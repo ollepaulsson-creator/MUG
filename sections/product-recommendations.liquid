@@ -222,12 +222,15 @@
 <script>
 function setupShowMore() {
   const productSection = document.querySelector('product-recommendations');
-  if (!productSection) return;
+  if (!productSection) return false;
 
   const grid = productSection.querySelector('.resource-list--grid');
   const showMoreBtn = productSection.querySelector('#show-more-products');
 
   if (!grid || !showMoreBtn) return false;
+
+  // Already set up for this content — skip to avoid duplicate listeners
+  if (showMoreBtn.dataset.showMoreSetup === 'true') return true;
 
   const items = Array.from(grid.querySelectorAll('.resource-list__item'));
   if (!items.length) return false;
@@ -252,19 +255,19 @@ function setupShowMore() {
     if (visible >= items.length) showMoreBtn.style.display = 'none';
   });
 
-  return true; // successfully setup
+  showMoreBtn.dataset.showMoreSetup = 'true';
+  return true;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Try immediately
-  if (setupShowMore()) return;
+  setupShowMore();
 
-  // If products not yet rendered, observe mutations
+  // Keep observing so AJAX content replacement is also handled
   const productSection = document.querySelector('product-recommendations');
   if (!productSection) return;
 
   const observer = new MutationObserver(() => {
-    if (setupShowMore()) observer.disconnect();
+    setupShowMore();
   });
 
   observer.observe(productSection, { childList: true, subtree: true });
