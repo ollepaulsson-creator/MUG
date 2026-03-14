@@ -36,6 +36,7 @@
             data-page="{{ paginate.current_page }}"
             data-product-id="{{ product.id }}"
             ref="cards[]"
+            style="--card-index: {{ forloop.index0 | at_most: 8 }}"
           >
             {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
           </li>
