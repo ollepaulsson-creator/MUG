@@ -67,6 +67,7 @@
           id: 'media-gallery',
           closest.product: closest.product
         -%}
+        {%- render 'product-card-badges', product: closest.product, settings: settings -%}
       </div>
     {% endcapture %}
    
@@ -296,6 +297,10 @@
 
   .product-information__media .product-badges {
     --badge-inset: max(calc(var(--padding-xs) * 2), calc((var(--border-radius) + var(--padding-xs)) * (1 - cos(45deg)) * 2));
+    top: var(--badge-inset) !important;
+    left: var(--badge-inset) !important;
+    bottom: auto !important;
+    right: auto !important;
   }
 {% endstylesheet %}
 
