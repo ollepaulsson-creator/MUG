@@ -77,10 +77,10 @@
 
     if recommendations.performed
       # --- Search & Discovery path ---
-      # Use Shopify's algorithm as base, filtered by type and availability
-      assign rec_filtered = recommendations.products | where: 'type', current_product.type | where: 'available', true | reject: 'id', current_product.id
+      # Trust Shopify's algorithm fully — use all 10, only filter unavailable/current product
+      assign rec_filtered = recommendations.products | where: 'available', true | reject: 'id', current_product.id
 
-      # Uprank same vendor
+      # Uprank same vendor within recommendations
       assign same_vendor = rec_filtered | where: 'vendor', current_product.vendor
       assign other_vendors = rec_filtered | reject: 'vendor', current_product.vendor
       assign type_products = same_vendor | concat: other_vendors
