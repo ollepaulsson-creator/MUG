@@ -9,6 +9,13 @@
   {% render 'product-card-badges', product: product, settings: settings %}
 {%- enddoc -%}
 
+{%- assign is_nyhet = false -%}
+{%- for tag in product.tags -%}
+  {%- if tag contains 'Nyheter:' or tag == 'nyhet' or tag == 'new' or tag == 'new-in' -%}
+    {%- assign is_nyhet = true -%}
+  {%- endif -%}
+{%- endfor -%}
+
 <div
   class="product-badges product-badges--{{ settings.badge_position }}"
   style="
@@ -18,7 +25,7 @@
     --badge-text-transform: {{ settings.badge_text_transform }};
   "
 >
-  {%- if product.available == false or product.tags contains 'begagnat' or product.compare_at_price > product.price and product.available or product.tags contains 'nyhet' or product.tags contains 'new' or product.tags contains 'new-in' -%}
+  {%- if product.available == false or product.tags contains 'begagnat' or product.compare_at_price > product.price and product.available or is_nyhet -%}
     <div
       class="
         product-badges__badge product-badges__badge--rectangle
@@ -28,7 +35,7 @@
           color-scheme-begagnat
         {% elsif product.compare_at_price > product.price %}
           color-{{ settings.badge_sale_color_scheme }}
-        {% elsif product.tags contains 'nyhet' or product.tags contains 'new' or product.tags contains 'new-in' %}
+        {% elsif is_nyhet %}
           color-scheme-nyhet
         {% endif %}
       "
@@ -39,7 +46,7 @@
         Begagnat
       {%- elsif product.compare_at_price > product.price -%}
         {{ 'content.product_badge_sale' | t }}
-      {%- elsif product.tags contains 'nyhet' or product.tags contains 'new' or product.tags contains 'new-in' -%}
+      {%- elsif is_nyhet -%}
         Nyhet
       {%- endif -%}
     </div>
