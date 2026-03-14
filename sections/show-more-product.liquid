@@ -1,0 +1,61 @@
+{% comment %}
+Show More Products Button — custom section for product page
+File: sections/show-more-products.liquid
+{% endcomment %}
+
+<section class="show-more-products" style="text-align: {{ section.settings.alignment }};">
+  <a href="{{ section.settings.button_link }}" class="button button--primary">
+    {{ section.settings.button_text }}
+  </a>
+</section>
+
+<style>
+  .show-more-products {
+    margin-top: 2rem;
+  }
+  .show-more-products .button {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 400;
+    font-family: "Inter Variable", sans-serif;
+    font-size: 14px;
+  }
+</style>
+
+{% schema %}
+{
+"name": "Show More Products Button",
+"settings": [
+{
+"type": "text",
+"id": "button_text",
+"label": "Button text",
+"default": "Show more products"
+},
+{
+"type": "url",
+"id": "button_link",
+"label": "Button link",
+"default": "/collections/all"
+},
+{
+"type": "select",
+"id": "alignment",
+"label": "Alignment",
+"default": "center",
+"options": [
+{ "value": "left", "label": "Left" },
+{ "value": "center", "label": "Center" },
+{ "value": "right", "label": "Right" }
+]
+}
+],
+"presets": [
+{
+"name": "Show More Products Button"
+}
+]
+}
+{% endschema %}

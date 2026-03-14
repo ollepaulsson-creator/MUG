@@ -1,0 +1,272 @@
+
+
+{% comment %} {%- liquid
+  assign block_settings = block.settings
+  assign variant = closest.product.selected_or_first_available_variant
+
+  if variant.inventory_management == 'shopify'
+    assign inventory_managed = true
+  endif
+
+  assign inventory_quantity = variant.inventory_quantity
+  assign inventory_policy = variant.inventory_policy
+  assign threshold = block_settings.inventory_threshold
+
+  comment
+    ⚙️ Determine which warehouse/fulfillment location this variant belongs to.
+    You can adjust based on your metafield or location naming convention.
+  endcomment
+
+  assign warehouse_name = variant.store_availabilities.first.location.name | downcase
+
+  if warehouse_name contains 'butik' or warehouse_name contains 'store'
+    assign stock_source = 'store'
+  elsif warehouse_name contains 'webblager' or warehouse_name contains 'online'
+    assign stock_source = 'web'
+  else
+    assign stock_source = 'unknown'
+  endif
+
+  if inventory_managed
+    if inventory_quantity > 0
+      if inventory_quantity <= threshold
+        assign status = 'low'
+      else
+        assign status = 'in_stock'
+      endif
+    else
+      if inventory_policy == 'continue'
+        assign status = 'in_stock'
+      else
+        assign status = 'out_of_stock'
+      endif
+    endif
+  else
+    assign status = 'out_of_stock'
+  endif
+-%}
+
+<product-inventory
+  class="product-inventory spacing-style {% if block_settings.type_preset != '' %}{{ block_settings.type_preset }}{% endif %}"
+  style="{% render 'spacing-style', settings: block_settings %}"
+  {{ block.shopify_attributes }}
+  data-product-id="{{ product.id }}"
+>
+  <span class="product-inventory__status">
+  {% if status != 'out_of_stock' %}
+    <span class="svg-wrapper product-inventory__icon product-inventory__icon-{{ status }}">
+      {{ 'in-stock.svg' | inline_asset_content }}
+    </span>
+  {% endif %}
+    <span
+      class="product-inventory__text"
+      id="Inventory-{{ section.id }}"
+      role="status"
+      aria-label="{{ 'accessibility.inventory_status' | t }}"
+    >
+      {%- if status == 'out_of_stock' -%}
+        Slut i lager
+      {%- elsif stock_source == 'store' -%}
+        Finns i butik
+      {%- elsif stock_source == 'web' -%}
+        I webblager: Leverans 1–3 arbetsdagar
+      {%- else -%}
+        {{ 'content.inventory_in_stock' | t }}
+      {%- endif -%}
+    </span>
+  </span>
+</product-inventory> {% endcomment %}
+
+{%- liquid
+  assign block_settings = block.settings
+  assign threshold = block_settings.inventory_threshold | default: 10
+
+  # Variant (safe)
+  assign variant = product.selected_or_first_available_variant
+
+  # Inventory management flag (no inline comparisons in {{ }})
+  assign inventory_managed = false
+  if variant.inventory_management == 'shopify'
+    assign inventory_managed = true
+  endif
+
+  # Quantity only when managed
+  assign inventory_quantity = 0
+  if inventory_managed
+    assign inventory_quantity = variant.inventory_quantity | default: 0
+  endif
+
+  # Availability status (respects policy: continue)
+  if variant.available
+    if inventory_managed and inventory_quantity > 0 and inventory_quantity <= threshold
+      assign status = 'low'
+    else
+      assign status = 'in_stock'
+    endif
+  else
+    assign status = 'out_of_stock'
+  endif
+
+  # --- Warehouse/source messaging ---
+  # Scan ALL store_availabilities and classify available locations by name.
+  assign available_in_store = false
+  assign available_in_web   = false
+
+  for sa in variant.store_availabilities
+    if sa.available
+      assign loc = sa.location.name | downcase
+      if loc contains 'butik' or loc contains 'store'
+        assign available_in_store = true
+      elsif loc contains 'webblager' or loc contains 'online'
+        assign available_in_web = true
+      endif
+    endif
+  endfor
+-%}
+
+<product-inventory
+  class="product-inventory spacing-style {% if block_settings.type_preset != '' %}{{ block_settings.type_preset }}{% endif %}"
+  style="{% render 'spacing-style', settings: block_settings %}"
+  {{ block.shopify_attributes }}
+  data-product-id="{{ product.id }}"
+>
+  <span class="product-inventory__status">
+    {% if status != 'out_of_stock' %}
+      <span class="svg-wrapper product-inventory__icon product-inventory__icon-{{ status }}">
+        {{ 'in-stock.svg' | inline_asset_content }}
+      </span>
+    {% endif %}
+
+    <span
+      class="product-inventory__text"
+      id="Inventory-{{ section.id }}"
+      role="status"
+      aria-label="{{ 'accessibility.inventory_status' | t }}"
+    >
+      {%- if status == 'out_of_stock' -%}
+        Slut i lager
+      {%- elsif available_in_store -%}
+        I butik: Leverans 1–2 arbetsdagar
+      {%- elsif available_in_web -%}
+        I webblager: Leverans 1–3 arbetsdagar
+      {%- else -%}
+        {{ 'content.inventory_in_stock' | t }}
+      {%- endif -%}
+
+      {%- if block_settings.show_inventory_quantity and inventory_managed and inventory_quantity > 0 -%}
+        &nbsp;— {{ inventory_quantity }} i lager
+      {%- endif -%}
+    </span>
+  </span>
+</product-inventory>
+
+{% stylesheet %}
+  .product-inventory__status {
+    display: flex;
+    align-items: center;
+    font-size: var(--font-paragraph--size);
+    line-height: var(--font-paragraph--line-height);
+    gap: var(--padding-md);
+  }
+
+  .product-inventory__icon,
+  .product-inventory__icon svg {
+    width: var(--icon-size-sm);
+    height: var(--icon-size-sm);
+  }
+
+  .product-inventory__icon-low {
+    color: var(--color-lowstock);
+  }
+
+  .product-inventory__icon-in_stock {
+    color: var(--color-instock);
+  }
+
+  .product-inventory__icon-out_of_stock {
+    color: var(--color-outofstock);
+  }
+
+  .product-inventory__icon circle:first-of-type {
+    opacity: 0.3;
+  }
+{% endstylesheet %}
+
+
+{% schema %}
+{
+  "name": "t:names.product_inventory",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:content.resource_reference_product_inventory"
+    },
+    {
+      "type": "range",
+      "id": "inventory_threshold",
+      "label": "t:settings.inventory_threshold",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 10
+    },
+    {
+      "type": "checkbox",
+      "id": "show_inventory_quantity",
+      "label": "t:settings.show_inventory_quantity",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.product_inventory",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}
