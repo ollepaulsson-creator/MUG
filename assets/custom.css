@@ -19,6 +19,11 @@ header-menu .tmenu_item--root > .tmenu_item_link {
   font-size: 15px;
 }
 
+.tmenu_item--root>.tmenu_submenu {
+    box-shadow: inset 0 0 0 30px #eaeaea, 0 5px 5px #0000000d !important;
+    border-bottom: 1px solid #e3e3e3 !important;
+    border-top: 1px solid #e3e3e3 !important;
+}
 /* Inherit header text color for icon/text/indicator */
 header-menu .tmenu_item_text,
 header-menu .tmenu_item_icon,
