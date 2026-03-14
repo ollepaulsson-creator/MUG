@@ -37,7 +37,6 @@ header-menu .tmenu_submenu--desktop .tmenu_item_link {
   font-family: "inter variable", sans-serif !important;
   font-feature-settings: 'ss07' 1 !important;
   padding: 5px 10px !important;
-  letter-spacing: .5px;
 }
 
 /* Tab-style submenu padding */
