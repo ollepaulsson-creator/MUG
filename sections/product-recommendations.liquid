@@ -200,17 +200,24 @@ function setupShowMore() {
   const items = Array.from(grid.querySelectorAll('.resource-list__item'));
   if (!items.length) return false;
 
-  const initiallyVisible = 8;
+  const batchSize = 8;
+  let visible = batchSize;
 
-  // Hide items after the first 8
+  // Hide items after the first batch
   items.forEach((item, index) => {
-    if (index >= initiallyVisible) item.style.display = 'none';
+    if (index >= visible) item.style.display = 'none';
   });
 
-  // Button click: show all
+  // Hide button if all items already visible
+  if (items.length <= visible) showMoreBtn.style.display = 'none';
+
+  // Button click: reveal next batch, hide button when all shown
   showMoreBtn.addEventListener('click', () => {
-    items.forEach(item => item.style.display = '');
-    showMoreBtn.style.display = 'none';
+    visible += batchSize;
+    items.forEach((item, index) => {
+      if (index < visible) item.style.display = '';
+    });
+    if (visible >= items.length) showMoreBtn.style.display = 'none';
   });
 
   return true; // successfully setup
