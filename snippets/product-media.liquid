@@ -138,6 +138,15 @@
     aspect-ratio: var(--gallery-aspect-ratio, var(--ratio));
     min-height: 0;
     min-width: 0;
+    background: linear-gradient(
+      90deg,
+      rgb(var(--color-foreground-rgb) / 0.04) 25%,
+      rgb(var(--color-foreground-rgb) / 0.08) 50%,
+      rgb(var(--color-foreground-rgb) / 0.04) 75%
+    );
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+    animation: img-shimmer 1.5s ease-in-out infinite;
   }
 
   .product-media__image {
