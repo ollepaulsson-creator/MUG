@@ -72,9 +72,10 @@
   endif
 
   if source_product != blank
-    # Find the best collection (skip the generic 'all' collection)
+    # Sort collections by products_count ascending to find the most specific category collection
+    assign sorted_collections = source_product.collections | sort: 'products_count'
     assign best_collection = blank
-    for col in source_product.collections
+    for col in sorted_collections
       if best_collection == blank
         unless col.handle == 'all'
           assign best_collection = col
@@ -82,22 +83,15 @@
       endif
     endfor
 
-    # Try: same product_type within the best collection
+    # Use the most specific collection to find more of the same
     assign products = blank
-    if best_collection != blank and source_product.product_type != blank
-      assign products = best_collection.products | where: 'product_type', source_product.product_type | reject: 'id', source_product.id
+    if best_collection != blank
+      assign products = best_collection.products | reject: 'id', source_product.id
     endif
 
-    # Fallback 1: all products in the collection (if type filter returned nothing)
+    # Fallback: use all products if collection had nothing
     if products == blank or products.size == 0
-      if best_collection != blank
-        assign products = best_collection.products | reject: 'id', source_product.id
-      endif
-    endif
-
-    # Fallback 2: same product_type across all products (if collection had nothing)
-    if products == blank or products.size == 0
-      assign products = collections.all.products | where: 'product_type', source_product.product_type | reject: 'id', source_product.id
+      assign products = collections.all.products | reject: 'id', source_product.id
     endif
 
     assign products = products | slice: 0, max_display
