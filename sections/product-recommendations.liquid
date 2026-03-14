@@ -72,13 +72,13 @@
   endif
 
   if source_product != blank
-    # Sort collections by products_count ascending, skip 'all' and tiny cross-category collections (min 10 products)
+    # Sort collections by products_count ascending, skip 'all' and small cross-category collections (min 20 products)
     assign sorted_collections = source_product.collections | sort: 'products_count'
     assign best_collection = blank
     for col in sorted_collections
       if best_collection == blank
         unless col.handle == 'all'
-          if col.products_count >= 10
+          if col.products_count >= 20
             assign best_collection = col
           endif
         endunless
@@ -96,17 +96,19 @@
       endfor
     endif
 
-    # Get products of the same type from the best collection
+    # Get products of the same type — use product.type (product.product_type is empty in this store)
     assign type_products = blank
-    if best_collection != blank and source_product.product_type != blank
-      assign type_products = best_collection.products | where: 'product_type', source_product.product_type | reject: 'id', source_product.id
-    endif
-
-    # Fallback: same type across all products (keeps types strict — no mixing)
-    if type_products == blank or type_products.size == 0
-      if source_product.product_type != blank
-        assign type_products = collections.all.products | where: 'product_type', source_product.product_type | reject: 'id', source_product.id
-      elsif best_collection != blank
+    if source_product.type != blank
+      if best_collection != blank
+        assign type_products = best_collection.products | where: 'type', source_product.type | reject: 'id', source_product.id
+      endif
+      # Fallback: same type across all products (strict — no mixing)
+      if type_products == blank or type_products.size == 0
+        assign type_products = collections.all.products | where: 'type', source_product.type | reject: 'id', source_product.id
+      endif
+    else
+      # No type set — fall back to collection only
+      if best_collection != blank
         assign type_products = best_collection.products | reject: 'id', source_product.id
       else
         assign type_products = collections.all.products | reject: 'id', source_product.id
