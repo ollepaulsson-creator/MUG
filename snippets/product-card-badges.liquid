@@ -10,9 +10,14 @@
 {%- enddoc -%}
 
 {%- assign is_nyhet = false -%}
+{%- assign now_seconds = 'now' | date: '%s' | plus: 0 -%}
+{%- assign published_seconds = product.published_at | date: '%s' | plus: 0 -%}
+{%- assign age_days = now_seconds | minus: published_seconds | divided_by: 86400 -%}
 {%- for tag in product.tags -%}
   {%- if tag contains 'Nyheter:' or tag == 'nyhet' or tag == 'new' or tag == 'new-in' -%}
-    {%- assign is_nyhet = true -%}
+    {%- if age_days <= 60 -%}
+      {%- assign is_nyhet = true -%}
+    {%- endif -%}
   {%- endif -%}
 {%- endfor -%}
 
