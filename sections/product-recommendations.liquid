@@ -35,7 +35,7 @@
 <product-recommendations
   id="product-recommendations-{{ section.id }}"
   class="product-recommendations"
-  data-url="{{ routes.product_recommendations_url }}?limit=10"
+  data-url="{{ routes.product_recommendations_url }}?limit=24"
   data-section-id="{{ section.id }}"
   data-product-id="{{ section.settings.product.id | default: product.id }}"
   data-intent="{{ section.settings.recommendation_type }}"
@@ -77,13 +77,14 @@
 
     if recommendations.performed
       # --- Search & Discovery path ---
-      # Trust Shopify's algorithm fully — use all 10, only filter unavailable/current product
       assign rec_filtered = recommendations.products | where: 'available', true | reject: 'id', current_product.id
 
-      # Uprank same vendor within recommendations
-      assign same_vendor = rec_filtered | where: 'vendor', current_product.vendor
-      assign other_vendors = rec_filtered | reject: 'vendor', current_product.vendor
-      assign type_products = same_vendor | concat: other_vendors
+      # Sort by: same type + same vendor → same type + other vendors → other types
+      assign same_type = rec_filtered | where: 'type', current_product.type
+      assign other_type = rec_filtered | reject: 'type', current_product.type
+      assign same_type_same_vendor = same_type | where: 'vendor', current_product.vendor
+      assign same_type_other_vendor = same_type | reject: 'vendor', current_product.vendor
+      assign type_products = same_type_same_vendor | concat: same_type_other_vendor | concat: other_type
 
       # Fill gaps using the best collection if recommendations don't have enough
       if type_products.size < max_display
