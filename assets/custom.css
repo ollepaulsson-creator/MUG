@@ -16,7 +16,6 @@ header-menu .tmenu_item--root > .tmenu_item_link {
   color: var(--color-foreground) !important;
   font-family: "inter variable", sans-serif !important;
   font-feature-settings: 'ss07' 1 !important;
-  letter-spacing: 0.05em !important;
 }
 
 /* Inherit header text color for icon/text/indicator */
