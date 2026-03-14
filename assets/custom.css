@@ -2,9 +2,9 @@
   box-sizing: border-box;
 }
 
-/* Hide native desktop nav inner content so Qiokify mega menu isn't overtaken */
+/* Hide only the native nav element inside header-menu, leaving Qiokify's injection visible */
 @media screen and (min-width: 750px) {
-  header-menu .header-menu__inner {
+  header-menu nav[header-menu] {
     display: none !important;
   }
 }
