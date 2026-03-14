@@ -46,7 +46,7 @@
     </div>
   {%- endif -%}
   {%- if product.compare_at_price > product.price and product.available -%}
-    <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sale_color_scheme }}">
+    <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sale_color_scheme }} color-scheme-sale">
       {{- 'content.product_badge_sale' | t -}}
     </div>
   {%- endif -%}
@@ -106,6 +106,14 @@
     color: black;
     letter-spacing: 1px;
     font-size: 13px!important;
+  }
+
+  /* Rea/Sale badge */
+  .product-badges__badge.color-scheme-sale {
+    background: #fff;
+    color: red;
+    font-size: 13px!important;
+    letter-spacing: 1px;
   }
 
   /* Nyhet badge */
