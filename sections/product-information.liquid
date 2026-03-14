@@ -296,11 +296,11 @@
   }
 
   .product-information__media .product-badges {
-    --badge-inset: max(calc(var(--padding-xs) * 2), calc((var(--border-radius) + var(--padding-xs)) * (1 - cos(45deg)) * 2));
-    top: var(--badge-inset) !important;
-    left: var(--badge-inset) !important;
+    top: 16px !important;
+    left: 16px !important;
     bottom: auto !important;
     right: auto !important;
+    z-index: 10 !important;
   }
 {% endstylesheet %}
 
