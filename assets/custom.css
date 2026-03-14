@@ -5,7 +5,7 @@
 .product-grid__item {
   opacity: 0;
   animation: fadeIn 0.4s ease forwards;
-  animation-delay: calc(var(--card-index, 0) * 45ms);
+  animation-delay: calc(var(--card-index, 0) * 30ms);
 }
 .search_pred{
         display: flex;
