@@ -32,24 +32,16 @@
   "
 >
   {%- if product.available == false -%}
-    <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sold_out_color_scheme }}">
-      {{ 'content.product_badge_sold_out' | t }}
-    </div>
+    <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sold_out_color_scheme }}">{{- 'content.product_badge_sold_out' | t -}}</div>
   {%- else -%}
     {%- if product.tags contains 'Status:Begagnad' -%}
-      <div class="product-badges__badge product-badges__badge--rectangle color-scheme-begagnat">
-        Begagnad
-      </div>
+      <div class="product-badges__badge product-badges__badge--rectangle color-scheme-begagnat">Begagnad</div>
     {%- endif -%}
     {%- if product.compare_at_price > product.price -%}
-      <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sale_color_scheme }}">
-        {{ 'content.product_badge_sale' | t }}
-      </div>
+      <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sale_color_scheme }}">{{- 'content.product_badge_sale' | t -}}</div>
     {%- endif -%}
     {%- if is_nyhet -%}
-      <div class="product-badges__badge product-badges__badge--rectangle color-scheme-nyhet">
-        Nyhet
-      </div>
+      <div class="product-badges__badge product-badges__badge--rectangle color-scheme-nyhet">Nyhet</div>
     {%- endif -%}
   {%- endif -%}
 </div>
@@ -83,16 +75,15 @@
   }
 
   .product-badges__badge {
-    --badge-font-size: 12px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
     white-space: nowrap;
     width: fit-content;
     color: var(--color-foreground);
     background: var(--color-background);
-    font-size: var(--badge-font-size);
+    font-size: 12px !important;
+    line-height: 1 !important;
     font-family: var(--badge-font-family);
     font-weight: var(--badge-font-weight);
     text-transform: var(--badge-text-transform);
