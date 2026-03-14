@@ -27,7 +27,7 @@
 >
   {% liquid
     assign high_res_url = media.preview_image | image_url: width: 3840
-    assign fetch_priority = 'auto'
+    assign fetch_priority = fetchpriority | default: 'auto'
     if is_main_product_media
       assign fetch_priority = 'high'
     endif
@@ -45,6 +45,7 @@
       transitionToProduct: settings.transition_to_main_product,
       data_max_resolution: high_res_url,
       fetchpriority: fetch_priority,
+      decoding: 'async',
       style: focal_point_style
   }}
 

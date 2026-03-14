@@ -79,6 +79,7 @@
             sizes: image_sizes,
             transitionToProduct: settings.transition_to_main_product,
             data-media-id: featured_image.id,
+            decoding: 'async',
             style: primary_focal_point_style
         }}
         {%- if image_hover and resource.media.size > 1 -%}

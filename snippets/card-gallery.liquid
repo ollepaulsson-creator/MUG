@@ -141,6 +141,7 @@
       capture slides
         for media in media_list_to_show
           assign loading = 'lazy'
+          assign card_fetchpriority = 'auto'
           assign sizes = 'auto, ' | append: image_sizes
 
           assign hidden = false
@@ -177,6 +178,7 @@
 
           if forloop.first and section.index == null or section.index < 5
             assign loading = 'eager'
+            assign card_fetchpriority = 'high'
             assign sizes = image_sizes
           endif
 
@@ -186,7 +188,7 @@
           endif
 
           capture slideshow_children
-            render 'product-media', media: media, sizes: sizes, loading: loading, preview_image_only: true
+            render 'product-media', media: media, sizes: sizes, loading: loading, preview_image_only: true, fetchpriority: card_fetchpriority
           endcapture
 
           render 'slideshow-slide', slide_id: media.id, index: forloop.index, hidden: hidden, class: class, attributes: attributes, children: slideshow_children, media_fit: media_fit
