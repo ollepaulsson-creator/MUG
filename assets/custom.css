@@ -350,6 +350,7 @@ ul.pagination__list {
     height: 100%;
     display: flex;
     align-items: center;
+    width: 25%;
 }
 .facets-toggle__wrapper:hover {
     background: #FBFBFB;
