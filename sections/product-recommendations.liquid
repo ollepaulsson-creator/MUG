@@ -83,25 +83,27 @@
       endif
     endfor
 
-    # Use the most specific collection filtered by product type
-    assign products = blank
+    # Get products of the same type from the best collection
+    assign type_products = blank
     if best_collection != blank and source_product.product_type != blank
-      assign products = best_collection.products | where: 'product_type', source_product.product_type | reject: 'id', source_product.id
+      assign type_products = best_collection.products | where: 'product_type', source_product.product_type | reject: 'id', source_product.id
     endif
 
-    # Fallback 1: same collection without type filter (if type is empty or returns nothing)
-    if products == blank or products.size == 0
-      if best_collection != blank
-        assign products = best_collection.products | reject: 'id', source_product.id
+    # Fallback: same type across all products (keeps types strict — no mixing)
+    if type_products == blank or type_products.size == 0
+      if source_product.product_type != blank
+        assign type_products = collections.all.products | where: 'product_type', source_product.product_type | reject: 'id', source_product.id
+      elsif best_collection != blank
+        assign type_products = best_collection.products | reject: 'id', source_product.id
+      else
+        assign type_products = collections.all.products | reject: 'id', source_product.id
       endif
     endif
 
-    # Fallback 2: only use all products if collection returned nothing at all
-    if products == blank or products.size == 0
-      assign products = collections.all.products | reject: 'id', source_product.id
-    endif
-
-    assign products = products | slice: 0, max_display
+    # Uprank same vendor (brand) first, then other vendors of the same type
+    assign same_vendor = type_products | where: 'vendor', source_product.vendor
+    assign other_vendors = type_products | reject: 'vendor', source_product.vendor
+    assign products = same_vendor | concat: other_vendors | slice: 0, max_display
   else
     # Theme editor placeholder — no product context available
     assign products = null
