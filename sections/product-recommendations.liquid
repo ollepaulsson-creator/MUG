@@ -63,15 +63,9 @@
     assign max_display = 16
   endif
 
-  if section.settings.product == blank
-    assign products = null
-    for i in (1..max_display)
-      assign products = products | append: ', '
-      assign products = products | split: ','
-    endfor
-  else
-    # Always show more from the same collection as the current product
-    assign current_product = section.settings.product | default: product
+  if recommendations.performed
+    # In recommendations context, `product` is the viewed product (set by Shopify from the URL)
+    assign current_product = product
     assign best_collection = blank
     for col in current_product.collections
       if best_collection == blank
@@ -85,6 +79,29 @@
     else
       assign products = current_product.collections.first.products | reject: 'id', current_product.id | slice: 0, max_display
     endif
+  elsif section.settings.product != blank
+    # A specific product is pinned in theme settings
+    assign current_product = section.settings.product
+    assign best_collection = blank
+    for col in current_product.collections
+      if best_collection == blank
+        unless col.handle == 'all'
+          assign best_collection = col
+        endunless
+      endif
+    endfor
+    if best_collection != blank
+      assign products = best_collection.products | reject: 'id', current_product.id | slice: 0, max_display
+    else
+      assign products = current_product.collections.first.products | reject: 'id', current_product.id | slice: 0, max_display
+    endif
+  else
+    # Theme editor placeholder — no product context available
+    assign products = null
+    for i in (1..max_display)
+      assign products = products | append: ', '
+      assign products = products | split: ','
+    endfor
   endif
 %}
 
