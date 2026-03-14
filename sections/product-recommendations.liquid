@@ -128,7 +128,7 @@
 %}
 
 
-      <!-- debug: source_product.title="{{ source_product.title }}", source_product.product_type="{{ source_product.product_type }}", product.title="{{ product.title }}", product.product_type="{{ product.product_type }}", section.settings.product.product_type="{{ section.settings.product.product_type }}", collection="{{ best_collection.handle }}", products_count="{{ products.size }}" -->
+      <!-- debug: product.type="{{ product.type }}", product.product_type="{{ product.product_type }}", source_product.type="{{ source_product.type }}", source_product.product_type="{{ source_product.product_type }}", collection="{{ best_collection.handle }}", products_count="{{ products.size }}", has_product_context="{{ has_product_context }}", recommendations.performed="{{ recommendations.performed }}" -->
       {% capture list_items %}
         {% for product in products limit: 16 %}
           <div class="resource-list__item">
