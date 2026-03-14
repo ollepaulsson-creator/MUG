@@ -72,15 +72,15 @@
   endif
 
   if source_product != blank
-    # Filter all products by the same type — strict, no collection guessing needed
+    # Filter all products by the same type, available only (no sold-out)
     assign type_products = blank
     if source_product.type != blank
-      assign type_products = collections.all.products | where: 'type', source_product.type | reject: 'id', source_product.id
+      assign type_products = collections.all.products | where: 'type', source_product.type | where: 'available', true | reject: 'id', source_product.id
     endif
 
     # Fallback if type is blank or returns nothing
     if type_products == blank or type_products.size == 0
-      assign type_products = collections.all.products | reject: 'id', source_product.id
+      assign type_products = collections.all.products | where: 'available', true | reject: 'id', source_product.id
     endif
 
     # Uprank same vendor (brand) first, then other vendors of the same type
@@ -98,7 +98,7 @@
 %}
 
 
-      <!-- debug: product.type="{{ product.type }}", products_count="{{ products.size }}", has_product_context="{{ has_product_context }}", recommendations.performed="{{ recommendations.performed }}" -->
+      <!-- debug: product.type="{{ product.type }}", product.vendor="{{ product.vendor }}", same_vendor_count="{{ same_vendor.size }}", products_count="{{ products.size }}" -->
       {% capture list_items %}
         {% for product in products limit: 16 %}
           <div class="resource-list__item">
