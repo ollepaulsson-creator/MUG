@@ -2,6 +2,12 @@
   box-sizing: border-box;
 }
 
+/* Hide native desktop nav inner content so Qiokify mega menu isn't overtaken */
+@media screen and (min-width: 750px) {
+  header-menu .header-menu__inner {
+    display: none !important;
+  }
+}
 
 .product-grid__item {
   opacity: 0;
