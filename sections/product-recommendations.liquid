@@ -81,10 +81,21 @@
         endunless
       endif
     endfor
+
+    # Filter by product type within the best collection for "more of the same"
     if best_collection != blank
-      assign products = best_collection.products | reject: 'id', source_product.id | slice: 0, max_display
-    else
-      assign products = source_product.collections.first.products | reject: 'id', source_product.id | slice: 0, max_display
+      assign products = best_collection.products | where: 'type', source_product.type | reject: 'id', source_product.id | slice: 0, max_display
+    endif
+
+    # Fallback: same type across all products if not enough from collection
+    if products == blank or products.size < max_display
+      assign needed = max_display | minus: products.size
+      assign type_fallback = collections.all.products | where: 'type', source_product.type | reject: 'id', source_product.id | slice: 0, needed
+      if products != blank
+        assign products = products | concat: type_fallback
+      else
+        assign products = type_fallback
+      endif
     endif
   else
     # Theme editor placeholder — no product context available
