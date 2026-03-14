@@ -123,6 +123,9 @@
         </div>
       {%- endif -%}
     {%- endif -%}
+    {%- if resource_type == 'product' -%}
+      {%- render 'product-card-badges', product: resource, settings: settings -%}
+    {%- endif -%}
   </div>
 
   <div class="resource-card__content">
@@ -134,21 +137,6 @@
   </p>
 
   {% if resource_type == 'product' %}
-    
-
-
-    <div class="product-badges">
-    {% if resource.available == false %}
-      <span class="badge badge--soldout">slutsåld</span>
-    {% elsif resource.compare_at_price > resource.price %}
-      <span class="badge badge--sale">Rea</span>
-    {% elsif resource.tags contains 'New' %}
-      <span class="badge badge--new">Ny in</span>
-    {% endif %}
-  </div>
-
-
-
     {% render 'price', product_resource: resource, show_unit_price: true %}
   {% elsif resource_type == 'collection' and single_thumbnail_collection == false %}
     <p class="resource-card__subtext paragraph">
@@ -168,44 +156,6 @@
 
 {% stylesheet %}
 
-.product-badges {
-  font-weight: 400;
-  text-transform: uppercase;
-  font-size: 14px;
-  font-family:"Inter Variable", sans-serif;
-  font-feature-settings: 'ss07' 1;
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  z-index: 2;
-}
-.badge{
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top:4px;
-  padding-bottom: 4px;
-  font-size: 12px;
-  letter-spacing: 1px;
-  background-color: white;
-}
-}
-.badge--sale {
-  color: #e53935;
-  background: white;
-}
-
-.badge--new {
-  color: #43a047;
-  background: white;
-}
-
-.badge--soldout {
-  color: black;
-  background: white;
-}
 
 
 .resource-card__vendor {
