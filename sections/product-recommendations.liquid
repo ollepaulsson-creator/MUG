@@ -79,14 +79,13 @@
       # --- Search & Discovery path ---
       assign rec_filtered = recommendations.products | where: 'available', true | reject: 'id', current_product.id
 
-      # Sort by: same type + same vendor → same type + other vendors → other types
+      # Start with same-type products from Shopify, sorted by vendor
       assign same_type = rec_filtered | where: 'type', current_product.type
-      assign other_type = rec_filtered | reject: 'type', current_product.type
       assign same_type_same_vendor = same_type | where: 'vendor', current_product.vendor
       assign same_type_other_vendor = same_type | reject: 'vendor', current_product.vendor
-      assign type_products = same_type_same_vendor | concat: same_type_other_vendor | concat: other_type
+      assign type_products = same_type_same_vendor | concat: same_type_other_vendor
 
-      # Fill gaps using the best collection if recommendations don't have enough
+      # Fill gaps with same-type products from the best matching collection
       if type_products.size < max_display
         assign best_collection = blank
         assign best_type_count = 0
@@ -106,9 +105,14 @@
           endfor
           assign fill_same_vendor = fill | where: 'vendor', current_product.vendor
           assign fill_other_vendors = fill | reject: 'vendor', current_product.vendor
-          assign fill_sorted = fill_same_vendor | concat: fill_other_vendors
-          assign type_products = type_products | concat: fill_sorted
+          assign type_products = type_products | concat: fill_same_vendor | concat: fill_other_vendors
         endif
+      endif
+
+      # Only use other-type Shopify results as a last resort if still not enough
+      if type_products.size < max_display
+        assign other_type = rec_filtered | reject: 'type', current_product.type
+        assign type_products = type_products | concat: other_type
       endif
 
     else
