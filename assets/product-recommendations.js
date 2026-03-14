@@ -29,6 +29,11 @@ class ProductRecommendations extends HTMLElement {
       )
         continue;
 
+      // If the product ID changed, reset so the new product's recommendations load
+      if (mutation.attributeName === 'data-product-id') {
+        this.dataset.recommendationsPerformed = 'false';
+      }
+
       // All other attribute changes trigger a reload
       this.#loadRecommendations();
       break;

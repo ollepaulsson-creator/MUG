@@ -100,6 +100,9 @@
         endfor
         if best_collection != blank
           assign fill = best_collection.products | where: 'type', current_product.type | where: 'available', true | reject: 'id', current_product.id
+          for existing in type_products
+            assign fill = fill | reject: 'id', existing.id
+          endfor
           assign fill_same_vendor = fill | where: 'vendor', current_product.vendor
           assign fill_other_vendors = fill | reject: 'vendor', current_product.vendor
           assign fill_sorted = fill_same_vendor | concat: fill_other_vendors
@@ -143,8 +146,7 @@
 %}
 
 
-      <!-- debug: path="{{ recommendations.performed | default: 'server-side' }}", rec_raw="{{ recommendations.products.size }}", rec_after_filter="{{ rec_filtered.size }}", same_vendor_count="{{ same_vendor.size }}", products_count="{{ products.size }}" -->
-      {% capture list_items %}
+{% capture list_items %}
         {% for product in products limit: 24 %}
           <div class="resource-list__item">
             {% content_for 'block', type: '_product-card', id: 'static-product-card', closest.product: product %}
