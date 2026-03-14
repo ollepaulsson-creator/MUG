@@ -100,7 +100,10 @@
         endfor
         if best_collection != blank
           assign fill = best_collection.products | where: 'type', current_product.type | where: 'available', true | reject: 'id', current_product.id
-          assign type_products = type_products | concat: fill
+          assign fill_same_vendor = fill | where: 'vendor', current_product.vendor
+          assign fill_other_vendors = fill | reject: 'vendor', current_product.vendor
+          assign fill_sorted = fill_same_vendor | concat: fill_other_vendors
+          assign type_products = type_products | concat: fill_sorted
         endif
       endif
 
