@@ -605,4 +605,6 @@ form#FacetFiltersForm--template--26591884083549__main-desktop {
 facet-status-component.facets__status {
     font-size: 14px;
     color: black !important;
+    font-feature-settings: 'ss07' 1;
+
 }
