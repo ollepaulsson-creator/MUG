@@ -63,7 +63,7 @@
       {% content_for 'blocks' %}
     </div>
 
-    {% if recommendations.performed or section.settings.product != blank %}
+    {% if recommendations.performed or has_product_context or section.settings.product == blank %}
       {% liquid
   assign max_display = section.settings.max_products
   if max_display > 24
@@ -107,6 +107,27 @@
         endif
       endif
 
+    else
+      # --- Initial server-side render path (before AJAX fires) ---
+      assign best_collection = blank
+      assign best_type_count = 0
+      for col in current_product.collections
+        unless col.handle == 'all'
+          assign col_type_count = col.products | where: 'type', current_product.type | where: 'available', true | size
+          if col_type_count > best_type_count
+            assign best_collection = col
+            assign best_type_count = col_type_count
+          endif
+        endunless
+      endfor
+      if best_collection != blank
+        assign type_products = best_collection.products | where: 'type', current_product.type | where: 'available', true | reject: 'id', current_product.id
+      else
+        assign type_products = collections.all.products | where: 'type', current_product.type | where: 'available', true | reject: 'id', current_product.id
+      endif
+      assign same_vendor = type_products | where: 'vendor', current_product.vendor
+      assign other_vendors = type_products | reject: 'vendor', current_product.vendor
+      assign type_products = same_vendor | concat: other_vendors
     endif
 
     assign products = type_products | slice: 0, max_display
