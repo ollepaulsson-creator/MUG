@@ -609,9 +609,7 @@ facet-status-component.facets__status {
 
 }
 .product-badges__badge.color-scheme-begagnat {
-    font-size: 14px;
+    font-size: 14px !important;
     background: #ffffff;
     color: #000000;
-    font-feature-settings: 'ss07' 1;
-
 }
