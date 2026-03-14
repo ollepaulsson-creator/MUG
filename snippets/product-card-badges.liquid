@@ -21,41 +21,27 @@
   {%- endif -%}
 {%- endfor -%}
 
-<!-- badge-debug: is_nyhet="{{ is_nyhet }}", age_days="{{ age_days }}", available="{{ product.available }}", compare_at="{{ product.compare_at_price }}", price="{{ product.price }}", tags="{{ product.tags | join: ',' }}" -->
 <div
   class="product-badges product-badges--{{ settings.badge_position }}"
   style="
     --badge-border-radius: {{ settings.badge_corner_radius }}px;
-    --badge-font-family: var(--font-{{ settings.badge_font_family }}--family); 
-    --badge-font-weight: var(--font-{{ settings.badge_font_family }}--weight); 
+    --badge-font-family: var(--font-{{ settings.badge_font_family }}--family);
+    --badge-font-weight: var(--font-{{ settings.badge_font_family }}--weight);
     --badge-text-transform: {{ settings.badge_text_transform }};
   "
 >
-  {%- if product.available == false or product.tags contains 'Status:Begagnad' or product.compare_at_price > product.price and product.available or is_nyhet -%}
-    <div
-      class="
-        product-badges__badge product-badges__badge--rectangle
-        {% if product.available == false %}
-          color-{{ settings.badge_sold_out_color_scheme }}
-        {% elsif product.tags contains 'Status:Begagnad' %}
-          color-scheme-begagnat
-        {% elsif product.compare_at_price > product.price %}
-          color-{{ settings.badge_sale_color_scheme }}
-        {% elsif is_nyhet %}
-          color-scheme-nyhet
-        {% endif %}
-      "
-    >
-      {%- if product.available == false -%}
-        {{ 'content.product_badge_sold_out' | t }}
-      {%- elsif product.tags contains 'Status:Begagnad' -%}
-        Begagnat
-      {%- elsif product.compare_at_price > product.price -%}
-        {{ 'content.product_badge_sale' | t }}
-      {%- elsif is_nyhet -%}
-        Nyhet
-      {%- endif -%}
-    </div>
+  {%- if product.available == false -%}
+    <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sold_out_color_scheme }}">{{- 'content.product_badge_sold_out' | t -}}</div>
+  {%- else -%}
+    {%- if product.tags contains 'Status:Begagnad' -%}
+      <div class="product-badges__badge product-badges__badge--rectangle color-scheme-begagnat">Begagnad</div>
+    {%- endif -%}
+    {%- if product.compare_at_price > product.price -%}
+      <div class="product-badges__badge product-badges__badge--rectangle product-badges__badge--sale color-{{ settings.badge_sale_color_scheme }}">{{- 'content.product_badge_sale' | t -}}</div>
+    {%- endif -%}
+    {%- if is_nyhet -%}
+      <div class="product-badges__badge product-badges__badge--rectangle color-scheme-nyhet">Nyhet</div>
+    {%- endif -%}
   {%- endif -%}
 </div>
 
@@ -64,6 +50,12 @@
     --badge-inset: max(var(--padding-xs), calc((var(--border-radius) + var(--padding-xs)) * (1 - cos(45deg))));
     position: absolute;
     z-index: var(--layer-flat);
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 4px;
+    max-width: none !important;
   }
 
   .product-badges--bottom-left {
@@ -82,40 +74,43 @@
   }
 
   .product-badges__badge {
-    --badge-font-size: var(--font-size--xs);
-    display: flex;
+    display: inline-flex !important;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    white-space: nowrap;
+    width: fit-content;
+    flex-shrink: 0;
     color: var(--color-foreground);
     background: var(--color-background);
-    font-size: var(--badge-font-size);
+    font-size: 13px !important;
+    line-height: 1 !important;
     font-family: var(--badge-font-family);
     font-weight: var(--badge-font-weight);
-    text-transform: var(--badge-text-transform);
+    text-transform: uppercase;
     border-radius: 0px;
     letter-spacing: 1px !important;
   }
 
   .product-badges__badge--rectangle {
-    padding-block: var(--badge-rectangle-padding-block);
-    padding-inline: var(--badge-rectangle-padding-inline);
-    text-transform: uppercase;
+    padding-block: 6px !important;
+    padding-inline: 10px !important;
   }
 
-  /* Begagnat badge */
+  /* Sale badge */
+  .product-badges__badge--sale {
+    color: #e53935 !important;
+    background: #fff !important;
+  }
+
+  /* Begagnad badge */
   .product-badges__badge.color-scheme-begagnat {
-    background:rgb(255, 255, 255);
-    color: black;
-    letter-spacing: 1px;
-    font-size: 13px!important;
+    background: #fff !important;
+    color: #000 !important;
   }
 
   /* Nyhet badge */
   .product-badges__badge.color-scheme-nyhet {
-    background: #000;
-    color: red;
-    font-size: 13px!important;
-    letter-spacing: 1px;
+    background: #fff !important;
+    color: #000 !important;
   }
 {% endstylesheet %}
