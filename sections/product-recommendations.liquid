@@ -72,10 +72,23 @@
   endif
 
   if source_product != blank
-    # Filter all products by the same type, available only (no sold-out)
+    # Find the collection with the most products of the same type — that's the real category collection
+    assign best_collection = blank
+    assign best_type_count = 0
+    for col in source_product.collections
+      unless col.handle == 'all'
+        assign col_type_products = col.products | where: 'type', source_product.type | where: 'available', true
+        if col_type_products.size > best_type_count
+          assign best_collection = col
+          assign best_type_count = col_type_products.size
+        endif
+      endunless
+    endfor
+
+    # Get available products of the same type from the best collection
     assign type_products = blank
-    if source_product.type != blank
-      assign type_products = collections.all.products | where: 'type', source_product.type | where: 'available', true | reject: 'id', source_product.id
+    if best_collection != blank and source_product.type != blank
+      assign type_products = best_collection.products | where: 'type', source_product.type | where: 'available', true | reject: 'id', source_product.id
     endif
 
     # Fallback if type is blank or returns nothing
@@ -98,7 +111,7 @@
 %}
 
 
-      <!-- debug: product.type="{{ product.type }}", product.vendor="{{ product.vendor }}", same_vendor_count="{{ same_vendor.size }}", products_count="{{ products.size }}" -->
+      <!-- debug: product.type="{{ product.type }}", product.vendor="{{ product.vendor }}", collection="{{ best_collection.handle }}", same_vendor_count="{{ same_vendor.size }}", products_count="{{ products.size }}" -->
       {% capture list_items %}
         {% for product in products limit: 16 %}
           <div class="resource-list__item">
