@@ -286,11 +286,6 @@
 
     {% if block_settings.filter_style == 'horizontal' %}
       <div class="facets-toggle__count-sort">
-        <div class="products-count-wrapper facets-toggle__products-count">
-          <span title="{{ 'content.product_count' | t }}">
-            {{- 'content.item_count' | t: count: products_count -}}
-          </span>
-        </div>
         {% if block_settings.enable_sorting %}
           {% render 'sorting',
             results: results,
@@ -302,6 +297,11 @@
             section_id: section.id
           %}
         {% endif %}
+        <div class="products-count-wrapper facets-toggle__products-count">
+          <span title="{{ 'content.product_count' | t }}">
+            {{- 'content.item_count' | t: count: products_count -}}
+          </span>
+        </div>
       </div>
     {% endif %}
 
