@@ -40,7 +40,7 @@
   data-product-id="{{ section.settings.product.id | default: product.id }}"
   data-intent="{{ section.settings.recommendation_type }}"
   data-testid="product-recommendations-section"
-  data-recommendations-performed="{{ recommendations.performed | default: has_product_context }}"
+  data-recommendations-performed="{{ recommendations.performed }}"
   {{ section.shopify_attributes }}
 >
   <div class="section-background color-{{ section.settings.color_scheme }}"></div>
@@ -63,45 +63,77 @@
       {% content_for 'blocks' %}
     </div>
 
-    {% if has_product_context or recommendations.performed or section.settings.product == blank %}
+    {% if recommendations.performed or has_product_context or section.settings.product == blank %}
       {% liquid
-  # Clamp the max_products to 24
   assign max_display = section.settings.max_products
   if max_display > 24
     assign max_display = 24
   endif
 
-  if source_product != blank
-    # Find the collection with the most products of the same type — that's the real category collection
-    assign best_collection = blank
-    assign best_type_count = 0
-    for col in source_product.collections
-      unless col.handle == 'all'
-        assign col_type_products = col.products | where: 'type', source_product.type | where: 'available', true
-        if col_type_products.size > best_type_count
-          assign best_collection = col
-          assign best_type_count = col_type_products.size
-        endif
-      endunless
-    endfor
+  assign current_product = section.settings.product | default: product
 
-    # Get available products of the same type from the best collection
+  if current_product != blank
     assign type_products = blank
-    if best_collection != blank and source_product.type != blank
-      assign type_products = best_collection.products | where: 'type', source_product.type | where: 'available', true | reject: 'id', source_product.id
+
+    if recommendations.performed
+      # --- Search & Discovery path ---
+      # Use Shopify's algorithm as base, filtered by type and availability
+      assign rec_filtered = recommendations.products | where: 'type', current_product.type | where: 'available', true | reject: 'id', current_product.id
+
+      # Uprank same vendor
+      assign same_vendor = rec_filtered | where: 'vendor', current_product.vendor
+      assign other_vendors = rec_filtered | reject: 'vendor', current_product.vendor
+      assign type_products = same_vendor | concat: other_vendors
+
+      # Fill gaps using the best collection if recommendations don't have enough
+      if type_products.size < max_display
+        assign best_collection = blank
+        assign best_type_count = 0
+        for col in current_product.collections
+          unless col.handle == 'all'
+            assign col_type_count = col.products | where: 'type', current_product.type | where: 'available', true | size
+            if col_type_count > best_type_count
+              assign best_collection = col
+              assign best_type_count = col_type_count
+            endif
+          endunless
+        endfor
+        if best_collection != blank
+          assign fill = best_collection.products | where: 'type', current_product.type | where: 'available', true | reject: 'id', current_product.id
+          assign type_products = type_products | concat: fill
+        endif
+      endif
+
+    else
+      # --- Initial server-side render path (before AJAX fires) ---
+      # Show collection-based products immediately so page doesn't show a skeleton
+      assign best_collection = blank
+      assign best_type_count = 0
+      for col in current_product.collections
+        unless col.handle == 'all'
+          assign col_type_count = col.products | where: 'type', current_product.type | where: 'available', true | size
+          if col_type_count > best_type_count
+            assign best_collection = col
+            assign best_type_count = col_type_count
+          endif
+        endunless
+      endfor
+
+      if best_collection != blank
+        assign type_products = best_collection.products | where: 'type', current_product.type | where: 'available', true | reject: 'id', current_product.id
+      else
+        assign type_products = collections.all.products | where: 'type', current_product.type | where: 'available', true | reject: 'id', current_product.id
+      endif
+
+      assign same_vendor = type_products | where: 'vendor', current_product.vendor
+      assign other_vendors = type_products | reject: 'vendor', current_product.vendor
+      assign type_products = same_vendor | concat: other_vendors
     endif
 
-    # Fallback if type is blank or returns nothing
-    if type_products == blank or type_products.size == 0
-      assign type_products = collections.all.products | where: 'available', true | reject: 'id', source_product.id
-    endif
+    assign products = type_products | slice: 0, max_display
 
-    # Uprank same vendor (brand) first, then other vendors of the same type
-    assign same_vendor = type_products | where: 'vendor', source_product.vendor
-    assign other_vendors = type_products | reject: 'vendor', source_product.vendor
-    assign products = same_vendor | concat: other_vendors | slice: 0, max_display
   else
-    # Theme editor placeholder — no product context available
+    # Theme editor placeholder
     assign products = null
     for i in (1..max_display)
       assign products = products | append: ', '
@@ -111,7 +143,7 @@
 %}
 
 
-      <!-- debug: product.type="{{ product.type }}", product.vendor="{{ product.vendor }}", collection="{{ best_collection.handle }}", same_vendor_count="{{ same_vendor.size }}", products_count="{{ products.size }}" -->
+      <!-- debug: path="{{ recommendations.performed | default: 'server-side' }}", product.type="{{ current_product.type }}", product.vendor="{{ current_product.vendor }}", same_vendor_count="{{ same_vendor.size }}", products_count="{{ products.size }}" -->
       {% capture list_items %}
         {% for product in products limit: 24 %}
           <div class="resource-list__item">
