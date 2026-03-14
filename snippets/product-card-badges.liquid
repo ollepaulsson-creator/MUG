@@ -38,7 +38,7 @@
       <div class="product-badges__badge product-badges__badge--rectangle color-scheme-begagnat">Begagnad</div>
     {%- endif -%}
     {%- if product.compare_at_price > product.price -%}
-      <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sale_color_scheme }}">{{- 'content.product_badge_sale' | t -}}</div>
+      <div class="product-badges__badge product-badges__badge--rectangle product-badges__badge--sale color-{{ settings.badge_sale_color_scheme }}">{{- 'content.product_badge_sale' | t -}}</div>
     {%- endif -%}
     {%- if is_nyhet -%}
       <div class="product-badges__badge product-badges__badge--rectangle color-scheme-nyhet">Nyhet</div>
@@ -95,6 +95,12 @@
   .product-badges__badge--rectangle {
     padding-block: 6px !important;
     padding-inline: 10px !important;
+  }
+
+  /* Sale badge */
+  .product-badges__badge--sale {
+    color: #e53935 !important;
+    background: #fff !important;
   }
 
   /* Begagnad badge */
