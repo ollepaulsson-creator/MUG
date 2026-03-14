@@ -220,6 +220,24 @@
               %}
             {% endif %}
             {% if block_settings.filter_style == 'horizontal' %}
+              <div class="products-count-wrapper">
+                <span title="{{ 'content.product_count' | t }}">
+                  {{- 'content.item_count' | t: count: products_count -}}
+                </span>
+              </div>
+
+              {% if block_settings.enable_sorting %}
+                {% render 'sorting',
+                  results: results,
+                  sort_by: sort_by,
+                  filter_style: block_settings.filter_style,
+                  suffix: 'desktop',
+                  sort_position: 'desktop',
+                  should_use_select_on_mobile: false,
+                  section_id: section.id
+                %}
+              {% endif %}
+
               {% if block_settings.enable_grid_density %}
                 {% render 'grid-density-controls', viewport: 'desktop' %}
               {% endif %}
@@ -283,27 +301,6 @@
   </div>
 {% endif %}
 
-
-    {% if block_settings.filter_style == 'horizontal' %}
-      <div class="facets-toggle__count-sort">
-        <div class="products-count-wrapper facets-toggle__products-count">
-          <span title="{{ 'content.product_count' | t }}">
-            {{- 'content.item_count' | t: count: products_count -}}
-          </span>
-        </div>
-        {% if block_settings.enable_sorting %}
-          {% render 'sorting',
-            results: results,
-            sort_by: sort_by,
-            filter_style: block_settings.filter_style,
-            suffix: 'desktop',
-            sort_position: 'desktop',
-            should_use_select_on_mobile: false,
-            section_id: section.id
-          %}
-        {% endif %}
-      </div>
-    {% endif %}
 
     <div class="facets-mobile-wrapper facets-controls-wrapper">
       {% if block_settings.enable_filtering == false and block_settings.enable_sorting %}
@@ -1099,28 +1096,9 @@
   }
 
   .facets-toggle__info {
-    display: flex;
-  }
-
-  .facets-toggle__count-sort {
-    display: none;
-
-    @media screen and (min-width: 750px) {
-      display: flex;
-      align-items: center;
-      gap: var(--gap-md);
-      margin-inline-start: auto;
-      flex-shrink: 0;
-    }
-  }
-
-  .facets-toggle__products-count {
-    display: flex !important;
-    margin-left: 0 !important;
-    flex-shrink: 0;
-    align-items: center;
-    height: var(--minimum-touch-target);
-  }
+    display: flex
+;
+}
 {% endstylesheet %}
 
 {% schema %}
