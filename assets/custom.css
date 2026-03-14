@@ -348,10 +348,10 @@ ul.pagination__list {
 .facets-toggle__wrapper {
     border-right: 1px solid #DCDCDC;
     padding-right: 16px;
-    margin-right: 16px;
     height: 100%;
     display: flex;
     align-items: center;
+    width: 25%;
 }
 .facets-toggle__wrapper:hover {
     background: #FBFBFB;

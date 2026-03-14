@@ -1104,9 +1104,20 @@
 
   @media screen and (min-width: 750px) {
     .facets-toggle {
-      grid-column: var(--full-width) !important;
-      padding-inline: var(--margin-4xl) !important;
-      border-bottom: 1px solid #DCDCDC;
+      grid-column: var(--centered) !important;
+      padding-inline: 0 !important;
+      position: relative;
+      overflow: visible;
+    }
+
+    .facets-toggle::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: -9999px;
+      right: -9999px;
+      height: 1px;
+      background: #DCDCDC;
     }
   }
 
