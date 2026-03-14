@@ -502,19 +502,12 @@
               {% if media.media_type == 'image' %}
                 <drag-zoom-wrapper class="product-media__drag-zoom-wrapper">
                   {%- render 'product-media',
-  media: media,
-  sizes: '100vw',
-  widths: '750, 1100, 1500, 2000, 2500, 3000',
-  loading: 'lazy',
-  is_main_product_media: forloop.first
--%}
-{%- render 'product-media',
-  media: media,
-  sizes: '100vw',
-  widths: '750, 1100, 1500, 2000, 2500, 3000',
-  loading: 'lazy',
-  is_main_product_media: forloop.first
--%}
+                    media: media,
+                    sizes: '100vw',
+                    widths: '750, 1100, 1500, 2000, 2500, 3000',
+                    loading: 'lazy',
+                    is_main_product_media: forloop.first
+                  -%}
                 </drag-zoom-wrapper>
               {% else %}
                 {%- render 'product-media',
