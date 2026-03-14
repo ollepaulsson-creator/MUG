@@ -39,7 +39,7 @@ header-menu .tmenu_submenu--desktop .tmenu_item_link {
   padding: 5px 10px !important;
 }
 .tmenu_navbar .tmenu_item--root > .tmenu_item_link {
-  height: 42px;
+  height: 42px!important;
 }
 /* Tab-style submenu padding */
 header-menu .tmenu_submenu_tab_control .tmenu_item_link {
