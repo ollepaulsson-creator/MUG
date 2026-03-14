@@ -18,29 +18,29 @@
     --badge-text-transform: {{ settings.badge_text_transform }};
   "
 >
-  {%- if product.available == false or product.compare_at_price > product.price and product.available or product.tags contains 'new' or product.tags contains 'new-in' or product.tags contains 'vintage' -%}
+  {%- if product.available == false or product.tags contains 'begagnat' or product.compare_at_price > product.price and product.available or product.tags contains 'nyhet' or product.tags contains 'new' or product.tags contains 'new-in' -%}
     <div
       class="
         product-badges__badge product-badges__badge--rectangle
         {% if product.available == false %}
           color-{{ settings.badge_sold_out_color_scheme }}
+        {% elsif product.tags contains 'begagnat' %}
+          color-scheme-begagnat
         {% elsif product.compare_at_price > product.price %}
           color-{{ settings.badge_sale_color_scheme }}
-        {% elsif product.tags contains 'new' or product.tags contains 'new-in' %}
-          color-scheme-new
-        {% elsif product.tags contains 'vintage' %}
-          color-scheme-vintage
+        {% elsif product.tags contains 'nyhet' or product.tags contains 'new' or product.tags contains 'new-in' %}
+          color-scheme-nyhet
         {% endif %}
       "
     >
       {%- if product.available == false -%}
         {{ 'content.product_badge_sold_out' | t }}
+      {%- elsif product.tags contains 'begagnat' -%}
+        Begagnat
       {%- elsif product.compare_at_price > product.price -%}
         {{ 'content.product_badge_sale' | t }}
-      {%- elsif product.tags contains 'new' or product.tags contains 'new-in' -%}
-        NEW IN
-      {%- elsif product.tags contains 'vintage' -%}
-        VINTAGE
+      {%- elsif product.tags contains 'nyhet' or product.tags contains 'new' or product.tags contains 'new-in' -%}
+        Nyhet
       {%- endif -%}
     </div>
   {%- endif -%}
@@ -90,17 +90,17 @@
     text-transform: uppercase;
   }
 
-  /* 🎯 New In badge styling */
-  .product-badges__badge.color-scheme-new {
-    background: #000;
+  /* Begagnat badge */
+  .product-badges__badge.color-scheme-begagnat {
+    background: #8B6F47;
     color: #fff;
     letter-spacing: 1px;
   }
 
-  /* 🪶 Vintage badge styling */
-  .product-badges__badge.color-scheme-vintage {
-    background: #d2b48c;
-    color: #000;
+  /* Nyhet badge */
+  .product-badges__badge.color-scheme-nyhet {
+    background: #000;
+    color: #fff;
     letter-spacing: 1px;
   }
 {% endstylesheet %}
