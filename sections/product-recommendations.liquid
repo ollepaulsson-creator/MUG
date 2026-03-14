@@ -22,6 +22,14 @@
     echo '--column-count: ' | append: section.settings.columns | append: ';'
     echo '--column-count-mobile: ' | append: section.settings.mobile_columns | append: ';'
   endcapture
+
+  # Determine if we have a real product context to render from (initial page load)
+  assign source_product = section.settings.product | default: product
+  if source_product != blank
+    assign has_product_context = true
+  else
+    assign has_product_context = false
+  endif
 %}
 
 <product-recommendations
@@ -32,7 +40,7 @@
   data-product-id="{{ section.settings.product.id | default: product.id }}"
   data-intent="{{ section.settings.recommendation_type }}"
   data-testid="product-recommendations-section"
-  data-recommendations-performed="{{ recommendations.performed }}"
+  data-recommendations-performed="{{ recommendations.performed | default: has_product_context }}"
   {{ section.shopify_attributes }}
 >
   <div class="section-background color-{{ section.settings.color_scheme }}"></div>
@@ -55,7 +63,7 @@
       {% content_for 'blocks' %}
     </div>
 
-    {% if recommendations.performed or section.settings.product == blank %}
+    {% if has_product_context or recommendations.performed or section.settings.product == blank %}
       {% liquid
   # Clamp the max_products to 16
   assign max_display = section.settings.max_products
@@ -63,11 +71,10 @@
     assign max_display = 16
   endif
 
-  if recommendations.performed
-    # In recommendations context, `product` is the viewed product (set by Shopify from the URL)
-    assign current_product = product
+  if source_product != blank
+    # Find the best collection (skip the generic 'all' collection)
     assign best_collection = blank
-    for col in current_product.collections
+    for col in source_product.collections
       if best_collection == blank
         unless col.handle == 'all'
           assign best_collection = col
@@ -75,25 +82,9 @@
       endif
     endfor
     if best_collection != blank
-      assign products = best_collection.products | reject: 'id', current_product.id | slice: 0, max_display
+      assign products = best_collection.products | reject: 'id', source_product.id | slice: 0, max_display
     else
-      assign products = current_product.collections.first.products | reject: 'id', current_product.id | slice: 0, max_display
-    endif
-  elsif section.settings.product != blank
-    # A specific product is pinned in theme settings
-    assign current_product = section.settings.product
-    assign best_collection = blank
-    for col in current_product.collections
-      if best_collection == blank
-        unless col.handle == 'all'
-          assign best_collection = col
-        endunless
-      endif
-    endfor
-    if best_collection != blank
-      assign products = best_collection.products | reject: 'id', current_product.id | slice: 0, max_display
-    else
-      assign products = current_product.collections.first.products | reject: 'id', current_product.id | slice: 0, max_display
+      assign products = source_product.collections.first.products | reject: 'id', source_product.id | slice: 0, max_display
     endif
   else
     # Theme editor placeholder — no product context available
