@@ -38,7 +38,9 @@ header-menu .tmenu_submenu--desktop .tmenu_item_link {
   font-feature-settings: 'ss07' 1 !important;
   padding: 5px 10px !important;
 }
-
+.tmenu_navbar .tmenu_item--root > .tmenu_item_link {
+  height: 42px;
+}
 /* Tab-style submenu padding */
 header-menu .tmenu_submenu_tab_control .tmenu_item_link {
   padding: 12px 25px !important;
