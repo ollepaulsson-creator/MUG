@@ -493,13 +493,13 @@ h5 {
     border-bottom: 1px solid #DCDCDC;
 }
 .facets-toggle__wrapper {
-    width: 100%;
+    width: auto;
 }
 button.button.facets-toggle__button.button-unstyled.button-unstyled--with-icon {
     display: flex;
-    justify-content: space-between;
-    flex-direction: row-reverse;
-    width: 100%;
+    justify-content: flex-start;
+    flex-direction: row;
+    width: auto;
 }
 overflow-list.facets__overflow-list {
     display: none;
