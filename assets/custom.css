@@ -2,9 +2,9 @@
   box-sizing: border-box;
 }
 
-/* Hide native desktop nav so Qiokify mega menu can replace it without the web component reinstating itself */
+/* Hide only the native nav links inside header-menu so Qiokify can inject adjacent to it */
 @media screen and (min-width: 750px) {
-  header-menu.header-menu {
+  header-menu .header-menu__inner {
     display: none !important;
   }
 }
