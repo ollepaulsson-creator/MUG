@@ -72,16 +72,29 @@
   endif
 
   if source_product != blank
-    # Sort collections by products_count ascending to find the most specific category collection
+    # Sort collections by products_count ascending, skip 'all' and tiny cross-category collections (min 10 products)
     assign sorted_collections = source_product.collections | sort: 'products_count'
     assign best_collection = blank
     for col in sorted_collections
       if best_collection == blank
         unless col.handle == 'all'
-          assign best_collection = col
+          if col.products_count >= 10
+            assign best_collection = col
+          endif
         endunless
       endif
     endfor
+    # If nothing meets the threshold, take the largest non-all collection as fallback
+    if best_collection == blank
+      assign sorted_desc = source_product.collections | sort: 'products_count' | reverse
+      for col in sorted_desc
+        if best_collection == blank
+          unless col.handle == 'all'
+            assign best_collection = col
+          endunless
+        endif
+      endfor
+    endif
 
     # Get products of the same type from the best collection
     assign type_products = blank
