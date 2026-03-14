@@ -220,39 +220,6 @@
               %}
             {% endif %}
             {% if block_settings.filter_style == 'horizontal' %}
-              {% if block_settings.enable_filtering %}
-                <button
-                  class="button facets-toggle__button button-unstyled button-unstyled--with-icon facets-toggle__button--in-form"
-                  on:click="#filters-drawer/showDialog"
-                  type="button"
-                >
-                  <div class="facets-toggle__icon">
-                    <span class="svg-wrapper">
-                      <img
-                        src="{{ 'Icon - Filter.png' | asset_url }}"
-                        alt="Filter Icon"
-                        class="icon-filter"
-                        width="20"
-                        height="20"
-                        style="display: block; object-fit: contain;"
-                      >
-                    </span>
-                  </div>
-                  <div class="facets-toggle__info">
-                    <h4 class="facets-toggle__label">Filtrera</h4>
-                    {% if total_active_values > 0 %}
-                      <div
-                        class="filter-count-bubble"
-                        aria-label="({{ 'accessibility.filter_count' | t: count: total_active_values }})"
-                      >
-                        <span class="filter-count-bubble__text" aria-hidden="true">
-                          ({{ total_active_values }})
-                        </span>
-                      </div>
-                    {% endif %}
-                  </div>
-                </button>
-              {% endif %}
               <div class="products-count-wrapper">
                 <span title="{{ 'content.product_count' | t }}">
                   {{- 'content.item_count' | t: count: products_count -}}
@@ -1129,36 +1096,9 @@
   }
 
   .facets-toggle__info {
-    display: flex;
-  }
-
-  /* Filtrera button moved into horizontal filter bar on desktop */
-  .facets-toggle__button--in-form {
-    @media screen and (min-width: 750px) {
-      margin-inline-start: auto;
-      flex-shrink: 0;
-      height: var(--minimum-touch-target);
-      align-items: center;
-      display: flex;
-      border-right: 1px solid #DCDCDC;
-      padding-inline-end: var(--padding-md);
-      margin-inline-end: var(--padding-md);
-    }
-  }
-
-  /* Remove auto margin from count since Filtrera button now handles it */
-  .facets--horizontal:has(.facets-toggle__button--in-form) .products-count-wrapper {
-    @media screen and (min-width: 750px) {
-      margin-left: 0;
-    }
-  }
-
-  /* Hide the standalone Filtrera toggle on desktop when it's in the form */
-  @media screen and (min-width: 750px) {
-    .facets-block-wrapper--horizontal ~ .facets-toggle .facets-toggle__wrapper {
-      display: none;
-    }
-  }
+    display: flex
+;
+}
 {% endstylesheet %}
 
 {% schema %}
