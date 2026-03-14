@@ -72,47 +72,15 @@
   endif
 
   if source_product != blank
-    # Sort collections by products_count ascending, skip 'all' and small cross-category collections (min 20 products)
-    assign sorted_collections = source_product.collections | sort: 'products_count'
-    assign best_collection = blank
-    for col in sorted_collections
-      if best_collection == blank
-        unless col.handle == 'all'
-          if col.products_count >= 20
-            assign best_collection = col
-          endif
-        endunless
-      endif
-    endfor
-    # If nothing meets the threshold, take the largest non-all collection as fallback
-    if best_collection == blank
-      assign sorted_desc = source_product.collections | sort: 'products_count' | reverse
-      for col in sorted_desc
-        if best_collection == blank
-          unless col.handle == 'all'
-            assign best_collection = col
-          endunless
-        endif
-      endfor
-    endif
-
-    # Get products of the same type — use product.type (product.product_type is empty in this store)
+    # Filter all products by the same type — strict, no collection guessing needed
     assign type_products = blank
     if source_product.type != blank
-      if best_collection != blank
-        assign type_products = best_collection.products | where: 'type', source_product.type | reject: 'id', source_product.id
-      endif
-      # Fallback: same type across all products (strict — no mixing)
-      if type_products == blank or type_products.size == 0
-        assign type_products = collections.all.products | where: 'type', source_product.type | reject: 'id', source_product.id
-      endif
-    else
-      # No type set — fall back to collection only
-      if best_collection != blank
-        assign type_products = best_collection.products | reject: 'id', source_product.id
-      else
-        assign type_products = collections.all.products | reject: 'id', source_product.id
-      endif
+      assign type_products = collections.all.products | where: 'type', source_product.type | reject: 'id', source_product.id
+    endif
+
+    # Fallback if type is blank or returns nothing
+    if type_products == blank or type_products.size == 0
+      assign type_products = collections.all.products | reject: 'id', source_product.id
     endif
 
     # Uprank same vendor (brand) first, then other vendors of the same type
@@ -130,7 +98,7 @@
 %}
 
 
-      <!-- debug: product.type="{{ product.type }}", product.product_type="{{ product.product_type }}", source_product.type="{{ source_product.type }}", source_product.product_type="{{ source_product.product_type }}", collection="{{ best_collection.handle }}", products_count="{{ products.size }}", has_product_context="{{ has_product_context }}", recommendations.performed="{{ recommendations.performed }}" -->
+      <!-- debug: product.type="{{ product.type }}", products_count="{{ products.size }}", has_product_context="{{ has_product_context }}", recommendations.performed="{{ recommendations.performed }}" -->
       {% capture list_items %}
         {% for product in products limit: 16 %}
           <div class="resource-list__item">
