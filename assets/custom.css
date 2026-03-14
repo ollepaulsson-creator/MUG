@@ -11,7 +11,7 @@
 
 /* Root nav items: match live site padding & font */
 header-menu .tmenu_item--root > .tmenu_item_link {
-  padding: 0px 0px !important;
+  padding: 0px 15px !important;
   line-height: 1.8em;
   color: var(--color-foreground) !important;
   font-family: "inter variable", sans-serif !important;
@@ -36,7 +36,7 @@ header-menu .tmenu_submenu--desktop .tmenu_item_link {
   color: var(--color-foreground) !important;
   font-family: "inter variable", sans-serif !important;
   font-feature-settings: 'ss07' 1 !important;
-  padding: 0px 0px !important;
+  padding: 5px 10px !important;
 }
 
 /* Tab-style submenu padding */
