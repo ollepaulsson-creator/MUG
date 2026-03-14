@@ -6,6 +6,7 @@
   opacity: 0;
   animation: fadeIn 0.4s ease forwards;
   animation-delay: calc(var(--card-index, 0) * 30ms);
+  border-bottom: 1px solid #DCDCDC;
 }
 .search_pred{
         display: flex;
@@ -441,6 +442,9 @@ h5 {
 }
 .product-card__content {
     border-right: 1px solid #DCDCDC;
+    border-top: none;
+}
+ul.product-grid {
     border-top: 1px solid #DCDCDC;
 }
 .text-block h1, .text-block.h1 > * {
