@@ -349,8 +349,11 @@ ul.pagination__list {
     border-right: 1px solid #DCDCDC;
     padding-right: 16px;
     margin-right: 16px;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
-.facets-toggle:hover {
+.facets-toggle__wrapper:hover {
     background: #FBFBFB;
 }
 .product-badges__badge.product-badges__badge--rectangle.color-scheme-1 {
