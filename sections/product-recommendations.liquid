@@ -82,10 +82,10 @@
       endif
     endfor
 
-    # Try: same type within the best collection
+    # Try: same product_type within the best collection
     assign products = blank
-    if best_collection != blank and source_product.type != blank
-      assign products = best_collection.products | where: 'type', source_product.type | reject: 'id', source_product.id
+    if best_collection != blank and source_product.product_type != blank
+      assign products = best_collection.products | where: 'product_type', source_product.product_type | reject: 'id', source_product.id
     endif
 
     # Fallback 1: all products in the collection (if type filter returned nothing)
@@ -95,9 +95,9 @@
       endif
     endif
 
-    # Fallback 2: same type across all products (if collection had nothing)
+    # Fallback 2: same product_type across all products (if collection had nothing)
     if products == blank or products.size == 0
-      assign products = collections.all.products | where: 'type', source_product.type | reject: 'id', source_product.id
+      assign products = collections.all.products | where: 'product_type', source_product.product_type | reject: 'id', source_product.id
     endif
 
     assign products = products | slice: 0, max_display
@@ -112,6 +112,7 @@
 %}
 
 
+      <!-- debug: product_type="{{ source_product.product_type }}", collection="{{ best_collection.handle }}", products_count="{{ products.size }}" -->
       {% capture list_items %}
         {% for product in products limit: 16 %}
           <div class="resource-list__item">
