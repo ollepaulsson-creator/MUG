@@ -69,20 +69,22 @@
       assign products = products | append: ', '
       assign products = products | split: ','
     endfor
-  elsif recommendations.performed
-    assign products = recommendations.products
-
-    # If less than max_display, fill from the same collection as the current product
-    if products.size < max_display
-      assign needed = max_display | minus: products.size
-      assign current_product = section.settings.product | default: product
-      assign fallback = current_product.collections.first.products | reject: 'id', current_product.id | slice: 0, needed
-      assign products = products | concat: fallback
-    endif
   else
-    # No recommendations, take from the same collection as the current product
+    # Always show more from the same collection as the current product
     assign current_product = section.settings.product | default: product
-    assign products = current_product.collections.first.products | reject: 'id', current_product.id | slice: 0, max_display
+    assign best_collection = blank
+    for col in current_product.collections
+      if best_collection == blank
+        unless col.handle == 'all'
+          assign best_collection = col
+        endunless
+      endif
+    endfor
+    if best_collection != blank
+      assign products = best_collection.products | reject: 'id', current_product.id | slice: 0, max_display
+    else
+      assign products = current_product.collections.first.products | reject: 'id', current_product.id | slice: 0, max_display
+    endif
   endif
 %}
 
