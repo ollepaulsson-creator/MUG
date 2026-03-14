@@ -2,12 +2,6 @@
   box-sizing: border-box;
 }
 
-/* Hide only the native nav links inside header-menu so Qiokify can inject adjacent to it */
-@media screen and (min-width: 750px) {
-  header-menu .header-menu__inner {
-    display: none !important;
-  }
-}
 
 .product-grid__item {
   opacity: 0;
