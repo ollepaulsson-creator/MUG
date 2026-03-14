@@ -65,10 +65,10 @@
 
     {% if has_product_context or recommendations.performed or section.settings.product == blank %}
       {% liquid
-  # Clamp the max_products to 16
+  # Clamp the max_products to 24
   assign max_display = section.settings.max_products
-  if max_display > 16
-    assign max_display = 16
+  if max_display > 24
+    assign max_display = 24
   endif
 
   if source_product != blank
@@ -113,7 +113,7 @@
 
       <!-- debug: product.type="{{ product.type }}", product.vendor="{{ product.vendor }}", collection="{{ best_collection.handle }}", same_vendor_count="{{ same_vendor.size }}", products_count="{{ products.size }}" -->
       {% capture list_items %}
-        {% for product in products limit: 16 %}
+        {% for product in products limit: 24 %}
           <div class="resource-list__item">
             {% content_for 'block', type: '_product-card', id: 'static-product-card', closest.product: product %}
           </div>
@@ -338,7 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "id": "max_products",
       "label": "t:settings.product_count",
       "min": 3,
-      "max": 16,
+      "max": 24,
       "step": 1,
       "default": 4
     },
