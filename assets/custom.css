@@ -445,6 +445,7 @@ h5 {
 }
 ul.product-grid {
     border-top: 1px solid #DCDCDC;
+    box-shadow: inset 0 -1px 0 0 #DCDCDC;
 }
 .text-block h1, .text-block.h1 > * {
     font-size: 32px;
