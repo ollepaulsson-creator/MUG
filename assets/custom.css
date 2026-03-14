@@ -341,7 +341,7 @@ ul.pagination__list {
 }
 
 .facets-toggle {
-    max-width: 100%;
+    max-width: 25%;
     border-right: 1px solid #DCDCDC;
     height: 52px!important;
 }
