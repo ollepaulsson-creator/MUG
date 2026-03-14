@@ -83,13 +83,20 @@
       endif
     endfor
 
-    # Use the most specific collection to find more of the same
+    # Use the most specific collection filtered by product type
     assign products = blank
-    if best_collection != blank
-      assign products = best_collection.products | reject: 'id', source_product.id
+    if best_collection != blank and source_product.product_type != blank
+      assign products = best_collection.products | where: 'product_type', source_product.product_type | reject: 'id', source_product.id
     endif
 
-    # Fallback: use all products if collection had nothing
+    # Fallback 1: same collection without type filter (if type is empty or returns nothing)
+    if products == blank or products.size == 0
+      if best_collection != blank
+        assign products = best_collection.products | reject: 'id', source_product.id
+      endif
+    endif
+
+    # Fallback 2: only use all products if collection returned nothing at all
     if products == blank or products.size == 0
       assign products = collections.all.products | reject: 'id', source_product.id
     endif
