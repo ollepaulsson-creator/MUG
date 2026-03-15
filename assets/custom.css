@@ -24,6 +24,9 @@ header-menu .tmenu_item--root > .tmenu_item_link {
     border-bottom: 1px solid #e3e3e3 !important;
     border-top: 1px solid #e3e3e3 !important;
 }
+.tmenu_item_active>.tmenu_submenu {
+    z-index: 1000;
+}
 /* Inherit header text color for icon/text/indicator */
 header-menu .tmenu_item_text,
 header-menu .tmenu_item_icon,
