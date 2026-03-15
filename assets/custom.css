@@ -48,6 +48,15 @@ header-menu .tmenu_submenu--desktop.tmenu_submenu_type_mega {
   padding: 28px 40px 36px !important;
 }
 
+/* ── Separator: right border on the left featured column ── */
+/* The left column wraps block-layout items; add a right border + gap */
+header-menu .tmenu_submenu_mega_fullscreen > ul > li:first-child,
+header-menu .tmenu_submenu--desktop.tmenu_submenu_type_mega > ul > li:first-child {
+  border-right: 1px solid #DCDCDC !important;
+  padding-right: 36px !important;
+  margin-right: 10px !important;
+}
+
 /* ── Bold featured links — left column (block layout + display_header) ── */
 header-menu .tmenu_item_layout_block.tmenu_item_display_header > .tmenu_item_link {
   font-size: 17px !important;
