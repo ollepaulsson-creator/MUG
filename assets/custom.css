@@ -3,82 +3,121 @@
 }
 
 /* ============================================================
- * Qikify Smart Menu — new theme integration
- * Replaces Debut-specific overrides (Blocks 2-5) with
- * equivalents for this theme's header-menu structure.
- * Block 1 (structural .tmenu_* CSS) is injected by the app.
+ * Qikify Smart Menu — theme integration (matches mockup)
  * ============================================================ */
 
-/* Root nav items: match live site padding & font */
-header-menu .tmenu_item--root > .tmenu_item_link {
-  padding: 0px 15px !important;
-  line-height: 1.8em;
-  color: var(--color-foreground) !important;
-  font-family: "inter variable", sans-serif !important;
-  font-feature-settings: 'ss07' 1 !important;
-  font-size: 15px;
+/* ── Desktop nav container ── */
+header-menu .tmenu_app_desktop {
+  width: 100%;
 }
 
-.tmenu_item--root>.tmenu_submenu {
-    box-shadow: inset 0 0 0 30px #eaeaea, 0 5px 5px #0000000d !important;
-    border-bottom: 1px solid #e3e3e3 !important;
-    border-top: 1px solid #e3e3e3 !important;
+/* ── Root nav bar items (Elgitarr, Bas, etc.) ── */
+header-menu .tmenu_item--root > .tmenu_item_link {
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 16px !important;
+  height: 42px !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  font-family: "inter variable", sans-serif !important;
+  font-feature-settings: 'ss07' 1 !important;
+  letter-spacing: 0.02em !important;
+  color: var(--color-foreground) !important;
+  text-decoration: none !important;
+  text-shadow: none !important;
 }
-.tmenu_item_active>.tmenu_submenu {
-    z-index: 1000;
+
+/* Active submenu stacking */
+.tmenu_item_active > .tmenu_submenu {
+  z-index: 1000;
 }
-/* Inherit header text color for icon/text/indicator */
+
+/* Color inheritance for icon / text / arrow */
 header-menu .tmenu_item_text,
 header-menu .tmenu_item_icon,
 header-menu .tmenu_indicator {
   color: inherit !important;
 }
 
-/* Submenu desktop: theme background + foreground color */
-header-menu .tmenu_submenu--desktop {
-  background-color: rgb(var(--color-background-rgb, 255 255 255)) !important;
-  color: var(--color-foreground) !important;
+/* ── Full-width mega menu panel ── */
+header-menu .tmenu_submenu_mega_fullscreen,
+header-menu .tmenu_submenu--desktop.tmenu_submenu_type_mega {
+  background-color: #ffffff !important;
+  border-top: 1px solid #DCDCDC !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07) !important;
+  padding: 28px 40px 36px !important;
 }
 
-header-menu .tmenu_submenu--desktop .tmenu_item_link {
-  color: var(--color-foreground) !important;
+/* ── Bold featured links — left column (block layout + display_header) ── */
+header-menu .tmenu_item_layout_block.tmenu_item_display_header > .tmenu_item_link {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  color: #000 !important;
+  padding: 4px 0 !important;
+  line-height: 1.55 !important;
+  text-decoration: none !important;
+  text-shadow: none !important;
+}
+
+/* ── Uppercase category headers (text layout + display_header) ── */
+header-menu .tmenu_item_layout_text.tmenu_item_display_header > .tmenu_item_link {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  color: #000 !important;
+  padding: 0 0 8px 0 !important;
+  margin-top: 22px !important;
+  text-decoration: none !important;
+  text-shadow: none !important;
+  cursor: default !important;
+}
+
+/* No top-gap for the first header in each column */
+header-menu .tmenu_col > .tmenu_item_layout_text.tmenu_item_display_header:first-child > .tmenu_item_link {
+  margin-top: 0 !important;
+}
+
+/* ── Regular submenu links ── */
+header-menu .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  color: #000 !important;
+  padding: 3px 0 !important;
+  letter-spacing: 0 !important;
+  text-shadow: none !important;
   font-family: "inter variable", sans-serif !important;
   font-feature-settings: 'ss07' 1 !important;
-  padding: 5px 10px !important;
-}
-.tmenu_navbar .tmenu_item--root > .tmenu_item_link {
-  height: 42px!important;
-}
-/* Tab-style submenu padding */
-header-menu .tmenu_submenu_tab_control .tmenu_item_link {
-  padding: 12px 25px !important;
+  text-decoration: none !important;
 }
 
-/* Flyout submenu */
-header-menu .tmenu_submenu_type_flyout .tmenu_item_link {
-  padding: 7px 25px !important;
+/* ── Featured image block (left column image + caption) ── */
+header-menu .tmenu_item_layout_image > .tmenu_item_link {
+  padding: 0 !important;
+  display: block !important;
 }
-header-menu .tmenu_submenu_type_flyout .tmenu_item { padding: 0 !important; }
-header-menu .tmenu_submenu_type_flyout .tmenu_submenu { padding: 7px 0 !important; }
-header-menu .tmenu_item--root.tmenu_item_submenu_type_flyout > .tmenu_submenu {
-  left: 0 !important;
-  top: 100% !important;
-  padding: 7px 0 !important;
+header-menu .tmenu_item_layout_image img {
+  width: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+  margin-bottom: 8px !important;
+}
+header-menu .tmenu_item_layout_image .tmenu_item_text {
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  text-decoration: underline !important;
+  color: #000 !important;
 }
 
-/* Remove text-shadow from submenu links */
-header-menu .tmenu_submenu .tmenu_item_link {
+/* Remove text-shadow everywhere in menu */
+header-menu .tmenu_item_link {
   text-shadow: none !important;
 }
 header-menu .tmenu_custom_content a {
-  display: inline-block;
+  display: inline-block !important;
   padding: 0 !important;
   text-shadow: none !important;
-}
-
-/* Desktop app container fills header-menu width */
-header-menu .tmenu_app_desktop {
-  width: 100%;
 }
 
 .product-grid__item {
