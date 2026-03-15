@@ -9,7 +9,7 @@
  * Block 1 (structural .tmenu_* CSS) is injected by the app.
  * ============================================================ */
 
-/* Root nav items: match live site padding & font */
+/* Root nav items */
 header-menu .tmenu_item--root > .tmenu_item_link {
   padding: 0px 15px !important;
   line-height: 1.8em;
@@ -19,14 +19,24 @@ header-menu .tmenu_item--root > .tmenu_item_link {
   font-size: 15px;
 }
 
-.tmenu_item--root>.tmenu_submenu {
-    box-shadow: inset 0 0 0 30px #eaeaea, 0 5px 5px #0000000d !important;
-    border-bottom: 1px solid #e3e3e3 !important;
-    border-top: 1px solid #e3e3e3 !important;
+/* Header sits above the mega menu panel, clipping the top shadow */
+#shopify-section-header {
+  position: relative;
+  z-index: 1002;
 }
-.tmenu_item_active>.tmenu_submenu {
-    z-index: 1000;
+
+/* Mega menu: background, shadow, no top border (header covers it) */
+.tmenu_item--root > .tmenu_submenu {
+  box-shadow: inset 0 0 0 30px #eaeaea, 0 5px 5px #0000000d !important;
+  border-bottom: 1px solid #e3e3e3 !important;
+  border-top: none !important;
 }
+
+/* Mega menu sits below the header */
+.tmenu_item_active > .tmenu_submenu {
+  z-index: 999 !important;
+}
+
 /* Inherit header text color for icon/text/indicator */
 header-menu .tmenu_item_text,
 header-menu .tmenu_item_icon,
@@ -34,14 +44,15 @@ header-menu .tmenu_indicator {
   color: inherit !important;
 }
 
-/* Submenu desktop: theme background + foreground color */
+/* Submenu desktop background */
 header-menu .tmenu_submenu--desktop {
   background-color: rgb(var(--color-background-rgb, 255 255 255)) !important;
   color: var(--color-foreground) !important;
 }
 
-header-menu .tmenu_submenu_mega_fullscreen, header-menu .tmenu_submenu--desktop.tmenu_submenu_type_mega {
-    padding: 18px 18px 18px !important;
+header-menu .tmenu_submenu_mega_fullscreen,
+header-menu .tmenu_submenu--desktop.tmenu_submenu_type_mega {
+  padding: 18px 18px 18px !important;
 }
 
 header-menu .tmenu_submenu--desktop .tmenu_item_link {
