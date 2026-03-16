@@ -117,6 +117,13 @@ border: 0!important;
 opacity: .6;
 text-decoration: underline;
 }
+.tmenu_nav .tmenu_item {
+font-family: inherit;
+font-size: 15px;
+font-weight: 400;
+font-style: inherit;
+letter-spacing: 0px;
+}
 
 .tmenu_masonry_col:first-child {
 border-right: 1px solid #e3e3e3!important;
