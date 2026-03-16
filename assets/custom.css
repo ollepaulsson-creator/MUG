@@ -36,26 +36,9 @@
   padding: 20px 20px 24px !important;
 }
 
-/* Header covers the top of the mega menu via a pseudo-element */
-header-component {
-  position: relative;
-  z-index: 10;
-}
-header-component::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 8px;
-  background: var(--color-background, #fff);
-  z-index: 11;
-  pointer-events: none;
-}
-
-/* Mega menu z-index below the header cover */
+/* Submenu must paint above the sticky header (--layer-sticky: 8, max theme layer: 20) */
 .tmenu_item_active > .tmenu_submenu {
-  z-index: 9 !important;
+  z-index: 200 !important;
 }
 
 /* ── Separators between masonry columns ── */
