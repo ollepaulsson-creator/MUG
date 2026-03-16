@@ -125,6 +125,16 @@ letter-spacing: .96px!important;
 text-transform: uppercase!important;
 margin-bottom: 4px!important;
 }
+.tmenu_item_text {
+padding: 0!important;
+display: inline!important;
+text-transform: inherit!important;
+color: inherit!important;
+font-family: inherit!important;
+font-weight: inherit!important;
+font-size: inherit!important;
+letter-spacing: inherit!important;
+}
 
 /* ── Featured image block ── */
 header-menu .tmenu_item_layout_image > .tmenu_item_link {
