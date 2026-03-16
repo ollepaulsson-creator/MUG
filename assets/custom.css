@@ -3,24 +3,95 @@
 }
 
 /* ============================================================
- * Qikify Smart Menu — copied from live site (www.mug.se)
+ * Qikify Smart Menu — theme integration (mockup)
  * ============================================================ */
 
-body .tmenu_item--root > .tmenu_submenu { box-shadow: inset 0 0 0 30px #eaeaea, 0 5px 5px rgba(0,0,0,.05) !important; border-bottom: 1px solid #e3e3e3 !important; border-top: 1px solid #e3e3e3 !important; }
+/* ── Desktop nav container ── */
+header-menu .tmenu_app_desktop {
+  width: 100%;
+}
 
-body .tmenu_item--root .tmenu_item_display_header > .tmenu_item_link > .tmenu_item_text { color: #000; font-size: 14px !important; font-style: normal !important; font-weight: 400 !important; letter-spacing: .96px !important; text-transform: uppercase !important; margin-bottom: 4px !important; }
+/* ── Root nav bar items ── */
+header-menu .tmenu_item--root > .tmenu_item_link,
+.tmenu_navbar .tmenu_item--root > .tmenu_item_link {
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 15px !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  font-family: "inter variable", sans-serif !important;
+  font-feature-settings: 'ss07' 1 !important;
+  color: var(--color-foreground) !important;
+  text-shadow: none !important;
+  text-decoration: none !important;
+}
 
-body .tmenu_item--root .tmenu_item_display_header > .tmenu_item_link { border-width: 0 0 0px 0 !important; }
+/* ── Mega menu panel ── */
+.tmenu_item--root > .tmenu_submenu {
+  background-color: #ffffff !important;
+  border-top: none !important;
+  border-bottom: 1px solid #e3e3e3 !important;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08) !important;
+  padding: 28px 40px 36px !important;
+}
 
-body .tmenu_masonry_col { margin: 0 !important; padding: 20px 15px 25px 25px !important; border: 0 !important; }
+/* Header covers the top of the mega menu via a pseudo-element */
+header-component {
+  position: relative;
+  z-index: 10;
+}
+header-component::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: var(--color-background, #fff);
+  z-index: 11;
+  pointer-events: none;
+}
 
-body .tmenu_masonry_col:first-child { border-right: 1px solid #e3e3e3 !important; padding-right: 25px !important; padding-left: 15px !important; }
+/* Mega menu z-index below the header cover */
+.tmenu_item_active > .tmenu_submenu {
+  z-index: 9 !important;
+}
 
-body .tmenu_masonry_col:last-child { border-left: 1px solid #e3e3e3 !important; padding-left: 25px !important; }
+/* ── Separators between column groups ── */
+.tmenu_submenu_mega_fullscreen > ul > li:not(:last-child) {
+  border-right: 1px solid #DCDCDC !important;
+  padding-right: 32px !important;
+  margin-right: 8px !important;
+}
 
-body .tmenu_masonry_row { padding-left: 10px; padding-right: 10px; }
+/* ── Bold featured links (left column) ── */
+header-menu .tmenu_item_layout_block.tmenu_item_display_header > .tmenu_item_link {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  color: #000 !important;
+  padding: 4px 0 !important;
+  line-height: 1.55 !important;
+  letter-spacing: 0 !important;
+  text-decoration: none !important;
+  text-shadow: none !important;
+}
 
-body .tmenu_submenu_mega_fullscreen { padding: 0 !important; }
+/* ── Uppercase category headers ── */
+header-menu .tmenu_item_layout_text.tmenu_item_display_header > .tmenu_item_link {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  color: #000 !important;
+  padding: 0 0 8px 0 !important;
+  margin-top: 20px !important;
+  text-decoration: none !important;
+  text-shadow: none !important;
+  cursor: default !important;
+}
+header-menu .tmenu_col > .tmenu_item_layout_text.tmenu_item_display_header:first-child > .tmenu_item_link {
+  margin-top: 0 !important;
+}
 
 /* ── Regular submenu links ── */
 header-menu .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link {
@@ -52,18 +123,16 @@ header-menu .tmenu_item_layout_image .tmenu_item_text {
   color: #000 !important;
 }
 
-body a[href*="/title"],
-body .tmenu_masonry_col:first-child .tmenu_item_layout_text a[href*="/pages"] { font-size: 22px !important; font-weight: 600 !important; padding-top: 0 !important; padding-bottom: 0 !important; line-height: 28px !important; }
-
-body .tmenu_submenu_type_mega .tmenu_item_link { padding-top: 4px !important; padding-bottom: 4px !important; }
-
-body .tmenu_submenu_type_mega .tmenu_item_layout_block .tmenu_submenu > .tmenu_item li:last-child { padding-bottom: 20px !important; }
-
-body .tmenu_item_content_alignment_left { text-align: left !important; text-decoration: underline; }
-
-body .tmenu_item_text:hover { opacity: .6; text-decoration: underline; }
-
-body .tmenu_item_submenu_mega_position_fullwidth.tmenu_item--root.tmenu_item_active { text-decoration: underline !important; }
+/* ── Inherit color, remove text-shadow globally ── */
+header-menu .tmenu_item_text,
+header-menu .tmenu_item_icon,
+header-menu .tmenu_indicator { color: inherit !important; }
+header-menu .tmenu_item_link { text-shadow: none !important; }
+header-menu .tmenu_custom_content a {
+  display: inline-block !important;
+  padding: 0 !important;
+  text-shadow: none !important;
+}
 
 .product-grid__item {
   opacity: 0;
