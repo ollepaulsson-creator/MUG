@@ -106,6 +106,12 @@ header-menu .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_disp
   font-family: "inter variable", sans-serif !important;
   font-feature-settings: 'ss07' 1 !important;
 }
+/* ── Olles mega menu styles ── */
+.tmenu_masonry_col:first-child {
+border-right: 1px solid #e3e3e3!important;
+padding-right: 25px!important;
+padding-left: 15px!important;
+}
 
 /* ── Featured image block ── */
 header-menu .tmenu_item_layout_image > .tmenu_item_link {
