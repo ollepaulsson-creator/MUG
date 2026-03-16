@@ -107,6 +107,13 @@ header-menu .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_disp
   font-feature-settings: 'ss07' 1 !important;
 }
 /* ── Olles mega menu styles ── */
+
+body .tmenu_masonry_col {
+margin: 0!important;
+padding: 20px 15px 25px 25px!important;
+border: 0!important;
+}
+
 .tmenu_masonry_col:first-child {
 border-right: 1px solid #e3e3e3!important;
 padding-right: 25px!important;
@@ -134,6 +141,15 @@ font-family: inherit!important;
 font-weight: inherit!important;
 font-size: inherit!important;
 letter-spacing: inherit!important;
+}
+body .tmenu_item--root .tmenu_item_display_header>.tmenu_item_link>.tmenu_item_text {
+color: #000;
+font-size: 14px!important;
+font-style: normal!important;
+font-weight: 400!important;
+letter-spacing: .96px!important;
+text-transform: uppercase!important;
+margin-bottom: 4px!important;
 }
 
 /* ── Featured image block ── */
