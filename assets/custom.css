@@ -135,6 +135,13 @@ body .tmenu_masonry_row {
 padding-left: 10px;
 padding-right: 10px;
 }
+.tmenu_item--root>.tmenu_submenu {
+    background-color: #fff !important;
+    border-top: none !important;
+    border-bottom: 1px solid #e3e3e3 !important;
+    box-shadow: 0 6px 16px #00000014 !important;
+    padding: 28px 40px 36px !important;
+}
 
 .tmenu_masonry_col:first-child {
 border-right: 1px solid #e3e3e3!important;
