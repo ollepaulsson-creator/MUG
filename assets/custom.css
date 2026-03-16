@@ -33,7 +33,7 @@
   border-top: none !important;
   border-bottom: 1px solid #e3e3e3 !important;
   box-shadow: 0 6px 16px rgba(0,0,0,0.08) !important;
-  padding: 28px 40px 36px !important;
+  padding: 20px 20px 24px !important;
 }
 
 /* Header covers the top of the mega menu via a pseudo-element */
@@ -68,8 +68,8 @@ header-component::after {
 }
 
 /* ── Bold featured links (first/left column only) ── */
-.tmenu_masonry_col:first-child .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link,
-.tmenu_masonry_placeholder > li:first-child .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link {
+.tmenu_wrapper .tmenu_masonry_col:first-child .tmenu_item_level_2.tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link,
+.tmenu_wrapper .tmenu_masonry_placeholder > li:first-child .tmenu_item_level_2.tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link {
   font-size: 17px !important;
   font-weight: 700 !important;
   color: #000 !important;
