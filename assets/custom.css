@@ -16,6 +16,7 @@ header-menu .tmenu_item--root > .tmenu_item_link,
 .tmenu_navbar .tmenu_item--root > .tmenu_item_link {
   display: flex !important;
   align-items: center !important;
+  height: 42px !important;
   padding: 0 15px !important;
   font-size: 14px !important;
   font-weight: 400 !important;
