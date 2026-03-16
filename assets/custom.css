@@ -116,6 +116,15 @@ padding-left: 15px!important;
 border-left: 1px solid #e3e3e3!important;
 padding-left: 25px!important;
 }
+body .tmenu_item--root .tmenu_item_display_header>.tmenu_item_link>.tmenu_item_text {
+color: #000;
+font-size: 14px!important;
+font-style: normal!important;
+font-weight: 400!important;
+letter-spacing: .96px!important;
+text-transform: uppercase!important;
+margin-bottom: 4px!important;
+}
 
 /* ── Featured image block ── */
 header-menu .tmenu_item_layout_image > .tmenu_item_link {
