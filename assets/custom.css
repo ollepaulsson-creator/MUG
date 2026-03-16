@@ -112,6 +112,10 @@ border-right: 1px solid #e3e3e3!important;
 padding-right: 25px!important;
 padding-left: 15px!important;
 }
+.tmenu_masonry_col:last-child {
+border-left: 1px solid #e3e3e3!important;
+padding-left: 25px!important;
+}
 
 /* ── Featured image block ── */
 header-menu .tmenu_item_layout_image > .tmenu_item_link {
