@@ -131,6 +131,10 @@ padding-top: 0!important;
 padding-bottom: 0!important;
 line-height: 28px!important;
 }
+body .tmenu_masonry_row {
+padding-left: 10px;
+padding-right: 10px;
+}
 
 .tmenu_masonry_col:first-child {
 border-right: 1px solid #e3e3e3!important;
