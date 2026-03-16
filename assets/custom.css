@@ -113,6 +113,10 @@ margin: 0!important;
 padding: 20px 15px 25px 25px!important;
 border: 0!important;
 }
+.tmenu_item_text:hover {
+opacity: .6;
+text-decoration: underline;
+}
 
 .tmenu_masonry_col:first-child {
 border-right: 1px solid #e3e3e3!important;
