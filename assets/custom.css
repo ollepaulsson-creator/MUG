@@ -28,34 +28,19 @@
 }
 
 /* ── Mega menu panel ── */
+/* Make navbar the positioning context so top:100% anchors below the nav bar */
+.tmenu_navbar {
+  position: relative !important;
+}
+
 .tmenu_item--root > .tmenu_submenu {
+  top: 100% !important; /* Override Qikify's top:auto — positions below navbar */
+  z-index: 100 !important;
   background-color: #ffffff !important;
   border-top: none !important;
   border-bottom: 1px solid #e3e3e3 !important;
   box-shadow: 0 6px 16px rgba(0,0,0,0.08) !important;
   padding: 20px 20px 24px !important;
-}
-
-/* Header covers the top of the mega menu via a pseudo-element */
-header-component {
-  position: relative;
-  z-index: 10;
-}
-header-component::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 8px;
-  background: var(--color-background, #fff);
-  z-index: 11;
-  pointer-events: none;
-}
-
-/* Mega menu z-index below the header cover */
-.tmenu_item_active > .tmenu_submenu {
-  z-index: 9 !important;
 }
 
 /* ── Separators between masonry columns ── */
