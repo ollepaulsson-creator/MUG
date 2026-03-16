@@ -568,6 +568,35 @@ p,span,li,button,div, a, #text,h1,h2,h3,h4,h5,h6, input {
     font-family: "Inter Variable", sans-serif !important;
     font-feature-settings: 'ss07' 1;
 }
+
+/* ── Text wrapping ── */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+p, li {
+  text-wrap: pretty;
+}
+
+/* ── Tabular numbers on prices ── */
+.price,
+.compare-at-price,
+.unit-price {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Scale on press ── */
+.button:active,
+.button-primary:active {
+  transform: scale(0.96);
+}
+:is(.quantity-minus, .quantity-plus):active .svg-wrapper {
+  transform: scale(0.96);
+}
+
+/* ── Fix will-change on quick-add (margin is not compositable) ── */
+.card-gallery:hover .quick-add__button {
+  will-change: opacity;
+}
 h5 {
     letter-spacing: 2px !important;
     font-size: 13px !important;
