@@ -33,7 +33,7 @@ header-menu .tmenu_item--root > .tmenu_item_link,
   border-top: none !important;
   border-bottom: 1px solid #e3e3e3 !important;
   box-shadow: 0 6px 16px rgba(0,0,0,0.08) !important;
-  padding: 28px 40px 36px !important;
+  padding: 0px 0px 0px!important;
 }
 
 /* Header covers the top of the mega menu via a pseudo-element */
