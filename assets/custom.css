@@ -7,12 +7,12 @@
  * ============================================================ */
 
 /* ── Desktop nav container ── */
-#AccessibleNav .tmenu_app_desktop {
+.tmenu_wrapper .tmenu_app_desktop {
   width: 100%;
 }
 
 /* ── Root nav bar items ── */
-#AccessibleNav .tmenu_item--root > .tmenu_item_link,
+.tmenu_wrapper .tmenu_item--root > .tmenu_item_link,
 .tmenu_navbar .tmenu_item--root > .tmenu_item_link {
   display: flex !important;
   align-items: center !important;
@@ -66,7 +66,7 @@ header-component::after {
 }
 
 /* ── Bold featured links (left column) ── */
-#AccessibleNav .tmenu_item_layout_block.tmenu_item_display_header > .tmenu_item_link {
+.tmenu_wrapper .tmenu_item_layout_block.tmenu_item_display_header > .tmenu_item_link {
   font-size: 17px !important;
   font-weight: 700 !important;
   color: #000 !important;
@@ -78,7 +78,7 @@ header-component::after {
 }
 
 /* ── Uppercase category headers ── */
-#AccessibleNav .tmenu_item_layout_text.tmenu_item_display_header > .tmenu_item_link {
+.tmenu_wrapper .tmenu_item_layout_text.tmenu_item_display_header > .tmenu_item_link {
   font-size: 11px !important;
   font-weight: 500 !important;
   text-transform: uppercase !important;
@@ -90,12 +90,12 @@ header-component::after {
   text-shadow: none !important;
   cursor: default !important;
 }
-#AccessibleNav .tmenu_col > .tmenu_item_layout_text.tmenu_item_display_header:first-child > .tmenu_item_link {
+.tmenu_wrapper .tmenu_col > .tmenu_item_layout_text.tmenu_item_display_header:first-child > .tmenu_item_link {
   margin-top: 0 !important;
 }
 
 /* ── Regular submenu links ── */
-#AccessibleNav .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link {
+.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link {
   font-size: 14px !important;
   font-weight: 400 !important;
   color: #000 !important;
@@ -107,17 +107,17 @@ header-component::after {
   font-feature-settings: 'ss07' 1 !important;
 }
 /* ── Featured image block ── */
-#AccessibleNav .tmenu_item_layout_image > .tmenu_item_link {
+.tmenu_wrapper .tmenu_item_layout_image > .tmenu_item_link {
   padding: 0 !important;
   display: block !important;
 }
-#AccessibleNav .tmenu_item_layout_image img {
+.tmenu_wrapper .tmenu_item_layout_image img {
   width: 100% !important;
   object-fit: cover !important;
   display: block !important;
   margin-bottom: 8px !important;
 }
-#AccessibleNav .tmenu_item_layout_image .tmenu_item_text {
+.tmenu_wrapper .tmenu_item_layout_image .tmenu_item_text {
   font-size: 13px !important;
   font-weight: 400 !important;
   text-decoration: underline !important;
@@ -125,11 +125,11 @@ header-component::after {
 }
 
 /* ── Inherit color, remove text-shadow globally ── */
-#AccessibleNav .tmenu_item_text,
-#AccessibleNav .tmenu_item_icon,
-#AccessibleNav .tmenu_indicator { color: inherit !important; }
-#AccessibleNav .tmenu_item_link { text-shadow: none !important; }
-#AccessibleNav .tmenu_custom_content a {
+.tmenu_wrapper .tmenu_item_text,
+.tmenu_wrapper .tmenu_item_icon,
+.tmenu_wrapper .tmenu_indicator { color: inherit !important; }
+.tmenu_wrapper .tmenu_item_link { text-shadow: none !important; }
+.tmenu_wrapper .tmenu_custom_content a {
   display: inline-block !important;
   padding: 0 !important;
   text-shadow: none !important;
