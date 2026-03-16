@@ -124,6 +124,13 @@ font-weight: 400;
 font-style: inherit;
 letter-spacing: 0px;
 }
+body .tmenu_masonry_col:first-child .tmenu_item_layout_text a[href*="/pages"] {
+font-size: 22px!important;
+font-weight: 600!important;
+padding-top: 0!important;
+padding-bottom: 0!important;
+line-height: 28px!important;
+}
 
 .tmenu_masonry_col:first-child {
 border-right: 1px solid #e3e3e3!important;
