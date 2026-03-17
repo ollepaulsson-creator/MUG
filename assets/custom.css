@@ -131,10 +131,14 @@
 }
 
 .product-grid__item {
-  opacity: 0;
-  animation: fadeIn 0.4s ease forwards;
+  animation: cardSlideIn 0.3s ease forwards;
   animation-delay: calc(var(--card-index, 0) * 30ms);
   border-bottom: 1px solid #DCDCDC;
+}
+
+@keyframes cardSlideIn {
+  from { transform: translateY(6px); }
+  to   { transform: translateY(0); }
 }
 .search_pred{
         display: flex;
