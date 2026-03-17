@@ -775,16 +775,6 @@ h4.predictive-search-results__heading {
     display: none !important;
 }
 
-/* Collapse grid columns to match item count — prevents empty trailing cells */
-.predictive-search-results__wrapper-products:has(> li:nth-child(1):last-child) {
-  grid-template-columns: 1fr !important;
-}
-.predictive-search-results__wrapper-products:has(> li:nth-child(2):last-child) {
-  grid-template-columns: repeat(2, 1fr) !important;
-}
-.predictive-search-results__wrapper-products:has(> li:nth-child(3):last-child) {
-  grid-template-columns: repeat(3, 1fr) !important;
-}
 
 
 @media (min-width: 768px) {

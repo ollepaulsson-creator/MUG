@@ -407,10 +407,20 @@ class PredictiveSearchComponent extends Component {
       if (!collectionElement) return;
       collectionElement.prepend(...recentlyViewedProductsHtml.children);
 
-      // If recently viewed returned products, remove the default collection grid
-      // to avoid two separate grids with a partial first row creating an empty slot.
+      // Merge into one grid: pad recently viewed with default collection items
+      // so the count is always a multiple of 4 (no empty trailing cells).
       const recentlyViewedUl = collectionElement.querySelector('ul[ref="recentlyViewedWrapper"]');
       if (recentlyViewedUl && recentlyViewedUl.children.length > 0) {
+        const rvCount = recentlyViewedUl.children.length;
+        const needed = (4 - (rvCount % 4)) % 4;
+        if (needed > 0) {
+          const defaultUl = Array.from(collectionElement.children)
+            .find(el => el.tagName === 'UL' && el.getAttribute('ref') !== 'recentlyViewedWrapper');
+          if (defaultUl) {
+            Array.from(defaultUl.children).slice(0, needed).forEach(item => recentlyViewedUl.appendChild(item));
+          }
+        }
+        // Remove the now-redundant default collection elements
         Array.from(collectionElement.children)
           .filter(el => el.getAttribute('ref') !== 'recentlyViewedWrapper')
           .forEach(el => el.remove());
