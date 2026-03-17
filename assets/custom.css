@@ -3,6 +3,39 @@
 }
 
 /* ============================================================
+ * ABC Diatype — self-hosted
+ * ============================================================ */
+
+@font-face {
+  font-family: 'ABC Diatype';
+  src: url('ABCDiatype-Regular.woff2') format('woff2'),
+       url('ABCDiatype-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ABC Diatype';
+  src: url('ABCDiatype-Medium.woff2') format('woff2'),
+       url('ABCDiatype-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-body--family: 'ABC Diatype', sans-serif;
+  --font-body--weight: 400;
+  --font-body--style: normal;
+  --font-heading--family: 'ABC Diatype', sans-serif;
+  --font-heading--weight: 500;
+  --font-heading--style: normal;
+  --font-subheading--family: 'ABC Diatype', sans-serif;
+  --font-accent--family: 'ABC Diatype', sans-serif;
+}
+
+/* ============================================================
  * Qikify Smart Menu — theme integration (mockup)
  * ============================================================ */
 
