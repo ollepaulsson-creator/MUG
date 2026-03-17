@@ -359,6 +359,10 @@ scroll-hint.slideshow-controls__thumbnails-container::after {
 .dialog-thumbnails-list__thumbnail {
   border: 1px solid #DCDCDC !important;
   outline: none !important;
+  background: #f7f7f7 !important;
+}
+.dialog-thumbnails-list__thumbnail img {
+  mix-blend-mode: multiply;
 }
 .dialog-thumbnails-list__thumbnail[aria-selected='true'] {
   border: 1px solid #000000 !important;
