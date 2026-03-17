@@ -185,8 +185,9 @@ input[type="search"]::-ms-clear {
 
 @media only screen and (min-width: 769px) {
   dialog.search-modal__content.dialog-modal.search-bar--header {
-    height: auto !important;
     top: 310px !important;
+    max-height: calc(100dvh - 320px) !important;
+    overflow-y: auto !important;
 }
 }
 
