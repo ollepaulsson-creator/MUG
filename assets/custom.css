@@ -620,6 +620,7 @@ ul.product-grid {
 
 .product-recommendations .resource-list--grid {
     border-top: 1px solid #DCDCDC;
+    overflow: hidden;
 }
 .product-recommendations .resource-list__item {
     border-bottom: 1px solid #DCDCDC;
