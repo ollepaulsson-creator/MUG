@@ -360,6 +360,7 @@ scroll-hint.slideshow-controls__thumbnails-container::after {
   border: 1px solid #DCDCDC !important;
   outline: none !important;
   background: #f7f7f7 !important;
+  isolation: isolate;
 }
 .dialog-thumbnails-list__thumbnail img {
   mix-blend-mode: multiply;
