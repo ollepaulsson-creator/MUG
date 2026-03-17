@@ -388,6 +388,7 @@ class PredictiveSearchComponent extends Component {
     /** This needs to be awaited and not .then so the DOM is already morphed
      * when #closeResults is called and therefore the height is animated */
     const viewedProducts = RecentlyViewed.getProducts();
+    console.log('[RV debug] viewedProducts IDs:', viewedProducts);
 
     if (viewedProducts.length > 0) {
       const recentlyViewedMarkup = await this.#getRecentlyViewedProductsMarkup();
@@ -395,6 +396,7 @@ class PredictiveSearchComponent extends Component {
 
       const parsedRecentlyViewedMarkup = new DOMParser().parseFromString(recentlyViewedMarkup, 'text/html');
       const recentlyViewedProductsHtml = parsedRecentlyViewedMarkup.getElementById('predictive-search-products');
+      console.log('[RV debug] recentlyViewedProductsHtml:', recentlyViewedProductsHtml?.outerHTML?.slice(0, 500));
       if (!recentlyViewedProductsHtml) return;
 
       for (const child of recentlyViewedProductsHtml.children) {
@@ -407,15 +409,8 @@ class PredictiveSearchComponent extends Component {
       if (!collectionElement) return;
       collectionElement.prepend(...recentlyViewedProductsHtml.children);
 
-      // Show recently viewed only if we have a full row (multiple of 4).
-      // Otherwise fall back to the default collection to avoid empty cells.
-      // Both the <h4> title and the <ul> are direct children of collectionElement,
-      // and both get ref="recentlyViewedWrapper" — so we must gather ALL of them,
-      // not just the first querySelector match.
       const allChildren = Array.from(collectionElement.children);
       const recentlyViewedChildren = allChildren.filter(el => el.getAttribute('ref') === 'recentlyViewedWrapper');
-      // The <ul> may be a direct child (when predictive_search.performed = true)
-      // or nested inside a wrapper div (when search.results path fires instead).
       let recentlyViewedUl = recentlyViewedChildren.find(el => el.tagName === 'UL');
       if (!recentlyViewedUl) {
         for (const el of recentlyViewedChildren) {
@@ -425,15 +420,16 @@ class PredictiveSearchComponent extends Component {
       }
       const count = recentlyViewedUl ? recentlyViewedUl.children.length : 0;
       const rounded = Math.floor(count / 4) * 4;
+      console.log('[RV debug] recentlyViewedChildren count:', recentlyViewedChildren.length, '| ul found:', !!recentlyViewedUl, '| li count:', count, '| rounded:', rounded);
       if (rounded >= 4) {
-        // Trim to nearest multiple of 4, remove default collection
         Array.from(recentlyViewedUl.children).slice(rounded).forEach(el => el.remove());
         allChildren
           .filter(el => el.getAttribute('ref') !== 'recentlyViewedWrapper')
           .forEach(el => el.remove());
+        console.log('[RV debug] showing recently viewed, trimmed to', rounded);
       } else {
-        // Not enough for a full row — remove recently viewed, keep default collection
         recentlyViewedChildren.forEach(el => el.remove());
+        console.log('[RV debug] not enough for full row — showing default collection');
       }
     }
 
