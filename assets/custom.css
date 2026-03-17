@@ -613,6 +613,10 @@ ul.product-grid {
     border-top: 1px solid #DCDCDC;
     box-shadow: inset 0 -1px 0 0 #DCDCDC;
 }
+
+.product-recommendations .resource-list--grid {
+    border-top: 1px solid #DCDCDC;
+}
 .text-block h1, .text-block.h1 > * {
     font-size: 32px;
     font-weight: 400;
