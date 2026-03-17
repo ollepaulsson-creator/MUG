@@ -131,7 +131,7 @@
 }
 
 .product-grid__item {
-  animation: cardEnter 0.25s ease-out both;
+  animation: cardEnter 0.15s ease-in-out both;
   animation-delay: calc(var(--card-index, 0) * 25ms);
   border-bottom: 1px solid #DCDCDC;
 }
