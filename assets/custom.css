@@ -357,9 +357,9 @@ scroll-hint.slideshow-controls__thumbnails-container::after {
 
 /* Zoom dialog thumbnails */
 .dialog-thumbnails-list__thumbnail {
-  border: 1px solid #DCDCDC !important;
+  border: none !important;
   outline: none !important;
-  background: #f7f7f7 !important;
+  background: #f0f0f0 !important;
   isolation: isolate;
 }
 .dialog-thumbnails-list__thumbnail img {
@@ -368,6 +368,7 @@ scroll-hint.slideshow-controls__thumbnails-container::after {
 .dialog-thumbnails-list__thumbnail[aria-selected='true'] {
   border: 1px solid #000000 !important;
   outline: none !important;
+  background: #0000001a !important;
 }
 
 button#checkout {
