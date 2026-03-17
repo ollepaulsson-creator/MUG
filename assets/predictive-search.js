@@ -414,7 +414,15 @@ class PredictiveSearchComponent extends Component {
       // not just the first querySelector match.
       const allChildren = Array.from(collectionElement.children);
       const recentlyViewedChildren = allChildren.filter(el => el.getAttribute('ref') === 'recentlyViewedWrapper');
-      const recentlyViewedUl = recentlyViewedChildren.find(el => el.tagName === 'UL');
+      // The <ul> may be a direct child (when predictive_search.performed = true)
+      // or nested inside a wrapper div (when search.results path fires instead).
+      let recentlyViewedUl = recentlyViewedChildren.find(el => el.tagName === 'UL');
+      if (!recentlyViewedUl) {
+        for (const el of recentlyViewedChildren) {
+          recentlyViewedUl = el.querySelector('ul');
+          if (recentlyViewedUl) break;
+        }
+      }
       const count = recentlyViewedUl ? recentlyViewedUl.children.length : 0;
       const rounded = Math.floor(count / 4) * 4;
       if (rounded >= 4) {
