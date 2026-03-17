@@ -407,23 +407,24 @@ class PredictiveSearchComponent extends Component {
       if (!collectionElement) return;
       collectionElement.prepend(...recentlyViewedProductsHtml.children);
 
-      // Merge into one grid: pad recently viewed with default collection items
-      // so the count is always a multiple of 4 (no empty trailing cells).
+      // Show recently viewed only if we have a full row (multiple of 4).
+      // Otherwise fall back to the default collection to avoid empty cells.
       const recentlyViewedUl = collectionElement.querySelector('ul[ref="recentlyViewedWrapper"]');
-      if (recentlyViewedUl && recentlyViewedUl.children.length > 0) {
-        const rvCount = recentlyViewedUl.children.length;
-        const needed = (4 - (rvCount % 4)) % 4;
-        if (needed > 0) {
-          const defaultUl = Array.from(collectionElement.children)
-            .find(el => el.tagName === 'UL' && el.getAttribute('ref') !== 'recentlyViewedWrapper');
-          if (defaultUl) {
-            Array.from(defaultUl.children).slice(0, needed).forEach(item => recentlyViewedUl.appendChild(item));
-          }
+      if (recentlyViewedUl) {
+        const count = recentlyViewedUl.children.length;
+        const rounded = Math.floor(count / 4) * 4;
+        if (rounded >= 4) {
+          // Trim to nearest multiple of 4, remove default collection
+          Array.from(recentlyViewedUl.children).slice(rounded).forEach(el => el.remove());
+          Array.from(collectionElement.children)
+            .filter(el => el.getAttribute('ref') !== 'recentlyViewedWrapper')
+            .forEach(el => el.remove());
+        } else {
+          // Not enough for a full row — remove recently viewed, keep default collection
+          Array.from(collectionElement.children)
+            .filter(el => el.getAttribute('ref') === 'recentlyViewedWrapper')
+            .forEach(el => el.remove());
         }
-        // Remove the now-redundant default collection elements
-        Array.from(collectionElement.children)
-          .filter(el => el.getAttribute('ref') !== 'recentlyViewedWrapper')
-          .forEach(el => el.remove());
       }
     }
 
