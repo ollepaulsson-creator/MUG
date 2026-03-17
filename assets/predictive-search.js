@@ -409,22 +409,23 @@ class PredictiveSearchComponent extends Component {
 
       // Show recently viewed only if we have a full row (multiple of 4).
       // Otherwise fall back to the default collection to avoid empty cells.
-      // Note: ref="recentlyViewedWrapper" is on the <div>, not the <ul> inside it.
-      const recentlyViewedWrapper = collectionElement.querySelector('[ref="recentlyViewedWrapper"]');
-      if (recentlyViewedWrapper) {
-        const ul = recentlyViewedWrapper.querySelector('ul');
-        const count = ul ? ul.children.length : 0;
-        const rounded = Math.floor(count / 4) * 4;
-        if (rounded >= 4) {
-          // Trim to nearest multiple of 4, remove default collection
-          if (ul) Array.from(ul.children).slice(rounded).forEach(el => el.remove());
-          Array.from(collectionElement.children)
-            .filter(el => el !== recentlyViewedWrapper)
-            .forEach(el => el.remove());
-        } else {
-          // Not enough for a full row — remove recently viewed, keep default collection
-          recentlyViewedWrapper.remove();
-        }
+      // Both the <h4> title and the <ul> are direct children of collectionElement,
+      // and both get ref="recentlyViewedWrapper" — so we must gather ALL of them,
+      // not just the first querySelector match.
+      const allChildren = Array.from(collectionElement.children);
+      const recentlyViewedChildren = allChildren.filter(el => el.getAttribute('ref') === 'recentlyViewedWrapper');
+      const recentlyViewedUl = recentlyViewedChildren.find(el => el.tagName === 'UL');
+      const count = recentlyViewedUl ? recentlyViewedUl.children.length : 0;
+      const rounded = Math.floor(count / 4) * 4;
+      if (rounded >= 4) {
+        // Trim to nearest multiple of 4, remove default collection
+        Array.from(recentlyViewedUl.children).slice(rounded).forEach(el => el.remove());
+        allChildren
+          .filter(el => el.getAttribute('ref') !== 'recentlyViewedWrapper')
+          .forEach(el => el.remove());
+      } else {
+        // Not enough for a full row — remove recently viewed, keep default collection
+        recentlyViewedChildren.forEach(el => el.remove());
       }
     }
 
