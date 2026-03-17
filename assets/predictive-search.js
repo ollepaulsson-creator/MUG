@@ -406,6 +406,15 @@ class PredictiveSearchComponent extends Component {
       const collectionElement = parsedEmptySectionMarkup.querySelector('#predictive-search-products');
       if (!collectionElement) return;
       collectionElement.prepend(...recentlyViewedProductsHtml.children);
+
+      // If recently viewed returned products, remove the default collection grid
+      // to avoid two separate grids with a partial first row creating an empty slot.
+      const recentlyViewedUl = collectionElement.querySelector('ul[ref="recentlyViewedWrapper"]');
+      if (recentlyViewedUl && recentlyViewedUl.children.length > 0) {
+        Array.from(collectionElement.children)
+          .filter(el => el.getAttribute('ref') !== 'recentlyViewedWrapper')
+          .forEach(el => el.remove());
+      }
     }
 
     if (abortController.signal.aborted) return;
