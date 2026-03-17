@@ -775,6 +775,23 @@ h4.predictive-search-results__heading {
     display: none !important;
 }
 
+/* Hide default collection when recently viewed products are shown — avoids two-grid layout with empty cells */
+#predictive-search-products:has([ref="recentlyViewedWrapper"])
+  .predictive-search-results__wrapper-products:not([ref="recentlyViewedWrapper"]) {
+  display: none !important;
+}
+
+/* Collapse columns for partial single-row grids so no empty slots appear */
+.predictive-search-results__wrapper-products:has(> li:nth-child(1):last-child) {
+  grid-template-columns: 1fr !important;
+}
+.predictive-search-results__wrapper-products:has(> li:nth-child(2):last-child) {
+  grid-template-columns: repeat(2, 1fr) !important;
+}
+.predictive-search-results__wrapper-products:has(> li:nth-child(3):last-child) {
+  grid-template-columns: repeat(3, 1fr) !important;
+}
+
 @media (min-width: 768px) {
   .product__media-wrapper, 
   .product__media, 
