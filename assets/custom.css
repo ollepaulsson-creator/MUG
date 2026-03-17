@@ -134,7 +134,6 @@
   animation: cardEnter 0.15s ease-in-out both;
   animation-delay: calc(var(--card-index, 0) * 25ms);
   border-top: 1px solid #DCDCDC;
-  border-bottom: 1px solid #DCDCDC;
 }
 
 media-gallery slideshow-slide {
