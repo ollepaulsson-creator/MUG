@@ -623,7 +623,6 @@ ul.product-grid {
 }
 .product-recommendations .resource-list__item {
     border-top: 1px solid #DCDCDC;
-    border-bottom: 1px solid #DCDCDC;
 }
 .text-block h1, .text-block.h1 > * {
     font-size: 32px;
