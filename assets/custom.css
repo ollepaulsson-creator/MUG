@@ -133,6 +133,7 @@
 .product-grid__item {
   animation: cardEnter 0.15s ease-in-out both;
   animation-delay: calc(var(--card-index, 0) * 25ms);
+  border-top: 1px solid #DCDCDC;
   border-bottom: 1px solid #DCDCDC;
 }
 
@@ -215,6 +216,7 @@ h4.predictive-search-results__title {
 }
 .resource-card__title {
     padding-bottom: 2px;
+    line-height: 1.5;
 }
 .resource-card__content .price {
     font-weight:400!important;
@@ -610,7 +612,6 @@ h5 {
     border-top: none;
 }
 ul.product-grid {
-    border-top: 1px solid #DCDCDC;
     box-shadow: inset 0 -1px 0 0 #DCDCDC;
 }
 
