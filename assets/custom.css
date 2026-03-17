@@ -28,13 +28,7 @@
 }
 
 /* ── Mega menu panel ── */
-/* Make navbar the containing block so top:100% anchors to its bottom edge */
-.tmenu_navbar {
-  position: relative !important;
-}
-
 .tmenu_item--root > .tmenu_submenu {
-  top: 100% !important; /* Start flush at navbar bottom = header border-bottom */
   background-color: #ffffff !important;
   border-top: none !important;
   border-bottom: 1px solid #e3e3e3 !important;
