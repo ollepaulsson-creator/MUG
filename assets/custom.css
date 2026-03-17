@@ -198,9 +198,9 @@ media-gallery slideshow-slide {
     padding-block: 0px !important;
 }
 
-.predictive-search-results__card--product .product-badges {
-    top: var(--badge-inset) !important;
-    left: var(--badge-inset) !important;
+.resource-card__media .product-badges {
+    top: 8px !important;
+    left: 8px !important;
 }
 
 div#predictive-search-products {
