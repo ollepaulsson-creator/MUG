@@ -203,6 +203,11 @@ media-gallery slideshow-slide {
     left: 8px !important;
 }
 
+.predictive-search-form__content-wrapper:has([data-search-results]):not(:has(.predictive-search-results__no-results))
+  > .predictive-search-form__content {
+    padding-block-end: 52px !important;
+}
+
 div#predictive-search-products {
     padding: 0px;
 }
