@@ -248,13 +248,13 @@ h4.predictive-search-results__title {
 .media-gallery {
     margin-top: 0 !important;
     padding-top: 0 !important;
+    background: #f7f7f7;
+    border-bottom: 1px solid #DCDCDC;
 }
 .product-information__media {
     margin-top: 0 !important;
     padding-top: 0 !important;
     top: 0 !important;
-    background: #f7f7f7;
-    border-bottom: 1px solid #DCDCDC;
 }
 .product-information__media .sticky-content {
     top: 0 !important;
