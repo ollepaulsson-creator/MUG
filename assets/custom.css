@@ -253,11 +253,12 @@ h4.predictive-search-results__title {
     margin-top: 0 !important;
     padding-top: 0 !important;
     top: 0 !important;
-    background: #f7f7f7;
+    background: #f7f7f7 !important;
     border-bottom: 1px solid #DCDCDC;
 }
 .product-information__media .sticky-content {
     top: 0 !important;
+    min-height: 100%;
 }
 
 .product-grid img,
