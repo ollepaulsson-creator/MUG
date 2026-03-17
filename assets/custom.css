@@ -247,7 +247,7 @@ h4.predictive-search-results__title {
 .slideshow-controls__thumbnail:hover {
     background: #ededed;
 }
-#shopify-section-template--26591884116317__main .product-media:hover {
+.product-information__media .product-media:hover {
     background: #f7f7f7;
 }
 .resource-card__media:hover {
