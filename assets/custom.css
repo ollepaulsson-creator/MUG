@@ -213,6 +213,11 @@ h4.predictive-search-results__title {
 
 .product-media {
     background: #f7f7f7;
+    border-bottom: 1px solid #DCDCDC;
+}
+.media-gallery--carousel .product-media {
+    background: #f7f7f7;
+    border-bottom: none;
 }
 .slideshow-controls__thumbnails {
     background: ##f7f7f7;
@@ -244,12 +249,10 @@ h4.predictive-search-results__title {
 .main-collection-grid {
 }
 
-/* Remove gap above product media; fill empty space below single image */
+/* Remove gap above product media */
 .media-gallery {
     margin-top: 0 !important;
     padding-top: 0 !important;
-    background: #f7f7f7;
-    border-bottom: 1px solid #DCDCDC;
 }
 .product-information__media {
     margin-top: 0 !important;
