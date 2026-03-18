@@ -569,22 +569,17 @@ input[type='search']::-webkit-search-decoration { -webkit-appearance: none; }
 .predictive-search-form__footer {
   position: sticky;
   bottom: 0;
-  background-color: var(--color-background);
-  padding: var(--padding-lg);
+  z-index: 1;
+  /* Gradient fades content above into solid background at button level */
+  background: linear-gradient(to bottom, transparent 0%, var(--color-background) 40%);
+  padding: 60px var(--padding-lg) var(--padding-lg);
   display: flex;
   justify-content: center;
+  pointer-events: none;
 }
 
-/* Gradient that fades the product grid behind the footer */
-.predictive-search-form__footer::before {
-  content: '';
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-  right: 0;
-  height: 80px;
-  background: linear-gradient(to bottom, transparent, var(--color-background));
-  pointer-events: none;
+.predictive-search-form__footer .button {
+  pointer-events: auto;
 }
 
 /* ── Suggestion list ── */
