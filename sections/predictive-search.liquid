@@ -346,7 +346,7 @@ input[type='search']::-webkit-search-decoration { -webkit-appearance: none; }
   .dialog-modal .predictive-search-form__content { max-height: 100%; }
   .dialog-modal .predictive-search-form__content-wrapper { box-shadow: none; }
   .dialog-modal .predictive-search-form__header { box-shadow: none; }
-  .dialog-modal .predictive-search-form__footer { padding-block: var(--padding-2xl); }
+  .dialog-modal .predictive-search-form__footer { padding-bottom: var(--padding-2xl); }
   .dialog-modal .predictive-search__reset-button-icon { display: none; }
   .dialog-modal .predictive-search__reset-button-text { display: block; }
 }
@@ -557,18 +557,18 @@ input[type='search']::-webkit-search-decoration { -webkit-appearance: none; }
 }
 .predictive-search-results__card--query:active { transform: scale(0.97); }
 
-/* ── Footer: always at bottom of flex column layout (no sticky needed) ── */
+/* ── Footer: always at bottom of flex column layout ── */
 .predictive-search-form__footer {
   flex-shrink: 0;
-  /* Gradient fades the scrollable content above into the solid background */
-  background: linear-gradient(to bottom, transparent 0%, var(--color-background) 40%);
-  padding: 60px var(--padding-lg) var(--padding-lg);
+  /* Gradient fades scrollable content into solid background at button level */
+  background: linear-gradient(to bottom, transparent 0%, var(--color-background) 55%);
+  padding: 80px var(--padding-lg) var(--padding-lg);
   display: flex;
   justify-content: center;
   pointer-events: none;
-  margin-top: -60px; /* overlap bottom of content with the gradient */
+  margin-top: -80px; /* pull up so gradient overlaps bottom of scroll area */
   position: relative;
-  z-index: 1;
+  z-index: 2; /* above content-wrapper which has transform stacking context */
 }
 
 .predictive-search-form__footer .button {
