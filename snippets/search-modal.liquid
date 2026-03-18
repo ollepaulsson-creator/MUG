@@ -187,8 +187,32 @@ input[type="search"]::-ms-clear {
   dialog.search-modal__content.dialog-modal.search-bar--header {
     top: 310px !important;
     max-height: calc(100dvh - 320px) !important;
-    overflow-y: auto !important;
-}
+    overflow: hidden !important;
+    flex-direction: column;
+  }
+
+  /* Make component and form fill dialog height as flex column */
+  .search-modal__content predictive-search-component,
+  .search-modal__content .predictive-search-form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+  }
+
+  /* Content wrapper takes remaining space and scrolls */
+  .search-modal__content .predictive-search-form__content-wrapper {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* Content fills wrapper height */
+  .search-modal__content .predictive-search-form__content {
+    max-height: none;
+    overflow: visible;
+  }
 }
 
 

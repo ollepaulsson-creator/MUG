@@ -7,6 +7,7 @@
     aria-expanded="true"
     data-transition-container
     style="--color-shadow: rgb(var(--color-foreground-rgb) / var(--opacity-10-25));"
+    {% if predictive_search.performed and predictive_search.resources.products.size > 0 %}data-product-count="{{ predictive_search.resources.products.size }}" data-search-terms="{{ predictive_search.terms | url_encode }}"{% endif %}
   >
     <div class="predictive-search-results__inner" data-search-results>
       {% if predictive_search.performed %}
@@ -231,15 +232,6 @@
       {% endif %}
     </div>
 
-    <div class="predictive-search-form__footer">
-      <a
-        href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}&type=product"
-        class="button button-primary predictive-search__search-button"
-        ref="viewAllButton"
-      >
-        VISA ALLA {{ predictive_search.resources.products.size }} RESULTAT
-      </a>
-    </div>
   </div>
 {%- endif -%}
 
@@ -565,17 +557,18 @@ input[type='search']::-webkit-search-decoration { -webkit-appearance: none; }
 }
 .predictive-search-results__card--query:active { transform: scale(0.97); }
 
-/* ── Footer: sticky at bottom, never cropped ── */
+/* ── Footer: always at bottom of flex column layout (no sticky needed) ── */
 .predictive-search-form__footer {
-  position: sticky;
-  bottom: 0;
-  z-index: 1;
-  /* Gradient fades content above into solid background at button level */
+  flex-shrink: 0;
+  /* Gradient fades the scrollable content above into the solid background */
   background: linear-gradient(to bottom, transparent 0%, var(--color-background) 40%);
   padding: 60px var(--padding-lg) var(--padding-lg);
   display: flex;
   justify-content: center;
   pointer-events: none;
+  margin-top: -60px; /* overlap bottom of content with the gradient */
+  position: relative;
+  z-index: 1;
 }
 
 .predictive-search-form__footer .button {
