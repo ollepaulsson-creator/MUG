@@ -3,6 +3,7 @@ import { debounce, onAnimationEnd, prefersReducedMotion, onDocumentLoaded } from
 import { sectionRenderer } from '@theme/section-renderer';
 import { morph } from '@theme/morph';
 import { RecentlyViewed } from '@theme/recently-viewed-products';
+import { RecentSearches } from '@theme/recent-searches';
 import { DialogCloseEvent, DialogComponent } from '@theme/dialog';
 
 /**
@@ -53,6 +54,9 @@ class PredictiveSearchComponent extends Component {
       this.addEventListener('click', this.#handleModalClick, { signal });
     }
 
+    // Registered outside if(dialog) so it works in all contexts
+    this.addEventListener('click', this.#handleSuggestionClick, { signal });
+
     onDocumentLoaded(() => {
       this.resetSearch(false); // Pass false to avoid focusing the input
     });
@@ -75,6 +79,18 @@ class PredictiveSearchComponent extends Component {
     if (!isInteractiveElement && this.refs.searchInput) {
       this.refs.searchInput.focus();
     }
+  };
+
+  /**
+   * Records a search term when a suggestion link is clicked.
+   * @param {MouseEvent} event
+   */
+  #handleSuggestionClick = (event) => {
+    const link = /** @type {HTMLElement} */ (event.target).closest('#search-suggestions a');
+    if (!link) return;
+    // Read the text node directly (first child) to avoid including the label span text
+    const term = link.firstChild?.textContent?.trim();
+    if (term) RecentSearches.addSearch(term);
   };
 
   disconnectedCallback() {
@@ -211,8 +227,10 @@ class PredictiveSearchComponent extends Component {
           event.preventDefault();
           this.#currentItem?.querySelector('a')?.click();
         } else {
+          const term = this.refs.searchInput.value.trim();
+          if (term) RecentSearches.addSearch(term);
           const searchUrl = new URL(Theme.routes.search_url, location.origin);
-          searchUrl.searchParams.set('q', this.refs.searchInput.value);
+          searchUrl.searchParams.set('q', term);
           window.location.href = searchUrl.toString();
         }
         break;
@@ -388,48 +406,60 @@ class PredictiveSearchComponent extends Component {
     /** This needs to be awaited and not .then so the DOM is already morphed
      * when #closeResults is called and therefore the height is animated */
     const viewedProducts = RecentlyViewed.getProducts();
-    console.log('[RV debug] viewedProducts IDs:', viewedProducts);
 
     if (viewedProducts.length > 0) {
       const recentlyViewedMarkup = await this.#getRecentlyViewedProductsMarkup();
-      if (!recentlyViewedMarkup) return;
+      const parsedRecentlyViewedMarkup = recentlyViewedMarkup
+        ? new DOMParser().parseFromString(recentlyViewedMarkup, 'text/html')
+        : null;
+      const recentlyViewedProductsHtml = parsedRecentlyViewedMarkup?.getElementById('predictive-search-products') ?? null;
 
-      const parsedRecentlyViewedMarkup = new DOMParser().parseFromString(recentlyViewedMarkup, 'text/html');
-      const recentlyViewedProductsHtml = parsedRecentlyViewedMarkup.getElementById('predictive-search-products');
-      console.log('[RV debug] recentlyViewedProductsHtml:', recentlyViewedProductsHtml?.outerHTML?.slice(0, 500));
-      if (!recentlyViewedProductsHtml) return;
+      if (recentlyViewedProductsHtml) {
+        for (const child of recentlyViewedProductsHtml.children) {
+          if (child instanceof HTMLElement) {
+            child.setAttribute('ref', 'recentlyViewedWrapper');
+          }
+        }
 
-      for (const child of recentlyViewedProductsHtml.children) {
-        if (child instanceof HTMLElement) {
-          child.setAttribute('ref', 'recentlyViewedWrapper');
+        const collectionElement = parsedEmptySectionMarkup.querySelector('#predictive-search-products');
+        if (collectionElement) {
+          collectionElement.prepend(...recentlyViewedProductsHtml.children);
+
+          const allChildren = Array.from(collectionElement.children);
+          const recentlyViewedChildren = allChildren.filter(el => el.getAttribute('ref') === 'recentlyViewedWrapper');
+          let recentlyViewedUl = recentlyViewedChildren.find(el => el.tagName === 'UL');
+          if (!recentlyViewedUl) {
+            for (const el of recentlyViewedChildren) {
+              recentlyViewedUl = el.querySelector('ul');
+              if (recentlyViewedUl) break;
+            }
+          }
+          const count = recentlyViewedUl ? recentlyViewedUl.children.length : 0;
+          const rounded = Math.floor(count / 4) * 4;
+          if (rounded >= 4) {
+            Array.from(recentlyViewedUl.children).slice(rounded).forEach(el => el.remove());
+            allChildren
+              .filter(el => el.getAttribute('ref') !== 'recentlyViewedWrapper')
+              .forEach(el => el.remove());
+          } else {
+            recentlyViewedChildren.forEach(el => el.remove());
+          }
         }
       }
+    }
 
-      const collectionElement = parsedEmptySectionMarkup.querySelector('#predictive-search-products');
-      if (!collectionElement) return;
-      collectionElement.prepend(...recentlyViewedProductsHtml.children);
-
-      const allChildren = Array.from(collectionElement.children);
-      const recentlyViewedChildren = allChildren.filter(el => el.getAttribute('ref') === 'recentlyViewedWrapper');
-      let recentlyViewedUl = recentlyViewedChildren.find(el => el.tagName === 'UL');
-      if (!recentlyViewedUl) {
-        for (const el of recentlyViewedChildren) {
-          recentlyViewedUl = el.querySelector('ul');
-          if (recentlyViewedUl) break;
-        }
-      }
-      const count = recentlyViewedUl ? recentlyViewedUl.children.length : 0;
-      const rounded = Math.floor(count / 4) * 4;
-      console.log('[RV debug] recentlyViewedChildren count:', recentlyViewedChildren.length, '| ul found:', !!recentlyViewedUl, '| li count:', count, '| rounded:', rounded);
-      if (rounded >= 4) {
-        Array.from(recentlyViewedUl.children).slice(rounded).forEach(el => el.remove());
-        allChildren
-          .filter(el => el.getAttribute('ref') !== 'recentlyViewedWrapper')
-          .forEach(el => el.remove());
-        console.log('[RV debug] showing recently viewed, trimmed to', rounded);
-      } else {
-        recentlyViewedChildren.forEach(el => el.remove());
-        console.log('[RV debug] not enough for full row — showing default collection');
+    // Swap popular suggestions → recent searches if history exists.
+    // Runs regardless of whether recently-viewed markup loaded.
+    const recentSearches = RecentSearches.getSearches();
+    if (recentSearches.length > 0) {
+      const suggestionsEl = parsedEmptySectionMarkup.querySelector('#search-suggestions');
+      if (suggestionsEl) {
+        suggestionsEl.innerHTML = recentSearches
+          .map(
+            (term) =>
+              `<li><a href="${Theme.routes.search_url}?q=${encodeURIComponent(term)}&type=product">${term}<span class="search-suggestions__label">Kategori</span></a></li>`
+          )
+          .join('');
       }
     }
 
