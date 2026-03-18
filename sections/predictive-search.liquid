@@ -232,15 +232,19 @@
     </div>
 
     <div class="predictive-search-form__footer">
-      <button class="button button-primary predictive-search__search-button" ref="viewAllButton">
-        {{ 'content.search_results_view_all' | t }} {{ predictive_search.resources.products.size }} Resultat
-      </button>
+      <a
+        href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}&type=product"
+        class="button button-primary predictive-search__search-button"
+        ref="viewAllButton"
+      >
+        VISA ALLA {{ predictive_search.resources.products.size }} RESULTAT
+      </a>
     </div>
   </div>
 {%- endif -%}
 
 {% stylesheet %}
-.predictive-search-form__footer { position: relative !important; }
+/* footer position handled below */
 
 .predictive-search-results__group { padding: var(--padding-sm) var(--padding-xl); }
 
@@ -400,13 +404,7 @@ input[type='search']::-webkit-search-decoration { -webkit-appearance: none; }
 }
 .predictive-search-results__title:first-of-type { margin-block-start: 0; }
 
-button.button.button-primary.predictive-search__search-button {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%);
-  margin-bottom: 20px;
-}
+/* position: fixed removed — footer is now sticky (see below) */
 
 @media screen and (max-width: 749px) {
   .predictive-search-results__title { margin-block: var(--margin-lg) var(--margin-sm); }
@@ -566,6 +564,64 @@ button.button.button-primary.predictive-search__search-button {
   transform-origin: center;
 }
 .predictive-search-results__card--query:active { transform: scale(0.97); }
+
+/* ── Footer: sticky at bottom, never cropped ── */
+.predictive-search-form__footer {
+  position: sticky;
+  bottom: 0;
+  background-color: var(--color-background);
+  padding: var(--padding-lg);
+  display: flex;
+  justify-content: center;
+}
+
+/* Gradient that fades the product grid behind the footer */
+.predictive-search-form__footer::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--color-background));
+  pointer-events: none;
+}
+
+/* ── Suggestion list ── */
+.search-suggestions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.search-suggestions li {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.search-suggestions li:last-child {
+  border-bottom: none;
+}
+
+.search-suggestions a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  text-decoration: none;
+  color: var(--color-foreground);
+}
+
+.search-suggestions a:hover {
+  text-decoration: underline;
+}
+
+.search-suggestions__label {
+  font-size: 0.8rem;
+  color: rgb(var(--color-foreground-rgb) / 0.5);
+  margin-left: 16px;
+  flex-shrink: 0;
+}
 {% endstylesheet %}
 
 {% schema %}
