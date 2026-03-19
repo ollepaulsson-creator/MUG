@@ -202,6 +202,7 @@ input[type="search"]::-ms-clear {
 
   /* Content wrapper takes remaining space and scrolls */
   .search-modal__content .predictive-search-form__content-wrapper {
+    position: static; /* override position:absolute from base CSS so it participates in flex */
     flex: 1;
     min-height: 0;
     overflow-y: auto;
