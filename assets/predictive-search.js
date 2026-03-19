@@ -335,6 +335,7 @@ class PredictiveSearchComponent extends Component {
 
     const abortController = this.#createAbortController();
 
+    this.dataset.searchActive = 'true';
     sectionRenderer
       .getSectionHTML(this.dataset.sectionId, false, url)
       .then((resultsMarkup) => {
@@ -398,6 +399,7 @@ class PredictiveSearchComponent extends Component {
     this.#currentIndex = -1;
     searchInput.value = '';
     this.#hideResetButton();
+    delete this.dataset.searchActive;
 
     const abortController = this.#createAbortController();
     const url = new URL(window.location.href);
@@ -455,19 +457,16 @@ class PredictiveSearchComponent extends Component {
       }
     }
 
-    // Swap popular suggestions → recent searches if history exists.
-    // Runs regardless of whether recently-viewed markup loaded.
+    // Update persistent suggestions list with recent searches if history exists.
     const recentSearches = RecentSearches.getSearches();
-    if (recentSearches.length > 0) {
-      const suggestionsEl = parsedEmptySectionMarkup.querySelector('#search-suggestions');
-      if (suggestionsEl) {
-        suggestionsEl.innerHTML = recentSearches
-          .map(
-            (term) =>
-              `<li><a href="${Theme.routes.search_url}?q=${encodeURIComponent(term)}&type=product">${term}<span class="search-suggestions__label">Kategori</span></a></li>`
-          )
-          .join('');
-      }
+    const suggestionsEl = /** @type {HTMLElement | null} */ (this.querySelector('#search-suggestions'));
+    if (suggestionsEl && recentSearches.length > 0) {
+      suggestionsEl.innerHTML = recentSearches
+        .map(
+          (term) =>
+            `<li><a href="${Theme.routes.search_url}?q=${encodeURIComponent(term)}&type=product">${term}<span class="search-suggestions__label">Senaste</span></a></li>`
+        )
+        .join('');
     }
 
     if (abortController.signal.aborted) return;
