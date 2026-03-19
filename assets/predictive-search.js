@@ -309,6 +309,12 @@ class PredictiveSearchComponent extends Component {
       if (formContent instanceof HTMLElement) {
         formContent.scrollTop = 0;
       }
+
+      // Content-wrapper is now the scroll container after the flex layout refactor
+      const contentWrapper = this.querySelector('.predictive-search-form__content-wrapper');
+      if (contentWrapper instanceof HTMLElement) {
+        contentWrapper.scrollTop = 0;
+      }
     });
   }
 
