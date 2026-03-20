@@ -28,8 +28,11 @@
         {% assign products = collection.products %}
       {% endif %}
 
+      <!-- DEBUG: products.size={{ products.size }} search.results_count={{ search.results_count }} -->
+
       {% capture children %}
         {% for product in products %}
+          <!-- DEBUG-PRODUCT: {{ product.id }} {{ product.title }} -->
           <li
             id="{{ section.id }}-{{ product.id }}"
             class="product-grid__item product-grid__item--{{ forloop.index0 }}"
@@ -42,6 +45,8 @@
           </li>
         {% endfor %}
       {% endcapture %}
+
+      <!-- DEBUG: children.size={{ children.size }} children-blank={{ children | strip | blank? }} -->
 
       {% render 'product-grid',
         section: section,
