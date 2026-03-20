@@ -501,12 +501,11 @@ class PredictiveSearchComponent extends Component {
     if (!link) return;
 
     const resultsEl = this.refs.predictiveSearchResults.querySelector('#predictive-search-results');
-    const count = resultsEl?.dataset.productCount ? parseInt(resultsEl.dataset.productCount, 10) : 0;
     const terms = resultsEl?.dataset.searchTerms ?? '';
 
-    if (count > 0 && terms) {
+    if (terms) {
       link.href = `${Theme.routes.search_url}?q=${terms}&type=product`;
-      link.textContent = `VISA ALLA ${count} RESULTAT`;
+      link.textContent = 'VISA ALLA RESULTAT';
     } else {
       link.href = `${Theme.routes.search_url}?type=product`;
       link.textContent = 'VISA ALLA PRODUKTER';
