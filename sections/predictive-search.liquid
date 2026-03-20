@@ -451,12 +451,6 @@ input[type='search']::-webkit-search-decoration { -webkit-appearance: none; }
 .predictive-search-results__card--product,
 .recently-viewed-wrapper .predictive-search-results__card--product {
   &:active { transform: none; }
-  &:hover {
-    background-color: #ffffff;
-    border-radius: var(--product-corner-radius);
-    padding: calc(var(--padding-2xs) + 2px);
-    margin: calc((var(--padding-2xs) + 2px) * -1);
-  }
   &:is([aria-selected='true'].keyboard-focus, &:focus-visible, &:has(.resource-card:focus-visible)) {
     background-color: #ffffff;
     padding: calc(var(--padding-2xs) + 1px);
