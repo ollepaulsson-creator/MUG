@@ -503,6 +503,11 @@ ul.pagination__list {
     height: 52px!important;
     grid-column: var(--full-width);
 }
+
+/* Fix sort dropdown anchor: floating-panel sets top:40px relative to nearest positioned ancestor */
+.facets-toggle .facets__panel {
+  position: relative;
+}
 .facets-toggle__label {
     font-size: 14px;
     text-transform: none;
