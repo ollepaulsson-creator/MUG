@@ -32,11 +32,18 @@
 {% endunless %}
 
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
+{% if section.settings.enable_pagination %}
+<div
+  class="section product-grid-container spacing-style color-{{ section.settings.color_scheme }}"
+  style="--padding-block-start: {{ section.settings.padding-block-start }}px; --padding-block-end: {{ section.settings.padding-block-end }}px;"
+>
+{% else %}
 <results-list
   class="section product-grid-container spacing-style color-{{ section.settings.color_scheme }}"
   style="--padding-block-start: {{ section.settings.padding-block-start }}px; --padding-block-end: {{ section.settings.padding-block-end }}px;"
   section-id="{{ section.id }}"
 >
+{% endif %}
   {% render 'skip-to-content-link', href: '#ResultsList', text: 'accessibility.skip_to_results_list' %}
 
   <div
@@ -126,7 +133,11 @@
       {% endif %}
     {% endpaginate %}
   </div>
+{% if section.settings.enable_pagination %}
+</div>
+{% else %}
 </results-list>
+{% endif %}
 
 {% schema %}
 {
