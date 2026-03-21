@@ -9,11 +9,13 @@
   })();
 </script>
 
+{% unless section.settings.enable_pagination %}
 <script
   src="{{ 'results-list.js' | asset_url }}"
   type="module"
   fetchpriority="low"
 ></script>
+{% endunless %}
 
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <results-list
@@ -26,7 +28,7 @@
   <div
     class="collection-wrapper grid gap-style"
   >
-    {% paginate search.results by 24 %}
+    {% paginate search.results by section.settings.product_shown %}
       {% if search.results_count > 0 %}
         {% content_for 'block', type: 'filters', id: 'filters', results: search, results_size: search.results_count %}
         {% assign products = search.results | where: 'object_type', 'product' %}
@@ -59,9 +61,76 @@
         paginate: paginate,
         title: title
       %}
+
+      {% if section.settings.enable_pagination %}
+        {% if paginate.pages > 1 %}
+          <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+            <ul class="pagination__list" role="list">
+
+              {%- if paginate.previous -%}
+                <li class="pagination__item pagination__item--prev">
+                  <a href="{{ paginate.previous.url | escape }}#ResultsList"
+                    rel="prev"
+                    aria-label="{{ 'general.pagination.previous' | t }}">
+                    <span class="pagination__arrow">◄</span> Föregående
+                  </a>
+                </li>
+              {%- endif -%}
+
+              {%- for part in paginate.parts -%}
+                {% if part.is_link %}
+                  <li class="pagination__item">
+                    <a href="{{ part.url | escape }}#ResultsList"
+                      aria-label="{{ 'general.pagination.page' | t: number: part.title }}">
+                      {{ part.title }}
+                    </a>
+                  </li>
+                {% elsif part.title == paginate.current_page %}
+                  <li class="pagination__item pagination__item--current" aria-current="page">
+                    {{ part.title }}
+                  </li>
+                {% else %}
+                  <li class="pagination__item pagination__item--ellipsis">
+                    <span class="pagination__ellipsis">{{ part.title }}</span>
+                  </li>
+                {% endif %}
+              {%- endfor -%}
+
+              {%- if paginate.next -%}
+                <li class="pagination__item pagination__item--next">
+                  <a href="{{ paginate.next.url | escape }}#ResultsList"
+                    rel="next"
+                    aria-label="{{ 'general.pagination.next' | t }}">
+                    Nästa <span class="pagination__arrow">►</span>
+                  </a>
+                </li>
+              {%- endif -%}
+
+            </ul>
+          </nav>
+        {% endif %}
+      {% endif %}
     {% endpaginate %}
   </div>
 </results-list>
+
+{% style %}
+  {% if section.settings.enable_pagination %}
+    .collection-wrapper.grid.gap-style {
+        display: flex;
+        flex-direction: column;
+    }
+    .pagination__ellipsis {
+      color: #000000;
+    }
+    .pagination { margin-top: var(--spacing-6, 36px); text-align: center; }
+    .pagination__list { display: inline-flex; gap: 8px; align-items: center;list-style: none; }
+    .pagination__item { padding: 2px; border-radius: 0px; }
+    .pagination__item a { text-decoration: none; }
+    .pagination__item--current { font-weight: 600; outline: 1px solid var(--color-border, #ddd); }
+    .pagination__item--prev a, .pagination__item--next a { font-weight: 500; outline: none}
+  {% endif %}
+{% endstyle %}
 
 {% schema %}
 {
@@ -70,6 +139,21 @@
     {
       "type": "paragraph",
       "content": "t:content.edit_empty_state_collection_in_theme_settings"
+    },
+    {
+      "type": "range",
+      "id": "product_shown",
+      "label": "Products per page",
+      "min": 6,
+      "max": 50,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_pagination",
+      "label": "Enable Pagination",
+      "default": false
     },
     {
       "type": "select",
