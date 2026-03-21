@@ -503,6 +503,12 @@ ul.pagination__list {
     height: 52px!important;
     grid-column: var(--full-width);
 }
+.facets-toggle__label {
+    font-size: 14px;
+    text-transform: none;
+    margin: 0;
+    font-weight: 400;
+}
 .facets-toggle__wrapper {
     border-right: 1px solid #DCDCDC;
     padding-inline: var(--padding-lg) 16px;
