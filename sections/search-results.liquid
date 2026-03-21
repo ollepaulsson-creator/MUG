@@ -1,4 +1,13 @@
-
+{% comment %} Auto-apply availability filter if not already set {% endcomment %}
+<script>
+  (function() {
+    const url = new URL(window.location.href);
+    if (!url.searchParams.has("filter.v.availability")) {
+      url.searchParams.set("filter.v.availability", "1");
+      window.location.replace(url.toString());
+    }
+  })();
+</script>
 
 <script
   src="{{ 'results-list.js' | asset_url }}"
