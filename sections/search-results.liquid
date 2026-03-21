@@ -1,23 +1,44 @@
+{% style %}
+  .pagination__ellipsis { color: #000000; }
+  .pagination { margin-top: var(--spacing-6, 36px); margin-bottom: var(--spacing-6, 36px); text-align: center; }
+  .pagination__list { display: inline-flex; gap: 8px; align-items: center; list-style: none; }
+  .pagination__item { padding: 2px; border-radius: 0px; }
+  .pagination__item a { text-decoration: none; }
+  .pagination__item--current { font-weight: 600; outline: 1px solid var(--color-border, #ddd); }
+  .pagination__item--prev a, .pagination__item--next a { font-weight: 500; outline: none; }
+{% endstyle %}
 
+{% assign product_shown = section.settings.product_shown %}
 
-<script
-  src="{{ 'results-list.js' | asset_url }}"
-  type="module"
-  fetchpriority="low"
-></script>
+{% comment %} Block results-list custom element before any module scripts run {% endcomment %}
+<script>
+  if (!customElements.get('results-list')) {
+    customElements.define('results-list', class extends HTMLElement {});
+  }
+</script>
+
+{% comment %} Auto-apply availability filter if not already set {% endcomment %}
+<script>
+  (function() {
+    const url = new URL(window.location.href);
+    if (!url.searchParams.has("filter.v.availability")) {
+      url.searchParams.set("filter.v.availability", "1");
+      window.location.replace(url.toString());
+    }
+  })();
+</script>
 
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
-<results-list
+<div
   class="section product-grid-container spacing-style color-{{ section.settings.color_scheme }}"
   style="--padding-block-start: {{ section.settings.padding-block-start }}px; --padding-block-end: {{ section.settings.padding-block-end }}px;"
-  section-id="{{ section.id }}"
 >
   {% render 'skip-to-content-link', href: '#ResultsList', text: 'accessibility.skip_to_results_list' %}
 
   <div
     class="collection-wrapper grid gap-style"
   >
-    {% paginate search.results by 24 %}
+    {% paginate search.results by product_shown %}
       {% if search.results_count > 0 %}
         {% content_for 'block', type: 'filters', id: 'filters', results: search, results_size: search.results_count %}
         {% assign products = search.results | where: 'object_type', 'product' %}
@@ -48,11 +69,59 @@
         children: children,
         products: products,
         paginate: paginate,
-        title: title
+        title: title,
+        hide_viewmore: true
       %}
+
+      {% if paginate.pages > 1 %}
+        <nav class="pagination" style="grid-column: 1 / -1" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+          <ul class="pagination__list" role="list">
+
+            {%- if paginate.previous -%}
+              <li class="pagination__item pagination__item--prev">
+                <a href="{{ paginate.previous.url | escape }}#ResultsList"
+                  rel="prev"
+                  aria-label="{{ 'general.pagination.previous' | t }}">
+                  <span class="pagination__arrow">◄</span> Föregående
+                </a>
+              </li>
+            {%- endif -%}
+
+            {%- for part in paginate.parts -%}
+              {% if part.is_link %}
+                <li class="pagination__item">
+                  <a href="{{ part.url | escape }}#ResultsList"
+                    aria-label="{{ 'general.pagination.page' | t: number: part.title }}">
+                    {{ part.title }}
+                  </a>
+                </li>
+              {% elsif part.title == paginate.current_page %}
+                <li class="pagination__item pagination__item--current" aria-current="page">
+                  {{ part.title }}
+                </li>
+              {% else %}
+                <li class="pagination__item pagination__item--ellipsis">
+                  <span class="pagination__ellipsis">{{ part.title }}</span>
+                </li>
+              {% endif %}
+            {%- endfor -%}
+
+            {%- if paginate.next -%}
+              <li class="pagination__item pagination__item--next">
+                <a href="{{ paginate.next.url | escape }}#ResultsList"
+                  rel="next"
+                  aria-label="{{ 'general.pagination.next' | t }}">
+                  Nästa <span class="pagination__arrow">►</span>
+                </a>
+              </li>
+            {%- endif -%}
+
+          </ul>
+        </nav>
+      {% endif %}
     {% endpaginate %}
   </div>
-</results-list>
+</div>
 
 {% schema %}
 {
@@ -61,6 +130,21 @@
     {
       "type": "paragraph",
       "content": "t:content.edit_empty_state_collection_in_theme_settings"
+    },
+    {
+      "type": "range",
+      "id": "product_shown",
+      "label": "Products per page",
+      "min": 6,
+      "max": 50,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_pagination",
+      "label": "Enable Pagination",
+      "default": false
     },
     {
       "type": "select",
