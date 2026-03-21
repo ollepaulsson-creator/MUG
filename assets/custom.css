@@ -501,6 +501,7 @@ ul.pagination__list {
 .facets-toggle {
     max-width: 100%;
     height: 52px!important;
+    grid-column: var(--full-width);
 }
 .facets-toggle__wrapper {
     border-right: 1px solid #DCDCDC;
