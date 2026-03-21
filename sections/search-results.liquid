@@ -49,7 +49,7 @@
   <div
     class="collection-wrapper grid gap-style"
   >
-    {% paginate search.results by product_shown %}
+    {% paginate search.results by 20 %}
       {% if search.results_count > 0 %}
         {% content_for 'block', type: 'filters', id: 'filters', results: search, results_size: search.results_count %}
         {% assign products = search.results | where: 'object_type', 'product' %}
@@ -74,6 +74,8 @@
           </li>
         {% endfor %}
       {% endcapture %}
+
+      <!-- DEBUG: paginate.pages={{ paginate.pages }} paginate.current_page={{ paginate.current_page }} products.size={{ products.size }} product_shown={{ product_shown }} -->
 
       {% render 'product-grid',
         section: section,
