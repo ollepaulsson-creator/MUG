@@ -29,6 +29,26 @@
   type="module"
   fetchpriority="low"
 ></script>
+{% else %}
+<script>
+  (function() {
+    // Remove infinite scroll observer targets so PaginatedList cannot trigger
+    function removeViewMoreSpans() {
+      document.querySelectorAll('[ref="viewMoreNext"], [ref="viewMorePrevious"]').forEach(function(el) {
+        el.remove();
+      });
+      // Also undefine/disconnect any results-list element that may have connected
+      document.querySelectorAll('results-list').forEach(function(el) {
+        el.removeAttribute('initialized');
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', removeViewMoreSpans);
+    } else {
+      removeViewMoreSpans();
+    }
+  })();
+</script>
 {% endunless %}
 
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
