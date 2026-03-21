@@ -108,7 +108,7 @@
         </p>
       </div>
     {% else %}
-      <span ref="viewMorePrevious"></span>
+      {% unless section.settings.enable_pagination %}<span ref="viewMorePrevious"></span>{% endunless %}
 
       {% if title %}
         <h4 class="main-collection-grid__title">{{ title }}</h4>
@@ -123,7 +123,7 @@
       >
         {{ children }}
       </ul>
-      <span ref="viewMoreNext"></span>
+      {% unless section.settings.enable_pagination %}<span ref="viewMoreNext"></span>{% endunless %}
     {% endif %}
   </div>
 </div>
