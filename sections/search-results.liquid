@@ -10,6 +10,8 @@
 {% endstyle %}
 {% endif %}
 
+{% assign product_shown = section.settings.product_shown %}
+
 {% comment %} Auto-apply availability filter if not already set {% endcomment %}
 <script>
   (function() {
@@ -40,7 +42,7 @@
   <div
     class="collection-wrapper grid gap-style"
   >
-    {% paginate search.results by section.settings.product_shown %}
+    {% paginate search.results by product_shown %}
       {% if search.results_count > 0 %}
         {% content_for 'block', type: 'filters', id: 'filters', results: search, results_size: search.results_count %}
         {% assign products = search.results | where: 'object_type', 'product' %}
