@@ -1,3 +1,15 @@
+{% if section.settings.enable_pagination %}
+{% style %}
+  .pagination__ellipsis { color: #000000; }
+  .pagination { margin-top: var(--spacing-6, 36px); margin-bottom: var(--spacing-6, 36px); text-align: center; }
+  .pagination__list { display: inline-flex; gap: 8px; align-items: center; list-style: none; }
+  .pagination__item { padding: 2px; border-radius: 0px; }
+  .pagination__item a { text-decoration: none; }
+  .pagination__item--current { font-weight: 600; outline: 1px solid var(--color-border, #ddd); }
+  .pagination__item--prev a, .pagination__item--next a { font-weight: 500; outline: none; }
+{% endstyle %}
+{% endif %}
+
 {% comment %} Auto-apply availability filter if not already set {% endcomment %}
 <script>
   (function() {
@@ -64,7 +76,7 @@
 
       {% if section.settings.enable_pagination %}
         {% if paginate.pages > 1 %}
-          <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+          <nav class="pagination" style="grid-column: 1 / -1" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
             <ul class="pagination__list" role="list">
 
               {%- if paginate.previous -%}
@@ -113,24 +125,6 @@
     {% endpaginate %}
   </div>
 </results-list>
-
-{% style %}
-  {% if section.settings.enable_pagination %}
-    .collection-wrapper.grid.gap-style {
-        display: flex;
-        flex-direction: column;
-    }
-    .pagination__ellipsis {
-      color: #000000;
-    }
-    .pagination { margin-top: var(--spacing-6, 36px); text-align: center; }
-    .pagination__list { display: inline-flex; gap: 8px; align-items: center;list-style: none; }
-    .pagination__item { padding: 2px; border-radius: 0px; }
-    .pagination__item a { text-decoration: none; }
-    .pagination__item--current { font-weight: 600; outline: 1px solid var(--color-border, #ddd); }
-    .pagination__item--prev a, .pagination__item--next a { font-weight: 500; outline: none}
-  {% endif %}
-{% endstyle %}
 
 {% schema %}
 {
