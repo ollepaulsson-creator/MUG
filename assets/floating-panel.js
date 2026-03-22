@@ -18,6 +18,7 @@ export class FloatingPanelComponent extends HTMLElement {
       const viewportWidth = window.innerWidth;
 
       this.style.position = 'fixed';
+      this.style.zIndex = '9999';
       this.style.top = summaryRect.bottom + 'px';
       this.style.left = 'auto';
       this.style.right = (viewportWidth - summaryRect.right) + 'px';
