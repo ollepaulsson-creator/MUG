@@ -10,19 +10,39 @@ export class FloatingPanelComponent extends HTMLElement {
     // Wait for any view transitions to finish
     if (viewTransition.current) await viewTransition.current;
 
-    const rect = this.getBoundingClientRect();
-    const viewportWidth = window.innerWidth;
+    const details = this.closest('details');
+    const summary = details?.querySelector('summary');
 
-    this.style.top = OFFSET + 'px';
+    if (summary) {
+      const summaryRect = summary.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
 
-    if (rect.right > viewportWidth) {
-      const overflowAmount = rect.right - viewportWidth + OFFSET;
-      this.style.left = `-${overflowAmount}px`;
-    }
+      this.style.position = 'fixed';
+      this.style.top = summaryRect.bottom + 'px';
+      this.style.left = 'auto';
+      this.style.right = (viewportWidth - summaryRect.right) + 'px';
 
-    if (rect.left < 0) {
-      const overflowAmount = Math.abs(rect.left) + OFFSET;
-      this.style.left = `${overflowAmount}px`;
+      // Check if panel overflows left edge and correct
+      const rect = this.getBoundingClientRect();
+      if (rect.left < 0) {
+        this.style.right = 'auto';
+        this.style.left = '0px';
+      }
+    } else {
+      const rect = this.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
+
+      this.style.top = OFFSET + 'px';
+
+      if (rect.right > viewportWidth) {
+        const overflowAmount = rect.right - viewportWidth + OFFSET;
+        this.style.left = `-${overflowAmount}px`;
+      }
+
+      if (rect.left < 0) {
+        const overflowAmount = Math.abs(rect.left) + OFFSET;
+        this.style.left = `${overflowAmount}px`;
+      }
     }
 
     this.#mutationObserver.takeRecords();
