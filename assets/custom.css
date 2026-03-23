@@ -454,10 +454,10 @@ ul.pagination__list {
 }
 .pagination__item--prev a, .pagination__item--next a {
   outline: none !important;
-  padding: 3px 7px;
+  padding: 10px 16px;
 }
 .pagination__item--current {
-  padding: 7px 16px;
+  padding: 10px 16px;
   background: black;
   color: white;
 }
