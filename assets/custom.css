@@ -878,7 +878,7 @@ facet-status-component.facets__status {
     font-size: 15px;
 }
 @media (max-width: 768px) {
-    #shopify-section-template--29835055006045__main .collection-wrapper.grid.gap-style {
+    .collection-wrapper.grid.gap-style {
         border-top: none;
     }
 }
