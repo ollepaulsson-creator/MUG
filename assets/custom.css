@@ -709,10 +709,6 @@ ul.product-grid {
     .facets-toggle__wrapper {
         width: 50%;
     }
-    .facets-toggle__count-sort {
-        display: flex !important;
-        margin-inline-start: auto;
-    }
 }
 
 .close-button:focus-visible {
