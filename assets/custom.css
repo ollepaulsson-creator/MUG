@@ -521,6 +521,9 @@ ul.pagination__list {
 .facets-toggle .facets__panel {
   position: relative;
 }
+.facets__panel {
+    padding-right: 8px;
+}
 .facets-toggle__label {
     font-size: 14px;
     text-transform: none;
