@@ -857,3 +857,13 @@ facet-status-component.facets__status {
         border-top: none !important;
     }
 }
+
+/* Prevent floating-panel JS from repositioning filter values inside the drawer.
+   floating-panel.js sets position:fixed via inline style — !important overrides that. */
+.facets--drawer .facets__panel-content {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    z-index: auto !important;
+}
