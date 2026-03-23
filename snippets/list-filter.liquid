@@ -31,12 +31,10 @@
     data-disable-animation-on-desktop="true"
     data-close-with-escape="true"
   {% endif %}
-  {% unless in_drawer %}open-by-default-on-mobile{% endunless %}
+  open-by-default-on-mobile
   {% if filter_style == 'vertical' %}
-    {% unless in_drawer %}
-      open
-      open-by-default-on-desktop
-    {% endunless %}
+    open
+    open-by-default-on-desktop
   {% endif %}
   data-filter-param-name="{{ filter.param_name | escape | replace: '.', '-' }}"
 >
