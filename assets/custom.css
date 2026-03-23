@@ -725,9 +725,13 @@ ul.product-grid {
         font-size: 16px;
     }
     .facets-toggle {
-        display: flex !important;
         max-width: 100% !important;
-        border-right: none !important;
+    }
+    .facets-toggle__count-sort {
+        display: flex !important;
+    }
+    .facets.facets--horizontal.spacing-style {
+        border-top: 1px solid #DCDCDC;
     }
 
 }
