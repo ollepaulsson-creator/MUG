@@ -506,8 +506,8 @@ ul.pagination__list {
     grid-template-columns: repeat(4, 1fr);
     column-gap: 0px;
     align-items: stretch;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 .facets-toggle__count-sort {
     gap: 0 !important;
