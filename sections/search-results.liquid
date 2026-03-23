@@ -127,36 +127,27 @@
 <script>
 (function () {
   function syncFilterWidth() {
-    const wrapper = document.querySelector('.facets-toggle__wrapper');
-    const firstCard = document.querySelector('.product-grid__item');
-    if (!wrapper || !firstCard) return;
-    const wrapperLeft = wrapper.getBoundingClientRect().left;
-    const cardRight = firstCard.getBoundingClientRect().right;
-    if (cardRight <= wrapperLeft) return;
-    wrapper.style.width = (cardRight - wrapperLeft) + 'px';
+    var wrapper = document.querySelector('.facets-toggle__wrapper');
+    var firstCard = document.querySelector('.product-grid__item');
+    if (!wrapper || !firstCard) return false;
+    var cardRect = firstCard.getBoundingClientRect();
+    if (cardRect.width === 0) return false;
+    var wrapperLeft = wrapper.getBoundingClientRect().left;
+    wrapper.style.width = (cardRect.right - wrapperLeft) + 'px';
+    return true;
   }
 
-  function init() {
-    syncFilterWidth();
-    setTimeout(syncFilterWidth, 100);
-    setTimeout(syncFilterWidth, 500);
-    const firstCard = document.querySelector('.product-grid__item');
-    if (firstCard && window.ResizeObserver) {
-      new ResizeObserver(syncFilterWidth).observe(firstCard);
-    }
+  // Observe the product grid for layout — fires as soon as the grid has size
+  var grid = document.querySelector('.product-grid');
+  if (grid && window.ResizeObserver) {
+    new ResizeObserver(syncFilterWidth).observe(grid);
   }
 
-  if (document.readyState === 'complete') {
-    requestAnimationFrame(() => requestAnimationFrame(init));
-  } else {
-    window.addEventListener('load', () => requestAnimationFrame(() => requestAnimationFrame(init)));
-  }
+  // Fallback timers in case ResizeObserver doesn't fire in time
+  [0, 100, 300, 700, 1500].forEach(function (d) { setTimeout(syncFilterWidth, d); });
 
-  let resizeTimer;
-  window.addEventListener('resize', function () {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(syncFilterWidth, 100);
-  });
+  var rt;
+  window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(syncFilterWidth, 100); });
 })();
 </script>
 
