@@ -725,6 +725,7 @@ ul.product-grid {
     }
     .facets-toggle {
         max-width: 100% !important;
+        padding-inline: 0 !important;
     }
     .facets-toggle__count-sort {
         display: flex !important;
