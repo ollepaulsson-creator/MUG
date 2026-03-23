@@ -879,6 +879,6 @@ facet-status-component.facets__status {
 }
 @media (max-width: 768px) {
     .collection-wrapper.grid.gap-style {
-        border-top: none;
+        border-top: none !important;
     }
 }
