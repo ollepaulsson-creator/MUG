@@ -121,6 +121,11 @@
               <a class="breadcrumbs__link" href="{{ article.url }}" aria-current="page">{{ article.title }}</a>
             </li>
 
+          {%- when 'search' -%}
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link" href="{{ request.path }}" aria-current="page">Sökning: "{{ search.terms }}"</a>
+            </li>
+
           {%- else -%}
             <li class="breadcrumbs__item">
               <a class="breadcrumbs__link" href="{{ request.path }}" aria-current="page">{{ page_title }}</a>
