@@ -132,13 +132,22 @@
     if (!wrapper || !firstCard) return;
     const wrapperLeft = wrapper.getBoundingClientRect().left;
     const cardRight = firstCard.getBoundingClientRect().right;
+    if (cardRight <= wrapperLeft) return;
     wrapper.style.width = (cardRight - wrapperLeft) + 'px';
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', syncFilterWidth);
-  } else {
+  function init() {
     syncFilterWidth();
+    const firstCard = document.querySelector('.product-grid__item');
+    if (firstCard && window.ResizeObserver) {
+      new ResizeObserver(syncFilterWidth).observe(firstCard);
+    }
+  }
+
+  if (document.readyState === 'complete') {
+    init();
+  } else {
+    window.addEventListener('load', init);
   }
 
   let resizeTimer;
