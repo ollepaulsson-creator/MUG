@@ -128,12 +128,13 @@
 (function () {
   function syncFilterWidth() {
     var wrapper = document.querySelector('.facets-toggle__wrapper');
-    var firstCard = document.querySelector('.product-grid__item');
-    if (!wrapper || !firstCard) return false;
-    var cardRect = firstCard.getBoundingClientRect();
-    if (cardRect.width === 0) return false;
+    var cardContent = document.querySelector('.product-card__content');
+    if (!wrapper || !cardContent) return false;
+    var contentRect = cardContent.getBoundingClientRect();
+    if (contentRect.width === 0) return false;
+    wrapper.style.width = '';
     var wrapperLeft = wrapper.getBoundingClientRect().left;
-    wrapper.style.width = (cardRect.right - wrapperLeft) + 'px';
+    wrapper.style.width = (contentRect.right - wrapperLeft) + 'px';
     return true;
   }
 
