@@ -523,11 +523,7 @@ ul.pagination__list {
 }
 .facets__panel {
     padding-right: 8px !important;
-}
-.facets__form-wrapper {
-    padding-bottom: 4px;
-}
-.facets-toggle__label {
+}.facets-toggle__label {
     font-size: 14px;
     text-transform: none;
     margin: 0;
