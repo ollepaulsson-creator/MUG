@@ -204,7 +204,8 @@
                   endif
                 endif
               %}
-              {% unless value.label == 'Out of stock' or value.label == 'Slut i lager' or (filter.param_name contains 'inventory.butik' and forloop.first == false) %}
+              {% if filter.param_name contains 'inventory.butik' and forloop.first == false %}{% continue %}{% endif %}
+              {% unless value.label == 'Out of stock' or value.label == 'Slut i lager' %}
               <li
                 data-skip-node-update="true"
                 class="facets__inputs-list-item{% if hidden_class %} {{ hidden_class }}{% endif %}"
