@@ -500,11 +500,16 @@ ul.pagination__list {
 
 .facets-toggle {
     max-width: 100%;
-    height: 52px!important;
+    height: 52px !important;
     grid-column: var(--full-width);
+    display: grid !important;
+    grid-template-columns: subgrid;
+    align-items: center;
 }
 .facets-toggle__count-sort {
     gap: 0 !important;
+    grid-column: 2 / -1;
+    justify-self: end;
 }
 
 /* Fix sort dropdown anchor: floating-panel sets top:40px relative to nearest positioned ancestor */
@@ -523,7 +528,7 @@ ul.pagination__list {
     height: 100%;
     display: flex;
     align-items: center;
-    width: 25%;
+    grid-column: 1;
 }
 
 @media screen and (min-width: 750px) {
@@ -706,9 +711,7 @@ ul.product-grid {
         max-width: 100% !important;
         border-right: none !important;
     }
-    .facets-toggle__wrapper {
-        width: 50%;
-    }
+
 }
 
 .close-button:focus-visible {
