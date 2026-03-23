@@ -244,17 +244,9 @@
       on:click="#filters-drawer/showDialog"
       type="button"
     >
-<!-- PNG Icon -->
 <div class="facets-toggle__icon">
   <span class="svg-wrapper">
-    <img 
-      src="{{ 'Icon - Filter.png' | asset_url }}" 
-      alt="Filter Icon" 
-      class="icon-filter"
-      width="20"
-      height="20"
-      style="display: block; object-fit: contain;"
-    >
+    {{ 'icon-filter.svg' | inline_asset_content }}
   </span>
 </div>
 
