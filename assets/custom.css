@@ -874,3 +874,6 @@ facet-status-component.facets__status {
     font-feature-settings: 'ss07' 1;
 
 }
+.search-page-input {
+    font-size: 15px;
+}
