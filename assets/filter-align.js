@@ -11,12 +11,27 @@
     return true;
   }
 
+  // Watch for product cards being inserted into the DOM
+  var mo = new MutationObserver(function () {
+    if (syncFilterWidth()) mo.disconnect();
+  });
+  mo.observe(document.body, { childList: true, subtree: true });
+
+  // Also watch grid resize (handles container-query reflows)
   var grid = document.querySelector('.product-grid');
   if (grid && window.ResizeObserver) {
     new ResizeObserver(syncFilterWidth).observe(grid);
   }
 
-  [0, 100, 300, 700, 1500].forEach(function (d) { setTimeout(syncFilterWidth, d); });
+  // Fallback timeouts spread further out for slow renders
+  [0, 100, 300, 700, 1500, 3000, 5000].forEach(function (d) {
+    setTimeout(syncFilterWidth, d);
+  });
+
+  // Re-run after all resources (fonts, images) finish loading
+  window.addEventListener('load', function () {
+    requestAnimationFrame(syncFilterWidth);
+  });
 
   var rt;
   window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(syncFilterWidth, 100); });
