@@ -522,7 +522,7 @@ ul.pagination__list {
   position: relative;
 }
 .facets__panel {
-    padding-right: 8px;
+    padding-right: 8px !important;
 }
 .facets-toggle__label {
     font-size: 14px;
