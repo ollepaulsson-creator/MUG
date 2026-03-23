@@ -452,31 +452,6 @@ ul.pagination__list {
   background: white;
   color: rgba(0, 0, 0, 0.50) !important;
 }
-@media(max-width:768px){
-    .pagination__list {
-        gap: 2px !important;
-    }
-    .pagination__item a {
-        padding-bottom: 3px;
-        padding-top: 3px;
-        padding-left: 6px;
-        padding-right: 6px;
-        font-size: 11px;
-        border-radius: 0;
-    }
-    li.pagination__item.pagination__item--current {
-        margin-top: 1px;
-        margin-bottom: 0;
-        padding-bottom: 0;
-        padding-top: 2px;
-        padding-left: 7px;
-        padding-right: 7px;
-        font-size: 11px;
-    }
-    .pagination__item--current {
-        padding: 5px 9px;
-    }
-}
 .pagination__item--prev a, .pagination__item--next a {
   outline: none !important;
   padding: 3px 7px;
