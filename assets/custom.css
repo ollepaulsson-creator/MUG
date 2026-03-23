@@ -703,8 +703,15 @@ ul.product-grid {
         font-size: 16px;
     }
     .facets-toggle {
-        max-width: 50%;
-        border-right: 1px solid #DCDCDC;
+        max-width: 100% !important;
+        border-right: none !important;
+    }
+    .facets-toggle__wrapper {
+        width: 50%;
+    }
+    .facets-toggle__count-sort {
+        display: flex !important;
+        margin-inline-start: auto;
     }
 }
 
