@@ -526,6 +526,16 @@ ul.pagination__list {
 }
 .facets__status {
     display: none !important;
+}
+@media screen and (max-width: 749px) {
+    .facets-toggle .sorting-filter__options {
+        border-radius: 4px;
+        box-shadow: 2px 2px 5px 2px rgb(0 0 0 / 8%);
+        border: 1px solid #E2E2E2;
+        background-color: var(--color-background);
+        overflow-y: hidden;
+        gap: 0;
+    }
 }.facets-toggle__label {
     font-size: 14px;
     text-transform: none;
