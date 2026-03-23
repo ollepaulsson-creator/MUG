@@ -430,10 +430,14 @@
                   
                   <div class="filter-option ">
                     {% if filter.param_name == 'filter.v.availability' or filter.param_name contains 'inventory.butik' %}
+                      {%- assign switch_label = value.label -%}
+                      {%- if filter.param_name contains 'inventory.butik' -%}
+                        {%- assign switch_label = 'Finns i butik' -%}
+                      {%- endif -%}
                       {% render 'switch-checkbox',
                         name: value.param_name,
                         value: value.value,
-                        label: value.label,
+                        label: switch_label,
                         checked: value.active,
                         id: input_id,
                         disabled: is_disabled,
