@@ -124,6 +124,31 @@
   </div>
 </div>
 
+<script>
+(function () {
+  function syncFilterWidth() {
+    const wrapper = document.querySelector('.facets-toggle__wrapper');
+    const firstCard = document.querySelector('.product-grid__item');
+    if (!wrapper || !firstCard) return;
+    const wrapperLeft = wrapper.getBoundingClientRect().left;
+    const cardRight = firstCard.getBoundingClientRect().right;
+    wrapper.style.width = (cardRight - wrapperLeft) + 'px';
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', syncFilterWidth);
+  } else {
+    syncFilterWidth();
+  }
+
+  let resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(syncFilterWidth, 100);
+  });
+})();
+</script>
+
 {% schema %}
 {
   "name": "t:names.search_results",
