@@ -1,13 +1,10 @@
 {%- doc -%}
-  Renders a price filter.
+  Renders a price filter as predefined range checkboxes.
 
   @param {object} filter - The filter object to render.
   @param {string} filter_style - The filter style, can be 'horizontal' or 'vertical'.
-  @param {boolean} [autofocus] - Whether to autofocus the filter.
+  @param {boolean} [autofocus] - Whether to autofocus the first checkbox.
   @param {boolean} [should_render_clear] - Whether to render the clear button.
-
-  @example
-  {% render 'price-filter', filter: filter, filter_style: 'vertical' %}
 {%- enddoc -%}
 
 <accordion-custom
@@ -16,7 +13,6 @@
     data-disable-animation-on-desktop="true"
     data-close-with-escape="true"
   {% endif %}
-
   open-by-default-on-mobile
   {% if filter_style == 'vertical' %}
     open
@@ -33,7 +29,6 @@
       <span class="facets__label">{{ filter.label }}</span>
       <facet-status-component class="facets__status">
         <template ref="moneyFormat">{{ shop.money_format }}</template>
-
         <span
           class="hide-when-empty"
           ref="facetStatus"
@@ -42,16 +37,11 @@
         >
           {%- if filter.min_value.value != null or filter.max_value.value != null %}
             {%- if filter.min_value.value != null and filter.max_value.value != null %}
-              {{- filter.min_value.value | money | strip_html -}}
-              –
-              {{- filter.max_value.value | money | strip_html -}}
+              {{- filter.min_value.value | money | strip_html -}}–{{- filter.max_value.value | money | strip_html -}}
             {%- elsif filter.min_value.value != null -%}
               {{ filter.min_value.value | money | strip_html }}–{{ filter.range_max | money | strip_html }}
-
             {%- elsif filter.max_value.value != null -%}
-              {{- 0 | money | strip_html -}}
-              –
-              {{- filter.max_value.value | money | strip_html -}}
+              {{- 0 | money | strip_html -}}–{{- filter.max_value.value | money | strip_html -}}
             {%- endif -%}
           {%- endif -%}
         </span>
@@ -60,180 +50,188 @@
         {{- 'dropdown-svgrepo-com.svg' | inline_asset_content -}}
       </span>
     </summary>
+
     <floating-panel-component
       {% unless filter_style == 'vertical' %}
         data-close-on-resize
       {% endunless %}
       class="facets__panel-content details-content{% if filter_style == 'horizontal' %} color-{{ settings.popover_color_scheme }}{% endif %}"
     >
-      {% assign min_input_max_value = filter.max_value.value | default: filter.range_max %}
-      {% assign max_input_min_value = filter.min_value.value | default: 0 %}
+      {%- liquid
+        assign breakpoints       = '0,500,1000,2000,5000,10000,20000,50000' | split: ','
+        assign breakpoint_labels = '0,500,1 000,2 000,5 000,10 000,20 000,50 000' | split: ','
+        assign last_i            = breakpoints | size | minus: 1
+      -%}
 
-      <price-facet-component
-        class="price-facet"
-        id="facet-inputs-{{ filter.param_name | escape | replace: '.', '-' }}"
-        on:change="/updatePriceFilterAndResults"
+      <facet-inputs-component
+        on:change="/updateFilters"
+        id="facet-inputs-component-{{ filter.param_name | escape | replace: '.', '-' }}"
+        data-price-range-filter
       >
-        <div class="price-facet__inputs-wrapper facets__inputs-wrapper facets__inputs-wrapper--row">
-          <div class="field price-facet__field">
-            <input
-              class="field__input price-facet__input"
-              name="{{ filter.min_value.param_name }}"
-              id="{{ filter.label | escape }}-GTE"
-              {%- if filter.min_value.value -%}
-                value="{{ filter.min_value.value | money_without_currency }}"
-              {%- endif -%}
-              type="text"
-              inputmode="decimal"
-              placeholder="0"
-              data-min="0"
-              data-max="{{ min_input_max_value | money_without_currency }}"
-              ref="minInput"
-              autocomplete="off"
-              {% if autofocus %}
-                autofocus
-              {% endif %}
-            >
-            <label
-              class="field__label price-facet__label"
-              for="{{ filter.label | escape }}-GTE"
-            >
-              {{ cart.currency.symbol }}
-            </label>
-          </div>
+        <div class="facets__inputs facets__inputs-wrapper">
+          <ul class="facets__inputs-list">
+            {%- for i in (0..last_i) -%}
+              {%- liquid
+                assign lower_kr    = breakpoints[i] | plus: 0
+                assign lower_cents = lower_kr | times: 100
+                assign next_i      = i | plus: 1
+                assign upper_kr    = breakpoints[next_i] | plus: 0
+                assign upper_cents = upper_kr | times: 100
 
-          <div class="price-facet__separator">{{ 'fields.separator' | t }}</div>
+                # Stop rendering if this bucket's lower bound is at or above range_max
+                if lower_cents >= filter.range_max
+                  break
+                endif
 
-          <div class="field price-facet__field">
-            <input
-              class="field__input price-facet__input"
-              name="{{ filter.max_value.param_name }}"
-              id="{{ filter.label | escape }}-LTE"
-              {%- if filter.max_value.value -%}
-                value="{{ filter.max_value.value | money_without_currency }}"
-              {%- endif -%}
-              type="text"
-              inputmode="decimal"
-              placeholder="{{ filter.range_max | money_without_currency }}"
-              data-min="{{ max_input_min_value | money_without_currency }}"
-              data-max="{{ filter.range_max | money_without_currency }}"
-              ref="maxInput"
-              autocomplete="off"
-              {% if autofocus %}
-                autofocus
-              {% endif %}
-            >
-            <label
-              class="field__label price-facet__label"
-              for="{{ filter.label | escape }}-LTE"
-            >
-              {{ cart.currency.symbol }}
-            </label>
-          </div>
+                # Last bucket = either the final breakpoint OR the next bucket would exceed range_max
+                assign is_last_bucket = false
+                if i == last_i
+                  assign is_last_bucket = true
+                elsif upper_cents >= filter.range_max
+                  assign is_last_bucket = true
+                endif
+
+                # Pre-check if the stored price range covers this bucket
+                assign is_active = false
+                if is_last_bucket
+                  # Active when: filter starts at or below this bucket AND either
+                  #   (a) no upper bound stored (open-ended, only last bucket selected), or
+                  #   (b) upper bound reaches into this bucket (e.g. adjacent bucket + last bucket selected)
+                  if filter.min_value.value != null and filter.min_value.value <= lower_cents
+                    if filter.max_value.value == null or filter.max_value.value >= lower_cents
+                      assign is_active = true
+                    endif
+                  endif
+                else
+                  if filter.min_value.value != null and filter.max_value.value != null
+                    if filter.min_value.value <= lower_cents and filter.max_value.value >= upper_cents
+                      assign is_active = true
+                    endif
+                  endif
+                endif
+
+                assign lower_label = breakpoint_labels[i]
+                assign upper_label = breakpoint_labels[next_i]
+              -%}
+              <li class="facets__inputs-list-item">
+                <div class="checkbox">
+                  <input
+                    type="checkbox"
+                    id="price-range-{{ section.id }}-{{ forloop.index }}"
+                    class="checkbox__input"
+                    data-gte="{{ lower_cents }}"
+                    data-lte="{% unless is_last_bucket %}{{ upper_cents }}{% endunless %}"
+                    {% if is_active %}checked{% endif %}
+                    {% if autofocus and forloop.first %}autofocus{% endif %}
+                  >
+                  <label class="checkbox__label" for="price-range-{{ section.id }}-{{ forloop.index }}">
+                    {{- 'icon-checkmark.svg' | inline_asset_content -}}
+                    <span class="checkbox__label-text">
+                      {%- if is_last_bucket -%}
+                        {{ lower_label }} kr+
+                      {%- else -%}
+                        {{ lower_label }} – {{ upper_label }} kr
+                      {%- endif -%}
+                    </span>
+                  </label>
+                </div>
+              </li>
+            {%- endfor -%}
+          </ul>
         </div>
 
-        <div class="price-facet__highest-price">
-          {%- assign formatted_highest_price = filter.range_max | money -%}
-          {{ 'content.price_filter_html' | t: price: formatted_highest_price }}
-        </div>
+        <input
+          type="hidden"
+          name="{{ filter.min_value.param_name }}"
+          data-price-gte
+          value="{% if filter.min_value.value %}{{ filter.min_value.value }}{% endif %}"
+        >
+        <input
+          type="hidden"
+          name="{{ filter.max_value.param_name }}"
+          data-price-lte
+          value="{% if filter.max_value.value %}{{ filter.max_value.value }}{% endif %}"
+        >
 
-        {% if filter.min_value.value != null or filter.max_value.value != null %}
-          {% assign has_active_values = true %}
-        {% endif %}
+        {%- assign has_active_price = false -%}
+        {%- if filter.min_value.value != null or filter.max_value.value != null -%}
+          {%- assign has_active_price = true -%}
+        {%- endif -%}
 
         {% if should_render_clear %}
           <facet-clear-component
             class="clear-filter"
-            tabindex="{% if has_active_values %}0{% else %}-1{% endif %}"
+            tabindex="{% if has_active_price %}0{% else %}-1{% endif %}"
             on:click="/clearFilter"
             on:keydown="/clearFilter"
           >
             <div
-              class="facets__clear {% if has_active_values %}facets__clear--active{% endif %}"
+              class="facets__clear {% if has_active_price %}facets__clear--active{% endif %}"
               ref="clearButton"
             >
               {{- 'actions.clear' | t -}}
             </div>
           </facet-clear-component>
         {% endif %}
-      </price-facet-component>
+      </facet-inputs-component>
+
+      <script>
+      (function () {
+        function syncPriceHiddenInputs(container) {
+          var checked  = Array.from(container.querySelectorAll('input[data-gte]:checked'));
+          var gteInput = container.querySelector('input[data-price-gte]');
+          var lteInput = container.querySelector('input[data-price-lte]');
+          if (!gteInput || !lteInput) return;
+
+          if (checked.length === 0) {
+            gteInput.value = '';
+            lteInput.value = '';
+            return;
+          }
+
+          var gteValues = checked.map(function (cb) { return parseInt(cb.dataset.gte, 10); });
+          var lteValues = checked
+            .map(function (cb) { return cb.dataset.lte; })
+            .filter(function (v) { return v !== ''; });
+
+          gteInput.value = Math.min.apply(null, gteValues);
+          lteInput.value = lteValues.length > 0
+            ? Math.max.apply(null, lteValues.map(Number))
+            : '';
+        }
+
+        // Sync on every (re-)render — runs immediately when script is parsed
+        document.querySelectorAll('[data-price-range-filter]').forEach(function (container) {
+          syncPriceHiddenInputs(container);
+        });
+
+        // Delegated listener — registered once, survives all AJAX re-renders.
+        // IMPORTANT: Uses capture phase so it fires before facets.js (type="module", deferred)
+        // registers its own capture-phase listener. stopImmediatePropagation() then prevents
+        // facet-inputs-component from also calling updateFilters() on the raw checkbox event.
+        // This ordering is guaranteed by the HTML spec: inline scripts run before deferred modules.
+        if (!window.__priceRangeListenerAttached) {
+          window.__priceRangeListenerAttached = true;
+
+          document.addEventListener('change', function (e) {
+            if (!(e.target instanceof HTMLInputElement) || e.target.type !== 'checkbox') return;
+            var container = e.target.closest('[data-price-range-filter]');
+            if (!container) return;
+
+            // Stop component from also seeing this event (prevents double updateFilters call)
+            e.stopImmediatePropagation();
+
+            syncPriceHiddenInputs(container);
+
+            // Call updateFilters directly on the form component
+            var facetsForm = container.closest('facets-form-component');
+            if (facetsForm && typeof facetsForm.updateFilters === 'function') {
+              facetsForm.updateFilters();
+            }
+          }, true); // true = capture phase
+        }
+      })();
+      </script>
     </floating-panel-component>
   </details>
 </accordion-custom>
-
-{% stylesheet %}
-  /* Price filter */
-  .price-facet {
-    container-type: inline-size;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .facets__inputs-wrapper.price-facet__inputs-wrapper {
-    flex-wrap: nowrap;
-  }
-
-  .price-facet__field {
-    width: 50%;
-    flex-grow: 0;
-  }
-
-  @container (max-width: 199px) {
-    .facets__inputs-wrapper.price-facet__inputs-wrapper {
-      flex-wrap: wrap;
-      width: 100%;
-    }
-
-    .price-facet__inputs-wrapper .price-facet__field {
-      width: 100%;
-    }
-  }
-
-  .facets .facets__inputs-wrapper.price-facet__inputs-wrapper {
-    padding: var(--style-border-width-inputs);
-    gap: calc(var(--gap-sm) + (var(--style-border-width-inputs) * 2));
-  }
-
-  .facets--horizontal .facets__panel-content:has(.price-facet) {
-    min-width: 360px;
-  }
-
-  .facets--horizontal .facets__inputs-wrapper.price-facet__inputs-wrapper {
-    @media screen and (min-width: 750px) {
-      padding: calc(var(--padding-sm) + var(--style-border-width-inputs));
-    }
-  }
-
-  .price-facet__input {
-    width: 100%;
-    text-align: right;
-    padding-left: calc(2.5 * var(--input-padding-x));
-  }
-
-  .price-facet__input::placeholder {
-    color: var(--facets-input-label-color);
-  }
-
-  .price-facet__separator {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: var(--font-paragraph--size);
-  }
-
-  .price-facet__highest-price {
-    padding: var(--padding-xs) 0 var(--padding-sm);
-  }
-
-  .facets--horizontal .price-facet__highest-price {
-    padding: 0 var(--padding-md) var(--padding-xs);
-  }
-
-  .field__label.price-facet__label {
-    top: 0;
-    left: 0;
-    color: var(--facets-input-label-color);
-    padding: var(--input-padding-y) var(--input-padding-x);
-    transform: none;
-  }
-{% endstylesheet %}
