@@ -429,7 +429,7 @@
 
                   
                   <div class="filter-option ">
-                    {% if filter.param_name == 'filter.v.availability' %}
+                    {% if filter.param_name == 'filter.v.availability' or filter.param_name contains 'inventory.butik' %}
                       {% render 'switch-checkbox',
                         name: value.param_name,
                         value: value.value,
