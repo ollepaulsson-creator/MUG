@@ -138,6 +138,8 @@
 
   function init() {
     syncFilterWidth();
+    setTimeout(syncFilterWidth, 100);
+    setTimeout(syncFilterWidth, 500);
     const firstCard = document.querySelector('.product-grid__item');
     if (firstCard && window.ResizeObserver) {
       new ResizeObserver(syncFilterWidth).observe(firstCard);
@@ -145,9 +147,9 @@
   }
 
   if (document.readyState === 'complete') {
-    init();
+    requestAnimationFrame(() => requestAnimationFrame(init));
   } else {
-    window.addEventListener('load', init);
+    window.addEventListener('load', () => requestAnimationFrame(() => requestAnimationFrame(init)));
   }
 
   let resizeTimer;
