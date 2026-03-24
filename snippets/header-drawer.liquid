@@ -1104,16 +1104,14 @@ nav.footer-block ul li{
   }
 
   .menu-drawer,
-  details[open] > .menu-drawer__submenu {
-    transition: transform var(--drawer-animation-speed) ease, visibility var(--drawer-animation-speed) ease,
-      opacity var(--drawer-animation-speed) ease;
+  .menu-drawer__submenu {
+    transition: transform var(--drawer-animation-speed) ease, visibility var(--drawer-animation-speed) ease;
   }
 
   .menu-open > .menu-drawer,
   .menu-open > .menu-drawer__submenu:not(.menu-drawer__menu--childlist) {
     transform: translateX(0);
     visibility: visible;
-    opacity: 1;
     display: flex;
     flex-direction: column;
     will-change: transform;
@@ -1441,10 +1439,19 @@ nav.footer-block ul li{
     left: 0;
     background-color: var(--color-background);
     z-index: var(--layer-flat);
-    transform: translateX(-5%);
+    transform: translateX(100%);
     visibility: hidden;
     overflow-y: auto;
-    opacity: 0;
+    opacity: 1;
+  }
+
+  /* Main menu slides out left when a submenu is active */
+  .menu-drawer__menu.has-submenu {
+    transition: transform var(--drawer-animation-speed) ease;
+  }
+
+  .menu-drawer:has(.menu-drawer__menu-container.menu-open) .menu-drawer__menu.has-submenu {
+    transform: translateX(-100%);
   }
 
   .menu-drawer__back-button > .svg-wrapper {
