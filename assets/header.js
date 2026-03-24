@@ -65,8 +65,9 @@ class HeaderComponent extends Component {
   #resizeObserver = new ResizeObserver(([entry]) => {
     if (!entry) return;
 
-    const { height } = entry.target.getBoundingClientRect();
+    const { height, bottom } = entry.target.getBoundingClientRect();
     document.body.style.setProperty('--header-height', `${height}px`);
+    document.body.style.setProperty('--header-bottom', `${Math.max(0, bottom)}px`);
 
     // Check if the menu drawer should be hidden in favor of the header menu
     if (this.#menuDrawerHiddenWidth && window.innerWidth > this.#menuDrawerHiddenWidth) {
@@ -126,6 +127,9 @@ class HeaderComponent extends Component {
   }
 
   #handleWindowScroll = () => {
+    const bottom = this.getBoundingClientRect().bottom;
+    document.body.style.setProperty('--header-bottom', `${Math.max(0, bottom)}px`);
+
     const stickyMode = this.getAttribute('sticky');
     if (!this.#offscreen && stickyMode !== 'always') return;
 
@@ -203,6 +207,7 @@ class HeaderComponent extends Component {
     this.removeEventListener('overflowMinimum', this.#handleOverflowMinimum);
     document.removeEventListener('scroll', this.#handleWindowScroll);
     document.body.style.setProperty('--header-height', '0px');
+    document.body.style.setProperty('--header-bottom', '0px');
   }
 }
 
