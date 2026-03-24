@@ -84,7 +84,29 @@ class HeaderDrawer extends Component {
    * @param {Event} [event]
    */
   back(event) {
-    this.#close(this.#getDetailsElement(event));
+    const details = this.#getDetailsElement(event);
+    const submenu = details.querySelector('.menu-drawer__submenu');
+    const summary = details.querySelector('summary');
+
+    if (!summary) return;
+
+    summary.setAttribute('aria-expanded', 'false');
+    details.classList.remove('menu-open');
+
+    if (submenu) {
+      submenu.addEventListener('transitionend', () => {
+        reset(details);
+        setTimeout(() => {
+          trapFocus(this.refs.details);
+        }, 0);
+      }, { once: true });
+    } else {
+      // Fallback: no submenu element found, reset immediately
+      reset(details);
+      setTimeout(() => {
+        trapFocus(this.refs.details);
+      }, 0);
+    }
   }
 
   /**
