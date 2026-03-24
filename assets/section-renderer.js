@@ -175,7 +175,50 @@ export async function morphSection(sectionId, html) {
     throw new Error(`Section ${sectionId} not found in the section rendering response`);
   }
 
+  preserveFilterAccordions(existingElement, newElement);
   morph(existingElement, newElement);
+}
+
+/**
+ * When a Shopify filter combination yields zero products, the Section Rendering API
+ * returns only the price_range filter in the `filters` array — omitting list filters
+ * (availability, brand, etc.). This causes morph to remove those sections from the DOM.
+ *
+ * We fix this by copying any missing filter accordion items from the existing DOM into
+ * the new element before morphing, so they are preserved rather than removed.
+ *
+ * @param {HTMLElement} existingElement - The current section element in the DOM
+ * @param {HTMLElement} newElement - The parsed new section element (not yet in DOM)
+ */
+function preserveFilterAccordions(existingElement, newElement) {
+  const existingWrappers = existingElement.querySelectorAll('.facets__filters-wrapper');
+
+  for (const existingWrapper of existingWrappers) {
+    const form = existingWrapper.closest('form');
+    if (!form?.id) continue;
+
+    const newWrapper = newElement.querySelector(`#${CSS.escape(form.id)} .facets__filters-wrapper`);
+    if (!newWrapper) continue;
+
+    const existingAccordions = existingWrapper.querySelectorAll(':scope > accordion-custom.facets__item');
+    const newAccordions = newWrapper.querySelectorAll(':scope > accordion-custom.facets__item');
+
+    if (newAccordions.length >= existingAccordions.length) continue;
+
+    // Some filter accordions are absent from the new HTML — restore non-price ones.
+    for (const accordion of existingAccordions) {
+      if (accordion.querySelector('[data-price-range-filter]')) continue;
+
+      const label = accordion.querySelector('.facets__label')?.textContent?.trim();
+      const alreadyPresent = Array.from(newAccordions).some(
+        (a) => a.querySelector('.facets__label')?.textContent?.trim() === label
+      );
+
+      if (!alreadyPresent) {
+        newWrapper.appendChild(accordion.cloneNode(true));
+      }
+    }
+  }
 }
 
 export const sectionRenderer = new SectionRenderer();
