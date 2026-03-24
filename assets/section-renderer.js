@@ -200,24 +200,31 @@ function preserveFilterAccordions(existingElement, newElement) {
     const newWrapper = newElement.querySelector(`#${CSS.escape(form.id)} .facets__filters-wrapper`);
     if (!newWrapper) continue;
 
-    const existingAccordions = existingWrapper.querySelectorAll(':scope > accordion-custom.facets__item');
-    const newAccordions = newWrapper.querySelectorAll(':scope > accordion-custom.facets__item');
+    const existingAccordions = Array.from(
+      existingWrapper.querySelectorAll(':scope > accordion-custom.facets__item')
+    );
+    const newAccordions = Array.from(
+      newWrapper.querySelectorAll(':scope > accordion-custom.facets__item')
+    );
 
     if (newAccordions.length >= existingAccordions.length) continue;
 
-    // Some filter accordions are absent from the new HTML — restore non-price ones.
+    // Restore missing filter accordions and re-sort to match original order.
+    const getLabel = (el) => el.querySelector('.facets__label')?.textContent?.trim() ?? '';
+
     for (const accordion of existingAccordions) {
-      if (accordion.querySelector('[data-price-range-filter]')) continue;
-
-      const label = accordion.querySelector('.facets__label')?.textContent?.trim();
-      const alreadyPresent = Array.from(newAccordions).some(
-        (a) => a.querySelector('.facets__label')?.textContent?.trim() === label
-      );
-
+      const label = getLabel(accordion);
+      const alreadyPresent = newAccordions.some((a) => getLabel(a) === label);
       if (!alreadyPresent) {
         newWrapper.appendChild(accordion.cloneNode(true));
       }
     }
+
+    // Re-order to match the original sequence so morph doesn't reorder them.
+    const labelOrder = existingAccordions.map(getLabel);
+    Array.from(newWrapper.querySelectorAll(':scope > accordion-custom.facets__item'))
+      .sort((a, b) => labelOrder.indexOf(getLabel(a)) - labelOrder.indexOf(getLabel(b)))
+      .forEach((el) => newWrapper.appendChild(el));
   }
 }
 
