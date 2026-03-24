@@ -222,6 +222,58 @@
               facetsForm.updateFilters();
             }
           }, true); // true = capture phase
+
+          // Hover prefetch — warms section-renderer cache 200ms before click,
+          // matching the behaviour of other filters (on:pointerenter="/prefetchPage").
+          var _prefetchTimer = null;
+
+          document.addEventListener('pointerenter', function (e) {
+            if (!(e.target instanceof Element)) return;
+            var label = e.target.closest('.checkbox__label');
+            if (!label) return;
+            var container = label.closest('[data-price-range-filter]');
+            if (!container) return;
+
+            clearTimeout(_prefetchTimer);
+            _prefetchTimer = setTimeout(function () {
+              var checkbox = label.closest('.checkbox') && label.closest('.checkbox').querySelector('input[data-gte]');
+              if (!checkbox) return;
+
+              // Simulate toggling the hovered checkbox to predict the resulting URL
+              var allCheckboxes = Array.from(container.querySelectorAll('input[data-gte]'));
+              var simChecked = allCheckboxes.filter(function (cb) {
+                return cb === checkbox ? !cb.checked : cb.checked;
+              });
+
+              var newGte = '';
+              var newLte = '';
+              if (simChecked.length > 0) {
+                var gteVals = simChecked.map(function (cb) { return parseInt(cb.dataset.gte, 10); });
+                var lteVals = simChecked.map(function (cb) { return cb.dataset.lte; }).filter(function (v) { return v !== ''; });
+                newGte = String(Math.min.apply(null, gteVals));
+                newLte = lteVals.length > 0 ? String(Math.max.apply(null, lteVals.map(Number))) : '';
+              }
+
+              var form = container.closest('form');
+              var section = container.closest('.shopify-section');
+              if (!form || !section || !window.__sectionRenderer) return;
+
+              var urlParams = new URLSearchParams(new FormData(form));
+              if (newGte) { urlParams.set('filter.v.price.gte', newGte); } else { urlParams.delete('filter.v.price.gte'); }
+              if (newLte) { urlParams.set('filter.v.price.lte', newLte); } else { urlParams.delete('filter.v.price.lte'); }
+              urlParams.delete('page');
+
+              var url = new URL(window.location.pathname, window.location.origin);
+              urlParams.forEach(function (val, key) { url.searchParams.append(key, val); });
+
+              window.__sectionRenderer.getSectionHTML(section.id, true, url);
+            }, 200);
+          }, true);
+
+          document.addEventListener('pointerleave', function (e) {
+            if (!(e.target instanceof Element)) return;
+            if (e.target.closest('[data-price-range-filter]')) clearTimeout(_prefetchTimer);
+          }, true);
         }
       })();
       </script>

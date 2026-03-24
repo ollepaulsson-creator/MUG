@@ -179,3 +179,5 @@ export async function morphSection(sectionId, html) {
 }
 
 export const sectionRenderer = new SectionRenderer();
+
+window.__sectionRenderer = sectionRenderer;
