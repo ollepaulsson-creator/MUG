@@ -204,7 +204,7 @@
                   endif
                 endif
               %}
-              {% if filter.param_name contains 'inventory.butik' and value.value != 'true' %}{% continue %}{% endif %}
+              {% if filter.param_name contains 'inventory.butik' or filter.param_name contains 'custom.finns_i_butik' %}{% unless value.value == 'true' %}{% continue %}{% endunless %}{% endif %}
               {% unless value.label == 'Out of stock' or value.label == 'Slut i lager' %}
               <li
                 data-skip-node-update="true"
@@ -430,9 +430,13 @@
 
                   
                   <div class="filter-option ">
-                    {% if filter.param_name == 'filter.v.availability' or filter.param_name contains 'inventory.butik' %}
+                    {% assign is_butik_filter = false %}
+                    {% if filter.param_name contains 'inventory.butik' or filter.param_name contains 'custom.finns_i_butik' %}
+                      {% assign is_butik_filter = true %}
+                    {% endif %}
+                    {% if filter.param_name == 'filter.v.availability' or is_butik_filter %}
                       {%- assign switch_label = value.label -%}
-                      {%- if filter.param_name contains 'inventory.butik' -%}
+                      {%- if is_butik_filter -%}
                         {%- assign switch_label = 'Finns i butik' -%}
                       {%- endif -%}
                       {% render 'switch-checkbox',
