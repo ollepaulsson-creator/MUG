@@ -64,12 +64,11 @@
       -%}
 
       <facet-inputs-component
-        on:change="/updateFilters"
         id="facet-inputs-component-{{ filter.param_name | escape | replace: '.', '-' }}"
         data-price-range-filter
       >
         <div class="facets__inputs facets__inputs-wrapper">
-          <ul class="facets__inputs-list">
+          <ul class="facets__inputs-list list-unstyled">
             {%- for i in (0..last_i) -%}
               {%- liquid
                 assign lower_kr    = breakpoints[i] | plus: 0
@@ -119,8 +118,8 @@
                     type="checkbox"
                     id="price-range-{{ section.id }}-{{ forloop.index }}"
                     class="checkbox__input"
-                    data-gte="{{ lower_cents }}"
-                    data-lte="{% unless is_last_bucket %}{{ upper_cents }}{% endunless %}"
+                    data-gte="{{ lower_kr }}"
+                    data-lte="{% unless is_last_bucket %}{{ upper_kr }}{% endunless %}"
                     {% if is_active %}checked{% endif %}
                     {% if autofocus and forloop.first %}autofocus{% endif %}
                   >
@@ -144,13 +143,13 @@
           type="hidden"
           name="{{ filter.min_value.param_name }}"
           data-price-gte
-          value="{% if filter.min_value.value %}{{ filter.min_value.value }}{% endif %}"
+          value="{% if filter.min_value.value %}{{ filter.min_value.value | divided_by: 100 }}{% endif %}"
         >
         <input
           type="hidden"
           name="{{ filter.max_value.param_name }}"
           data-price-lte
-          value="{% if filter.max_value.value %}{{ filter.max_value.value }}{% endif %}"
+          value="{% if filter.max_value.value %}{{ filter.max_value.value | divided_by: 100 }}{% endif %}"
         >
 
         {%- assign has_active_price = false -%}
@@ -206,10 +205,7 @@
         });
 
         // Delegated listener — registered once, survives all AJAX re-renders.
-        // IMPORTANT: Uses capture phase so it fires before facets.js (type="module", deferred)
-        // registers its own capture-phase listener. stopImmediatePropagation() then prevents
-        // facet-inputs-component from also calling updateFilters() on the raw checkbox event.
-        // This ordering is guaranteed by the HTML spec: inline scripts run before deferred modules.
+        // facet-inputs-component intentionally has no on:change binding so only this listener fires.
         if (!window.__priceRangeListenerAttached) {
           window.__priceRangeListenerAttached = true;
 
@@ -217,9 +213,6 @@
             if (!(e.target instanceof HTMLInputElement) || e.target.type !== 'checkbox') return;
             var container = e.target.closest('[data-price-range-filter]');
             if (!container) return;
-
-            // Stop component from also seeing this event (prevents double updateFilters call)
-            e.stopImmediatePropagation();
 
             syncPriceHiddenInputs(container);
 
