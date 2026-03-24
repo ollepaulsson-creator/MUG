@@ -102,8 +102,9 @@
                     endif
                   endif
                 else
-                  if filter.min_value.value != null and filter.max_value.value != null
-                    if filter.min_value.value <= lower_cents and filter.max_value.value >= upper_cents
+                  # Active when max >= upper AND (min is null — i.e. gte=0 was omitted — OR min <= lower)
+                  if filter.max_value.value != null and filter.max_value.value >= upper_cents
+                    if filter.min_value.value == null or filter.min_value.value <= lower_cents
                       assign is_active = true
                     endif
                   endif
@@ -193,9 +194,10 @@
             .map(function (cb) { return cb.dataset.lte; })
             .filter(function (v) { return v !== ''; });
 
-          gteInput.value = Math.min.apply(null, gteValues);
+          var minGte = Math.min.apply(null, gteValues);
+          gteInput.value = minGte > 0 ? String(minGte) : '';
           lteInput.value = lteValues.length > 0
-            ? Math.max.apply(null, lteValues.map(Number))
+            ? String(Math.max.apply(null, lteValues.map(Number)))
             : '';
         }
 
