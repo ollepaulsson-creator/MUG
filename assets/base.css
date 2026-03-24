@@ -2825,7 +2825,7 @@ fly-to-cart {
 
 @keyframes slideOutRight {
   from {
-    transform: translateX(100);
+    transform: translateX(0);
   }
 
   to {
