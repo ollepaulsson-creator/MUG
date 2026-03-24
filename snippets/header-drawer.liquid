@@ -999,21 +999,61 @@ nav.footer-block ul li{
     }
   }
 
-  details:not([open]) .header__icon--menu .header-drawer-icon--close {
-    display: none;
+  /* Hamburger ↔ ✕ cross-fade animation */
+  .header__icon--summary {
+    position: relative;
+  }
+
+  .header__icon--summary .header-drawer-icon {
+    transition: opacity 0.2s cubic-bezier(0.2, 0, 0, 1),
+                transform 0.2s cubic-bezier(0.2, 0, 0, 1),
+                filter 0.2s cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  /* Close icon: hidden by default, positioned over the hamburger */
+  .header__icon--summary .header-drawer-icon--close {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    display: flex !important;
+    opacity: 0;
+    transform: scale(0.25);
+    filter: blur(4px);
+  }
+
+  /* Hamburger icon: visible by default */
+  .header__icon--summary .header-drawer-icon--open {
+    display: flex !important;
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+
+  /* When menu is open on mobile: swap icons */
+  details[open] .header__icon--menu .header-drawer-icon--open {
+    opacity: 0;
+    transform: scale(0.25);
+    filter: blur(4px);
   }
 
   details[open] .header__icon--menu .header-drawer-icon--close {
-    @media screen and (min-width: 750px) {
-      display: none;
-    }
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
   }
 
-  details[open] .header__icon--menu .header-drawer-icon--open {
-    display: none;
+  /* On desktop: always show hamburger, never ✕ */
+  @media screen and (min-width: 750px) {
+    details[open] .header__icon--menu .header-drawer-icon--open {
+      opacity: 1;
+      transform: scale(1);
+      filter: blur(0px);
+    }
 
-    @media screen and (min-width: 750px) {
-      display: flex;
+    details[open] .header__icon--menu .header-drawer-icon--close {
+      opacity: 0;
+      transform: scale(0.25);
+      filter: blur(4px);
     }
   }
 
