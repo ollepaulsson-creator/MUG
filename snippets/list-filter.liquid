@@ -204,7 +204,7 @@
                   endif
                 endif
               %}
-              {% if filter.param_name contains 'inventory.butik' and forloop.first == false %}{% continue %}{% endif %}
+              {% if filter.param_name contains 'inventory.butik' and value.value != 'true' %}{% continue %}{% endif %}
               {% unless value.label == 'Out of stock' or value.label == 'Slut i lager' %}
               <li
                 data-skip-node-update="true"
