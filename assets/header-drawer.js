@@ -93,19 +93,26 @@ class HeaderDrawer extends Component {
     summary.setAttribute('aria-expanded', 'false');
     details.classList.remove('menu-open');
 
-    if (submenu) {
-      submenu.addEventListener('transitionend', () => {
-        reset(details);
-        setTimeout(() => {
-          trapFocus(this.refs.details);
-        }, 0);
-      }, { once: true });
-    } else {
-      // Fallback: no submenu element found, reset immediately
+    const doReset = () => {
       reset(details);
       setTimeout(() => {
         trapFocus(this.refs.details);
       }, 0);
+    };
+
+    if (submenu) {
+      let done = false;
+      const onDone = () => {
+        if (done) return;
+        done = true;
+        doReset();
+      };
+      submenu.addEventListener('transitionend', onDone, { once: true });
+      // Fallback: if transitionend doesn't fire (e.g. transition was interrupted)
+      const duration = parseFloat(getComputedStyle(submenu).transitionDuration || '0') * 1000;
+      setTimeout(onDone, duration + 50);
+    } else {
+      doReset();
     }
   }
 
