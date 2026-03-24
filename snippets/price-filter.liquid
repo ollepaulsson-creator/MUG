@@ -216,12 +216,68 @@
             var container = e.target.closest('[data-price-range-filter]');
             if (!container) return;
 
+            // Save non-price filter sections from the drawer before the AJAX update.
+            // When a price filter yields zero results Shopify returns a reduced 'filters'
+            // array (price_range only), so morph removes availability/brand sections.
+            // We detect the removal and restore the saved sections afterwards.
+            var drawerWrapper = document.querySelector('#filters-drawer .facets__filters-wrapper');
+            var savedNonPrice = [];
+            if (drawerWrapper) {
+              Array.from(drawerWrapper.querySelectorAll(':scope > accordion-custom.facets__item'))
+                .forEach(function (el) {
+                  if (!el.querySelector('[data-price-range-filter]')) {
+                    savedNonPrice.push(el.outerHTML);
+                  }
+                });
+            }
+
             syncPriceHiddenInputs(container);
 
             // Call updateFilters directly on the form component
             var facetsForm = container.closest('facets-form-component');
             if (facetsForm && typeof facetsForm.updateFilters === 'function') {
               facetsForm.updateFilters();
+            }
+
+            if (savedNonPrice.length > 0 && drawerWrapper) {
+              // Cancel any observer left over from a previous rapid click
+              if (window.__priceRangeRestoreObserver) {
+                window.__priceRangeRestoreObserver.disconnect();
+                clearTimeout(window.__priceRangeRestoreTimeout);
+              }
+
+              var obs = new MutationObserver(function () {
+                obs.disconnect();
+                clearTimeout(window.__priceRangeRestoreTimeout);
+                window.__priceRangeRestoreObserver = null;
+
+                // Defer to let all morph mutations settle before we inspect the DOM
+                setTimeout(function () {
+                  if (!drawerWrapper.isConnected) return;
+
+                  var remaining = Array.from(
+                    drawerWrapper.querySelectorAll(':scope > accordion-custom.facets__item')
+                  ).filter(function (el) { return !el.querySelector('[data-price-range-filter]'); });
+
+                  if (remaining.length < savedNonPrice.length) {
+                    // Morph stripped some/all non-price sections — restore them
+                    remaining.forEach(function (el) { el.parentNode && el.parentNode.removeChild(el); });
+                    savedNonPrice.forEach(function (html) {
+                      var tmp = document.createElement('div');
+                      tmp.innerHTML = html;
+                      if (tmp.firstElementChild) drawerWrapper.appendChild(tmp.firstElementChild);
+                    });
+                  }
+                }, 0);
+              });
+
+              window.__priceRangeRestoreObserver = obs;
+              window.__priceRangeRestoreTimeout = setTimeout(function () {
+                obs.disconnect();
+                window.__priceRangeRestoreObserver = null;
+              }, 10000);
+
+              obs.observe(drawerWrapper, { childList: true });
             }
           }, true); // true = capture phase
 
