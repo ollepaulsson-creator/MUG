@@ -1103,18 +1103,27 @@ nav.footer-block ul li{
     }
   }
 
-  .menu-drawer,
-  .menu-drawer__submenu {
+  .menu-drawer {
     transition: transform var(--drawer-animation-speed) ease, visibility var(--drawer-animation-speed) ease;
   }
 
-  .menu-open > .menu-drawer,
-  .menu-open > .menu-drawer__submenu:not(.menu-drawer__menu--childlist) {
+  /* Submenu only needs visibility transition — its visual slide is driven by the parent UL's transform */
+  .menu-drawer__submenu {
+    transition: visibility var(--drawer-animation-speed) ease;
+  }
+
+  .menu-open > .menu-drawer {
     transform: translateX(0);
     visibility: visible;
     display: flex;
     flex-direction: column;
     will-change: transform;
+  }
+
+  /* When a submenu is active, make it visible — its transform stays at translateX(100%).
+     The parent UL slides to translateX(-100%), which nets to visual position 0 for the submenu. */
+  .menu-open > .menu-drawer__submenu:not(.menu-drawer__menu--childlist) {
+    visibility: visible;
   }
 
   .menu-drawer__inner-container {
