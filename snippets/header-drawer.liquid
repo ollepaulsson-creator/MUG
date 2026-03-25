@@ -1060,7 +1060,7 @@ nav.footer-block ul li{
 
   .menu-drawer {
     position: fixed;
-    transform: translateX(-100%);
+    transform: translateY(-100%);
     visibility: hidden;
     height: calc(100dvh - var(--header-bottom, 60px));
     width: 100vw;
@@ -1105,19 +1105,25 @@ nav.footer-block ul li{
     }
   }
 
-  @keyframes fade-in {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+  @keyframes slide-down-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .menu-drawer {
     transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
   }
 
-  /* Stagger fade-in for menu items when the drawer opens */
+  /* Stagger slide-down + fade-in for menu items when the drawer opens */
   .menu-open > .menu-drawer .menu-drawer__list-item {
     --index: var(--menu-drawer-animation-index, 0);
-    animation: fade-in 0.45s linear calc(var(--index) * 0.05s) backwards;
+    animation: slide-down-fade-in 0.35s cubic-bezier(0.2, 0, 0, 1) calc(var(--index) * 0.05s) backwards;
   }
 
   .menu-drawer__submenu {
@@ -1125,7 +1131,7 @@ nav.footer-block ul li{
   }
 
   .menu-open > .menu-drawer {
-    transform: translateX(0);
+    transform: translateY(0);
     visibility: visible;
     display: flex;
     flex-direction: column;
