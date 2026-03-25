@@ -1060,7 +1060,7 @@ nav.footer-block ul li{
 
   .menu-drawer {
     position: fixed;
-    transform: translateY(-100%);
+    clip-path: inset(0 0 100% 0);
     visibility: hidden;
     height: calc(100dvh - var(--header-bottom, 60px));
     width: 100vw;
@@ -1117,7 +1117,7 @@ nav.footer-block ul li{
   }
 
   .menu-drawer {
-    transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    transition: clip-path 0.3s ease-in-out, visibility 0.3s ease-in-out;
   }
 
   /* Stagger slide-down + fade-in for menu items when the drawer opens */
@@ -1131,7 +1131,7 @@ nav.footer-block ul li{
   }
 
   .menu-open > .menu-drawer {
-    transform: translateY(0);
+    clip-path: inset(0 0 0% 0);
     visibility: visible;
     display: flex;
     flex-direction: column;
