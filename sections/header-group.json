@@ -108,8 +108,8 @@
         }
       },
       "custom_css": [
-        ".header__columns.spacing-style {padding-left: 5px; padding-right: 15px;}",
-        "@media (max-width: 789px) {summary.header__icon.header__icon--menu.header__icon--summary {padding: 0px; } .menu-drawer__featured-content {display: none; }}"
+        ".header__columns.spacing-style {padding-left: 15px; padding-right: 15px;}",
+        "@media (max-width: 789px) {.header__columns.spacing-style {padding-left: 0px;} summary.header__icon.header__icon--menu.header__icon--summary {padding: 0px; } .menu-drawer__featured-content {display: none; }}"
       ],
       "settings": {
         "logo_position": "left",
