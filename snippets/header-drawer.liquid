@@ -1117,13 +1117,18 @@ nav.footer-block ul li{
   }
 
   .menu-drawer {
-    transition: clip-path 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    transition: clip-path 0.3s ease-out, visibility 0.3s ease-out;
+  }
+
+  /* Reset animation when drawer is closed so it replays on every open */
+  .menu-drawer .menu-drawer__list-item {
+    animation: none;
   }
 
   /* Stagger slide-down + fade-in for menu items when the drawer opens */
   .menu-open > .menu-drawer .menu-drawer__list-item {
     --index: var(--menu-drawer-animation-index, 0);
-    animation: slide-down-fade-in 0.35s cubic-bezier(0.2, 0, 0, 1) calc(var(--index) * 0.05s) backwards;
+    animation: slide-down-fade-in 0.35s ease-out calc(var(--index) * 0.05s) backwards;
   }
 
   .menu-drawer__submenu {
