@@ -760,6 +760,10 @@ span.menu-drawer__menu-item-text {
     font-weight: 400;
 }
 
+.menu-drawer__back-button span.menu-drawer__menu-item-text {
+    font-weight: 600;
+}
+
 ul.menu-drawer__menu.menu-drawer__menu--grandchildlist {
     padding-left: 20px;
 }
@@ -1240,7 +1244,8 @@ nav.footer-block ul li{
   }
 
   .menu-drawer__list-item--deep .menu-drawer__list-item,
-  .menu-drawer__list-item--flat .menu-drawer__list-item {
+  .menu-drawer__list-item--flat .menu-drawer__list-item,
+  .menu-drawer__menu--childlist > .menu-drawer__list-item {
     min-height: auto;
   }
 
@@ -1349,7 +1354,7 @@ nav.footer-block ul li{
 
   .menu-drawer__menu-item {
     display: flex;
-    padding: var(--padding-2xs) 0;
+    padding: 6px 0;
     position: relative;
     text-decoration: none;
     justify-content: space-between;
