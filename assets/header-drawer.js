@@ -99,22 +99,24 @@ class HeaderDrawer extends Component {
       }, 0);
     };
 
-    // Wait for the main menu UL to slide back before resetting the details element.
-    // The submenu's visual exit is driven by the UL's transform — no separate submenu transition.
-    const mainMenu = this.querySelector('.menu-drawer__menu.has-submenu');
-    if (mainMenu) {
+    // Wait for the sliding element to finish its transform transition before resetting.
+    // L1 back: the main menu UL slides back (translateX(-100%) → 0).
+    // L2+ back: the parent submenu panel slides back (translateX(0) → 100%).
+    const parentSubmenu = details.closest('.menu-drawer__submenu');
+    const transitionTarget = parentSubmenu ?? this.querySelector('.menu-drawer__menu.has-submenu');
+    if (transitionTarget) {
       let done = false;
       const onDone = () => {
         if (done) return;
         done = true;
-        mainMenu.removeEventListener('transitionend', onTransitionEnd);
+        transitionTarget.removeEventListener('transitionend', onTransitionEnd);
         doReset();
       };
       const onTransitionEnd = (e) => {
         if (e.propertyName === 'transform') onDone();
       };
-      mainMenu.addEventListener('transitionend', onTransitionEnd);
-      const duration = parseFloat(getComputedStyle(mainMenu).transitionDuration || '0') * 1000;
+      transitionTarget.addEventListener('transitionend', onTransitionEnd);
+      const duration = parseFloat(getComputedStyle(transitionTarget).transitionDuration || '0') * 1000;
       setTimeout(onDone, duration + 50);
     } else {
       doReset();

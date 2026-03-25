@@ -1107,9 +1107,8 @@ nav.footer-block ul li{
     transition: transform var(--drawer-animation-speed) ease, visibility var(--drawer-animation-speed) ease;
   }
 
-  /* Submenu only needs visibility transition — its visual slide is driven by the parent UL's transform */
   .menu-drawer__submenu {
-    transition: visibility var(--drawer-animation-speed) ease;
+    transition: transform var(--drawer-animation-speed) ease, visibility var(--drawer-animation-speed) ease;
   }
 
   .menu-open > .menu-drawer {
@@ -1459,6 +1458,13 @@ nav.footer-block ul li{
 
   .menu-drawer:has(.menu-drawer__menu-container.menu-open) .menu-drawer__menu.has-submenu {
     transform: translateX(-100%);
+  }
+
+  /* Sub-submenu: slide the parent submenu panel left when a grandchild opens.
+     The grandchild submenu stays at translateX(100%); parent sliding to translateX(0)
+     means grandchild's net visual position = parent_origin + 100% = 0 (on screen). */
+  .menu-drawer__submenu:has(.menu-drawer__menu-container.menu-open) {
+    transform: translateX(0);
   }
 
   .menu-drawer__back-button > .svg-wrapper {
