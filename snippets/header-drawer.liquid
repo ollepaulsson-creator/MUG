@@ -1178,8 +1178,7 @@ nav.footer-block ul li{
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #DCDCDC;
-    margin-left: 20px;
-    margin-right: 20px;
+    padding-inline: 20px;
     margin-bottom: 20px;
   }
 
@@ -1202,6 +1201,12 @@ nav.footer-block ul li{
 
   .menu-drawer__menu--childlist:not(.menu-drawer__menu--grid) {
     flex-grow: 1;
+  }
+
+  /* Align child items with the title text in the nav-buttons bar:
+     20px (nav padding) + 15px (back icon) + var(--padding-md) (icon gap) */
+  .menu-drawer__inner-submenu .menu-drawer__menu--childlist {
+    padding-inline-start: calc(20px + 15px + var(--padding-md));
   }
 
   .menu-drawer__menu.has-submenu,
