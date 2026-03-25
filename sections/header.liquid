@@ -589,6 +589,13 @@
     padding-inline: calc(var(--gap-xl) / 2);
   }
 
+  /* Remove the section grid's page-margin indent on mobile so the hamburger sits flush */
+  @media screen and (max-width: 749px) {
+    .header-section {
+      --page-margin: 0px;
+    }
+  }
+
   /* Set header paddings based on height setting */
   .header {
     --header-padding: var(--padding-sm);
