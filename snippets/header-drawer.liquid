@@ -999,7 +999,7 @@ nav.footer-block ul li{
   }
 
   .menu-drawer__navigation {
-    padding: 20px 0;
+    padding: 0;
 
     @media screen and (min-width: 750px) {
     margin-top: var(--drawer-header-desktop-top);
@@ -1068,7 +1068,7 @@ nav.footer-block ul li{
     position: fixed;
     clip-path: inset(0 0 100% 0);
     visibility: hidden;
-    height: calc(100dvh - var(--header-bottom, 60px));
+    height: auto;
     width: 100vw;
     max-width: 100vw;
     z-index: var(--layer-menu-drawer);
@@ -1076,8 +1076,7 @@ nav.footer-block ul li{
     top: var(--header-bottom, 60px);
     padding: 0;
     background-color: var(--color-background);
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: clip;
     display: flex;
     border-top: 1px solid #DCDCDC;
     border-right: var(--style-border-drawer);
@@ -1171,9 +1170,6 @@ nav.footer-block ul li{
   .menu-drawer__inner-submenu {
     display: flex;
     flex-direction: column;
-    flex: 1;
-    min-height: 0;
-    overflow-y: auto;
 
     @media screen and (min-width: 750px) {
       margin-top: var(--drawer-header-desktop-top);
@@ -1221,6 +1217,7 @@ nav.footer-block ul li{
   }
 
   .menu-drawer__menu.has-submenu {
+    padding-block: 20px;
     margin-block-end: var(--margin-xs);
 
     @media screen and (min-width: 750px) {
@@ -1467,6 +1464,11 @@ nav.footer-block ul li{
     flex-shrink: 0;
   }
 
+  /* In childlists, match SVG wrapper height to the 45px span so all items are uniform */
+  .menu-drawer__menu--childlist .menu-drawer__menu-item > .svg-wrapper {
+    padding-block: 15px;
+  }
+
   .menu-drawer__list-item--divider .menu-drawer__menu-item > .svg-wrapper {
     padding-block: var(--padding-md);
   }
@@ -1481,7 +1483,8 @@ nav.footer-block ul li{
     position: absolute;
     width: 100%;
     top: 0;
-    height: 100%;
+    height: auto;
+    min-height: 100%;
     left: 0;
     background-color: var(--color-background);
     z-index: var(--layer-flat);
