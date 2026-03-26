@@ -1496,10 +1496,11 @@ nav.footer-block ul li{
     position: absolute;
     width: 100%;
     top: 0;
-    /* Explicit height instead of 100%: when the parent UL gets transform: translateX(-100%)
-       it becomes the CSS containing block, so height:100% resolves to the UL's auto content
-       height (not the drawer height), causing child items to be clipped. */
-    height: calc(100dvh - var(--header-bottom, 60px));
+    /* max-height instead of height: sizes to content but caps at viewport.
+       Avoids the transform containing-block problem (height:100% would resolve
+       to the transformed UL's content height, not the drawer height). */
+    max-height: calc(100dvh - var(--header-bottom, 60px));
+    overflow-y: auto;
     left: 0;
     background-color: var(--color-background);
     z-index: var(--layer-flat);
@@ -1511,7 +1512,7 @@ nav.footer-block ul li{
   }
 
   .header__drawer--desktop .menu-drawer__submenu {
-    height: 100vh;
+    max-height: 100vh;
   }
 
   /* Main menu slides out left when a submenu is active */
