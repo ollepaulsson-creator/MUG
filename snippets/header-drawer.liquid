@@ -1170,8 +1170,11 @@ nav.footer-block ul li{
   .menu-drawer__inner-submenu {
     display: flex;
     flex-direction: column;
-    /* No flex:1 / min-height:0 — parent submenu uses max-height + overflow-y:auto,
-       so the submenu itself scrolls. flex:1 with an auto-height parent collapses to 0. */
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    scrollbar-width: none;
+    &::-webkit-scrollbar { display: none; }
 
     @media screen and (min-width: 750px) {
       margin-top: var(--drawer-header-desktop-top);
@@ -1490,11 +1493,11 @@ nav.footer-block ul li{
     position: absolute;
     width: 100%;
     top: 0;
-    /* max-height instead of height: sizes to content but caps at viewport.
-       Avoids the transform containing-block problem (height:100% would resolve
-       to the transformed UL's content height, not the drawer height). */
-    max-height: calc(100dvh - var(--header-bottom, 60px));
-    overflow-y: auto;
+    /* fit-content(X): sizes to content but caps at X (viewport height).
+       - No overflow set here — setting overflow-y:auto would force overflow-x:auto,
+         which clips L3 grandchild submenus that extend to the right of L2.
+       - Scrolling is handled by .menu-drawer__inner-submenu inside. */
+    height: fit-content(calc(100dvh - var(--header-bottom, 60px)));
     left: 0;
     background-color: var(--color-background);
     z-index: var(--layer-flat);
@@ -1506,7 +1509,7 @@ nav.footer-block ul li{
   }
 
   .header__drawer--desktop .menu-drawer__submenu {
-    max-height: 100vh;
+    height: fit-content(100vh);
   }
 
   /* Main menu slides out left when a submenu is active */
