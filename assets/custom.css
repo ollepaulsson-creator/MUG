@@ -894,23 +894,43 @@ facet-status-component.facets__status {
 
 
 /* ── Zoom dialog video player: square with cover crop ── */
+.dialog-zoomed-gallery .product-media-container--video .product-media,
+.dialog-zoomed-gallery .product-media-container--external_video .product-media {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
 .dialog-zoomed-gallery .product-media-container--video deferred-media,
 .dialog-zoomed-gallery .product-media-container--external_video deferred-media {
-  aspect-ratio: 1 !important;
-  height: auto !important;
-  max-height: 80vh;
-  overflow: hidden;
+  width: 80vh !important;
+  height: 80vh !important;
+  max-width: 100% !important;
+  aspect-ratio: unset !important;
+  overflow: hidden !important;
+  position: relative !important;
+  flex-shrink: 0 !important;
 }
 
 .dialog-zoomed-gallery .product-media-container--video deferred-media video,
 .dialog-zoomed-gallery .product-media-container--video deferred-media iframe,
-.dialog-zoomed-gallery .product-media-container--video .deferred-media__poster-image,
+.dialog-zoomed-gallery .product-media-container--video .deferred-media__poster-button,
 .dialog-zoomed-gallery .product-media-container--external_video deferred-media video,
 .dialog-zoomed-gallery .product-media-container--external_video deferred-media iframe,
-.dialog-zoomed-gallery .product-media-container--external_video .deferred-media__poster-image {
-  object-fit: cover !important;
+.dialog-zoomed-gallery .product-media-container--external_video .deferred-media__poster-button {
+  position: absolute !important;
+  inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
+  object-fit: cover !important;
+  aspect-ratio: unset !important;
+}
+
+.dialog-zoomed-gallery .product-media-container--video .deferred-media__poster-image,
+.dialog-zoomed-gallery .product-media-container--external_video .deferred-media__poster-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
 }
 
 /* ── Zoom dialog thumbnails: square aspect ratio with cover crop ── */
@@ -918,11 +938,15 @@ facet-status-component.facets__status {
   width: var(--thumbnail-width) !important;
   height: var(--thumbnail-width) !important;
   overflow: hidden !important;
+  position: relative !important;
+  flex-shrink: 0 !important;
 }
 
 .dialog-thumbnails-list__thumbnail img {
+  position: absolute !important;
+  inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  aspect-ratio: unset !important;
   object-fit: cover !important;
+  aspect-ratio: unset !important;
 }
