@@ -869,3 +869,15 @@ facet-status-component.facets__status {
     right: auto !important;
     z-index: auto !important;
 }
+/* ── Zoom dialog mobile: center image vertically ── */
+@media screen and (max-width: 749px) {
+  .dialog-zoomed-gallery .product-media-container--image .product-media {
+    flex: none !important;
+    height: auto !important;
+    aspect-ratio: auto !important;
+  }
+
+  .dialog-zoomed-gallery .product-media-container--image .product-media__drag-zoom-wrapper {
+    align-items: center !important;
+  }
+}
