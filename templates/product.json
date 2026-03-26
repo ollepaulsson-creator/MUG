@@ -30,7 +30,7 @@
       "settings": {
         "enable": true,
         "nav_menu": "main-menu",
-        "home_label": "Home",
+        "home_label": "Start",
         "aria_label": "Breadcrumbs"
       }
     },
