@@ -361,14 +361,14 @@ scroll-hint.slideshow-controls__thumbnails-container::after {
 }
 
 /* Zoom dialog thumbnails */
+.dialog-thumbnails-list {
+  --thumbnail-width: 120px;
+}
 .dialog-thumbnails-list__thumbnail {
   border: none !important;
   outline: none !important;
   background: #f0f0f0 !important;
   isolation: isolate;
-}
-.dialog-thumbnails-list__thumbnail img {
-  mix-blend-mode: multiply;
 }
 .dialog-thumbnails-list__thumbnail[aria-selected='true'] {
   border: 1px solid #000000 !important;
