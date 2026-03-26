@@ -1,141 +1,118 @@
 {% comment %}
   Section: Breadcrumbs
   Usage: Add to templates where you want breadcrumbs. The section will auto-hide on index, cart, and list-collections.
+  Matches the CSS and HTML structure used by product/search page custom-liquid breadcrumbs.
 {% endcomment %}
 
 {% if section.settings.enable %}
   <style>
-    .section-breadcrumbs {
-      padding-inline: var(--page-margin, 40px);
-      max-width: var(--normal-page-width, 1400px);
-      margin-inline: auto;
-    }
     .breadcrumbs {
-      margin: 0 0 {{ section.settings.margin_bottom }}px;
-    }
-    .breadcrumbs__list {
-      list-style-type: none;
+      width: 100%;
+      font-size: 14px;
+      color: #000000;
+      padding: 15px;
       margin: 0;
-      padding: 0;
+      border-top: 1px solid #e5e5e5;
+      border-bottom: 1px solid #e5e5e5;
     }
-    .breadcrumbs__item {
-      display: inline-block;
-    }
-    .breadcrumbs__item:not(:last-child):after {
-      content: '/';
-      margin: 0 .35em;
-    }
-    .breadcrumbs__link {
-      {% if section.settings.underline_links %}text-decoration: underline;{% else %}text-decoration: none;{% endif %}
-    }
-    .breadcrumbs__link[aria-current="page"] {
-      color: inherit;
-      font-weight: normal;
+    .breadcrumbs a {
+      color: rgb(0 0 0 / 0.81);
       text-decoration: none;
     }
-    .breadcrumbs__link[aria-current="page"]:hover,
-    .breadcrumbs__link[aria-current="page"]:focus {
+    .breadcrumbs a:hover {
+      color: rgb(0 0 0 / 0.81);
       text-decoration: underline;
+    }
+    .breadcrumbs span {
+      color: black;
+      font-family: "Inter Variable", sans-serif;
+      font-feature-settings: 'ss07' 1;
+      font-weight: 400;
+    }
+    .breadcrumbs .divider {
+      margin: 0 6px;
+      color: #C1C1C1;
+    }
+    .breadcrumbs a,
+    .breadcrumbs span,
+    .breadcrumbs .divider {
+      display: inline;
     }
   </style>
 
   {%- unless template == 'index' or template == 'cart' or template == 'list-collections' -%}
     {%- assign t = template | split: '.' | first -%}
 
-    {% if section.settings.wrap_in_container %}<div class="{{ section.settings.container_class | default: 'page-width' }}">{% endif %}
     <nav class="breadcrumbs" role="navigation" aria-label="{{ section.settings.aria_label | escape }}">
-      <ol class="breadcrumbs__list">
-        <li class="breadcrumbs__item">
-          <a class="breadcrumbs__link" href="{{ routes.root_url }}">{{ section.settings.home_label | default: 'Home' }}</a>
-        </li>
+      <a href="{{ routes.root_url }}">{{ section.settings.home_label | default: 'Home' }}</a>
 
-        {%- case t -%}
-          {%- when 'page' -%}
-            <li class="breadcrumbs__item">
-              <a class="breadcrumbs__link" href="{{ page.url }}" aria-current="page">{{ page.title }}</a>
-            </li>
+      {%- case t -%}
+        {%- when 'page' -%}
+          <span class="divider">/</span>
+          <span>{{ page.title }}</span>
 
-          {%- when 'product' -%}
-            {%- comment -%}
-              Respect navigation context: prefer collection from URL param, then any associated collection.
-            {%- endcomment -%}
-            {%- assign crumb_collection = nil -%}
-            {%- if request.params.collection != blank -%}
-              {%- assign crumb_collection = collections[request.params.collection] -%}
-            {%- endif -%}
-            {%- if crumb_collection == nil and collection and collection.handle -%}
-              {%- assign crumb_collection = collection -%}
-            {%- endif -%}
-            {%- if crumb_collection != nil -%}
-              <li class="breadcrumbs__item">
-                <a class="breadcrumbs__link" href="{{ crumb_collection.url }}">{{ crumb_collection.title }}</a>
-              </li>
-            {%- elsif product.type != blank -%}
-              <li class="breadcrumbs__item">
-                <a class="breadcrumbs__link" href="{{ routes.all_products_collection_url }}?filter.p.product_type={{ product.type | url_encode }}">{{ product.type }}</a>
-              </li>
-            {%- endif -%}
-            <li class="breadcrumbs__item">
-              <a class="breadcrumbs__link" href="{{ product.url }}" aria-current="page">{{ product.title }}</a>
-            </li>
+        {%- when 'product' -%}
+          {%- assign crumb_collection = nil -%}
+          {%- if request.params.collection != blank -%}
+            {%- assign crumb_collection = collections[request.params.collection] -%}
+          {%- endif -%}
+          {%- if crumb_collection == nil and collection and collection.handle -%}
+            {%- assign crumb_collection = collection -%}
+          {%- endif -%}
+          {%- if crumb_collection != nil -%}
+            <span class="divider">/</span>
+            <a href="{{ crumb_collection.url }}">{{ crumb_collection.title }}</a>
+          {%- elsif product.type != blank -%}
+            <span class="divider">/</span>
+            <a href="{{ routes.all_products_collection_url }}?filter.p.product_type={{ product.type | url_encode }}">{{ product.type }}</a>
+          {%- endif -%}
+          <span class="divider">/</span>
+          <span>{{ product.title }}</span>
 
-          {%- when 'collection' -%}
-            {%- if collection.handle -%}
-              {%- if current_tags -%}
-                <li class="breadcrumbs__item">
-                  <a class="breadcrumbs__link" href="{{ collection.url }}">{{ collection.title }}</a>
-                </li>
-                <li class="breadcrumbs__item">
-                  {%- capture tag_url -%}{{ collection.url }}/{{ current_tags | join: "+" }}{%- endcapture -%}
-                  <a class="breadcrumbs__link" href="{{ tag_url }}" aria-current="page">{{ current_tags | join: " + " }}</a>
-                </li>
-              {%- else -%}
-                <li class="breadcrumbs__item">
-                  <a class="breadcrumbs__link" href="{{ collection.url }}" aria-current="page">{{ collection.title }}</a>
-                </li>
-              {%- endif -%}
-            {%- endif -%}
-
-          {%- when 'blog' -%}
+        {%- when 'collection' -%}
+          {%- if collection.handle -%}
             {%- if current_tags -%}
-              <li class="breadcrumbs__item">
-                <a class="breadcrumbs__link" href="{{ blog.url }}">{{ blog.title }}</a>
-              </li>
-              <li class="breadcrumbs__item">
-                <a class="breadcrumbs__link" href="{{ blog.url }}/tagged/{{ current_tags | first | handle }}" aria-current="page">{{ current_tags | join: " + " }}</a>
-              </li>
+              <span class="divider">/</span>
+              <a href="{{ collection.url }}">{{ collection.title }}</a>
+              <span class="divider">/</span>
+              {%- capture tag_url -%}{{ collection.url }}/{{ current_tags | join: "+" }}{%- endcapture -%}
+              <span>{{ current_tags | join: " + " }}</span>
             {%- else -%}
-              <li class="breadcrumbs__item">
-                <a class="breadcrumbs__link" href="{{ blog.url }}" aria-current="page">{{ blog.title }}</a>
-              </li>
+              <span class="divider">/</span>
+              <span>{{ collection.title }}</span>
             {%- endif -%}
+          {%- endif -%}
 
-          {%- when 'article' -%}
-            <li class="breadcrumbs__item">
-              <a class="breadcrumbs__link" href="{{ blog.url }}">{{ blog.title }}</a>
-            </li>
-            <li class="breadcrumbs__item">
-              <a class="breadcrumbs__link" href="{{ article.url }}" aria-current="page">{{ article.title }}</a>
-            </li>
-
-          {%- when 'search' -%}
-            <li class="breadcrumbs__item">
-              <a class="breadcrumbs__link" href="{{ request.path }}" aria-current="page">Sökning: "{{ search.terms }}"</a>
-            </li>
-
-          {%- when '404' -%}
-            <li class="breadcrumbs__item">
-              <span class="breadcrumbs__link" aria-current="page">404</span>
-            </li>
-
+        {%- when 'blog' -%}
+          {%- if current_tags -%}
+            <span class="divider">/</span>
+            <a href="{{ blog.url }}">{{ blog.title }}</a>
+            <span class="divider">/</span>
+            <span>{{ current_tags | join: " + " }}</span>
           {%- else -%}
-            <li class="breadcrumbs__item">
-              <a class="breadcrumbs__link" href="{{ request.path }}" aria-current="page">{{ page_title }}</a>
-            </li>
-        {%- endcase -%}
-      </ol>
+            <span class="divider">/</span>
+            <span>{{ blog.title }}</span>
+          {%- endif -%}
+
+        {%- when 'article' -%}
+          <span class="divider">/</span>
+          <a href="{{ blog.url }}">{{ blog.title }}</a>
+          <span class="divider">/</span>
+          <span>{{ article.title }}</span>
+
+        {%- when 'search' -%}
+          <span class="divider">/</span>
+          <span>Sökning: "{{ search.terms }}"</span>
+
+        {%- when '404' -%}
+          <span class="divider">/</span>
+          <span>404</span>
+
+        {%- else -%}
+          <span class="divider">/</span>
+          <span>{{ page_title }}</span>
+      {%- endcase -%}
     </nav>
-    {% if section.settings.wrap_in_container %}</div>{% endif %}
   {%- endunless -%}
 {% endif %}
 
@@ -162,34 +139,6 @@
       "id": "aria_label",
       "label": "ARIA label",
       "default": "Breadcrumbs"
-    },
-    {
-      "type": "checkbox",
-      "id": "underline_links",
-      "label": "Underline links",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "wrap_in_container",
-      "label": "Wrap in page-width container",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "container_class",
-      "label": "Custom container class (optional)",
-      "default": "page-width",
-      "info": "Used when \"Wrap in page-width container\" is enabled."
-    },
-    {
-      "type": "range",
-      "id": "margin_bottom",
-      "label": "Bottom spacing (px)",
-      "min": 0,
-      "max": 80,
-      "step": 4,
-      "default": 32
     }
   ],
   "presets": [
