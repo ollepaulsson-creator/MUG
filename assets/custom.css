@@ -892,3 +892,16 @@ facet-status-component.facets__status {
   }
 }
 
+
+/* ── Zoom dialog thumbnails: square aspect ratio with cover crop ── */
+.dialog-thumbnails-list__thumbnail {
+  aspect-ratio: 1 !important;
+  overflow: hidden;
+}
+
+.dialog-thumbnails-list__thumbnail img {
+  aspect-ratio: 1 !important;
+  width: 100%;
+  height: 100%;
+  object-fit: cover !important;
+}
