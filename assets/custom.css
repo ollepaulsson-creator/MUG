@@ -252,19 +252,19 @@ h4.predictive-search-results__title {
     background: #f7f7f7;
 }
 .product-media:hover {
-    background: #ededed;
+    background: unset;
 }
 .slideshow-controls__thumbnail:hover {
-    background: #ededed;
+    background: unset;
 }
 .product-information__media .product-media:hover {
-    background: #f7f7f7;
+    background: unset;
 }
 .resource-card__media:hover {
-    background: #ededed!important;
+    background: unset !important;
 }
 .search-page .product-image:hover {
-    background: #ededed!important;
+    background: unset !important;
 }
 .product-grid img {
     padding: 0px!important;
