@@ -59,6 +59,28 @@
           {%- if crumb_collection == nil and collection and collection.handle -%}
             {%- assign crumb_collection = collection -%}
           {%- endif -%}
+          {%- comment -%} Fallback: find a product collection that exists in the nav menu {%- endcomment -%}
+          {%- if crumb_collection == nil and section.settings.nav_menu != blank -%}
+            {%- assign nav_fallback = linklists[section.settings.nav_menu] -%}
+            {%- for pc in product.collections -%}
+              {%- if crumb_collection != nil -%}{% break %}{%- endif -%}
+              {%- for l1 in nav_fallback.links -%}
+                {%- if crumb_collection != nil -%}{% break %}{%- endif -%}
+                {%- for l2 in l1.links -%}
+                  {%- if l2.url == pc.url -%}
+                    {%- assign crumb_collection = pc -%}
+                    {%- break -%}
+                  {%- endif -%}
+                  {%- for l3 in l2.links -%}
+                    {%- if l3.url == pc.url -%}
+                      {%- assign crumb_collection = pc -%}
+                      {%- break -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- endfor -%}
+              {%- endfor -%}
+            {%- endfor -%}
+          {%- endif -%}
           {%- if crumb_collection != nil -%}
             {%- comment -%} Walk the nav menu to find parent(s) of this collection {%- endcomment -%}
             {%- assign prod_parent_title = nil -%}
