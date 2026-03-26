@@ -251,20 +251,14 @@ h4.predictive-search-results__title {
 .search-page .product-image {
     background: #f7f7f7;
 }
-.product-media:hover {
-    background: unset;
-}
 .slideshow-controls__thumbnail:hover {
-    background: unset;
-}
-.product-information__media .product-media:hover {
-    background: unset;
+    background: #f7f7f7;
 }
 .resource-card__media:hover {
-    background: unset !important;
+    background: #f7f7f7 !important;
 }
 .search-page .product-image:hover {
-    background: unset !important;
+    background: #f7f7f7 !important;
 }
 .product-grid img {
     padding: 0px!important;
