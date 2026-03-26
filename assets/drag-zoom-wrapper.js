@@ -11,11 +11,11 @@ const DRAG_THRESHOLD = 10;
 export class DragZoomWrapper extends HTMLElement {
   #controller = new AbortController();
   /** @type {number} */
-  #scale = DEFAULT_ZOOM;
+  #scale = MIN_ZOOM;
   /** @type {number} */
   #initialDistance = 0;
   /** @type {number} */
-  #startScale = DEFAULT_ZOOM;
+  #startScale = MIN_ZOOM;
   /** @type {Point} */
   #translate = { x: 0, y: 0 };
   /** @type {Point} */
@@ -461,8 +461,8 @@ export class DragZoomWrapper extends HTMLElement {
    */
   #resetZoom() {
     // Reset scale and translation to defaults
-    this.#scale = DEFAULT_ZOOM;
-    this.#startScale = DEFAULT_ZOOM;
+    this.#scale = MIN_ZOOM;
+    this.#startScale = MIN_ZOOM;
     this.#translate.x = 0;
     this.#translate.y = 0;
 
@@ -475,7 +475,7 @@ export class DragZoomWrapper extends HTMLElement {
     this.#hasDraggedBeyondThreshold = false;
 
     // Update CSS properties to reflect reset state
-    this.style.setProperty('--drag-zoom-scale', DEFAULT_ZOOM.toString());
+    this.style.setProperty('--drag-zoom-scale', MIN_ZOOM.toString());
     this.style.setProperty('--drag-zoom-translate-x', '0px');
     this.style.setProperty('--drag-zoom-translate-y', '0px');
   }
