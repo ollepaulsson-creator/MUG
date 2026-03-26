@@ -620,6 +620,7 @@
       flex: 0 0 100%;
       scroll-snap-align: start;
       position: relative;
+      height: 100%;
     }
 
     .dialog-zoomed-gallery .product-media-container--image .product-media {
@@ -654,6 +655,7 @@
       overflow: scroll;
       scrollbar-width: none;
       justify-content: center;
+      align-items: center;
 
       &::-webkit-scrollbar {
         display: none;
@@ -665,6 +667,9 @@
 
       object-fit: var(--product-media-fit);
       overflow: hidden;
+      width: 100%;
+      height: auto;
+      max-height: 100%;
       transform: scale(var(--drag-zoom-scale))
         translate(var(--drag-zoom-translate-x, 0), var(--drag-zoom-translate-y, 0));
     }
