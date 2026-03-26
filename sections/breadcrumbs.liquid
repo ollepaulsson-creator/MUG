@@ -44,7 +44,7 @@
     {%- assign t = template | split: '.' | first -%}
 
     <nav class="breadcrumbs" role="navigation" aria-label="{{ section.settings.aria_label | escape }}">
-      <a href="{{ routes.root_url }}">{{ section.settings.home_label | default: 'Home' }}</a>
+      <a href="{{ routes.root_url }}">{{ section.settings.home_label | default: 'Start' }}</a>
 
       {%- case t -%}
         {%- when 'page' -%}
@@ -224,7 +224,7 @@
       "type": "text",
       "id": "home_label",
       "label": "Home label",
-      "default": "Home"
+      "default": "Start"
     },
     {
       "type": "text",
