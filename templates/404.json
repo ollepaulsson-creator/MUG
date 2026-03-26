@@ -8,19 +8,12 @@
  * ------------------------------------------------------------
  */{
   "sections": {
-    "breadcrumbs": {
-      "type": "breadcrumbs",
-      "settings": {
-        "home_label": "Start"
-      }
-    },
     "main": {
       "type": "main-404",
       "settings": {}
     }
   },
   "order": [
-    "breadcrumbs",
     "main"
   ]
 }
