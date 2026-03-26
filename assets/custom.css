@@ -460,17 +460,19 @@ ul.pagination__list {
   padding: 10px 16px;
   background: black;
   color: white;
+  border-radius: 2px;
+  width: auto;
+  height: auto;
+  aspect-ratio: unset;
 }
-@media(min-width:769px){
-    li.pagination__item.pagination__item--current {
-        padding-left: 16px;
-        padding-right: 16px;
-        border-radius: 2px;
-        padding-top: 8px;
-        margin-top: 0;
-        padding-bottom: 7px;
-        margin-bottom: 1px;
-    }
+li.pagination__item.pagination__item--current {
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 2px;
+    padding-top: 8px;
+    margin-top: 0;
+    padding-bottom: 7px;
+    margin-bottom: 1px;
 }
 
 .facets-toggle {
