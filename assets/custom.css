@@ -896,3 +896,8 @@ facet-status-component.facets__status {
     aspect-ratio: auto !important;
   }
 }
+
+/* ── Remove zoom-in cursor on product page images ── */
+.product-media-container__zoom-button {
+  cursor: default;
+}
