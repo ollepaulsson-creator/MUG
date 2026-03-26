@@ -303,7 +303,7 @@ scroll-hint.slideshow-controls__thumbnails-container {
 
 slideshow-controls {
   border-bottom: none !important;
-  background: #ededed;
+  background: #D9D9D9;
 }
 
 /* Kill scroll-hint gradient */
