@@ -42,7 +42,7 @@
     }
   </style>
 
-  {%- unless template == 'index' or template == 'cart' or template == 'list-collections' or template == '404' -%}
+  {%- unless template == 'index' or template == 'cart' or template == 'list-collections' -%}
     {%- assign t = template | split: '.' | first -%}
 
     {% if section.settings.wrap_in_container %}<div class="{{ section.settings.container_class | default: 'page-width' }}">{% endif %}
@@ -124,6 +124,11 @@
           {%- when 'search' -%}
             <li class="breadcrumbs__item">
               <a class="breadcrumbs__link" href="{{ request.path }}" aria-current="page">Sökning: "{{ search.terms }}"</a>
+            </li>
+
+          {%- when '404' -%}
+            <li class="breadcrumbs__item">
+              <span class="breadcrumbs__link" aria-current="page">404</span>
             </li>
 
           {%- else -%}
