@@ -472,11 +472,11 @@
                   %}
                   {{
   media.preview_image
-  | image_url: width: 960
+  | image_url: width: 1920
   | image_tag:
     loading: 'lazy',
     sizes: 'auto, 220, (min-width: 750px) 320',
-    widths: '160, 240, 320, 480, 960',
+    widths: '160, 240, 320, 480, 960, 1920',
     alt: media.alt,
     style: focal_point_style
   | escape
