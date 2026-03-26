@@ -1253,9 +1253,12 @@ nav.footer-block ul li{
   }
 
   .menu-drawer__list-item--deep .menu-drawer__list-item,
-  .menu-drawer__list-item--flat .menu-drawer__list-item,
-  .menu-drawer__menu--childlist > .menu-drawer__list-item {
+  .menu-drawer__list-item--flat .menu-drawer__list-item {
     min-height: auto;
+  }
+
+  .menu-drawer__menu--childlist > .menu-drawer__list-item {
+    min-height: calc(2 * var(--padding-lg) + var(--icon-size-xs));
   }
 
   .menu-drawer__menu .menu-drawer__list-item--flat {
