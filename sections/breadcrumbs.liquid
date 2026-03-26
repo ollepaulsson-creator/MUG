@@ -90,19 +90,23 @@
             {%- assign nav = linklists[section.settings.nav_menu] -%}
             {%- if nav != blank -%}
               {%- for l1 in nav.links -%}
+                {%- if prod_parent_title != nil -%}{%- break -%}{%- endif -%}
                 {%- for l2 in l1.links -%}
+                  {%- if prod_parent_title != nil -%}{%- break -%}{%- endif -%}
                   {%- if l2.url == crumb_collection.url -%}
                     {%- assign prod_parent_title = l1.title -%}
                     {%- assign prod_parent_url = l1.url -%}
+                  {%- else -%}
+                    {%- for l3 in l2.links -%}
+                      {%- if l3.url == crumb_collection.url -%}
+                        {%- assign prod_grandparent_title = l1.title -%}
+                        {%- assign prod_grandparent_url = l1.url -%}
+                        {%- assign prod_parent_title = l2.title -%}
+                        {%- assign prod_parent_url = l2.url -%}
+                        {%- break -%}
+                      {%- endif -%}
+                    {%- endfor -%}
                   {%- endif -%}
-                  {%- for l3 in l2.links -%}
-                    {%- if l3.url == crumb_collection.url -%}
-                      {%- assign prod_grandparent_title = l1.title -%}
-                      {%- assign prod_grandparent_url = l1.url -%}
-                      {%- assign prod_parent_title = l2.title -%}
-                      {%- assign prod_parent_url = l2.url -%}
-                    {%- endif -%}
-                  {%- endfor -%}
                 {%- endfor -%}
               {%- endfor -%}
             {%- endif -%}
@@ -143,19 +147,23 @@
             {%- assign nav = linklists[section.settings.nav_menu] -%}
             {%- if nav != blank -%}
               {%- for l1 in nav.links -%}
+                {%- if crumb_parent_title != nil -%}{%- break -%}{%- endif -%}
                 {%- for l2 in l1.links -%}
+                  {%- if crumb_parent_title != nil -%}{%- break -%}{%- endif -%}
                   {%- if l2.url == collection.url -%}
                     {%- assign crumb_parent_title = l1.title -%}
                     {%- assign crumb_parent_url = l1.url -%}
+                  {%- else -%}
+                    {%- for l3 in l2.links -%}
+                      {%- if l3.url == collection.url -%}
+                        {%- assign crumb_grandparent_title = l1.title -%}
+                        {%- assign crumb_grandparent_url = l1.url -%}
+                        {%- assign crumb_parent_title = l2.title -%}
+                        {%- assign crumb_parent_url = l2.url -%}
+                        {%- break -%}
+                      {%- endif -%}
+                    {%- endfor -%}
                   {%- endif -%}
-                  {%- for l3 in l2.links -%}
-                    {%- if l3.url == collection.url -%}
-                      {%- assign crumb_grandparent_title = l1.title -%}
-                      {%- assign crumb_grandparent_url = l1.url -%}
-                      {%- assign crumb_parent_title = l2.title -%}
-                      {%- assign crumb_parent_url = l2.url -%}
-                    {%- endif -%}
-                  {%- endfor -%}
                 {%- endfor -%}
               {%- endfor -%}
             {%- endif -%}
