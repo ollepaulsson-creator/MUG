@@ -893,6 +893,26 @@ facet-status-component.facets__status {
 }
 
 
+/* ── Zoom dialog video player: square with cover crop ── */
+.dialog-zoomed-gallery .product-media-container--video deferred-media,
+.dialog-zoomed-gallery .product-media-container--external_video deferred-media {
+  aspect-ratio: 1 !important;
+  height: auto !important;
+  max-height: 80vh;
+  overflow: hidden;
+}
+
+.dialog-zoomed-gallery .product-media-container--video deferred-media video,
+.dialog-zoomed-gallery .product-media-container--video deferred-media iframe,
+.dialog-zoomed-gallery .product-media-container--video .deferred-media__poster-image,
+.dialog-zoomed-gallery .product-media-container--external_video deferred-media video,
+.dialog-zoomed-gallery .product-media-container--external_video deferred-media iframe,
+.dialog-zoomed-gallery .product-media-container--external_video .deferred-media__poster-image {
+  object-fit: cover !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
 /* ── Zoom dialog thumbnails: square aspect ratio with cover crop ── */
 .dialog-thumbnails-list__thumbnail {
   width: var(--thumbnail-width) !important;
