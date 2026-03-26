@@ -11,6 +11,7 @@
   "sections": {
     "custom_liquid_jJadKM": {
       "type": "custom-liquid",
+      "disabled": true,
       "custom_css": [],
       "name": "t:names.custom_liquid",
       "settings": {
@@ -25,16 +26,12 @@
     },
     "breadcrumbs_GrLYt4": {
       "type": "breadcrumbs",
-      "disabled": true,
       "name": "Breadcrumbs",
       "settings": {
         "enable": true,
+        "nav_menu": "main-menu",
         "home_label": "Home",
-        "aria_label": "Breadcrumbs",
-        "underline_links": true,
-        "wrap_in_container": true,
-        "container_class": "page-width",
-        "margin_bottom": 32
+        "aria_label": "Breadcrumbs"
       }
     },
     "main": {
