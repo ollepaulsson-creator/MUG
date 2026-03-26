@@ -869,28 +869,30 @@ facet-status-component.facets__status {
     right: auto !important;
     z-index: auto !important;
 }
-/* ── Zoom dialog: center image vertically (all viewport sizes) ── */
-zoom-dialog dialog {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-}
+/* ── Zoom dialog mobile: center image vertically ── */
+@media screen and (max-width: 749px) {
+  zoom-dialog dialog {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
 
-.dialog-zoomed-gallery {
-  height: auto !important;
-  flex-shrink: 0 !important;
-}
+  .dialog-zoomed-gallery {
+    height: auto !important;
+    flex-shrink: 0 !important;
+  }
 
-.dialog-zoomed-gallery .product-media-container {
-  height: auto !important;
-}
+  .dialog-zoomed-gallery .product-media-container {
+    height: auto !important;
+  }
 
-.dialog-zoomed-gallery .product-media-container--image .product-media__drag-zoom-wrapper {
-  height: auto !important;
-}
+  .dialog-zoomed-gallery .product-media-container--image .product-media__drag-zoom-wrapper {
+    height: auto !important;
+  }
 
-.dialog-zoomed-gallery .product-media-container--image .product-media {
-  flex: none !important;
-  height: auto !important;
-  aspect-ratio: auto !important;
+  .dialog-zoomed-gallery .product-media-container--image .product-media {
+    flex: none !important;
+    height: auto !important;
+    aspect-ratio: auto !important;
+  }
 }
