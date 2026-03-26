@@ -1170,11 +1170,8 @@ nav.footer-block ul li{
   .menu-drawer__inner-submenu {
     display: flex;
     flex-direction: column;
-    flex: 1;
-    min-height: 0;
-    overflow-y: auto;
-    scrollbar-width: none;
-    &::-webkit-scrollbar { display: none; }
+    /* No flex:1 / min-height:0 — parent submenu uses max-height + overflow-y:auto,
+       so the submenu itself scrolls. flex:1 with an auto-height parent collapses to 0. */
 
     @media screen and (min-width: 750px) {
       margin-top: var(--drawer-header-desktop-top);
