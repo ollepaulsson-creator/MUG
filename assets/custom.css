@@ -894,36 +894,58 @@ facet-status-component.facets__status {
 
 
 /* ── Zoom dialog video player: square with cover crop ── */
-/* deferred-media is position:absolute (set by theme) relative to li.product-media-container.
-   Center it with translate and give it explicit square dimensions. */
-.dialog-zoomed-gallery .product-media-container--video deferred-media,
-.dialog-zoomed-gallery .product-media-container--external_video deferred-media {
-  width: min(80vh, 90vw) !important;
-  height: min(80vh, 90vw) !important;
+/* Make the li a flex container so .product-media can be centered */
+.dialog-zoomed-gallery .product-media-container--video,
+.dialog-zoomed-gallery .product-media-container--external_video {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* .product-media becomes the square positioned container */
+.dialog-zoomed-gallery .product-media-container--video .product-media,
+.dialog-zoomed-gallery .product-media-container--external_video .product-media {
+  width: 80vh !important;
+  max-width: 90vw !important;
+  height: 80vh !important;
+  max-height: 90vw !important;
+  flex: none !important;
+  position: relative !important;
   aspect-ratio: unset !important;
   overflow: hidden !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
 }
 
-.dialog-zoomed-gallery .product-media-container--video .deferred-media__poster-button,
-.dialog-zoomed-gallery .product-media-container--external_video .deferred-media__poster-button {
-  aspect-ratio: unset !important;
-}
-
-.dialog-zoomed-gallery .product-media-container--video .deferred-media__poster-image,
-.dialog-zoomed-gallery .product-media-container--external_video .deferred-media__poster-image {
+/* deferred-media fills the square .product-media */
+.dialog-zoomed-gallery .product-media-container--video deferred-media,
+.dialog-zoomed-gallery .product-media-container--external_video deferred-media {
+  position: absolute !important;
+  inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  object-fit: cover !important;
+  aspect-ratio: unset !important;
+  overflow: hidden !important;
+  transform: none !important;
+}
+
+/* poster button fills deferred-media */
+.dialog-zoomed-gallery .product-media-container--video .deferred-media__poster-button,
+.dialog-zoomed-gallery .product-media-container--external_video .deferred-media__poster-button {
+  width: 100% !important;
+  height: 100% !important;
   aspect-ratio: unset !important;
 }
 
+/* poster image and video/iframe: cover-crop to fill */
+.dialog-zoomed-gallery .product-media-container--video .deferred-media__poster-image,
+.dialog-zoomed-gallery .product-media-container--external_video .deferred-media__poster-image,
 .dialog-zoomed-gallery .product-media-container--video deferred-media iframe,
 .dialog-zoomed-gallery .product-media-container--video deferred-media video,
 .dialog-zoomed-gallery .product-media-container--external_video deferred-media iframe,
 .dialog-zoomed-gallery .product-media-container--external_video deferred-media video {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
   object-fit: cover !important;
   aspect-ratio: unset !important;
 }
