@@ -140,11 +140,23 @@
         on:click="/showDeferredMedia"
         style="--video-aspect-ratio: {{ video.aspect_ratio }}"
       >
-        {{
-          video_preview_image
-          | image_url: width: 3840
-          | image_tag: widths: widths, sizes: sizes, loading: loading, class: 'deferred-media__poster-image'
-        }}
+        {% if video.host == 'youtube' and video.external_id != blank %}
+          <img
+            src="https://i.ytimg.com/vi/{{ video.external_id }}/maxresdefault.jpg"
+            onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/{{ video.external_id }}/sddefault.jpg'"
+            class="deferred-media__poster-image"
+            alt="{{ video_alt | escape }}"
+            loading="{{ loading | default: 'lazy' }}"
+            width="1280"
+            height="720"
+          >
+        {% else %}
+          {{
+            video_preview_image
+            | image_url: width: 3840
+            | image_tag: widths: widths, sizes: sizes, loading: loading, class: 'deferred-media__poster-image'
+          }}
+        {% endif %}
 
         <span class="deferred-media__poster-icon icon-play">
           <span class="visually-hidden">{{ 'accessibility.play_video' | t }}</span>
