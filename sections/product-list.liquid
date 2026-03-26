@@ -27,6 +27,7 @@
     {% if section.settings.collection != blank and shop.products_count != 0 %}
       {% paginate section.settings.collection.products by max_items %}
         {% for product in section.settings.collection.products limit: max_items %}
+          {% unless product.available %}{% continue %}{% endunless %}
           <div
             class="resource-list__item"
           >
