@@ -1000,12 +1000,6 @@ nav.footer-block ul li{
 
   .menu-drawer__navigation {
     padding: 0;
-    /* Fill the drawer height so the footer is pushed off-screen (hidden).
-       Scrolling happens here, not on the outer drawer. */
-    flex: 0 0 100%;
-    overflow-y: auto;
-    scrollbar-width: none;
-    &::-webkit-scrollbar { display: none; }
 
     @media screen and (min-width: 750px) {
     margin-top: var(--drawer-header-desktop-top);
@@ -1082,7 +1076,10 @@ nav.footer-block ul li{
     top: var(--header-bottom, 60px);
     padding: 0;
     background-color: var(--color-background);
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    &::-webkit-scrollbar { display: none; }
     display: flex;
     border-top: 1px solid #DCDCDC;
     border-right: var(--style-border-drawer);
@@ -1166,11 +1163,8 @@ nav.footer-block ul li{
   }
 
   .menu-drawer__navigation-container {
-    display: grid;
-    grid-template-rows: 1fr auto;
-    align-content: space-between;
-    overflow-y: auto;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   .menu-drawer__inner-submenu {
