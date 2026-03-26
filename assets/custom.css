@@ -905,10 +905,8 @@ facet-status-component.facets__status {
 /* .product-media becomes the square positioned container */
 .dialog-zoomed-gallery .product-media-container--video .product-media,
 .dialog-zoomed-gallery .product-media-container--external_video .product-media {
-  width: 80vh !important;
-  max-width: 90vw !important;
-  height: 80vh !important;
-  max-height: 90vw !important;
+  width: min(95vh, 95vw) !important;
+  height: min(95vh, 95vw) !important;
   flex: none !important;
   position: relative !important;
   aspect-ratio: unset !important;
