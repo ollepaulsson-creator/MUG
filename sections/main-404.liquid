@@ -1,6 +1,9 @@
 {% stylesheet %}
   .error-page {
     padding-block: 80px;
+    padding-inline: var(--page-margin, 40px);
+    max-width: var(--normal-page-width, 1400px);
+    margin-inline: auto;
   }
   .error-page__inner {
     display: flex;
@@ -27,20 +30,17 @@
   }
 {% endstylesheet %}
 
-<section class="section-wrapper">
-  <div class="error-page page-width">
+<section>
+  <div class="error-page">
     <div class="error-page__inner">
       <div class="error-page__image">
         <img
           src="{{ 'mug-404.jpg' | asset_url }}"
           alt="MUG skylt"
-          loading="lazy"
           width="500"
         >
       </div>
-      <div class="text-block">
-        <h1>Här blev det fel! – Sidan saknas (404)</h1>
-      </div>
+      <h1>Här blev det fel! – Sidan saknas (404)</h1>
       <p>
         Sidan du letar efter verkar saknas. Använd vår navigering ovan eller
         <a href="{{ routes.root_url }}">klicka här</a> för att återgå till startsidan.
