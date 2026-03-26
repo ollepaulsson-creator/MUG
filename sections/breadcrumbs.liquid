@@ -5,6 +5,11 @@
 
 {% if section.settings.enable %}
   <style>
+    .section-breadcrumbs {
+      padding-inline: var(--page-margin, 40px);
+      max-width: var(--normal-page-width, 1400px);
+      margin-inline: auto;
+    }
     .breadcrumbs {
       margin: 0 0 {{ section.settings.margin_bottom }}px;
     }
