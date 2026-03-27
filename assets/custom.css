@@ -77,6 +77,15 @@
   text-decoration: underline;
 }
 
+body a[href*="/title"],
+body .tmenu_masonry_col:first-child .tmenu_item_layout_text a[href*="/pages"] {
+  font-size: 22px !important;
+  font-weight: 600 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: 28px !important;
+}
+
 /* ── Uppercase category headers ── */
 .tmenu_wrapper .tmenu_item_layout_text.tmenu_item_display_header > .tmenu_item_link {
   font-size: 11px !important;
