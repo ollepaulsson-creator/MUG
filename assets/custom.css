@@ -48,7 +48,7 @@
 /* ── Separators between masonry columns ── */
 .tmenu_masonry_col:not(:last-child) {
   border-right: none !important;
-  padding-right: 24px !important;
+  padding-right: 0px !important;
 }
 .tmenu_masonry_col + .tmenu_masonry_col {
   padding-left: 24px !important;
