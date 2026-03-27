@@ -72,7 +72,7 @@
   text-decoration: underline !important;
 }
 
-.tmenu_item_content_alignment_left {
+body .tmenu_item_content_alignment_left {
   text-align: left !important;
   text-decoration: underline;
 }
