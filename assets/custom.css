@@ -205,7 +205,7 @@ body .tmenu_image > img {
 }
 
 /* ── Responsive: 5-column mega menu collapses middle 3 into 2 rows ── */
-@media screen and (min-width: 1025px) and (max-width: 1280px) {
+@media screen and (min-width: 920px) and (max-width: 1280px) {
   .tmenu_masonry_row {
     display: grid !important;
     grid-template-columns: minmax(0, auto) 1fr 1fr minmax(0, auto) !important;
