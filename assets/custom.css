@@ -86,8 +86,14 @@ body .tmenu_masonry_col:first-child .tmenu_item_layout_text a[href*="/pages"] {
   line-height: 28px !important;
 }
 
-.tmenu_item--root .tmenu_item_display_header > .tmenu_item_link {
+.tmenu_item--root .tmenu_item_display_header > .tmenu_item_link,
+.tmenu_wrapper .tmenu_item--root .tmenu_item_display_header > .tmenu_item_link,
+body .tmenu_wrapper .tmenu_item--root .tmenu_item_display_header > .tmenu_item_link {
   border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  border-right: none !important;
 }
 
 body .tmenu_item--root .tmenu_item_display_header > .tmenu_item_link > .tmenu_item_text {
