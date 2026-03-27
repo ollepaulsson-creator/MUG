@@ -972,8 +972,7 @@ facet-status-component.facets__status {
   }
 }
 
-.cart-drawer__heading,
-span.cart-drawer__heading.h3.cart-drawer__heading--empty {
+.cart-drawer__heading {
     font-size: 14px !important;
     font-weight: 400 !important;
     letter-spacing: 2px !important;
