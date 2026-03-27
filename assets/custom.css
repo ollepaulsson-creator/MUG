@@ -972,6 +972,13 @@ facet-status-component.facets__status {
   }
 }
 
+.cart-drawer__heading {
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+}
+
 .cart__checkout-button--disabled {
     background-color: #000000 !important;
     color: #ffffff !important;
