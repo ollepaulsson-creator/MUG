@@ -580,7 +580,6 @@ a.cart-items__media-container {
 }
 .cart-drawer__heading, h3 {
     font-size: 14px!important;
-    letter-spacing: 1px!important;
     text-transform: uppercase!important;
     font-weight: 400!important;
 }
