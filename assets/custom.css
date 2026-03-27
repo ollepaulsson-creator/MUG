@@ -204,6 +204,36 @@ body .tmenu_image > img {
   text-shadow: none !important;
 }
 
+/* ── Responsive: 5-column mega menu collapses middle 3 into 2 rows ── */
+@media screen and (min-width: 1025px) and (max-width: 1280px) {
+  .tmenu_masonry_row {
+    display: grid !important;
+    grid-template-columns: minmax(0, auto) 1fr 1fr minmax(0, auto) !important;
+    grid-template-rows: auto auto !important;
+    align-items: start !important;
+  }
+  .tmenu_masonry_col,
+  [class*="tmenu_masonry_col-"] {
+    width: auto !important;
+    max-width: none !important;
+  }
+  /* First column spans both rows */
+  .tmenu_masonry_col:first-child {
+    grid-column: 1 !important;
+    grid-row: 1 / span 2 !important;
+  }
+  /* Last column spans both rows */
+  .tmenu_masonry_col:last-child {
+    grid-column: 4 !important;
+    grid-row: 1 / span 2 !important;
+  }
+  /* 4th child (3rd middle col) drops to row 2, spanning both middle tracks */
+  .tmenu_masonry_col:nth-child(4):not(:last-child) {
+    grid-column: 2 / span 2 !important;
+    grid-row: 2 !important;
+  }
+}
+
 .product-grid__item {
   animation: cardEnter 0.15s ease-in-out both;
   animation-delay: calc(var(--card-index, 0) * 25ms);
