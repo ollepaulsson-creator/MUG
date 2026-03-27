@@ -972,7 +972,7 @@ facet-status-component.facets__status {
   }
 }
 
-.cart-drawer__heading {
+.cart-drawer__heading.h3 {
     font-size: 14px !important;
     font-weight: 400 !important;
     letter-spacing: 2px !important;
