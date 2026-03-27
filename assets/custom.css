@@ -971,3 +971,15 @@ facet-status-component.facets__status {
     max-width: 480px !important;
   }
 }
+
+.cart__checkout-button--disabled {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-color: #000000 !important;
+    cursor: not-allowed;
+    opacity: 0.4;
+}
+
+.cart__checkout-button--disabled .btn-text, .cart__checkout-button--disabled .btn-price {
+    color: #ffffff !important;
+}
