@@ -234,6 +234,22 @@ body .tmenu_image > img {
   }
 }
 
+/* ── Nav breakpoint: use mobile nav below 920px ── */
+
+/* Hide Qikify desktop nav below 920px */
+@media screen and (max-width: 919px) {
+  .tmenu_wrapper {
+    display: none !important;
+  }
+}
+
+/* Show theme mobile nav row between 750px and 919px */
+@media screen and (min-width: 750px) and (max-width: 919px) {
+  .header__row--mobile {
+    display: block !important;
+  }
+}
+
 .product-grid__item {
   animation: cardEnter 0.15s ease-in-out both;
   animation-delay: calc(var(--card-index, 0) * 25ms);
