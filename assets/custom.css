@@ -54,6 +54,17 @@
   padding-left: 24px !important;
 }
 
+body .tmenu_masonry_col:first-child {
+  border-right: 1px solid #e3e3e3 !important;
+  padding-right: 25px !important;
+  padding-left: 15px !important;
+}
+
+body .tmenu_masonry_col:last-child {
+  border-left: 1px solid #e3e3e3 !important;
+  padding-left: 25px !important;
+}
+
 /* ── Bold featured links (first/left column only) ── */
 .tmenu_wrapper .tmenu_masonry_col:first-child .tmenu_item_level_2.tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link,
 .tmenu_wrapper .tmenu_masonry_placeholder > li:first-child .tmenu_item_level_2.tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link {
