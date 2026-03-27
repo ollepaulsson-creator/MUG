@@ -964,3 +964,9 @@ facet-status-component.facets__status {
   object-fit: cover !important;
   aspect-ratio: unset !important;
 }
+
+@media screen and (min-width: 750px) {
+  .cart-drawer__dialog {
+    max-width: calc(var(--normal-content-width) * 1.2);
+  }
+}
