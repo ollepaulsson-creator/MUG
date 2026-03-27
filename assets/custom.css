@@ -154,6 +154,11 @@ body .tmenu_image > img {
   padding-top: 30px !important;
 }
 
+.tmenu_image--above .tmenu_item_text {
+  display: block !important;
+  margin-top: 10px;
+}
+
 /* ── Regular submenu links ── */
 .tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link {
   font-size: 14px !important;
