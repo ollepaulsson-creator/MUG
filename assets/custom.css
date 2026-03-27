@@ -967,7 +967,7 @@ facet-status-component.facets__status {
 
 @media screen and (min-width: 750px) {
   .cart-drawer__dialog {
-    width: calc(var(--normal-content-width) * 0.6) !important;
-    max-width: calc(var(--normal-content-width) * 0.6) !important;
+    width: 520px !important;
+    max-width: 520px !important;
   }
 }
