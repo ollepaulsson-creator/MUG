@@ -86,6 +86,10 @@ body .tmenu_masonry_col:first-child .tmenu_item_layout_text a[href*="/pages"] {
   line-height: 28px !important;
 }
 
+.tmenu_item--root .tmenu_item_display_header > .tmenu_item_link {
+  border: none !important;
+}
+
 body .tmenu_item--root .tmenu_item_display_header > .tmenu_item_link > .tmenu_item_text {
   color: #000;
   font-size: 14px !important;
