@@ -143,6 +143,7 @@ body .tmenu_masonry_col {
 
 body .tmenu_submenu_type_mega .tmenu_item_layout_block .tmenu_submenu > .tmenu_item li:last-child {
   padding-bottom: 20px !important;
+  text-decoration: underline;
 }
 
 body .tmenu_submenu_type_mega .tmenu_item_link {
