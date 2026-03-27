@@ -96,6 +96,12 @@ body .tmenu_item--root .tmenu_item_display_header > .tmenu_item_link > .tmenu_it
   margin-bottom: 4px !important;
 }
 
+body .tmenu_masonry_col {
+  margin: 0 !important;
+  padding: 20px 15px 25px 25px !important;
+  border: 0 !important;
+}
+
 /* ── Uppercase category headers ── */
 .tmenu_wrapper .tmenu_item_layout_text.tmenu_item_display_header > .tmenu_item_link {
   font-size: 11px !important;
