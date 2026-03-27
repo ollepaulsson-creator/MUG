@@ -141,6 +141,11 @@ body .tmenu_masonry_col {
   margin-top: 0 !important;
 }
 
+.tmenu_submenu_type_mega .tmenu_item_layout_block .tmenu_submenu > .tmenu_item {
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+}
+
 body .tmenu_submenu_type_mega .tmenu_item_layout_block .tmenu_submenu > .tmenu_item li:last-child {
   padding-bottom: 20px !important;
   text-decoration: underline;
