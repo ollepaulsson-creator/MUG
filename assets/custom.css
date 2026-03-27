@@ -970,4 +970,41 @@ facet-status-component.facets__status {
     width: calc(var(--normal-content-width) * 1.2) !important;
     max-width: calc(var(--normal-content-width) * 1.2) !important;
   }
+
+  /* Two-column layout */
+  .cart-drawer__content {
+    flex-direction: row !important;
+    overflow: hidden;
+  }
+
+  .cart-drawer__left {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Empty state: center the message */
+  .cart-drawer--empty .cart-drawer__left {
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Non-empty state: items start from top */
+  .cart-drawer__dialog:not(.cart-drawer--empty) .cart-drawer__left {
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+
+  .cart-drawer__summary {
+    width: 260px;
+    min-width: 260px;
+    border-left: 1px solid #e5e5e5 !important;
+    border-top: none !important;
+    position: static !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow-y: auto;
+  }
 }
