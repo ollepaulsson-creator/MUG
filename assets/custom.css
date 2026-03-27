@@ -33,7 +33,7 @@
   border-top: none !important;
   border-bottom: 1px solid #e3e3e3 !important;
   box-shadow: 0 6px 16px rgba(0,0,0,0.08) !important;
-  padding: 20px 20px 24px !important;
+  padding: 0px 0px 0px !important;
   /* Clip shadow flush at the top so it doesn't bleed over the header */
   clip-path: inset(0 -50px -50px -50px) !important;
 }
