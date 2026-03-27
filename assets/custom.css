@@ -145,6 +145,15 @@ body .tmenu_submenu_type_mega .tmenu_item_layout_block .tmenu_submenu > .tmenu_i
   padding-bottom: 20px !important;
 }
 
+body .tmenu_submenu_type_mega .tmenu_item_link {
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+}
+
+body .tmenu_image > img {
+  padding-top: 30px !important;
+}
+
 /* ── Regular submenu links ── */
 .tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link {
   font-size: 14px !important;
