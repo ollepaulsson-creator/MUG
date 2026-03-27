@@ -85,28 +85,39 @@
       assign same_type_other_vendor = same_type | reject: 'vendor', current_product.vendor
       assign type_products = same_type_same_vendor | concat: same_type_other_vendor
 
-      # Fill gaps with same-type products from the best matching collection
-      if type_products.size < max_display
-        assign best_collection = blank
-        assign best_type_count = 0
-        for col in current_product.collections
-          unless col.handle == 'all'
-            assign col_type_count = col.products | where: 'type', current_product.type | where: 'available', true | size
-            if col_type_count > best_type_count
-              assign best_collection = col
-              assign best_type_count = col_type_count
-            endif
-          endunless
+      # Find best matching collection (used for fills below)
+      assign best_collection = blank
+      assign best_type_count = 0
+      for col in current_product.collections
+        unless col.handle == 'all'
+          assign col_type_count = col.products | where: 'type', current_product.type | where: 'available', true | size
+          if col_type_count > best_type_count
+            assign best_collection = col
+            assign best_type_count = col_type_count
+          endif
+        endunless
+      endfor
+
+      # Fill gaps with same-type products from best collection
+      if type_products.size < max_display and best_collection != blank
+        assign fill = best_collection.products | where: 'type', current_product.type | where: 'available', true | reject: 'id', current_product.id
+        for existing in type_products
+          assign fill = fill | reject: 'id', existing.id
         endfor
-        if best_collection != blank
-          assign fill = best_collection.products | where: 'type', current_product.type | where: 'available', true | reject: 'id', current_product.id
-          for existing in type_products
-            assign fill = fill | reject: 'id', existing.id
-          endfor
-          assign fill_same_vendor = fill | where: 'vendor', current_product.vendor
-          assign fill_other_vendors = fill | reject: 'vendor', current_product.vendor
-          assign type_products = type_products | concat: fill_same_vendor | concat: fill_other_vendors
-        endif
+        assign fill_same_vendor = fill | where: 'vendor', current_product.vendor
+        assign fill_other_vendors = fill | reject: 'vendor', current_product.vendor
+        assign type_products = type_products | concat: fill_same_vendor | concat: fill_other_vendors
+      endif
+
+      # Fill remaining gaps with any-type products from best collection
+      if type_products.size < max_display and best_collection != blank
+        assign any_fill = best_collection.products | where: 'available', true | reject: 'id', current_product.id
+        for existing in type_products
+          assign any_fill = any_fill | reject: 'id', existing.id
+        endfor
+        assign any_fill_same_vendor = any_fill | where: 'vendor', current_product.vendor
+        assign any_fill_other = any_fill | reject: 'vendor', current_product.vendor
+        assign type_products = type_products | concat: any_fill_same_vendor | concat: any_fill_other
       endif
 
       # Only use other-type Shopify results as a last resort if still not enough
@@ -136,6 +147,17 @@
       assign same_vendor = type_products | where: 'vendor', current_product.vendor
       assign other_vendors = type_products | reject: 'vendor', current_product.vendor
       assign type_products = same_vendor | concat: other_vendors
+
+      # Fill remaining gaps with any-type products from best collection
+      if type_products.size < max_display and best_collection != blank
+        assign any_fill = best_collection.products | where: 'available', true | reject: 'id', current_product.id
+        for existing in type_products
+          assign any_fill = any_fill | reject: 'id', existing.id
+        endfor
+        assign any_fill_same_vendor = any_fill | where: 'vendor', current_product.vendor
+        assign any_fill_other = any_fill | reject: 'vendor', current_product.vendor
+        assign type_products = type_products | concat: any_fill_same_vendor | concat: any_fill_other
+      endif
     endif
 
     assign products = type_products | slice: 0, max_display
