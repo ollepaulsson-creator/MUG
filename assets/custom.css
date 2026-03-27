@@ -57,7 +57,7 @@
 /* ── Bold featured links (first/left column only) ── */
 .tmenu_wrapper .tmenu_masonry_col:first-child .tmenu_item_level_2.tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link,
 .tmenu_wrapper .tmenu_masonry_placeholder > li:first-child .tmenu_item_level_2.tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link {
-  font-size: 17px !important;
+  font-size: 21px !important;
   font-weight: 700 !important;
   color: #000 !important;
   padding: 4px 0 !important;
