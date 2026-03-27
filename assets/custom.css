@@ -130,6 +130,10 @@ body .tmenu_masonry_col {
   margin-top: 0 !important;
 }
 
+body .tmenu_submenu_type_mega .tmenu_item_layout_block .tmenu_submenu > .tmenu_item li:last-child {
+  padding-bottom: 20px !important;
+}
+
 /* ── Regular submenu links ── */
 .tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link {
   font-size: 14px !important;
