@@ -104,10 +104,12 @@ body .tmenu_masonry_col {
 
 /* ── Uppercase category headers ── */
 .tmenu_wrapper .tmenu_item_layout_text.tmenu_item_display_header > .tmenu_item_link {
-  font-size: 11px !important;
-  font-weight: 500 !important;
+  font-size: 14px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  letter-spacing: .96px !important;
   text-transform: uppercase !important;
-  letter-spacing: 2px !important;
+  margin-bottom: 4px !important;
   color: #000 !important;
   padding: 0 0 8px 0 !important;
   margin-top: 20px !important;
