@@ -251,8 +251,9 @@ body .tmenu_image > img {
     display: flex !important;
   }
 
-  /* Hide desktop nav row */
-  .header__row--bottom {
+  /* Hide desktop nav row and theme's header-menu overflow component */
+  .header__row--bottom,
+  header-menu {
     display: none !important;
   }
 
