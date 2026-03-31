@@ -244,9 +244,50 @@ body .tmenu_image > img {
 }
 
 /* Show theme mobile hamburger drawer between 750px and 879px */
+/* and apply full mobile header layout (centered logo, 5-track grid) */
 @media screen and (min-width: 750px) and (max-width: 879px) {
+  /* Show hamburger */
   .header__drawer {
     display: flex !important;
+  }
+
+  /* Hide desktop nav row */
+  .header__row--bottom {
+    display: none !important;
+  }
+
+  /* Apply mobile 5-track grid */
+  .header__columns {
+    --header-template-columns: var(--header-mobile-bookend) var(--header-mobile-bookend) 1fr var(--header-mobile-bookend) var(--header-mobile-bookend) !important;
+    grid-template-areas: 'leftA leftB center rightA rightB' !important;
+    column-gap: 0 !important;
+    padding-block: 0 !important;
+    padding-inline: 0 var(--padding-3xs) !important;
+  }
+
+  /* Make columns transparent so children participate in grid directly */
+  .header__column {
+    display: contents !important;
+  }
+
+  /* Center the logo */
+  .header-logo {
+    grid-area: center !important;
+  }
+
+  /* Position search */
+  .search-action {
+    grid-area: leftB !important;
+  }
+
+  /* Position cart/actions */
+  header-actions {
+    grid-area: rightB !important;
+  }
+
+  /* Flush hamburger to edge */
+  .header-section {
+    --page-margin: 0px;
   }
 }
 
