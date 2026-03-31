@@ -243,10 +243,10 @@ body .tmenu_image > img {
   }
 }
 
-/* Show theme mobile nav row between 750px and 879px */
+/* Show theme mobile hamburger drawer between 750px and 879px */
 @media screen and (min-width: 750px) and (max-width: 879px) {
-  .header__row--mobile {
-    display: block !important;
+  .header__drawer {
+    display: flex !important;
   }
 }
 
