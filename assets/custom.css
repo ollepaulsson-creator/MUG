@@ -992,6 +992,14 @@ h4.predictive-search-results__heading {
     align-self: stretch !important;
     height: auto !important;
   }
+
+  /* Stretch inner containers to fill the column height */
+  .product-information__grid:has(.slideshow--single-media) .product-information__media media-gallery,
+  .product-information__grid:has(.slideshow--single-media) .product-information__media .slideshow--single-media,
+  .product-information__grid:has(.slideshow--single-media) .product-information__media slideshow-container,
+  .product-information__grid:has(.slideshow--single-media) .product-information__media slideshow-slides {
+    height: 100% !important;
+  }
 }
 
 .dialog-zoomed-gallery__close-button {
