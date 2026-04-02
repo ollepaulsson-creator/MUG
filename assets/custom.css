@@ -445,8 +445,12 @@ h4.predictive-search-results__title {
     padding-top: 0 !important;
     top: 0 !important;
 }
-.product-information__media .sticky-content {
+.product-information__media .sticky-content,
+.product-information__media media-gallery,
+.product-information__media slideshow-component,
+.product-information__media slideshow-container {
     top: 0 !important;
+    margin-block-start: 0 !important;
     padding-block-start: 0 !important;
 }
 
