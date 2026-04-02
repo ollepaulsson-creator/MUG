@@ -978,13 +978,19 @@ h4.predictive-search-results__heading {
 
 
 @media (min-width: 768px) {
-  .product__media-wrapper, 
-  .product__media, 
+  .product__media-wrapper,
+  .product__media,
   .product-information__media {
     position: sticky !important;
     top: 100px;
     align-self: flex-start !important;
     height: fit-content !important;
+  }
+
+  /* Single image: let column stretch to fill row height so border-right extends fully */
+  .product-information__grid:has(.slideshow--single-media) .product-information__media {
+    align-self: stretch !important;
+    height: auto !important;
   }
 }
 
