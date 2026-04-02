@@ -166,7 +166,8 @@ body .tmenu_image > img {
 }
 
 /* ── Regular submenu links ── */
-.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link {
+.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link,
+.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link:hover {
   font-weight: 400 !important;
   color: #000 !important;
   padding: 4px 0 !important;
