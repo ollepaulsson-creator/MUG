@@ -993,12 +993,9 @@ h4.predictive-search-results__heading {
     height: auto !important;
   }
 
-  /* Stretch inner containers to fill the column height */
-  .product-information__grid:has(.slideshow--single-media) .product-information__media media-gallery,
-  .product-information__grid:has(.slideshow--single-media) .product-information__media .slideshow--single-media,
-  .product-information__grid:has(.slideshow--single-media) .product-information__media slideshow-container,
-  .product-information__grid:has(.slideshow--single-media) .product-information__media slideshow-slides {
-    height: 100% !important;
+  /* Fill the column background for single-image products */
+  .product-information__grid:has(.slideshow--single-media) .product-information__media {
+    background: #f7f7f7;
   }
 }
 
