@@ -447,6 +447,7 @@ h4.predictive-search-results__title {
 }
 .product-information__media .sticky-content {
     top: 0 !important;
+    padding-block-start: 0 !important;
 }
 
 .product-grid img,
