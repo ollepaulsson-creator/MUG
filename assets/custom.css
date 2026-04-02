@@ -457,6 +457,11 @@ h4.predictive-search-results__title {
     mix-blend-mode: multiply; 
 }
 
+/* ── Hide thumbnail strip when only one image ── */
+.slideshow-controls__thumbnails-container:not(:has(.slideshow-controls__thumbnail ~ .slideshow-controls__thumbnail)) {
+  display: none !important;
+}
+
 /* ── Thumbnails ── */
 .slideshow-controls__thumbnails-container,
 scroll-hint.slideshow-controls__thumbnails-container {
