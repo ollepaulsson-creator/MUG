@@ -965,35 +965,10 @@ h4.predictive-search-results__heading {
 
 
 @media (min-width: 768px) {
-  /* Stretch media column to full row height and fill background */
+  /* Stretch media column to fill row height (for border and background) */
   .product-information__media {
     align-self: stretch !important;
     background: #f7f7f7;
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* Height chain: fills column so thumbnails sit at the bottom */
-  .product-information__media media-gallery {
-    flex: 1 1 0;
-    min-height: 0;
-    display: flex !important;
-    flex-direction: column;
-  }
-
-  .product-information__media slideshow-component {
-    flex: 1 1 0;
-    min-height: 0;
-  }
-
-  .product-information__media slideshow-container {
-    flex: 1 1 0;
-    min-height: 0;
-  }
-
-  .product-information__media slideshow-slides {
-    flex: 1 1 0;
-    min-height: 0;
   }
 }
 
