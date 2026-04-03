@@ -971,9 +971,9 @@ h4.predictive-search-results__heading {
     background: #f7f7f7;
   }
 
-  /* Sticky unit capped to viewport height; image grows to fill space above thumbnails */
+  /* Sticky unit sized to viewport height; flex-grow fills space between image and thumbnails */
   .product-information__media media-gallery {
-    max-height: calc(100vh - var(--sticky-header-offset, 0px));
+    min-height: calc(100vh - var(--sticky-header-offset, 0px));
     display: flex !important;
     flex-direction: column;
   }
