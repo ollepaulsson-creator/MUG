@@ -112,8 +112,7 @@
             {%- endif -%}
             {%- if prod_grandparent_title -%}
               <span class="divider">/</span>
-              {%- assign gp_handle = prod_grandparent_url | split: '/collections/' | last -%}
-              {%- if collections[gp_handle] != blank -%}
+              {%- if prod_grandparent_url != blank -%}
                 <a href="{{ prod_grandparent_url }}">{{ prod_grandparent_title }}</a>
               {%- else -%}
                 <span>{{ prod_grandparent_title }}</span>
@@ -121,8 +120,7 @@
             {%- endif -%}
             {%- if prod_parent_title -%}
               <span class="divider">/</span>
-              {%- assign p_handle = prod_parent_url | split: '/collections/' | last -%}
-              {%- if collections[p_handle] != blank -%}
+              {%- if prod_parent_url != blank -%}
                 <a href="{{ prod_parent_url }}">{{ prod_parent_title }}</a>
               {%- else -%}
                 <span>{{ prod_parent_title }}</span>
@@ -170,8 +168,7 @@
 
             {%- if crumb_grandparent_title -%}
               <span class="divider">/</span>
-              {%- assign gp_handle = crumb_grandparent_url | split: '/collections/' | last -%}
-              {%- if collections[gp_handle] != blank -%}
+              {%- if crumb_grandparent_url != blank -%}
                 <a href="{{ crumb_grandparent_url }}">{{ crumb_grandparent_title }}</a>
               {%- else -%}
                 <span>{{ crumb_grandparent_title }}</span>
@@ -180,8 +177,7 @@
 
             {%- if crumb_parent_title -%}
               <span class="divider">/</span>
-              {%- assign p_handle = crumb_parent_url | split: '/collections/' | last -%}
-              {%- if collections[p_handle] != blank -%}
+              {%- if crumb_parent_url != blank -%}
                 <a href="{{ crumb_parent_url }}">{{ crumb_parent_title }}</a>
               {%- else -%}
                 <span>{{ crumb_parent_title }}</span>
