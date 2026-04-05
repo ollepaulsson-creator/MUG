@@ -137,5 +137,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.tmenu_submenu--desktop .tmenu_item_link').forEach(function (link) {
+    if (link.textContent.trim().startsWith('Alla')) {
+      link.classList.add('tmenu-alla-link');
+    }
+  });
+});
+</script>
+
   </body>
 </html>

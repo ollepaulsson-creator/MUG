@@ -172,9 +172,9 @@ body .tmenu_image > img {
   font-feature-settings: 'ss07' 1 !important;
 }
 
-/* ── "Alla X" underlined links — must come after the rule above ── */
-.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link[href*="alla"],
-.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link[href*="alla"]:hover {
+/* ── "Alla X" underlined links — class added via JS on links starting with "Alla" ── */
+.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link.tmenu-alla-link,
+.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link.tmenu-alla-link:hover {
   text-decoration: underline !important;
 }
 /* ── Featured image block ── */
