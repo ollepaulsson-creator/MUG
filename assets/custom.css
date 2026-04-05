@@ -78,10 +78,6 @@ body .tmenu_masonry_col:last-child {
   text-shadow: none !important;
 }
 
-/* ── "Alla X" underlined links ── */
-.tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > a[href*="alla"] {
-  text-decoration: underline !important;
-}
 
 body .tmenu_item_content_alignment_left {
   text-align: left !important;
@@ -174,6 +170,12 @@ body .tmenu_image > img {
   text-decoration: none !important;
   font-family: "inter variable", sans-serif !important;
   font-feature-settings: 'ss07' 1 !important;
+}
+
+/* ── "Alla X" underlined links — must come after the rule above ── */
+.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link[href*="alla"],
+.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link[href*="alla"]:hover {
+  text-decoration: underline !important;
 }
 /* ── Featured image block ── */
 .tmenu_wrapper .tmenu_item_layout_image > .tmenu_item_link {
