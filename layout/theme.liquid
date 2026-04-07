@@ -137,5 +137,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
 </script>
 
+<script>
+(function () {
+  function labelAllaLinks() {
+    var links = document.querySelectorAll('.tmenu_submenu--desktop .tmenu_item_link:not(.tmenu-alla-link)');
+    links.forEach(function (link) {
+      if (link.textContent.trim().startsWith('Alla')) {
+        link.classList.add('tmenu-alla-link');
+      }
+    });
+  }
+  var observer = new MutationObserver(labelAllaLinks);
+  observer.observe(document.documentElement, { childList: true, subtree: true });
+})();
+</script>
+
   </body>
 </html>
