@@ -204,7 +204,7 @@
                   endif
                 endif
               %}
-              {% if filter.param_name contains 'inventory.butik' or filter.param_name contains 'custom.finns_i_butik' %}{% unless value.value == 'true' or value.value == true %}{% continue %}{% endunless %}{% endif %}
+              {% if filter.param_name contains 'inventory.butik' or filter.param_name contains 'custom.finns_i_butik' %}{% if value.value == false or value.value == 'false' or value.value == 0 or value.value == '0' %}{% continue %}{% endif %}{% endif %}
               {% unless value.label == 'Out of stock' or value.label == 'Slut i lager' %}
               <li
                 data-skip-node-update="true"
