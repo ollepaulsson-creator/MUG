@@ -429,7 +429,7 @@
 {% endcomment %}
 
                   
-                  <div class="filter-option " data-debug-param="{{ filter.param_name }}" data-debug-value="{{ value.value }}" data-debug-label="{{ value.label }}">
+                  <div class="filter-option ">
                     {% assign is_butik_filter = false %}
                     {% if filter.param_name contains 'inventory.butik' or filter.param_name contains 'custom.finns_i_butik' %}
                       {% assign is_butik_filter = true %}
