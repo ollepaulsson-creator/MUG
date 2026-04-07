@@ -36,14 +36,6 @@
 
     {{ content_for_header }}
 
-    {% if template == 'index' %}
-    <style>
-      .tmenu_item_active > .tmenu_submenu {
-        margin-top: 10px !important;
-      }
-    </style>
-    {% endif %}
-
     <style>
       /* ── Thumbnail border fix ── */
       .slideshow-controls__thumbnails-container {
@@ -155,18 +147,8 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
   }
-  {% if template == 'index' %}
-  function fixSubmenuMargin() {
-    document.querySelectorAll('.tmenu_item_active > .tmenu_submenu').forEach(function (el) {
-      el.style.setProperty('margin-top', '10px', 'important');
-    });
-  }
-  {% endif %}
-  var observer = new MutationObserver(function () {
-    labelAllaLinks();
-    {% if template == 'index' %}fixSubmenuMargin();{% endif %}
-  });
-  observer.observe(document.documentElement, { childList: true, subtree: true, attributes: true });
+  var observer = new MutationObserver(labelAllaLinks);
+  observer.observe(document.documentElement, { childList: true, subtree: true });
 })();
 </script>
 
