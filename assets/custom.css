@@ -110,6 +110,10 @@ body .tmenu_item--root .tmenu_item_display_header > .tmenu_item_link > .tmenu_it
   letter-spacing: .96px !important;
   text-transform: uppercase !important;
   margin-bottom: 4px !important;
+  text-decoration: none !important;
+}
+body .tmenu_item--root .tmenu_item_display_header > .tmenu_item_link:hover > .tmenu_item_text {
+  text-decoration: underline !important;
 }
 
 body .tmenu_masonry_col {
