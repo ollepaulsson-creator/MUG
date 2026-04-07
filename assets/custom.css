@@ -182,9 +182,11 @@ body .tmenu_image > img {
 }
 
 /* ── "Alla X" underlined links — JS adds .tmenu-alla-link to links starting with "Alla" ── */
-.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link.tmenu-alla-link,
-.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link.tmenu-alla-link:hover {
+.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link.tmenu-alla-link {
   text-decoration: underline !important;
+}
+.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link.tmenu-alla-link:hover {
+  text-decoration: none !important;
 }
 /* ── Featured image block ── */
 .tmenu_wrapper .tmenu_item_layout_image > .tmenu_item_link {
