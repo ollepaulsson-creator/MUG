@@ -167,9 +167,14 @@ body .tmenu_image > img {
   padding: 4px 0 !important;
   letter-spacing: 0 !important;
   text-shadow: none !important;
-  text-decoration: none !important;
   font-family: "inter variable", sans-serif !important;
   font-feature-settings: 'ss07' 1 !important;
+}
+.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link {
+  text-decoration: none !important;
+}
+.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link:hover {
+  text-decoration: underline !important;
 }
 
 /* ── "Alla X" underlined links — JS adds .tmenu-alla-link to links starting with "Alla" ── */
