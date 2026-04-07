@@ -36,6 +36,14 @@
 
     {{ content_for_header }}
 
+    {% if template == 'index' %}
+    <style>
+      .tmenu_item_active > .tmenu_submenu {
+        margin-top: 10px !important;
+      }
+    </style>
+    {% endif %}
+
     <style>
       /* ── Thumbnail border fix ── */
       .slideshow-controls__thumbnails-container {
