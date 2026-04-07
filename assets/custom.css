@@ -26,6 +26,9 @@
   text-shadow: none !important;
   text-decoration: none !important;
 }
+.tmenu_app .tmenu_nav .tmenu_item--root.tmenu_item_active > .tmenu_item_link:hover {
+  text-decoration: underline !important;
+}
 
 /* ── Mega menu panel ── */
 .tmenu_item--root > .tmenu_submenu {
