@@ -48,7 +48,7 @@
 }
 /* On the homepage the header is transparent so the gap is visible — remove it */
 .template-index .tmenu_item_active > .tmenu_submenu {
-  margin-top: 0 !important;
+  margin-top: 1px !important;
 }
 
 /* ── Separators between masonry columns ── */
