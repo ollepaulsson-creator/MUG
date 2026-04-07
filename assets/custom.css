@@ -45,6 +45,18 @@
 .tmenu_item_active > .tmenu_submenu {
   z-index: 200 !important;
   margin-top: 12px !important;
+  animation: megaMenuSlideDown 0.18s ease-out !important;
+}
+
+@keyframes megaMenuSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ── Separators between masonry columns ── */
