@@ -44,7 +44,7 @@
 /* Submenu must paint above the sticky header (--layer-sticky: 8, max theme layer: 20) */
 .tmenu_item_active > .tmenu_submenu {
   z-index: 200 !important;
-  margin-top: 0 !important;
+  margin-top: 15px !important;
 }
 
 /* ── Separators between masonry columns ── */
