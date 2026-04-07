@@ -1,5 +1,14 @@
 {% assign product_shown = section.settings.product_shown %}
 
+<script>
+  (function() {
+    var url = new URL(window.location.href);
+    if (!url.searchParams.has('filter.v.availability')) {
+      url.searchParams.set('filter.v.availability', '1');
+      window.location.replace(url.toString());
+    }
+  })();
+</script>
 
 {% unless section.settings.enable_pagination %}
 <script
@@ -50,7 +59,6 @@
     {% paginate collection.products by product_shown %}
       {% capture children %}
         {% for product in collection.products %}
-          {% if product.available %}
           <li
             id="{{ section.id }}-{{ product.id }}"
             class="product-grid__item product-grid__item--{{ forloop.index0 }}"
@@ -63,7 +71,6 @@
             {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
             {% # theme-check-enable %}
           </li>
-          {% endif %}
         {% endfor %}
       {% endcapture %}
 
