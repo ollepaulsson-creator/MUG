@@ -176,6 +176,10 @@
                       -%}
                     {% else %}
                       {% liquid
+                        if filter.param_name == 'filter.v.availability'
+                          continue
+                        endif
+
                         if filter.active_values.size > 0
                           assign is_active = true
                         endif
@@ -416,6 +420,10 @@
                     -%}
                   {% else %}
                     {% liquid
+                      if filter.param_name == 'filter.v.availability'
+                        continue
+                      endif
+
                       if filter.active_values.size > 0
                         assign is_active = true
                       endif

@@ -14,6 +14,7 @@
     {%- liquid
       assign is_first_filter = forloop.first
     -%}
+    {%- if filter.param_name == 'filter.v.availability' -%}{%- continue -%}{%- endif -%}
     {% if filter.type == 'price_range' and filter.min_value.value != null or filter.max_value.value != null %}
       {%- liquid
         assign is_active = true
