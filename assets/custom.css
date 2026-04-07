@@ -207,6 +207,9 @@ body .tmenu_image > img {
   text-decoration: underline !important;
   color: #000 !important;
 }
+.tmenu_wrapper .tmenu_item_layout_image:hover .tmenu_item_text {
+  text-decoration: none !important;
+}
 
 /* ── Inherit color, remove text-shadow globally ── */
 .tmenu_wrapper .tmenu_item_text,
