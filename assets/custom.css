@@ -77,6 +77,9 @@ body .tmenu_masonry_col:last-child {
   text-decoration: none !important;
   text-shadow: none !important;
 }
+.tmenu_wrapper .tmenu_masonry_col:first-child .tmenu_item_level_2.tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link:hover {
+  opacity: 0.85 !important;
+}
 
 
 body .tmenu_item_content_alignment_left {
