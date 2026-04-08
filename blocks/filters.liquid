@@ -145,6 +145,7 @@
           class="facets__form"
           ref="facetsForm"
         >
+          <input type="hidden" name="filter.v.availability" value="1">
           {% if should_show_pane %}
             {% render 'filter-remove-buttons',
               filters: filters,
@@ -356,6 +357,7 @@
           class="facets__form"
           ref="facetsForm"
         >
+          <input type="hidden" name="filter.v.availability" value="1">
           <div
             class="facets__title-wrapper"
             style="--color-shadow: rgb(var(--color-foreground-rgb) / var(--opacity-10-25));"
