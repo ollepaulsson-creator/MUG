@@ -229,7 +229,8 @@ body .tmenu_image > img {
 .tmenu_wrapper .tmenu_item_text,
 .tmenu_wrapper .tmenu_item_icon,
 .tmenu_wrapper .tmenu_indicator { color: inherit !important; }
-.tmenu_wrapper .tmenu_item_link { text-shadow: none !important; }
+.tmenu_wrapper .tmenu_item_link { text-shadow: none !important; transition: none !important; }
+.tmenu_wrapper .tmenu_item_text { transition: none !important; }
 .tmenu_wrapper .tmenu_custom_content a {
   display: inline-block !important;
   padding: 0 !important;
