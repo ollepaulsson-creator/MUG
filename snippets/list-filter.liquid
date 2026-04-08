@@ -434,15 +434,11 @@
                     {% if filter.param_name contains 'inventory.butik' or filter.param_name contains 'custom.finns_i_butik' %}
                       {% assign is_butik_filter = true %}
                     {% endif %}
-                    {% if filter.param_name == 'filter.v.availability' or is_butik_filter %}
-                      {%- assign switch_label = value.label -%}
-                      {%- if is_butik_filter -%}
-                        {%- assign switch_label = 'Finns i butik' -%}
-                      {%- endif -%}
+                    {% if filter.param_name == 'filter.v.availability' %}
                       {% render 'switch-checkbox',
                         name: value.param_name,
                         value: value.value,
-                        label: switch_label,
+                        label: value.label,
                         checked: value.active,
                         id: input_id,
                         disabled: is_disabled,
@@ -454,7 +450,7 @@
                       {% render 'checkbox',
                         name: value.param_name,
                         value: value.value,
-                        label: value.label,
+                        label: is_butik_filter ? 'Finns i butik' : value.label,
                         checked: value.active,
                         id: input_id,
                         disabled: is_disabled,
