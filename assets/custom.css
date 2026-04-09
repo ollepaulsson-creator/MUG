@@ -335,6 +335,54 @@ body .tmenu_image > img {
   }
 }
 
+/* ── Filter loading shimmer ── */
+results-list[data-loading] .product-grid__item {
+  position: relative;
+  overflow: hidden;
+  pointer-events: none;
+}
+results-list[data-loading] .product-grid__item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.55) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: gridShimmer 1.1s infinite;
+  z-index: 20;
+}
+@keyframes gridShimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── LQIP blur-up ── */
+.card-gallery .product-media {
+  position: relative;
+  overflow: hidden;
+}
+.product-media__lqip {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(12px);
+  transform: scale(1.08);
+  transition: opacity 0.35s ease;
+  z-index: 0;
+}
+.product-media__image--lqip {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.product-media__image--lqip.is-loaded {
+  opacity: 1;
+}
+.card-gallery .product-media:has(.product-media__image--lqip.is-loaded) .product-media__lqip {
+  opacity: 0;
+}
+
 .product-grid__item {
   animation: cardEnter 0.15s ease-in-out both;
   animation-delay: calc(var(--card-index, 0) * 25ms);

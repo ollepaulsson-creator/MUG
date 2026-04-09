@@ -142,6 +142,56 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 <script>
+// ── Filter loading shimmer ──
+(function () {
+  document.addEventListener('filter:update', function () {
+    var grid = document.querySelector('results-list');
+    if (!grid) return;
+    grid.setAttribute('data-loading', '');
+    var resolved = false;
+    function resolve() {
+      if (resolved) return;
+      resolved = true;
+      grid.removeAttribute('data-loading');
+    }
+    setTimeout(resolve, 3000);
+    requestAnimationFrame(function () {
+      var mo = new MutationObserver(function () {
+        if (grid.querySelector('.product-grid__item')) {
+          resolve();
+          mo.disconnect();
+        }
+      });
+      mo.observe(grid, { childList: true, subtree: true });
+    });
+  });
+})();
+
+// ── LQIP blur-up ──
+(function () {
+  function initLQIP(root) {
+    (root || document).querySelectorAll('.product-media__image--lqip:not(.is-loaded)').forEach(function (img) {
+      function onLoad() { img.classList.add('is-loaded'); }
+      if (img.complete && img.naturalWidth > 0) {
+        onLoad();
+      } else {
+        img.addEventListener('load', onLoad, { once: true });
+        img.addEventListener('error', onLoad, { once: true });
+      }
+    });
+  }
+  document.addEventListener('DOMContentLoaded', function () { initLQIP(document); });
+  new MutationObserver(function (mutations) {
+    mutations.forEach(function (m) {
+      m.addedNodes.forEach(function (node) {
+        if (node.nodeType === 1) initLQIP(node);
+      });
+    });
+  }).observe(document.body, { childList: true, subtree: true });
+})();
+</script>
+
+<script>
 (function () {
   function labelAllaLinks() {
     var links = document.querySelectorAll('.tmenu_submenu--desktop .tmenu_item_link:not(.tmenu-alla-link)');
