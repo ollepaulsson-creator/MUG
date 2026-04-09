@@ -18,9 +18,7 @@
 
 {% liquid
   assign widths = widths | default: '240, 352, 832, 1200, 1600, 1920, 2560, 3840'
-  if preview_image_only
-    assign lqip_url = media.preview_image | image_url: width: 20
-  endif
+  assign lqip_url = media.preview_image | image_url: width: 20
 %}
 
 <div
@@ -28,9 +26,7 @@
   style="--ratio: {{ media.aspect_ratio }}"
   data-media-id="{{ media.id }}"
 >
-  {%- if preview_image_only -%}
-    <div class="product-media__lqip" style="background-image: url('{{ lqip_url }}')"></div>
-  {%- endif -%}
+  <div class="product-media__lqip" style="background-image: url('{{ lqip_url }}')"></div>
   {% liquid
     assign high_res_url = media.preview_image | image_url: width: 3840
     assign fetch_priority = fetchpriority | default: 'auto'
@@ -38,10 +34,7 @@
       assign fetch_priority = 'high'
     endif
     assign focal_point_style = '--focal-point: ' | append: media.presentation.focal_point | append: ';'
-    assign image_class = 'product-media__image'
-    if preview_image_only
-      assign image_class = 'product-media__image product-media__image--lqip'
-    endif
+    assign image_class = 'product-media__image product-media__image--lqip'
   %}
   {{
     media.preview_image
@@ -58,6 +51,7 @@
       decoding: 'async',
       style: focal_point_style
   }}
+
 
   {% unless preview_image_only %}
     {%- case media.media_type -%}

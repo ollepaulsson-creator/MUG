@@ -356,7 +356,9 @@ results-list[data-loading] .product-grid__item::after {
 }
 
 /* ── LQIP blur-up ── */
-.card-gallery .product-media {
+.product-media,
+.resource-card__media,
+.search-result__image-wrapper {
   position: relative;
   overflow: hidden;
 }
@@ -369,6 +371,7 @@ results-list[data-loading] .product-grid__item::after {
   transform: scale(1.08);
   transition: opacity 0.35s ease;
   z-index: 0;
+  pointer-events: none;
 }
 .product-media__image--lqip {
   position: relative;
@@ -379,7 +382,7 @@ results-list[data-loading] .product-grid__item::after {
 .product-media__image--lqip.is-loaded {
   opacity: 1;
 }
-.card-gallery .product-media:has(.product-media__image--lqip.is-loaded) .product-media__lqip {
+:has(> .product-media__image--lqip.is-loaded) .product-media__lqip {
   opacity: 0;
 }
 
