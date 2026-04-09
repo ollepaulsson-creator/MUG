@@ -2,6 +2,16 @@
   box-sizing: border-box;
 }
 
+aside.announcement-bar.spacing-style.section.section--page-width.color-scheme-5 {
+    display: flex;
+    flex-direction: row-reverse;
+    padding-top: 12px;
+    justify-content: space-between;
+    padding-left: 15px;
+    padding-bottom: 12px;
+    padding-right: 15px;
+}
+
 /* ============================================================
  * Qikify Smart Menu — theme integration (mockup)
  * ============================================================ */
