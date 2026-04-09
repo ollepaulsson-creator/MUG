@@ -117,7 +117,7 @@
 
   <!-- 🔹 IMAGE -->
   <a href="{{ item.url }}" class="search-result__image-wrapper">
-    <div class="product-media__lqip" style="background-image: url('{{ item.featured_image | image_url: width: 20 }}')"></div>
+    <div class="product-media__lqip" style="background-image: url('{{ item.featured_image | image_url: width: 100 }}')"></div>
     {{ item.featured_image | image_url: width: 400 | image_tag: class: 'product-media__image--lqip', loading: 'lazy', decoding: 'async' }}
   </a>
 </div>
