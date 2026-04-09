@@ -367,8 +367,6 @@ results-list[data-loading] .product-grid__item::after {
   inset: 0;
   background-size: cover;
   background-position: center;
-  filter: blur(12px);
-  transform: scale(1.08);
   transition: opacity 0.35s ease;
   z-index: 0;
   pointer-events: none;
