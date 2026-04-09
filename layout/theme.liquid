@@ -4,7 +4,11 @@
   lang="{{ request.locale.iso_code }}"
 >
   <head>
-    {%- render 'stylesheets' -%}
+    <link rel="preconnect" href="https://cdn.shopify.com">
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="dns-prefetch" href="https://cdn.boostcommerce.io">
+
+  {%- render 'stylesheets' -%}
 
     {%- if settings.favicon != blank -%}
       <link

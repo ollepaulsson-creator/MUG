@@ -138,6 +138,8 @@
         assign max_visible_slide_count = 2
       endif
 
+      assign card_widths = '240, 352, 480, 600, 750, 960, 1200'
+
       capture slides
         for media in media_list_to_show
           assign loading = 'lazy'
@@ -188,7 +190,7 @@
           endif
 
           capture slideshow_children
-            render 'product-media', media: media, sizes: sizes, loading: loading, preview_image_only: true, fetchpriority: card_fetchpriority
+            render 'product-media', media: media, sizes: sizes, loading: loading, preview_image_only: true, fetchpriority: card_fetchpriority, widths: card_widths
           endcapture
 
           render 'slideshow-slide', slide_id: media.id, index: forloop.index, hidden: hidden, class: class, attributes: attributes, children: slideshow_children, media_fit: media_fit
