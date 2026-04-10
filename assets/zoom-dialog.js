@@ -28,11 +28,13 @@ export class ZoomDialog extends Component {
   connectedCallback() {
     super.connectedCallback();
     this.refs.dialog.addEventListener('scroll', this.handleScroll);
+    this.refs.dialog.addEventListener('click', this.#handleVideoPlay, true);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.refs.dialog.removeEventListener('scroll', this.handleScroll);
+    this.refs.dialog.removeEventListener('click', this.#handleVideoPlay, true);
   }
 
   /**
@@ -179,20 +181,50 @@ export class ZoomDialog extends Component {
 
   /**
    * If the media item contains a deferred-media element (video), trigger playback automatically.
+   * Waits for the deferred-media custom element to be upgraded before calling showDeferredMedia,
+   * since media.js loads with fetchpriority="low" and may not be ready immediately.
    * @param {HTMLElement | undefined} mediaItem
    */
-  #playVideoIfNeeded(mediaItem) {
+  async #playVideoIfNeeded(mediaItem) {
     if (!mediaItem) return;
     const dm = mediaItem.querySelector('deferred-media');
-    if (!dm) return;
-    // Only auto-play if content hasn't been loaded yet
+    if (!dm || dm.getAttribute('data-media-loaded')) return;
+
+    // Wait for the custom element to be upgraded (resolves immediately if already defined)
+    await customElements.whenDefined('deferred-media');
+
     if (dm.getAttribute('data-media-loaded')) return;
+
     /** @type {any} */
     const deferredMedia = dm;
     if (typeof deferredMedia.showDeferredMedia === 'function') {
       deferredMedia.showDeferredMedia();
     }
   }
+
+  /**
+   * Fallback handler for poster-button clicks when deferred-media may not yet be upgraded.
+   * Fires in capture phase on the dialog, after document-level component.js routing.
+   * @param {Event} event
+   */
+  #handleVideoPlay = (event) => {
+    const target = event.target instanceof Element ? event.target : null;
+    if (!target) return;
+    const btn = target.closest('.deferred-media__poster-button');
+    if (!btn) return;
+    const dm = btn.closest('deferred-media');
+    if (!dm || dm.getAttribute('data-media-loaded')) return;
+
+    // If already upgraded, component.js handled it — bail out
+    if (typeof /** @type {any} */ (dm).showDeferredMedia === 'function') return;
+
+    // Fallback: inject template content directly before media.js finishes loading
+    const content = dm.querySelector('template')?.content.firstElementChild?.cloneNode(true);
+    if (!content) return;
+    dm.setAttribute('data-media-loaded', 'true');
+    dm.appendChild(content);
+    btn.classList.add('deferred-media__playing');
+  };
 
   /**
    * Closes the dialog when the user presses the escape key.

@@ -1207,6 +1207,11 @@ facet-status-component.facets__status {
   cursor: pointer !important;  /* override the zoom-out cursor from .dialog-zoomed-gallery */
 }
 
+/* Once the video/iframe is playing, the invisible poster button must not block clicks */
+.dialog-zoomed-gallery .deferred-media__poster-button.deferred-media__playing {
+  pointer-events: none !important;
+}
+
 /* reset zoom-out cursor on video items — only images should zoom */
 .dialog-zoomed-gallery .product-media-container--video,
 .dialog-zoomed-gallery .product-media-container--external_video {
