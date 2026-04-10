@@ -125,13 +125,20 @@
           </script>
         {%- endif -%}
       {% when 'video', 'external_video' %}
+        {%- liquid
+          if show_video_controls
+            assign video_disable_controls = false
+          else
+            assign video_disable_controls = true
+          endif
+        -%}
         {%- render 'video',
           video: media,
           video_loop: block.settings.video_loop,
           widths: widths,
           sizes: sizes,
           loading: loading,
-          disable_controls: show_video_controls == true ? false : true,
+          disable_controls: video_disable_controls,
           section_id: section.id
         -%}
     {% endcase %}
