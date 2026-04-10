@@ -514,7 +514,8 @@
                   media: media,
                   sizes: '100vw',
                   loading: 'lazy',
-                  is_main_product_media: forloop.first
+                  is_main_product_media: forloop.first,
+                  show_video_controls: true
                 -%}
               {% endif %}
             </li>
@@ -724,6 +725,11 @@
   .dialog-zoomed-gallery .product-media-container--external_video .video-interaction-hint {
     opacity: 1;
     cursor: pointer;
+  }
+
+  /* Once video is playing, the poster button becomes invisible — don't let it block clicks to the iframe */
+  .dialog-zoomed-gallery .deferred-media__poster-button.deferred-media__playing {
+    pointer-events: none;
   }
 
   .media-gallery__mobile-controls {

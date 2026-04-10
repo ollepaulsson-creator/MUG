@@ -131,7 +131,7 @@
           widths: widths,
           sizes: sizes,
           loading: loading,
-          disable_controls: true,
+          disable_controls: show_video_controls == true ? false : true,
           section_id: section.id
         -%}
     {% endcase %}
