@@ -59,7 +59,11 @@ export class ZoomDialog extends Component {
     /** @type {HTMLElement | null} */
     const sourceImage = event.target instanceof Element ? event.target.closest('li,slideshow-slide') : null;
 
-    if (!supportsViewTransitions || !sourceImage || !targetImage) return open();
+    if (!supportsViewTransitions || !sourceImage || !targetImage) {
+      open();
+      this.#playVideoIfNeeded(targetImage);
+      return;
+    }
 
     const transitionName = `gallery-item`;
     sourceImage.style.setProperty('view-transition-name', transitionName);
@@ -73,6 +77,7 @@ export class ZoomDialog extends Component {
     targetImage.style.removeProperty('view-transition-name');
 
     this.selectThumbnail(index, { behavior: 'instant' });
+    this.#playVideoIfNeeded(targetImage);
   }
 
   /**
@@ -170,6 +175,23 @@ export class ZoomDialog extends Component {
     const { dialog } = this.refs;
     dialog.close();
     window.dispatchEvent(new DialogCloseEvent());
+  }
+
+  /**
+   * If the media item contains a deferred-media element (video), trigger playback automatically.
+   * @param {HTMLElement | undefined} mediaItem
+   */
+  #playVideoIfNeeded(mediaItem) {
+    if (!mediaItem) return;
+    const dm = mediaItem.querySelector('deferred-media');
+    if (!dm) return;
+    // Only auto-play if content hasn't been loaded yet
+    if (dm.getAttribute('data-media-loaded')) return;
+    /** @type {any} */
+    const deferredMedia = dm;
+    if (typeof deferredMedia.showDeferredMedia === 'function') {
+      deferredMedia.showDeferredMedia();
+    }
   }
 
   /**

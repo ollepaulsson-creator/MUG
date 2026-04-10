@@ -1204,6 +1204,22 @@ facet-status-component.facets__status {
   width: 100% !important;
   height: 100% !important;
   aspect-ratio: unset !important;
+  cursor: pointer !important;  /* override the zoom-out cursor from .dialog-zoomed-gallery */
+}
+
+/* reset zoom-out cursor on video items — only images should zoom */
+.dialog-zoomed-gallery .product-media-container--video,
+.dialog-zoomed-gallery .product-media-container--external_video {
+  cursor: default !important;
+}
+
+/* larger, fully opaque play icon in zoom dialog */
+.dialog-zoomed-gallery .product-media-container--video .deferred-media__poster-icon svg,
+.dialog-zoomed-gallery .product-media-container--external_video .deferred-media__poster-icon svg {
+  width: 72px !important;
+  height: 72px !important;
+  opacity: 1 !important;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6)) !important;
 }
 
 /* poster image and video/iframe: cover-crop to fill */
@@ -1264,3 +1280,4 @@ facet-status-component.facets__status {
 .cart__checkout-button--disabled .btn-text, .cart__checkout-button--disabled .btn-price {
     color: #ffffff !important;
 }
+
