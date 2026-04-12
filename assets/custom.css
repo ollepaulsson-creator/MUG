@@ -384,6 +384,11 @@ results-list[data-loading] .product-grid__item::after {
   opacity: 0;
 }
 
+/* deferred-media must sit above the product preview image (z-index: 1) so the play button is clickable */
+.product-media :is(deferred-media, product-model) {
+  z-index: 2;
+}
+
 /* Disable LQIP in zoom dialog — images must be visible immediately */
 zoom-dialog .product-media__lqip {
   display: none;
