@@ -63,7 +63,6 @@ export class ZoomDialog extends Component {
 
     if (!supportsViewTransitions || !sourceImage || !targetImage) {
       open();
-      this.#playVideoIfNeeded(targetImage);
       return;
     }
 
@@ -79,7 +78,6 @@ export class ZoomDialog extends Component {
     targetImage.style.removeProperty('view-transition-name');
 
     this.selectThumbnail(index, { behavior: 'instant' });
-    this.#playVideoIfNeeded(targetImage);
   }
 
   /**
@@ -180,31 +178,6 @@ export class ZoomDialog extends Component {
   }
 
   /**
-   * If the media item contains a deferred-media element (video), trigger playback automatically.
-   * Waits for the deferred-media custom element to be upgraded before calling showDeferredMedia,
-   * since media.js loads with fetchpriority="low" and may not be ready immediately.
-   * @param {HTMLElement | undefined} mediaItem
-   */
-  async #playVideoIfNeeded(mediaItem) {
-    console.log('[zoom] playVideoIfNeeded', mediaItem?.className);
-    if (!mediaItem) return;
-    const dm = mediaItem.querySelector('deferred-media');
-    console.log('[zoom] deferred-media found:', !!dm);
-    if (!dm || dm.getAttribute('data-media-loaded')) return;
-
-    const tmpl = dm.querySelector('template');
-    console.log('[zoom] template found:', !!tmpl, 'firstElementChild:', tmpl?.content?.firstElementChild?.tagName);
-    const content = tmpl?.content.firstElementChild?.cloneNode(true);
-    if (!content) { console.log('[zoom] no content to inject'); return; }
-
-    console.log('[zoom] injecting', content.tagName, content.getAttribute('src')?.slice(0, 60));
-    dm.setAttribute('data-media-loaded', 'true');
-    dm.appendChild(content);
-    dm.querySelector('.deferred-media__poster-button')?.classList.add('deferred-media__playing');
-    console.log('[zoom] done');
-  }
-
-  /**
    * Handles poster-button clicks inside the zoom dialog.
    * Fires in capture phase. Always injects template directly — bypasses component.js routing
    * which can silently fail if deferred-media is not yet recognised as a Component.
@@ -302,7 +275,6 @@ export class ZoomDialog extends Component {
       });
 
       this.#loadHighResolutionImage(targetImage);
-      this.#playVideoIfNeeded(targetImage);
     }
     this.dispatchEvent(new ZoomMediaSelectedEvent(index));
   }

@@ -96,11 +96,10 @@
   {% liquid
     if disable_controls
       assign controls = false
-      assign enable_js_api = true
     else
       assign controls = true
-      assign enable_js_api = false
     endif
+    assign enable_js_api = true
   %}
 
   {% capture video_tag %}
@@ -180,7 +179,6 @@
           <span class="visually-hidden">{{ 'accessibility.play_video' | t }}</span>
           {{- 'icon-play.svg' | inline_asset_content -}}
         </span>
-        
       </button>
     {% endif %}
 
