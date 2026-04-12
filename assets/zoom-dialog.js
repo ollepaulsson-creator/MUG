@@ -190,21 +190,20 @@ export class ZoomDialog extends Component {
     const dm = mediaItem.querySelector('deferred-media');
     if (!dm || dm.getAttribute('data-media-loaded')) return;
 
-    // Wait for the custom element to be upgraded (resolves immediately if already defined)
-    await customElements.whenDefined('deferred-media');
+    // Inject template content directly — bypasses component.js routing which can silently
+    // fail if deferred-media is not yet upgraded when the dialog opens.
+    const content = dm.querySelector('template')?.content.firstElementChild?.cloneNode(true);
+    if (!content) return;
 
-    if (dm.getAttribute('data-media-loaded')) return;
-
-    /** @type {any} */
-    const deferredMedia = dm;
-    if (typeof deferredMedia.showDeferredMedia === 'function') {
-      deferredMedia.showDeferredMedia();
-    }
+    dm.setAttribute('data-media-loaded', 'true');
+    dm.appendChild(content);
+    dm.querySelector('.deferred-media__poster-button')?.classList.add('deferred-media__playing');
   }
 
   /**
-   * Fallback handler for poster-button clicks when deferred-media may not yet be upgraded.
-   * Fires in capture phase on the dialog, after document-level component.js routing.
+   * Handles poster-button clicks inside the zoom dialog.
+   * Fires in capture phase. Always injects template directly — bypasses component.js routing
+   * which can silently fail if deferred-media is not yet recognised as a Component.
    * @param {Event} event
    */
   #handleVideoPlay = (event) => {
@@ -215,15 +214,20 @@ export class ZoomDialog extends Component {
     const dm = btn.closest('deferred-media');
     if (!dm || dm.getAttribute('data-media-loaded')) return;
 
-    // If already upgraded, component.js handled it — bail out
-    if (typeof /** @type {any} */ (dm).showDeferredMedia === 'function') return;
-
-    // Fallback: inject template content directly before media.js finishes loading
-    const content = dm.querySelector('template')?.content.firstElementChild?.cloneNode(true);
-    if (!content) return;
-    dm.setAttribute('data-media-loaded', 'true');
-    dm.appendChild(content);
-    btn.classList.add('deferred-media__playing');
+    /** @type {any} */
+    const deferredMedia = dm;
+    if (typeof deferredMedia.showDeferredMedia === 'function') {
+      // Component is upgraded — call the official method
+      event.stopPropagation();
+      deferredMedia.showDeferredMedia();
+    } else {
+      // Fallback: inject template content directly before media.js finishes loading
+      const content = dm.querySelector('template')?.content.firstElementChild?.cloneNode(true);
+      if (!content) return;
+      dm.setAttribute('data-media-loaded', 'true');
+      dm.appendChild(content);
+      btn.classList.add('deferred-media__playing');
+    }
   };
 
   /**
@@ -294,6 +298,7 @@ export class ZoomDialog extends Component {
       });
 
       this.#loadHighResolutionImage(targetImage);
+      this.#playVideoIfNeeded(targetImage);
     }
     this.dispatchEvent(new ZoomMediaSelectedEvent(index));
   }
