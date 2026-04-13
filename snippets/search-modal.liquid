@@ -7,20 +7,25 @@
   id="search-modal"
   class="search-modal"
   {{ block.shopify_attributes }}
+
+  style="max-width: 100% !important;"
+
 >
   <dialog
     ref="dialog"
-    class="search-modal__content dialog-modal dialog-drawer dialog-drawer--right search-bar--header"
+    class="search-modal__content dialog-modal search-bar--header"
     scroll-lock
+
+
   >
-    <!-- Close button -->
+    <!-- Custom Close button (top right) -->
     <button
       class="search-modal__close"
       type="button"
       on:click="#search-modal/closeDialog"
       aria-label="Close"
     >
-      {{- 'icon-close.svg' | inline_asset_content -}}
+      ✕
     </button>
 
     {% render 'predictive-search',
@@ -31,14 +36,31 @@
   </dialog>
 </dialog-component>
 
+<style>
+  /* Default (desktop) */
+  .search-modal__content.dialog-modal.search-bar--header {
+    width: 72% !important;
+    max-width: 100% !important;
+  }
+
+  /* Mobile view */
+  @media screen and (max-width: 768px) {
+    .search-modal__content.dialog-modal.search-bar--header {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+  }
+</style>
 {% stylesheet %}
+
 
 /* Hide Shopify's predictive search reset (cancel) button */
 .predictive-search__reset-button {
   display: none !important;
 }
 
-/* Remove default browser cancel (X) in search inputs */
+
+/* ---------- Remove default browser cancel (X) in search inputs ---------- */
 input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
   appearance: none;
@@ -50,82 +72,82 @@ input[type="search"]::-ms-clear {
   height: 0;
 }
 
-/* ── Search drawer dimensions & position ── */
-.search-modal__content.dialog-drawer {
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: auto;
-  height: var(--drawer-height);
-  max-height: var(--drawer-height);
-  width: var(--drawer-width);
-  max-width: var(--drawer-max-width);
-  margin: 0;
-  padding: 0;
-  border: none;
-  border-radius: 0;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-shadow: var(--shadow-popover);
+/* ---------- Modal Close Button ---------- */
+@media(min-width:770px){
+  .search-modal__content {
+    position: relative; /* so the button positions relative to the modal */
+  }
+
+  .search-modal__close {
+    position: absolute;
+    top: 18px;
+    right: 14px;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+    color: #333;
+    z-index: 10; /* keep it above content */
+  }
 }
 
-/* Override the bottom-slide animations with right-slide */
-.search-modal__content.dialog-drawer[open] {
-  transform-origin: unset;
-  animation: slideInRight var(--drawer-animation-speed) var(--animation-easing) forwards;
+/* ---------- Search modal style ---------- */
+.search-modal {
+  --search-border-radius: var(--style-border-radius-popover);
+  --search-border-width: var(--style-border-width);
 }
 
-.search-modal__content.dialog-drawer.dialog-closing {
-  animation: slideOutRight var(--drawer-animation-speed) var(--animation-easing);
-}
-
-/* ── Close button ── */
-.search-modal__content {
-  position: relative;
-}
-
-.search-modal__close {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  z-index: 10;
-  width: 24px;
-  height: 24px;
+.search-modal__button {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: currentColor;
-  opacity: 0.6;
 }
 
-.search-modal__close:hover {
-  opacity: 1;
+.search-modal__content {
+  /* Approx set the top so when the content is at max height, the modal is centered */
+  --modal-top-margin: calc(50dvh - var(--modal-max-height) / 2 - 10px);
+  --modal-width: 66dvw;
+
+  padding: 0;
+  border: var(--style-border-popover);
+
+  @media screen and (min-width: 750px) {
+    width: var(--modal-width);
+    margin-block-start: var(--modal-top-margin);
+    overflow: hidden;
+  }
 }
 
-/* ── Inner layout: fill height, scroll in middle ── */
-.search-modal__content predictive-search-component,
-.search-modal__content .predictive-search-form {
+/* Hide the default dialog backdrop on small screens */
+@media screen and (max-width: 749px) {
+  .search-modal__content::backdrop {
+    display: none;
+  }
+}
+
+.dialog-modal[open].search-modal__content {
+  transform-origin: bottom center;
+  animation: search-element-slide-in-bottom 300ms var(--ease-out-quad) forwards;
+  border-radius: var(--search-border-radius);
+  box-shadow: var(--shadow-popover);
+
+  @media screen and (max-width: 749px) {
+    border-radius: 0;
+  }
+}
+
+.dialog-modal.search-modal__content.dialog-closing {
+  animation: search-element-slide-out-bottom 200ms var(--ease-out-quad) forwards;
+}
+
+.search-modal__content[open] {
   display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
 }
 
-.search-modal__content .predictive-search-form__content-wrapper {
-  position: static;
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.search-modal__content .predictive-search-form__content {
-  max-height: none;
-  overflow: visible;
+.search-modal__content :is(.predictive-search-dropdown, .predictive-search-form__content-wrapper) {
+  position: relative;
 }
 
 /* Predictive search header tweaks for small screens */
@@ -153,5 +175,46 @@ input[type="search"]::-ms-clear {
     }
   }
 }
+
+
+@media only screen and (max-width: 768px){
+  dialog.search-modal__content.dialog-modal.search-bar--header {
+    width: 100% !important;
+}
+}
+
+@media only screen and (min-width: 769px) {
+  dialog.search-modal__content.dialog-modal.search-bar--header {
+    top: 310px !important;
+    max-height: calc(100dvh - 320px) !important;
+    overflow: hidden !important;
+    flex-direction: column;
+  }
+
+  /* Make component and form fill dialog height as flex column */
+  .search-modal__content predictive-search-component,
+  .search-modal__content .predictive-search-form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+  }
+
+  /* Content wrapper takes remaining space and scrolls */
+  .search-modal__content .predictive-search-form__content-wrapper {
+    position: static; /* override position:absolute from base CSS so it participates in flex */
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* Content fills wrapper height */
+  .search-modal__content .predictive-search-form__content {
+    max-height: none;
+    overflow: visible;
+  }
+}
+
 
 {% endstylesheet %}
