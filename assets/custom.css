@@ -1232,6 +1232,14 @@ facet-status-component.facets__status {
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6)) !important;
 }
 
+/* Show high-quality YouTube thumbnail in zoom dialog.
+   base.css hides .deferred-media__poster-image when a .product-media__image sibling exists,
+   but in the zoom dialog we want it visible (it uses maxresdefault.jpg) */
+.dialog-zoomed-gallery .product-media-container--video .deferred-media__poster-image,
+.dialog-zoomed-gallery .product-media-container--external_video .deferred-media__poster-image {
+  display: block !important;
+}
+
 /* poster image and video/iframe: cover-crop to fill */
 .dialog-zoomed-gallery .product-media-container--video .deferred-media__poster-image,
 .dialog-zoomed-gallery .product-media-container--external_video .deferred-media__poster-image,
