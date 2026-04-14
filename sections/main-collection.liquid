@@ -99,8 +99,16 @@
         (function() {
           function injectFeatured() {
             if (window.innerWidth < 1024) return;
-            var page = new URL(window.location.href).searchParams.get('page');
+            var url = new URL(window.location.href);
+            var page = url.searchParams.get('page');
             if (page && page !== '1') return;
+            var hasActiveFilters = false;
+            url.searchParams.forEach(function(val, key) {
+              if (key.startsWith('filter.') && !(key === 'filter.v.availability' && val === '1')) {
+                hasActiveFilters = true;
+              }
+            });
+            if (!hasActiveFilters) return;
             var featuredKey = '{{ featured_key }}';
             var sectionKey = 'featured_' + featuredKey.replace(/-/g, '_');
             var sectionEl = document.querySelector('[id$="__' + sectionKey + '"]');
