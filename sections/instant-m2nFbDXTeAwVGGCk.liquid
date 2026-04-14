@@ -55,9 +55,15 @@
         <div class="i5oLEuJAZ7Nck21tW" data-instant-type="container"
           ><div data-instant-type="media" class="i5qP6GjDQ8wInUO2B">
             {%- if section.settings.image_5qP6GjDQ8wInUO2B and section.settings.image_5qP6GjDQ8wInUO2B != blank -%}
-              {{ section.settings.image_5qP6GjDQ8wInUO2B | image_url: width: 1280 | image_tag: class: 'instant-media instant-image instant-image__main', alt: section.settings.image_5qP6GjDQ8wInUO2B.alt, fetchpriority: fetchpriority, loading: loading, decoding: 'async' }}
+              {{ section.settings.image_5qP6GjDQ8wInUO2B | image_url: width: 1280 | image_tag: class: 'instant-media instant-image instant-image__main instant-responsive instant-responsive--desktop instant-responsive--laptop instant-responsive--tablet', alt: section.settings.image_5qP6GjDQ8wInUO2B.alt, fetchpriority: fetchpriority, loading: loading, decoding: 'async' }}
             {%- else -%}
-              <img alt="" src="https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/Wg0KLop3ugRm2Myl/arturia.svg" width="175" height="45" decoding="async" fetchpriority="{{ fetchpriority }}" loading="{{ loading }}" class="instant-media instant-image instant-image__main">
+              <img alt="" src="https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/Wg0KLop3ugRm2Myl/arturia.svg" width="175" height="45" decoding="async" fetchpriority="{{ fetchpriority }}" loading="{{ loading }}" class="instant-media instant-image instant-image__main instant-responsive instant-responsive--desktop instant-responsive--laptop instant-responsive--tablet">
+            {%- endif -%}
+            <!--  -->
+            {%- if section.settings.image_5qP6GjDQ8wInUO2B_mobile and section.settings.image_5qP6GjDQ8wInUO2B_mobile != blank -%}
+              {{ section.settings.image_5qP6GjDQ8wInUO2B_mobile | image_url: width: 1280 | image_tag: class: 'instant-media instant-image instant-image__main instant-responsive instant-responsive--mobile', alt: section.settings.image_5qP6GjDQ8wInUO2B_mobile.alt, fetchpriority: fetchpriority, loading: loading, decoding: 'async' }}
+            {%- else -%}
+              <img alt="" sizes="(max-width: 1280px) 100vw, 1280px" srcSet="https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/VCkrAHvDDxqPqgcM/arturia.png?width=1080 1080w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/VCkrAHvDDxqPqgcM/arturia.png?width=828 828w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/VCkrAHvDDxqPqgcM/arturia.png?width=750 750w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/VCkrAHvDDxqPqgcM/arturia.png?width=640 640w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/VCkrAHvDDxqPqgcM/arturia.png?width=360 360w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/VCkrAHvDDxqPqgcM/arturia.png?width=1280 1280w" src="https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/VCkrAHvDDxqPqgcM/arturia.png?width=1280" width="349" height="90" decoding="async" fetchpriority="{{ fetchpriority }}" loading="{{ loading }}" class="instant-media instant-image instant-image__main instant-responsive instant-responsive--mobile">
             {%- endif -%}</div
           ><div data-instant-type="text" class="instant-rich-text iHcFuMvkyGzFi7SDv"
             ><div>{{ section.settings.text_HcFuMvkyGzFi7SDv }}</div></div
@@ -100,6 +106,11 @@
       "type": "image_picker",
       "id": "image_5qP6GjDQ8wInUO2B",
       "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_5qP6GjDQ8wInUO2B_mobile",
+      "label": "Image mobile"
     },
     {
       "type": "richtext",
