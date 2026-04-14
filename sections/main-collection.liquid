@@ -52,12 +52,10 @@
     function initDescriptionClamp() {
       var block = document.querySelector('.text-block--text_twGGkJ');
       if (!block) return;
-      var p = block.querySelector('p');
-      if (!p) return;
 
       block.classList.add('desc-clamped');
 
-      if (p.scrollHeight <= p.clientHeight + 2) {
+      if (block.scrollHeight <= block.clientHeight + 2) {
         block.classList.remove('desc-clamped');
         return;
       }
@@ -71,7 +69,7 @@
         block.classList.remove('desc-clamped');
         link.remove();
       });
-      block.appendChild(link);
+      block.insertAdjacentElement('afterend', link);
     }
 
     if (document.readyState === 'loading') {
