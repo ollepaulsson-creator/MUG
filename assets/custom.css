@@ -1427,6 +1427,10 @@ facet-status-component.facets__status {
   font-weight: 600 !important;
 }
 
+.section-content-wrapper.section-content-wrapper {
+  padding-bottom: 30px;
+}
+
 @media (min-width: 769px) {
   #shopify-section-template--29835055006045__section .spacing-style.layout-panel-flex.layout-panel-flex--column.section-content-wrapper.mobile-column {
     max-width: 80%;
