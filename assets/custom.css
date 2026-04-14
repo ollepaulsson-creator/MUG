@@ -1298,33 +1298,30 @@ facet-status-component.facets__status {
     color: #ffffff !important;
 }
 
-/* ── Announcement bar: truncate text on desktop, never wrap to second row ── */
-.announcement-bar__slider {
-  min-width: 0 !important;
-  overflow: hidden !important;
-  flex: 1 1 0% !important;
-}
-
-.announcement-bar__slides {
-  min-width: 0 !important;
-  overflow: hidden !important;
-}
-
+/* ── Announcement bar: desktop — truncate with ellipsis ── */
 @media screen and (min-width: 769px) {
+  .announcement-bar__slider {
+    min-width: 0 !important;
+    overflow: hidden !important;
+    flex: 1 1 0% !important;
+  }
+
   .announcement-bar__slides {
+    min-width: 0 !important;
+    overflow: hidden !important;
     padding-right: 20px;
   }
-}
 
-.announcement-bar__slide {
-  min-width: 0 !important;
-  overflow: hidden !important;
-}
+  .announcement-bar__slide {
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
 
-.announcement-bar__text {
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
+  .announcement-bar__text {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
 }
 
 /* ── Announcement bar: mobile — centered, no clipping ── */
