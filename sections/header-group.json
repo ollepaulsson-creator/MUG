@@ -32,8 +32,7 @@
         "announcement_BxgCk9"
       ],
       "custom_css": [
-        "a.announcement-bar__link {font-size: 14px;}",
-        "@media (max-width: 768px) {.announcement-menu {display: none; }}"
+        "a.announcement-bar__link {font-size: 14px;}"
       ],
       "name": "t:names.announcement_bar",
       "settings": {
