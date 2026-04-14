@@ -1417,9 +1417,6 @@ facet-status-component.facets__status {
   text-decoration: none;
 }
 
-rte-formatter[class*="text_twGGkJ"] {
-  text-wrap: balance;
-}
 rte-formatter[class*="text_twGGkJ"] a {
   text-decoration: underline;
 }
