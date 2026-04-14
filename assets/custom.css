@@ -1398,17 +1398,14 @@ facet-status-component.facets__status {
   cursor: default;
 }
 
-/* ── Collection description: read-more truncation ── */
-
-a.collection-read-more {
-  display: inline-block;
-  margin-top: 6px;
-  font-size: inherit;
-  color: var(--color-primary, currentColor);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  cursor: pointer;
+/* ── Collection description: 3-line clamp ── */
+.text-block--text_twGGkJ p {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
+
 
 /* ── Collection empty state ── */
 .main-collection-grid__empty {
