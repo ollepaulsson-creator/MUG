@@ -46,6 +46,52 @@
   })();
 </script>
 
+{% comment %} ── Collection description: 3-line clamp with Läs mer ── {% endcomment %}
+<script>
+  (function() {
+    function initDescClamp() {
+      var block = document.querySelector('.text-block--text_twGGkJ');
+      if (!block) return;
+
+      // Apply via inline styles — bypasses any CSS processor that strips -webkit-box-orient
+      block.style.setProperty('display', '-webkit-box');
+      block.style.setProperty('-webkit-line-clamp', '3');
+      block.style.setProperty('-webkit-box-orient', 'vertical');
+      block.style.setProperty('overflow', 'hidden');
+
+      // If content fits within 3 lines there is nothing to do
+      if (block.scrollHeight <= block.clientHeight + 2) {
+        block.style.removeProperty('display');
+        block.style.removeProperty('-webkit-line-clamp');
+        block.style.removeProperty('-webkit-box-orient');
+        block.style.removeProperty('overflow');
+        return;
+      }
+
+      // Add "Läs mer" link
+      var btn = document.createElement('a');
+      btn.href = '#';
+      btn.className = 'desc-read-more';
+      btn.textContent = 'Läs mer';
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        block.style.removeProperty('display');
+        block.style.removeProperty('-webkit-line-clamp');
+        block.style.removeProperty('-webkit-box-orient');
+        block.style.removeProperty('overflow');
+        btn.remove();
+      });
+      block.insertAdjacentElement('afterend', btn);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initDescClamp);
+    } else {
+      initDescClamp();
+    }
+  })();
+</script>
+
 {% comment %} We always render this full-width, as the child blocks have width: page/full settings {% endcomment %}
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <results-list
