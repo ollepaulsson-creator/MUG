@@ -33,98 +33,253 @@
   class="section product-grid-container spacing-style color-{{ section.settings.color_scheme }}"
   style="--padding-block-start: {{ section.settings.padding-block-start }}px; --padding-block-end: {{ section.settings.padding-block-end }}px;"
 >
-{% endif %}
   {% render 'skip-to-content-link', href: '#ResultsList', text: 'accessibility.skip_to_results_list' %}
 
-  <div
-    class="collection-wrapper grid gap-style"
-  >
+  <div class="collection-wrapper grid gap-style">
     {% paginate search.results by product_shown %}
+
+      {% comment %} Always show filters, even on zero-result searches {% endcomment %}
       {% if search.results_count > 0 %}
         {% content_for 'block', type: 'filters', id: 'filters', results: search, results_size: search.results_count %}
         {% assign products = search.results | where: 'object_type', 'product' %}
       {% else %}
-        {% assign collection = settings.empty_state_collection | default: collections.all %}
-        {% assign default_title = 'content.search_results_resource_products' | t %}
-        {% assign title = settings.empty_state_collection.title | default: default_title %}
-        {% assign products = collection.products %}
+        {% assign nyheter_collection = settings.empty_state_collection | default: collections.all %}
+        {% content_for 'block', type: 'filters', id: 'filters', results: search, results_size: nyheter_collection.products.size %}
       {% endif %}
 
-      {% capture children %}
-        {% for product in products %}
-          <li
-            id="{{ section.id }}-{{ product.id }}"
-            class="product-grid__item product-grid__item--{{ forloop.index0 }}"
-            data-page="{{ paginate.current_page }}"
-            data-product-id="{{ product.id }}"
-            ref="cards[]"
-            style="--card-index: {{ forloop.index0 | at_most: 8 }}"
-          >
-            {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
-          </li>
-        {% endfor %}
-      {% endcapture %}
+      {% if search.results_count > 0 %}
 
-      {% render 'product-grid',
-        section: section,
-        children: children,
-        products: products,
-        paginate: paginate,
-        title: title,
-        hide_viewmore: true
-      %}
+        {% capture children %}
+          {% for product in products %}
+            <li
+              id="{{ section.id }}-{{ product.id }}"
+              class="product-grid__item product-grid__item--{{ forloop.index0 }}"
+              data-page="{{ paginate.current_page }}"
+              data-product-id="{{ product.id }}"
+              ref="cards[]"
+              style="--card-index: {{ forloop.index0 | at_most: 8 }}"
+            >
+              {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
+            </li>
+          {% endfor %}
+        {% endcapture %}
 
-      {% if paginate.pages > 1 %}
-        <nav class="pagination" style="grid-column: 1 / -1" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
-          <ul class="pagination__list" role="list">
+        {% render 'product-grid',
+          section: section,
+          children: children,
+          products: products,
+          paginate: paginate,
+          hide_viewmore: true
+        %}
 
-            {%- if paginate.previous -%}
-              <li class="pagination__item pagination__item--prev">
-                <a href="{{ paginate.previous.url | escape }}#ResultsList"
-                  rel="prev"
-                  aria-label="{{ 'general.pagination.previous' | t }}">
-                  <span class="pagination__arrow">◄</span> Föregående
-                </a>
-              </li>
-            {%- endif -%}
+        {% if paginate.pages > 1 %}
+          <nav class="pagination" style="grid-column: 1 / -1" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+            <ul class="pagination__list" role="list">
 
-            {%- for part in paginate.parts -%}
-              {% if part.is_link %}
-                <li class="pagination__item">
-                  <a href="{{ part.url | escape }}#ResultsList"
-                    aria-label="{{ 'general.pagination.page' | t: number: part.title }}">
-                    {{ part.title }}
+              {%- if paginate.previous -%}
+                <li class="pagination__item pagination__item--prev">
+                  <a href="{{ paginate.previous.url | escape }}#ResultsList"
+                    rel="prev"
+                    aria-label="{{ 'general.pagination.previous' | t }}">
+                    <span class="pagination__arrow">◄</span> Föregående
                   </a>
                 </li>
-              {% elsif part.title == paginate.current_page %}
-                <li class="pagination__item pagination__item--current" aria-current="page">
-                  {{ part.title }}
-                </li>
-              {% else %}
-                <li class="pagination__item pagination__item--ellipsis">
-                  <span class="pagination__ellipsis">{{ part.title }}</span>
-                </li>
-              {% endif %}
-            {%- endfor -%}
+              {%- endif -%}
 
-            {%- if paginate.next -%}
-              <li class="pagination__item pagination__item--next">
-                <a href="{{ paginate.next.url | escape }}#ResultsList"
-                  rel="next"
-                  aria-label="{{ 'general.pagination.next' | t }}">
-                  Nästa <span class="pagination__arrow">►</span>
-                </a>
-              </li>
-            {%- endif -%}
+              {%- for part in paginate.parts -%}
+                {% if part.is_link %}
+                  <li class="pagination__item">
+                    <a href="{{ part.url | escape }}#ResultsList"
+                      aria-label="{{ 'general.pagination.page' | t: number: part.title }}">
+                      {{ part.title }}
+                    </a>
+                  </li>
+                {% elsif part.title == paginate.current_page %}
+                  <li class="pagination__item pagination__item--current" aria-current="page">
+                    {{ part.title }}
+                  </li>
+                {% else %}
+                  <li class="pagination__item pagination__item--ellipsis">
+                    <span class="pagination__ellipsis">{{ part.title }}</span>
+                  </li>
+                {% endif %}
+              {%- endfor -%}
 
-          </ul>
-        </nav>
+              {%- if paginate.next -%}
+                <li class="pagination__item pagination__item--next">
+                  <a href="{{ paginate.next.url | escape }}#ResultsList"
+                    rel="next"
+                    aria-label="{{ 'general.pagination.next' | t }}">
+                    Nästa <span class="pagination__arrow">►</span>
+                  </a>
+                </li>
+              {%- endif -%}
+
+            </ul>
+          </nav>
+        {% endif %}
+
+      {% else %}
+
+        {% comment %} Zero-results: empty state message + Nyheter i butiken {% endcomment %}
+        <div
+          id="ResultsList"
+          class="grid main-collection-grid spacing-style"
+          style="
+            --grid-column--desktop: var(--centered);
+            --grid-column--mobile: var(--full-width);
+            --grid--margin--mobile: 0;
+            --padding-inline-start: {{ section.settings.padding-inline-start }}px;
+            --padding-inline-end: {{ section.settings.padding-inline-end }}px;
+          "
+        >
+          <div style="grid-column: var(--full-width);">
+
+            {% comment %} Empty state message {% endcomment %}
+            <div class="search-empty-state">
+              <p class="search-empty-state__heading h3">Inga resultat på din sökning</p>
+              <p class="search-empty-state__body">
+                Inga resultat hittades för "{{ search.terms | escape }}". Kontrollera stavningen eller använd ett annat ord eller fras.
+              </p>
+            </div>
+
+            {% comment %} Nyheter i butiken {% endcomment %}
+            <div class="search-nyheter-section">
+              <div class="search-nyheter-section__header">
+                <span class="search-nyheter-section__title">Nyheter i butiken</span>
+              </div>
+
+              <div
+                class="resource-list resource-list--grid search-nyheter-grid"
+                id="search-nyheter-grid"
+                style="
+                  --resource-list-columns: repeat(4, 1fr);
+                  --resource-list-columns-mobile: repeat(2, 1fr);
+                  --resource-list-column-gap-desktop: {{ section.settings.columns_gap_horizontal }}px;
+                  --resource-list-row-gap-desktop: {{ section.settings.columns_gap_vertical }}px;
+                  --column-count: 4;
+                  --column-count-mobile: 2;
+                "
+              >
+                {% for product in nyheter_collection.products limit: 24 %}
+                  <div class="resource-list__item">
+                    {% content_for 'block', type: '_product-card', id: 'static-product-card-nyheter', closest.product: product %}
+                  </div>
+                {% endfor %}
+              </div>
+
+              <div class="show-more-wrapper" style="text-align: center; margin-top: 24px; display: flex; justify-content: center;">
+                <button id="search-show-more-nyheter" class="button">VISA FLER</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       {% endif %}
+
     {% endpaginate %}
   </div>
 </div>
 
+<script>
+(function() {
+  function setupNyheterShowMore() {
+    const grid = document.getElementById('search-nyheter-grid');
+    const btn = document.getElementById('search-show-more-nyheter');
+    if (!grid || !btn || btn.dataset.setup === 'true') return;
+
+    const items = Array.from(grid.querySelectorAll('.resource-list__item'));
+    if (!items.length) return;
+
+    const batchSize = 8;
+    let visible = batchSize;
+
+    items.forEach((item, i) => {
+      if (i >= visible) item.style.display = 'none';
+    });
+
+    if (items.length <= visible) {
+      btn.style.display = 'none';
+    }
+
+    btn.addEventListener('click', () => {
+      visible += batchSize;
+      items.forEach((item, i) => {
+        if (i < visible) item.style.display = '';
+      });
+      if (visible >= items.length) btn.style.display = 'none';
+    });
+
+    btn.dataset.setup = 'true';
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupNyheterShowMore);
+  } else {
+    setupNyheterShowMore();
+  }
+})();
+</script>
+
 <script src="{{ 'filter-align.js' | asset_url }}" defer></script>
+
+{% stylesheet %}
+
+/* ── Empty state ── */
+.search-empty-state {
+  padding-block: var(--padding-6xl);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--padding-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.search-empty-state__heading {
+  margin: 0;
+  font-weight: 600;
+}
+
+.search-empty-state__body {
+  margin: 0;
+  max-width: 480px;
+}
+
+/* ── Nyheter i butiken section ── */
+.search-nyheter-section {
+  padding-block-start: var(--padding-xl);
+  padding-block-end: var(--padding-2xl);
+}
+
+.search-nyheter-section__header {
+  border-bottom: 1px solid var(--color-border);
+  padding-block-end: var(--padding-sm);
+  margin-block-end: var(--padding-md);
+}
+
+.search-nyheter-section__title {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* ── Nyheter grid (mirrors resource-list--grid from product-recommendations) ── */
+.search-nyheter-grid.resource-list--grid {
+  display: grid;
+  grid-template-columns: var(--resource-list-columns-mobile, repeat(2, 1fr));
+  gap: var(--resource-list-row-gap-desktop, 16px) var(--resource-list-column-gap-desktop, 16px);
+}
+
+@media screen and (min-width: 750px) {
+  .search-nyheter-grid.resource-list--grid {
+    grid-template-columns: var(--resource-list-columns, repeat(4, 1fr));
+  }
+}
+
+{% endstylesheet %}
 
 {% schema %}
 {
