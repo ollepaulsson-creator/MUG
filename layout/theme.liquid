@@ -9,6 +9,7 @@
   <link rel="dns-prefetch" href="https://cdn.boostcommerce.io">
 
   {%- render 'stylesheets' -%}
+  {{ 'custom.css' | asset_url | stylesheet_tag }}
 
     {%- if settings.favicon != blank -%}
       <link
@@ -205,6 +206,66 @@ document.addEventListener("DOMContentLoaded", function() {
   observer.observe(document.documentElement, { childList: true, subtree: true });
 })();
 </script>
+
+  <script>
+  {% if template contains 'collection' %}
+  (function() {
+    function tryClamp() {
+      var block = document.querySelector('[class*="text_twGGkJ"]') ||
+                  document.querySelector('.boost-pfs-filter-collection-description');
+      if (!block) return false;
+      if (block.querySelector('.desc-read-more')) return true;
+
+      var fullH = block.scrollHeight;
+      if (fullH === 0) return false; // not yet painted
+
+      var ref = block.querySelector('p') || block.querySelector('span') || block;
+      var cs = window.getComputedStyle(ref);
+      var lh = parseFloat(cs.lineHeight);
+      if (!lh || isNaN(lh)) lh = parseFloat(cs.fontSize) * 1.5;
+      if (!lh || isNaN(lh)) return false;
+      var pt = parseFloat(window.getComputedStyle(block).paddingTop) || 0;
+      var maxH = lh * 3 + pt;
+
+      if (fullH <= maxH + 4) return true;
+
+      block.style.maxHeight = maxH + 'px';
+      block.style.overflow  = 'hidden';
+      block.style.position  = 'relative';
+
+      var overlay = document.createElement('span');
+      overlay.className = 'desc-read-more';
+      var link = document.createElement('a');
+      link.href = '#';
+      link.textContent = 'Läs mer';
+      overlay.appendChild(document.createTextNode('.. '));
+      overlay.appendChild(link);
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        block.style.maxHeight = '';
+        block.style.overflow  = '';
+        block.style.position  = '';
+        overlay.remove();
+      });
+      block.appendChild(overlay);
+      return true;
+    }
+
+    /* MutationObserver catches Boost PFS async injection */
+    var mo = new MutationObserver(function() {
+      if (tryClamp()) mo.disconnect();
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+
+    /* Immediate + timed fallbacks */
+    if (!tryClamp()) {
+      [200, 600, 1200, 2500, 4000].forEach(function(d) {
+        setTimeout(function() { if (tryClamp()) mo.disconnect(); }, d);
+      });
+    }
+  })();
+  {% endif %}
+  </script>
 
   </body>
 </html>

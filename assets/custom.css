@@ -1398,7 +1398,10 @@ facet-status-component.facets__status {
   cursor: default;
 }
 
-/* ── Collection description: 3-line clamp ── */
+/* ── Collection description: 3-line clamp (CSS removed — handled by JS only) ── */
+/* Note: webkit-line-clamp is NOT used here because it causes scrollHeight to report
+   the clamped height, which prevents the JS from detecting long content to add "Läs mer" */
+
 .desc-read-more {
   position: absolute;
   bottom: 0;
@@ -1426,5 +1429,11 @@ facet-status-component.facets__status {
 .main-collection-grid__empty-title {
   font-size: 0.9375rem !important;
   font-weight: 600 !important;
+}
+
+@media (min-width: 769px) {
+  #shopify-section-template--29835055006045__section .spacing-style.layout-panel-flex.layout-panel-flex--column.section-content-wrapper.mobile-column {
+    max-width: 80%;
+  }
 }
 
