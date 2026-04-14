@@ -92,6 +92,7 @@
       %}
 
       {% comment %} ── Featured section: JS injects from template-rendered section into grid ── {% endcomment %}
+      <p style="background:yellow;padding:8px;font-size:12px;">DEBUG: featured_key="{{ featured_key }}" | looking for id="shopify-section-featured_{{ featured_key | replace: '-', '_' }}"</p>
       {% if featured_key %}
         <script>
         (function() {
