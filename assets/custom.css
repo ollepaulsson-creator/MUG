@@ -1298,13 +1298,34 @@ facet-status-component.facets__status {
     color: #ffffff !important;
 }
 
-/* ── Announcement bar: mobile padding ── */
+/* ── Announcement bar: mobile padding + center + no clipping ── */
 @media screen and (max-width: 768px) {
   aside.announcement-bar.spacing-style.section.section--page-width.color-scheme-5 {
     padding-top: 15px !important;
     padding-bottom: 15px !important;
     padding-left: 15px !important;
     padding-right: 15px !important;
+    justify-content: center !important;
+  }
+
+  .announcement-bar__slider {
+    overflow: visible !important;
+    flex: unset !important;
+  }
+
+  .announcement-bar__slides {
+    overflow: visible !important;
+  }
+
+  .announcement-bar__slide {
+    overflow: visible !important;
+  }
+
+  .announcement-bar__text {
+    white-space: normal !important;
+    text-align: center !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
   }
 }
 
