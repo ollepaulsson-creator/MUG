@@ -224,8 +224,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
     block.dataset.clampInit = '1';
 
-    block.style.maxHeight = maxH + 'px';
-    block.style.overflow = 'hidden';
+    // Wrap block's children in a plain div so position:relative works reliably
+    var wrapper = document.createElement('div');
+    wrapper.style.maxHeight = maxH + 'px';
+    wrapper.style.overflow = 'hidden';
+    wrapper.style.position = 'relative';
+    while (block.firstChild) {
+      wrapper.appendChild(block.firstChild);
+    }
+    block.appendChild(wrapper);
 
     var btn = document.createElement('a');
     btn.href = '#';
@@ -233,11 +240,12 @@ document.addEventListener("DOMContentLoaded", function() {
     btn.className = 'desc-read-more-btn';
     btn.addEventListener('click', function(e) {
       e.preventDefault();
-      block.style.maxHeight = '';
-      block.style.overflow = '';
+      wrapper.style.maxHeight = '';
+      wrapper.style.overflow = '';
+      wrapper.style.position = '';
       btn.remove();
     });
-    block.parentNode.insertBefore(btn, block.nextSibling);
+    wrapper.appendChild(btn);
     return true;
   }
 
