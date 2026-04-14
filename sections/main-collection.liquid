@@ -92,7 +92,9 @@
       %}
 
       {% comment %} ── Featured section: JS injects from template-rendered section into grid ── {% endcomment %}
-      <p style="background:yellow;padding:8px;font-size:12px;">DEBUG: featured_key="{{ featured_key }}" | looking for id="shopify-section-featured_{{ featured_key | replace: '-', '_' }}"</p>
+      {% style %}
+        [id^="shopify-section-featured_"] { display: none !important; }
+      {% endstyle %}
       {% if featured_key %}
         <script>
         (function() {
@@ -105,6 +107,7 @@
             if (!grid) return;
             var items = grid.querySelectorAll(':scope > .product-grid__item');
             if (items.length < 1) return;
+            sectionEl.style.display = '';
             var li = document.createElement('li');
             li.className = 'product-grid__item product-grid__item--featured';
             li.appendChild(sectionEl);
