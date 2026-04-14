@@ -98,6 +98,7 @@
         <script>
         (function() {
           function injectFeatured() {
+            if (window.innerWidth < 1024) return;
             var page = new URL(window.location.href).searchParams.get('page');
             if (page && page !== '1') return;
             var featuredKey = '{{ featured_key }}';

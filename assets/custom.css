@@ -1366,7 +1366,7 @@ facet-status-component.facets__status {
 }
 
 /* ── Featured section in collection grid ── */
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 1024px) {
   .product-grid__item--featured {
     grid-column: span 2;
     grid-row: span 2;
@@ -1380,7 +1380,7 @@ facet-status-component.facets__status {
   }
 }
 
-@media screen and (max-width: 749px) {
+@media screen and (max-width: 1023px) {
   .product-grid__item--featured {
     display: none;
   }
