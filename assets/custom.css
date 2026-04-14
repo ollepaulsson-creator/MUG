@@ -535,12 +535,11 @@ h4.predictive-search-results__title {
 }
 
 
-.product-grid img,
 .product-media-container img,
 .product-information__media img,
 .resource-card__media img,
 .cart-items__media img {
-    mix-blend-mode: multiply; 
+    mix-blend-mode: multiply;
 }
 
 /* ── Hide thumbnail strip when only one image ── */
