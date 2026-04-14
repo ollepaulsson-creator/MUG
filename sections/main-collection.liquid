@@ -101,17 +101,22 @@
           function injectFeatured() {
             var featuredKey = '{{ featured_key }}';
             var sectionId = 'shopify-section-featured_' + featuredKey.replace(/-/g, '_');
+            console.log('[Featured] key:', featuredKey, '| sectionId:', sectionId);
             var sectionEl = document.getElementById(sectionId);
+            console.log('[Featured] sectionEl found:', !!sectionEl);
             if (!sectionEl) return;
             var grid = document.querySelector('.product-grid--{{ section.id }}');
+            console.log('[Featured] grid found:', !!grid, '| selector: .product-grid--{{ section.id }}');
             if (!grid) return;
             var items = grid.querySelectorAll(':scope > .product-grid__item');
+            console.log('[Featured] product items:', items.length);
             if (items.length < 1) return;
             sectionEl.style.setProperty('display', 'block', 'important');
             var li = document.createElement('li');
             li.className = 'product-grid__item product-grid__item--featured';
             li.appendChild(sectionEl);
             grid.insertBefore(li, items[2] || null);
+            console.log('[Featured] injected successfully');
           }
           if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', injectFeatured);
