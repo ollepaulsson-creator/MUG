@@ -1403,8 +1403,25 @@ facet-status-component.facets__status {
 .boost-pfs-filter-collection-description > div {
   display: -webkit-box !important;
   -webkit-box-orient: vertical !important;
-  -webkit-line-clamp: 3 !important;
-  overflow: hidden !important;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+/* Expanded state — toggled by JS via data-expanded attribute */
+[class*="text_twGGkJ"][data-expanded] > div,
+.boost-pfs-filter-collection-description[data-expanded] > div {
+  -webkit-line-clamp: unset;
+  overflow: visible;
+  display: block !important;
+}
+
+.desc-read-more-btn {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: inherit;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 

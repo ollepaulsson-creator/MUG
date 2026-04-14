@@ -207,6 +207,44 @@ document.addEventListener("DOMContentLoaded", function() {
 })();
 </script>
 
+{% if template contains 'collection' %}
+<script>
+(function() {
+  function initDescExpand() {
+    var block = document.querySelector('[class*="text_twGGkJ"]') ||
+                document.querySelector('.boost-pfs-filter-collection-description');
+    if (!block || block.dataset.clampInit) return false;
+    var inner = block.querySelector('div');
+    if (!inner) return false;
+    block.dataset.clampInit = '1';
+
+    if (inner.scrollHeight <= inner.clientHeight + 2) return true; // not truncated
+
+    var btn = document.createElement('a');
+    btn.href = '#';
+    btn.textContent = 'Läs mer';
+    btn.className = 'desc-read-more-btn';
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      block.dataset.expanded = '1';
+      btn.remove();
+    });
+    block.parentNode.insertBefore(btn, block.nextSibling);
+    return true;
+  }
+
+  var mo = new MutationObserver(function() {
+    if (initDescExpand()) mo.disconnect();
+  });
+  mo.observe(document.documentElement, { childList: true, subtree: true });
+  if (!initDescExpand()) {
+    [200, 600, 1200].forEach(function(d) {
+      setTimeout(function() { if (initDescExpand()) mo.disconnect(); }, d);
+    });
+  }
+})();
+</script>
+{% endif %}
 
   </body>
 </html>
