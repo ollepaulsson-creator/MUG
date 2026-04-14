@@ -53,12 +53,8 @@
       var block = document.querySelector('.text-block--text_twGGkJ');
       if (!block) return;
 
-      block.classList.add('desc-clamped');
-
-      if (block.scrollHeight <= block.clientHeight + 2) {
-        block.classList.remove('desc-clamped');
-        return;
-      }
+      // Only show button if content is actually taller than what's visible
+      if (block.scrollHeight <= block.clientHeight + 2) return;
 
       var link = document.createElement('a');
       link.href = '#';
@@ -66,7 +62,7 @@
       link.textContent = 'Läs mer';
       link.addEventListener('click', function(e) {
         e.preventDefault();
-        block.classList.remove('desc-clamped');
+        block.classList.add('desc-expanded');
         link.remove();
       });
       block.insertAdjacentElement('afterend', link);

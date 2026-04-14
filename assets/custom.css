@@ -1399,12 +1399,6 @@ facet-status-component.facets__status {
 }
 
 /* ── Collection description: read-more truncation ── */
-.text-block--text_twGGkJ.desc-clamped {
-  display: -webkit-box !important;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
 
 a.collection-read-more {
   display: inline-block;
