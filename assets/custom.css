@@ -1403,8 +1403,8 @@ facet-status-component.facets__status {
   position: absolute;
   bottom: 0;
   right: 0;
-  background: var(--color-background, #fff);
-  padding-left: 0;
+  background: linear-gradient(to right, transparent, var(--color-background, #fff) 2.5em);
+  padding-left: 3em;
   white-space: nowrap;
   font-size: inherit;
 }

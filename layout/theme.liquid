@@ -217,7 +217,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var ref = block.querySelector('p') || block;
     var lh = parseFloat(window.getComputedStyle(ref).lineHeight);
     if (!lh || isNaN(lh)) return false;
-    var maxH = lh * 3;
+    var maxH = Math.round(lh) * 3;
 
     if (block.scrollHeight <= maxH + 4) return true; // fits, no clamp needed
 
