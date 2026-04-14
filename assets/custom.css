@@ -1404,7 +1404,7 @@ facet-status-component.facets__status {
   bottom: 0;
   right: 0;
   background: var(--color-background, #fff);
-  padding-left: 8px;
+  padding-left: 0;
   white-space: nowrap;
   font-size: inherit;
 }
