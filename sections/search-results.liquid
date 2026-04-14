@@ -35,7 +35,15 @@
 >
   {% render 'skip-to-content-link', href: '#ResultsList', text: 'accessibility.skip_to_results_list' %}
 
-  <div class="collection-wrapper grid gap-style">
+  {% if search.performed %}
+    <p class="search-results-summary">
+      Visar <strong>{{ search.results_count }}</strong>
+      <strong>produkt{% if search.results_count != 1 %}er{% endif %}</strong>
+      för sökningen <strong>{{ search.terms }}</strong>.
+    </p>
+  {% endif %}
+
+  <div class="collection-wrapper grid gap-style{% if search.results_count == 0 %} collection-wrapper--no-results{% endif %}">
     {% paginate search.results by product_shown %}
 
       {% comment %} Always show filters, even on zero-result searches {% endcomment %}
@@ -219,6 +227,21 @@
 
 {% stylesheet %}
 
+/* ── Search summary line ── */
+.search-results-summary {
+  text-align: center;
+  font-size: 13px;
+  margin-block: 0;
+  padding-block: 8px;
+}
+
+/* ── Inactive filter bar when no results ── */
+.collection-wrapper--no-results .facets-toggle__button {
+  opacity: 0.35;
+  pointer-events: none;
+  cursor: default;
+}
+
 /* ── Empty state ── */
 .search-empty-state {
   padding-block: var(--padding-6xl);
@@ -256,10 +279,13 @@
 }
 
 .search-nyheter-section__title {
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 500;
+  font-family: var(--font-h3--family);
+  font-style: var(--font-h3--style);
+  font-weight: var(--font-h3--weight);
+  font-size: var(--font-h3--size);
+  line-height: var(--font-h3--line-height);
+  letter-spacing: var(--font-h3--letter-spacing);
+  text-transform: var(--font-h3--case);
 }
 
 /* ── Nyheter grid (mirrors resource-list--grid from product-recommendations) ── */

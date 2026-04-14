@@ -53,7 +53,6 @@
         }
       },
       "custom_css": [
-        "a.button.button--primary {height: 49px; margin-top: 0;}",
         "h3 {display: none;}",
         ".search-section__input-wrapper {padding-left: 15px; padding-right: 15px;}",
         ".search-results__no-results {display: none;}"
@@ -71,6 +70,7 @@
     },
     "custom_liquid_TUpVga": {
       "type": "custom-liquid",
+      "disabled": true,
       "custom_css": [
         "p {text-align: center; font-size: 13px;}"
       ],
