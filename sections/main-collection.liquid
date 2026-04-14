@@ -50,7 +50,8 @@
 <script>
   (function() {
     function initDescClamp() {
-      var block = document.querySelector('.text-block--text_twGGkJ');
+      var block = document.querySelector('.boost-pfs-filter-collection-description') ||
+                  document.querySelector('.text-block--text_twGGkJ');
       if (!block) return;
 
       // Measure full height BEFORE any style changes (avoids false-positive from overflow check after clamping)
