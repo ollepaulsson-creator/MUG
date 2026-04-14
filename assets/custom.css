@@ -1314,7 +1314,6 @@ facet-status-component.facets__status {
 /* ── Collection empty state ── */
 .main-collection-grid__empty {
   padding-block-end: var(--padding-3xl);
-  gap: 0;
 }
 
 .main-collection-grid__empty-title {
