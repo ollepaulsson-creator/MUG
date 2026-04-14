@@ -1413,6 +1413,16 @@ facet-status-component.facets__status {
   text-decoration: underline;
   cursor: pointer;
 }
+.desc-read-more-btn:hover {
+  text-decoration: none;
+}
+
+rte-formatter[class*="text_twGGkJ"] a {
+  text-decoration: underline;
+}
+rte-formatter[class*="text_twGGkJ"] a:hover {
+  text-decoration: none;
+}
 
 
 
