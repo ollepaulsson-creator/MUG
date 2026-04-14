@@ -1,14 +1,8 @@
 {% assign product_shown = section.settings.product_shown %}
 
-{% comment %} ── Featured section: parse collection tags like "featured:arturia-hardware" ── {% endcomment %}
-{% assign featured_keys = '' %}
-{% for tag in collection.tags %}
-  {% if tag contains 'featured:' %}
-    {% assign fkey = tag | remove: 'featured:' %}
-    {% assign featured_keys = featured_keys | append: fkey | append: '|' %}
-  {% endif %}
-{% endfor %}
-{% assign featured_keys = featured_keys | split: '|' | compact %}
+{% comment %} ── Featured section: read from collection metafield custom.featured_section ── {% endcomment %}
+{% comment %} Value is a comma-separated list, e.g. "arturia-hardware" or "arturia-hardware,prs-guitars" {% endcomment %}
+{% assign featured_keys = collection.metafields.custom.featured_section.value | split: ',' | compact %}
 {% assign featured_key = nil %}
 {% if featured_keys.size > 0 %}
   {% assign rand = 'now' | date: '%S' | plus: 0 | modulo: featured_keys.size %}
