@@ -8,6 +8,7 @@
   {% assign rand = 'now' | date: '%S' | plus: 0 | modulo: featured_keys.size %}
   {% assign featured_key = featured_keys[rand] %}
 {% endif %}
+<!-- DEBUG featured_key: "{{ featured_key }}" | metafield raw: "{{ collection.metafields.custom.featured_section.value }}" -->
 
 <script>
   (function() {
