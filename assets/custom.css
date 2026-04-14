@@ -1308,7 +1308,12 @@ facet-status-component.facets__status {
 .announcement-bar__slides {
   min-width: 0 !important;
   overflow: hidden !important;
-  padding-right: 20px;
+}
+
+@media screen and (min-width: 769px) {
+  .announcement-bar__slides {
+    padding-right: 20px;
+  }
 }
 
 .announcement-bar__slide {
