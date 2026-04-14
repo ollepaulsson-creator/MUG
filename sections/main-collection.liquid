@@ -46,6 +46,44 @@
   })();
 </script>
 
+{% comment %} ── Collection description: 3-line clamp with "Läs mer" expand ── {% endcomment %}
+<script>
+  (function() {
+    function initDescriptionClamp() {
+      var block = document.querySelector('.text-block--text_twGGkJ');
+      if (!block) return;
+
+      var wrapper = document.createElement('div');
+      wrapper.className = 'collection-desc-inner';
+      while (block.firstChild) wrapper.appendChild(block.firstChild);
+      block.appendChild(wrapper);
+
+      if (wrapper.scrollHeight <= wrapper.clientHeight + 2) {
+        while (wrapper.firstChild) block.appendChild(wrapper.firstChild);
+        block.removeChild(wrapper);
+        return;
+      }
+
+      var link = document.createElement('a');
+      link.href = '#';
+      link.className = 'collection-read-more';
+      link.textContent = 'Läs mer';
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        wrapper.classList.remove('collection-desc-inner');
+        link.remove();
+      });
+      block.appendChild(link);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initDescriptionClamp);
+    } else {
+      initDescriptionClamp();
+    }
+  })();
+</script>
+
 {% comment %} We always render this full-width, as the child blocks have width: page/full settings {% endcomment %}
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <results-list
