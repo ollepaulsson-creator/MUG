@@ -76,7 +76,7 @@
       ],
       "name": "t:names.custom_liquid",
       "settings": {
-        "custom_liquid": "{% if search.performed and search.results_count > 0 %}\n  <p>\n    Visar <strong>{{ search.results_count }}</strong>\n    <strong>produkt{% if search.results_count != 1 %}er{% endif %}</strong>\n    för sökningen <strong>{{ search.terms }}</strong>.\n  </p>\n{% endif %}",
+        "custom_liquid": "{% if search.performed %}\n  <p>\n    Visar <strong>{{ search.results_count }}</strong>\n    <strong>produkt{% if search.results_count != 1 %}er{% endif %}</strong>\n    för sökningen <strong>{{ search.terms }}</strong>.\n  </p>\n{% endif %}",
         "color_scheme": "",
         "section_width": "page-width",
         "padding-block-start": 0,

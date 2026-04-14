@@ -124,7 +124,7 @@
         {% comment %} Zero-results: empty state message + Nyheter i butiken {% endcomment %}
         <div
           id="ResultsList"
-          style="grid-column: 1 / -1; border-top: 1px solid var(--color-border);"
+          style="grid-column: 1 / -1; border-top: 1px solid #e4e4e4;"
         >
           <div>
 
@@ -232,9 +232,9 @@
 
 .search-empty-state__heading {
   margin: 0;
-  font-size: 2rem;
-  font-weight: 400;
-  line-height: 1.2;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.4;
 }
 
 .search-empty-state__body {
@@ -244,21 +244,15 @@
 
 /* ── Nyheter i butiken section ── */
 .search-nyheter-section {
-  padding-block-start: var(--padding-xl);
+  padding-block-start: var(--padding-md);
   padding-block-end: var(--padding-2xl);
-  padding-inline: 15px;
-}
-
-@media screen and (min-width: 750px) {
-  .search-nyheter-section {
-    padding-inline: var(--page-margin, 20px);
-  }
 }
 
 .search-nyheter-section__header {
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid #e4e4e4;
   padding-block-end: var(--padding-sm);
-  margin-block-end: var(--padding-md);
+  margin-block-end: 0;
+  padding-inline: 15px;
 }
 
 .search-nyheter-section__title {
@@ -272,7 +266,7 @@
 .search-nyheter-grid.resource-list--grid {
   display: grid;
   grid-template-columns: var(--resource-list-columns-mobile, repeat(2, 1fr));
-  gap: var(--resource-list-row-gap-desktop, 16px) var(--resource-list-column-gap-desktop, 16px);
+  gap: 0;
 }
 
 @media screen and (min-width: 750px) {
