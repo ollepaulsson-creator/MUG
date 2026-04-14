@@ -6,9 +6,9 @@
 {% assign featured_key = nil %}
 {% if featured_keys.size > 0 %}
   {% assign rand = 'now' | date: '%S' | plus: 0 | modulo: featured_keys.size %}
-  {% assign featured_key = featured_keys[rand] %}
+  {% assign featured_key_raw = featured_keys[rand] %}
+  {% assign featured_key = featured_key_raw | strip | downcase | replace: 'å', 'a' | replace: 'ä', 'a' | replace: 'ö', 'o' | replace: ' ', '-' %}
 {% endif %}
-<!-- DEBUG featured_key: "{{ featured_key }}" | metafield raw: "{{ collection.metafields.custom.featured_section.value }}" -->
 
 <script>
   (function() {
