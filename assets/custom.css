@@ -1298,6 +1298,16 @@ facet-status-component.facets__status {
     color: #ffffff !important;
 }
 
+/* ── Announcement bar: mobile padding ── */
+@media screen and (max-width: 768px) {
+  aside.announcement-bar.spacing-style.section.section--page-width.color-scheme-5 {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+}
+
 /* ── Announcement bar: truncate text, never wrap to second row ── */
 .announcement-bar__slider {
   min-width: 0 !important;
