@@ -1428,7 +1428,8 @@ facet-status-component.facets__status {
 }
 
 .facets__form {
-    padding-bottom: 12px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 @media (min-width: 769px) {
