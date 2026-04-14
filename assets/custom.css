@@ -984,7 +984,7 @@ ul.product-grid {
 .facets.facets--horizontal.spacing-style {
     border-bottom: 1px solid #e4e4e4;
 }
-.facets-block-wrapper--horizontal:not(:has(active-filters li)) {
+.facets-block-wrapper--horizontal:not(:has(*)) {
     display: none;
 }
 .facets-toggle {
@@ -1425,6 +1425,10 @@ facet-status-component.facets__status {
 .main-collection-grid__empty-title {
   font-size: 0.9375rem !important;
   font-weight: 600 !important;
+}
+
+.section-content-wrapper.section-content-wrapper {
+  padding-bottom: 30px;
 }
 
 @media (min-width: 769px) {
