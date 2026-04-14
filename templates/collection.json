@@ -808,6 +808,34 @@
         "home_label": "Start",
         "aria_label": "Breadcrumbs"
       }
+    },
+    "featured_elgitarr_1": {
+      "type": "instant-pAIjqVrDW5Me8tFH",
+      "settings": {}
+    },
+    "featured_akustisk_gitarr_1": {
+      "type": "instant-zqWAHXqkOtl5ppiB",
+      "settings": {}
+    },
+    "featured_bas_1": {
+      "type": "instant-3Gzh5NpGBNGISxW3",
+      "settings": {}
+    },
+    "featured_slagverk_1": {
+      "type": "instant-m2nFbDXTeAwVGGCk",
+      "settings": {}
+    },
+    "featured_klaviatur_1": {
+      "type": "instant-GTIaL5v5E6BXEu1d",
+      "settings": {}
+    },
+    "featured_studio_1": {
+      "type": "instant-MavBILcAnwgDQP2p",
+      "settings": {}
+    },
+    "featured_pa_1": {
+      "type": "instant-NLnMgVf80h8UST5v",
+      "settings": {}
     }
   },
   "order": [
@@ -817,6 +845,13 @@
     "custom_liquid_KrgeXX",
     "main",
     "section_yFJeQH",
-    "section_KMH7q7"
+    "section_KMH7q7",
+    "featured_elgitarr_1",
+    "featured_akustisk_gitarr_1",
+    "featured_bas_1",
+    "featured_slagverk_1",
+    "featured_klaviatur_1",
+    "featured_studio_1",
+    "featured_pa_1"
   ]
 }
