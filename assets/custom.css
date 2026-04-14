@@ -1398,16 +1398,14 @@ facet-status-component.facets__status {
   cursor: default;
 }
 
-/* ── Collection description: 3-line clamp — JS sets max-height + float ── */
+/* ── Collection description: 3-line clamp ── */
 .desc-read-more-btn {
-  float: right;
-  clear: right;
-  margin-left: 6px;
+  display: block;
+  margin-top: 4px;
   font-size: inherit;
   color: inherit;
   text-decoration: underline;
   cursor: pointer;
-  white-space: nowrap;
 }
 
 

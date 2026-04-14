@@ -226,7 +226,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     block.style.maxHeight = maxH + 'px';
     block.style.overflow = 'hidden';
-    block.style.position = 'relative';
 
     var btn = document.createElement('a');
     btn.href = '#';
@@ -236,10 +235,9 @@ document.addEventListener("DOMContentLoaded", function() {
       e.preventDefault();
       block.style.maxHeight = '';
       block.style.overflow = '';
-      block.style.position = '';
       btn.remove();
     });
-    block.appendChild(btn);
+    block.parentNode.insertBefore(btn, block.nextSibling);
     return true;
   }
 
