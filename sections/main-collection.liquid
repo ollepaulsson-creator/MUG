@@ -46,57 +46,6 @@
   })();
 </script>
 
-{% comment %} ── Collection description: 3-line clamp with Läs mer ── {% endcomment %}
-<script>
-  (function() {
-    function initDescClamp() {
-      var block = document.querySelector('.boost-pfs-filter-collection-description') ||
-                  document.querySelector('.text-block--text_twGGkJ');
-      if (!block) return;
-
-      // Measure full height BEFORE any style changes (avoids false-positive from overflow check after clamping)
-      var fullH = block.scrollHeight;
-
-      // Compute line height from the first <p> or the block itself
-      var ref = block.querySelector('p') || block;
-      var cs = window.getComputedStyle(ref);
-      var lh = parseFloat(cs.lineHeight);
-      if (!lh || isNaN(lh)) lh = parseFloat(cs.fontSize) * 1.5;
-      var pt = parseFloat(cs.paddingTop) || 0;
-      var maxH = lh * 3 + pt;
-
-      if (fullH <= maxH + 4) return; // content fits — nothing to do
-
-      // Constrain height — works on any display type including flex
-      block.style.maxHeight = maxH + 'px';
-      block.style.overflow  = 'hidden';
-      block.style.position  = 'relative';
-
-      // ".. Läs mer" inline overlay at end of last visible line
-      var overlay = document.createElement('span');
-      overlay.className = 'desc-read-more';
-      var link = document.createElement('a');
-      link.href = '#';
-      link.textContent = 'Läs mer';
-      overlay.appendChild(document.createTextNode('.. '));
-      overlay.appendChild(link);
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        block.style.maxHeight = '';
-        block.style.overflow  = '';
-        block.style.position  = '';
-        overlay.remove();
-      });
-      block.appendChild(overlay);
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initDescClamp);
-    } else {
-      initDescClamp();
-    }
-  })();
-</script>
 
 {% comment %} We always render this full-width, as the child blocks have width: page/full settings {% endcomment %}
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
