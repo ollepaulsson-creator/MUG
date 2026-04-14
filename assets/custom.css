@@ -1298,7 +1298,36 @@ facet-status-component.facets__status {
     color: #ffffff !important;
 }
 
-/* ── Announcement bar: mobile padding + center + no clipping ── */
+/* ── Announcement bar: truncate text on desktop, never wrap to second row ── */
+.announcement-bar__slider {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  flex: 1 1 0% !important;
+}
+
+.announcement-bar__slides {
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+@media screen and (min-width: 769px) {
+  .announcement-bar__slides {
+    padding-right: 20px;
+  }
+}
+
+.announcement-bar__slide {
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.announcement-bar__text {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* ── Announcement bar: mobile — centered, no clipping ── */
 @media screen and (max-width: 768px) {
   aside.announcement-bar.spacing-style.section.section--page-width.color-scheme-5 {
     padding-top: 15px !important;
@@ -1327,35 +1356,6 @@ facet-status-component.facets__status {
     overflow: visible !important;
     text-overflow: clip !important;
   }
-}
-
-/* ── Announcement bar: truncate text, never wrap to second row ── */
-.announcement-bar__slider {
-  min-width: 0 !important;
-  overflow: hidden !important;
-  flex: 1 1 0% !important;
-}
-
-.announcement-bar__slides {
-  min-width: 0 !important;
-  overflow: hidden !important;
-}
-
-@media screen and (min-width: 769px) {
-  .announcement-bar__slides {
-    padding-right: 20px;
-  }
-}
-
-.announcement-bar__slide {
-  min-width: 0 !important;
-  overflow: hidden !important;
-}
-
-.announcement-bar__text {
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
 }
 
 /* ── Collection / filter row border ── */
