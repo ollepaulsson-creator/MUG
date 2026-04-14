@@ -1427,8 +1427,8 @@ facet-status-component.facets__status {
   font-weight: 600 !important;
 }
 
-.section-content-wrapper.section-content-wrapper {
-  padding-bottom: 10px;
+.facets__form {
+    padding-bottom: 12px;
 }
 
 @media (min-width: 769px) {
