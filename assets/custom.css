@@ -1398,26 +1398,15 @@ facet-status-component.facets__status {
   cursor: default;
 }
 
-/* ── Collection description: 3-line clamp (CSS removed — handled by JS only) ── */
-/* Note: webkit-line-clamp is NOT used here because it causes scrollHeight to report
-   the clamped height, which prevents the JS from detecting long content to add "Läs mer" */
+/* ── Collection description: 3-line clamp ── */
+[class*="text_twGGkJ"] > div,
+.boost-pfs-filter-collection-description > div {
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 3 !important;
+  overflow: hidden !important;
+}
 
-.desc-read-more {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  padding-left: 80px;
-  background: linear-gradient(to right, transparent, var(--color-background, #fff) 35%);
-  font-size: inherit;
-  line-height: inherit;
-  color: inherit;
-  cursor: pointer;
-  white-space: nowrap;
-}
-.desc-read-more a {
-  text-decoration: underline;
-  color: inherit;
-}
 
 
 /* ── Collection empty state ── */
