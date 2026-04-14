@@ -1299,3 +1299,14 @@ facet-status-component.facets__status {
     color: #ffffff !important;
 }
 
+/* ── Collection / filter row border ── */
+.facets-toggle {
+  border-bottom: 1px solid #E4E4E4;
+}
+
+/* ── Collection empty state heading ── */
+.main-collection-grid__empty-title {
+  font-size: 0.9375rem !important;
+  font-weight: 600 !important;
+}
+
