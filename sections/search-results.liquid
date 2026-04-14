@@ -124,20 +124,13 @@
         {% comment %} Zero-results: empty state message + Nyheter i butiken {% endcomment %}
         <div
           id="ResultsList"
-          class="grid main-collection-grid spacing-style"
-          style="
-            --grid-column--desktop: var(--centered);
-            --grid-column--mobile: var(--full-width);
-            --grid--margin--mobile: 0;
-            --padding-inline-start: {{ section.settings.padding-inline-start }}px;
-            --padding-inline-end: {{ section.settings.padding-inline-end }}px;
-          "
+          style="grid-column: 1 / -1; border-top: 1px solid var(--color-border);"
         >
-          <div style="grid-column: var(--full-width);">
+          <div>
 
             {% comment %} Empty state message {% endcomment %}
             <div class="search-empty-state">
-              <p class="search-empty-state__heading h3">Inga resultat på din sökning</p>
+              <p class="search-empty-state__heading">Inga resultat på din sökning</p>
               <p class="search-empty-state__body">
                 Inga resultat hittades för "{{ search.terms | escape }}". Kontrollera stavningen eller använd ett annat ord eller fras.
               </p>
@@ -163,7 +156,7 @@
               >
                 {% for product in nyheter_collection.products limit: 24 %}
                   <div class="resource-list__item">
-                    {% content_for 'block', type: '_product-card', id: 'static-product-card-nyheter', closest.product: product %}
+                    {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
                   </div>
                 {% endfor %}
               </div>
@@ -239,7 +232,9 @@
 
 .search-empty-state__heading {
   margin: 0;
-  font-weight: 600;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.2;
 }
 
 .search-empty-state__body {
@@ -251,6 +246,13 @@
 .search-nyheter-section {
   padding-block-start: var(--padding-xl);
   padding-block-end: var(--padding-2xl);
+  padding-inline: 15px;
+}
+
+@media screen and (min-width: 750px) {
+  .search-nyheter-section {
+    padding-inline: var(--page-margin, 20px);
+  }
 }
 
 .search-nyheter-section__header {
