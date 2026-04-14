@@ -229,7 +229,7 @@ document.addEventListener("DOMContentLoaded", function() {
       block.dataset.expanded = '1';
       btn.remove();
     });
-    block.parentNode.insertBefore(btn, block.nextSibling);
+    block.appendChild(btn);
     return true;
   }
 
