@@ -1304,7 +1304,11 @@ facet-status-component.facets__status {
   border-bottom: 1px solid #E4E4E4;
 }
 
-/* ── Collection empty state heading ── */
+/* ── Collection empty state ── */
+.main-collection-grid__empty {
+  padding-block-end: var(--padding-3xl);
+}
+
 .main-collection-grid__empty-title {
   font-size: 0.9375rem !important;
   font-weight: 600 !important;
