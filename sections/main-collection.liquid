@@ -107,7 +107,7 @@
             if (!grid) return;
             var items = grid.querySelectorAll(':scope > .product-grid__item');
             if (items.length < 1) return;
-            sectionEl.style.display = '';
+            sectionEl.style.setProperty('display', 'block', 'important');
             var li = document.createElement('li');
             li.className = 'product-grid__item product-grid__item--featured';
             li.appendChild(sectionEl);
