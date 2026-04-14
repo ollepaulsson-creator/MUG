@@ -226,23 +226,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
     block.dataset.clampInit = '1';
 
-    // Apply max-height clamp
+    // Apply max-height clamp with relative positioning for absolute btn
     inner.style.maxHeight = maxH + 'px';
     inner.style.overflow = 'hidden';
+    inner.style.position = 'relative';
 
-    // Float "Läs mer" right, pushed to last line via margin-top
     var btn = document.createElement('a');
     btn.href = '#';
-    btn.textContent = 'Läs mer';
+    btn.textContent = '… Läs mer';
     btn.className = 'desc-read-more-btn';
-    btn.style.marginTop = (maxH - lh) + 'px';
     btn.addEventListener('click', function(e) {
       e.preventDefault();
       inner.style.maxHeight = '';
       inner.style.overflow = '';
+      inner.style.position = '';
       btn.remove();
     });
-    inner.insertBefore(btn, inner.firstChild);
+    inner.appendChild(btn);
     return true;
   }
 
