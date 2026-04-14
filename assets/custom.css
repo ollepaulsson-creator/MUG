@@ -1298,6 +1298,29 @@ facet-status-component.facets__status {
     color: #ffffff !important;
 }
 
+/* ── Announcement bar: truncate text, never wrap to second row ── */
+.announcement-bar__slider {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  flex: 1 1 0% !important;
+}
+
+.announcement-bar__slides {
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.announcement-bar__slide {
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.announcement-bar__text {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
 /* ── Collection / filter row border ── */
 .facets-toggle {
   border-bottom: 1px solid #E4E4E4;
