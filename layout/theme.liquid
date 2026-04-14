@@ -216,20 +216,33 @@ document.addEventListener("DOMContentLoaded", function() {
     if (!block || block.dataset.clampInit) return false;
     var inner = block.querySelector('div');
     if (!inner) return false;
+
+    var ref = inner.querySelector('span') || inner;
+    var lh = parseFloat(window.getComputedStyle(ref).lineHeight);
+    if (!lh || isNaN(lh)) return false;
+    var maxH = lh * 3;
+
+    if (inner.scrollHeight <= maxH + 4) return true; // fits, no clamp needed
+
     block.dataset.clampInit = '1';
 
-    if (inner.scrollHeight <= inner.clientHeight + 2) return true; // not truncated
+    // Apply max-height clamp
+    inner.style.maxHeight = maxH + 'px';
+    inner.style.overflow = 'hidden';
 
+    // Float "Läs mer" right, pushed to last line via margin-top
     var btn = document.createElement('a');
     btn.href = '#';
     btn.textContent = 'Läs mer';
     btn.className = 'desc-read-more-btn';
+    btn.style.marginTop = (maxH - lh) + 'px';
     btn.addEventListener('click', function(e) {
       e.preventDefault();
-      block.dataset.expanded = '1';
+      inner.style.maxHeight = '';
+      inner.style.overflow = '';
       btn.remove();
     });
-    block.appendChild(btn);
+    inner.insertBefore(btn, inner.firstChild);
     return true;
   }
 
