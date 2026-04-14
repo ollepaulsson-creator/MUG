@@ -91,33 +91,14 @@
         paginate: paginate
       %}
 
-      {% comment %} ── Featured section holder (injected into grid via JS) ── {% endcomment %}
+      {% comment %} ── Featured section: JS injects from template-rendered section into grid ── {% endcomment %}
       {% if featured_key %}
-        <div id="collection-featured-holder" style="display:none;" aria-hidden="true">
-          {% if featured_key == 'elgitarr-1' %}
-            {% section 'instant-pAIjqVrDW5Me8tFH' %}
-          {% elsif featured_key == 'akustisk-gitarr-1' %}
-            {% section 'instant-zqWAHXqkOtl5ppiB' %}
-          {% elsif featured_key == 'bas-1' %}
-            {% section 'instant-3Gzh5NpGBNGISxW3' %}
-          {% elsif featured_key == 'slagverk-1' %}
-            {% section 'instant-m2nFbDXTeAwVGGCk' %}
-          {% elsif featured_key == 'klaviatur-1' %}
-            {% section 'instant-GTIaL5v5E6BXEu1d' %}
-          {% elsif featured_key == 'studio-1' %}
-            {% section 'instant-MavBILcAnwgDQP2p' %}
-          {% elsif featured_key == 'pa-1' %}
-            {% section 'instant-NLnMgVf80h8UST5v' %}
-          {% elsif featured_key == 'arturia-hardware' %}
-            {% section 'instant-wQg86ffb9HGydc9k' %}
-          {% endif %}
-        </div>
         <script>
         (function() {
           function injectFeatured() {
-            var holder = document.getElementById('collection-featured-holder');
-            if (!holder) return;
-            var sectionEl = holder.firstElementChild;
+            var featuredKey = '{{ featured_key }}';
+            var sectionId = 'shopify-section-featured_' + featuredKey.replace(/-/g, '_');
+            var sectionEl = document.getElementById(sectionId);
             if (!sectionEl) return;
             var grid = document.querySelector('.product-grid--{{ section.id }}');
             if (!grid) return;
@@ -127,7 +108,6 @@
             li.className = 'product-grid__item product-grid__item--featured';
             li.appendChild(sectionEl);
             grid.insertBefore(li, items[2] || null);
-            holder.remove();
           }
           if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', injectFeatured);

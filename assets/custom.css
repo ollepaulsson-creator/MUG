@@ -1360,6 +1360,11 @@ facet-status-component.facets__status {
   border-bottom: 1px solid #E4E4E4;
 }
 
+/* ── Featured section slots: hidden until JS injects into grid ── */
+[id^="shopify-section-featured_"] {
+  display: none;
+}
+
 /* ── Featured section in collection grid ── */
 @media screen and (min-width: 750px) {
   .product-grid__item--featured {
