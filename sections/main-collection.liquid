@@ -88,6 +88,8 @@
       <script>
       (function() {
         function injectFeatured() {
+          var page = new URL(window.location.href).searchParams.get('page');
+          if (page && page !== '1') return;
           var sectionEl = document.querySelector('[id*="__featured_"]');
           if (!sectionEl) return;
           var grid = document.querySelector('.product-grid--{{ section.id }}');
