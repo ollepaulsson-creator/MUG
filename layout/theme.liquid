@@ -214,22 +214,19 @@ document.addEventListener("DOMContentLoaded", function() {
     var block = document.querySelector('[class*="text_twGGkJ"]') ||
                 document.querySelector('.boost-pfs-filter-collection-description');
     if (!block || block.dataset.clampInit) return false;
-    var inner = block.querySelector('div');
-    if (!inner) return false;
 
-    var ref = inner.querySelector('span') || inner;
+    var ref = block.querySelector('p') || block;
     var lh = parseFloat(window.getComputedStyle(ref).lineHeight);
     if (!lh || isNaN(lh)) return false;
     var maxH = lh * 3;
 
-    if (inner.scrollHeight <= maxH + 4) return true; // fits, no clamp needed
+    if (block.scrollHeight <= maxH + 4) return true; // fits, no clamp needed
 
     block.dataset.clampInit = '1';
 
-    // Apply max-height clamp with relative positioning for absolute btn
-    inner.style.maxHeight = maxH + 'px';
-    inner.style.overflow = 'hidden';
-    inner.style.position = 'relative';
+    block.style.maxHeight = maxH + 'px';
+    block.style.overflow = 'hidden';
+    block.style.position = 'relative';
 
     var btn = document.createElement('a');
     btn.href = '#';
@@ -237,12 +234,12 @@ document.addEventListener("DOMContentLoaded", function() {
     btn.className = 'desc-read-more-btn';
     btn.addEventListener('click', function(e) {
       e.preventDefault();
-      inner.style.maxHeight = '';
-      inner.style.overflow = '';
-      inner.style.position = '';
+      block.style.maxHeight = '';
+      block.style.overflow = '';
+      block.style.position = '';
       btn.remove();
     });
-    inner.appendChild(btn);
+    block.appendChild(btn);
     return true;
   }
 
