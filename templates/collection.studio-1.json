@@ -808,6 +808,10 @@
         "home_label": "Start",
         "aria_label": "Breadcrumbs"
       }
+    },
+    "featured_studio_1": {
+      "type": "instant-MavBILcAnwgDQP2p",
+      "settings": {}
     }
   },
   "order": [
@@ -817,6 +821,7 @@
     "custom_liquid_KrgeXX",
     "main",
     "section_yFJeQH",
-    "section_KMH7q7"
+    "section_KMH7q7",
+    "featured_studio_1"
   ]
 }

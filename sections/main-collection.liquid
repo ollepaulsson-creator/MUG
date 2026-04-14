@@ -1,15 +1,5 @@
 {% assign product_shown = section.settings.product_shown %}
 
-{% comment %} ── Featured section: read from collection metafield custom.featured_section ── {% endcomment %}
-{% comment %} Value is a comma-separated list, e.g. "arturia-hardware" or "arturia-hardware,prs-guitars" {% endcomment %}
-{% assign featured_keys = collection.metafields.custom.featured_section.value | split: ',' | compact %}
-{% assign featured_key = nil %}
-{% if featured_keys.size > 0 %}
-  {% assign rand = 'now' | date: '%S' | plus: 0 | modulo: featured_keys.size %}
-  {% assign featured_key_raw = featured_keys[rand] %}
-  {% assign featured_key = featured_key_raw | strip | downcase | replace: 'å', 'a' | replace: 'ä', 'a' | replace: 'ö', 'o' | replace: ' ', '-' %}
-{% endif %}
-
 <script>
   (function() {
     var url = new URL(window.location.href);
@@ -95,32 +85,28 @@
       {% style %}
         [id*="__featured_"] { display: none !important; }
       {% endstyle %}
-      {% if featured_key %}
-        <script>
-        (function() {
-          function injectFeatured() {
-            var featuredKey = '{{ featured_key }}';
-            var sectionKey = 'featured_' + featuredKey.replace(/-/g, '_');
-            var sectionEl = document.querySelector('[id$="__' + sectionKey + '"]');
-            if (!sectionEl) return;
-            var grid = document.querySelector('.product-grid--{{ section.id }}');
-            if (!grid) return;
-            var items = grid.querySelectorAll(':scope > .product-grid__item');
-            if (items.length < 1) return;
-            sectionEl.style.setProperty('display', 'block', 'important');
-            var li = document.createElement('li');
-            li.className = 'product-grid__item product-grid__item--featured';
-            li.appendChild(sectionEl);
-            grid.insertBefore(li, items[2] || null);
-          }
-          if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', injectFeatured);
-          } else {
-            injectFeatured();
-          }
-        })();
-        </script>
-      {% endif %}
+      <script>
+      (function() {
+        function injectFeatured() {
+          var sectionEl = document.querySelector('[id*="__featured_"]');
+          if (!sectionEl) return;
+          var grid = document.querySelector('.product-grid--{{ section.id }}');
+          if (!grid) return;
+          var items = grid.querySelectorAll(':scope > .product-grid__item');
+          if (items.length < 1) return;
+          sectionEl.style.setProperty('display', 'block', 'important');
+          var li = document.createElement('li');
+          li.className = 'product-grid__item product-grid__item--featured';
+          li.appendChild(sectionEl);
+          grid.insertBefore(li, items[2] || null);
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', injectFeatured);
+        } else {
+          injectFeatured();
+        }
+      })();
+      </script>
 
       {% if section.settings.enable_pagination %}
         {%- comment -%} Pagination controls {%- endcomment -%}
