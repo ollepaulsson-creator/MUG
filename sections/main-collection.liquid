@@ -47,7 +47,7 @@
   {% render 'skip-to-content-link', href: '#ResultsList', text: 'accessibility.skip_to_results_list' %}
 
   <div
-    class="collection-wrapper grid gap-style"
+    class="collection-wrapper grid gap-style{% if collection.products_count == 0 %} collection-wrapper--no-results{% endif %}"
   >
     {% content_for 'block',
       type: 'filters',

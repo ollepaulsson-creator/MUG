@@ -1304,6 +1304,13 @@ facet-status-component.facets__status {
   border-bottom: 1px solid #E4E4E4;
 }
 
+/* ── Inactive filter button when no results ── */
+.collection-wrapper--no-results .facets-toggle__button {
+  opacity: 0.35;
+  pointer-events: none;
+  cursor: default;
+}
+
 /* ── Collection empty state ── */
 .main-collection-grid__empty {
   padding-block-end: var(--padding-3xl);
