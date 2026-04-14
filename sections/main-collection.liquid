@@ -69,19 +69,24 @@
       // Constrain height — works on any display type including flex
       block.style.maxHeight = maxH + 'px';
       block.style.overflow  = 'hidden';
+      block.style.position  = 'relative';
 
-      // "Läs mer" expand link
-      var btn = document.createElement('a');
-      btn.href = '#';
-      btn.className = 'desc-read-more';
-      btn.textContent = 'Läs mer';
-      btn.addEventListener('click', function(e) {
+      // ".. Läs mer" inline overlay at end of last visible line
+      var overlay = document.createElement('span');
+      overlay.className = 'desc-read-more';
+      var link = document.createElement('a');
+      link.href = '#';
+      link.textContent = 'Läs mer';
+      overlay.appendChild(document.createTextNode('.. '));
+      overlay.appendChild(link);
+      link.addEventListener('click', function(e) {
         e.preventDefault();
         block.style.maxHeight = '';
         block.style.overflow  = '';
-        btn.remove();
+        block.style.position  = '';
+        overlay.remove();
       });
-      block.insertAdjacentElement('afterend', btn);
+      block.appendChild(overlay);
     }
 
     if (document.readyState === 'loading') {

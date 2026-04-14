@@ -1400,12 +1400,20 @@ facet-status-component.facets__status {
 
 /* ── Collection description: 3-line clamp ── */
 .desc-read-more {
-  display: block;
-  margin-top: 4px;
-  padding-left: 15px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-left: 40px;
+  background: linear-gradient(to right, transparent, var(--color-background, #fff) 40%);
+  font-size: inherit;
+  line-height: inherit;
   color: inherit;
-  text-decoration: underline;
   cursor: pointer;
+  white-space: nowrap;
+}
+.desc-read-more a {
+  text-decoration: underline;
+  color: inherit;
 }
 
 
