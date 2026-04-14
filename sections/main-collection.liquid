@@ -53,32 +53,32 @@
       var block = document.querySelector('.text-block--text_twGGkJ');
       if (!block) return;
 
-      // Apply via inline styles — bypasses any CSS processor that strips -webkit-box-orient
-      block.style.setProperty('display', '-webkit-box');
-      block.style.setProperty('-webkit-line-clamp', '3');
-      block.style.setProperty('-webkit-box-orient', 'vertical');
-      block.style.setProperty('overflow', 'hidden');
+      // Measure full height BEFORE any style changes (avoids false-positive from overflow check after clamping)
+      var fullH = block.scrollHeight;
 
-      // If content fits within 3 lines there is nothing to do
-      if (block.scrollHeight <= block.clientHeight + 2) {
-        block.style.removeProperty('display');
-        block.style.removeProperty('-webkit-line-clamp');
-        block.style.removeProperty('-webkit-box-orient');
-        block.style.removeProperty('overflow');
-        return;
-      }
+      // Compute line height from the first <p> or the block itself
+      var ref = block.querySelector('p') || block;
+      var cs = window.getComputedStyle(ref);
+      var lh = parseFloat(cs.lineHeight);
+      if (!lh || isNaN(lh)) lh = parseFloat(cs.fontSize) * 1.5;
+      var pt = parseFloat(cs.paddingTop) || 0;
+      var maxH = lh * 3 + pt;
 
-      // Add "Läs mer" link
+      if (fullH <= maxH + 4) return; // content fits — nothing to do
+
+      // Constrain height — works on any display type including flex
+      block.style.maxHeight = maxH + 'px';
+      block.style.overflow  = 'hidden';
+
+      // "Läs mer" expand link
       var btn = document.createElement('a');
       btn.href = '#';
       btn.className = 'desc-read-more';
       btn.textContent = 'Läs mer';
       btn.addEventListener('click', function(e) {
         e.preventDefault();
-        block.style.removeProperty('display');
-        block.style.removeProperty('-webkit-line-clamp');
-        block.style.removeProperty('-webkit-box-orient');
-        block.style.removeProperty('overflow');
+        block.style.maxHeight = '';
+        block.style.overflow  = '';
         btn.remove();
       });
       block.insertAdjacentElement('afterend', btn);
