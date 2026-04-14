@@ -1,5 +1,20 @@
 {% assign product_shown = section.settings.product_shown %}
 
+{% comment %} ── Featured section: parse collection tags like "featured:arturia-hardware" ── {% endcomment %}
+{% assign featured_keys = '' %}
+{% for tag in collection.tags %}
+  {% if tag contains 'featured:' %}
+    {% assign fkey = tag | remove: 'featured:' %}
+    {% assign featured_keys = featured_keys | append: fkey | append: '|' %}
+  {% endif %}
+{% endfor %}
+{% assign featured_keys = featured_keys | split: '|' | compact %}
+{% assign featured_key = nil %}
+{% if featured_keys.size > 0 %}
+  {% assign rand = 'now' | date: '%S' | plus: 0 | modulo: featured_keys.size %}
+  {% assign featured_key = featured_keys[rand] %}
+{% endif %}
+
 <script>
   (function() {
     var url = new URL(window.location.href);
@@ -80,6 +95,39 @@
         products: collection.products,
         paginate: paginate
       %}
+
+      {% comment %} ── Featured section holder (injected into grid via JS) ── {% endcomment %}
+      {% if featured_key %}
+        <div id="collection-featured-holder" style="display:none;" aria-hidden="true">
+          {% if featured_key == 'arturia-hardware' %}
+            {% section 'instant-wQg86ffb9HGydc9k' %}
+          {% endif %}
+        </div>
+        <script>
+        (function() {
+          function injectFeatured() {
+            var holder = document.getElementById('collection-featured-holder');
+            if (!holder) return;
+            var sectionEl = holder.firstElementChild;
+            if (!sectionEl) return;
+            var grid = document.querySelector('.product-grid--{{ section.id }}');
+            if (!grid) return;
+            var items = grid.querySelectorAll(':scope > .product-grid__item');
+            if (items.length < 1) return;
+            var li = document.createElement('li');
+            li.className = 'product-grid__item product-grid__item--featured';
+            li.appendChild(sectionEl);
+            grid.insertBefore(li, items[2] || null);
+            holder.remove();
+          }
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', injectFeatured);
+          } else {
+            injectFeatured();
+          }
+        })();
+        </script>
+      {% endif %}
 
       {% if section.settings.enable_pagination %}
         {%- comment -%} Pagination controls {%- endcomment -%}
