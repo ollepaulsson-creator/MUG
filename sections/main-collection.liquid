@@ -52,15 +52,13 @@
     function initDescriptionClamp() {
       var block = document.querySelector('.text-block--text_twGGkJ');
       if (!block) return;
+      var p = block.querySelector('p');
+      if (!p) return;
 
-      var wrapper = document.createElement('div');
-      wrapper.className = 'collection-desc-inner';
-      while (block.firstChild) wrapper.appendChild(block.firstChild);
-      block.appendChild(wrapper);
+      block.classList.add('desc-clamped');
 
-      if (wrapper.scrollHeight <= wrapper.clientHeight + 2) {
-        while (wrapper.firstChild) block.appendChild(wrapper.firstChild);
-        block.removeChild(wrapper);
+      if (p.scrollHeight <= p.clientHeight + 2) {
+        block.classList.remove('desc-clamped');
         return;
       }
 
@@ -70,7 +68,7 @@
       link.textContent = 'Läs mer';
       link.addEventListener('click', function(e) {
         e.preventDefault();
-        wrapper.classList.remove('collection-desc-inner');
+        block.classList.remove('desc-clamped');
         link.remove();
       });
       block.appendChild(link);

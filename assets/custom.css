@@ -1399,7 +1399,7 @@ facet-status-component.facets__status {
 }
 
 /* ── Collection description: read-more truncation ── */
-.collection-desc-inner {
+.text-block--text_twGGkJ.desc-clamped p {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
