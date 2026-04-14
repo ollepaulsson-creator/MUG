@@ -81,8 +81,7 @@
       ],
       "custom_css": [
         "p {padding-top: 15px; padding-left: 15px; letter-spacing: 0.1px;}",
-        "@media (min-width: 769px) {.spacing-style.layout-panel-flex.layout-panel-flex--column.section-content-wrapper.mobile-column {max-width: 65%; }}",
-        ".text-block--text_twGGkJ:not(.desc-expanded) { display: -webkit-box !important; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }"
+        "@media (min-width: 769px) {.spacing-style.layout-panel-flex.layout-panel-flex--column.section-content-wrapper.mobile-column {max-width: 65%; }}"
       ],
       "name": "Collection heading",
       "settings": {
