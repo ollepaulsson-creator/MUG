@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <script>
 (function() {
   function initDescExpand() {
-    var block = document.querySelector('[class*="text_twGGkJ"]');
+    var block = document.querySelector('rte-formatter[class*="text_twGGkJ"]');
     if (!block || block.dataset.clampInit) return false;
 
     var ref = block.querySelector('p') || block;
