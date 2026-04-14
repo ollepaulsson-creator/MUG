@@ -1368,8 +1368,8 @@ facet-status-component.facets__status {
 /* ── Featured section in collection grid ── */
 @media screen and (min-width: 1024px) {
   .product-grid__item--featured {
-    grid-column: span 2;
-    grid-row: span 2;
+    grid-column: span 2 / -1;
+    grid-row: 1 / span 2;
   }
 
   .product-grid__item--featured .shopify-section,
