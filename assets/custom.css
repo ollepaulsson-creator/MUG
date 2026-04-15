@@ -1127,6 +1127,21 @@ facet-status-component.facets__status {
 .search-page-input {
     font-size: 15px;
 }
+
+/* ── Search page: spacing + button alignment ── */
+p.search-results-summary {
+  margin: 0;
+  padding: 40px 15px 0;
+  font-size: 13px;
+}
+.search-section__input-wrapper .search-section__input {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
+.search-section__input-wrapper .button {
+  height: 100%;
+}
 @media (max-width: 768px) {
     .collection-wrapper.grid.gap-style {
         border-top: none !important;
