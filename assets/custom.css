@@ -1356,10 +1356,6 @@ facet-status-component.facets__status {
   }
 }
 
-/* ── Collection / filter row border ── */
-.facets-toggle {
-  border-bottom: 1px solid #E4E4E4;
-}
 
 /* ── Featured section slots: hidden until JS injects into grid ── */
 [id*="__featured_"] {
