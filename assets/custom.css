@@ -967,7 +967,6 @@ ul.product-grid {
         max-width: 100% !important;
         padding-inline: 0 !important;
         margin-top: 16px !important;
-        border-top: 1px solid #e4e4e4;
     }
     .facets-toggle__count-sort {
         display: flex !important;
@@ -986,9 +985,6 @@ ul.product-grid {
 }
 .facets-block-wrapper--horizontal:not(:has(*)) {
     display: none;
-}
-.facets-toggle {
-    border-top: 1px solid #e4e4e4;
 }
 button.button.facets-toggle__button.button-unstyled.button-unstyled--with-icon {
     display: flex;
