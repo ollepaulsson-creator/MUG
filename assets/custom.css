@@ -1129,13 +1129,13 @@ facet-status-component.facets__status {
 }
 
 /* ── Search page: spacing + button alignment ── */
-.product-grid-container:has(> p.search-results-summary) {
-  display: block !important;
-}
 p.search-results-summary {
   margin: 0;
-  padding: 0 15px 40px;
+  padding: 0 15px 0;
   font-size: 13px;
+}
+p.search-results-summary + .collection-wrapper {
+  margin-top: 40px !important;
 }
 .search-section__input-wrapper .button {
   height: 44px;
