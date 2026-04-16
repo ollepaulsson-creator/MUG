@@ -149,8 +149,7 @@
   {% if current_variant.inventory_quantity > 0 and current_variant.inventory_management == 'shopify' %}
     <p>
       <div class="Product-availability"><div class="Product-availabilityIcon"></div><!--
-        --><span>I
-        {%- if product.metafields.custom.finns_i_butik.value == true -%} butik: Leverans 1–2 arbetsdagar{%- else -%} webblager: Leverans 3–4 arbetsdagar{%- endif -%}</span>
+        --><span>I {%- if product.metafields.custom.finns_i_butik.value == true -%}butik: Leverans 1–2 arbetsdagar{%- else -%}webblager: Leverans 3–4 arbetsdagar{%- endif -%}</span>
       </div>
     </p>
   {% endif %}
