@@ -150,13 +150,7 @@
     <p>
       <div class="Product-availability"><div class="Product-availabilityIcon"></div><!--
         --><span>I
-        {%- assign in_butik = false -%}
-        {%- for avail in current_variant.store_availabilities -%}
-          {%- if avail.location.name == 'Finns i butik' and avail.available -%}
-            {%- assign in_butik = true -%}
-          {%- endif -%}
-        {%- endfor -%}
-        {%- if in_butik -%}butik: Leverans 1–2 arbetsdagar{%- else -%}webblager: Leverans 3–4 arbetsdagar{%- endif -%}</span>
+        {%- if product.metafields.custom.finns_i_butik.value == true -%}butik: Leverans 1–2 arbetsdagar{%- else -%}webblager: Leverans 3–4 arbetsdagar{%- endif -%}</span>
       </div>
     </p>
   {% endif %}
