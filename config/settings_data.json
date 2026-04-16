@@ -9,709 +9,1146 @@
  */
 {
   "current": {
-    "logo": "shopify://shop_images/Resurs_4_2x_180x_585d62b1-152b-468a-96b7-535d3ed89761.avif",
-    "favicon": "shopify://shop_images/favicon.png",
-    "type_body_font": "inter_n4",
-    "type_subheading_font": "inter_n5",
-    "type_heading_font": "inter_n7",
-    "type_accent_font": "inter_n7",
-    "type_size_paragraph": "15",
-    "type_line_height_paragraph": "body-loose",
-    "type_font_h1": "heading",
-    "type_size_h1": "56",
-    "type_line_height_h1": "display-tight",
-    "type_letter_spacing_h1": "heading-normal",
-    "type_case_h1": "none",
-    "type_font_h2": "heading",
-    "type_size_h2": "48",
-    "type_line_height_h2": "display-tight",
-    "type_letter_spacing_h2": "heading-normal",
-    "type_case_h2": "none",
-    "type_font_h3": "heading",
-    "type_size_h3": "32",
-    "type_line_height_h3": "display-normal",
-    "type_letter_spacing_h3": "heading-normal",
-    "type_case_h3": "none",
-    "type_font_h4": "heading",
-    "type_size_h4": "24",
-    "type_line_height_h4": "display-tight",
-    "type_case_h4": "uppercase",
-    "type_font_h5": "body",
-    "type_size_h5": "14",
-    "type_line_height_h5": "display-normal",
-    "type_letter_spacing_h5": "heading-loose",
-    "type_case_h5": "uppercase",
-    "type_font_h6": "body",
-    "type_size_h6": "16",
-    "type_line_height_h6": "display-loose",
-    "type_letter_spacing_h6": "heading-loose",
-    "page_width": "wide",
-    "page_transition_enabled": false,
-    "transition_to_main_product": false,
-    "add_to_cart_animation": false,
-    "card_hover_effect": "none",
-    "badge_position": "top-left",
-    "badge_corner_radius": 0,
-    "badge_sale_color_scheme": "scheme-1",
-    "badge_sold_out_color_scheme": "scheme-3",
-    "badge_text_transform": "none",
-    "primary_button_border_width": 1,
-    "button_border_radius_primary": 2,
-    "button_text_case_primary": "uppercase",
-    "secondary_button_border_width": 1,
-    "button_border_radius_secondary": 2,
-    "button_font_weight_secondary": "500",
-    "button_text_case_secondary": "uppercase",
-    "pills_border_radius": 0,
-    "cart_type": "drawer",
-    "product_title_case": "default",
-    "cart_price_font": "secondary",
-    "auto_open_cart_drawer": true,
-    "show_cart_note": true,
-    "cart_note_open_by_default": true,
-    "show_add_discount_code": true,
-    "show_accelerated_checkout_buttons": false,
-    "drawer_drop_shadow": true,
-    "icon_stroke": "default",
-    "input_border_width": 1,
-    "inputs_border_radius": 2,
-    "popover_border_radius": 2,
-    "popover_border": "none",
-    "currency_code_enabled_product_pages": false,
-    "currency_code_enabled_product_cards": false,
-    "currency_code_enabled_cart_items": false,
-    "quick_add": false,
-    "show_second_image_on_hover": false,
-    "product_card_carousel": false,
-    "empty_state_collection": "senaste",
-    "product_corner_radius": 0,
-    "card_corner_radius": 2,
-    "show_variant_image": false,
-    "variant_swatch_width": 34,
-    "variant_swatch_height": 34,
-    "variant_swatch_radius": 32,
-    "variant_button_border_width": 1,
-    "variant_button_radius": 2,
-    "variant_button_width": "equal-width-buttons",
-    "content_for_index": [],
+    "color_text": "#000000",
+    "color_body_text": "#000000",
+    "color_sale_text": "#fa4545",
+    "color_button": "#000000",
+    "color_button_text": "#ffffff",
+    "color_small_button_text_border": "#000000",
+    "color_text_field_text": "#000000",
+    "color_text_field_border": "#cccccc",
+    "color_text_field": "rgba(0,0,0,0)",
+    "color_image_overlay_text": "#ffffff",
+    "color_image_overlay": "#000000",
+    "image_overlay_opacity": 5,
+    "color_borders": "#ebebeb",
+    "color_body_bg": "#ffffff",
+    "type_header_font": "inter_n4",
+    "type_header_base_size": 20,
+    "type_base_font": "inter_n4",
+    "type_base_size": 15,
+    "predictive_search_enabled": true,
+    "predictive_search_show_vendor": true,
+    "predictive_search_show_price": true,
+    "share_image": "shopify://shop_images/FB_Share_Image_4364c847-4b23-4752-a204-e28b3c1785d2.jpg",
+    "share_facebook": true,
+    "share_twitter": true,
+    "share_pinterest": true,
+    "social_twitter_link": "",
+    "social_facebook_link": "https://www.facebook.com/musikutangranser/",
+    "social_pinterest_link": "",
+    "social_instagram_link": "https://www.instagram.com/musikutangranser/",
+    "social_tumblr_link": "",
+    "social_snapchat_link": "",
+    "social_youtube_link": "",
+    "social_vimeo_link": "",
+    "favicon": "shopify://shop_images/MUG_e2a95d62-c8c8-4049-bcbf-2b18b183809a.png",
+    "enable_ajax": true,
+    "checkout_header_image": "",
+    "checkout_logo_image": "shopify://shop_images/MUG.png",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "medium",
+    "checkout_body_background_image": "",
+    "checkout_body_background_color": "#ffffff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_image": "",
+    "checkout_sidebar_background_color": "#ffffff",
+    "checkout_heading_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+    "checkout_body_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+    "checkout_accent_color": "#000000",
+    "checkout_button_color": "#000000",
+    "checkout_error_color": "#e32c2b",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "align_logo": "center",
+          "logo": "shopify://shop_images/Resurs_4_2x_d558f146-363d-4167-8e94-0d0c62424fa6.png",
+          "logo_max_width": 105,
+          "main_linklist": "main-menu",
+          "message": true,
+          "home_page_only": false,
+          "message_text": "Snabba leveranser & personlig service!  🎸  Öppettider: Mån-Fre 11–18, Lör 11–16, Sön 12–16",
+          "message_link": "shopify://pages/fri-hemkorning",
+          "color_bg": "#000000",
+          "color_text": "#ffffff"
+        }
+      },
+      "image-bar": {
+        "type": "image-bar",
+        "blocks": {
+          "image-bar-0": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/DSC05004.gif",
+              "alignment": "center",
+              "link": "",
+              "cta_label": ""
+            }
+          },
+          "image-bar-2": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/DSC03595_v2_0fc6c985-7188-436c-8dc3-60537c665e82.jpg",
+              "alignment": "bottom",
+              "link": "shopify://pages/butiken",
+              "cta_label": "Besök butiken"
+            }
+          },
+          "image-bar-1": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/VNAV_Arket_tote_3b77fdb8-db70-4ed4-a26a-c814cb0540de.jpg",
+              "alignment": "center",
+              "link": "shopify://collections/merch",
+              "cta_label": ""
+            }
+          }
+        },
+        "block_order": [
+          "image-bar-0",
+          "image-bar-2",
+          "image-bar-1"
+        ],
+        "settings": {
+          "section_height": "medium"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "1584915429691": {
+            "type": "text",
+            "settings": {
+              "title": "Musik Utan Gränser",
+              "text": "<p>Vi är Göteborgs mesta musikaffär. En oas för musikentusiaster sedan 1973. <br/><br/>Kaserntorget 9 i Göteborg</p><p>T: <a href=\"tel:+4631-7110309\" title=\"tel:+4631-7110309\">031-711 03 09</a><br/>E: <a href=\"mailto:order@mug.se\" title=\"mailto:order@mug.se\">order@mug.se</a><br/> </p>"
+            }
+          },
+          "1584915111110": {
+            "type": "text",
+            "settings": {
+              "title": "",
+              "text": "<p>Öppettider:<br/>Mån–Fre: 11.00–18.00<br/>Lördag: 11.00–16.00<br/>Söndag: 12.00–16.00<br/><br/>Välkomna till MUG!</p>"
+            }
+          },
+          "footer-1": {
+            "type": "newsletter",
+            "settings": {
+              "title": "Nyhetsbrev"
+            }
+          },
+          "footer-0": {
+            "type": "link_list",
+            "settings": {
+              "title": "Om oss",
+              "menu": "footer"
+            }
+          }
+        },
+        "block_order": [
+          "1584915429691",
+          "1584915111110",
+          "footer-1",
+          "footer-0"
+        ],
+        "settings": {
+          "show_payment_icons": true,
+          "color_footer_bg": "#ffffff",
+          "color_footer_text": "#000000",
+          "show_locale_selector": false,
+          "show_currency_selector": false
+        }
+      },
+      "1584885699463": {
+        "type": "collection",
+        "disabled": true,
+        "settings": {
+          "title": "Elgitarrer",
+          "collection": "elgitarrer",
+          "grid": 4,
+          "rows": 2,
+          "show_vendor": true,
+          "show_view_all": true
+        }
+      },
+      "collection-template": {
+        "type": "collection-template",
+        "settings": {
+          "layout": "grid",
+          "grid": 3,
+          "rows": 8,
+          "show_collection_image": true,
+          "show_vendor": true,
+          "sort_enable": true,
+          "tags_enable": true
+        }
+      },
+      "product-template": {
+        "type": "product-template",
+        "settings": {
+          "show_quantity_selector": false,
+          "show_variant_labels": true,
+          "show_vendor": true,
+          "enable_payment_button": true,
+          "show_share_buttons": false,
+          "media_size": "medium",
+          "enable_image_zoom": true,
+          "enable_video_looping": true
+        }
+      },
+      "product-recommendations": {
+        "type": "product-recommendations",
+        "settings": {
+          "show_product_recommendations": true,
+          "heading": "Du kanske också gillar",
+          "show_vendor": true
+        }
+      },
+      "cart-template": {
+        "type": "cart-template",
+        "settings": {
+          "cart_ajax_enable": true,
+          "cart_notes_enable": false
+        }
+      },
+      "1585035201000": {
+        "type": "rich-text",
+        "disabled": true,
+        "settings": {
+          "full_width": true,
+          "section_title": "Din independent-musikaffär på nätet",
+          "text": "",
+          "text_size": "large"
+        }
+      },
+      "list-collections-template": {
+        "type": "list-collections-template",
+        "settings": {
+          "display_type": "all",
+          "sort": "alphabetical",
+          "grid": 3
+        }
+      },
+      "blog-template": {
+        "type": "blog-template",
+        "settings": {
+          "layout": "list",
+          "blog_show_author": true,
+          "blog_show_date": true
+        }
+      },
+      "1585267835999": {
+        "type": "collection",
+        "disabled": true,
+        "settings": {
+          "title": "Förstärkare & Effekter",
+          "collection": "effekter-och-forstarkare",
+          "grid": 4,
+          "rows": 2,
+          "show_vendor": true,
+          "show_view_all": true
+        }
+      },
+      "1585586637191": {
+        "type": "feature-row",
+        "disabled": true,
+        "settings": {
+          "image": "shopify://shop_images/Puff_-_Fri_hemleverans_780f9ee9-1095-4747-9c69-2973019796f7.png",
+          "layout": "left",
+          "title": "",
+          "text": "<p>Fri hemleverans av instrument och tillbehör i hela Göteborg vid köp över 950:-. Beställ och få hem samma dag eller när det passar dig. Vår snabba chaufför levererar musikglädje varje dag i veckan. Och bara att höra av dig om du bor utanför vårt leveransområde, så kan vi se om det går att ordna leverans till just dig. Beställ nu och få fri hemleverans av dina varor! </p>",
+          "button_label": "Beställ fri hemleverans",
+          "button_link": "shopify://pages/fri-hemkorning"
+        }
+      },
+      "1587283369413": {
+        "type": "image-slider",
+        "blocks": {
+          "1587284776993": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/MUG_Product_Take_1-15.jpg",
+              "text": "Sandberg",
+              "link": "shopify://collections/sandberg"
+            }
+          },
+          "1587284757174": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/MUG_Product_Take_1-18.jpg",
+              "text": "Ernie Ball",
+              "link": "shopify://collections/ernie-ball"
+            }
+          },
+          "1599312540296": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/MUG_Product_Take_1-5.jpg",
+              "text": "Casio",
+              "link": "shopify://collections/casio"
+            }
+          },
+          "1599428640245": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/MUG_Product_Take_1-28.jpg",
+              "text": "Arturia",
+              "link": "shopify://collections/arturia"
+            }
+          },
+          "1587283386191": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/MUG_Product_Take_1-7_00bbf222-75f2-4499-bd60-82f1e6ef6635.jpg",
+              "text": "Korg",
+              "link": "shopify://collections/korg"
+            }
+          },
+          "1599302286697": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/MUG_Product_Take_1-22_a9859128-bbcc-4a0b-b628-dd083026d39b.jpg",
+              "text": "Electro Harmonix",
+              "link": "shopify://collections/electro-harmonix"
+            }
+          },
+          "1587284701195": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/MUG_Product_Take_1-3_d67841e4-dbae-4216-8c76-caa93814e4f6.jpg",
+              "text": "Vic Firth",
+              "link": "shopify://collections/vic-firth"
+            }
+          },
+          "1587294201575": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/MUG_Product_Take_1-25.jpg",
+              "text": "Ernie Ball Music Man",
+              "link": "shopify://collections/music-man"
+            }
+          },
+          "1587294230670": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/MUG_Product_Take_1-1.jpg",
+              "text": "Moog",
+              "link": "shopify://collections/moog"
+            }
+          },
+          "1599302278172": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/MUG_Product_Take_1-6.jpg",
+              "text": "Zildjian",
+              "link": "shopify://collections/zildjan"
+            }
+          },
+          "1587284737578": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/MUG_Product_Take_1-21.jpg",
+              "text": "PRS Guitars",
+              "link": "shopify://collections/prs"
+            }
+          },
+          "1599302007889": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/MUG_Product_Take_1-10_7fd99788-8de5-4daf-9ad2-f3d41d4651d1.jpg",
+              "text": "Ortega",
+              "link": "https://www.mug.se/collections/vendors?q=Ortega"
+            }
+          },
+          "1599312694013": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/MUG_Product_Take_1-31.jpg",
+              "text": "Universial Audio",
+              "link": "shopify://collections/apollo"
+            }
+          }
+        },
+        "block_order": [
+          "1587284776993",
+          "1587284757174",
+          "1599312540296",
+          "1599428640245",
+          "1587283386191",
+          "1599302286697",
+          "1587284701195",
+          "1587294201575",
+          "1587294230670",
+          "1599302278172",
+          "1587284737578",
+          "1599302007889",
+          "1599312694013"
+        ],
+        "disabled": true,
+        "settings": {
+          "heading": "Utvalda varumärken"
+        }
+      },
+      "16053460097264651a": {
+        "type": "collection",
+        "disabled": true,
+        "settings": {
+          "title": "Summer Sale",
+          "collection": "summersale",
+          "grid": 4,
+          "rows": 2,
+          "show_vendor": true,
+          "show_view_all": true
+        }
+      },
+      "collection-template-boost-pfs-original": {
+        "type": "collection-template-boost-pfs-original",
+        "settings": {
+          "layout": "grid",
+          "grid": 4,
+          "rows": 2,
+          "show_collection_image": true,
+          "show_vendor": true,
+          "sort_enable": true,
+          "tags_enable": false
+        }
+      },
+      "password-header": {
+        "type": "password-header",
+        "settings": {
+          "logo": "shopify://shop_images/mug_d8861e0f-f21f-4186-9aa4-915dfb04bed0.png",
+          "logo_max_width": 120,
+          "header": ""
+        }
+      },
+      "password-content": {
+        "type": "password-content",
+        "settings": {
+          "newsletter_enable": false,
+          "newsletter_form_heading": "Var den första som vet när vi kör igång.",
+          "newsletter_form_subheading": "<p>En kort mening som beskriver vad som erhålls med prenumeration</p>",
+          "newsletter_placeholder": "E-postadress",
+          "newsletter_button_text": "Meddela mig"
+        }
+      },
+      "password-footer": {
+        "type": "password-footer",
+        "settings": {
+          "show_share_buttons": false,
+          "social_message": "Sprid meddelandet"
+        }
+      },
+      "product-webblager": {
+        "type": "product-webblager",
+        "settings": {
+          "show_quantity_selector": false,
+          "show_variant_labels": true,
+          "show_vendor": true,
+          "enable_payment_button": true,
+          "show_share_buttons": false,
+          "media_size": "medium",
+          "enable_image_zoom": true,
+          "enable_video_looping": true
+        }
+      },
+      "9deaab62-c2af-416c-9b80-583831935735": {
+        "type": "custom-content",
+        "blocks": {
+          "12dd6a6d-e22c-42c1-b86f-578498c428bb": {
+            "type": "html",
+            "settings": {
+              "code": "<div id=\"insta-feed\"></div>",
+              "width": "100%"
+            }
+          }
+        },
+        "block_order": [
+          "12dd6a6d-e22c-42c1-b86f-578498c428bb"
+        ],
+        "disabled": true,
+        "settings": {
+          "title": ""
+        }
+      },
+      "instant_bzm_ps2_bu_jb_tv_cwg_n_eHTjFf": {
+        "type": "instant-bzmPS2BuJbTvCwgN",
+        "settings": {
+          "collection_M7zDHGDD5dmlcOR4": "gitarreffekter",
+          "text_GWaElkopupj274Zw": "<p>Se alla</p>",
+          "padding_top": 0,
+          "padding_bottom": 0
+        }
+      },
+      "instant_bzm_ps2_bu_jb_tv_cwg_n_K9edNi": {
+        "type": "instant-bzmPS2BuJbTvCwgN",
+        "disabled": true,
+        "settings": {
+          "collection_M7zDHGDD5dmlcOR4": "winter-sale",
+          "text_GWaElkopupj274Zw": "<p>Se alla</p>",
+          "padding_top": 0,
+          "padding_bottom": 0
+        }
+      },
+      "instant_bzm_ps2_bu_jb_tv_cwg_n_8P38ak": {
+        "type": "instant-bzmPS2BuJbTvCwgN",
+        "settings": {
+          "collection_M7zDHGDD5dmlcOR4": "teenage-engineering",
+          "text_GWaElkopupj274Zw": "<p>Se alla</p>",
+          "padding_top": 0,
+          "padding_bottom": 0
+        }
+      },
+      "instant_bzm_ps2_bu_jb_tv_cwg_n_iQmUWU": {
+        "type": "instant-bzmPS2BuJbTvCwgN",
+        "name": "Instant Slider",
+        "settings": {
+          "collection_M7zDHGDD5dmlcOR4": "gramel-guitars",
+          "text_GWaElkopupj274Zw": "<p>Se alla</p>",
+          "padding_top": 0,
+          "padding_bottom": 0
+        }
+      },
+      "instant_bzm_ps2_bu_jb_tv_cwg_n_Wqk4zj": {
+        "type": "instant-bzmPS2BuJbTvCwgN",
+        "name": "Instant Slider",
+        "settings": {
+          "collection_M7zDHGDD5dmlcOR4": "begagnat",
+          "text_GWaElkopupj274Zw": "<p>Se alla</p>",
+          "padding_top": 0,
+          "padding_bottom": 0
+        }
+      },
+      "1584885307152": {
+        "type": "image-bar",
+        "blocks": {
+          "1584885307152-0": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/skylt_46c00e1b-8f03-494d-a1e0-0d6049a436e1.jpg",
+              "alignment": "bottom",
+              "link": "shopify://pages/omoss",
+              "cta_label": "Est. 1973"
+            }
+          },
+          "1584885307152-1": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/ernie_stop_201f56c1-9d18-4061-b43a-a2fc208b6479.gif",
+              "alignment": "center",
+              "link": "",
+              "cta_label": ""
+            }
+          },
+          "1584885307152-2": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/gittarvard.jpg",
+              "alignment": "center",
+              "link": "shopify://pages/serviceverkstad",
+              "cta_label": "Service & verkstad"
+            }
+          }
+        },
+        "block_order": [
+          "1584885307152-0",
+          "1584885307152-1",
+          "1584885307152-2"
+        ],
+        "settings": {
+          "section_height": "medium"
+        }
+      },
+      "instant_xk_wn_bn_vsn_dc_smw4q_jPqNQR": {
+        "type": "instant-XKWnBNVsnDcSmw4q",
+        "disabled": true,
+        "name": "January 1",
+        "settings": {
+          "url_RRDyIhLgxrPDgkDS": "https://www.mug.se/collections/winter-sale",
+          "text_m9A9zFF5IYUqwpYX": "<p>WINTER SALE</p>",
+          "text_pWAWQhTCRO76qE6w": "<p>FYNDA</p>",
+          "url_ePoMM2SoHEClBmSe": "https://www.mug.se/collections/winter-sale",
+          "text_MQG3F7SNMPie9FgJ": "<p>WINTER SALE</p>",
+          "text_PTkKblEPXniIqJQU": "<p>FYNDA</p>",
+          "padding_top": 0,
+          "padding_bottom": 0
+        }
+      },
+      "instant_4d_m7rd_na_uz_ncpwy_c_BHFn9F": {
+        "type": "instant-4dM7rdNaUzNcpwyC",
+        "name": "Gramel Guitars",
+        "settings": {
+          "url_R4yONQlq03n28Sqq": "https://www.mug.se/collections/vendors?q=Gramel%20Guitars",
+          "text_Gw17zuF3LKCvMjkZ": "<p>Gramel Guitars</p>",
+          "text_klyTD1nmUlaVkJRn": "<p>Upptäck</p>",
+          "url_0NcUAJju31MYRbU4": "https://www.mug.se/collections/vendors?q=Gramel%20Guitars",
+          "text_zn1AGNFrpUmjHKzq": "<p>Gramel guitars</p>",
+          "text_VYdx5fufz9Ur3sb3": "<p>Upptäck</p>",
+          "padding_top": 0,
+          "padding_bottom": 0
+        }
+      },
+      "instant_bzm_ps2_bu_jb_tv_cwg_n_zzRQiK": {
+        "type": "instant-bzmPS2BuJbTvCwgN",
+        "name": "Instant Slider",
+        "settings": {
+          "collection_M7zDHGDD5dmlcOR4": "arturia",
+          "text_GWaElkopupj274Zw": "<p>Se alla</p>",
+          "padding_top": 0,
+          "padding_bottom": 0
+        }
+      },
+      "instant_w_qg86ffb9_h_gydc9k_nHzYnf": {
+        "type": "instant-wQg86ffb9HGydc9k",
+        "name": "Arturia hardware",
+        "settings": {
+          "url_xKiVRlgl4rvKdfBs": "https://www.mug.se/pages/arturia-digital-precision-moter-analog-sjal",
+          "text_gLwX3GPthb9CgfBF": "<p>ARTURIA</p><p>HARDWARE</p>",
+          "text_f0dwAXHLzYmumoJt": "<p>ARTURIA HARDWARE</p>",
+          "text_sak0nZXfUJlAX0i9": "<p>UPPTÄCK</p>",
+          "url_Bsk4TcPI01u8AOZW": "https://www.mug.se/pages/arturia-digital-precision-moter-analog-sjal",
+          "text_URFZlgZYoAMYDUDf": "<p>ARTURIA HARDWARE</p>",
+          "text_VBzhVi4TlPW9ZIQA": "<p></p><p></p><p>UPPTÄCK</p>",
+          "padding_top": 0,
+          "padding_bottom": 0
+        }
+      },
+      "instant_rw_rmcj_hbeqy_h_ul_fu_WVBeEm": {
+        "type": "instant-rwRmcjHbeqyHUlFu",
+        "name": "Ljudhealing & Meditation",
+        "settings": {
+          "url_JmU6fXdbnK6fwHIw": "https://www.mug.se/pages/ljudhealing-och-meditation",
+          "text_lssuUEC5J8gjl5C1": "<p>LJUDHEALING &amp; MEDITATION </p>",
+          "text_P3mlIQtadRH2NlRD": "<p>UPPTÄCK</p>",
+          "url_AFAypgH4kyRLfyTh": "https://www.mug.se/pages/ljudhealing-och-meditation",
+          "text_Pqsw1QlX90CFAjPd": "<p>LJUDHEALING &amp; MEDITATION</p>",
+          "text_vZ4gWGaVeBcXjU5L": "<p></p><p></p><p>UPPTÄCK</p>",
+          "padding_top": 0,
+          "padding_bottom": 0
+        }
+      },
+      "instant_bzm_ps2_bu_jb_tv_cwg_n_VTPj6V": {
+        "type": "instant-bzmPS2BuJbTvCwgN",
+        "name": "Instant Slider",
+        "settings": {
+          "collection_M7zDHGDD5dmlcOR4": "ljudhealing-meditation",
+          "text_GWaElkopupj274Zw": "<p>Se alla</p>",
+          "padding_top": 0,
+          "padding_bottom": 0
+        }
+      },
+      "instant_rz_rs_pn_fwscmy3wd_q_C7VUzP": {
+        "type": "instant-RzRsPnFwscmy3wdQ",
+        "name": "Effektspedaler",
+        "settings": {
+          "url_cMTfgDMrjT910Q2M": "https://www.mug.se/collections/gitarreffekter/products/ld303-multi-function-delay-pedal",
+          "text_dCwV0rGv1rLjl2tP": "<p>LD303 Layer Delayer Pedal</p>",
+          "text_xSP8ekfTcJcicPpB": "<p>Upptäck</p>",
+          "url_JMjmBJM357JG0ifl": "https://www.mug.se/collections/earthquaker-devices",
+          "text_Nv9WIx1ejRlF5MX8": "<p>EarthQuaker Devices</p>",
+          "text_PmKxTUccR5lcbxTf": "<p></p><p></p><p>UPPTÄCK</p>",
+          "padding_top": 0,
+          "padding_bottom": 0
+        }
+      },
+      "instant_qy1r_eh3vvf_ow5_deq_NUbd76": {
+        "type": "instant-Qy1rEH3vvfOw5Deq",
+        "name": "Teenage Engineering",
+        "settings": {
+          "url_OxBC3qAqHbBsGRVd": "https://www.mug.se/pages/skapa-med-teenage-engineering",
+          "text_1KpJA1ZwmfDA99e5": "<p>Teenage Engineering</p>",
+          "text_r7IWnCzaansSgGg9": "<p></p><p></p><p>UPPTÄCK</p>",
+          "url_IWu6EIrKn02vEuva": "https://www.mug.se/pages/skapa-med-teenage-engineering",
+          "text_CjZaPGwFumtziy9w": "<p>Teenage Engineering</p>",
+          "text_RP9t73fZOuq1LCQ0": "<p></p><p></p><p>UPPTÄCK</p>",
+          "padding_top": 0,
+          "padding_bottom": 0
+        }
+      },
+      "instant_u_x_qo4_ng_ebjmyp_ifm_JN4fJW": {
+        "type": "instant-uXQo4NGEbjmypIfm",
+        "name": "Begagnat & Vintage",
+        "settings": {
+          "url_D6v0yNcin7Exesxx": "https://www.mug.se/collections/begagnat",
+          "text_iyLI4duLXIxEhicm": "<h1>BEGAGNAT</h1><h1>OCH VINTAGE</h1>",
+          "text_34dwqgFoWShn8VMX": "<p>Begagnat och Vintage</p>",
+          "text_2qPCMby1Y3VJZiQG": "<p>UPPTÄCK</p>",
+          "url_y4aQDjZKjWYMlsEv": "https://www.mug.se/collections/begagnat",
+          "text_bMzSGJUdaYe8O9OC": "<p>Begagnat och Vintage</p>",
+          "text_nBfyGVDXLllBuady": "<p></p><p></p><p>UPPTÄCK</p>",
+          "padding_top": 0,
+          "padding_bottom": 0
+        }
+      }
+    },
+    "content_for_index": [
+      "instant_u_x_qo4_ng_ebjmyp_ifm_JN4fJW",
+      "instant_bzm_ps2_bu_jb_tv_cwg_n_Wqk4zj",
+      "instant_xk_wn_bn_vsn_dc_smw4q_jPqNQR",
+      "instant_bzm_ps2_bu_jb_tv_cwg_n_K9edNi",
+      "instant_qy1r_eh3vvf_ow5_deq_NUbd76",
+      "instant_bzm_ps2_bu_jb_tv_cwg_n_8P38ak",
+      "instant_rz_rs_pn_fwscmy3wd_q_C7VUzP",
+      "instant_bzm_ps2_bu_jb_tv_cwg_n_eHTjFf",
+      "instant_4d_m7rd_na_uz_ncpwy_c_BHFn9F",
+      "instant_bzm_ps2_bu_jb_tv_cwg_n_iQmUWU",
+      "instant_w_qg86ffb9_h_gydc9k_nHzYnf",
+      "instant_bzm_ps2_bu_jb_tv_cwg_n_zzRQiK",
+      "instant_rw_rmcj_hbeqy_h_ul_fu_WVBeEm",
+      "1585035201000",
+      "1587283369413",
+      "9deaab62-c2af-416c-9b80-583831935735",
+      "1584885699463",
+      "1585586637191",
+      "16053460097264651a",
+      "1585267835999",
+      "instant_bzm_ps2_bu_jb_tv_cwg_n_VTPj6V",
+      "image-bar",
+      "1584885307152"
+    ],
     "blocks": {
-      "1656560654682496077": {
-        "type": "shopify://apps/instant-ai-page-builder/blocks/instant_core/927e19d9-4e68-41db-99c7-d8debdc1f80d",
+      "4318962865815008709": {
+        "type": "shopify://apps/boost-ai-search-discovery/blocks/boost-sd/7fc998ae-a150-4367-bab8-505d8a4503f7",
         "disabled": false,
         "settings": {}
       },
-      "15623156175785154009": {
-        "type": "shopify://apps/qikify-mega-menu-navigation/blocks/app-embed/19d2f1cd-1836-4a32-8937-03df3c601dc8",
+      "qikify-tmenu-1701320845": {
+        "type": "shopify://apps/qikify-smart-menu-mega-menu/blocks/app-embed/19d2f1cd-1836-4a32-8937-03df3c601dc8",
         "disabled": false,
         "settings": {}
       },
       "15683396631634586217": {
         "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
-        "disabled": true,
+        "disabled": false,
         "settings": {
           "button_color": "#000000",
-          "secondary_color": "#ffffff",
-          "ternary_color": "#6a6a6a",
           "button_icon": "chat_bubble",
-          "button_text": "chat_with_us",
+          "button_text": "no_text",
           "button_horizontal_position": "bottom_right",
           "button_vertical_position": "lowest",
-          "greeting_message": ""
-        }
-      }
-    },
-    "color_schemes": {
-      "scheme-1": {
-        "settings": {
-          "background": "#ffffff",
-          "foreground_heading": "#000000",
-          "foreground": "#000000cf",
-          "primary": "#000000cf",
-          "primary_hover": "#000000",
-          "border": "#0000000f",
-          "shadow": "#000000",
-          "primary_button_background": "#000000",
-          "primary_button_text": "#ffffff",
-          "primary_button_border": "#000000",
-          "primary_button_hover_background": "#333333",
-          "primary_button_hover_text": "#ffffff",
-          "primary_button_hover_border": "#000000",
-          "secondary_button_background": "rgba(0,0,0,0)",
-          "secondary_button_text": "#000000",
-          "secondary_button_border": "#dcdcdc",
-          "secondary_button_hover_background": "#fafafa",
-          "secondary_button_hover_text": "#333333",
-          "secondary_button_hover_border": "#d3d3d3",
-          "input_background": "#ffffffc7",
-          "input_text_color": "#333333",
-          "input_border_color": "#dcdcdc",
-          "input_hover_background": "#00000003",
-          "variant_background_color": "#ffffff",
-          "variant_text_color": "#000000",
-          "variant_border_color": "#dcdcdc",
-          "variant_hover_background_color": "#fafafa",
-          "variant_hover_text_color": "#000000",
-          "variant_hover_border_color": "#d3d3d3",
-          "selected_variant_background_color": "#000000",
-          "selected_variant_text_color": "#ffffff",
-          "selected_variant_border_color": "#000000",
-          "selected_variant_hover_background_color": "#1a1a1a",
-          "selected_variant_hover_text_color": "#ffffff",
-          "selected_variant_hover_border_color": "#1a1a1a"
+          "greeting_message": "Hej! Kan vi hjälp dig med någonting? Det är bara att skriva och om du letar efter något specifikt. Vi hjälper gärna till! 👋 "
         }
       },
-      "scheme-2": {
+      "1656560654682496077": {
+        "type": "shopify://apps/instant/blocks/instant_core/927e19d9-4e68-41db-99c7-d8debdc1f80d",
+        "disabled": false,
+        "settings": {}
+      },
+      "13951170544780599758": {
+        "type": "shopify://apps/tapita-seo-speed/blocks/app-embed/cd37ca7a-40ad-4fdc-afd3-768701482209",
+        "disabled": false,
+        "settings": {}
+      },
+      "478144830049398400": {
+        "type": "shopify://apps/storeseo/blocks/store_seo_meta/64b24496-16f9-4afc-a800-84e6acc4a36c",
+        "disabled": true,
+        "settings": {}
+      },
+      "9613492946349090214": {
+        "type": "shopify://apps/avada-seo-suite/blocks/avada-seo/15507c6e-1aa3-45d3-b698-7e175e033440",
+        "disabled": true,
+        "settings": {}
+      },
+      "back-in-stock-restock-alerts-4bb73be2-b7c2-4870-949f-c528145452a3": {
+        "type": "shopify://apps/back-in-stock-restock-alerts/blocks/main/4bb73be2-b7c2-4870-949f-c528145452a3",
+        "disabled": false,
+        "settings": {}
+      },
+      "3678330922655817062": {
+        "type": "shopify://apps/boost-ai-search-discovery/blocks/boost-sd-ssr/7fc998ae-a150-4367-bab8-505d8a4503f7",
+        "disabled": false,
         "settings": {
-          "background": "#f5f5f5",
-          "foreground_heading": "#000000",
-          "foreground": "#000000cf",
-          "primary": "#000000cf",
-          "primary_hover": "#ffffff",
-          "border": "#dfdfdf",
-          "shadow": "#000000",
-          "primary_button_background": "#000000",
-          "primary_button_text": "#ffffff",
-          "primary_button_border": "#000000",
-          "primary_button_hover_background": "#333333",
-          "primary_button_hover_text": "#ffffff",
-          "primary_button_hover_border": "#333333",
-          "secondary_button_background": "rgba(0,0,0,0)",
-          "secondary_button_text": "#000000",
-          "secondary_button_border": "#000000",
-          "secondary_button_hover_background": "#ffffff5c",
-          "secondary_button_hover_text": "#000000",
-          "secondary_button_hover_border": "#333333ba",
-          "input_background": "rgba(0,0,0,0)",
-          "input_text_color": "#00000087",
-          "input_border_color": "#00000021",
-          "input_hover_background": "#ffffff5c",
-          "variant_background_color": "#ffffff",
-          "variant_text_color": "#000000",
-          "variant_border_color": "#e6e6e6",
-          "variant_hover_background_color": "#f5f5f5",
-          "variant_hover_text_color": "#000000",
-          "variant_hover_border_color": "#e6e6e6",
-          "selected_variant_background_color": "#000000",
-          "selected_variant_text_color": "#ffffff",
-          "selected_variant_border_color": "#000000",
-          "selected_variant_hover_background_color": "#1a1a1a",
-          "selected_variant_hover_text_color": "#ffffff",
-          "selected_variant_hover_border_color": "#1a1a1a"
+          "templateId": "",
+          "productGridSelector": ""
         }
       },
-      "scheme-3": {
-        "settings": {
-          "background": "#eef1ea",
-          "foreground_heading": "#000000",
-          "foreground": "#000000cf",
-          "primary": "#000000cf",
-          "primary_hover": "#000000",
-          "border": "#000000cf",
-          "shadow": "#000000",
-          "primary_button_background": "#000000",
-          "primary_button_text": "#ffffff",
-          "primary_button_border": "#000000",
-          "primary_button_hover_background": "#333333",
-          "primary_button_hover_text": "#ffffff",
-          "primary_button_hover_border": "#333333",
-          "secondary_button_background": "rgba(0,0,0,0)",
-          "secondary_button_text": "#000000",
-          "secondary_button_border": "#000000",
-          "secondary_button_hover_background": "#ffffff5c",
-          "secondary_button_hover_text": "#000000cf",
-          "secondary_button_hover_border": "#000000cf",
-          "input_background": "rgba(0,0,0,0)",
-          "input_text_color": "#000000cf",
-          "input_border_color": "#dcdcdc",
-          "input_hover_background": "#ffffff5c",
-          "variant_background_color": "#ffffff",
-          "variant_text_color": "#000000",
-          "variant_border_color": "#e6e6e6",
-          "variant_hover_background_color": "#f5f5f5",
-          "variant_hover_text_color": "#000000",
-          "variant_hover_border_color": "#e6e6e6",
-          "selected_variant_background_color": "#000000",
-          "selected_variant_text_color": "#ffffff",
-          "selected_variant_border_color": "#000000",
-          "selected_variant_hover_background_color": "#1a1a1a",
-          "selected_variant_hover_text_color": "#ffffff",
-          "selected_variant_hover_border_color": "#1a1a1a"
-        }
-      },
-      "scheme-4": {
-        "settings": {
-          "background": "#e1edf5",
-          "foreground_heading": "#000000",
-          "foreground": "#000000cf",
-          "primary": "#000000cf",
-          "primary_hover": "#000000",
-          "border": "#1d368680",
-          "shadow": "#000000",
-          "primary_button_background": "#000000",
-          "primary_button_text": "#ffffff",
-          "primary_button_border": "#1d3686",
-          "primary_button_hover_background": "#333333",
-          "primary_button_hover_text": "#ffffff",
-          "primary_button_hover_border": "#000000",
-          "secondary_button_background": "rgba(0,0,0,0)",
-          "secondary_button_text": "#000000",
-          "secondary_button_border": "#000000",
-          "secondary_button_hover_background": "#ffffff5c",
-          "secondary_button_hover_text": "#000000cf",
-          "secondary_button_hover_border": "#000000cf",
-          "input_background": "rgba(0,0,0,0)",
-          "input_text_color": "#000000cf",
-          "input_border_color": "#dcdcdc",
-          "input_hover_background": "#ffffff5c",
-          "variant_background_color": "#ffffff",
-          "variant_text_color": "#000000",
-          "variant_border_color": "#e6e6e6",
-          "variant_hover_background_color": "#f5f5f5",
-          "variant_hover_text_color": "#000000",
-          "variant_hover_border_color": "#e6e6e6",
-          "selected_variant_background_color": "#000000",
-          "selected_variant_text_color": "#ffffff",
-          "selected_variant_border_color": "#000000",
-          "selected_variant_hover_background_color": "#1a1a1a",
-          "selected_variant_hover_text_color": "#ffffff",
-          "selected_variant_hover_border_color": "#1a1a1a"
-        }
-      },
-      "scheme-5": {
-        "settings": {
-          "background": "#000000",
-          "foreground_heading": "#ffffff",
-          "foreground": "#ffffff",
-          "primary": "#ffffff",
-          "primary_hover": "#ffffffb0",
-          "border": "#dcdcdc",
-          "shadow": "#000000",
-          "primary_button_background": "#000000",
-          "primary_button_text": "#ffffff",
-          "primary_button_border": "#000000",
-          "primary_button_hover_background": "#333333",
-          "primary_button_hover_text": "#ffffff",
-          "primary_button_hover_border": "#000000",
-          "secondary_button_background": "rgba(0,0,0,0)",
-          "secondary_button_text": "#000000",
-          "secondary_button_border": "#dcdcdc",
-          "secondary_button_hover_background": "#fafafa",
-          "secondary_button_hover_text": "#000000",
-          "secondary_button_hover_border": "#d3d3d3",
-          "input_background": "#111111",
-          "input_text_color": "#000000",
-          "input_border_color": "#dcdcdc",
-          "input_hover_background": "#fafafa",
-          "variant_background_color": "#ffffff",
-          "variant_text_color": "#000000",
-          "variant_border_color": "#dcdcdc",
-          "variant_hover_background_color": "#fafafa",
-          "variant_hover_text_color": "#000000",
-          "variant_hover_border_color": "#d3d3d3",
-          "selected_variant_background_color": "#000000",
-          "selected_variant_text_color": "#ffffff",
-          "selected_variant_border_color": "#dcdcdc",
-          "selected_variant_hover_background_color": "#d3d3d3",
-          "selected_variant_hover_text_color": "#ffffff",
-          "selected_variant_hover_border_color": "#1a1a1a"
-        }
-      },
-      "scheme-6": {
-        "settings": {
-          "background": "rgba(0,0,0,0)",
-          "foreground_heading": "#ffffff",
-          "foreground": "#ffffff",
-          "primary": "#ffffff",
-          "primary_hover": "#ffffffb0",
-          "border": "#e6e6e6",
-          "shadow": "#000000",
-          "primary_button_background": "#ffffff",
-          "primary_button_text": "#000000",
-          "primary_button_border": "#ffffff",
-          "primary_button_hover_background": "#000000",
-          "primary_button_hover_text": "#ffffff",
-          "primary_button_hover_border": "#000000",
-          "secondary_button_background": "rgba(0,0,0,0)",
-          "secondary_button_text": "#ffffff",
-          "secondary_button_border": "#ffffff",
-          "secondary_button_hover_background": "#ffffff14",
-          "secondary_button_hover_text": "#ffffff",
-          "secondary_button_hover_border": "#ffffff",
-          "input_background": "#ffffff",
-          "input_text_color": "#00000087",
-          "input_border_color": "#dcdcdc",
-          "input_hover_background": "#fafafa",
-          "variant_background_color": "#ffffff",
-          "variant_text_color": "#000000",
-          "variant_border_color": "#e6e6e6",
-          "variant_hover_background_color": "#f5f5f5",
-          "variant_hover_text_color": "#000000",
-          "variant_hover_border_color": "#e6e6e6",
-          "selected_variant_background_color": "#000000",
-          "selected_variant_text_color": "#ffffff",
-          "selected_variant_border_color": "#000000",
-          "selected_variant_hover_background_color": "#1a1a1a",
-          "selected_variant_hover_text_color": "#ffffff",
-          "selected_variant_hover_border_color": "#1a1a1a"
-        }
-      },
-      "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7": {
-        "settings": {
-          "background": "rgba(0,0,0,0)",
-          "foreground_heading": "#000000",
-          "foreground": "#000000",
-          "primary": "#000000",
-          "primary_hover": "#00000087",
-          "border": "#e6e6e6",
-          "shadow": "#000000",
-          "primary_button_background": "#000000",
-          "primary_button_text": "#ffffff",
-          "primary_button_border": "#000000",
-          "primary_button_hover_background": "#333333",
-          "primary_button_hover_text": "#ffffff",
-          "primary_button_hover_border": "#333333",
-          "secondary_button_background": "rgba(0,0,0,0)",
-          "secondary_button_text": "#000000",
-          "secondary_button_border": "#000000",
-          "secondary_button_hover_background": "#fafafa",
-          "secondary_button_hover_text": "#333333",
-          "secondary_button_hover_border": "#333333",
-          "input_background": "#ffffff",
-          "input_text_color": "#00000087",
-          "input_border_color": "#dcdcdc",
-          "input_hover_background": "#fafafa",
-          "variant_background_color": "#ffffff",
-          "variant_text_color": "#000000",
-          "variant_border_color": "#e6e6e6",
-          "variant_hover_background_color": "#f5f5f5",
-          "variant_hover_text_color": "#000000",
-          "variant_hover_border_color": "#e6e6e6",
-          "selected_variant_background_color": "#000000",
-          "selected_variant_text_color": "#ffffff",
-          "selected_variant_border_color": "#000000",
-          "selected_variant_hover_background_color": "#1a1a1a",
-          "selected_variant_hover_text_color": "#ffffff",
-          "selected_variant_hover_border_color": "#1a1a1a"
-        }
-      },
-      "scheme-616a2f84-d7f4-4883-802e-8083bf81ba36": {
-        "settings": {
-          "background": "#ffffff",
-          "foreground_heading": "#f3f3f3",
-          "foreground": "#000000cf",
-          "primary": "#000000cf",
-          "primary_hover": "#000000",
-          "border": "#0000000f",
-          "shadow": "#000000",
-          "primary_button_background": "#000000",
-          "primary_button_text": "#ffffff",
-          "primary_button_border": "#000000",
-          "primary_button_hover_background": "#333333",
-          "primary_button_hover_text": "#ffffff",
-          "primary_button_hover_border": "#000000",
-          "secondary_button_background": "rgba(0,0,0,0)",
-          "secondary_button_text": "#000000",
-          "secondary_button_border": "#dcdcdc",
-          "secondary_button_hover_background": "#fafafa",
-          "secondary_button_hover_text": "#333333",
-          "secondary_button_hover_border": "#d3d3d3",
-          "input_background": "#ffffffc7",
-          "input_text_color": "#333333",
-          "input_border_color": "#dcdcdc",
-          "input_hover_background": "#00000003",
-          "variant_background_color": "#ffffff",
-          "variant_text_color": "#000000",
-          "variant_border_color": "#dcdcdc",
-          "variant_hover_background_color": "#fafafa",
-          "variant_hover_text_color": "#000000",
-          "variant_hover_border_color": "#d3d3d3",
-          "selected_variant_background_color": "#000000",
-          "selected_variant_text_color": "#ffffff",
-          "selected_variant_border_color": "#000000",
-          "selected_variant_hover_background_color": "#1a1a1a",
-          "selected_variant_hover_text_color": "#ffffff",
-          "selected_variant_hover_border_color": "#1a1a1a"
-        }
+      "16422382648059844097": {
+        "type": "shopify://apps/boost-ai-search-discovery/blocks/instant-search-app-embedded/7fc998ae-a150-4367-bab8-505d8a4503f7",
+        "disabled": false,
+        "settings": {}
       }
     }
   },
   "presets": {
-    "Horizon": {
-      "color_schemes": {
-        "scheme-1": {
+    "Default": {
+      "sections": {
+        "header": {
+          "type": "header",
+          "settings": {}
+        },
+        "hero-1": {
+          "type": "hero",
           "settings": {
-            "background": "#ffffff",
-            "foreground_heading": "#000000",
-            "foreground": "#000000cf",
-            "primary": "#000000cf",
-            "primary_hover": "#000000",
-            "border": "#0000000f",
-            "shadow": "#000000",
-            "primary_button_background": "#000000",
-            "primary_button_text": "#ffffff",
-            "primary_button_border": "#000000",
-            "primary_button_hover_background": "#333333",
-            "primary_button_hover_text": "#ffffff",
-            "primary_button_hover_border": "#000000",
-            "secondary_button_background": "rgba(0,0,0,0)",
-            "secondary_button_text": "#000000",
-            "secondary_button_border": "#000000",
-            "secondary_button_hover_background": "#fafafa",
-            "secondary_button_hover_text": "#333333",
-            "secondary_button_hover_border": "#333333",
-            "input_background": "#ffffffc7",
-            "input_text_color": "#333333",
-            "input_border_color": "#DCDCDC",
-            "input_hover_background": "#00000003",
-            "variant_background_color": "#ffffff",
-            "variant_text_color": "#000000",
-            "variant_border_color": "#00000021",
-            "variant_hover_background_color": "#f5f5f5",
-            "variant_hover_text_color": "#000000",
-            "variant_hover_border_color": "#e6e6e6",
-            "selected_variant_background_color": "#000000",
-            "selected_variant_text_color": "#ffffff",
-            "selected_variant_border_color": "#000000",
-            "selected_variant_hover_background_color": "#1a1a1a",
-            "selected_variant_hover_text_color": "#ffffff",
-            "selected_variant_hover_border_color": "#1a1a1a"
+            "hero_size": "large",
+            "text_size": "large"
           }
         },
-        "scheme-2": {
+        "feature-row": {
+          "type": "feature-row",
+          "settings": {}
+        },
+        "feature-columns": {
+          "type": "feature-columns",
+          "blocks": {
+            "feature-columns-0": {
+              "type": "text_block",
+              "settings": {}
+            },
+            "feature-columns-1": {
+              "type": "text_block",
+              "settings": {}
+            },
+            "feature-columns-2": {
+              "type": "text_block",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "feature-columns-0",
+            "feature-columns-1",
+            "feature-columns-2"
+          ],
           "settings": {
-            "background": "#f5f5f5",
-            "foreground_heading": "#000000",
-            "foreground": "#000000cf",
-            "primary": "#000000cf",
-            "primary_hover": "#ffffff",
-            "border": "#DFDFDF",
-            "shadow": "#000000",
-            "primary_button_background": "#000000",
-            "primary_button_text": "#ffffff",
-            "primary_button_border": "#000000",
-            "primary_button_hover_background": "#333333",
-            "primary_button_hover_text": "#ffffff",
-            "primary_button_hover_border": "#333333",
-            "secondary_button_background": "rgba(0,0,0,0)",
-            "secondary_button_text": "#000000",
-            "secondary_button_border": "#000000",
-            "secondary_button_hover_background": "#ffffff5c",
-            "secondary_button_hover_text": "#000000",
-            "secondary_button_hover_border": "#333333ba",
-            "input_background": "rgba(0,0,0,0)",
-            "input_text_color": "#00000087",
-            "input_border_color": "#DCDCDC",
-            "input_hover_background": "#ffffff5c",
-            "variant_background_color": "#ffffff",
-            "variant_text_color": "#000000",
-            "variant_border_color": "#e6e6e6",
-            "variant_hover_background_color": "#f5f5f5",
-            "variant_hover_text_color": "#000000",
-            "variant_hover_border_color": "#e6e6e6",
-            "selected_variant_background_color": "#000000",
-            "selected_variant_text_color": "#ffffff",
-            "selected_variant_border_color": "#000000",
-            "selected_variant_hover_background_color": "#1a1a1a",
-            "selected_variant_hover_text_color": "#ffffff",
-            "selected_variant_hover_border_color": "#1a1a1a"
+            "title": ""
           }
         },
-        "scheme-3": {
+        "collection": {
+          "type": "collection",
           "settings": {
-            "background": "#eef1ea",
-            "foreground_heading": "#000000",
-            "foreground": "#000000cf",
-            "primary": "#000000cf",
-            "primary_hover": "#000000",
-            "border": "#000000cf",
-            "shadow": "#000000",
-            "primary_button_background": "#000000",
-            "primary_button_text": "#ffffff",
-            "primary_button_border": "#000000",
-            "primary_button_hover_background": "#333333",
-            "primary_button_hover_text": "#ffffff",
-            "primary_button_hover_border": "#333333",
-            "secondary_button_background": "rgba(0,0,0,0)",
-            "secondary_button_text": "#000000",
-            "secondary_button_border": "#000000",
-            "secondary_button_hover_background": "#ffffff5c",
-            "secondary_button_hover_text": "#000000cf",
-            "secondary_button_hover_border": "#000000cf",
-            "input_background": "rgba(0,0,0,0)",
-            "input_text_color": "#000000cf",
-            "input_border_color": "#DCDCDC",
-            "input_hover_background": "#ffffff5c",
-            "variant_background_color": "#ffffff",
-            "variant_text_color": "#000000",
-            "variant_border_color": "#e6e6e6",
-            "variant_hover_background_color": "#f5f5f5",
-            "variant_hover_text_color": "#000000",
-            "variant_hover_border_color": "#e6e6e6",
-            "selected_variant_background_color": "#000000",
-            "selected_variant_text_color": "#ffffff",
-            "selected_variant_border_color": "#000000",
-            "selected_variant_hover_background_color": "#1a1a1a",
-            "selected_variant_hover_text_color": "#ffffff",
-            "selected_variant_hover_border_color": "#1a1a1a"
+            "grid": 4
           }
         },
-        "scheme-4": {
+        "hero-2": {
+          "type": "hero",
           "settings": {
-            "background": "#e1edf5",
-            "foreground_heading": "#000000",
-            "foreground": "#000000cf",
-            "primary": "#000000cf",
-            "primary_hover": "#000000",
-            "border": "#1d368680",
-            "shadow": "#000000",
-            "primary_button_background": "#000000",
-            "primary_button_text": "#ffffff",
-            "primary_button_border": "#1d3686",
-            "primary_button_hover_background": "#333333",
-            "primary_button_hover_text": "#ffffff",
-            "primary_button_hover_border": "#000000",
-            "secondary_button_background": "rgba(0,0,0,0)",
-            "secondary_button_text": "#000000",
-            "secondary_button_border": "#000000",
-            "secondary_button_hover_background": "#ffffff5c",
-            "secondary_button_hover_text": "#000000cf",
-            "secondary_button_hover_border": "#000000cf",
-            "input_background": "rgba(0,0,0,0)",
-            "input_text_color": "#000000cf",
-            "input_border_color": "#DCDCDC",
-            "input_hover_background": "#ffffff5c",
-            "variant_background_color": "#ffffff",
-            "variant_text_color": "#000000",
-            "variant_border_color": "#e6e6e6",
-            "variant_hover_background_color": "#f5f5f5",
-            "variant_hover_text_color": "#000000",
-            "variant_hover_border_color": "#e6e6e6",
-            "selected_variant_background_color": "#000000",
-            "selected_variant_text_color": "#ffffff",
-            "selected_variant_border_color": "#000000",
-            "selected_variant_hover_background_color": "#1a1a1a",
-            "selected_variant_hover_text_color": "#ffffff",
-            "selected_variant_hover_border_color": "#1a1a1a"
+            "text_size": "large"
           }
         },
-        "scheme-5": {
+        "quotes": {
+          "type": "quotes",
+          "blocks": {
+            "quotes-0": {
+              "type": "quote",
+              "settings": {}
+            },
+            "quotes-1": {
+              "type": "quote",
+              "settings": {}
+            },
+            "quotes-2": {
+              "type": "quote",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "quotes-0",
+            "quotes-1",
+            "quotes-2"
+          ],
           "settings": {
-            "background": "#333333",
-            "foreground_heading": "#ffffff",
-            "foreground": "#ffffff",
-            "primary": "#ffffff",
-            "primary_hover": "#ffffffb0",
-            "border": "#ffffffb0",
-            "shadow": "#000000",
-            "primary_button_background": "#ffffff",
-            "primary_button_text": "#000000",
-            "primary_button_border": "#ffffff",
-            "primary_button_hover_background": "#000000",
-            "primary_button_hover_text": "#ffffff",
-            "primary_button_hover_border": "#000000",
-            "secondary_button_background": "rgba(0,0,0,0)",
-            "secondary_button_text": "#ffffff",
-            "secondary_button_border": "#ffffffb0",
-            "secondary_button_hover_background": "#ffffff0a",
-            "secondary_button_hover_text": "#ffffffed",
-            "secondary_button_hover_border": "#ffffffb0",
-            "input_background": "#333333",
-            "input_text_color": "#ffffffed",
-            "input_border_color": "#DCDCDC",
-            "input_hover_background": "#ffffff0a",
-            "variant_background_color": "#ffffff",
-            "variant_text_color": "#000000",
-            "variant_border_color": "#e6e6e6",
-            "variant_hover_background_color": "#f5f5f5",
-            "variant_hover_text_color": "#000000",
-            "variant_hover_border_color": "#e6e6e6",
-            "selected_variant_background_color": "#000000",
-            "selected_variant_text_color": "#ffffff",
-            "selected_variant_border_color": "#000000",
-            "selected_variant_hover_background_color": "#1a1a1a",
-            "selected_variant_hover_text_color": "#ffffff",
-            "selected_variant_hover_border_color": "#1a1a1a"
+            "title": ""
           }
         },
-        "scheme-6": {
-          "settings": {
-            "background": "rgba(0,0,0,0)",
-            "foreground_heading": "#ffffff",
-            "foreground": "#ffffff",
-            "primary": "#ffffff",
-            "primary_hover": "#ffffffb0",
-            "border": "#e6e6e6",
-            "shadow": "#000000",
-            "primary_button_background": "#ffffff",
-            "primary_button_text": "#000000",
-            "primary_button_border": "#ffffff",
-            "primary_button_hover_background": "#000000",
-            "primary_button_hover_text": "#ffffff",
-            "primary_button_hover_border": "#000000",
-            "secondary_button_background": "rgba(0,0,0,0)",
-            "secondary_button_text": "#ffffff",
-            "secondary_button_border": "#ffffff",
-            "secondary_button_hover_background": "#ffffff14",
-            "secondary_button_hover_text": "#ffffff",
-            "secondary_button_hover_border": "#ffffff",
-            "input_background": "#ffffff",
-            "input_text_color": "#00000087",
-            "input_border_color": "#DCDCDC",
-            "input_hover_background": "#fafafa",
-            "variant_background_color": "#ffffff",
-            "variant_text_color": "#000000",
-            "variant_border_color": "#e6e6e6",
-            "variant_hover_background_color": "#f5f5f5",
-            "variant_hover_text_color": "#000000",
-            "variant_hover_border_color": "#e6e6e6",
-            "selected_variant_background_color": "#000000",
-            "selected_variant_text_color": "#ffffff",
-            "selected_variant_border_color": "#000000",
-            "selected_variant_hover_background_color": "#1a1a1a",
-            "selected_variant_hover_text_color": "#ffffff",
-            "selected_variant_hover_border_color": "#1a1a1a"
-          }
+        "image-bar": {
+          "type": "image-bar",
+          "blocks": {
+            "image-bar-0": {
+              "type": "image",
+              "settings": {}
+            },
+            "image-bar-1": {
+              "type": "image",
+              "settings": {}
+            },
+            "image-bar-2": {
+              "type": "image",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "image-bar-0",
+            "image-bar-1",
+            "image-bar-2"
+          ],
+          "settings": {}
         },
-        "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7": {
+        "footer": {
+          "type": "footer",
+          "blocks": {
+            "footer-0": {
+              "type": "link_list",
+              "settings": {}
+            },
+            "footer-1": {
+              "type": "newsletter",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "footer-0",
+            "footer-1"
+          ],
           "settings": {
-            "background": "rgba(0,0,0,0)",
-            "foreground_heading": "#000000",
-            "foreground": "#000000",
-            "primary": "#000000",
-            "primary_hover": "#00000087",
-            "border": "#e6e6e6",
-            "shadow": "#000000",
-            "primary_button_background": "#000000",
-            "primary_button_text": "#ffffff",
-            "primary_button_border": "#000000",
-            "primary_button_hover_background": "#333333",
-            "primary_button_hover_text": "#ffffff",
-            "primary_button_hover_border": "#333333",
-            "secondary_button_background": "rgba(0,0,0,0)",
-            "secondary_button_text": "#000000",
-            "secondary_button_border": "#000000",
-            "secondary_button_hover_background": "#fafafa",
-            "secondary_button_hover_text": "#333333",
-            "secondary_button_hover_border": "#333333",
-            "input_background": "#ffffff",
-            "input_text_color": "#00000087",
-            "input_border_color": "#DCDCDC",
-            "input_hover_background": "#fafafa",
-            "variant_background_color": "#ffffff",
-            "variant_text_color": "#000000",
-            "variant_border_color": "#e6e6e6",
-            "variant_hover_background_color": "#f5f5f5",
-            "variant_hover_text_color": "#000000",
-            "variant_hover_border_color": "#e6e6e6",
-            "selected_variant_background_color": "#000000",
-            "selected_variant_text_color": "#ffffff",
-            "selected_variant_border_color": "#000000",
-            "selected_variant_hover_background_color": "#1a1a1a",
-            "selected_variant_hover_text_color": "#ffffff",
-            "selected_variant_hover_border_color": "#1a1a1a"
+            "show_payment_icons": true
           }
         }
-      }
+      },
+      "content_for_index": [
+        "hero-1",
+        "feature-row",
+        "feature-columns",
+        "collection",
+        "hero-2",
+        "quotes",
+        "image-bar"
+      ]
+    },
+    "Light": {
+      "color_text": "#162950",
+      "color_body_text": "#6d6d6d",
+      "color_sale_text": "#DA2F0C",
+      "color_borders": "#e4e4e4",
+      "color_button": "#DA2F0C",
+      "color_button_text": "#ffffff",
+      "color_small_button_text_border": "#162950",
+      "color_text_field": "#ffffff",
+      "color_text_field_text": "#162950",
+      "color_text_field_border": "#909090",
+      "color_image_overlay_text": "#ffffff",
+      "color_image_overlay": "#3d3d3d",
+      "image_overlay_opacity": 40,
+      "color_body_bg": "#f8f8f8",
+      "type_header_font": "muli_n6",
+      "type_header_base_size": 26,
+      "type_base_font": "muli_n4",
+      "type_base_size": 18,
+      "share_facebook": true,
+      "share_twitter": true,
+      "share_pinterest": true,
+      "social_twitter_link": "",
+      "social_facebook_link": "",
+      "social_pinterest_link": "",
+      "social_instagram_link": "",
+      "social_tumblr_link": "",
+      "social_snapchat_link": "",
+      "social_youtube_link": "",
+      "social_vimeo_link": "",
+      "favicon": "",
+      "checkout_header_image": "",
+      "checkout_logo_image": "",
+      "checkout_logo_position": "left",
+      "checkout_logo_size": "small",
+      "checkout_body_background_image": "",
+      "checkout_body_background_color": "#ffffff",
+      "checkout_input_background_color_mode": "white",
+      "checkout_sidebar_background_image": "",
+      "checkout_sidebar_background_color": "#e8f3f6",
+      "checkout_heading_font": "Roboto",
+      "checkout_body_font": "Source Sans Pro",
+      "checkout_accent_color": "#1990c6",
+      "checkout_button_color": "#23314e",
+      "checkout_error_color": "#ff6d6d",
+      "sections": {
+        "header": {
+          "type": "header",
+          "settings": {
+            "align_logo": "left",
+            "logo": "",
+            "logo_max_width": 135,
+            "main_linklist": "main-menu",
+            "message": true,
+            "color_bg": "#162950",
+            "color_text": "#ffffff"
+          }
+        },
+        "hero": {
+          "type": "hero",
+          "settings": {
+            "alignment": "center",
+            "hero_size": "x-large",
+            "text_size": "large"
+          }
+        },
+        "slideshow": {
+          "type": "slideshow",
+          "blocks": {
+            "slideshow-0": {
+              "type": "image",
+              "settings": {
+                "image": "",
+                "alignment": "center center"
+              }
+            },
+            "1492095993817": {
+              "type": "image",
+              "settings": {
+                "image": "",
+                "alignment": "center"
+              }
+            }
+          },
+          "block_order": [
+            "slideshow-0",
+            "1492095993817"
+          ],
+          "settings": {
+            "slideshow_height": "medium",
+            "text_size": "medium",
+            "autorotate": false,
+            "autorotate_speed": 5
+          }
+        },
+        "featured-collections": {
+          "type": "collection",
+          "settings": {
+            "grid": 3,
+            "rows": 1,
+            "show_vendor": true,
+            "show_view_all": true
+          }
+        },
+        "product-template": {
+          "type": "product-template",
+          "settings": {
+            "show_quantity_selector": false,
+            "show_variant_labels": true,
+            "show_vendor": false,
+            "show_share_buttons": true,
+            "media_size": "medium",
+            "enable_image_zoom": true,
+            "enable_video_looping": false
+          }
+        },
+        "collection-template": {
+          "type": "collection-template",
+          "settings": {
+            "layout": "grid",
+            "grid": 2,
+            "rows": 2,
+            "show_collection_image": true,
+            "show_vendor": false,
+            "sort_enable": true,
+            "tags_enable": true
+          }
+        },
+        "1492033809691": {
+          "type": "map",
+          "settings": {}
+        },
+        "1492033877875": {
+          "type": "quotes",
+          "blocks": {
+            "1492033877875-0": {
+              "type": "quote",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "1492033877875-0"
+          ],
+          "settings": {}
+        },
+        "1492033924902": {
+          "type": "custom-content",
+          "blocks": {
+            "1492033924902-0": {
+              "type": "text",
+              "settings": {
+                "width": "100%",
+                "alignment": "center",
+                "align_text": "center"
+              }
+            }
+          },
+          "block_order": [
+            "1492033924902-0"
+          ],
+          "settings": {
+            "title": ""
+          }
+        },
+        "1492096252560": {
+          "type": "collection-list",
+          "blocks": {
+            "1492096252560-0": {
+              "type": "featured_collection",
+              "settings": {}
+            },
+            "1492096252560-1": {
+              "type": "featured_collection",
+              "settings": {}
+            },
+            "1492096252560-2": {
+              "type": "featured_collection",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "1492096252560-0",
+            "1492096252560-1",
+            "1492096252560-2"
+          ],
+          "settings": {
+            "grid": 3
+          }
+        },
+        "blog-template": {
+          "type": "blog-template",
+          "settings": {
+            "layout": "grid",
+            "blog_show_author": true,
+            "blog_show_date": false
+          }
+        },
+        "article-template": {
+          "type": "article-template",
+          "settings": {
+            "blog_show_author": true,
+            "blog_show_date": true,
+            "show_share_buttons": true
+          }
+        },
+        "cart-template": {
+          "type": "cart-template",
+          "settings": {
+            "cart_notes_enable": false
+          }
+        },
+        "footer": {
+          "type": "footer",
+          "blocks": {
+            "link_list": {
+              "type": "link_list",
+              "settings": {}
+            },
+            "text": {
+              "type": "text",
+              "settings": {}
+            },
+            "newsletter": {
+              "type": "newsletter",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "link_list",
+            "text",
+            "newsletter"
+          ],
+          "settings": {
+            "color_footer_bg": "#f8f8f8",
+            "color_footer_text": "#6d6d6d"
+          }
+        }
+      },
+      "content_for_index": [
+        "hero",
+        "featured-collections",
+        "slideshow",
+        "1492033924902",
+        "1492096252560",
+        "1492033877875",
+        "1492033809691"
+      ]
     }
   }
 }

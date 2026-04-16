@@ -1,1109 +1,760 @@
-
-
-{% liquid
-  assign media_count = 0
-  if section.settings.image_1 != blank and section.settings.image_2 != blank
-    assign media_width_desktop = 100 | divided_by: 2 | append: 'vw'
-  else
-    assign media_width_desktop = '100vw'
-  endif
-  assign media_width_mobile = '100vw'
-  assign sizes = '(min-width: 750px) ' | append: media_width_desktop | append: ', ' | append: media_width_mobile
-  assign widths = '832, 1200, 1600, 1920, 2560, 3840'
-
-  assign has_image_1 = false
-  assign has_image_2 = false
-  assign has_video_1 = false
-  assign has_video_2 = false
-  assign has_image = false
-  assign has_video = false
-  assign has_video_multiple = false
-  assign has_media = false
-  assign media_type_1 = section.settings.media_type_1
-  assign media_type_2 = section.settings.media_type_2
-  if section.settings.image_1 != blank and media_type_1 == 'image'
-    assign has_image_1 = true
-  endif
-  if section.settings.image_2 != blank and media_type_2 == 'image'
-    assign has_image_2 = true
-  endif
-  if section.settings.video_1 != blank and media_type_1 == 'video'
-    assign has_video_1 = true
-  endif
-  if section.settings.video_2 != blank and media_type_2 == 'video'
-    assign has_video_2 = true
-  endif
-
-  if has_image_1 or has_image_2
-    assign has_image = true
-  endif
-  if has_video_1 or has_video_2
-    assign has_video = true
-  endif
-  if has_video_1 and has_video_2
-    assign has_video_multiple = true
-  endif
-  if has_image or has_video
-    assign has_media = true
-  endif
-
-  assign alpha = section.settings.overlay_color.alpha
-  assign is_transparent = true
-  if alpha == 1 and section.settings.toggle_overlay
-    assign is_transparent = false
-  endif
-
-  assign fetch_priority = 'auto'
-
-  if section.index == 1
-    assign fetch_priority = 'high'
-  endif
-%}
-
-{% capture media %}
-  {%- if has_image_1 -%}
-    {% assign media_count = media_count | plus: 1 %}
-    {{
-      section.settings.image_1
-      | image_url: width: 3840
-      | image_tag:
-        width: section.settings.image_1.width,
-        widths: widths,
-        height: section.settings.image_1.height,
-        alt: section.settings.image_1.alt,
-        class: 'hero__image',
-        sizes: sizes,
-        fetchpriority: fetch_priority
-    }}
+{%- if section.settings.hero_layout == 'full_width' and section.settings.hero_size == 'adapt' -%}
+  {%- if section.settings.image.aspect_ratio == blank -%}
+    {%- assign min_aspect_ratio = 2.0 -%}
+  {%- else -%}
+    {%- assign min_aspect_ratio = section.settings.image.aspect_ratio -%}
   {%- endif -%}
-
-  {%- if has_video_1 -%}
-    {% assign media_count = media_count | plus: 1 %}
-    <div class="hero__video-wrapper">
-      {%- if section.settings.video_1.preview_image -%}
-        {% liquid
-          assign fetch_priority_poster = false
-          if section.index == 1
-            assign fetch_priority_poster = 'high'
-          endif
-        %}
-        {{
-          section.settings.video_1.preview_image
-          | image_url: width: 3840
-          | image_tag:
-            width: section.settings.video_1.preview_image.width,
-            widths: widths,
-            height: section.settings.video_1.preview_image.height,
-            alt: section.settings.video_1.alt,
-            class: 'hero__video-poster',
-            sizes: sizes,
-            fetchpriority: fetch_priority_poster
-        }}
+  {%- assign wrapper_height = 100 | divided_by: min_aspect_ratio -%}
+  {%- style -%}
+    .hero-{{ section.id }} {
+      height: {{- wrapper_height -}}vw !important;
+    }
+  {%- endstyle -%}
+{%- endif -%}
+<div data-section-id="{{ section.id }}" data-section-type="hero-section">
+  {%- if section.settings.hero_layout == 'fixed_width' -%}
+    <div class="page-width">
+  {%- endif -%}
+  {%- if section.settings.hero_layout == 'fixed_width' and section.settings.hero_size ==  'adapt' -%}
+    {%- assign slide_width = 1090 -%}
+    {%- assign min_aspect_ratio = section.settings.image.aspect_ratio | default: 2.0 -%}
+    <div class="hero-fixed-width hero--adapt"
+         id="Hero-{{ section.id }}"
+         data-layout="{{ section.settings.hero_layout }}">
+      {%- assign img_url = section.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+      {%- if section.settings.image.width < max_width -%}
+        {%- assign slide_width = section.settings.image.width -%}
       {%- endif -%}
-      {{
-        section.settings.video_1
-        | video_tag:
-          poster: nil,
-          autoplay: true,
-          loop: true,
-          controls: false,
-          muted: false,
-          class: 'hero__video'
-      }}
-    </div>
-  {%- endif -%}
-
-  {%- if has_image_2 -%}
-    {% assign media_count = media_count | plus: 1 %}
-    {{
-      section.settings.image_2
-      | image_url: width: 3840
-      | image_tag:
-        width: section.settings.image_2.width,
-        widths: widths,
-        height: section.settings.image_2.height,
-        alt: section.settings.image_2.alt,
-        class: 'hero__image',
-        sizes: sizes,
-        fetchpriority: fetch_priority
-    }}
-  {%- endif -%}
-
-  {%- if has_video_2 -%}
-    {% assign media_count = media_count | plus: 1 %}
-    <div class="hero__video-wrapper">
-      {%- if section.settings.video_2.preview_image -%}
-        {{
-          section.settings.video_2.preview_image
-          | image_url: width: 3840
-          | image_tag:
-            width: section.settings.video_2.preview_image.width,
-            widths: widths,
-            height: section.settings.video_2.preview_image.height,
-            alt: section.settings.video_2.alt,
-            class: 'hero__video-poster',
-            sizes: sizes
-        }}
-      {%- endif -%}
-      {{
-        section.settings.video_2
-        | video_tag:
-          poster: nil,
-          autoplay: true,
-          loop: true,
-          controls: false,
-          muted: false,
-          class: 'hero__video'
-      }}
-    </div>
-  {%- endif -%}
-
-  {% if has_media == false and is_transparent %}
-    {{ 'hero-apparel-1' | placeholder_svg_tag: 'hero__image' }}
-  {%- endif -%}
-{% endcapture %}
-
-{% capture media_blurred %}
-  {% if has_image_1 %}
-    {{
-      section.settings.image_1
-      | image_url: width: 3840
-      | image_tag:
-        width: section.settings.image_1.width,
-        widths: widths,
-        height: section.settings.image_1.height,
-        alt: '',
-        class: 'hero__image',
-        sizes: sizes
-    }}
-  {% endif %}
-  {% if has_image_2 %}
-    {{
-      section.settings.image_2
-      | image_url: width: 3840
-      | image_tag:
-        width: section.settings.image_2.width,
-        widths: widths,
-        height: section.settings.image_2.height,
-        alt: '',
-        class: 'hero__image',
-        sizes: sizes
-    }}
-  {% endif %}
-  {% if has_media == false and is_transparent %}
-    {{ 'hero-apparel-1' | placeholder_svg_tag: 'hero__image' }}
-  {% endif %}
-{% endcapture %}
-
-<div
-  id="Hero-{{ section.id }}"
-  class="hero color-{{ section.settings.color_scheme }}{% if section.blocks.size == 0 and section.settings.section_height == 'auto' %} hero--no-blocks-auto-height{% endif %}"
-  style="
-    --hero-border-style: {{ section.settings.border }};
-    --hero-border-width: {{ section.settings.border_width }}px;
-    --hero-border-opacity: {{ section.settings.border_opacity }}%;
-    --blur-opacity: {{ section.settings.reflection_opacity | divided_by: 100.0 }};
-    {% if section.settings.section_height == 'custom' %}
-      --hero-min-height: {{ section.settings.section_height_custom }}svh;
-    {% elsif section.settings.section_height == "full-screen" %}
-       --hero-min-height: 100svh;
-    {% else %}
-      --hero-min-height: var(--section-height-{{ section.settings.section_height }});
-    {% endif %}
-  "
-  {% if request.visual_preview_mode %}
-    data-shopify-visual-preview
-  {% endif %}
-  {% if section.settings.blurred_reflection and has_video_multiple == false %}
-    data-blur-shadow="true"
-  {% endif %}
->
-  {% if section.settings.blurred_reflection %}
-    {% unless has_video_multiple or is_transparent == false %}
-      <div class="hero__blurred-image">
-        {{ media_blurred }}
+      <div class="hero-fixed-width__content">
+        <div class="page-width text-center">
+          {%- if section.settings.title != blank -%}
+            <h2 class="h1 mega-title{% if section.settings.text_size == 'large' %} mega-title--large{% endif %}">{{ section.settings.title | escape }}</h2>
+          {%- endif -%}
+          {%- if section.settings.text != blank -%}
+            <div class="rte-setting mega-subtitle{% if section.settings.text_size == 'large' %} mega-subtitle--large{% endif %}">{{ section.settings.text }}</div>
+          {%- endif -%}
+          {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+            <a href="{{ section.settings.button_link }}" class="btn hero__btn">
+              {{ section.settings.button_label | escape }}
+            </a>
+          {%- endif -%}
+        </div>
       </div>
-    {% endunless %}
-  {% endif %}
-
-  {% comment %}
-    Hardcoded to section--full-width bc the media has to be full width in all cases.
-    hero__content-wrapper applies section_width.
-  {% endcomment %}
-
-  <div
-    class="hero__container spacing-style section section--full-width"
-    style="      {% render 'spacing-style', settings: section.settings %}"
-  >
-    {%- if section.settings.link != blank -%}
-      <a
-        href="{{ section.settings.link }}"
-        class="hero__link"
-        {% if section.settings.open_in_new_tab %}
-          target="_blank" rel="noopener"
-        {% endif %}
-      ></a>
+      {%- if section.settings.image != blank -%}
+        <img class="hero-fixed-width__image lazyload lazypreload"
+             src="{{ section.settings.image | img_url: '300x300' }}"
+             data-src="{{ img_url }}"
+             data-widths="[180, 360, 470, 600, 770, 970, 1060, 1280, 1512, 1728, 2048]"
+             data-aspectratio="{{ section.settings.image.aspect_ratio }}"
+             data-sizes="auto"
+             style="{%- if slide_width <= max_width -%}
+                      {%- assign min_width = slide_width | times: 100 | divided_by: max_width -%}
+                      min-width: {{ min_width }}%;
+                    {%- endif -%}
+                    object-position: {{ section.settings.alignment }};"
+             alt="{{ section.settings.image.alt | escape }}">
+      {%- else -%}
+        <span>
+          {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+          {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+        </span>
+      {%- endif -%}
+      <noscript>
+        <div class="hero-fixed-width__image"{% if section.settings.image %}{% unless section.settings.image.alt == blank %} role="img" aria-label="{{ section.settings.image.alt | escape }}"{% endunless %} style="background-image: url('{{ section.settings.image | img_url: '2048x' }}'); background-position: center {{ section.settings.alignment }};"{% endif %}></div>
+      </noscript>
+    </div>
+  {%- else -%}
+    <div class="hero hero--{{ section.settings.hero_size }} hero-{{ section.id }}{% if section.settings.title != blank or section.settings.text != blank or section.settings.button_label != blank %} hero__overlay{% endif %} box ratio-container lazyload js"
+         id="Hero-{{ section.id }}"
+         data-layout="{{ section.settings.hero_layout }}"
+         {%- if section.settings.image -%}
+          {% unless section.settings.image.alt == blank %}
+          role="img"
+          aria-label="{{ section.settings.image.alt | escape }}"
+          data-alt="{{ section.settings.image.alt | escape }}"
+          {% endunless %}
+         data-bg="{{ section.settings.image | img_url: '300x300' }}"
+         data-bgset="{% include 'bgset', image: section.settings.image %}"
+         data-sizes="auto"
+         data-parent-fit="cover"
+         style="background-position: {{ section.settings.alignment }}; background-image: url('{{ section.settings.image | img_url: '300x300' }});"
+         {%- endif -%}>
+    {%- if section.settings.image == blank -%}
+      <div class="placeholder-background">
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
     {%- endif -%}
-    <div
-      class="hero__media-wrapper"
-      style="--hero-media-count: {{ media_count }};{%- if section.settings.image_1 != blank -%} --hero-media-aspect-ratio: {{ section.settings.image_1.aspect_ratio }};{% endif %}"
-    >
-      {% liquid
-        if section.settings.toggle_overlay
-          render 'overlay', settings: section.settings
-        endif
-      %}
-      {{ media }}
+      <div class="hero__inner">
+        <div class="page-width text-center">
+          {%- if section.settings.title != blank -%}
+            <h2 class="h1 mega-title{% if section.settings.text_size == 'large' %} mega-title--large{% endif %}">{{ section.settings.title | escape }}</h2>
+          {%- endif -%}
+          {%- if section.settings.text != blank -%}
+            <div class="rte-setting mega-subtitle{% if section.settings.text_size == 'large' %} mega-subtitle--large{% endif %}">{{ section.settings.text }}</div>
+          {%- endif -%}
+          {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+            {%- capture ariaLabel -%}
+              {{- section.settings.button_label -}}
+              {%- if section.settings.button_link.type == 'frontpage_link' -%}
+                : {{ 'homepage.general.title' | t -}}
+              {%- elsif section.settings.button_link.type == 'catalog_link' -%}
+                : {{ 'collections.catalog.title' | t -}}
+              {%- elsif section.settings.button_link.object.title -%}
+                : {{ section.settings.button_link.object.title -}}
+              {%- endif -%}
+            {%- endcapture -%}
+
+            <a href="{{ section.settings.button_link }}"
+              class="btn hero__btn"
+              aria-label="{{ ariaLabel }}">
+              {{- section.settings.button_label | escape -}}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
     </div>
-    <div
-      class="
-        hero__content-wrapper
-        layout-panel-flex
-        layout-panel-flex--{{ section.settings.content_direction }}
-        {% if section.settings.vertical_on_mobile %}mobile-column{% endif %}
-        section-content-wrapper
-        {{section.settings.section_width}}
-        {% if request.design_mode %}hero__content-wrapper--design-mode{% endif %}
-      "
-      style="{% render 'layout-panel-style', settings: section.settings %}"
-    >
-      {% content_for 'blocks' %}
+    <noscript>
+      <div class="hero hero--{{ section.settings.hero_size }}{% if section.settings.title != blank or section.settings.text != blank or section.settings.button_label != blank %} hero__overlay{% endif %}"{% if section.settings.image %}{% unless section.settings.image.alt == blank %} role="img" aria-label="{{ section.settings.image.alt | escape }}"{% endunless %} style="background-image: url('{{ section.settings.image | img_url: '2048x' }}'); background-position: center {{ section.settings.alignment }};"{% endif %}></div>
+    </noscript>
+  {%- endif -%}
+  {%- if section.settings.hero_layout == 'fixed_width' -%}
     </div>
-  </div>
+  {%- endif -%}
 </div>
-
-{% stylesheet %}
-  .hero-wrapper {
-    --hero-height-offset: 0px;
-  }
-
-  /* Being extra specific in the selector for performance reasons */
-  body:has(> #header-group > .header-section > #header-component) .hero-wrapper:first-child {
-    --hero-height-offset: var(--header-group-height, 0);
-  }
-
-  .hero {
-    position: relative;
-    min-height: calc(var(--hero-min-height) - var(--hero-height-offset));
-  }
-
-  .hero[data-shopify-visual-preview] {
-    --hero-min-height: 600px;
-
-    min-height: 600px;
-  }
-
-  .hero__container {
-    position: relative;
-    overflow: hidden;
-    border: var(--hero-border-width) var(--hero-border-style) rgb(var(--color-border-rgb) / var(--hero-border-opacity));
-    min-height: inherit;
-    align-items: var(--vertical-alignment-mobile);
-    justify-content: var(--horizontal-alignment);
-    z-index: var(--layer-base);
-
-    @media screen and (min-width: 750px) {
-      align-items: var(--vertical-alignment);
-    }
-  }
-
-  .hero__content-wrapper.page-width {
-    grid-column: 2 / 3;
-  }
-
-  .hero__content-wrapper {
-    position: relative;
-    inset: 0;
-    z-index: var(--layer-flat);
-  }
-
-  .hero__content-wrapper .group-block-content {
-    position: relative;
-  }
-
-  .hero__media-wrapper {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    grid-column: 1 / -1;
-    grid-template-columns: repeat(var(--hero-media-count, 1), 1fr);
-  }
-
-  .hero--auto .hero__image,
-  .hero--auto .hero__video {
-    aspect-ratio: var(--hero-media-aspect-ratio);
-  }
-
-  .hero--no-blocks-auto-height {
-    :is(.hero__image, .hero__video) {
-      width: 100%;
-      aspect-ratio: auto;
-    }
-
-    .hero__media-wrapper {
-      /* When there are no blocks and the height is auto, allow the image to appear. */
-      position: relative;
-    }
-  }
-
-  .hero__image,
-  .hero__video,
-  .hero__video-poster {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    object-position: center center;
-    overflow: hidden;
-    position: relative;
-    z-index: var(--layer-base);
-  }
-
-  .hero__video-wrapper {
-    position: relative;
-  }
-
-  .hero__video-poster {
-    position: absolute;
-  }
-
-  .hero__link {
-    position: absolute;
-    inset: 0;
-    grid-column: 1 / -1;
-  }
-
-  .hero__media-wrapper,
-  .hero__content-wrapper {
-    pointer-events: none;
-
-    :is(a, button, input, textarea, select) {
-      pointer-events: auto;
-    }
-  }
-
-  .hero__content-wrapper--design-mode * {
-    pointer-events: auto;
-  }
-
-  .hero[data-blur-shadow='true'] {
-    --blurred-reflection-filter-saturate: saturate(1.5);
-    --blurred-reflection-mask-image: linear-gradient(to bottom, #000 0%, #000 60%, transparent 100%);
-    --blurred-reflection-box-shadow: rgb(0 0 0 / 5%) 0 0 1rem;
-    --blurred-reflection-filter-blur: blur(20px);
-    --blurred-reflection-scale: scale(2, 1.25);
-    --blurred-reflection-padding-block-end: 60px;
-  }
-
-  .hero[data-blur-shadow='true'] .hero__container {
-    overflow: inherit;
-  }
-
-  .hero[data-blur-shadow='true'] .hero__container::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    box-shadow: var(--blurred-reflection-box-shadow);
-    mix-blend-mode: overlay;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  .hero__blurred-image {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    mask-image: var(--blurred-reflection-mask-image);
-    filter: var(--blurred-reflection-filter-saturate);
-    pointer-events: none;
-    transform: translateY(50%);
-    overflow: hidden;
-  }
-
-  .hero__blurred-image img,
-  .hero__blurred-image svg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
-    filter: var(--blurred-reflection-filter-blur);
-    opacity: var(--blur-opacity);
-    transform: var(--blurred-reflection-scale);
-    padding-block-end: var(--blurred-reflection-padding-block-end);
-
-    &:not(:only-child) {
-      width: 50%;
-
-      &:last-child {
-        right: 0;
-        left: auto;
-      }
-    }
-  }
-{% endstylesheet %}
 
 {% schema %}
 {
-  "name": "t:names.hero",
-  "tag": "section",
-  "class": "hero-wrapper section-wrapper",
-  "blocks": [
-    {
-      "type": "@theme"
-    },
-    {
-      "type": "text"
-    },
-    {
-      "type": "button"
-    },
-    {
-      "type": "logo"
-    },
-    {
-      "type": "jumbo-text"
-    },
-    {
-      "type": "spacer"
-    },
-    {
-      "type": "group"
-    },
-    {
-      "type": "_marquee"
-    }
-  ],
-  "disabled_on": {
-    "groups": ["header"]
+  "name": {
+    "da": "Billede med tekstoverlejring",
+    "de": "Foto mit überlegtem Text",
+    "en": "Image with text overlay",
+    "es": "Imagen con texto",
+    "fi": "Kuva päällä olevalla tekstillä",
+    "fr": "Image avec calque texte",
+    "hi": "पाठ ओवरले के साथ इमेज",
+    "it": "Immagine con testo",
+    "ja": "テキストオーバーレイ付き画像",
+    "ko": "텍스트 오버레이 포함 이미지",
+    "nb": "Bilde med tekstoverlegg",
+    "nl": "Foto met tekstoverlay",
+    "pt-BR": "Imagem com texto",
+    "pt-PT": "Imagem com sobreposição de texto",
+    "sv": "Bild med textöverlagring",
+    "th": "การวางซ้อนรูปภาพพร้อมข้อความ",
+    "zh-CN": "带文本叠加的图片",
+    "zh-TW": "附文字疊加的圖片"
   },
+  "class": "index-section index-section--flush",
   "settings": [
     {
-      "type": "header",
-      "content": "t:content.media"
+      "type": "image_picker",
+      "id": "image",
+      "label": {
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "hi": "इमेज",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      }
     },
     {
       "type": "select",
-      "id": "media_type_1",
-      "label": "t:settings.type",
+      "id": "alignment",
+      "label": {
+        "da": "Justering af billede",
+        "de": "Fotoausrichtung",
+        "en": "Image alignment",
+        "es": "Alineación de imagen",
+        "fi": "Kuvan tasaus",
+        "fr": "Alignement de l'image",
+        "hi": "इमेज पंक्तिबद्ध करना",
+        "it": "Allineamento immagine",
+        "ja": "画像アラインメント",
+        "ko": "이미지 정렬",
+        "nb": "Bildejustering",
+        "nl": "Afbeelding uitlijnen",
+        "pt-BR": "Alinhamento da imagem",
+        "pt-PT": "Alinhamento da imagem",
+        "sv": "Bildjustering",
+        "th": "การจัดวางรูปภาพ",
+        "zh-CN": "图片对齐方式",
+        "zh-TW": "圖片對齊"
+      },
+      "default": "center",
       "options": [
         {
-          "value": "image",
-          "label": "t:options.image"
+          "value": "top",
+          "label": {
+            "da": "Top",
+            "de": "Oben",
+            "en": "Top",
+            "es": "Superior",
+            "fi": "Ylös",
+            "fr": "Haut",
+            "hi": "सबसे ऊपर",
+            "it": "In alto",
+            "ja": "上",
+            "ko": "위쪽",
+            "nb": "Topp",
+            "nl": "Boven",
+            "pt-BR": "Acima",
+            "pt-PT": "Acima",
+            "sv": "Högst upp",
+            "th": "ด้านบน",
+            "zh-CN": "顶部",
+            "zh-TW": "頂部"
+          }
         },
         {
-          "value": "video",
-          "label": "t:options.video"
+          "value": "center",
+          "label": {
+            "da": "I midten",
+            "de": "Mitte",
+            "en": "Middle",
+            "es": "Centrada",
+            "fi": "Keskelle",
+            "fr": "Milieu",
+            "hi": "मध्य में",
+            "it": "Al centro",
+            "ja": "中央",
+            "ko": "중간",
+            "nb": "Midten",
+            "nl": "Midden",
+            "pt-BR": "Meio",
+            "pt-PT": "Meio",
+            "sv": "Mitten",
+            "th": "ตรงกลาง",
+            "zh-CN": "中间",
+            "zh-TW": "中央"
+          }
+        },
+        {
+          "value": "bottom",
+          "label": {
+            "da": "Bund",
+            "de": "Unten",
+            "en": "Bottom",
+            "es": "Inferior",
+            "fi": "Alas",
+            "fr": "Bas",
+            "hi": "नीचे का",
+            "it": "In basso",
+            "ja": "下",
+            "ko": "아래쪽",
+            "nb": "Bunn",
+            "nl": "Onder",
+            "pt-BR": "Abaixo",
+            "pt-PT": "Abaixo",
+            "sv": "Längst ner",
+            "th": "ด้านล่าง",
+            "zh-CN": "底部",
+            "zh-TW": "底部"
+          }
         }
-      ],
-      "default": "image"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_1",
-      "label": "t:settings.image",
-      "visible_if": "{{ section.settings.media_type_1 == 'image' }}"
-    },
-    {
-      "type": "video",
-      "id": "video_1",
-      "label": "t:settings.video",
-      "visible_if": "{{ section.settings.media_type_1 == 'video' }}"
-    },
-    {
-      "type": "header",
-      "content": "t:content.media_2"
+      ]
     },
     {
       "type": "select",
-      "id": "media_type_2",
-      "label": "t:settings.type",
+      "id": "hero_layout",
+      "label": {
+        "da": "Layout",
+        "de": "Layout",
+        "en": "Layout",
+        "es": "Diseño",
+        "fi": "Asettelu",
+        "fr": "Mise en page",
+        "hi": "लेआउट",
+        "it": "Layout",
+        "ja": "レイアウト",
+        "ko": "레이아웃",
+        "nb": "Oppsett",
+        "nl": "Opmaak",
+        "pt-BR": "Layout",
+        "pt-PT": "Esquema",
+        "sv": "Layout",
+        "th": "เลย์เอาต์",
+        "zh-CN": "布局",
+        "zh-TW": "版面配置"
+      },
+      "default": "full_width",
       "options": [
         {
-          "value": "image",
-          "label": "t:options.image"
+          "label": {
+            "da": "Fuld bredde",
+            "de": "Volle Breite",
+            "en": "Full width",
+            "es": "Ancho completo",
+            "fi": "Täysi leveys",
+            "fr": "Pleine largeur",
+            "hi": "पूर्ण चौड़ाई",
+            "it": "Intera larghezza",
+            "ja": "全幅",
+            "ko": "전체 폭",
+            "nb": "Full bredde",
+            "nl": "Volledige breedte",
+            "pt-BR": "Largura completa",
+            "pt-PT": "Largura total",
+            "sv": "Full bredd",
+            "th": "เต็มความกว้าง",
+            "zh-CN": "全宽",
+            "zh-TW": "全寬度"
+          },
+          "value": "full_width"
         },
         {
-          "value": "video",
-          "label": "t:options.video"
+          "label": {
+            "da": "Fast bredde",
+            "de": "Feste Breite",
+            "en": "Fixed width",
+            "es": "Ancho fijo",
+            "fi": "Kiinteä leveys",
+            "fr": "Largeur fixe",
+            "hi": "निश्चित चौड़ाई",
+            "it": "Larghezza fissa",
+            "ja": "固定幅",
+            "ko": "고정 폭",
+            "nb": "Fast bredde",
+            "nl": "Vaste breedte",
+            "pt-BR": "Largura fixa",
+            "pt-PT": "Largura fixa",
+            "sv": "Fast bredd",
+            "th": "ความกว้างตายตัว",
+            "zh-CN": "固定宽度",
+            "zh-TW": "固定寬度"
+          },
+          "value": "fixed_width"
         }
-      ],
-      "default": "image"
+      ]
     },
     {
-      "type": "image_picker",
-      "id": "image_2",
-      "label": "t:settings.image",
-      "visible_if": "{{ section.settings.media_type_2 == 'image' }}"
+      "type": "select",
+      "id": "hero_size",
+      "label": {
+        "da": "Højde på afsnit",
+        "de": "Bereichs-Höhe",
+        "en": "Section height",
+        "es": "Altura de la sección",
+        "fi": "Osan korkeus",
+        "fr": "Hauteur de la section",
+        "hi": "सेक्शन की ऊंचाई",
+        "it": "Altezza sezione",
+        "ja": "セクションの高さ",
+        "ko": "섹션 높이",
+        "nb": "Høyde på del",
+        "nl": "Sectiehoogte",
+        "pt-BR": "Altura da seção",
+        "pt-PT": "Altura da secção",
+        "sv": "Sektionshöjd",
+        "th": "ความสูงของส่วน",
+        "zh-CN": "分区高度",
+        "zh-TW": "區塊高度"
+      },
+      "default": "medium",
+      "options": [
+        {
+          "label": {
+            "da": "Tilpas til billede",
+            "de": "An Bild anpassen",
+            "en": "Adapt to image",
+            "es": "Adaptar a la imagen",
+            "fi": "Sovita kuvaan",
+            "fr": "S'adapter à l'image",
+            "hi": "इमेज के अनुकूल बनाएं",
+            "it": "Adatta all'immagine",
+            "ja": "画像に対応",
+            "ko": "이미지에 맞춤",
+            "nb": "Tilpass til bilde",
+            "nl": "Aanpassen aan afbeelding",
+            "pt-BR": "Adaptar à imagem",
+            "pt-PT": "Adaptar à imagem",
+            "sv": "Anpassa till bild",
+            "th": "ปรับตามรูปภาพ",
+            "zh-CN": "适应图片",
+            "zh-TW": "配合圖片"
+          },
+          "value": "adapt"
+        },
+        {
+          "label": {
+            "da": "Ekstra lille",
+            "de": "Extra klein",
+            "en": "Extra Small",
+            "es": "Extra pequeña",
+            "fi": "Erikoispieni",
+            "fr": "Très petite",
+            "hi": "अतिरिक्त छोटा",
+            "it": "Molto piccola",
+            "ja": "極小",
+            "ko": "특소",
+            "nb": "Ekstra liten",
+            "nl": "Extra klein",
+            "pt-BR": "Extra pequeno",
+            "pt-PT": "Extra pequeno",
+            "sv": "Extra liten",
+            "th": "ขนาดเล็กพิเศษ",
+            "zh-CN": "特小",
+            "zh-TW": "超小型"
+          },
+          "value": "x-small"
+        },
+        {
+          "label": {
+            "da": "Lille",
+            "de": "Klein",
+            "en": "Small",
+            "es": "Pequeña",
+            "fi": "Pieni",
+            "fr": "Petite",
+            "hi": "छोटा",
+            "it": "Small",
+            "ja": "小",
+            "ko": "스몰",
+            "nb": "Liten",
+            "nl": "Klein",
+            "pt-BR": "Pequeno",
+            "pt-PT": "Pequeno",
+            "sv": "Liten",
+            "th": "เล็ก",
+            "zh-CN": "小",
+            "zh-TW": "小型"
+          },
+          "value": "small"
+        },
+        {
+          "label": {
+            "da": "Medium",
+            "de": "Mitte",
+            "en": "Medium",
+            "es": "Mediana",
+            "fi": "Keskisuuri",
+            "fr": "Moyenne",
+            "hi": "मध्यम",
+            "it": "Medium",
+            "ja": "中",
+            "ko": "보통",
+            "nb": "Middels",
+            "nl": "Gemiddeld",
+            "pt-BR": "Médio",
+            "pt-PT": "Médio",
+            "sv": "Medium",
+            "th": "ปานกลาง",
+            "zh-CN": "中等",
+            "zh-TW": "中等"
+          },
+          "value": "medium"
+        },
+        {
+          "label": {
+            "da": "Stor",
+            "de": "Groß",
+            "en": "Large",
+            "es": "Grande",
+            "fi": "Suuri",
+            "fr": "Grande",
+            "hi": "बड़ा",
+            "it": "Large",
+            "ja": "大",
+            "ko": "라지",
+            "nb": "Stor",
+            "nl": "Groot",
+            "pt-BR": "Grande",
+            "pt-PT": "Grande",
+            "sv": "Stor",
+            "th": "ใหญ่",
+            "zh-CN": "大",
+            "zh-TW": "大型"
+          },
+          "value": "large"
+        },
+        {
+          "label": {
+            "da": "Ekstra stor",
+            "de": "Extra groß",
+            "en": "Extra Large",
+            "es": "Extra grande",
+            "fi": "Erikoissuuri",
+            "fr": "Très grande",
+            "hi": "अतिरिक्त बड़ा",
+            "it": "Molto grande",
+            "ja": "特大",
+            "ko": "특대",
+            "nb": "Ekstra stort",
+            "nl": "Extra groot",
+            "pt-BR": "Extra grande",
+            "pt-PT": "Extra grande",
+            "sv": "Extra stor",
+            "th": "ขนาดใหญ่พิเศษ",
+            "zh-CN": "特大",
+            "zh-TW": "超大型"
+          },
+          "value": "x-large"
+        }
+      ]
     },
     {
-      "type": "video",
-      "id": "video_2",
-      "label": "t:settings.video",
-      "visible_if": "{{ section.settings.media_type_2 == 'video' }}"
+      "type": "select",
+      "id": "text_size",
+      "label": {
+        "da": "Tekststørrelse",
+        "de": "Textgröße",
+        "en": "Text size",
+        "es": "Tamaño del texto",
+        "fi": "Tekstin koko",
+        "fr": "Taille du texte",
+        "hi": "टेक्स्ट आकार",
+        "it": "Dimensione testo",
+        "ja": "文字サイズ",
+        "ko": "텍스트 사이즈",
+        "nb": "Tekststørrelse",
+        "nl": "Tekengrootte",
+        "pt-BR": "Tamanho do texto",
+        "pt-PT": "Tamanho do texto",
+        "sv": "Textstorlek",
+        "th": "ขนาดตัวอักษร",
+        "zh-CN": "文本大小",
+        "zh-TW": "文字尺寸"
+      },
+      "default": "medium",
+      "options": [
+        {
+          "label": {
+            "da": "Medium",
+            "de": "Mitte",
+            "en": "Medium",
+            "es": "Mediano",
+            "fi": "Keskisuuri",
+            "fr": "Moyenne",
+            "hi": "मध्यम",
+            "it": "Medium",
+            "ja": "中",
+            "ko": "보통",
+            "nb": "Middels",
+            "nl": "Gemiddeld",
+            "pt-BR": "Médio",
+            "pt-PT": "Intermédio",
+            "sv": "Medium",
+            "th": "ปานกลาง",
+            "zh-CN": "中等",
+            "zh-TW": "中等"
+          },
+          "value": "medium"
+        },
+        {
+          "label": {
+            "da": "Stor",
+            "de": "Groß",
+            "en": "Large",
+            "es": "Grande",
+            "fi": "Suuri",
+            "fr": "Grande",
+            "hi": "बड़ा",
+            "it": "Large",
+            "ja": "大",
+            "ko": "라지",
+            "nb": "Stor",
+            "nl": "Groot",
+            "pt-BR": "Grande",
+            "pt-PT": "Grande",
+            "sv": "Stor",
+            "th": "ใหญ่",
+            "zh-CN": "大",
+            "zh-TW": "大型"
+          },
+          "value": "large"
+        }
+      ]
     },
     {
-      "type": "header",
-      "content": "t:content.section_link"
+      "type": "text",
+      "id": "title",
+      "label": {
+        "da": "Overskrift",
+        "de": "Titel",
+        "en": "Heading",
+        "es": "Título",
+        "fi": "Otsake",
+        "fr": "En-tête",
+        "hi": "शीर्षक",
+        "it": "Heading",
+        "ja": "見出し",
+        "ko": "제목",
+        "nb": "Overskrift",
+        "nl": "Kop",
+        "pt-BR": "Título",
+        "pt-PT": "Título",
+        "sv": "Rubrik",
+        "th": "ส่วนหัว",
+        "zh-CN": "标题",
+        "zh-TW": "標題"
+      },
+      "default": {
+        "da": "Billede med tekstoverlejring",
+        "de": "Foto mit überlegtem Text",
+        "en": "Image with text overlay",
+        "es": "Imagen con texto",
+        "fi": "Kuva päällä olevalla tekstillä",
+        "fr": "Image avec calque texte",
+        "hi": "पाठ ओवरले के साथ इमेज",
+        "it": "Immagine con testo",
+        "ja": "テキストオーバーレイ付き画像",
+        "ko": "텍스트 오버레이 포함 이미지",
+        "nb": "Bilde med tekstoverlegg",
+        "nl": "Foto met tekstoverlay",
+        "pt-BR": "Imagem com sobreposição de texto",
+        "pt-PT": "Imagem com sobreposição de texto",
+        "sv": "Bild med textöverlagring",
+        "th": "การวางซ้อนรูปภาพพร้อมข้อความ",
+        "zh-CN": "带文本叠加的图片",
+        "zh-TW": "附文字疊加的圖片"
+      }
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": {
+        "da": "Tekst",
+        "de": "Text",
+        "en": "Text",
+        "es": "Texto",
+        "fi": "Teksti",
+        "fr": "Texte",
+        "hi": "टेक्स्ट",
+        "it": "Testo",
+        "ja": "テキスト",
+        "ko": "텍스트",
+        "nb": "Tekst",
+        "nl": "Tekst",
+        "pt-BR": "Texto",
+        "pt-PT": "Texto",
+        "sv": "Text",
+        "th": "ข้อความ",
+        "zh-CN": "文本",
+        "zh-TW": "文字"
+      },
+      "default": {
+        "da": "<p>Brug tekstoverlejring til at give dine kunder indblik i dit brand. Vælg billeder og tekst, der passer til din stil og historie.</p>",
+        "de": "<p>Nutzen Sie überlegten Text, um Kunden über Ihre Marke zu informieren. Wählen Sie Fotos und Text aus, die zu Ihrer Marke passen.</p>",
+        "en": "<p>Use overlay text to give your customers insight into your brand. Select imagery and text that relates to your style and story.</p>",
+        "es": "<p>Usa el texto superpuesto para darles información a tus clientes sobre tu marca. Selecciona imágenes y textos que se relacionen con tu estilo e historia.</p>",
+        "fi": "<p>Käytä taustan päällä olevaa tekstiä, jotta asiakkaat voivat tutustua tuotemerkkisi. Valitse tyylisi ja tarinasi liittyvät kuvat ja teksti.</p>",
+        "fr": "<p>Utilisez la superposition de texte pour donner un aperçu de votre marque à vos clients. Utilisez une image et du texte qui se rapportent au style et à l'histoire de votre marque.</p>",
+        "hi": "<p>अपने ब्रांड में अपने ग्राहकों को जानकारी देने के लिए ओवरले टेक्स्ट का उपयोग करें. अपनी स्टाइल और कहानी से संबंधित कल्पना और पाठ का चयन करें.</p>",
+        "it": "<p>Utilizza il testo in sovrapposizione per dare ai clienti informazioni sul tuo brand. Seleziona immagini e testo legati al tuo stile e alla tua storia.</p>",
+        "ja": "<p>オーバーレイテキストを使用して、お客様があなたのブランドについてよく理解できるようにします。あなたのスタイルやストーリーに関連する画像やテキストを選択してください。</p>",
+        "ko": "<p>오버레이 텍스트를 사용하여 고객에게 브랜드에 대한 통찰력을 부여하십시오. 자신의 스타일과 이야기와 관련된 이미지와 텍스트를 선택하십시오.</p>",
+        "nb": "<p>Bruk overleggstekst til å gi kundene dine innsikt i merkevaren din. Velg bildebruk og tekst som er relatert til din stil og historie.</p>",
+        "nl": "<p>Gebruik overlay-tekst om uw klanten inzicht te geven in uw merk. Selecteer afbeeldingen en tekst die betrekking hebben op uw stijl en verhaal.</p>",
+        "pt-BR": "<p>Use o texto de sobreposição para apresentar insights sobre sua marca aos clientes. Selecione imagens e textos que reflitam seu estilo e sua história.</p>",
+        "pt-PT": "<p>Utilize o texto de sobreposição para fornecer informações sobre a sua marca aos clientes. Selecione imagens e textos que reflitam o seu estilo e a sua história.</p>",
+        "sv": "<p>Använd överläggningstext för att ge dina kunder inblick i ditt varumärke. Välj bildspråk och text som gäller din stil och historia.</p>",
+        "th": "<p>ใช้ข้อความซ้อนทับเพื่อให้ลูกค้าของคุณทราบถึงรายละเอียดเกี่ยวกับแบรนด์ เลือกรูปภาพและข้อความที่มีความเกี่ยวข้องกับสไตล์กับเรื่องราวของคุณ</p>",
+        "zh-CN": "<p>使用叠加文本让客户深入了解您的品牌。选择与您的风格和故事相关的图片和文本。</p>",
+        "zh-TW": "<p>運用文字疊加讓顧客更加瞭解您的品牌。選擇與您風格和品牌故事相關的圖像和文字。</p>"
+      }
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": {
+        "da": "Knaptekst",
+        "de": "Button-Etikett",
+        "en": "Button label",
+        "es": "Etiqueta de botón",
+        "fi": "Tekstipainike",
+        "fr": "Texte du bouton",
+        "hi": "बटन लेबल",
+        "it": "Etichetta pulsante",
+        "ja": "ボタンのラベル",
+        "ko": "버튼 레이블",
+        "nb": "Knappetikett",
+        "nl": "Knoplabel",
+        "pt-BR": "Etiqueta de botão",
+        "pt-PT": "Etiqueta do botão",
+        "sv": "Knappetikett",
+        "th": "ป้ายกำกับปุ่ม",
+        "zh-CN": "按钮标签",
+        "zh-TW": "按鈕標籤"
+      }
     },
     {
       "type": "url",
-      "id": "link",
-      "label": "t:settings.link"
-    },
-    {
-      "type": "checkbox",
-      "id": "open_in_new_tab",
-      "label": "t:settings.open_new_tab",
-      "default": false
-    },
-    {
-      "type": "header",
-      "content": "t:content.layout"
-    },
-    {
-      "type": "select",
-      "id": "content_direction",
-      "label": "t:settings.direction",
-      "options": [
-        {
-          "value": "column",
-          "label": "t:options.vertical"
-        },
-        {
-          "value": "row",
-          "label": "t:options.horizontal"
-        }
-      ],
-      "default": "column"
-    },
-    {
-      "type": "checkbox",
-      "id": "vertical_on_mobile",
-      "label": "t:settings.vertical_on_mobile",
-      "default": true,
-      "visible_if": "{{ section.settings.content_direction == 'row' }}"
-    },
-    {
-      "type": "select",
-      "id": "horizontal_alignment",
-      "label": "t:settings.alignment",
-      "options": [
-        {
-          "value": "flex-start",
-          "label": "t:options.left"
-        },
-        {
-          "value": "center",
-          "label": "t:options.center"
-        },
-        {
-          "value": "flex-end",
-          "label": "t:options.right"
-        },
-        {
-          "value": "space-between",
-          "label": "t:options.space_between"
-        }
-      ],
-      "default": "flex-start",
-      "visible_if": "{{ section.settings.content_direction == 'row' }}"
-    },
-    {
-      "type": "select",
-      "id": "vertical_alignment",
-      "label": "t:settings.position",
-      "options": [
-        {
-          "value": "flex-start",
-          "label": "t:options.top"
-        },
-        {
-          "value": "center",
-          "label": "t:options.center"
-        },
-        {
-          "value": "flex-end",
-          "label": "t:options.bottom"
-        }
-      ],
-      "default": "center",
-      "visible_if": "{{ section.settings.content_direction == 'row' }}"
-    },
-    {
-      "type": "checkbox",
-      "id": "align_baseline",
-      "label": "t:settings.align_baseline",
-      "default": false,
-      "visible_if": "{{ section.settings.vertical_alignment == 'flex-end' }}"
-    },
-    {
-      "type": "select",
-      "id": "horizontal_alignment_flex_direction_column",
-      "label": "t:settings.alignment",
-      "options": [
-        {
-          "value": "flex-start",
-          "label": "t:options.left"
-        },
-        {
-          "value": "center",
-          "label": "t:options.center"
-        },
-        {
-          "value": "flex-end",
-          "label": "t:options.right"
-        }
-      ],
-      "default": "flex-start",
-      "visible_if": "{{ section.settings.content_direction != 'row' }}"
-    },
-    {
-      "type": "select",
-      "id": "vertical_alignment_flex_direction_column",
-      "label": "t:settings.position",
-      "options": [
-        {
-          "value": "flex-start",
-          "label": "t:options.top"
-        },
-        {
-          "value": "center",
-          "label": "t:options.center"
-        },
-        {
-          "value": "flex-end",
-          "label": "t:options.bottom"
-        },
-        {
-          "value": "space-between",
-          "label": "t:options.space_between"
-        }
-      ],
-      "default": "center",
-      "visible_if": "{{ section.settings.content_direction == 'column' }}"
-    },
-    {
-      "type": "range",
-      "id": "gap",
-      "label": "t:settings.gap",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 12
-    },
-    {
-      "type": "select",
-      "id": "section_width",
-      "label": "t:settings.width",
-      "options": [
-        {
-          "value": "page-width",
-          "label": "t:options.page"
-        },
-        {
-          "value": "full-width",
-          "label": "t:options.full"
-        }
-      ],
-      "default": "page-width"
-    },
-    {
-      "type": "select",
-      "id": "section_height",
-      "label": "t:settings.height",
-      "options": [
-        {
-          "value": "auto",
-          "label": "t:options.auto"
-        },
-        {
-          "value": "small",
-          "label": "t:options.small"
-        },
-        {
-          "value": "medium",
-          "label": "t:options.medium"
-        },
-        {
-          "value": "large",
-          "label": "t:options.large"
-        },
-        {
-          "value": "full-screen",
-          "label": "t:options.full_screen"
-        },
-        {
-          "value": "custom",
-          "label": "t:options.custom"
-        }
-      ],
-      "default": "medium"
-    },
-    {
-      "type": "range",
-      "id": "section_height_custom",
-      "label": "t:settings.custom_height",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "default": 50,
-      "unit": "%",
-      "visible_if": "{{ section.settings.section_height == 'custom' }}"
-    },
-    {
-      "type": "header",
-      "content": "t:content.appearance"
-    },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:settings.color_scheme",
-      "default": "scheme-1"
-    },
-    {
-      "type": "checkbox",
-      "id": "toggle_overlay",
-      "label": "t:settings.media_overlay"
-    },
-    {
-      "type": "color",
-      "id": "overlay_color",
-      "label": "t:settings.overlay_color",
-      "alpha": true,
-      "default": "#00000026",
-      "visible_if": "{{ section.settings.toggle_overlay }}"
-    },
-    {
-      "type": "select",
-      "id": "overlay_style",
-      "label": "t:settings.overlay_style",
-      "options": [
-        {
-          "value": "solid",
-          "label": "t:options.solid"
-        },
-        {
-          "value": "gradient",
-          "label": "t:options.gradient"
-        }
-      ],
-      "default": "solid",
-      "visible_if": "{{ section.settings.toggle_overlay }}"
-    },
-    {
-      "type": "select",
-      "id": "gradient_direction",
-      "label": "t:settings.gradient_direction",
-      "options": [
-        {
-          "value": "to top",
-          "label": "t:options.up"
-        },
-        {
-          "value": "to bottom",
-          "label": "t:options.down"
-        }
-      ],
-      "default": "to top",
-      "visible_if": "{{ section.settings.toggle_overlay and section.settings.overlay_style == 'gradient' }}"
-    },
-    {
-      "type": "checkbox",
-      "id": "blurred_reflection",
-      "label": "t:settings.blurred_reflection",
-      "default": false,
-      "info": "t:info.applies_on_image_only"
-    },
-    {
-      "type": "range",
-      "id": "reflection_opacity",
-      "label": "t:settings.reflection_opacity",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "%",
-      "default": 75,
-      "visible_if": "{{ section.settings.blurred_reflection }}"
-    },
-    {
-      "type": "header",
-      "content": "t:content.padding"
-    },
-    {
-      "type": "range",
-      "id": "padding-block-start",
-      "label": "t:settings.top",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "padding-block-end",
-      "label": "t:settings.bottom",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 0
+      "id": "button_link",
+      "label": {
+        "da": "Knaplink",
+        "de": "Button-Etikett",
+        "en": "Button link",
+        "es": "Enlace de botón",
+        "fi": "Painikelinkki",
+        "fr": "Lien du bouton",
+        "hi": "बटन लिंक",
+        "it": "Link pulsante",
+        "ja": "ボタンのリンク",
+        "ko": "버튼 링크",
+        "nb": "Kobling for knapp",
+        "nl": "Knoplink",
+        "pt-BR": "Link de botão",
+        "pt-PT": "Ligação do botão",
+        "sv": "Knapplänk",
+        "th": "ลิงก์ปุ่ม",
+        "zh-CN": "按钮链接",
+        "zh-TW": "按鈕連結"
+      }
     }
   ],
   "presets": [
     {
-      "name": "t:names.hero",
-      "category": "t:categories.banners",
-      "blocks": {
-        "text_1": {
-          "type": "text",
-          "settings": {
-            "text": "<h1>New arrivals</h1>",
-            "type_preset": "h1",
-            "max_width": "narrow"
-          }
-        },
-        "text_2": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Made with care and unconditionally loved by our customers.</p>",
-            "max_width": "narrow",
-            "padding-block-end": 32
-          }
-        },
-        "button": {
-          "type": "button",
-          "name": "t:names.button",
-          "settings": {
-            "label": "Shop Now",
-            "link": "shopify://collections/all"
-          }
-        }
+      "name": {
+        "da": "Billede med tekstoverlejring",
+        "de": "Foto mit überlegtem Text",
+        "en": "Image with text overlay",
+        "es": "Imagen con texto",
+        "fi": "Kuva päällä olevalla tekstillä",
+        "fr": "Image avec calque texte",
+        "hi": "पाठ ओवरले के साथ इमेज",
+        "it": "Immagine con testo",
+        "ja": "テキストオーバーレイ付き画像",
+        "ko": "텍스트 오버레이 포함 이미지",
+        "nb": "Bilde med tekstoverlegg",
+        "nl": "Foto met tekstoverlay",
+        "pt-BR": "Imagem com sobreposição de texto",
+        "pt-PT": "Imagem com sobreposição de texto",
+        "sv": "Bild med textöverlagring",
+        "th": "การวางซ้อนรูปภาพพร้อมข้อความ",
+        "zh-CN": "带文本叠加的图片",
+        "zh-TW": "附文字疊加的圖片"
       },
-      "block_order": ["text_1", "text_2", "button"],
-      "settings": {
-        "horizontal_alignment_flex_direction_column": "center",
-        "gap": 16,
-        "section_height": "large",
-        "color_scheme": "scheme-5",
-        "padding-block-start": 40,
-        "padding-block-end": 40,
-        "toggle_overlay": true,
-        "overlay_style": "gradient"
-      }
-    },
-    {
-      "name": "t:names.hero_marquee",
-      "category": "t:categories.banners",
-      "blocks": {
-        "spacer": {
-          "type": "spacer",
-          "settings": {
-            "size": "pixel",
-            "pixel_size": 24
-          }
-        },
-        "marquee": {
-          "type": "_marquee",
-          "blocks": {
-            "text": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Explore our latest products.</p>",
-                "type_preset": "h1"
-              }
-            }
-          },
-          "block_order": ["text"]
-        },
-        "button": {
-          "type": "button",
-          "settings": {
-            "label": "Shop Now",
-            "link": "shopify://collections/all"
-          }
-        }
-      },
-      "block_order": ["spacer", "marquee", "button"],
-      "settings": {
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "space-between",
-        "gap": 32,
-        "section_height": "large",
-        "color_scheme": "scheme-5",
-        "padding-block-start": 0,
-        "padding-block-end": 40,
-        "toggle_overlay": true,
-        "overlay_style": "gradient"
-      }
-    },
-    {
-      "name": "t:names.hero_bottom_aligned",
-      "category": "t:categories.banners",
-      "blocks": {
-        "group_main": {
-          "type": "group",
-          "name": "t:names.group",
-          "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "flex-end",
-            "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 18,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "content_group": {
-              "type": "group",
-              "name": "t:names.group",
-              "settings": {
-                "content_direction": "column",
-                "vertical_on_mobile": true,
-                "horizontal_alignment": "flex-start",
-                "vertical_alignment": "center",
-                "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start",
-                "vertical_alignment_flex_direction_column": "center",
-                "gap": 6,
-                "width": "custom",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "custom_height": 100,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
-                "background_media": "none",
-                "video_position": "cover",
-                "background_image_position": "cover",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {
-                "text_intro": {
-                  "type": "text",
-                  "name": "t:names.heading",
-                  "settings": {
-                    "text": "<h2><em>Introducing</em></h2>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "h6",
-                    "font": "var(--font-accent--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  }
-                },
-                "text_main": {
-                  "type": "text",
-                  "name": "t:names.heading",
-                  "settings": {
-                    "text": "<h1>Our Newest Arrivals</h1>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "h2",
-                    "font": "var(--font-primary--family)",
-                    "font_size": "",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  }
-                }
-              },
-              "block_order": ["text_intro", "text_main"]
-            },
-            "text_description": {
-              "type": "text",
-              "name": "t:names.text",
-              "settings": {
-                "text": "<p>We make things that work better and last longer. Our products solve real problems with clean design and honest materials.</p>",
-                "width": "fit-content",
-                "max_width": "none",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-primary--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              }
-            }
-          },
-          "block_order": ["content_group", "text_description"]
-        }
-      },
-      "block_order": ["group_main"],
-      "settings": {
-        "media_type_1": "image",
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 16,
-        "section_height": "large",
-        "color_scheme": "scheme-5",
-        "padding-block-start": 40,
-        "padding-block-end": 40,
-        "toggle_overlay": true,
-        "overlay_style": "gradient",
-        "gradient_direction": "to top"
+      "category": {
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "hi": "इमेज",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
       }
     }
   ]

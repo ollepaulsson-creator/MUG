@@ -1,0 +1,52 @@
+{% assign counter = 0 %}
+{% for vendor in shop.vendors %}
+{% assign counter = counter | plus: 1 %}
+{% endfor %}
+
+{% assign counter_divided_by_3 = counter | divided_by: 3 | floor %}
+
+<div>
+<div class="page-width">
+  <div class="grid">
+    <div class="grid__item medium-up--five-sixths medium-up--push-one-twelfth">
+      <div class="section-header text-center">
+        <h1 style="padding-top:40px;">{{ page.title }}</h1>
+      </div>
+
+      <div class="rte">
+        {{ page.content }}
+     
+{% assign chars = '' %}
+{% for vendor in shop.vendors %}
+    {% capture first_char %}{{ vendor | truncate: 1, '' }}{% endcapture %}
+
+    {% if forloop.first %}
+        <div>
+            <ul id="vendorlist">
+    {% endif %}
+
+    {% unless chars contains first_char %}
+        {% unless forloop.first %}
+               </ul>
+            </div>
+        {% endunless %}
+
+        <div class="vendor">
+            <h1 style="padding-top:20px;">{{ first_char }}</h1>
+               <ul style="list-style: none; margin-left: 0;">
+
+        {% capture temp %}{{ chars }}{{ first_char }}{% endcapture %}
+        {% assign chars = temp %}
+    {% endunless %}
+
+    <li style="list-style: none;">{{ vendor | link_to_vendor }}</li>
+{% endfor %}
+        
+      </div>
+          
+    </div>
+  </div>
+      
+</div>
+    
+    </div>

@@ -1,0 +1,7 @@
+<script id="nx8HmVar" type="text/javascript" >
+    const NX8_HM_CURRENCY_FORMAT = "{{ shop.money_format | strip_html }}";
+    const NX8_HM_LINKS = [ {%- for list in linklists -%} { id: "{{ list.handle }}", title: "{{ list.title | replace: '"', '\"' }}", items: [ {%- for link in linklists[list.handle].links -%} "{{ link.url | replace: '"', '\"' }}", {%- endfor -%} ], }, {%- endfor -%} ];
+    window.nx8HmCurrencyFormat = NX8_HM_CURRENCY_FORMAT;
+    window.nx8HmLinks = NX8_HM_LINKS;
+</script>
+<script type="text/javascript" src="{{ 'nx8_hm_data.js' | asset_url }}"></script>

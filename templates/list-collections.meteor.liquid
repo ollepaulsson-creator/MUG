@@ -1,0 +1,21 @@
+{%- comment -%}
+This file has been modified by the Yoast SEO for Shopify app.
+You can learn more about this (and learn how to cleanly revert these changes) at https://yoa.st/removing-theme-changes.
+{%- endcomment -%}
+{% layout none %}
+
+<html>
+  <head>
+    {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<meta name="robots" content="noindex, nofollow">
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+  </head>
+
+  <body>
+    <script id="meteor-menu-data" type="application/json">
+      {% include 'meteor-menu', load: 'data' %}
+    </script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+{% render 'shogun-products', content: collection %}
+
+{{collection.metafields.shogun.above}}
+{% comment %}
+  The contents of the collection.liquid template can be found in /sections/collection-template.liquid
+{% endcomment %}
+
+{% section 'collection-template' %}
+
+    <hr class="site-footer__hr">
+
+{{collection.metafields.shogun.below}}
+
+
+{% include 'wiser_trending' %}{% include 'wiser_recentview' %}{% include 'wiser_newarrivals' %}{% include 'wiser_featured' %}{% include 'wiser_topselling' %}{% include 'wiser_recent_related' %}
+{{ collection.metafields.shogun.optimizer }}

@@ -1,0 +1,35 @@
+
+<script type="text/javascript">
+  //BOOSTER APPS COMMON JS CODE
+  window.BoosterApps = window.BoosterApps || {};
+  window.BoosterApps.common = window.BoosterApps.common || {};
+  window.BoosterApps.common.shop = {
+    permanent_domain: '{{ shop.permanent_domain }}',
+    currency: {{ shop.currency | json }},
+    money_format: {{ shop.money_format | json }},
+    id: 8483307620
+  };
+  {% if customer %}
+  window.BoosterApps.common.customer = {
+    id: {{ customer.id | json }}, tags: {{ customer.tags | json }},
+    email: {{customer.email | json}}
+  };
+  {% endif %}
+  window.BoosterApps.common.template = '{{ template | split: "." | first }}';
+  window.BoosterApps.common.cart = {{ cart | json }};
+  window.BoosterApps.common.apps = {{shop.metafields.ba_apps.all | json}};
+  window.BoosterApps.cs_app_url = "/apps/ba_fb_app";
+
+  for (i = 0; i < window.localStorage.length; i++) {
+    var key = window.localStorage.key(i);
+    if (key.slice(0,10) === "ba_msg_sub") {
+      window.BoosterApps.can_update_cart = true;
+    }
+  }
+
+  {% if product %}
+    if (window.BoosterApps.common.template == 'product'){
+      window.BoosterApps.common.product = {id: {{product.id}}, price: {{product.price}}, handle: '{{product.handle}}', available: {{product.available}} };
+    }
+  {% endif %}
+</script>

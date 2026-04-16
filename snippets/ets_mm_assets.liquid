@@ -1,0 +1,10 @@
+
+<script id="etsMMNavigator">
+    var ETS_MM_MONEY_FORMAT = {{ shop.money_format | json }};
+    var ETS_MM_LINK_LIST = [{%- for list in linklists -%} {id: "{{list.handle}}", title: "{{ list.title | replace: '"', '\"' }}", items: [{%- for link in linklists[list.handle].links -%}"{{ link.url | replace: '"', '\"' }}", {%- endfor -%}]}, {%- endfor -%}];
+</script>
+<script type="text/javascript">
+    var ETS_MM_CART_ITEM_COUNT = {{ cart.item_count }};
+</script>
+
+<script src="{{ 'ets_mm_config.js' | asset_url }}" type="text/javascript"></script>

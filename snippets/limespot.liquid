@@ -1,0 +1,40 @@
+{%- comment -%}
+This file has been modified by the Yoast SEO for Shopify app.
+You can learn more about this (and learn how to cleanly revert these changes) at https://yoa.st/removing-theme-changes.
+{%- endcomment -%}
+<script type="text/javascript" async src="https://edge.personalizer.io/storefront/2.0.0/js/shopify/storefront.min.js?key=qfyrz-mn1mv3sk1ugp6f9huf6b-suhtc&shop=mug-musik-utan-granser.myshopify.com"></script>
+<script>
+window.LimeSpot = window.LimeSpot === undefined ? {} : LimeSpot;{% assign t = template | prepend: '/' | append: '.' %}
+{% if t contains '/product.' %}LimeSpot.PageInfo = { Type: "Product", ReferenceIdentifier: "{{ product.id }}"};
+{% elsif t contains '/collection.' %}LimeSpot.PageInfo = { Type: "Collection", ReferenceIdentifier: "{{ collection.id }}", Personalized: {%if collection.metafields.LimeSpot['Personalized'] == "true"%}true{%else%}false{%endif%} };
+{% elsif t contains '/index.' %}LimeSpot.PageInfo = { Type: "Home", ReferenceIdentifier: null };
+{% elsif t contains '/cart.' %}LimeSpot.PageInfo = { Type: "Cart", ReferenceIdentifier: null };
+{% elsif t contains '/search.' %}LimeSpot.PageInfo = { Type: "Search", ReferenceIdentifier: null };
+{% elsif t contains '/404.' %}LimeSpot.PageInfo = { Type: "Four04", ReferenceIdentifier: null };
+{% elsif checkout.id != blank and checkout.order_id == blank %}LimeSpot.PageInfo = { Type: "Checkout", ReferenceIdentifier: null };
+{% endif %}{% if customer %}LimeSpot.UserInfo = { Identifier: "{{ customer.id }}", Email: "{{ customer.email }}", CellPhone: "{{ customer.phone }}", FirstName: "{{ customer.first_name }}", LastName: "{{ customer.last_name }}", Tags: {{ customer.tags | json }} };
+{% endif %}
+LimeSpot.StoreInfo = { Theme: "{{ theme.name | escape }}" };
+{% assign cart_product_ids = "" %}
+{% if checkout.id != blank and checkout.order_id == blank %}
+	{% for item in checkout.line_items %}
+		{% assign cart_product_ids = cart_product_ids | append: ',' | append: item.product.id %}
+	{% endfor %}
+{% else %}
+	{% for item in cart.items %}
+		{% assign cart_product_ids = cart_product_ids | append: ',' | append: item.product.id %}
+	{% endfor %}
+{% endif %}
+LimeSpot.CartItems = [{{ cart_product_ids | remove_first: "," }}];
+</script>
+{% if t contains '/collection.' and collection.metafields.LimeSpot['CuratedCollectionVariation'] == "true" %}
+{%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<link rel="canonical" data-owner="LimeSpot" href="https://{{ request.host }}{{ collection.metafields.LimeSpot['StartingCollectionPath'] }}">
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+{% endif %}
+
+
+
+{% comment %}Checksum: 802bdd99929d5ead50af900563f64267{% endcomment %}

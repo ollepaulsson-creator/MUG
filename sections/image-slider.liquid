@@ -1,0 +1,95 @@
+<div class="image-slider">
+  <div class="image-slider__header">
+    <h2 class="h1">{{ section.settings.heading | escape }}</h2>
+    <button data-direction="left">{{ 'arrow_left.svg' | asset_url | img_tag }}</button>
+    <button>{{ 'arrow_right.svg' | asset_url | img_tag }}</button>
+  </div>
+  <ul class="image-slider__images">
+    <li class="image-slider__images__spacer" role="presentation"></li>
+  	{% for block in section.blocks %}
+ 
+   <li class="image-slider__images__image">
+          <a href="{{ block.settings.link }}">
+              <div>
+              <img class="lazyload lazypreload"
+                   src="{{ block.settings.image | img_url: '680x880', crop: 'center' }}"
+                   data-src="{{ img_url }}"
+                   data-widths="[180, 360, 470, 600, 770, 970, 1060, 1280, 1512, 1728, 2048]"
+                   alt="{{ block.settings.image.alt | escape }}">
+            <h3 class="image-slider-title">{{ block.settings.text }}</h3>
+              </div>
+            </a>	
+   </li>
+   
+  	{% endfor %}
+    <li class="image-slider__images__end"></li>
+  </ul>
+</div>
+
+{% schema %}
+  {
+  	"settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": {
+        	"en": "Heading"
+        }
+      }
+  	],
+    "blocks": [
+      {
+        "type": "image",
+        "name": {
+          "en": "Image"
+        },
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": {
+              "en": "Image"
+            }
+          },
+          {
+            "type": "text",
+            "id": "text",
+              "label": {
+                "en": "Text"
+              }
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": {
+              "en": "Link"
+            }
+          }
+        ]
+      }
+    ],
+    "presets": [{
+      "name": "Image slider",
+      "category": "Image"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+$(document).ready(function() {
+  $(".image-slider button").on('click', function(e) {
+    var list = $(this).parents('.image-slider').first().find('ul').first();
+
+	var offset = ($( window ).width() * 1);
+	var scroll = list.scrollLeft();
+	scroll += $(this).data('direction') == 'left' ? -offset : offset;
+
+    list.animate({
+        scrollLeft: scroll
+      }, 320);
+  });
+});
+{% endjavascript %}

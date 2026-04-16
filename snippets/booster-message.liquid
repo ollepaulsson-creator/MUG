@@ -1,0 +1,1749 @@
+
+<style type="text/css">
+  .booster-wrap div, .booster-wrap span, .booster-wrap object, .booster-wrap iframe,
+.booster-wrap h1, .booster-wrap h2, .booster-wrap h3, .booster-wrap h4, .booster-wrap h5, .booster-wrap h6,
+.booster-wrap p, .booster-wrap blockquote, .booster-wrap pre,
+.booster-wrap a, .booster-wrap img, .booster-wrap strong,
+.booster-wrap b, .booster-wrap u, .booster-wrap i,
+.booster-wrap dl, .booster-wrap dt, .booster-wrap dd, .booster-wrap ol, .booster-wrap ul, .booster-wrap li,
+.booster-wrap fieldset, .booster-wrap form, .booster-wrap label, .booster-wrap legend,
+.booster-wrap table, .booster-wrap caption, .booster-wrap tbody, .booster-wrap tfoot, .booster-wrap thead, .booster-wrap tr, .booster-wrap th, .booster-wrap td,
+.booster-wrap canvas, .booster-wrap embed,
+.booster-wrap footer, .booster-wrap header,
+.booster-wrap menu, .booster-wrap nav, .booster-wrap section,
+.booster-wrap audio, .booster-wrap video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+  text-transform: none;
+}
+/* HTML5 display-role reset for older browsers */
+.booster-wrap article, .booster-wrap aside, .booster-wrap details, .booster-wrap figcaption, .booster-wrap figure,
+.booster-wrap footer, .booster-wrap header, .booster-wrap hgroup, .booster-wrap menu, .booster-wrap nav, .booster-wrap section {
+	display: block;
+}
+.booster-wrap body {
+	line-height: 1;
+}
+.booster-wrap ol, .booster-wrap ul {
+	list-style: none;
+}
+.booster-wrap table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.res-blocker {
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  width: 100%; height: 100%;
+  overflow: auto;
+  z-index: 99999998;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.75);
+  text-align: center;
+}
+.res-blocker:before{
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -0.05em;
+}
+.res-blocker.behind {
+  background-color: transparent;
+}
+.booster-raModal {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  /*z-index: 99999999;*/
+  max-width: 480px;
+	width: 80%;
+  background: #ffffff;
+  padding: 30px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -o-border-radius: 8px;
+  -ms-border-radius: 8px;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 0 10px #000;
+  -moz-box-shadow: 0 0 10px #000;
+  -o-box-shadow: 0 0 10px #000;
+  -ms-box-shadow: 0 0 10px #000;
+  box-shadow: 0 0 10px #000;
+  text-align: left;
+  text-transform: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333333;
+  -moz-transition: background-color 0.15s linear;
+  -webkit-transition: background-color 0.15s linear;
+  -o-transition: background-color 0.15s linear;
+  transition: background-color 0.15s cubic-bezier(0.785, 0.135, 0.150, 0.860);
+
+}
+
+.booster-raModal a.close-raModal {
+  position: absolute;
+  top: -12.5px;
+  right: -12.5px;
+  display: block;
+  width: 30px;
+  height: 30px;
+  text-indent: -9999px;
+  background: url('data:image/png;base64,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') no-repeat 0 0;
+}
+
+.booster-raModal-spinner {
+  display: none;
+  width: 64px;
+  height: 64px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-right: -32px;
+  margin-top: -32px;
+  background: url('data:image/gif;base64,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') #111 no-repeat center center;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -o-border-radius: 8px;
+  -ms-border-radius: 8px;
+  border-radius: 8px;
+}
+
+
+.booster-raModal a {
+  background-color: transparent;
+}
+.booster-raModal a:active,
+.booster-raModal a:hover {
+  outline: 0;
+}
+
+.booster-raModal hr {
+  height: 0;
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+  height: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0;
+  border-top: 1px solid #eeeeee;
+  width: 100%;
+}
+
+.booster-raModal button,
+.booster-raModal input,
+.booster-raModal optgroup,
+.booster-raModal select,
+.booster-raModal textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+
+.booster-raModal button {
+  overflow: visible;
+}
+.booster-raModal button,
+.booster-raModal select {
+  text-transform: none;
+}
+.booster-raModal button {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+.booster-raModal button::-moz-focus-inner,
+.booster-raModal input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+.booster-raModal input {
+  line-height: normal;
+}
+.booster-raModal input[type='number']::-webkit-inner-spin-button,
+.booster-raModal input[type='number']::-webkit-outer-spin-button {
+  height: auto;
+}
+
+
+.booster-raModal body.fadein {
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.booster-raModal #booster-raModal-container {
+  background: white;
+  padding: 12px 18px 40px 18px;
+}
+
+@media only screen and (min-width:500px) {
+  .booster-raModal #booster-raModal-container {
+    border-radius: 5px;
+    padding: 30px 40px;
+  }
+}
+
+@media only screen and (min-width:992px) {
+  .booster-raModal #booster-raModal-container {
+    margin-top: 140px;
+  }
+}
+
+.booster-raModal .fade {
+  opacity: 0;
+  -webkit-transition: opacity 0.15s linear;
+  -o-transition: opacity 0.15s linear;
+  transition: opacity 0.15s linear;
+}
+.booster-raModal .fade.in {
+  opacity: 1;
+}
+
+/* only the stuff we need added here */
+
+.booster-raModal h2 {
+ font-size: 24px;
+ font-family: inherit;
+ font-weight: 500;
+ line-height: 1.1;
+ color: inherit;
+}
+
+.booster-raModal h3 {
+  font-family: inherit;
+  font-weight: normal;
+  line-height: 1.1;
+  color: inherit;
+  font-size: 18px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.booster-raModal p.body-text {
+  font-size: 20;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.booster-raModal .form-control {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.booster-raModal .input-lg {
+  height: 46px;
+  padding: 10px 16px;
+  line-height: 1.3333333;
+  border-radius: 6px;
+  text-indent:0px;
+}
+.booster-raModal select.input-lg {
+  height: 46px;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  .booster-raModal select:focus,
+  .booster-raModal textarea:focus,
+  .booster-raModal input:focus {
+    font-size: 16px;
+    background: #eee;
+  }
+}
+
+
+.booster-raModal .form-group {
+  margin-bottom: 15px;
+}
+
+.booster-raModal .btn {
+  display: inline-block;
+  padding: 8px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  letter-spacing: 1px;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
+}
+
+.booster-raModal .btn-success {
+  width: 100%;
+  color: #ffffff;
+  background: #4ed14e;
+}
+
+.booster-raModal .btn-lg {
+  line-height: 24px;
+  font-size: 15px;
+  padding:14px;
+  line-height: 1.3333333;
+  word-wrap: break-word;
+  white-space: normal;
+  box-sizing: border-box;
+	border: none;
+  box-shadow: none;
+}
+
+.booster-raModal label.qty-req-label{
+  margin-top:20px;
+  margin-bottom:10px;
+}
+
+.booster-raModal input.qty-req-input{
+  margin-top:10px;
+  width:35%;
+}
+
+.booster-raModal .close {
+  -webkit-appearance: none;
+  padding: 0;
+  cursor: pointer;
+  background: 0 0;
+  border: 0;
+  float: right;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+}
+
+.booster-raModal form{
+  margin-top:10px;
+}
+
+.booster-raModal .raModal-content .close {
+  font-size: 30px;
+}
+.booster-raModal .raModal-backdrop.in {
+  filter: alpha(opacity=65);
+  opacity: .65;
+}
+
+.booster-raModal .completed_message {
+  display: none;
+}
+.booster-raModal .complete .completed_message {
+  display: block;
+}
+
+.booster-raModal .single-variant{
+  display:none;
+}
+
+.booster-raModal form#booster-form{
+}
+
+.booster-raModal div.footer{
+  margin-top:20px;
+}
+
+.booster-raModal div.footer p{
+  color: #b3b3b3;
+  font-size:12px;
+}
+
+.booster-raModal div.accepts_marketing input[type='checkbox']{
+  margin-right:10px;
+}
+
+.booster-raModal div.accepts_marketing label{
+  font-size:13px;
+  opacity:0.9;
+}
+
+.booster-raModal .alert::before {content: none;}
+.booster-raModal .alert::after {content: none;}
+
+.booster-raModal .alert {
+  padding: 10px;
+  margin: 20px 0px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+	box-shadow: none;
+}
+
+.booster-raModal .alert-success {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+.booster-raModal .alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+.booster-raModal .alert-primary {
+	color: #004085;
+	background-color: #cce5ff;
+	border-color: #b8daff;
+}
+
+#booster-button{
+  display: block;
+  cursor: pointer;
+  text-align: center;
+  z-index: 99999999;
+  padding: 12px;
+  background: #512da8;
+  color: #ffffff;
+  font-weight: bold;
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+
+  
+    -webkit-transform: rotate(90deg);
+    -webkit-transform-origin: left bottom;
+    -moz-transform: rotate(90deg);
+    -moz-transform-origin: left bottom;
+    -ms-transform: rotate(90deg);
+    -ms-transform-origin: left bottom;
+    -o-transform: rotate(90deg);
+    -o-transform-origin: left bottom;
+    transform: rotate(90deg);
+    left: 0px;
+    top: 100px;
+    transform-origin: left bottom;
+
+  
+  white-space: nowrap;
+  position: fixed;
+}
+
+
+#booster-button{
+  font-size: 16px;
+}
+
+@media only screen and (max-width: 768px) {
+  #booster-button{
+    font-size: 12px;
+  }
+}
+
+
+  button > * {
+    pointer-events: none;
+  }
+</style>
+{{ 'booster.js' | asset_url | script_tag }}
+<script type="text/javascript">
+//Isolate script scope
+(function (){
+  window.baMsg = {
+     "remote_id": "8483307620",
+     "shopify_domain": "mug-musik-utan-granser.myshopify.com",
+     "fb_page_id": "",
+     "locale": "en_US",
+     "app_id": 369783430202516,
+     "use_stm_callback": "",
+     "user_ref": 'ba_8483307620_' + Math.random().toString(36).substring(5) + '_' + Math.floor(Math.random() * (9999999 - 1000000)),
+     "atc_preference": "push",
+     "active_fb_atc_shown": false,
+     "active_sms_atc_shown": false,
+     "active_email_atc_shown": false,
+     "app_url": "/apps/ba_fb_app",
+     "page_url": window.location.href,
+     "is_preview": (window.location.href.indexOf("ba-preview") != -1),
+     "is_generating": (window.location.href.indexOf("ba_action=generate") != -1),
+     "fb_active": false,
+     "sms_active": false,
+     "email_active": false,
+     "push_active": true,
+     "bis_active": true,
+     "ab_active": false
+  };
+
+  {% if product %}
+    window.boosterLiquid = window.boosterLiquid || {};
+    window.boosterLiquid.customer = {};
+    window.boosterLiquid.product = {{ product | json }};
+    {% if customer %}
+      window.boosterLiquid.customer.email = "{{ customer.email }}";
+    {% endif %}
+  {% endif %}
+
+  baMsg.debug = function (enabled) {
+    if (enabled === false) {
+      baMet.destroyCookie("baMsg_debug");
+    } else {
+      baMet.setCookie("baMsg_debug", "t", 365 * 24 * 60);
+    }
+    return true;
+  };
+
+  baMsg.log = function(message){
+    if (baMet.getCookie("baMsg_debug")) {
+      window.console.log(message);
+    }
+  }
+
+  function isMobile() {
+    return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+  }
+
+  function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  }
+
+  function getUrlParam(paramName) {
+    var params = {};
+    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str,key,value) {
+      params[key] = value;
+    });
+    return params[paramName];
+  }
+
+  function hasFlag(flag){
+    return window.baMsg.settings.flags[flag] == true
+  }
+
+  function getAtcButton(){
+    var addToCartBtn = document.querySelector('[name=add]');
+    if (!addToCartBtn || addToCartBtn.length === 0){
+      addToCartBtn = document.getElementsByClassName("btn-addtocart")[0];
+    }
+    if (!addToCartBtn || addToCartBtn.length === 0){
+      addToCartBtn = document.getElementsByClassName("button-cart")[0];
+    }
+    if (!addToCartBtn || addToCartBtn.length === 0){
+      addToCartBtn = document.getElementsByClassName("product-add")[0];
+    }
+    if (!addToCartBtn || addToCartBtn.length === 0){
+      addToCartBtn = document.getElementsByClassName("add-to-cart")[0] !== undefined ? document.getElementsByClassName("add-to-cart")[0].getElementsByTagName('input')[0] : null;
+    }
+    return addToCartBtn;
+  }
+
+  function canDisplayByDevice(devices) {
+    if (devices !== 'all') {
+      var isMobile = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+      if (devices === 'desktop' && isMobile){ return false;}
+      if (devices === 'mobile' && !isMobile){ return false;}
+    }
+    return true;
+  }
+
+  function getProductForm() {
+    var form = document.getElementById('add-item-form');
+    if (!form || form.length === 0){
+        form = document.getElementsByClassName("product-form")[1];
+    }
+    if (!form || form.length === 0){
+        form = document.querySelector("form[action='/cart/add']");
+    }
+    if (!form || form.length === 0){
+        form = document.querySelector("form[action^='/cart/add']");
+    }
+    if (!form || form.length === 0){
+        form = document.querySelector("form[action$='/cart/add']");
+    }
+    if (!form || form.length === 0){
+        form = document.querySelector("form[action='/cart/add.js']");
+    }
+    if (!form || form.length === 0){
+        form = document.querySelector("form[action='/cart/add?return=/']");
+    }
+    if (!form || form.length === 0){
+        form = document.getElementsByClassName("product-form")[0];
+    }
+    if (!form || form.length === 0){
+        form = document.getElementsByClassName("btn-addtocart")[0];
+    }
+    return form
+  }
+
+  function canDisplayByRules(rules) {
+    var pageURL = window.location.href;
+    var url = new URL(pageURL);
+    var pathname = (url.pathname.length === 1) ? '' : url.pathname.length;
+    var urlWOParams = url.origin + pathname;
+
+    var canDisplay = rules.length === 0;
+
+    for (var i = 0; i < rules.length; i++) {
+      var rule = rules[i];
+
+      if (rule.rule === 'match') {
+        if (rule.operator === 'true') {
+          if (rule.string === pageURL || rule.string === urlWOParams) {
+            canDisplay = true;
+          }
+        } else if (rule.string === pageURL || rule.string === urlWOParams) {
+          canDisplay = false;
+          break;
+        }
+      }
+
+      if (rule.rule === 'begin_with') {
+        var stringLength = rule.string.length;
+
+        if (rule.operator === 'true') {
+          if (rule.string === pageURL.substr(0, stringLength) || rule.string === urlWOParams.substr(0, stringLength)) {
+            canDisplay = true;
+          }
+        } else if (rule.string === pageURL.substr(0, stringLength) || rule.string === urlWOParams.substr(0, stringLength)) {
+          canDisplay = false;
+          break;
+        }
+      }
+
+      if (rule.rule === 'contains') {
+        if (rule.operator === 'true') {
+          if (pageURL.indexOf(rule.string) !== -1 || urlWOParams.indexOf(rule.string) !== -1) {
+            canDisplay = true;
+          }
+        } else if (pageURL.indexOf(rule.string) !== -1 || urlWOParams.indexOf(rule.string) !== -1) {
+          canDisplay = false;
+          break;
+        }
+      }
+    }
+
+    return canDisplay;
+  }
+
+  function updateSubscriberHash(updateHash){
+    var updatedSubscriberHash = window.baMsg.subscriber_hash;
+    for (var prop in updateHash) {
+      updatedSubscriberHash[prop] = updateHash[prop];
+    }
+    var subscriberKey = "ba_msg_subscriber_" + baMet.getVisitorToken();
+    localStorage.setItem(subscriberKey, JSON.stringify(updatedSubscriberHash));
+    window.BoosterApps.can_update_cart = true;
+  }
+
+  function applyMet(metName){
+    eventHash = {}
+    //baMet.apply(metName, eventHash, "ba_msg");
+  }
+
+  function getCartSessionId(){
+    return baMet.getCookie("baMet_cs_id");
+  }
+
+  function isHidden(el) {
+    return (el.offsetParent === null)
+  }
+
+  function handleAtcClick(event){
+    var subscriberHash = window.baMsg.subscriber_hash;
+    var atcPref = window.baMsg.atc_preference;
+    if (atcPref == 'fb'){
+      window.baMsg.showFbAtcModal(event);
+    } else if (atcPref == 'sms'){
+      window.baMsg.showSmsAtcModal(event);
+    } else if (atcPref == 'email'){
+      window.baMsg.showEmailAtcModal(event);
+    }
+  }
+
+  function listentoAtc(){
+    window.baMet.onBaEv("click", ".product-form__cart-submit, .product-form__cart-submit span, #AddToCart-product-template, .product-atc-btn, .product-menu-button.product-menu-button-atc, .button-cart, .product-add, .add-to-cart input, .btn-addtocart, [name=add]", function (e){
+      try {
+        baMsg.log(e)
+        var addToCartBtn = (e.target);
+        window.baMsg.active_atc = addToCartBtn;
+        addToCartBtn.classList.add('ba-click-ready');
+        if (window.baMsg.fb_active && window.baMsg.fb_page_id || window.baMsg.sms_active || window.baMsg.email_active){
+          handleAtcClick(e)
+        }
+      } catch(err){
+        console.log(err);
+      }
+    });
+  }
+
+  function documentReady(callback) {
+    document.readyState === "interactive" || document.readyState === "complete" ? callback() : document.addEventListener("DOMContentLoaded", callback);
+  }
+
+documentReady(function() {
+  var baFbPresent = (document.getElementsByTagName('head')[0].innerHTML.search("ba_fb_" + window.baMsg.remote_id) > 0);
+  if (!baFbPresent){return;}
+
+  window.baMsg.visitor_token = window.baMet.getVisitorToken();
+  window.baMsg.session_token = window.baMet.getVisitToken();
+  window.baMsg.cart_uid  = baMet.getCookie('baMet_cs_id');
+  window.baMsg.browser_info = window.baMet.getBrowserInfo();
+
+  var baSubscriberKey = "ba_msg_subscriber_" + window.baMsg.visitor_token;
+  var rawSubscriber   = localStorage.getItem(baSubscriberKey);
+  var baSubscriberHash = JSON.parse(rawSubscriber || "{}");
+  window.baMsg.subscriber_hash = baSubscriberHash;
+  if (rawSubscriber){
+    window.BoosterApps.can_update_cart = true;
+  } else {
+    window.BoosterApps.can_update_cart = false;
+  }
+
+  var baId = window.baMet.getCookie("baid");
+  var ba_fb_opted_in_cookie = window.baMet.getCookie("ba_opted_in");
+
+  if (window.BoosterApps.common.customer && !window.baMsg.subscriber_hash.customer_synced_at){
+    var data = {
+      action_type: 'sync_customer', visitor_token: window.baMsg.visitor_token,
+      sync_data: window.BoosterApps.common.customer
+    }
+    baMet.sendRequest(window.baMsg.app_url, data, function(resp) {
+      baMsg.log('sub sync updated')
+      rightNow = parseInt(new Date().getTime());
+      updateSubscriberHash({customer_synced_at: rightNow, cus_id: window.BoosterApps.common.customer.id, cus_email: window.BoosterApps.common.customer.email});
+    });
+  }
+
+  window.baMsg.settings = {
+    fb_base: {
+      "shop_id":8483307620,
+      "active": 0,
+      "visible":1,
+      "type":"discount",
+      "text":"Get 10% discount",
+      "checked_text": "Your discount: %discountCode",
+      "placement": "",
+      "text_placement": "above",
+      "background_color": "#fff",
+      "icon_background_color": "#f7f7f7",
+      "color": "#000",
+      "checked_color": "#000",
+      "border_color":"#e5e5e5",
+      "font_size":14,
+      "font_style":"normal",
+      "margin_top":15,
+      "margin_bottom":10,
+      "icon":"discount_1",
+      "checked_icon":"check_1",
+      "border_width":1,
+      "border_style":"solid",
+      "border_radius":5,
+      "align":"left",
+      "button_text":"Get Discount Code",
+      "button_background_color":"#F6F6F6",
+      "button_text_color":"#555555",
+      "button_font_size":14,
+      "button_font_style":"bold",
+      "button_border_color":"#eee",
+      "button_border_width":1,
+      "button_border_radius":5,
+      "discount_code":"<PUT YOUR DISCOUNT CODE HERE>",
+      "subtitle": ""
+    },
+    fb_modal: {
+      "shop_id":8483307620,
+      "active":0,
+      "title":"Hi! Opt-in and recieve a discount!",
+      "subtitle":"Just click on &quot;Send To Messenger&quot; and you will automatically be opted-in!",
+      "submitted_title":"Thanks for opt-ing in!",
+      "submitted_subtitle":"Your discount code is: %discountCode!&#39;",
+      "button_text":"View in Messenger",
+      "send_color":"blue",
+      "send_size":"large",
+      "background_color":"#fff",
+      "title_color":"#000",
+      "subtitle_color":"#808080",
+      "button_color":"#fff",
+      "button_text_color":"#000",
+      "border_color":"#eee",
+      "display":"immediately",
+      "delay":3,
+      "devices":"all",
+      "message":"Hi! Thanks for opt-ing in. Your discount code is: %discountCode! Enjoy!",
+      "image_name":"",
+      "submitted_image_name":"",
+      "image_placement":"above_title",
+      "submitted_image_placement":"above_title",
+      "discount_code":"DISCOUNT_CODE_HERE",
+      "rules": JSON.parse('[] ')
+    },
+    fb_atc_popup: {
+      "shop_id":8483307620,
+      "active":0,
+      "title":"Join us on Messenger",
+      "paragraph":"Sign up and gain access to new products, exclusive deals, and discounts before anybody else!",
+      "no_thanks_text":"No thanks",
+      "close_button":"1",
+      "plugin_type":"send_to_messenger",
+      "button_cta":"SEND_TO_MESSENGER",
+      "button_cta_color":"blue",
+      "header_bg_color":"#f4f6f8",
+      "body_bg_color":"#fff",
+      "header_text_color":"#626974",
+      "paragraph_text_color":"#626974",
+      "no_thanks_text_color":"#626974"
+    }
+  }
+
+  //update last seen at if subscriber active
+  if (window.baMsg.subscriber_hash.ba_fb_opted_in && window.baMsg.ab_active && window.baMsg.cart_uid && !window.baMsg.handle_legacy){
+    var data = {"action_type": 'heartbeat', visitor_token: window.baMsg.visitor_token, "cart_uid": window.baMsg.cart_uid}
+    baMet.sendRequest(window.baMsg.app_url, data, function(resp) {
+      baMsg.log('heartbeat recorded')
+    });
+  }
+
+  if (window.baMsg.is_generating == true){
+    var cartUid = getParameterByName('cart_uid');
+    var baId    = getParameterByName('baid');
+    if (cartUid || baId){
+      var abStep = getParameterByName('ab_step');
+      var baCheckoutUrl = getParameterByName('ba_checkout_url');
+      var baChannel = getParameterByName('channel');
+      var overlayWrapper = document.createElement('div');
+      overlayWrapper.id = 'ba-overlay';
+      overlayWrapper.setAttribute('style', 'position: fixed;display: block;width: 100%;height: 100%;top: 0;left: 0;right: 0;bottom: 0;background-color: rgba(0,0,0,0.8);z-index: 9999999999999;cursor: pointer;');
+      var overlayTextDiv = document.createElement('div');
+      overlayTextDiv.innerHTML = "Please wait... Generating cart";
+      overlayTextDiv.setAttribute('style', 'position: absolute;top: 50%;left: 50%;font-size: 22px;color: white;transform: translate(-50%,-50%);-ms-transform: translate(-50%,-50%);');
+      overlayWrapper.appendChild(overlayTextDiv);
+      document.getElementsByTagName('body')[0].appendChild(overlayWrapper);
+
+      //get the cart
+      var data = {"action_type": 'generate_cart', "ab_step": + abStep,
+        "cart_uid": window.baMsg.cart_uid, "baid": baId, "channel": baChannel
+      }
+      baMet.sendRequest(window.baMsg.app_url, data, function(resp) {
+        var baCheckoutStr = baCheckoutUrl + "?attributes[from]=Booster%20Apps%20Abandoned%20Cart%20Notification";
+        if (resp.code){
+          var baCheckoutStr = baCheckoutStr + "&discount=" + resp.code;
+        }
+        window.location = baCheckoutStr;
+      });
+      return;
+    }
+  }
+
+  
+  
+  function boosterPushSession(){
+  var _this = this;
+  window.baLoaded = false;
+
+  this.generate = function (settings) {
+    baMsg.log('boosterPush generate');
+    window.baMsg.requestPushPermissions = function(sourceType, successCallback){
+      navigator.serviceWorker.register("/apps/ba_fb_app/push?js_asset=1");
+      return new Promise(function(resolve, reject) {
+        const permissionResult = Notification.requestPermission(function(result) {
+          resolve(result);
+        });
+        if (permissionResult) {
+          permissionResult.then(resolve, reject);
+        }
+      })
+      .then(function(permissionResult) {
+        baMsg.log(permissionResult)
+
+        if (permissionResult !== 'granted') {
+          baMsg.log('Permission not granted.');
+        } else {
+          baMsg.log('Permission granted.');
+          subscribeUserToPush(sourceType, successCallback);
+        }
+      });
+    }
+
+    function urlB64ToUint8Array(base64String) {
+     const padding = '='.repeat((4 - base64String.length % 4) % 4);
+     const base64 = (base64String + padding)
+       .replace(/\-/g, '+')
+       .replace(/_/g, '/');
+
+     const rawData = window.atob(base64);
+     const outputArray = new Uint8Array(rawData.length);
+
+     for (let i = 0; i < rawData.length; ++i) {
+       outputArray[i] = rawData.charCodeAt(i);
+     }
+     return outputArray;
+   }
+
+    function subscribeUserToPush(sourceType, successCallback) {
+      return navigator.serviceWorker.register("/apps/ba_fb_app/push?js_asset=1")
+      .then(function(registration) {
+        var subscribeOptions = {
+          userVisibleOnly: true,
+          applicationServerKey: urlB64ToUint8Array("BO5RJ2FA8w6MW2Qt1_MKSFtoVpVjUMLYkHb2arb7zZxEaYGTMuLvmZGabSHj8q0EwlzLWBAcAU_0z-z9Xps8kF8=")
+        };
+        baMsg.log("subscribeOptions: ", subscribeOptions);
+        return registration.pushManager.subscribe(subscribeOptions);
+      })
+      .then(function(pushSubscription) {
+        baMsg.log('PushSubscription: ', JSON.stringify(pushSubscription));
+
+        trackPushOptIn(sourceType, pushSubscription.toJSON(), successCallback);
+      });
+    }
+
+    function trackPushOptIn(sourceType, pushSubscription, successCallback){
+      var params = {
+        channel: 'push',
+        endpoint: pushSubscription.endpoint,
+        keys_auth: pushSubscription.keys.auth,
+        keys_p256dh: pushSubscription.keys.p256dh,
+        user_agent: navigator.userAgent,
+        visitor_token: window.baMsg.visitor_token,
+        tz_offset: window.baMsg.browser_info.tz_offset,
+        os: window.baMsg.browser_info.os,
+        browser: window.baMsg.browser_info.browser
+      };
+
+      if (sourceType == 'bis'){
+        var variant = window.bisApp.variant;
+        params["product_id"]    = window.bisApp.product.id;
+        params["product_title"] = window.bisApp.product.title;
+        params["variant_title"] = variant.title;
+        params["variant_id"]    = variant.id;
+        params["action_type"]   =  'bis';
+      }
+
+      baMet.sendRequest(window.baMsg.app_url + "/push", params, function(data){
+        localStorage.setItem("ba_push_subscription", JSON.stringify(pushSubscription));
+        updateSubscriberHash({ba_push_opted_in: parseInt(new Date().getTime())})
+        successCallback();
+      });
+    }
+
+    if (!window.baMsg.subscriber_hash.ba_push_opted_in && !window.baMsg.subscriber_hash.ba_push_rejected && window.baMsg.bis_active == false){
+      setTimeout(function(){
+        window.baMsg.requestPushPermissions('pageLoad', function(){});
+      }, 1000);
+    }
+  }
+  return this;
+}
+  
+  var Shopify = Shopify || {};
+
+(function(window, document) {"use strict";
+  window.bis_debug = (document.location.search.indexOf("bisdebug=1") != -1 || false);
+  window.bis_preview = document.location.search.indexOf("preview_bis=1") > -1;
+  window.bisAppData = {"uses_radio":false,"email_subject":"[product_title] is now available from [shop_name]","modal_bg_color":"#ffffff","modal_body_text":"Subscribe to this product to receive a notification once it becomes available","email_header_buy":"Buy Now","modal_text_color":"#333333","email_header_text":"[product_title]","modal_footer_text":"You will receive a one time notification when the product becomes available. We won't share your info with anyone.","modal_header_text":"NOTIFY ME WHEN AVAILABLE","pre_order_enabled":false,"modal_button_label":"Notify me when available","modal_quantity_req":false,"email_body_img_size":100,"email_summary_emails":"","email_body_link_color":"#4e9de0","email_body_text_color":"#333333","email_header_bg_color":"#4e9de0","email_summary_enabled":false,"modal_button_bg_color":"#4ed14e","widget_button_enabled":false,"modal_already_reg_text":"Already registered for this product","widget_button_bg_color":"#512da8","widget_button_position":"left_edge","booster_option_selector":"","customer_checkbox_label":"Add me to the store mailing list","email_body_content_text":"The product availability you subscribed to is now available! Click the button below to place your order","email_footer_link_color":"#4e9de0","email_footer_text_color":"#bbbbbb","email_header_text_color":"#ffffff","modal_button_text_color":"#ffffff","modal_hide_dup_variants":false,"modal_reg_complete_text":"Notification saved","widget_button_text_size":16,"email_body_headline_text":"[product_title]","modal_close_button_color":"","modal_error_msg_bg_color":"#f2dede","modal_invalid_email_text":"The email address you entered is invalid","modal_overlay_tint_color":"","modal_quantity_req_label":"Quantity Required","widget_button_text_color":"#ffffff","customer_checkbox_default":false,"customer_checkbox_enabled":false,"email_body_headline_color":"#4e9de0","email_buy_button_bg_color":"#4e9de0","email_footer_content_text":"","max_instant_notifications":5,"modal_email_address_label":"Email Address","widget_button_border_size":"","email_summary_last_sent_at":"","modal_close_button_tooltip":"","modal_error_msg_text_color":"#a94442","modal_success_msg_bg_color":"#dff0d8","widget_button_border_color":"","widget_button_caption_text":"NOTIFY WHEN AVAILABLE","email_body_background_color":"#ffffff","email_buy_button_text_color":"#ffffff","email_header_subheader_text":"is now available from [shop_name]","instant_notification_emails":"","modal_quantity_invalid_text":"","only_show_tracked_inventory":true,"widget_button_border_radius":4,"widget_button_corner_offset":100,"modal_success_msg_text_color":"#3c763d","email_buy_button_caption_text":"Buy Now","instant_notifications_enabled":false};
+
+  if (window.bisAppData.track_orders){
+    function setCookie(cname, cvalue, exdays) {
+      var d = new Date();
+      d.setTime(d.getTime() + (exdays*24*60*60*1000));
+      var expires = "expires="+ d.toUTCString();
+      document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/;";
+    }
+
+    function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(';');
+      for(var i = 0; i <ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0)==' ') {
+              c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+              return c.substring(name.length,c.length);
+          }
+      }
+      return "";
+    }
+
+    function postCartToken(raId){
+      $.getJSON("/cart.js", {ra_call: true}, function(cartData){
+        var value = cartData.token;
+        $.ajax({
+          type: "POST",
+          url: "/apps/ba_fb_app",
+          data: {ra_id: raId, cart_token: value, shop: Shopify.shop},
+          dataType: 'json'
+        });
+      });
+    }
+
+    var params = {};
+    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str,key,value) {
+      params[key] = value;
+    });
+    var raId = params["ra_id"];
+    if (raId){setCookie('ra_id', raId, 30);}
+
+    if (getCookie('ra_id')){
+      if (document.location.pathname == "/cart"){
+        postCartToken(getCookie('ra_id'));
+      }else{
+        $(document).ajaxSuccess(function(evt,xhr,attrs) {
+          if (attrs.url != "/cart.js?ra_call=true"){
+            if (attrs.url == '/cart.js' || attrs.url == '/cart.json'){
+              postCartToken(getCookie('ra_id'));
+            }
+          }
+        });
+      }
+    }
+  }
+
+  if (typeof window.boosterLiquid == 'undefined' || !("Notification" in window)) {
+    if (!window.bis_preview){
+      return;
+    }
+  };
+
+  function reqJquery(onload) {
+    if(typeof jQuery === 'undefined' || (parseInt(jQuery.fn.jquery) === 1 && parseFloat(jQuery.fn.jquery.replace(/^1\./,'')) < 10)){
+      var head = document.getElementsByTagName('head')[0];
+      var script = document.createElement('script');
+      script.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js';;
+      script.type = 'text/javascript';
+      script.onload = script.onreadystatechange = function() {
+        if (script.readyState) {
+          if (script.readyState === 'complete' || script.readyState === 'loaded') {
+            script.onreadystatechange = null;
+            onload(jQuery.noConflict(true));
+          }
+        }
+        else {
+          onload(jQuery.noConflict(true));
+        }
+      };
+      head.appendChild(script);
+    }else {
+      onload(jQuery);
+  }
+}
+
+  reqJquery(function($){
+    $("head").append("[booster_custom_css]")
+    var bisQuery = $;
+    var raModals = [],
+    getCurrent = function() {
+      return raModals.length ? raModals[raModals.length - 1] : null;
+    },
+    selectCurrent = function() {
+      var i,
+          selected = false;
+      for (i=raModals.length-1; i>=0; i--) {
+        if (raModals[i].$blocker) {
+          raModals[i].$blocker.toggleClass('current',!selected).toggleClass('behind',selected);
+          selected = true;
+        }
+      }
+    };
+
+    var removeDuplicatesFromObjArray = function(arr, field) {
+      var u = [];
+      arr.reduce(function (a, b) {
+        if (a[field] !== b[field]) u.push(b);
+        return b;
+      }, []);
+      return u;
+    }
+
+    bisQuery.raModal = function(el, options) {
+      var remove, target;
+      this.$body = bisQuery('body');
+      this.options = bisQuery.extend({}, bisQuery.raModal.defaults, options);
+      this.options.doFade = !isNaN(parseInt(this.options.fadeDuration, 10));
+      this.$blocker = null;
+      if (this.options.closeExisting)
+        while (bisQuery.raModal.isActive())
+          bisQuery.raModal.close(); // Close any open raModals.
+      raModals.push(this);
+      if (el.is('a')) {
+        target = el.attr('href');
+        //Select element by id from href
+        if (/^#/.test(target)) {
+          this.$elm = bisQuery(target);
+          if (this.$elm.length !== 1) return null;
+          this.$body.append(this.$elm);
+          this.open();
+        //AJAX
+        } else {
+          this.$elm = bisQuery('<div>');
+          this.$body.append(this.$elm);
+          remove = function(event, raModal) { raModal.elm.remove(); };
+          this.showSpinner();
+          el.trigger(bisQuery.raModal.AJAX_SEND);
+          bisQuery.get(target).done(function(html) {
+            if (!bisQuery.raModal.isActive()) return;
+            el.trigger(bisQuery.raModal.AJAX_SUCCESS);
+            var current = getCurrent();
+            current.$elm.empty().append(html).on(bisQuery.raModal.CLOSE, remove);
+            current.hideSpinner();
+            current.open();
+            el.trigger(bisQuery.raModal.AJAX_COMPLETE);
+          }).fail(function() {
+            el.trigger(bisQuery.raModal.AJAX_FAIL);
+            var current = getCurrent();
+            current.hideSpinner();
+            raModals.pop(); // remove expected raModal from the list
+            el.trigger(bisQuery.raModal.AJAX_COMPLETE);
+          });
+        }
+      } else {
+        this.$elm = el;
+        this.$body.append(this.$elm);
+        this.open();
+      }
+    };
+
+    bisQuery.raModal.prototype = {
+      constructor: bisQuery.raModal,
+
+      open: function() {
+        var m = this;
+        this.block();
+        if(this.options.doFade) {
+          setTimeout(function() {
+            m.show();
+          }, this.options.fadeDuration * this.options.fadeDelay);
+        } else {
+          this.show();
+        }
+        bisQuery(document).off('keydown.raModal').on('keydown.raModal', function(event) {
+          var current = getCurrent();
+          if (event.which == 27 && current.options.escapeClose) current.close();
+        });
+        if (this.options.clickClose)
+          this.$blocker.click(function(e) {
+            if (e.target==this)
+              bisQuery.raModal.close();
+          });
+      },
+
+      close: function() {
+        raModals.pop();
+        this.unblock();
+        this.hide();
+        if (!bisQuery.raModal.isActive())
+          bisQuery(document).off('keydown.raModal');
+      },
+
+      block: function() {
+        this.$elm.trigger(bisQuery.raModal.BEFORE_BLOCK, [this._ctx()]);
+        this.$body.css('overflow','hidden');
+        this.$blocker = bisQuery('<div class="res-jquery-raModal res-blocker current"></div>').appendTo(this.$body);
+        selectCurrent();
+        if(this.options.doFade) {
+          this.$blocker.css('opacity',0).animate({opacity: 1}, this.options.fadeDuration);
+        }
+        this.$elm.trigger(bisQuery.raModal.BLOCK, [this._ctx()]);
+      },
+
+      unblock: function(now) {
+        if (!now && this.options.doFade)
+          this.$blocker.fadeOut(this.options.fadeDuration, this.unblock.bind(this,true));
+        else {
+          this.$blocker.children().appendTo(this.$body);
+          this.$blocker.remove();
+          this.$blocker = null;
+          selectCurrent();
+          if (!bisQuery.raModal.isActive())
+            this.$body.css('overflow','');
+        }
+      },
+
+      show: function() {
+        this.$elm.trigger(bisQuery.raModal.BEFORE_OPEN, [this._ctx()]);
+        if (this.options.showClose) {
+          this.closeButton = bisQuery('<a href="#close-raModal" rel="raModal:close" class="close-raModal ' + this.options.closeClass + '">' + this.options.closeText + '</a>');
+          this.$elm.append(this.closeButton);
+        }
+        this.$elm.addClass(this.options.raModalClass).appendTo(this.$blocker);
+        if(this.options.doFade) {
+          this.$elm.css('opacity',0).show().animate({opacity: 1}, this.options.fadeDuration);
+        } else {
+          this.$elm.show();
+        }
+        this.$elm.trigger(bisQuery.raModal.OPEN, [this._ctx()]);
+      },
+
+      hide: function() {
+        this.$elm.trigger(bisQuery.raModal.BEFORE_CLOSE, [this._ctx()]);
+        if (this.closeButton) this.closeButton.remove();
+        var _this = this;
+        if(this.options.doFade) {
+          this.$elm.fadeOut(this.options.fadeDuration, function () {
+            _this.$elm.trigger(bisQuery.raModal.AFTER_CLOSE, [_this._ctx()]);
+          });
+        } else {
+          this.$elm.hide(0, function () {
+            _this.$elm.trigger(bisQuery.raModal.AFTER_CLOSE, [_this._ctx()]);
+          });
+        }
+        this.$elm.trigger(bisQuery.raModal.CLOSE, [this._ctx()]);
+      },
+
+      showSpinner: function() {
+        if (!this.options.showSpinner) return;
+        this.spinner = this.spinner || bisQuery('<div class="' + this.options.raModalClass + '-spinner"></div>')
+          .append(this.options.spinnerHtml);
+        this.$body.append(this.spinner);
+        this.spinner.show();
+      },
+
+      hideSpinner: function() {
+        if (this.spinner) this.spinner.remove();
+      },
+
+      //Return context for custom events
+      _ctx: function() {
+        return { elm: this.$elm, $blocker: this.$blocker, options: this.options };
+      }
+    };
+
+    bisQuery.raModal.close = function(event) {
+      if (!bisQuery.raModal.isActive()) return;
+      if (event) event.preventDefault();
+      var current = getCurrent();
+      current.close();
+      return current.$elm;
+    };
+
+    // Returns if there currently is an active raModal
+    bisQuery.raModal.isActive = function () {
+      return raModals.length > 0;
+    }
+
+    bisQuery.raModal.defaults = {
+      closeExisting: true,
+      escapeClose: true,
+      clickClose: true,
+      closeText: 'Close',
+      closeClass: 'close-raModal',
+      modalClass: "booster-raModal",
+      spinnerHtml: null,
+      showSpinner: true,
+      showClose: true,
+      fadeDuration: null,   // Number of milliseconds the fade animation takes.
+      fadeDelay: 1.0        // Point during the overlay's fade-in that the modal begins to fade in (.5 = 50%, 1.5 = 150%, etc.)
+    };
+
+    // Event constants
+    bisQuery.raModal.BEFORE_BLOCK = 'raModal:before-block';
+    bisQuery.raModal.BLOCK = 'raModal:block';
+    bisQuery.raModal.BEFORE_OPEN = 'raModal:before-open';
+    bisQuery.raModal.OPEN = 'raModal:open';
+    bisQuery.raModal.BEFORE_CLOSE = 'raModal:before-close';
+    bisQuery.raModal.CLOSE = 'raModal:close';
+    bisQuery.raModal.AFTER_CLOSE = 'raModal:after-close';
+    bisQuery.raModal.AJAX_SEND = 'raModal:ajax:send';
+    bisQuery.raModal.AJAX_SUCCESS = 'raModal:ajax:success';
+    bisQuery.raModal.AJAX_FAIL = 'raModal:ajax:fail';
+    bisQuery.raModal.AJAX_COMPLETE = 'raModal:ajax:complete';
+
+    bisQuery.fn.raModal = function(options){
+      if (this.length === 1) {
+        new bisQuery.raModal(this, options);
+      }
+      return this;
+    };
+
+    // Automatically bind links with rel="raModal:close" to, well, close the raModal.
+    bisQuery(document).on('click.raModal', 'a[rel="raModal:close"]', bisQuery.raModal.close);
+    bisQuery(document).on('click.raModal', 'a[rel="raModal:open"]', function(event) {
+      event.preventDefault();
+      bisQuery(this).raModal();
+    });
+
+    window.bisApp = {
+      product : null,
+      variant : null,
+      variants: {},
+      variantsById: [],
+      unavailableVariants: [],
+      optionSelects: null,
+      optionSelectsSelector: window.bisAppData.booster_option_selector,
+      activeVariant: null,
+      usesSwatches: window.bisAppData.uses_radio,
+      preOrderEnabled: window.bisAppData.pre_order_enabled,
+      buttonLabel: window.bisAppData.widget_button_caption_text,
+      variantFromTitle: function(variantTitle) {
+        var variant = null;
+        if (typeof bisApp.variants[variantTitle] != 'undefined') {
+          variant = bisApp.variants[variantTitle];
+        }
+        return variant;
+      },
+      variantTitleFromId: function(variantId) {
+        var variantTitle = null;
+        if (typeof bisApp.variantsById[variantId] != 'undefined') {
+          variantTitle = bisApp.variantsById[variantId];
+        }
+        return variantTitle;
+      },
+      createVariantTitle : function() {
+       var options = [];
+       var $optionSelects = bisApp.getOptionSelects();
+       $optionSelects.each(function(){
+         options.push($(this).val());
+       });
+       return options.join(' / ');
+      },
+      setVariants: function(productAvailable) {
+        bisApp.unavailableVariants = [];
+        bisApp.product = Shopify.boosterProduct;
+
+        var filteredVariants = bisApp.product.variants;
+
+        for(var len = filteredVariants.length, i=0; i < len; i++) {
+          bisApp.variants[filteredVariants[i].title] = filteredVariants[i];
+          bisApp.variantsById[filteredVariants[i].id] = filteredVariants[i].title;
+          if ( filteredVariants[i].available == false ) {
+              bisApp.unavailableVariants.push(filteredVariants[i]);
+          } else if ( (filteredVariants[i].inventory_quantity <= 0) && (['1',true].includes(bisApp.preOrderEnabled))) {
+              bisApp.unavailableVariants.push(filteredVariants[i]);
+          } else if ( (filteredVariants[i].inventory_quantity <= 0) && (typeof bisApp.product != 'undefined') ) {
+              if ( typeof productAvailable !== 'undefined' && !productAvailable ) {
+                  filteredVariants[i].available = false;
+                  bisApp.unavailableVariants.push(filteredVariants[i]);
+              }
+          }
+        }
+
+      },
+      buildModalSelect: function(){
+
+        var selectArr = [];
+
+        if (window.bisAppData.modal_hide_dup_variants){
+          var filteredUnavailableVariants = removeDuplicatesFromObjArray(bisApp.unavailableVariants, 'sku');
+        } else {
+          var filteredUnavailableVariants = bisApp.unavailableVariants;
+        }
+
+        $(filteredUnavailableVariants).each(function(){
+          var el = $(this);
+          if (bisApp.activeVariant == el[0].title){
+            selectArr.push("<option value='" + el[0].id + "' selected>" + el[0].title + "</option>");
+          } else {
+            selectArr.push("<option value='" + el[0].id + "'>" + el[0].title + "</option>");
+          }
+        });
+
+        var selectOptions = selectArr.join("");
+
+        var formHtml = [
+          "<select id='variants' class='form-control input-lg'>",
+          selectOptions,
+          "</select>"
+        ].join("");
+
+        return formHtml;
+      },
+      setModalBody: function(product){
+        if(product.variants.length == 1){
+          var selectWrapper = "<div class='form-group single-variant' id='booster-select-wrapper'></div>"
+        } else{
+          var selectWrapper = "<div class='form-group' id='booster-select-wrapper'></div>"
+        }
+
+        var raModalSelectHtml = bisApp.buildModalSelect();
+        var formHtml = $([
+          "<div id='booster-raModal-container' style='display:none;' class='booster-wrap booster-raModal'>",
+          "<h2 class='title'>" + window.bisAppData.modal_header_text + "</h2>",
+          "<p class='body-text'>" + window.bisAppData.modal_body_text + "</p>",
+          "<hr><h3>" + product['title'] + "</h3>",
+          "<form action='#' id='booster-form'>",
+            selectWrapper,
+            "<div class='form-group' style='display:none;'>",
+            "<input type='email' id='email_address' placeholder='" + window.bisAppData.modal_email_address_label + "' class='form-control input-lg'/>",
+            "</div>",
+            "<div class='form-group' style='display:none;'>",
+            "<label class='qty-req-label'>Quantity</label>",
+            "<input type='number' id='quantity_required' class='form-control qty-req-input input-lg' min='1' max='99999' value='1' />",
+            "</div>",
+            "<div class='form-group accepts_marketing' style='display:none;'>",
+            "<label for='accepts_marketing'><input checked id='accepts_marketing' name='accepts_marketing' type='checkbox' value='0'/>" + window.bisAppData.customer_checkbox_label + "</label></div>",
+            "<div class='submit-button'><button type='submit' class='btn btn-success btn-lg'>" + window.bisAppData.modal_button_label + "</button></div>",
+          "</form>",
+          "<div class='messages'><div class='alert alert-primary' style='display:none;'></div><div class='alert alert-success' style='display:none;'>" + window.bisAppData.modal_reg_complete_text + "</div><div class='alert alert-danger' style='display:none;'>" + window.bisAppData.modal_invalid_email_text + "</div></div>",
+          "<hr/><div class='footer'><p>" + window.bisAppData.modal_footer_text + "</p></div><a href='#close-raModal' rel='raModal:close' class='close-raModal '>Close</a>",
+          "</div>"
+        ].join("\n"));
+
+        if($("#booster-raModal-container").length == 0){
+          $("body").append(formHtml);
+        }
+
+        $("#booster-select-wrapper").html(raModalSelectHtml);
+      },
+      getUrlParam: function(paramName) {
+          var params = {};
+          window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str,key,value) {
+              params[key] = value;
+          });
+        return params[paramName];
+      },
+      getOptionSelects: function() {
+        if (!bisApp.optionSelects) {
+          var selector, optionSelect, optionElement = 'select';
+          var prefixes = ['product-select', 'productSelect', 'ProductSelect', 'product-variants', 'product-selectors', 'variant-listbox'];
+
+          if (typeof window.boosterLiquid.optionElement != 'undefined') {
+            optionElement = window.boosterLiquid.optionElement;
+          }
+          if (typeof bisApp.optionSelectsSelector == 'undefined') {
+            for (var len = prefixes.length, i=0; i < len; i++) {
+                selector = optionElement + "[id|='" + prefixes[i] + "-option']";
+                optionSelect = $(selector);
+                if (optionSelect.length) {
+                    break;
+                }
+                selector = optionElement + "[id|='" + prefixes[i] + '-' + Shopify.boosterProduct.id + "-option']";
+                optionSelect = $(selector);
+                if (optionSelect.length) {
+                    break;
+                }
+            }
+          } else {
+            selector = bisApp.optionSelectsSelector
+            optionSelect = $(selector);
+          }
+          if (optionSelect.length == 0){
+            bisApp.optionSelectsSelector = '.single-option-selector:visible';
+            bisApp.optionSelects = $('.single-option-selector:visible');
+          } else {
+            bisApp.optionSelectsSelector = selector;
+            bisApp.optionSelects = optionSelect;
+          }
+          }
+          return bisApp.optionSelects;
+        },
+        buttonShow: function(variantName){
+          if (!variantName) {
+            var variantId = bisApp.getUrlParam('variant');
+            if (variantId) {
+              variantName = bisApp.variantTitleFromId(variantId);
+              var variant = bisApp.variantFromTitle(variantName);
+            }
+          } else {
+            var variant = bisApp.variantFromTitle(variantName);
+          }
+          bisApp.activeVariant = variantName;
+          bisApp.variant = variant;
+          if (typeof variant == 'undefined' || !variant || localStorage.getItem("ba_bisz_" + bisApp.variant.id) == "true") {
+            if (!window.bis_preview){
+              return;
+            }
+          }
+          if ( (window.bis_preview) || (bisApp.usesSwatches == true && bisApp.unavailableVariants.length > 0) || (variant.available == false) || ( (variant.inventory_quantity <= 0) && (['1',true].includes(bisApp.preOrderEnabled)))) {
+            bisApp.setModalBody(bisApp.product);
+
+            if (window.bisAppData.show_trigger_link){
+              if($("#booster-trigger").length == 0){
+                eval(window.bisAppData.custom_js);
+              }
+            }
+
+            if (window.bisAppData.widget_button_enabled || window.bis_preview){
+              if($("#booster-button").length == 0){
+                var button = $("<div id='booster-button'>" + window.bisAppData.widget_button_caption_text + "</div>");
+                $("body").append(button);
+              }
+            }
+
+          } else {
+            if (window.bisAppData.show_trigger_link){
+              $("#booster-trigger").closest('p').remove();
+            }
+
+            if (window.bisAppData.widget_button_enabled){
+              $("#booster-button").remove();
+            }
+          }
+     }
+
+    }
+
+    if ( (typeof window.boosterLiquid.product != 'undefined') && window.boosterLiquid.product) {
+      Shopify.boosterProduct = window.boosterLiquid.product;
+      if(window.boosterLiquid.product.tags.indexOf('ra-exclude') >= 0){
+        return false;
+      }
+    }
+
+    bisApp.setVariants();
+    var $optionSelectors = bisApp.getOptionSelects();
+
+    if (bisApp.usesSwatches == true && bisApp.unavailableVariants.length > 0){
+      bisApp.buttonShow(bisApp.product.variants[0].title);
+    } else if (window.bis_preview){
+      bisApp.buttonShow(bisApp.product.variants[0].title);
+    } else {
+      $optionSelectors.bind('change', function() {
+        try {
+          if ($optionSelectors.length == 1) {
+            bisApp.buttonShow($('option:selected', this).val());
+          } else {
+            bisApp.buttonShow(bisApp.createVariantTitle());
+          }
+        }
+        catch (e) {
+          console.log(e)
+        }
+      });
+
+      try {
+        if ($optionSelectors.length) {
+          if ($optionSelectors.length == 1) {
+            bisApp.buttonShow($('option:selected', $optionSelectors).val());
+          } else {
+            bisApp.buttonShow(bisApp.createVariantTitle());
+          }
+        } else {
+          bisApp.buttonShow(bisApp.product.variants[0].title);
+        }
+      }
+      catch (e) {
+        console.log(e)
+      }
+    }
+
+    $(document).on("click", "#booster-button, #booster-trigger", function(){
+      //$('#booster-modal-container').modal();
+      bisQuery("#booster-raModal-container").raModal();
+      return false;
+    });
+
+    var handleBisSubscribe = function(btn){
+      localStorage.setItem("ba_bis_" + window.bisApp.variant.id, true);
+      $('.booster-raModal .messages .alert-danger').hide();
+      $('.booster-raModal .messages .alert-primary').hide();
+      $('.booster-raModal .messages .alert-success').show();
+      btn.show();
+      btn.prop("disabled", false);
+      btn.text(window.bisAppData.modal_button_label);
+      setTimeout(function(){
+        $('.booster-raModal .messages .alert').hide();
+        bisQuery.raModal.close();
+      }, 3000);
+    }
+
+    var subscribeBisAlert = function(btn){
+      var variant = bisApp.variant;
+      var bisData = {
+        channel: 'push',
+        visitor_token: window.baMsg.visitor_token,
+        action_type: 'bis',
+        cart_uid: window.baMsg.cart_uid,
+        tz_offset: window.baMsg.browser_info.tz_offset,
+        os: window.baMsg.browser_info.os,
+        browser: window.baMsg.browser_info.browser,
+        product_id: bisApp.product.id,
+        product_title: bisApp.product.title,
+        variant_title:  variant.title,
+        variant_id: bisApp.variant.id,
+        action_type: 'bis'
+      };
+      $.ajax({
+        type: "POST",
+        url: "/apps/ba_fb_app",
+        data: bisData,
+        dataType: 'json',
+        success: function(data){
+          if(data.notice){
+            localStorage.setItem("ba_bis_" + window.bisApp.variant.id, true);
+            $('.booster-raModal .messages .alert-success').show();
+          } else if(data.alert){
+            $('.booster-raModal .messages .alert-danger').html(data.alert).show();
+          }
+        },
+        error: function(data) {
+          $('.booster-raModal .messages .alert-danger').html("Sorry, Please try again later").show();
+        },
+        complete: function(data){
+          btn.prop("disabled", false);
+          btn.text("Notify");
+          setTimeout(function(){
+            $('.booster-raModal .messages .alert').hide();
+            bisQuery.raModal.close();
+          }, 3000);
+        }
+      });
+    }
+
+    $(document).on('submit', 'form#booster-form', function(){
+      var btn = $(this).find('.submit-button button');
+      btn.attr('disabled','disabled');
+      $('.booster-raModal .messages .alert').hide();
+      if (window.baMsg.subscriber_hash.ba_push_opted_in){
+        btn.text('Saving...');
+        subscribeBisAlert(btn);
+      } else {
+        btn.hide();
+        $('.booster-raModal .messages .alert-primary').text("Please click Allow in the top left of the screen to subscribe to this notification. You will be sent a browser notification when the product is back in stock.").show();
+        window.baMsg.requestPushPermissions('bis', function(){
+          handleBisSubscribe(btn);
+        });
+      }
+
+      return false;
+    });
+    // $(document).on('submit', 'form#booster-form', function(){
+    //   var btn = $(this).find('.submit-button button');
+    //   var og_text = btn.text();
+    //   btn.text('Saving...');
+    //   btn.attr('disabled','disabled');
+    //   $('.booster-raModal .messages .alert').hide();
+    //   var variant = bisApp.variant;
+    //   var formData = '&product_id=' + bisApp.product.id
+    //                + '&product_title=' + bisApp.product.title
+    //                + '&variant_title=' + variant.title
+    //                + '&customer_email=' + $(this).find('input#email_address').val()
+    //                + '&variant_id=' + $(this).find('select#variants').val()
+    //                + '&quantity_required=' + $(this).find('input#quantity_required').val()
+    //                + '&accepts_marketing=' + $(this).find('input#accepts_marketing').is(":checked")
+    //                + '&action_type=' + 'bis';
+    //
+    //   $.ajax({
+    //     type: "POST",
+    //     url: "/apps/ba_fb_app",
+    //     data: formData,
+    //     dataType: 'json',
+    //     success: function(data){
+    //       if(data.notice){
+    //         $('.booster-raModal .messages .alert-success').show();
+    //       } else if(data.alert){
+    //         $('.booster-raModal .messages .alert-danger').html(data.alert).show();
+    //       }
+    //     },
+    //     error: function(data) {
+    //       $('.booster-raModal .messages .alert-danger').html("Sorry, Please try again later").show();
+    //     },
+    //     complete: function(data){
+    //       btn.prop("disabled", false);
+    //       btn.text(og_text);
+    //       setTimeout(function(){ $('.booster-raModal .messages .alert').hide();}, 5000);
+    //     }
+    //   });
+    //  return false;
+    // });
+
+    function insertPopupMessageJs(){
+      var head = document.getElementsByTagName('head')[0];
+      var script = document.createElement('script');
+      script.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'boosterapps.com/apps/back-in-stock/preview_bis.js';
+      script.type = 'text/javascript';
+      head.appendChild(script);
+    }
+    if(document.location.search.indexOf("preview_bis=1") > -1){
+      setTimeout(function(){
+        insertPopupMessageJs();
+      }, 1500);
+    }
+
+  });
+
+}(window, document));
+
+
+  (function() {
+
+      if (window.baMsg.fb_active && window.baMsg.fb_page_id){
+        //fb
+        var loader = new boosterFBLoader();
+        loader.load();
+        loader.loadChat({
+          "active":0,
+          "minimized":0,
+          "theme_color":'#0084FF',
+          "logged_in_greeting":"Hi there! How can we help you?",
+          "logged_out_greeting":"Hi! We\'re here to answer any questions you may have."
+        });
+        new boosterFbCheckboxes().generate(window.baMsg.settings.fb_base);
+        new boosterFbModal().generate(window.baMsg.settings.fb_modal);
+        new boosterFbAtcModal().generate(window.baMsg.settings.fb_atc_popup);
+      }
+      //push
+      if (window.baMsg.push_active){
+        new boosterPushSession().generate({
+          "active": true
+        });
+      }
+
+      if (window.baMsg.sms_active){
+        new boosterSMSAtcModal().generate({
+           "active":0,
+           "title":"Join us on SMS",
+           "paragraph":"Sign up and gain access to new products, exclusive deals, and discounts before anybody else!",
+           "no_thanks_text":"No thanks",
+           "close_button":"1",
+           "plugin_type":"send_to_messenger",
+           "button_cta":"Subscribe to SMS",
+           "button_cta_color":"blue",
+           "header_bg_color":"#f4f6f8",
+           "body_bg_color":"#fff",
+           "header_text_color":"#626974",
+           "paragraph_text_color":"#626974",
+           "no_thanks_text_color":"#626974",
+           "disclaimer":""
+        });
+      }
+
+      if (window.baMsg.email_active){
+        new boosterEmailAtcModal().generate({
+           "active":0,
+           "title":"Join us on E-mail",
+           "paragraph":"Sign up and gain access to new products, exclusive deals, and discounts before anybody else!",
+           "no_thanks_text":"No thanks",
+           "close_button":"1",
+           "plugin_type":"send_to_messenger",
+           "button_cta":"Subscribe to E-mail",
+           "button_cta_color":"blue",
+           "header_bg_color":"#f4f6f8",
+           "body_bg_color":"#fff",
+           "header_text_color":"#626974",
+           "paragraph_text_color":"#626974",
+           "no_thanks_text_color":"#626974",
+           "disclaimer":""
+        });
+      }
+
+    })();
+
+  listentoAtc();
+
+  });
+}())
+</script>

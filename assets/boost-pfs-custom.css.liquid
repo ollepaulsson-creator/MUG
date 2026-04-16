@@ -1,0 +1,396 @@
+/*********************** Custom CSS for Boost Filter & Search  ************************/
+{% assign breakpointMobile = '767px' %}
+{% assign breakpointDesktop = '768px' %}
+{% assign searchBoxMobileHeight = '64px' %}
+
+/**************************** Place your custom css below  ****************************/
+/* Layout */
+
+.search-bar__submit:focus, .search-bar__submit:hover {
+    color: #ccc;
+}
+
+.boost-pfs-search-suggestion-product-price {
+  	font-weight: 700;
+}
+
+.boost-pfs-search-suggestion-product-price s {
+  	font-weight: 700;
+    color: black;
+}
+
+.boost-pfs-filter-tree-mobile-style2 .boost-pfs-filter-mobile-toolbar .boost-pfs-filter-mobile-toolbar-items .boost-pfs-filter-mobile-toolbar-middle {
+    font-weight: 500;
+    letter-spacing: 0.1rem;
+}
+
+.boost-pfs-search-suggestion-item-product .boost-pfs-search-suggestion-right {
+    max-width: calc(80% - 72px);
+}
+
+.boost-pfs-search-btn-clear-suggestion:before {
+    width: 20px;
+          height: 1.5px;
+    background: black;
+}
+
+.boost-pfs-search-btn-clear-suggestion:after {
+    width: 20px;
+         height: 1.5px;
+    background: black;
+}
+
+.boost-pfs-search-suggestion-mobile-top-panel #boost-pfs-search-box-mobile {
+    display: inline-block;
+    width: calc(100% - 67px);
+    height: calc(64px - 20px);
+    margin: 10px 1px;
+    padding: 12px 50px 12px 2px;
+    background: #fff;
+    text-align: center;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: none;
+    border-radius: none;
+    text-align: left;
+    font-size: 16px;
+    line-height: 20px;
+    background: White;
+    border: none;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+}
+
+.boost-pfs-search-suggestion-mobile .boost-pfs-search-suggestion-header+.boost-pfs-search-suggestion-item.boost-pfs-search-suggestion-item-product {
+    padding-top: 0px;
+}
+.boost-pfs-search-suggestion-mobile .boost-pfs-search-suggestion-item {
+    padding: 6px 8px;
+    background: #fff;
+}
+
+.boost-pfs-search-suggestion-mobile .boost-pfs-search-suggestion-header-view-all {
+    display: none;
+}
+
+.boost-pfs-search-suggestion-mobile.boost-pfs-search-suggestion-wrapper {
+    background: white;
+}
+
+.boost-pfs-search-suggestion-mobile .boost-pfs-search-suggestion .boost-pfs-search-suggestion-item {
+    margin-bottom: -0px;
+    border: none;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0px;
+    border-radius: 0;
+}
+
+.boost-pfs-search-suggestion-mobile .boost-pfs-search-suggestion-header+.boost-pfs-search-suggestion-item {
+    -webkit-border-top-left-radius: 0px;
+    -webkit-border-top-right-radius: 04px;
+    -moz-border-radius-topleft: 0px;
+    -moz-border-radius-topright: 0px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.boost-pfs-search-suggestion-mobile .boost-pfs-search-suggestion-header  {
+  background: white;
+  text-align: left;
+      padding: 8px 8px 8px;
+}
+
+.boost-pfs-search-suggestion-mobile .boost-pfs-search-suggestion {
+	background: white;
+      text-align: left;
+  padding-bottom: 80px;
+}
+.boost-pfs-search-box:focus {
+    outline: none;
+}
+[class*=boost-pfs-search-suggestion-column-2-]:not(.boost-pfs-search-suggestion-mobile) .boost-pfs-search-suggestion-header-view-all a  {
+display:none;
+}
+
+[class*=boost-pfs-search-suggestion-column-2-]:not(.boost-pfs-search-suggestion-mobile) .boost-pfs-search-suggestion-header-view-all  {
+background: black;
+}
+
+[class*=boost-pfs-search-suggestion-column-2-]:not(.boost-pfs-search-suggestion-mobile) .boost-pfs-search-suggestion-header-view-all  {
+    margin: 9px 12px;
+    padding: 0;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+
+}
+
+.boost-pfs-search-suggestion-item {
+    padding: 8px 12px 0px;
+}
+.boost-pfs-search-suggestion-item.selected, .boost-pfs-search-suggestion-item:hover {
+    background: #f1f1f1;
+}
+
+.boost-pfs-search-suggestion .boost-pfs-search-suggestion-group li{
+  padding-bottom: 8px;
+}
+.boost-pfs-search-suggestion-wrapper:not(.boost-pfs-search-suggestion-mobile) .boost-pfs-search-suggestion-group[data-group*=products] .boost-pfs-search-suggestion-item.boost-pfs-search-suggestion-dym{
+    padding-bottom: 20px;
+}
+
+[class*=boost-pfs-search-suggestion-column-2-]:not(.boost-pfs-search-suggestion-mobile) .boost-pfs-search-suggestion-groups-others {
+    width: calc(100% - 2px);
+}
+
+.boost-pfs-search-suggestion-item-product .boost-pfs-search-suggestion-right {
+    max-width: calc(80% - 72px);
+}
+
+.boost-pfs-search-suggestion-item-product .boost-pfs-search-suggestion-left img  {
+	max-height: 100px;
+}
+
+
+.boost-pfs-search-suggestion-item-product .boost-pfs-search-suggestion-left  {
+max-width: 100px;
+  margin-right: 20px;
+}
+
+.boost-pfs-search-suggestion-no-result  {
+padding: 10px 0px 0px 0px;
+}
+
+.boost-pfs-search-suggestion-product-price {
+font-size: 15px;
+}
+
+.boost-pfs-search-suggestion-item a>b {
+    font-weight: 700;
+}
+
+.boost-pfs-search-suggestion-product-title b  {
+    font-weight: 400;
+}
+
+[class*=boost-pfs-search-suggestion-column-2-]:not(.boost-pfs-search-suggestion-mobile) .boost-pfs-search-suggestion-groups-pro {
+    width: 100%;
+}
+.boost-pfs-search-suggestion-product-title {
+    line-height: 23px;
+    font-size: 15px;
+  	font-weight: 400!important;
+  padding-bottom: 6px;
+}
+
+.boost-pfs-search-suggestion-product-vendor {
+    color: black;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+ 	font-size: 14px;
+  	line-height: 23px;
+      padding-bottom: 6px;
+}
+
+.boost-pfs-search-suggestion {
+  	-webkit-box-shadow: none;
+ 	 box-shadow: none;
+  	border: 1px solid #ccc;
+}
+.boost-pfs-search-suggestion-column-2-non-fullwidth:not(.boost-pfs-search-suggestion-mobile) .boost-pfs-search-suggestion {
+		padding:0px 10px 10px 10px;
+}
+
+.boost-pfs-search-suggestion-popover[data-direction=left] {
+		display:none!important;
+}
+
+.boost-pfs-search-suggestion-header {
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    background: white;
+  	padding: 8px 12px 5px;
+    color: black;
+    margin: 0;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 20px;
+	margin: 22px 0px 0px 0px;
+}
+
+.price--on-sale .price__badge--sale {
+  display:none;
+}
+
+.boost-pfs-filter-tree-mobile-style2 .boost-pfs-filter-mobile-toolbar .boost-pfs-filter-mobile-toolbar-items .boost-pfs-filter-mobile-toolbar-right {
+    width: 65px!important;
+}
+
+.boost-pfs-filter-tree-mobile-button button {
+    color: black;
+    background: white;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 2px;
+    padding: 8px 15px;
+    background-color: white;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-size: 15px;
+  	margin-bottom: 40px;
+}
+.boost-pfs-filter-tree-mobile-button button, .boost-pfs-filter-top-sorting-mobile button {
+    letter-spacing: 0.1rem;
+}
+.boost-pfs-filter-tree-v .boost-pfs-filter-option-title-heading {
+        letter-spacing: 0.1rem;
+  		padding-bottom: 12px;
+}
+
+.boost-pfs-filter-option-item.selected .boost-pfs-filter-option-amount {
+    opacity: 0.6;
+  text-decoration: none;
+}
+
+.boost-pfs-filter-option-view-more-action button {
+    font-size: 16px;
+ 	text-decoration: underline;
+}
+
+
+.boost-pfs-filter-option-item.selected  {
+    font-weight: 500;
+}
+
+.boost-pfs-filter-tree {
+  width: 20%;
+  float: left;
+  padding-right: 10px
+}
+
+.boost-pfs-filter-right {
+  width: 80%;
+  float: right;
+}
+
+.boost-pfs-filter-right .boost-pfs-filter-products {
+  width: 100%;
+  float: right;
+  overflow: visible;
+  height: auto !important;
+}
+
+
+/* Product */
+.boost-pfs-filter-products .has-bc-quickview {
+  overflow: hidden;
+}
+
+.boost-pfs-filter-products .list-view-items {
+  margin-left: 30px;
+}
+
+.product-card--list .list-view-item__link {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.boost-pfs-filter-products .grid-view-item {
+  position: relative;
+}
+
+.boost-pfs-filter-products .full-width-link {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9;
+}
+
+.boost-pfs-filter-products .price--on-sale .price__sale {
+  display: inherit;
+}
+
+.boost-pfs-filter-products .price__sale {
+  display: none;
+  color: #557b97;
+}
+
+.boost-pfs-filter-products .price__regular {
+  color: #69727b;
+}
+
+/* Search */
+ul.boost-pfs-search-suggestion, ul.boost-pfs-search-suggestion a {
+  color: #000000;
+}
+.boost-pfs-search-suggestion-header {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.boost-pfs-search-suggestion-header-view-all a,
+.boost-pfs-search-suggestion-item a {
+  font-size: 15px;
+}
+
+.template-search .filters-toolbar-wrapper {
+  margin-top: 55px;
+}
+
+#SearchInput {
+  display: none !important;
+}
+
+.predictive-search {
+  display: none;
+}
+
+.list-view-items .boost-pfs-action-list-wrapper {
+  display: none;
+}
+
+/*.js-drawer-open-top .drawer--top, .js-drawer-open .drawer-page-content::after {opacity: 0;}*/
+/* Version 3.1 */
+/**** Custom Search result toolbar ****/
+.boost-pfs-search-result-toolbar-wrap {
+  border-bottom: 1px solid #ededed;
+  margin-bottom: -1px;
+  display: none;
+}
+
+.boost-pfs-search-result-toolbar {
+  margin: 0 auto;
+  border: none;
+}
+
+.filters-toolbar__item-child:first-child {
+  line-height: 42px;
+}
+
+@media screen and (max-width: {{breakpointMobile}}) {
+    .boost-pfs-filter-tree {
+    display: none;
+    width: 100%;
+    float: none;
+  }
+
+  .boost-pfs-filter-right,
+  .boost-pfs-filter-right .boost-pfs-filter-products {
+    width: auto;
+    float: none;
+  }
+
+  .boost-pfs-filter-top-display-type span {
+    display: none;
+  }
+
+  .boost-pfs-filter-top-display-type .boost-pfs-filter-display-item:nth-of-type(1) {
+    margin-left: 0;
+  }
+}

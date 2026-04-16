@@ -1,0 +1,60 @@
+{%- assign pageTitle = page_title | strip_tags -%}
+{%- assign pageDescription = page_title | strip_tags -%}
+{%- if shop.metafields.ninja_head_code.store != blank -%}
+	{{ shop.metafields.ninja_head_code.store | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url }}
+{%- endif -%}
+{%- if template contains 'product' -%}
+    {%- if shop.metafields.ninja_head_code.products_head != blank -%}
+        {{ shop.metafields.ninja_head_code.products_head | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url }}
+    {%- endif -%}
+
+    {%- if product.metafields.ninja_head_code.head != blank -%}
+        {{ product.metafields.ninja_head_code.head | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url }}
+    {%- endif -%}
+{%- endif -%}
+{%- if template contains 'collection' -%}
+    {%- if shop.metafields.ninja_head_code.collections_head != blank -%}
+        {{ shop.metafields.ninja_head_code.collections_head  | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url}}
+    {%- endif -%}
+
+    {%- if collection.metafields.ninja_head_code.head != blank -%}
+        {{ collection.metafields.ninja_head_code.head | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url }}
+    {%- endif -%}
+{%- endif -%}
+{%- if template contains 'page' -%}
+    {%- if shop.metafields.ninja_head_code.pages_head != blank -%}
+        {{ shop.metafields.ninja_head_code.pages_head | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url }}
+    {%- endif -%}
+
+    {%- if page.metafields.ninja_head_code.head != blank -%}
+        {{ page.metafields.ninja_head_code.head | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url }}
+    {%- endif -%}
+{%- endif -%}
+{%- if template contains 'blog' -%}
+    {%- if shop.metafields.ninja_head_code.blogs_head != blank -%}
+        {{ shop.metafields.ninja_head_code.blogs_head | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url }}
+    {%- endif -%}
+
+    {%- if blog.metafields.ninja_head_code.head != blank -%}
+        {{ blog.metafields.ninja_head_code.head | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url }}
+    {%- endif -%}
+{%- endif -%}
+{%- if template contains 'article' -%}
+    {%- if shop.metafields.ninja_head_code.blogs_head != blank -%}
+        {{ shop.metafields.ninja_head_code.blogs_head | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url }}
+    {%- endif -%}
+
+    {%- if article.metafields.ninja_head_code.head != blank -%}
+        {{ article.metafields.ninja_head_code.head | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url }}
+    {%- endif -%}
+{%- endif -%}
+{%- if template contains 'index' -%}
+    {%- if shop.metafields.ninja_head_code.home != blank -%}
+        {{ shop.metafields.ninja_head_code.home | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url }}
+    {%- endif -%}
+{%- endif -%}
+{%- if template contains 'cart' -%}
+    {%- if shop.metafields.ninja_head_code.cart != blank -%}
+        {{ shop.metafields.ninja_head_code.cart | replace: '##page_title##', pageTitle | replace: '##page_description##', pageDescription | replace: '##url##', canonical_url }}
+    {%- endif -%}
+{%- endif -%}
