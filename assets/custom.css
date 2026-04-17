@@ -1472,3 +1472,14 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
   text-decoration: underline;
 }
 
+/* ── Smooth scroll on collection pages ── */
+html:has(body.template-collection) {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:has(body.template-collection) {
+    scroll-behavior: auto;
+  }
+}
+
