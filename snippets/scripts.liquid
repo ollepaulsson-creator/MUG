@@ -106,11 +106,19 @@
   href="{{ 'events.js' | asset_url }}"
   fetchpriority="low"
 >
-<script
-  src="{{ 'popover-polyfill.js' | asset_url }}"
-  type="module"
-  fetchpriority="low"
-></script>
+{% comment %}
+  Only load popover-polyfill on browsers that lack native support (~5% globally).
+  Saves ~28KB on modern Chrome/Edge/Firefox/Safari 17+.
+{% endcomment %}
+<script>
+  if (!('popover' in HTMLElement.prototype)) {
+    const s = document.createElement('script');
+    s.src = {{ 'popover-polyfill.js' | asset_url | json }};
+    s.type = 'module';
+    s.fetchPriority = 'low';
+    document.head.appendChild(s);
+  }
+</script>
 <script
   src="{{ 'quick-add.js' | asset_url }}"
   type="module"
@@ -213,11 +221,16 @@
   type="module"
   fetchpriority="low"
 ></script>
-<script
-  src="{{ 'gift-card-recipient-form.js' | asset_url }}"
-  type="module"
-  fetchpriority="low"
-></script>
+{% comment %}
+  gift-card-recipient-form only appears on product pages (gift card products).
+{% endcomment %}
+{% if template.name == 'product' %}
+  <script
+    src="{{ 'gift-card-recipient-form.js' | asset_url }}"
+    type="module"
+    fetchpriority="low"
+  ></script>
+{% endif %}
 
 {% if localization.available_countries.size > 1 or localization.available_languages.size > 1 %}
   <script
