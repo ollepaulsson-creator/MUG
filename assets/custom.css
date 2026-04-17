@@ -1457,19 +1457,6 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
     padding-bottom: 15px;
 }
 
-@media screen and (max-width: 499px) {
-  .shopify-section:not(.header-section) .section--full-width {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-}
-
-@media screen and (min-width: 500px) and (max-width: 989px) {
-  .shopify-section:not(.header-section) .section--full-width {
-    padding-top: 22px;
-    padding-bottom: 22px;
-  }
-}
 
 @media (min-width: 769px) {
   #shopify-section-template--29835055006045__section .spacing-style.layout-panel-flex.layout-panel-flex--column.section-content-wrapper.mobile-column {
