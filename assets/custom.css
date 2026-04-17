@@ -1143,7 +1143,11 @@ p.search-results-summary {
 .template-search .collection-wrapper {
   margin-top: 0 !important;
 }
-.search-section__input-wrapper .button {
+.search-page-input__parent search-page-input-component {
+  height: fit-content;
+  align-self: center;
+}
+.search-submit-btn {
   height: 44px;
   padding-block: 0;
 }
