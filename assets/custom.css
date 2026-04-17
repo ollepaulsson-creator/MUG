@@ -504,8 +504,10 @@ h4.predictive-search-results__title {
 
 .product-media {
     background: #f7f7f7;
-    border-top: 1px solid #e4e4e4;
     border-bottom: 1px solid #e4e4e4;
+}
+.template-index .product-media {
+    border-top: 1px solid #e4e4e4;
 }
 .media-gallery--carousel .product-media {
     background: #f7f7f7;
