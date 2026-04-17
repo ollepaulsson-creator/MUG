@@ -76,6 +76,7 @@
   "actions": {
     "add_to_cart": "Lägg till i varukorgen",
     "clear_all": "Rensa alla",
+    "search": "SÖK",
     "remove": "Ta bort",
     "view_in_your_space": "Visa i ditt utrymme",
     "show_filters": "Filter",
