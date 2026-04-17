@@ -1457,10 +1457,17 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
     padding-bottom: 15px;
 }
 
-@media screen and (max-width: 989px) {
+@media screen and (max-width: 499px) {
   .shopify-section:not(.header-section) .section--full-width {
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+@media screen and (min-width: 500px) and (max-width: 989px) {
+  .shopify-section:not(.header-section) .section--full-width {
+    padding-top: 16px;
+    padding-bottom: 16px;
   }
 }
 
