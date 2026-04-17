@@ -38,7 +38,7 @@
   %}
   {{
     media.preview_image
-    | image_url: width: 3840
+    | image_url: width: 1920
     | image_tag:
       widths: widths,
       alt: media.alt,
@@ -67,12 +67,13 @@
           >
             {{
               media.preview_image
-              | image_url: width: 3840
+              | image_url: width: 1920
               | image_tag:
                 widths: widths,
                 alt: media.alt,
                 sizes: sizes,
                 loading: loading,
+                decoding: 'async',
                 class: 'deferred-media__poster-image'
             }}
             <span class="deferred-media__poster-icon">

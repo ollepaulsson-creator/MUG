@@ -7,6 +7,9 @@
   @param {string} [text_fallback] - text to display if image is blank
   @param {boolean} [unset_image_tag] - if true, ignores the image focal point
   @param {string} [style] - additional styles
+  @param {string} [loading] - loading attribute (lazy/eager)
+  @param {string} [fetchpriority] - fetchpriority attribute (high/low/auto)
+  @param {string} [decoding] - decoding attribute (async/sync/auto)
 
   @example
   {% render 'image', image: product.featured_image, height: 300, class: 'product-image' %}
@@ -21,12 +24,23 @@
   {%- endcapture %}
 
   {% assign style_value = style | default: '' %}
+  {% assign decoding_value = decoding | default: 'async' %}
 
   {% if unset_image_tag %}
     {% assign style_value = style_value | append: 'object-position: inherit;' %}
   {% endif %}
 
-  {{ image | image_url: height: image_height | image_tag: class: class, srcset: image_srcset, style: style_value }}
+  {{
+    image
+    | image_url: height: image_height
+    | image_tag:
+      class: class,
+      srcset: image_srcset,
+      style: style_value,
+      loading: loading,
+      fetchpriority: fetchpriority,
+      decoding: decoding_value
+  }}
 {% elsif text_fallback %}
   {{ text_fallback }}
 {% endif %}

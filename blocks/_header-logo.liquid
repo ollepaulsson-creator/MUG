@@ -58,7 +58,9 @@
       class: 'header-logo__image',
       height: block_settings.custom_height,
       text_fallback: shop.name,
-      style: logo_style
+      style: logo_style,
+      loading: 'eager',
+      fetchpriority: 'high'
     %}
   </span>
 
@@ -72,7 +74,9 @@
         class: 'header-logo__image',
         height: block_settings.custom_height,
         text_fallback: shop.name,
-        style: inverse_logo_style
+        style: inverse_logo_style,
+        loading: 'eager',
+        fetchpriority: 'high'
       %}
     </span>
   {% endif %}

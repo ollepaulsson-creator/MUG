@@ -16,9 +16,11 @@
     {% if image.width >= 1500 %}{{ image | image_url: width: 1500 }} 1500w,{% endif %}
     {{ image | image_url }} {{ image.width }}w
   "
+  sizes="(min-width: 1200px) 1100px, (min-width: 750px) 50vw, 100vw"
   src="{{ image | image_url: width: 1100 }}"
   loading="eager"
   fetchpriority="high"
+  decoding="async"
   width="{{ image.width }}"
   height="{{ image.height }}"
   alt="{{ image.alt | escape }}"
