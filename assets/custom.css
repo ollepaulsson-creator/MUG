@@ -1458,7 +1458,7 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
 }
 
 @media screen and (max-width: 989px) {
-  .section--full-width {
+  .shopify-section:not(.header-section) .section--full-width {
     padding-top: 8px;
     padding-bottom: 8px;
   }
