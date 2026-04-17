@@ -2,6 +2,7 @@
   box-sizing: border-box;
 }
 
+
 /* ============================================================
  * Qikify Smart Menu — theme integration (mockup)
  * ============================================================ */
@@ -26,12 +27,15 @@
   text-shadow: none !important;
   text-decoration: none !important;
 }
+.tmenu_app .tmenu_nav .tmenu_item--root.tmenu_item_active > .tmenu_item_link:hover {
+  text-decoration: underline !important;
+}
 
 /* ── Mega menu panel ── */
 .tmenu_item--root > .tmenu_submenu {
   background-color: #ffffff !important;
-  border-top: none !important;
-  border-bottom: 1px solid #e3e3e3 !important;
+  border-top: 1px solid #e5e5e5 !important;
+  border-bottom: 1px solid #e4e4e4 !important;
   box-shadow: 0 6px 16px rgba(0,0,0,0.08) !important;
   padding: 0px 0px 0px !important;
   /* Clip shadow flush at the top so it doesn't bleed over the header */
@@ -39,10 +43,21 @@
 }
 
 /* Submenu must paint above the sticky header (--layer-sticky: 8, max theme layer: 20) */
-/* margin-top shifts it down to start at the header border-bottom, without touching position/width */
 .tmenu_item_active > .tmenu_submenu {
   z-index: 200 !important;
-  margin-top: 14px !important;
+  margin-top: 12px !important;
+  animation: none !important;
+}
+
+@keyframes megaMenuSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ── Separators between masonry columns ── */
@@ -55,13 +70,13 @@
 }
 
 body .tmenu_masonry_col:first-child {
-  border-right: 1px solid #e3e3e3 !important;
+  border-right: 1px solid #e4e4e4 !important;
   padding-right: 25px !important;
   padding-left: 15px !important;
 }
 
 body .tmenu_masonry_col:last-child {
-  border-left: 1px solid #e3e3e3 !important;
+  border-left: 1px solid #e4e4e4 !important;
   padding-left: 25px !important;
 }
 
@@ -77,15 +92,13 @@ body .tmenu_masonry_col:last-child {
   text-decoration: none !important;
   text-shadow: none !important;
 }
-
-/* ── "Alla X" underlined links ── */
-.tmenu_submenu--desktop .tmenu_item_content_alignment_left.tmenu_item_link {
-  text-decoration: underline !important;
+.tmenu_wrapper .tmenu_masonry_col:first-child .tmenu_item_level_2.tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link:hover {
+  opacity: .5 !important;
 }
+
 
 body .tmenu_item_content_alignment_left {
   text-align: left !important;
-  text-decoration: underline;
 }
 
 body a[href*="/title"],
@@ -115,6 +128,10 @@ body .tmenu_item--root .tmenu_item_display_header > .tmenu_item_link > .tmenu_it
   letter-spacing: .96px !important;
   text-transform: uppercase !important;
   margin-bottom: 4px !important;
+  text-decoration: none !important;
+}
+body .tmenu_item--root .tmenu_item_display_header > .tmenu_item_link:hover > .tmenu_item_text {
+  text-decoration: underline !important;
 }
 
 body .tmenu_masonry_col {
@@ -148,7 +165,6 @@ body .tmenu_masonry_col {
 
 body .tmenu_submenu_type_mega .tmenu_item_layout_block .tmenu_submenu > .tmenu_item li:last-child {
   padding-bottom: 20px !important;
-  text-decoration: underline;
 }
 
 body .tmenu_submenu_type_mega .tmenu_item_link {
@@ -166,15 +182,32 @@ body .tmenu_image > img {
 }
 
 /* ── Regular submenu links ── */
-.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link {
+.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link,
+.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link:hover,
+.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link.tmenu_item_link_active {
   font-weight: 400 !important;
+  font-size: 14px !important;
   color: #000 !important;
   padding: 4px 0 !important;
   letter-spacing: 0 !important;
   text-shadow: none !important;
-  text-decoration: none !important;
   font-family: "inter variable", sans-serif !important;
   font-feature-settings: 'ss07' 1 !important;
+  transition: none !important;
+}
+.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link {
+  text-decoration: none !important;
+}
+.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link:hover {
+  text-decoration: underline !important;
+}
+
+/* ── "Alla X" underlined links — JS adds .tmenu-alla-link to links starting with "Alla" ── */
+.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link.tmenu-alla-link {
+  text-decoration: underline !important;
+}
+.tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link.tmenu-alla-link:hover {
+  text-decoration: none !important;
 }
 /* ── Featured image block ── */
 .tmenu_wrapper .tmenu_item_layout_image > .tmenu_item_link {
@@ -192,12 +225,16 @@ body .tmenu_image > img {
   text-decoration: underline !important;
   color: #000 !important;
 }
+.tmenu_wrapper .tmenu_item_layout_image:hover .tmenu_item_text {
+  text-decoration: none !important;
+}
 
 /* ── Inherit color, remove text-shadow globally ── */
 .tmenu_wrapper .tmenu_item_text,
 .tmenu_wrapper .tmenu_item_icon,
 .tmenu_wrapper .tmenu_indicator { color: inherit !important; }
-.tmenu_wrapper .tmenu_item_link { text-shadow: none !important; }
+.tmenu_wrapper .tmenu_item_link { text-shadow: none !important; transition: none !important; }
+.tmenu_wrapper .tmenu_item_text { transition: none !important; }
 .tmenu_wrapper .tmenu_custom_content a {
   display: inline-block !important;
   padding: 0 !important;
@@ -276,9 +313,9 @@ body .tmenu_image > img {
     grid-area: center !important;
   }
 
-  /* Position search */
+  /* Position search on the right (matching mobile when account actions present) */
   .search-action {
-    grid-area: leftB !important;
+    grid-area: rightA !important;
   }
 
   /* Position cart/actions */
@@ -290,12 +327,81 @@ body .tmenu_image > img {
   .header-section {
     --page-margin: 0px;
   }
+
+  /* Drawer panel should fill full width (theme sets 25rem at min-width: 750px) */
+  .menu-drawer {
+    width: 100vw !important;
+    max-width: 100vw !important;
+  }
+}
+
+/* ── Filter loading shimmer ── */
+results-list[data-loading] .product-grid__item {
+  position: relative;
+  overflow: hidden;
+  pointer-events: none;
+}
+results-list[data-loading] .product-grid__item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.55) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: gridShimmer 1.1s infinite;
+  z-index: 20;
+}
+@keyframes gridShimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── LQIP blur-up ── */
+.product-media,
+.resource-card__media,
+.search-result__image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+.product-media__lqip {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 0.35s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+.product-media__image--lqip {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+.product-media__image--lqip.is-loaded {
+  opacity: 1;
+}
+:has(> .product-media__image--lqip.is-loaded) .product-media__lqip {
+  opacity: 0;
+}
+
+/* deferred-media must sit above the product preview image (z-index: 1) so the play button is clickable */
+.product-media :is(deferred-media, product-model) {
+  z-index: 2;
+}
+
+/* Disable LQIP in zoom dialog — images must be visible immediately */
+zoom-dialog .product-media__lqip {
+  display: none;
+}
+zoom-dialog .product-media__image--lqip {
+  opacity: 1 !important;
+  transition: none !important;
 }
 
 .product-grid__item {
   animation: cardEnter 0.15s ease-in-out both;
   animation-delay: calc(var(--card-index, 0) * 25ms);
-  border-bottom: 1px solid #DCDCDC;
+  border-bottom: 1px solid #e4e4e4;
 }
 
 media-gallery slideshow-slide {
@@ -398,7 +504,8 @@ h4.predictive-search-results__title {
 
 .product-media {
     background: #f7f7f7;
-    border-bottom: 1px solid #DCDCDC;
+    border-top: 1px solid #e4e4e4;
+    border-bottom: 1px solid #e4e4e4;
 }
 .media-gallery--carousel .product-media {
     background: #f7f7f7;
@@ -428,26 +535,17 @@ h4.predictive-search-results__title {
 .main-collection-grid {
 }
 
-/* Remove gap above product media */
-.media-gallery {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-}
-.product-information__media {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-    top: 0 !important;
-}
-.product-information__media .sticky-content {
-    top: 0 !important;
-}
 
-.product-grid img,
 .product-media-container img,
 .product-information__media img,
 .resource-card__media img,
 .cart-items__media img {
-    mix-blend-mode: multiply; 
+    mix-blend-mode: multiply;
+}
+
+/* ── Hide thumbnail strip when only one image ── */
+.slideshow-controls__thumbnails-container:not(:has(.slideshow-controls__thumbnail ~ .slideshow-controls__thumbnail)) {
+  display: none !important;
 }
 
 /* ── Thumbnails ── */
@@ -459,7 +557,7 @@ scroll-hint.slideshow-controls__thumbnails-container {
   overflow-y: hidden !important;
   border: none !important;
   border-bottom: none !important;
-  box-shadow: inset 0 1px 0 0 #DCDCDC !important;
+  box-shadow: inset 0 1px 0 0 #e4e4e4 !important;
   position: relative !important;
 }
 
@@ -491,7 +589,7 @@ scroll-hint.slideshow-controls__thumbnails-container::after {
 /* Thumbnails stretch full height, right divider only */
 .slideshow-controls__thumbnail {
   border-top: none !important;
-  border-right: 1px solid #DCDCDC !important;
+  border-right: 1px solid #e4e4e4 !important;
   border-bottom: none !important;
   border-left: none !important;
   margin-right: -1px !important;
@@ -588,7 +686,7 @@ ul.pagination__list {
 }
 .pagination__item a {
   padding: 10px 16px;
-  outline: 1px solid #E2E2E2;
+  outline: 1px solid #e4e4e4;
   color: #000000;
   border-radius: 2px;
 }
@@ -665,7 +763,7 @@ li.pagination__item.pagination__item--current {
     .facets-toggle .sorting-filter__options {
         border-radius: 4px;
         box-shadow: 2px 2px 5px 2px rgb(0 0 0 / 8%);
-        border: 1px solid #E2E2E2;
+        border: 1px solid #e4e4e4;
         background-color: var(--color-background);
         overflow-y: hidden;
         gap: 0;
@@ -677,7 +775,7 @@ li.pagination__item.pagination__item--current {
     font-weight: 600;
 }
 .facets-toggle__wrapper {
-    border-right: 1px solid #DCDCDC;
+    border-right: 1px solid #e4e4e4;
     padding-inline: var(--padding-lg) 16px;
     padding-top: 12px;
     padding-bottom: 12px;
@@ -713,7 +811,7 @@ span.svg-wrapper.add-to-cart-icon {
     display: none;
 }
 .product-information__media {
-    border-right: 1px solid #DCDCDC;
+    border-right: 1px solid #e4e4e4;
 }
 .product-badges__badge.product-badges__badge--rectangle.color-scheme-3 {
     border-radius: 0px;
@@ -747,7 +845,7 @@ a.cart-items__media-container {
 }
 div#cart-drawer-header {
     display: flex;
-    border-bottom: 1px solid #DCDCDC;
+    border-bottom: 1px solid #e4e4e4;
     flex-direction: column;
     align-items: flex-start;
 }
@@ -800,20 +898,20 @@ h5 {
     font-size: 13px !important;
 }
 .product-card__content {
-    border-right: 1px solid #DCDCDC;
-    border-top: none;
+    border-right: 1px solid #e4e4e4;
+    border-top: 1px solid #e4e4e4 !important;
 }
 ul.product-grid {
-    border-top: 1px solid #DCDCDC;
-    box-shadow: inset 0 -1px 0 0 #DCDCDC;
+    border-top: 1px solid #e4e4e4;
+    box-shadow: inset 0 -1px 0 0 #e4e4e4;
 }
 
 .product-recommendations .resource-list--grid {
-    border-top: 1px solid #DCDCDC;
+    border-top: 1px solid #e4e4e4;
     overflow: hidden;
 }
 .product-recommendations .resource-list__item {
-    border-bottom: 1px solid #DCDCDC;
+    border-bottom: 1px solid #e4e4e4;
 }
 .text-block h1, .text-block.h1 > * {
     font-size: 32px;
@@ -870,13 +968,12 @@ ul.product-grid {
         max-width: 100% !important;
         padding-inline: 0 !important;
         margin-top: 16px !important;
-        border-top: 1px solid #DCDCDC;
     }
     .facets-toggle__count-sort {
         display: flex !important;
     }
     .facets.facets--horizontal.spacing-style {
-        border-top: 1px solid #DCDCDC;
+        border-top: 1px solid #e4e4e4;
     }
 
 }
@@ -885,7 +982,10 @@ ul.product-grid {
     outline: 0px solid black!important;
 }
 .facets.facets--horizontal.spacing-style {
-    border-bottom: 1px solid #DCDCDC;
+    border-bottom: 1px solid #e4e4e4;
+}
+.facets-block-wrapper--horizontal:not(:has(*)) {
+    display: none;
 }
 button.button.facets-toggle__button.button-unstyled.button-unstyled--with-icon {
     display: flex;
@@ -942,7 +1042,6 @@ summary.facets__summary {
     font-size: 13px;
 }
 .facets__form {
-    padding-top: 6px;
     padding-bottom: 6px;
 }
 .cart-drawer--empty .cart-drawer__heading {
@@ -966,13 +1065,32 @@ h4.predictive-search-results__heading {
 
 
 @media (min-width: 768px) {
-  .product__media-wrapper, 
-  .product__media, 
+  /* Stretch media column to fill row height (for border and background) */
   .product-information__media {
-    position: sticky !important;
-    top: 100px;
-    align-self: flex-start !important;
-    height: fit-content !important;
+    align-self: stretch !important;
+    background: #f7f7f7;
+  }
+
+  /* Sticky unit sized to viewport height; flex-grow fills space between image and thumbnails */
+  .product-information__media media-gallery {
+    min-height: calc(100vh - var(--sticky-header-offset, 0px));
+    display: flex !important;
+    flex-direction: column;
+  }
+
+  .product-information__media slideshow-component {
+    flex-grow: 1;
+  }
+
+  .product-information__media slideshow-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-information__media slideshow-slides {
+    flex-grow: 1;
+    max-height: none !important;
   }
 }
 
@@ -1009,6 +1127,20 @@ facet-status-component.facets__status {
 }
 .search-page-input {
     font-size: 15px;
+}
+
+/* ── Search page: spacing + button alignment ── */
+p.search-results-summary {
+  margin: 0;
+  padding: 0 15px 40px;
+  font-size: 13px;
+}
+.template-search .collection-wrapper {
+  margin-top: 0 !important;
+}
+.search-section__input-wrapper .button {
+  height: 44px;
+  padding-block: 0;
 }
 @media (max-width: 768px) {
     .collection-wrapper.grid.gap-style {
@@ -1092,6 +1224,35 @@ facet-status-component.facets__status {
   width: 100% !important;
   height: 100% !important;
   aspect-ratio: unset !important;
+  cursor: pointer !important;  /* override the zoom-out cursor from .dialog-zoomed-gallery */
+}
+
+/* Once the video/iframe is playing, the invisible poster button must not block clicks */
+.dialog-zoomed-gallery .deferred-media__poster-button.deferred-media__playing {
+  pointer-events: none !important;
+}
+
+/* reset zoom-out cursor on video items — only images should zoom */
+.dialog-zoomed-gallery .product-media-container--video,
+.dialog-zoomed-gallery .product-media-container--external_video {
+  cursor: default !important;
+}
+
+/* larger, fully opaque play icon in zoom dialog */
+.dialog-zoomed-gallery .product-media-container--video .deferred-media__poster-icon svg,
+.dialog-zoomed-gallery .product-media-container--external_video .deferred-media__poster-icon svg {
+  width: 72px !important;
+  height: 72px !important;
+  opacity: 1 !important;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6)) !important;
+}
+
+/* Show high-quality YouTube thumbnail in zoom dialog.
+   base.css hides .deferred-media__poster-image when a .product-media__image sibling exists,
+   but in the zoom dialog we want it visible (it uses maxresdefault.jpg) */
+.dialog-zoomed-gallery .product-media-container--video .deferred-media__poster-image,
+.dialog-zoomed-gallery .product-media-container--external_video .deferred-media__poster-image {
+  display: block !important;
 }
 
 /* poster image and video/iframe: cover-crop to fill */
@@ -1152,3 +1313,150 @@ facet-status-component.facets__status {
 .cart__checkout-button--disabled .btn-text, .cart__checkout-button--disabled .btn-price {
     color: #ffffff !important;
 }
+
+/* ── Announcement bar: desktop — truncate with ellipsis ── */
+@media screen and (min-width: 769px) {
+  .announcement-bar__slider {
+    min-width: 0 !important;
+    overflow: hidden !important;
+    flex: 1 1 0% !important;
+  }
+
+  .announcement-bar__slides {
+    min-width: 0 !important;
+    overflow: hidden !important;
+    padding-right: 20px;
+  }
+
+  .announcement-bar__slide {
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .announcement-bar__text {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* ── Announcement bar: mobile — centered, no clipping ── */
+@media screen and (max-width: 768px) {
+  aside.announcement-bar.spacing-style.section.section--page-width.color-scheme-5 {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    justify-content: center !important;
+  }
+
+  .announcement-bar__slider {
+    overflow: visible !important;
+    flex: unset !important;
+  }
+
+  .announcement-bar__slides {
+    overflow: visible !important;
+  }
+
+  .announcement-bar__slide {
+    overflow: visible !important;
+  }
+
+  .announcement-bar__text {
+    white-space: normal !important;
+    text-align: center !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+  }
+}
+
+
+/* ── Featured section slots: hidden until JS injects into grid ── */
+[id*="__featured_"] {
+  display: none;
+}
+
+/* ── Featured section in collection grid ── */
+@media screen and (min-width: 1024px) {
+  .product-grid__item--featured {
+    grid-column: span 2 / -1;
+    grid-row: 1 / span 2;
+  }
+
+  .product-grid__item--featured .shopify-section,
+  .product-grid__item--featured .__instant,
+  .product-grid__item--featured [data-instant-type='root'],
+  .product-grid__item--featured [data-instant-type='root'] > [data-instant-type='container'] {
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .product-grid__item--featured {
+    display: none;
+  }
+}
+
+/* ── Empty collection: border under filter bar ── */
+.collection-wrapper--no-results .facets-toggle {
+  border-bottom: 1px solid #e4e4e4;
+}
+
+/* ── Inactive filter button when no results ── */
+.collection-wrapper--no-results .facets-toggle__button {
+  opacity: 0.35;
+  pointer-events: none;
+  cursor: default;
+}
+
+/* ── Collection description: 3-line clamp ── */
+.desc-read-more-overlay {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(to right, transparent, var(--color-background, #fff) 2.5em);
+  padding-left: 3em;
+  white-space: nowrap;
+  font-size: inherit;
+}
+.desc-read-more-btn {
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.desc-read-more-btn:hover {
+  text-decoration: none;
+}
+
+rte-formatter[class*="text_twGGkJ"] a {
+  text-decoration: underline;
+}
+rte-formatter[class*="text_twGGkJ"] a:hover {
+  text-decoration: none;
+}
+
+
+
+/* ── Collection empty state ── */
+.main-collection-grid__empty {
+  padding-block-end: var(--padding-3xl);
+  gap: 0 !important;
+}
+
+.main-collection-grid__empty-title {
+  font-size: 0.9375rem !important;
+  font-weight: 600 !important;
+}
+
+.facets__form {
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+
+@media (min-width: 769px) {
+  #shopify-section-template--29835055006045__section .spacing-style.layout-panel-flex.layout-panel-flex--column.section-content-wrapper.mobile-column {
+    max-width: 80%;
+  }
+}
+
