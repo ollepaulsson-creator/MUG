@@ -986,7 +986,7 @@ ul.product-grid {
 .facets.facets--horizontal.spacing-style {
     border-bottom: 1px solid #e4e4e4;
 }
-.facets-block-wrapper--horizontal:not(:has(*)) {
+.facets-block-wrapper--horizontal:not(:has(facet-remove-component)) {
     display: none;
 }
 button.button.facets-toggle__button.button-unstyled.button-unstyled--with-icon {
