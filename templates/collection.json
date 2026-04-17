@@ -41,10 +41,10 @@
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
-            "padding-block-start": 12,
+            "padding-block-start": 20,
             "padding-block-end": 0,
             "padding-inline-start": 15,
-            "padding-inline-end": 0
+            "padding-inline-end": 15
           },
           "blocks": {}
         },
