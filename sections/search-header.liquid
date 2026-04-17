@@ -18,43 +18,7 @@
 
     <h3 style="text-align: {{ section.settings.alignment }};">{{ heading_text }}</h3>
 
-    <!-- ✅ Search input + button inside same container -->
-    <div
-  class="search-section__input-wrapper"
-  style="display: flex; align-items: center; gap: 10px; max-width: 600px; margin: 0 auto;"
->
-  <div class="search-section__input" style="flex: 1;">
     {% content_for 'block', id: 'search', type: '_search-input' %}
-  </div>
-
-  {% if section.settings.button_text != blank %}
-    <a
-      href="#"
-      class="button button--{{ section.settings.button_style }}"
-      style="white-space: nowrap; display: flex; align-items: center;"
-      id="search-button"
-    >
-      {{ section.settings.button_text }}
-    </a>
-  {% endif %}
-</div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.querySelector('.search-section__input input[type="search"], .search-section__input input[name="q"]');
-    const searchButton = document.getElementById('search-button');
-
-    if (searchInput && searchButton) {
-      searchButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        const query = encodeURIComponent(searchInput.value.trim());
-        if (query) {
-          window.location.href = `/search?q=${query}`;
-        }
-      });
-    }
-  });
-</script>
 
   </div>
 </div>

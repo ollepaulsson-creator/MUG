@@ -62,6 +62,8 @@
     </button>
   </search-page-input-component>
 
+  <button type="submit" class="button button--primary search-submit-btn">{{ 'actions.search' | t | default: 'SÖK' }}</button>
+
   {% if search.results.size == 0 and search.terms != blank %}
     <div class="search-results__no-results">
       <p>
@@ -94,8 +96,14 @@
 
   .search-page-input__parent {
     display: flex;
-    flex-direction: column;
-    align-items: var(--horizontal-alignment);
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .search-page-input__parent search-page-input-component {
+    flex: 1;
   }
 
   .search-results__no-results {
@@ -110,7 +118,7 @@
     max-width: var(--size-style-width);
     align-items: center;
     background-color: var(--color-background);
-    margin: var(--margin-2xl) 0 var(--margin-md);
+    margin: 0;
 
     @media screen and (max-width: 749px) {
       max-width: 100%;
