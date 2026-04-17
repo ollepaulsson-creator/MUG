@@ -1457,6 +1457,13 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
     padding-bottom: 15px;
 }
 
+@media screen and (max-width: 749px) {
+  .section--full-width {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+}
+
 @media (min-width: 769px) {
   #shopify-section-template--29835055006045__section .spacing-style.layout-panel-flex.layout-panel-flex--column.section-content-wrapper.mobile-column {
     max-width: 80%;
