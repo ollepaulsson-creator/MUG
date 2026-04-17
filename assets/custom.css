@@ -1137,7 +1137,7 @@ facet-status-component.facets__status {
 /* ── Search page: spacing + button alignment ── */
 p.search-results-summary {
   margin: 0;
-  padding: 0 15px 40px;
+  padding: 0 15px 0;
   font-size: 13px;
 }
 .template-search .collection-wrapper {
