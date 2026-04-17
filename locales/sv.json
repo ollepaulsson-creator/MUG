@@ -178,8 +178,8 @@
     "recently_viewed_products": "Nyligen visade",
     "product_count": "Produktantal",
     "item_count": {
-      "one": "{{ count }} artikel",
-      "other": "{{ count }} artiklar"
+      "one": "{{ count }} produkt",
+      "other": "{{ count }} produkter"
     },
     "errors": "Fel",
     "price_from": "Från {{ price }}",
