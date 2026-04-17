@@ -1467,3 +1467,8 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
   margin-top: 20px;
 }
 
+/* ── Vendor link hover on product page ── */
+.template-product a[href*="/collections/vendors?q="]:hover {
+  text-decoration: underline;
+}
+
