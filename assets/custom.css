@@ -1151,11 +1151,6 @@ p.search-results-summary {
   height: 44px;
   padding-block: 0;
 }
-@media (max-width: 768px) {
-    .collection-wrapper.grid.gap-style {
-        border-top: none !important;
-    }
-}
 
 /* Prevent floating-panel JS from repositioning filter values inside the drawer.
    floating-panel.js sets position:fixed via inline style — !important overrides that. */
