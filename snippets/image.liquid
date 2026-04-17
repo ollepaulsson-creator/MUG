@@ -26,6 +26,9 @@
   {% assign style_value = style | default: '' %}
   {% assign decoding_value = decoding | default: 'async' %}
 
+  {% comment %} Compute intrinsic width matching the rendered height to preserve aspect ratio for CLS prevention {% endcomment %}
+  {% assign intrinsic_width = image_height | times: image.aspect_ratio | ceil %}
+
   {% if unset_image_tag %}
     {% assign style_value = style_value | append: 'object-position: inherit;' %}
   {% endif %}
@@ -36,6 +39,8 @@
     | image_tag:
       class: class,
       srcset: image_srcset,
+      width: intrinsic_width,
+      height: image_height,
       style: style_value,
       loading: loading,
       fetchpriority: fetchpriority,

@@ -154,7 +154,7 @@
     {{
       image_resource
       | image_url: width: 1920
-      | image_tag: widths: widths, class: 'image-block__image', sizes: sizes, loading: loading, fetchpriority: fetch_priority, decoding: 'async'
+      | image_tag: widths: widths, class: 'image-block__image', sizes: sizes, loading: loading, width: image_resource.width, height: image_resource.height, fetchpriority: fetch_priority, decoding: 'async'
     }}
   </div>
 {% else %}

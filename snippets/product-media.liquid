@@ -44,6 +44,8 @@
       alt: media.alt,
       sizes: sizes,
       loading: loading,
+      width: media.preview_image.width,
+      height: media.preview_image.height,
       class: image_class,
       transitionToProduct: settings.transition_to_main_product,
       data_max_resolution: high_res_url,
@@ -73,6 +75,8 @@
                 alt: media.alt,
                 sizes: sizes,
                 loading: loading,
+                width: media.preview_image.width,
+                height: media.preview_image.height,
                 decoding: 'async',
                 class: 'deferred-media__poster-image'
             }}
