@@ -17,7 +17,7 @@
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
-            "text": "Fri frakt över 2 000 kr – Beställ innan kl 12 så skickar vi samma dag!",
+            "text": "Fri frakt över 2 000 kr – beställ innan kl. 12 så skickar vi samma dag!",
             "link": "shopify://pages/butiken",
             "font": "var(--font-subheading--family)",
             "font_size": "0.9375rem",
@@ -32,8 +32,7 @@
         "announcement_BxgCk9"
       ],
       "custom_css": [
-        "a.announcement-bar__link {font-size: 14px;}",
-        "@media (max-width: 768px) {.announcement-menu {display: none; }}"
+        "a.announcement-bar__link {font-size: 14px;}"
       ],
       "name": "t:names.announcement_bar",
       "settings": {

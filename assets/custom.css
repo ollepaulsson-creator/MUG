@@ -899,7 +899,7 @@ h5 {
 }
 .product-card__content {
     border-right: 1px solid #e4e4e4;
-    border-top: 1px solid #e4e4e4 !important;
+    border-top: none;
 }
 ul.product-grid {
     border-top: 1px solid #e4e4e4;

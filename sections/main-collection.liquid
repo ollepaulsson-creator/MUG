@@ -1,14 +1,22 @@
 {% assign product_shown = section.settings.product_shown %}
 
-{% comment %} Auto-apply availability filter if not already set {% endcomment %}
+{% comment %} ── Featured grid section: read from collection metafield custom.featured_grid ── {% endcomment %}
+{% assign featured_keys = collection.metafields.custom.featured_grid.value | split: ',' | compact %}
+{% assign featured_key = nil %}
+{% if featured_keys.size > 0 %}
+  {% assign rand = 'now' | date: '%S' | plus: 0 | modulo: featured_keys.size %}
+  {% assign featured_key_raw = featured_keys[rand] %}
+  {% assign featured_key = featured_key_raw | strip | downcase | replace: 'å', 'a' | replace: 'ä', 'a' | replace: 'ö', 'o' | replace: ' ', '-' %}
+{% endif %}
+
 <script>
   (function() {
-  const url = new URL(window.location.href);
-  if (!url.searchParams.has("filter.v.availability")) {
-    url.searchParams.set("filter.v.availability", "1");
-    window.location.replace(url.toString());
-  }
-})();
+    var url = new URL(window.location.href);
+    if (!url.searchParams.has('filter.v.availability')) {
+      url.searchParams.set('filter.v.availability', '1');
+      window.location.replace(url.toString());
+    }
+  })();
 </script>
 
 {% unless section.settings.enable_pagination %}
@@ -38,6 +46,7 @@
   })();
 </script>
 
+
 {% comment %} We always render this full-width, as the child blocks have width: page/full settings {% endcomment %}
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <results-list
@@ -48,7 +57,7 @@
   {% render 'skip-to-content-link', href: '#ResultsList', text: 'accessibility.skip_to_results_list' %}
 
   <div
-    class="collection-wrapper grid gap-style"
+    class="collection-wrapper grid gap-style{% if collection.products_count == 0 %} collection-wrapper--no-results{% endif %}"
   >
     {% content_for 'block',
       type: 'filters',
@@ -60,7 +69,6 @@
     {% paginate collection.products by product_shown %}
       {% capture children %}
         {% for product in collection.products %}
-          {% if product.available %}
           <li
             id="{{ section.id }}-{{ product.id }}"
             class="product-grid__item product-grid__item--{{ forloop.index0 }}"
@@ -73,7 +81,6 @@
             {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
             {% # theme-check-enable %}
           </li>
-          {% endif %}
         {% endfor %}
       {% endcapture %}
 
@@ -83,6 +90,40 @@
         products: collection.products,
         paginate: paginate
       %}
+
+      {% comment %} ── Featured section: JS injects from template-rendered section into grid ── {% endcomment %}
+      {% style %}
+        [id*="__featured_"] { display: none !important; }
+      {% endstyle %}
+      {% if featured_key %}
+        <script>
+        (function() {
+          function injectFeatured() {
+            if (window.innerWidth < 1024) return;
+            var page = new URL(window.location.href).searchParams.get('page');
+            if (page && page !== '1') return;
+            var featuredKey = '{{ featured_key }}';
+            var sectionKey = 'featured_' + featuredKey.replace(/-/g, '_');
+            var sectionEl = document.querySelector('[id$="__' + sectionKey + '"]');
+            if (!sectionEl) return;
+            var grid = document.querySelector('.product-grid--{{ section.id }}');
+            if (!grid) return;
+            var items = grid.querySelectorAll(':scope > .product-grid__item');
+            if (items.length < 1) return;
+            sectionEl.style.setProperty('display', 'block', 'important');
+            var li = document.createElement('li');
+            li.className = 'product-grid__item product-grid__item--featured';
+            li.appendChild(sectionEl);
+            grid.insertBefore(li, items[2] || null);
+          }
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', injectFeatured);
+          } else {
+            injectFeatured();
+          }
+        })();
+        </script>
+      {% endif %}
 
       {% if section.settings.enable_pagination %}
         {%- comment -%} Pagination controls {%- endcomment -%}

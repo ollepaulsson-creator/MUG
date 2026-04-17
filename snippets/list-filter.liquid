@@ -204,7 +204,7 @@
                   endif
                 endif
               %}
-              {% if filter.param_name contains 'inventory.butik' or filter.param_name contains 'custom.finns_i_butik' %}{% unless value.value == 'true' %}{% continue %}{% endunless %}{% endif %}
+              {% if filter.param_name contains 'inventory.butik' or filter.param_name contains 'custom.finns_i_butik' %}{% if value.value == false or value.value == 'false' or value.value == 0 or value.value == '0' %}{% continue %}{% endif %}{% endif %}
               {% unless value.label == 'Out of stock' or value.label == 'Slut i lager' %}
               <li
                 data-skip-node-update="true"
@@ -434,15 +434,11 @@
                     {% if filter.param_name contains 'inventory.butik' or filter.param_name contains 'custom.finns_i_butik' %}
                       {% assign is_butik_filter = true %}
                     {% endif %}
-                    {% if filter.param_name == 'filter.v.availability' or is_butik_filter %}
-                      {%- assign switch_label = value.label -%}
-                      {%- if is_butik_filter -%}
-                        {%- assign switch_label = 'Finns i butik' -%}
-                      {%- endif -%}
+                    {% if filter.param_name == 'filter.v.availability' %}
                       {% render 'switch-checkbox',
                         name: value.param_name,
                         value: value.value,
-                        label: switch_label,
+                        label: value.label,
                         checked: value.active,
                         id: input_id,
                         disabled: is_disabled,
@@ -451,10 +447,15 @@
                         autofocus: autofocus
                       %}
                     {% else %}
+                      {%- if is_butik_filter -%}
+                        {%- assign checkbox_label = 'Finns i butik' -%}
+                      {%- else -%}
+                        {%- assign checkbox_label = value.label -%}
+                      {%- endif -%}
                       {% render 'checkbox',
                         name: value.param_name,
                         value: value.value,
-                        label: value.label,
+                        label: checkbox_label,
                         checked: value.active,
                         id: input_id,
                         disabled: is_disabled,

@@ -28,11 +28,13 @@ export class ZoomDialog extends Component {
   connectedCallback() {
     super.connectedCallback();
     this.refs.dialog.addEventListener('scroll', this.handleScroll);
+    this.refs.dialog.addEventListener('click', this.#handleVideoPlay, true);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.refs.dialog.removeEventListener('scroll', this.handleScroll);
+    this.refs.dialog.removeEventListener('click', this.#handleVideoPlay, true);
   }
 
   /**
@@ -59,7 +61,10 @@ export class ZoomDialog extends Component {
     /** @type {HTMLElement | null} */
     const sourceImage = event.target instanceof Element ? event.target.closest('li,slideshow-slide') : null;
 
-    if (!supportsViewTransitions || !sourceImage || !targetImage) return open();
+    if (!supportsViewTransitions || !sourceImage || !targetImage) {
+      open();
+      return;
+    }
 
     const transitionName = `gallery-item`;
     sourceImage.style.setProperty('view-transition-name', transitionName);
@@ -171,6 +176,36 @@ export class ZoomDialog extends Component {
     dialog.close();
     window.dispatchEvent(new DialogCloseEvent());
   }
+
+  /**
+   * Handles poster-button clicks inside the zoom dialog.
+   * Fires in capture phase. Always injects template directly — bypasses component.js routing
+   * which can silently fail if deferred-media is not yet recognised as a Component.
+   * @param {Event} event
+   */
+  #handleVideoPlay = (event) => {
+    const target = event.target instanceof Element ? event.target : null;
+    if (!target) return;
+    const btn = target.closest('.deferred-media__poster-button');
+    if (!btn) return;
+    const dm = btn.closest('deferred-media');
+    if (!dm || dm.getAttribute('data-media-loaded')) return;
+
+    /** @type {any} */
+    const deferredMedia = dm;
+    if (typeof deferredMedia.showDeferredMedia === 'function') {
+      // Component is upgraded — call the official method
+      event.stopPropagation();
+      deferredMedia.showDeferredMedia();
+    } else {
+      // Fallback: inject template content directly before media.js finishes loading
+      const content = dm.querySelector('template')?.content.firstElementChild?.cloneNode(true);
+      if (!content) return;
+      dm.setAttribute('data-media-loaded', 'true');
+      dm.appendChild(content);
+      btn.classList.add('deferred-media__playing');
+    }
+  };
 
   /**
    * Closes the dialog when the user presses the escape key.

@@ -145,6 +145,7 @@
           class="facets__form"
           ref="facetsForm"
         >
+          <input type="hidden" name="filter.v.availability" value="1">
           {% if should_show_pane %}
             {% render 'filter-remove-buttons',
               filters: filters,
@@ -176,6 +177,10 @@
                       -%}
                     {% else %}
                       {% liquid
+                        if filter.param_name == 'filter.v.availability'
+                          continue
+                        endif
+
                         if filter.active_values.size > 0
                           assign is_active = true
                         endif
@@ -352,6 +357,7 @@
           class="facets__form"
           ref="facetsForm"
         >
+          <input type="hidden" name="filter.v.availability" value="1">
           <div
             class="facets__title-wrapper"
             style="--color-shadow: rgb(var(--color-foreground-rgb) / var(--opacity-10-25));"
@@ -416,6 +422,10 @@
                     -%}
                   {% else %}
                     {% liquid
+                      if filter.param_name == 'filter.v.availability'
+                        continue
+                      endif
+
                       if filter.active_values.size > 0
                         assign is_active = true
                       endif

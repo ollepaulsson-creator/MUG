@@ -514,7 +514,8 @@
                   media: media,
                   sizes: '100vw',
                   loading: 'lazy',
-                  is_main_product_media: forloop.first
+                  is_main_product_media: forloop.first,
+                  show_video_controls: true
                 -%}
               {% endif %}
             </li>
@@ -692,6 +693,43 @@
     color: #fff;
     mix-blend-mode: difference;
     z-index: var(--layer-raised);
+  }
+
+  /* ── Video in zoom dialog: correct cursor + visible interaction hint ── */
+  .dialog-zoomed-gallery .product-media-container--video,
+  .dialog-zoomed-gallery .product-media-container--external_video {
+    cursor: default;
+  }
+
+  .dialog-zoomed-gallery .product-media-container--video deferred-media,
+  .dialog-zoomed-gallery .product-media-container--external_video deferred-media {
+    cursor: default;
+  }
+
+  .dialog-zoomed-gallery .product-media-container--video .deferred-media__poster-button,
+  .dialog-zoomed-gallery .product-media-container--external_video .deferred-media__poster-button {
+    cursor: pointer;
+  }
+
+  /* Play icon: larger and fully opaque in the zoom dialog */
+  .dialog-zoomed-gallery .product-media-container--video .deferred-media__poster-icon svg,
+  .dialog-zoomed-gallery .product-media-container--external_video .deferred-media__poster-icon svg {
+    width: 72px;
+    height: 72px;
+    opacity: 1;
+    filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.7));
+  }
+
+  /* Interaction hint (play/pause while playing): always visible in zoom dialog */
+  .dialog-zoomed-gallery .product-media-container--video .video-interaction-hint,
+  .dialog-zoomed-gallery .product-media-container--external_video .video-interaction-hint {
+    opacity: 1;
+    cursor: pointer;
+  }
+
+  /* Once video is playing, the poster button becomes invisible — don't let it block clicks to the iframe */
+  .dialog-zoomed-gallery .deferred-media__poster-button.deferred-media__playing {
+    pointer-events: none;
   }
 
   .media-gallery__mobile-controls {
