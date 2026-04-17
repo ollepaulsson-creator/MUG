@@ -52,7 +52,7 @@
         {% assign products = search.results | where: 'object_type', 'product' %}
       {% else %}
         {% assign nyheter_collection = settings.empty_state_collection | default: collections.all %}
-        {% content_for 'block', type: 'filters', id: 'filters', results: search, results_size: nyheter_collection.products.size %}
+        {% content_for 'block', type: 'filters', id: 'filters', results: search, results_size: 0 %}
       {% endif %}
 
       {% if search.results_count > 0 %}
