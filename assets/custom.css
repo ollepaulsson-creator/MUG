@@ -1044,7 +1044,7 @@ summary.facets__summary {
     font-size: 13px;
 }
 .facets__form {
-    padding-bottom: 6px;
+    padding-bottom: 10px;
 }
 .cart-drawer--empty .cart-drawer__heading {
     text-align: center;
@@ -1453,7 +1453,7 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
 
 .facets__form {
     padding-top: 10px;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
 }
 
 @media (min-width: 769px) {
