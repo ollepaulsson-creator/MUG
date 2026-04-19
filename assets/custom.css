@@ -299,7 +299,7 @@ body .tmenu_image > img {
     --header-template-columns: var(--header-mobile-bookend) var(--header-mobile-bookend) 1fr var(--header-mobile-bookend) var(--header-mobile-bookend) !important;
     grid-template-areas: 'leftA leftB center rightA rightB' !important;
     column-gap: 0 !important;
-    padding-block: 12px !important;
+    padding-block: 6px !important;
     padding-inline: 0 var(--padding-3xs) !important;
   }
 
