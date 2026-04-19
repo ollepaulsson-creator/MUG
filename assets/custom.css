@@ -1471,13 +1471,25 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
   text-decoration: underline;
 }
 
-/* ── Remove slide-in-from-below on page navigation ──
+/* ── Disable page-navigation view transition animation ──
    Theme default composes the new page's view transition as
      fadeIn + slideInTopViewTransition (translateY(100px) → 0).
-   The 100px upward slide reads as a "scroll to position" animation
-   when navigating between collection pages. Drop the slide, keep
-   a plain cross-fade. */
-:root {
-  --view-transition-new-main-content: var(--animation-speed) var(--animation-easing) both fadeIn;
+   The starting state (100px below final position) reads as the
+   page "jumping down" before settling. We disable both the old
+   page's fadeOut and the new page's slide so navigation is instant.
+
+   Higher specificity (html:root) is required because
+   theme-styles-variables.liquid is rendered AFTER custom.css and
+   also targets :root — equal-specificity cascade would lose. */
+html:root {
+  --view-transition-old-main-content: none;
+  --view-transition-new-main-content: none;
+}
+
+/* Belt-and-braces: neutralise the animation keyframes themselves
+   in case any other rule references them directly. */
+::view-transition-old(main-content),
+::view-transition-new(main-content) {
+  animation: none !important;
 }
 
