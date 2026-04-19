@@ -1471,4 +1471,13 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
   text-decoration: underline;
 }
 
+/* ── Remove slide-in-from-below on page navigation ──
+   Theme default composes the new page's view transition as
+     fadeIn + slideInTopViewTransition (translateY(100px) → 0).
+   The 100px upward slide reads as a "scroll to position" animation
+   when navigating between collection pages. Drop the slide, keep
+   a plain cross-fade. */
+:root {
+  --view-transition-new-main-content: var(--animation-speed) var(--animation-easing) both fadeIn;
+}
 
