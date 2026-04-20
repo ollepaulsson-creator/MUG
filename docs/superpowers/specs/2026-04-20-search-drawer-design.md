@@ -138,7 +138,7 @@ Four CSS blocks to add, structured like `.cart-drawer__dialog`.
 
 No new CSS variables. `--style-border-drawer` and `--shadow-drawer` are already theme-global (same variables used by the cart drawer). The width is an explicit `750px` rather than `var(--sidebar-width)` — intentional deviation from the cart to give the search results area more room. On viewports <790px the `max-width: 95vw` caps the drawer so it never crowds the edge; on viewports ≥790px the drawer is a fixed 750px, leaving the rest of the page visible behind the backdrop.
 
-**2. Animation override** — stop the desktop dialog from running `search-element-slide-in-bottom` and let the `.dialog-drawer[open]` rule (from `base.css:1260–1262`, using `slideInLeft` → right-edge slide) take over:
+**2. Animation override** — stop the desktop dialog from running `search-element-slide-in-bottom`, let the `slideInLeft` / `slideOutLeft` keyframes take over (via the `.dialog-drawer[open]` and `.dialog-drawer.dialog-closing` rules in `base.css:1260–1266`), and pin the duration/easing at **250ms `ease-in-out`** — an intentional deviation from the cart drawer, which uses the theme's `--drawer-animation-speed` / `--animation-easing`:
 
 ```css
 @media screen and (min-width: 750px) {
@@ -147,12 +147,21 @@ No new CSS variables. `--style-border-drawer` and `--shadow-drawer` are already 
     animation: none;
     transform-origin: initial;
   }
-  /* .dialog-drawer[open] rule in base.css now applies, using the
-     theme's --drawer-animation-speed and --animation-easing vars. */
+
+  /* Override the duration/easing that .dialog-drawer[open] and
+     .dialog-drawer.dialog-closing inherit from --drawer-animation-speed /
+     --animation-easing. The keyframe names (slideInLeft / slideOutLeft)
+     still come from base.css:1249-1251. */
+  .search-modal__content.dialog-drawer[open] {
+    animation: slideInLeft 250ms ease-in-out forwards;
+  }
+  .search-modal__content.dialog-drawer.dialog-closing {
+    animation: slideOutLeft 250ms ease-in-out forwards;
+  }
 }
 ```
 
-Closing already works out of the box because `dialog.js` adds `.dialog-closing` and `.dialog-drawer.dialog-closing` is keyframed in `base.css:1264–1266`.
+`dialog.js` adds `.dialog-closing` on close (verified: `assets/dialog.js:76`), so the out-animation fires automatically.
 
 **3. Header composition** — re-skin `.predictive-search-form__header` inside the drawer so the search input sits at the cart heading's padding rhythm, sticks to the top during scroll, and exposes the form's own close button. Also **unset the existing input-box styling** that `predictive-search.liquid:302–317` applies to this element (it currently has `background-color: var(--color-input-background)`, a full `border`, `border-radius: var(--style-border-radius-inputs)`, and `border-bottom: 1px solid #D3D3D3` — all of which would make the drawer header look like a rounded input field rather than a drawer heading bar):
 
@@ -243,7 +252,7 @@ These rules are a 1:1 replacement for the flex-column block currently at `snippe
 
 ## Risks & open questions
 
-- **`--drawer-animation-speed` availability at the search dialog's cascade root.** `.dialog-drawer[open]` uses `var(--drawer-animation-speed)` and `var(--animation-easing)`. These are theme-global. If either fails to resolve inside `.search-modal__content` (unlikely but possible), the keyframe falls back to the browser default (0s = instant). Verification step during implementation: open the drawer and confirm the slide animation runs at the same duration as the cart drawer.
+- **Animation inheritance bypass.** The search drawer intentionally overrides `.dialog-drawer[open]`'s theme-variable-driven duration/easing with a hard-coded `250ms ease-in-out`. This means any future theme-wide tweak to `--drawer-animation-speed` or `--animation-easing` will not propagate to the search drawer — by design. Verification step: confirm the open/close animation feels smooth at 250ms; adjust the literal value if needed.
 
 - **Cart drawer regression risk.** We do not touch `snippets/cart-drawer.liquid`, `snippets/header-actions.liquid`, or the `.dialog-drawer*` rules in `assets/base.css`. The only shared touchpoint is that both drawers now use the bare `.dialog-drawer` class from `base.css`. Verification step: after the change, open and close the cart drawer and confirm its animation is unchanged.
 
@@ -260,7 +269,7 @@ Manual verification on a staging preview (Shopify admin → Preview theme):
 1. **Desktop ≥1024px**
    - Click header search icon → drawer slides in from right edge.
    - Drawer is 750px wide (intentionally wider than the cart drawer, which stays at `--sidebar-width: 25rem`), capped by `max-width: 95vw` on narrower viewports.
-   - Slide-in duration matches cart drawer (both use `--drawer-animation-speed`).
+   - Slide-in/out runs at 250ms with `ease-in-out` timing (intentionally different from the cart drawer's theme-variable-driven animation).
    - Close button (predictive-search's built-in) is visible top-right and closes the drawer.
    - Escape key closes the drawer.
    - Click outside the drawer closes it.
