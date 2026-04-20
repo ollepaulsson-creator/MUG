@@ -120,8 +120,8 @@ Four CSS blocks to add, structured like `.cart-drawer__dialog`.
   .search-modal__content.dialog-modal.search-bar--header {
     position: fixed;
     inset: 0 0 0 auto;                 /* pin to right edge */
-    width: var(--sidebar-width);        /* same variable as cart: 25rem */
-    max-width: 95vw;
+    width: 750px;                       /* wider than cart (--sidebar-width = 25rem) */
+    max-width: 95vw;                    /* safety net on narrow tablet widths */
     height: 100dvh;
     margin: 0 0 0 auto;
     padding: 0;
@@ -136,7 +136,7 @@ Four CSS blocks to add, structured like `.cart-drawer__dialog`.
 }
 ```
 
-No new CSS variables. `--sidebar-width`, `--style-border-drawer`, `--shadow-drawer` are already theme-global (defined in `snippets/theme-styles-variables.liquid:553` and the theme's global variable layer) and are the exact variables used by the cart drawer.
+No new CSS variables. `--style-border-drawer` and `--shadow-drawer` are already theme-global (same variables used by the cart drawer). The width is an explicit `750px` rather than `var(--sidebar-width)` — intentional deviation from the cart to give the search results area more room. On viewports <790px the `max-width: 95vw` caps the drawer so it never crowds the edge; on viewports ≥790px the drawer is a fixed 750px, leaving the rest of the page visible behind the backdrop.
 
 **2. Animation override** — stop the desktop dialog from running `search-element-slide-in-bottom` and let the `.dialog-drawer[open]` rule (from `base.css:1260–1262`, using `slideInLeft` → right-edge slide) take over:
 
@@ -259,7 +259,7 @@ Manual verification on a staging preview (Shopify admin → Preview theme):
 
 1. **Desktop ≥1024px**
    - Click header search icon → drawer slides in from right edge.
-   - Drawer width matches the cart drawer visually (both pull from `--sidebar-width: 25rem`).
+   - Drawer is 750px wide (intentionally wider than the cart drawer, which stays at `--sidebar-width: 25rem`), capped by `max-width: 95vw` on narrower viewports.
    - Slide-in duration matches cart drawer (both use `--drawer-animation-speed`).
    - Close button (predictive-search's built-in) is visible top-right and closes the drawer.
    - Escape key closes the drawer.
