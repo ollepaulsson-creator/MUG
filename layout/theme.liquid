@@ -225,6 +225,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Wrap block's children in a plain div so position:relative works reliably
     var wrapper = document.createElement('div');
+    wrapper.className = 'desc-read-more-wrapper';
     wrapper.style.maxHeight = maxH + 'px';
     wrapper.style.overflow = 'hidden';
     wrapper.style.position = 'relative';
@@ -243,10 +244,24 @@ document.addEventListener("DOMContentLoaded", function() {
     overlay.appendChild(link);
     link.addEventListener('click', function(e) {
       e.preventDefault();
-      wrapper.style.maxHeight = '';
-      wrapper.style.overflow = '';
-      wrapper.style.position = '';
-      overlay.remove();
+      // Animate max-height from the current clamped pixel value to the
+      // full scrollHeight. CSS transitions can't go from a px value to
+      // `auto`/empty, so we set an explicit target then clean up once
+      // the transition finishes.
+      var fullHeight = wrapper.scrollHeight;
+      wrapper.style.maxHeight = wrapper.offsetHeight + 'px';
+      // Force reflow so the browser registers the starting value before
+      // we change to the target value, otherwise the transition skips.
+      void wrapper.offsetHeight;
+      overlay.classList.add('is-fading');
+      wrapper.style.maxHeight = fullHeight + 'px';
+      wrapper.addEventListener('transitionend', function onEnd(ev) {
+        if (ev.propertyName !== 'max-height') return;
+        wrapper.style.maxHeight = '';
+        wrapper.style.overflow = '';
+        wrapper.style.position = '';
+        overlay.remove();
+      }, { once: true });
     });
     wrapper.appendChild(overlay);
     return true;
