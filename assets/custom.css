@@ -1413,8 +1413,22 @@ p.search-results-summary {
 
 /* ── Collection description: 3-line clamp ── */
 .desc-read-more-wrapper {
-  transition: max-height 320ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* Soft vertical mask: bottom ~2em of the wrapper is faded out.
+     In the clamped state this blends the last line into the gradient
+     overlay. When the wrapper gets .is-expanded, the mask shifts down
+     so the faded region slides off the visible area, causing the
+     previously-faded content to fade IN smoothly. */
+  -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 2.2em), transparent 100%);
+          mask-image: linear-gradient(to bottom, black calc(100% - 2.2em), transparent 100%);
+  transition:
+    max-height 360ms cubic-bezier(0.4, 0, 0.2, 1),
+    -webkit-mask-image 360ms cubic-bezier(0.4, 0, 0.2, 1),
+    mask-image 360ms cubic-bezier(0.4, 0, 0.2, 1);
   will-change: max-height;
+}
+.desc-read-more-wrapper.is-expanded {
+  -webkit-mask-image: linear-gradient(to bottom, black 100%, transparent 100%);
+          mask-image: linear-gradient(to bottom, black 100%, transparent 100%);
 }
 .desc-read-more-overlay {
   position: absolute;
@@ -1424,7 +1438,7 @@ p.search-results-summary {
   padding-left: 3em;
   white-space: nowrap;
   font-size: inherit;
-  transition: opacity 200ms ease;
+  transition: opacity 360ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .desc-read-more-overlay.is-fading {
   opacity: 0;

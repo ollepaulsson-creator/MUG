@@ -254,6 +254,9 @@ document.addEventListener("DOMContentLoaded", function() {
       // we change to the target value, otherwise the transition skips.
       void wrapper.offsetHeight;
       overlay.classList.add('is-fading');
+      // Trigger mask-image transition: the bottom fade mask slides off
+      // so the previously-faded last line fades IN smoothly.
+      wrapper.classList.add('is-expanded');
       wrapper.style.maxHeight = fullHeight + 'px';
       wrapper.addEventListener('transitionend', function onEnd(ev) {
         if (ev.propertyName !== 'max-height') return;
