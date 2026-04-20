@@ -28,20 +28,16 @@
 {% endunless %}
 
 <script>
+  // product-card.js appends `#<section-id>-<product-id>` to the collection
+  // URL when a card is clicked, so returning to the collection lands on a
+  // URL with a hash. Both the browser's native anchor scroll and any
+  // scrollIntoView would align that card to the top of the viewport,
+  // hiding the sticky header. Strip the hash before the grid is parsed
+  // so no scroll-to-anchor ever happens — the page loads at the top.
   (function() {
-    const url = new URL(window.location.href);
-
-    if (url.hash) {
-      document.addEventListener(
-        'DOMContentLoaded',
-        () => {
-          const card = document.getElementById(url.hash.slice(1));
-          if (card) {
-            card.scrollIntoView({ behavior: 'instant' });
-          }
-        },
-        { once: true }
-      );
+    if (window.location.hash) {
+      const cleanUrl = window.location.pathname + window.location.search;
+      history.replaceState(history.state, '', cleanUrl);
     }
   })();
 </script>

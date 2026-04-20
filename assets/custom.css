@@ -1490,15 +1490,3 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
   animation: none !important;
 }
 
-/* ── Keep sticky header visible when returning to a product card ──
-   product-card.js appends `#<section-id>-<product-id>` to the URL when
-   a card is clicked, so clicking "back" brings you to the collection
-   with that hash. The browser's native anchor-scroll and the
-   `scrollIntoView` in main-collection.liquid both align the card to
-   the top of the viewport by default, which hides the sticky header.
-   scroll-margin-top tells both scrollers to leave header-height of
-   space above the card. */
-.product-grid__item {
-  scroll-margin-top: var(--header-height, 60px);
-}
-
