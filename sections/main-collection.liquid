@@ -63,8 +63,23 @@
     %}
 
     {% paginate collection.products by product_shown %}
+      {%- assign show_featured_slot = false -%}
+      {%- if featured_key and paginate.current_page == 1 -%}
+        {%- assign show_featured_slot = true -%}
+      {%- endif -%}
       {% capture children %}
         {% for product in collection.products %}
+          {%- comment -%}
+            ── Featured slot placeholder ──
+            Rendered in Liquid at source position 3 so the grid slot
+            (grid-column: span 2 / -1; grid-row: 1 / span 2 at ≥1024px)
+            is reserved from first paint. The script below moves the
+            pre-rendered Instant section into this placeholder, so no
+            layout shift occurs when content arrives.
+          {%- endcomment -%}
+          {%- if show_featured_slot and forloop.index == 3 -%}
+            <li class="product-grid__item product-grid__item--featured" data-featured-slot></li>
+          {%- endif -%}
           <li
             id="{{ section.id }}-{{ product.id }}"
             class="product-grid__item product-grid__item--{{ forloop.index0 }}"
@@ -87,30 +102,25 @@
         paginate: paginate
       %}
 
-      {% comment %} ── Featured section: JS injects from template-rendered section into grid ── {% endcomment %}
+      {% comment %} ── Featured section: JS fills pre-rendered placeholder ── {% endcomment %}
       {% style %}
         [id*="__featured_"] { display: none !important; }
       {% endstyle %}
-      {% if featured_key %}
+      {% if show_featured_slot %}
         <script>
         (function() {
           function injectFeatured() {
             if (window.innerWidth < 1024) return;
-            var page = new URL(window.location.href).searchParams.get('page');
-            if (page && page !== '1') return;
             var featuredKey = '{{ featured_key }}';
             var sectionKey = 'featured_' + featuredKey.replace(/-/g, '_');
             var sectionEl = document.querySelector('[id$="__' + sectionKey + '"]');
             if (!sectionEl) return;
             var grid = document.querySelector('.product-grid--{{ section.id }}');
             if (!grid) return;
-            var items = grid.querySelectorAll(':scope > .product-grid__item');
-            if (items.length < 1) return;
+            var placeholder = grid.querySelector(':scope > [data-featured-slot]');
+            if (!placeholder || placeholder.firstElementChild) return;
             sectionEl.style.setProperty('display', 'block', 'important');
-            var li = document.createElement('li');
-            li.className = 'product-grid__item product-grid__item--featured';
-            li.appendChild(sectionEl);
-            grid.insertBefore(li, items[2] || null);
+            placeholder.appendChild(sectionEl);
           }
           if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', injectFeatured);
