@@ -115,29 +115,31 @@ input[type="search"]::-ms-clear {
 
 /* ---------- Desktop (≥750px) — right-side slide-in drawer ---------- */
 @media screen and (min-width: 750px) {
-  /* 1. Drawer geometry — pin to right edge, 750px wide, full viewport height.
-     !important on the six geometry props forces the cascade over any
-     cross-file overrides (base.css .dialog-modal max-width, UA dialog[open]
-     inset/margin centering, or third-party resets). */
-  .search-modal__content.dialog-modal.search-bar--header {
-    position: fixed !important;
-    top: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    left: auto !important;
-    width: 750px !important;
-    max-width: 95vw !important;
-    height: 100dvh !important;
-    max-height: 100dvh !important;
-    margin: 0 0 0 auto !important;
+  /* 1. Drawer geometry — pin to right edge, 750px wide, full viewport
+     height. CRITICAL: gate on [open] so UA's `dialog:not([open])
+     { display: none }` keeps winning when the dialog is closed.
+     Without the [open] gate this selector's display:flex would make
+     the dialog always visible (auto-open appearance, wrong position,
+     not clickable because it's not in the top-layer). */
+  .search-modal__content.dialog-modal.search-bar--header[open] {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    width: 750px;
+    max-width: 95vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    margin: 0 0 0 auto;
     padding: 0;
     border: 0;
     border-left: var(--style-border-drawer);
     box-shadow: var(--shadow-drawer);
     border-radius: 0;
     overflow: hidden;
-    flex-direction: column;
     display: flex;
+    flex-direction: column;
   }
 
   /* 2. Animation override — kill the mobile slide-from-bottom and pin the
@@ -158,44 +160,28 @@ input[type="search"]::-ms-clear {
     animation: slideOutLeft 250ms ease-in-out forwards;
   }
 
-  /* 3. Header composition — drawer-style heading row. Overrides the
-     input-field styling that predictive-search.liquid:302-317 applies
-     to .predictive-search-form__header by default. Unhide the form's
-     built-in close button on desktop (predictive-search.liquid:505-507
-     hides it at ≥750px). */
-  .search-modal__content .predictive-search-form__header {
-    padding: var(--padding-xl) var(--padding-2xl);
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    background-color: var(--color-background);
-    border: 0;
-    border-bottom: var(--style-border-width) solid var(--color-border);
-    border-radius: 0;
-  }
-
-  .search-modal__content .predictive-search__close-modal-button {
+  /* 3. Unhide the form's built-in close button on desktop
+     (predictive-search.liquid:505-507 hides it at ≥750px). */
+  .search-modal__content[open] .predictive-search__close-modal-button {
     display: flex;
   }
 
   /* 4. Scroll container — component + form fill the drawer as a flex
      column; content wrapper scrolls within remaining space. Overrides
      position:absolute from predictive-search.liquid:249, height:fit-content
-     from sections/predictive-search.liquid:300, max-height:var(--modal-max-height)
-     from sections/predictive-search.liquid:306, and align-self:flex-start
-     from snippets/predictive-search.liquid:231 (which otherwise collapses
-     the form to its intrinsic height instead of filling the drawer). */
-  .search-modal__content predictive-search-component,
-  .search-modal__content .predictive-search-form {
+     from sections/predictive-search.liquid:300, and max-height:
+     var(--modal-max-height) from sections/predictive-search.liquid:306.
+     Scoped to [open] so these rules only apply when the drawer is
+     rendered as a drawer. */
+  .search-modal__content[open] predictive-search-component,
+  .search-modal__content[open] .predictive-search-form {
     display: flex;
     flex-direction: column;
-    flex: 1 1 auto;
-    width: 100%;
+    flex: 1;
     min-height: 0;
-    align-self: stretch;
   }
 
-  .search-modal__content .predictive-search-form__content-wrapper {
+  .search-modal__content[open] .predictive-search-form__content-wrapper {
     position: static;
     flex: 1;
     min-height: 0;
@@ -205,7 +191,7 @@ input[type="search"]::-ms-clear {
     overflow-x: hidden;
   }
 
-  .search-modal__content .predictive-search-form__content {
+  .search-modal__content[open] .predictive-search-form__content {
     max-height: none;
     overflow: visible;
   }
