@@ -119,8 +119,7 @@ class PredictiveSearchComponent extends Component {
   get #allResultsItems() {
     const containers = Array.from(
       this.querySelectorAll(
-        '.predictive-search-results__wrapper-queries, ' +
-          '.predictive-search-results__wrapper-products, ' +
+        '.predictive-search-results__wrapper-products, ' +
           '.predictive-search-results__list'
       )
     );
@@ -539,12 +538,12 @@ class PredictiveSearchComponent extends Component {
     const limit = parseInt(this.dataset.queryLimit || '4', 10);
 
     // Collect all "text" items in DOM order:
-    // - query pills: .predictive-search-results__wrapper-queries li
     // - text lists under groups (collections/pages/articles): .predictive-search-results__textlist li
-    // Exclude anything in the products wrapper
+    // - FÖRSLAG (queries) list is excluded — its own Liquid `limit: 5` governs.
+    // Exclude anything in the products wrapper.
     const candidates = Array.from(
       container.querySelectorAll(
-        '.predictive-search-results__wrapper-queries li, .predictive-search-results__textlist li'
+        '.predictive-search-results__textlist:not(.predictive-search-results__textlist--queries) li'
       )
     ).filter(li => !li.closest('.predictive-search-results__wrapper-products'));
 
@@ -558,9 +557,6 @@ class PredictiveSearchComponent extends Component {
     }
 
     // Clean up empty containers
-    const queriesUl = container.querySelector('.predictive-search-results__wrapper-queries');
-    if (queriesUl && !queriesUl.querySelector('li')) queriesUl.remove();
-
     container.querySelectorAll('.predictive-search-results__group').forEach(group => {
       const hasText = group.querySelector('.predictive-search-results__textlist li');
       const hasProducts = group.querySelector('.predictive-search-results__wrapper-products li');

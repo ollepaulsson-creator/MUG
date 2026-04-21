@@ -54,7 +54,7 @@
           {% if predictive_search.resources.queries.size > 0 %}
             <div class="predictive-search-results__group">
               <h4 class="predictive-search-results__heading">FÖRSLAG</h4>
-              <ul class="predictive-search-results__textlist list-unstyled">
+              <ul class="predictive-search-results__textlist predictive-search-results__textlist--queries list-unstyled">
                 {% for resource in predictive_search.resources.queries limit: 5 %}
                   <li>
                     <div class="search_pred">
@@ -491,12 +491,6 @@ input[type='search']::-webkit-search-decoration { -webkit-appearance: none; }
   from { opacity: 1; transform: translateY(0); }
   to { opacity: 0; transform: translateY(8px); }
 }
-
-.predictive-search-results__card--query {
-  transition: transform var(--animation-speed-medium) var(--animation-timing-bounce);
-  transform-origin: center;
-}
-.predictive-search-results__card--query:active { transform: scale(0.97); }
 
 /* ── Footer: always at bottom of flex column layout ── */
 .predictive-search-form__footer {
