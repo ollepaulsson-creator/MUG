@@ -65,7 +65,7 @@ Products already render as the visual grid further down (line 154-160 via `rende
 - `snippets/predictive-search.liquid:119-127` — delete `.predictive-search-form__footer` block (and its anchor `<a class="button button-primary predictive-search__search-button" …>`).
 - `sections/predictive-search.liquid:570-586` — delete the `.predictive-search-form__footer` ruleset (the one with `margin-top: -80px`, `z-index: 2`, gradient background, and `pointer-events: none` / `.predictive-search-form__footer .button { pointer-events: auto }`).
 - `sections/predictive-search.liquid` — add a new inline link at the **end** of the `{% if predictive_search.performed %}{%- if search_results_count > 0 -%}` branch, placed **after** the products-list render at line 158-160 and **before** the close of `.predictive-search-results__inner`. Uses the same `button button-primary` styling class list as the old button. Rendered only when `search_results_count > 0`.
-- `assets/predictive-search.js:#updateFooter()` (starts at line 497) — simplify to target the new inline link instead of the removed footer, OR delete it and inline the label-swap logic wherever the link renders. Since the link is now server-rendered per search, the method may become a no-op or be removed entirely if label does not need client-side updating. Implementer: audit which call sites still rely on `#updateFooter()` before deleting; if any remain, keep the method and point it at the new inline link.
+- `assets/predictive-search.js:#updateFooter()` (starts at line 497) — has **two call sites** (lines 343 and 474). The inline link is server-rendered via Shopify's `morph()` cycle on each keystroke, so the href stays in sync without JS. The method can safely become a no-op or be removed entirely, provided both call sites are updated (either removed, or pointed at the new inline link if label-swap logic is still wanted).
 
 **Link markup (Liquid):**
 ```liquid
@@ -132,16 +132,16 @@ Note the href: `?q={{ terms }}` without `&type=product`, so clicking navigates t
 
 ### 5. Full-resolution product thumbnails
 
-**File:** `snippets/predictive-search-products-list.liquid:67` (and its twin at line 83).
+**File:** `snippets/predictive-search-products-list.liquid` — **three call sites** at lines 66, 83, and 113. All three are `{% render 'resource-card' %}` invocations within the snippet; lines 66 and 83 are inside the recently-viewed branch (`if title == recently_viewed_title_text`), line 113 is inside the top-level `{% else %}` branch which is the **actual search-results render path**.
 
-**Change:** `image_width: 500` → `image_width: 1000` at both call sites within the snippet.
+**Change:** `image_width: 500` → `image_width: 1000` at **all three** call sites. A `replace_all` on `image_width: 500` within this file is safe (those are the only matches) and covers all three in one edit.
 
 **Why:** at 3 columns across a 750px drawer, each card's rendered width is ~250px. On a 3× DPR display (iPhone Pro, newer MacBook Pro Retina panels), the browser needs ≥750px of actual pixels for crisp rendering. The current 500px source was soft on those displays. Note: `image_aspect_ratio: '5 / 5'` is **kept** — the user's concern was blurriness, not crop; square preserves the clean grid rhythm.
 
 **Acceptance criteria:**
-- Product card thumbnails in the search drawer render visually crisp on Retina/3× displays when inspected at 100% zoom.
+- Product card thumbnails **in the actual search-results grid** (when the user types a query) render visually crisp on Retina/3× displays when inspected at 100% zoom. This is the line-113 path — missing it is the failure mode.
+- Recently-viewed grid thumbnails (lines 66 and 83 paths) also render at the higher resolution, for consistency.
 - No layout shift (image's displayed dimensions are unchanged; only the source is higher-resolution).
-- Recently-viewed product grid gets the same upgrade since both code paths flow through the same snippet.
 
 ### 6. Scroll jank — verified resolved by change #1
 
@@ -158,7 +158,7 @@ Not a separate change; listed here for explicit acceptance tracking.
 |---|---|
 | `sections/predictive-search.liquid` | Delete products textlist block (1). Delete queries pills block (4). Add "Förslag" textlist block (4). Add inline view-all link block (3). Delete `.predictive-search-form__footer` CSS + `.predictive-search-results__pill*` CSS from `{% stylesheet %}` (3, 4). |
 | `snippets/predictive-search.liquid` | Delete `.predictive-search-form__footer` markup (3). |
-| `snippets/predictive-search-products-list.liquid` | Change `image_width: 500` → `1000` at two call sites (5). |
+| `snippets/predictive-search-products-list.liquid` | Change `image_width: 500` → `1000` at **three** call sites — lines 66, 83, 113 (5). Safe to `replace_all` within the file. |
 | `assets/predictive-search.js` | Change `resources[limit]` from `8` → `9` (2). Audit/update `#updateFooter()` (3). |
 
 No new files. No deletions beyond code blocks within existing files. All changes are within `≥750px` scope (the deletions do not affect mobile because the mobile drawer reuses the same markup — verify during implementation that removing the pills doesn't visually break mobile; if it does, gate the pills removal behind a desktop media query instead of deleting outright).
@@ -173,6 +173,8 @@ No new files. No deletions beyond code blocks within existing files. All changes
 - Image aspect ratio change (kept at 5/5 square).
 - Increasing result count beyond 9.
 - Changes to recently-viewed state.
+- **The duplicate Pages text list at `sections/predictive-search.liquid:122-135`** — there are two Pages text-list blocks in the file (lines 76-92 and 122-135). The duplication is pre-existing and not caused by this spec. Leave both intact; removing one belongs to a separate cleanup.
+- **Visual rhythm change from removing pills:** deleting the pills block at lines 36-56 changes the first visible group in the results area from "pills row" to "Collections header". This is the intended consequence of replacing pills with the "Förslag" list and is not a regression.
 
 ---
 
