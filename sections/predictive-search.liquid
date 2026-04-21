@@ -155,6 +155,16 @@
               resources: predictive_search.resources.articles
             %}
           {% endif %}
+
+          <div class="predictive-search-results__view-all">
+            <a
+              href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}"
+              class="button button-primary predictive-search__view-all-button"
+              ref="viewAllButton"
+            >
+              VISA ALLA RESULTAT
+            </a>
+          </div>
         {% else %}
           <p class="predictive-search-results__no-results">
             {{ 'content.search_results_no_results' | t: terms: predictive_search.terms }}
@@ -329,7 +339,6 @@ input[type='search']::-webkit-search-decoration { -webkit-appearance: none; }
   .dialog-modal .predictive-search-form__content { max-height: 100%; }
   .dialog-modal .predictive-search-form__content-wrapper { box-shadow: none; }
   .dialog-modal .predictive-search-form__header { box-shadow: none; }
-  .dialog-modal .predictive-search-form__footer { padding-bottom: var(--padding-2xl); }
   .dialog-modal .predictive-search__reset-button-icon { display: none; }
   .dialog-modal .predictive-search__reset-button-text { display: block; }
 }
@@ -492,22 +501,16 @@ input[type='search']::-webkit-search-decoration { -webkit-appearance: none; }
   to { opacity: 0; transform: translateY(8px); }
 }
 
-/* ── Footer: always at bottom of flex column layout ── */
-.predictive-search-form__footer {
-  flex-shrink: 0;
-  /* Gradient fades scrollable content into solid background at button level */
-  background: linear-gradient(to bottom, transparent 0%, var(--color-background) 55%);
-  padding: 80px var(--padding-lg) var(--padding-lg);
+/* Inline view-all link — lives at the end of .predictive-search-results__inner,
+   flows naturally after the last result group. Replaces the old sticky footer. */
+.predictive-search-results__view-all {
   display: flex;
   justify-content: center;
-  pointer-events: none;
-  margin-top: -80px; /* pull up so gradient overlaps bottom of scroll area */
-  position: relative;
-  z-index: 2; /* above content-wrapper which has transform stacking context */
+  padding: var(--padding-xl) var(--padding-xl) var(--padding-2xl);
 }
 
-.predictive-search-form__footer .button {
-  pointer-events: auto;
+.predictive-search__view-all-button {
+  min-width: 240px;
 }
 
 {% endstylesheet %}

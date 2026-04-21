@@ -115,16 +115,6 @@
         %}
       </div>
     </div>
-
-    <div class="predictive-search-form__footer">
-      <a
-        href="{{ routes.search_url }}?type=product"
-        class="button button-primary predictive-search__search-button"
-        ref="viewAllButton"
-      >
-        VISA ALLA PRODUKTER
-      </a>
-    </div>
   </form>
 </predictive-search-component>
 
@@ -197,32 +187,6 @@
     align-items: center;
     background-color: var(--color-background);
     z-index: var(--layer-heightened);
-  }
-
-  .predictive-search-form__footer {
-    display: none;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    @media screen and (min-width: 750px) {
-      --to-top-gradient-background: linear-gradient(
-        to top,
-        rgb(var(--color-background-rgb) / var(--opacity-90)),
-        rgb(var(--color-background-rgb) / var(--opacity-80)),
-        rgb(var(--color-background-rgb) / var(--opacity-40)),
-        transparent
-      );
-
-      padding-block: var(--padding-xs) var(--padding-2xl);
-      background-image: var(--to-top-gradient-background);
-    }
-  }
-
-  predictive-search-component:has([data-search-results]):not(:has(.predictive-search-results__no-results))
-    .predictive-search-form__footer {
-    display: block;
   }
 
   .predictive-search-form {

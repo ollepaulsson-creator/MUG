@@ -339,7 +339,6 @@ class PredictiveSearchComponent extends Component {
       .then((resultsMarkup) => {
         if (!resultsMarkup || abortController.signal.aborted) return;
         morph(predictiveSearchResults, resultsMarkup);
-        this.#updateFooter();
         // ↓↓↓ Cap total text suggestions to 4 across all groups
         this.#limitTextSuggestions();
         this.#resetScrollPositions();
@@ -470,7 +469,6 @@ class PredictiveSearchComponent extends Component {
     if (abortController.signal.aborted) return;
 
     morph(predictiveSearchResults, parsedEmptySectionMarkup);
-    this.#updateFooter();
     // In empty state there may be no text groups, but safe to run:
     this.#limitTextSuggestions();
     this.#resetScrollPositions();
@@ -489,27 +487,6 @@ class PredictiveSearchComponent extends Component {
   //     if (index >= 4) card.remove();
   //   });
   // }
-
-  /**
-   * Update the persistent footer button text and href based on current results.
-   */
-  #updateFooter() {
-    const footer = this.querySelector('.predictive-search-form__footer');
-    if (!footer) return;
-    const link = /** @type {HTMLAnchorElement | null} */ (footer.querySelector('.predictive-search__search-button'));
-    if (!link) return;
-
-    const resultsEl = this.refs.predictiveSearchResults.querySelector('#predictive-search-results');
-    const terms = resultsEl?.dataset.searchTerms ?? '';
-
-    if (terms) {
-      link.href = `${Theme.routes.search_url}?q=${terms}&type=product`;
-      link.textContent = 'VISA ALLA RESULTAT';
-    } else {
-      link.href = `${Theme.routes.search_url}?type=product`;
-      link.textContent = 'VISA ALLA PRODUKTER';
-    }
-  }
 
   #limitDisplayedProducts() {
   const container = this.refs.predictiveSearchResults;
