@@ -213,8 +213,6 @@
 {%- endif -%}
 
 {% stylesheet %}
-/* footer position handled below */
-
 .predictive-search-results__group { padding: var(--padding-sm) var(--padding-xl); }
 
 .predictive-search-results__heading {
@@ -358,8 +356,6 @@ input[type='search']::-webkit-search-decoration { -webkit-appearance: none; }
   text-transform: var(--title-case);
 }
 .predictive-search-results__title:first-of-type { margin-block-start: 0; }
-
-/* position: fixed removed — footer is now sticky (see below) */
 
 @media screen and (max-width: 749px) {
   .predictive-search-results__title { margin-block: var(--margin-lg) var(--margin-sm); }
