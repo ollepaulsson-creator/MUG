@@ -195,6 +195,38 @@ input[type="search"]::-ms-clear {
     max-height: none;
     overflow: visible;
   }
+
+  /* 5. Header border — the base
+     .predictive-search-form__header has a full `border` on all four
+     sides (predictive-search.liquid:310). Inside the drawer that renders
+     as visible top/left/right border segments that collide with the
+     drawer's border-left at the top-right corner ("Border off in
+     placement" in design review). Strip horizontal/top borders on the
+     header so only the bottom separator remains inside the drawer. */
+  .search-modal__content[open] .predictive-search-form__header {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+  }
+
+  /* 6. Double border at first list child — .search-suggestions UL has
+     `border-bottom` on both itself and every `li`
+     (predictive-search.liquid:524/528), and the sticky header already
+     renders its own bottom border above. The first `li` ends up
+     sandwiched between the header's bottom border and its own border
+     cluster, producing a visible double line. Drop the first list
+     item's own separator inside the drawer so the header border alone
+     frames the list top. Scoped to both the static suggestions UL and
+     the dynamic .predictive-search-results__textlist UL. */
+  .search-modal__content[open] .search-suggestions li:first-child,
+  .search-modal__content[open] .predictive-search-results__textlist li:first-child {
+    border-top: 0;
+  }
+
+  .search-modal__content[open] .search-suggestions {
+    border-top: 0;
+  }
 }
 
 {% endstylesheet %}

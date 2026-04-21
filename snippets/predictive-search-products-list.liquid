@@ -195,10 +195,15 @@ h4.predictive-search-results__title {
     animation-delay: 50ms;
   }
 
-  /* Make predictive search products touch each other */
+  /* Make predictive search products touch each other.
+     !important on grid-template-columns overrides the carousel's
+     @container (min-width: 550px) { repeat(4, 1fr) } rule in
+     predictive-search-resource-carousel.liquid:98-108 — both rules
+     target the same class with identical specificity (0,1,0), so the
+     carousel's @container win via source order without !important. */
 .predictive-search-results__wrapper-products {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr) !important;
   gap: 0 !important;  /* removes spacing between items */
   margin: 0 !important;
   padding: 0 !important;
