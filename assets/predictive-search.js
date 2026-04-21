@@ -56,6 +56,7 @@ class PredictiveSearchComponent extends Component {
 
     // Registered outside if(dialog) so it works in all contexts
     this.addEventListener('click', this.#handleSuggestionClick, { signal });
+    this.addEventListener('click', this.#handleProductCardClick, { signal });
 
     onDocumentLoaded(() => {
       this.resetSearch(false); // Pass false to avoid focusing the input
@@ -91,6 +92,29 @@ class PredictiveSearchComponent extends Component {
     // Read the text node directly (first child) to avoid including the label span text
     const term = link.firstChild?.textContent?.trim();
     if (term) RecentSearches.addSearch(term);
+  };
+
+  /**
+   * Navigates to the product page when a product card is clicked on a non-link area.
+   *
+   * Belt-and-suspenders: `.resource-card__link` covers the card via
+   * `position:absolute; inset:0; z-index:1`, so most clicks land on the anchor
+   * directly. This handler catches clicks that slip through to a sibling element
+   * (image, title, price) — possible when the content-wrapper's `transform:
+   * translateZ(0)` compositing layer causes z-order hit-test mismatches in some
+   * GPU/browser configurations.
+   * @param {MouseEvent} event
+   */
+  #handleProductCardClick = (event) => {
+    if (/** @type {Element} */ (event.target).closest('a, button')) return;
+    const card = /** @type {Element} */ (event.target).closest(
+      '.predictive-search-results__card--product'
+    );
+    if (!card) return;
+    const link = /** @type {HTMLAnchorElement | null} */ (
+      card.querySelector('a.resource-card__link')
+    );
+    if (link?.href) window.location.href = link.href;
   };
 
   disconnectedCallback() {
