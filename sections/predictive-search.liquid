@@ -33,28 +33,6 @@
         {%- if search_results_count > 0 -%}
           {% assign shared_results_index = 0 %}
 
-          {% if predictive_search.resources.queries.size > 0 %}
-            {% assign shared_results_index = shared_results_index | plus: predictive_search.resources.collections.size %}
-            <ul
-              class="predictive-search-results__list predictive-search-results__wrapper predictive-search-results__wrapper-queries list-unstyled"
-              role="listbox"
-              aria-labelledby="predictive-search-queries"
-            >
-              {%- for resource in predictive_search.resources.queries -%}
-                <li
-                  class="predictive-search-results__card--query"
-                  ref="resultsItems[]"
-                  data-search-result-index="search-results-{{ shared_results_index | plus: forloop.index }}"
-                  on:keydown="/onSearchKeyDown"
-                >
-                  <a class="pills__pill predictive-search-results__pill" href="{{ resource.url }}">
-                    <span aria-label="{{ resource.text }}">{{ resource.styled_text }}</span>
-                  </a>
-                </li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-
           {% if predictive_search.resources.collections.size > 0 %}
             <div class="predictive-search-results__group">
               <h4 class="predictive-search-results__heading">COLLECTION</h4>
@@ -66,6 +44,23 @@
                         {{ resource.title | highlight: predictive_search.terms }}
                       </a>
                       <p class="search_pred__type">Samling</p>
+                    </div>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+
+          {% if predictive_search.resources.queries.size > 0 %}
+            <div class="predictive-search-results__group">
+              <h4 class="predictive-search-results__heading">FÖRSLAG</h4>
+              <ul class="predictive-search-results__textlist list-unstyled">
+                {% for resource in predictive_search.resources.queries limit: 5 %}
+                  <li>
+                    <div class="search_pred">
+                      <a href="{{ resource.url }}">
+                        <span aria-label="{{ resource.text }}">{{ resource.styled_text }}</span>
+                      </a>
                     </div>
                   </li>
                 {% endfor %}
@@ -343,35 +338,6 @@ input[type='search']::-webkit-search-decoration { -webkit-appearance: none; }
   border-bottom-color: transparent;
 }
 
-.predictive-search-results__pill {
-  font-weight: 500;
-  white-space: nowrap;
-  color: var(--color-foreground);
-  transition:
-    background-color var(--animation-speed-medium) var(--animation-timing-hover),
-    box-shadow var(--animation-speed-medium) var(--animation-timing-bounce),
-    transform var(--animation-speed-medium) var(--animation-timing-bounce);
-  margin: 2px;
-}
-.predictive-search-results__pill:hover {
-  transform: scale(1.03);
-  box-shadow: 0 2px 5px rgb(0 0 0 / var(--opacity-8));
-}
-.predictive-search-results__pill mark {
-  background-color: transparent;
-  font-weight: 200;
-  color: rgb(var(--color-foreground-rgb) / var(--opacity-80));
-}
-.predictive-search-results__pill:focus,
-.predictive-search-results__pill:hover,
-.predictive-search-results__card--query:is([aria-selected='true'], :focus-within) .predictive-search-results__pill {
-  --pill-background-color: rgb(var(--color-foreground-rgb) / var(--opacity-8));
-  background-color: var(--pill-background-color);
-  outline: var(--border-width-sm) solid var(--color-border);
-  border: var(--border-width-sm);
-  text-decoration: none;
-}
-
 .predictive-search-results__title {
   display: flex;
   justify-content: space-between;
@@ -388,12 +354,6 @@ input[type='search']::-webkit-search-decoration { -webkit-appearance: none; }
 
 @media screen and (max-width: 749px) {
   .predictive-search-results__title { margin-block: var(--margin-lg) var(--margin-sm); }
-}
-
-.predictive-search-results__wrapper.predictive-search-results__wrapper-queries {
-  margin-bottom: var(--margin-lg);
-  padding-inline: var(--padding-xl);
-  gap: var(--gap-2xs);
 }
 
 .predictive-search-results__card {
@@ -505,7 +465,6 @@ input[type='search']::-webkit-search-decoration { -webkit-appearance: none; }
 
 .predictive-search-results__list,
 .predictive-search-results__wrapper { animation-duration: var(--animation-speed-medium); }
-.predictive-search-results__wrapper-queries { animation-delay: 50ms; }
 .predictive-search-results__list:nth-of-type(2) { animation-delay: 150ms; }
 .predictive-search-results__list:nth-of-type(3) { animation-delay: 200ms; }
 .predictive-search-results__list:nth-of-type(4) { animation-delay: 250ms; }
