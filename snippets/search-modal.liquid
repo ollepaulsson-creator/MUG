@@ -115,14 +115,21 @@ input[type="search"]::-ms-clear {
 
 /* ---------- Desktop (≥750px) — right-side slide-in drawer ---------- */
 @media screen and (min-width: 750px) {
-  /* 1. Drawer geometry — mirrors .cart-drawer__dialog, but 750px wide. */
+  /* 1. Drawer geometry — pin to right edge, 750px wide, full viewport height.
+     !important on the six geometry props forces the cascade over any
+     cross-file overrides (base.css .dialog-modal max-width, UA dialog[open]
+     inset/margin centering, or third-party resets). */
   .search-modal__content.dialog-modal.search-bar--header {
-    position: fixed;
-    inset: 0 0 0 auto;
-    width: 750px;
-    max-width: 95vw;
-    height: 100dvh;
-    margin: 0 0 0 auto;
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: auto !important;
+    width: 750px !important;
+    max-width: 95vw !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    margin: 0 0 0 auto !important;
     padding: 0;
     border: 0;
     border-left: var(--style-border-drawer);
@@ -174,14 +181,18 @@ input[type="search"]::-ms-clear {
   /* 4. Scroll container — component + form fill the drawer as a flex
      column; content wrapper scrolls within remaining space. Overrides
      position:absolute from predictive-search.liquid:249, height:fit-content
-     from sections/predictive-search.liquid:300, and max-height:var(--modal-max-height)
-     from sections/predictive-search.liquid:306. */
+     from sections/predictive-search.liquid:300, max-height:var(--modal-max-height)
+     from sections/predictive-search.liquid:306, and align-self:flex-start
+     from snippets/predictive-search.liquid:231 (which otherwise collapses
+     the form to its intrinsic height instead of filling the drawer). */
   .search-modal__content predictive-search-component,
   .search-modal__content .predictive-search-form {
     display: flex;
     flex-direction: column;
-    flex: 1;
+    flex: 1 1 auto;
+    width: 100%;
     min-height: 0;
+    align-self: stretch;
   }
 
   .search-modal__content .predictive-search-form__content-wrapper {
