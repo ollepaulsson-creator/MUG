@@ -65,7 +65,8 @@
           resource: product,
           image_width: 1000,
           image_hover: false,
-          image_aspect_ratio: '5 / 5'
+          image_aspect_ratio: '5 / 5',
+          image_sizes: '(min-width: 750px) 240px, 33vw'
         %}
       </li>
       {% assign count = count | plus: 1 %}
@@ -82,7 +83,8 @@
         resource: product,
         image_width: 1000,
         image_hover: false,
-        image_aspect_ratio: '5 / 5'
+        image_aspect_ratio: '5 / 5',
+        image_sizes: '(min-width: 750px) 240px, 33vw'
       %}
     </li>
   {% endfor %}
@@ -112,7 +114,8 @@
             resource: product,
             image_width: 1000,
             image_hover: false,
-            image_aspect_ratio: '5 / 5'
+            image_aspect_ratio: '5 / 5',
+            image_sizes: '(min-width: 750px) 240px, 33vw'
           %}
         </li>
       {% endfor %}
