@@ -86,21 +86,6 @@
             </div>
           {% endif %}
 
-          {% if predictive_search.resources.pages.size > 0 %}
-            <div class="predictive-search-results__group">
-              <h4 class="predictive-search-results__heading">PAGES</h4>
-              <ul class="predictive-search-results__textlist list-unstyled">
-                {% for resource in predictive_search.resources.pages %}
-                  <li>
-                    <a href="{{ resource.url }}">
-                      {{ resource.title | highlight: predictive_search.terms }}
-                    </a>
-                  </li>
-                {% endfor %}
-              </ul>
-            </div>
-          {% endif %}
-
           {% if predictive_search.resources.articles.size > 0 %}
             <div class="predictive-search-results__group">
               <h4 class="predictive-search-results__heading">
