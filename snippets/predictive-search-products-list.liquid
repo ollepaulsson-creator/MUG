@@ -57,6 +57,7 @@
     {% assign product = products | find: 'id', int_id %}
     {% if product %}
       <li
+        id="search-product-{{ product.id }}"
         class="predictive-search-results__card predictive-search-results__card--product"
         ref="recentlyViewedItems[]"
       >
@@ -75,6 +76,7 @@
 {% else %}
   {% for product in products limit: limit %}
     <li
+      id="search-product-{{ product.id }}"
       class="predictive-search-results__card predictive-search-results__card--product"
       ref="recentlyViewedItems[]"
     >
@@ -106,6 +108,7 @@
       %}
       {% for product in products limit: limit %}
         <li
+          id="search-product-{{ product.id }}"
           class="predictive-search-results__card predictive-search-results__card--product"
           ref="resultsItems[]"
         >
