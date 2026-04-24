@@ -414,6 +414,7 @@ media-gallery slideshow-slide {
 .search_pred{
         display: flex;
     justify-content: space-between;
+    padding: 8px 15px 10px 15px;
 }
 
 .menu-list__link-title{
@@ -1461,7 +1462,7 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
 }
 
 .collection-wrapper.grid.gap-style {
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 /* ── Vendor link hover on product page ── */
@@ -1488,3 +1489,7 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
   animation: none !important;
 }
 
+
+.search-input {
+  font-size: var(--font-size--s);
+}
