@@ -240,7 +240,6 @@ document.addEventListener("DOMContentLoaded", function() {
     link.href = '#';
     link.textContent = 'Läs mer';
     link.className = 'desc-read-more-btn';
-    overlay.appendChild(document.createTextNode('… '));
     overlay.appendChild(link);
     link.addEventListener('click', function(e) {
       e.preventDefault();
@@ -266,7 +265,10 @@ document.addEventListener("DOMContentLoaded", function() {
         overlay.remove();
       }, { once: true });
     });
-    wrapper.appendChild(overlay);
+    // Append overlay to block (after wrapper) so "Läs mer" appears as a
+    // normal flow element below the truncated text rather than floating
+    // over the last visible line inside the overflow:hidden wrapper.
+    block.appendChild(overlay);
     return true;
   }
 

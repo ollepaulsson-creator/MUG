@@ -1410,12 +1410,8 @@ p.search-results-summary {
           mask-image: linear-gradient(to bottom, black 100%, transparent 100%);
 }
 .desc-read-more-overlay {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  background: linear-gradient(to right, transparent, var(--color-background, #fff) 2.5em);
-  padding-left: 3em;
-  white-space: nowrap;
+  display: block;
+  margin-top: 0.5em;
   font-size: inherit;
   transition: opacity 360ms cubic-bezier(0.4, 0, 0.2, 1);
 }
