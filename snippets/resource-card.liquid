@@ -20,6 +20,7 @@
   assign image_width = image_width | default: 1200
   assign widths = '240, 352, 832, 1200'
   assign image_sizes = image_sizes | default: 'auto'
+  assign image_loading = image_loading | default: 'lazy'
   assign single_thumbnail_collection = false
   if resource_type == 'collection' and collection_thumbnails != 'multiple'
     assign single_thumbnail_collection = true
@@ -75,7 +76,7 @@
           featured_image
           | image_url: width: image_width
           | image_tag:
-            loading: 'lazy',
+            loading: image_loading,
             class: 'resource-card__image product-media__image--lqip',
             widths: widths,
             sizes: image_sizes,
@@ -95,7 +96,7 @@
             resource.media[1]
             | image_url: width: image_width
             | image_tag:
-              loading: 'lazy',
+              loading: image_loading,
               class: 'resource-card__image resource-card__image--secondary',
               widths: widths,
               sizes: image_sizes,

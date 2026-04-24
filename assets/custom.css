@@ -396,6 +396,14 @@ zoom-dialog .product-media__image--lqip {
   transition: none !important;
 }
 
+/* In the predictive search drawer images are always visible, so skip the
+   opacity-0 hold — show the image sharp as soon as it arrives.
+   The LQIP background remains as a placeholder while the fetch is in flight. */
+.predictive-search-dropdown .product-media__image--lqip {
+  opacity: 1;
+  transition: none;
+}
+
 .product-grid__item {
   animation: cardEnter 0.15s ease-in-out both;
   animation-delay: calc(var(--card-index, 0) * 25ms);
