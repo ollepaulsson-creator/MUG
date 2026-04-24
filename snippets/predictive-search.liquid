@@ -197,7 +197,6 @@
 
   .predictive-search-form__content {
     background-color: var(--color-background);
-    border-top: 1px solid #dcdcdc;
   }
 
   .predictive-search-form__content-wrapper {
@@ -231,12 +230,6 @@
     @media screen and (min-width: 750px) {
       max-height: var(--modal-max-height);
     }
-  }
-
-  /* Add new rule to apply bottom padding only when search button exists */
-  .predictive-search-form__content-wrapper:has([data-search-results]):not(:has(.predictive-search-results__no-results))
-    > .predictive-search-form__content {
-    padding-block-end: var(--padding-6xl);
   }
 
   .predictive-search-form__header-inner {
@@ -294,9 +287,7 @@
     --list-item-padding-block: var(--padding-sm);
 
     flex-grow: 1;
-    overflow-y: auto;
     padding-block-start: 0;
-    padding-block-end: var(--padding-lg);
     container-type: inline-size;
     color: var(--color-foreground);
   }
@@ -466,7 +457,6 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    border-bottom: 1px solid var(--color-border);
   }
 
   .search-suggestions li {
