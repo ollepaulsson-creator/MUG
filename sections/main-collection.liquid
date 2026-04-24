@@ -78,7 +78,7 @@
             layout shift occurs when content arrives.
           {%- endcomment -%}
           {%- if show_featured_slot and forloop.index == 3 -%}
-            <li class="product-grid__item product-grid__item--featured" data-featured-slot></li>
+            <li id="featured-grid-slot-{{ section.id }}" class="product-grid__item product-grid__item--featured" data-featured-slot data-skip-subtree-update></li>
           {%- endif -%}
           <li
             id="{{ section.id }}-{{ product.id }}"
