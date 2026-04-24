@@ -12,6 +12,23 @@ class SearchPageInputComponent extends Component {
   requiredRefs = ['searchPageInput'];
 
   /**
+   * Auto-focuses the search input when landing on the results page so the user
+   * can immediately retype without reaching for the mouse. All existing text is
+   * selected so a new query replaces it in one keystroke.
+   */
+  connectedCallback() {
+    super.connectedCallback();
+
+    if (!this.#isEmptyState()) {
+      const { searchPageInput } = this.refs;
+      if (searchPageInput instanceof HTMLInputElement) {
+        searchPageInput.focus();
+        searchPageInput.select();
+      }
+    }
+  }
+
+  /**
    * Handles the click event on the clear button and submits an empty search.
    * This clears the search input and resubmits the form if the page is not
    * already in an empty state.
