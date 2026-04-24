@@ -398,10 +398,14 @@ zoom-dialog .product-media__image--lqip {
 
 /* In the predictive search drawer images are always visible, so skip the
    opacity-0 hold — show the image sharp as soon as it arrives.
-   The LQIP background remains as a placeholder while the fetch is in flight. */
+   Hide the blurry LQIP background entirely (same treatment as zoom-dialog)
+   so a clean grey placeholder shows while the image is fetching. */
 .predictive-search-dropdown .product-media__image--lqip {
   opacity: 1;
   transition: none;
+}
+.predictive-search-dropdown .product-media__lqip {
+  display: none;
 }
 
 .product-grid__item {
