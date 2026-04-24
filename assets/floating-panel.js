@@ -49,7 +49,20 @@ export class FloatingPanelComponent extends HTMLElement {
     this.#mutationObserver.takeRecords();
   };
 
-  #mutationObserver = new MutationObserver(this.#updatePosition);
+  /**
+   * Calls #updatePosition when:
+   * - the panel's own attributes change (e.g. morph preserving inline style), OR
+   * - the parent <details> is opened (so position is always fresh when the panel
+   *   becomes visible, even after scroll or a section re-render moved the trigger).
+   */
+  #mutationObserver = new MutationObserver((mutations) => {
+    const shouldUpdate = mutations.some((m) => {
+      if (m.target === this) return true;
+      if (m.target instanceof HTMLDetailsElement && m.target.open) return true;
+      return false;
+    });
+    if (shouldUpdate) this.#updatePosition();
+  });
 
   #resizeListener = debounce(() => {
     const parent = this.closest('details');
@@ -67,6 +80,12 @@ export class FloatingPanelComponent extends HTMLElement {
     requestIdleCallback(() => {
       this.#updatePosition();
       this.#mutationObserver.observe(this, { attributes: true });
+      // Recalculate position every time the parent details opens so the panel
+      // is correctly placed regardless of scroll position or post-morph layout shifts.
+      const details = this.closest('details');
+      if (details) {
+        this.#mutationObserver.observe(details, { attributes: true, attributeFilter: ['open'] });
+      }
     });
   }
 
