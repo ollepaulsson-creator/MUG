@@ -45,6 +45,11 @@
       Begagnad
     </div>
   {%- endif -%}
+  {%- if product.tags contains 'B-stock' -%}
+    <div class="product-badges__badge product-badges__badge--rectangle color-scheme-bstock">
+      B-stock
+    </div>
+  {%- endif -%}
   {%- if product.compare_at_price > product.price and product.available -%}
     <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sale_color_scheme }} color-scheme-sale">
       {{- 'content.product_badge_sale' | t -}}
@@ -106,6 +111,14 @@
     color: black;
     letter-spacing: 1px;
     font-size: 13px!important;
+  }
+
+  /* B-stock badge */
+  .product-badges__badge.color-scheme-bstock {
+    background: #fff;
+    color: #b35c00;
+    font-size: 13px!important;
+    letter-spacing: 1px;
   }
 
   /* Rea/Sale badge */
