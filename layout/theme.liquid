@@ -184,37 +184,40 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
   }
-  // ── iOS Safari: force lazy images to actually fetch ──
-  // On iOS Safari, images parsed from HTML with loading="lazy" sometimes never
-  // fetch from the network at all — not just a missing load event but a genuine
-  // non-fetch. Dynamically-inserted images (e.g. "Visa mer") work because the
-  // browser ignores the lazy attribute on JS-injected elements.
-  // Fix: detect iOS Safari, strip the loading attribute, then reset src/srcset.
-  // Resetting the attributes restarts the browser's image-loading algorithm,
-  // this time without lazy deferral, mirroring what JS injection achieves.
+  // ── iOS Safari: use img.decode() to force-initiate image loading ──
+  // "Visa mer" (infinite scroll) images work because grid.append() with
+  // DOMParser elements bypasses loading="lazy" — the browser eagerly loads
+  // dynamically-inserted images. Initial page images don't benefit from this.
+  // img.decode() is the standard API for explicitly initiating image loading
+  // and decoding. On iOS Safari it bypasses lazy-loading deferral and fires
+  // even when the load event is silently suppressed.
   (function () {
     var ua = navigator.userAgent;
     var isIOSSafari = /iP(hone|ad|od)/i.test(ua) &&
                       /Safari/i.test(ua) &&
                       !/CriOS|FxiOS|EdgiOS/i.test(ua);
     if (!isIOSSafari) return;
-    function forceLoadImages(root) {
-      (root || document).querySelectorAll('.product-media__image--lqip[loading="lazy"]').forEach(function (img) {
-        if (img.naturalWidth > 0) return; // already decoded, skip
-        img.removeAttribute('loading');
-        // Reset src/srcset so the browser restarts the load without lazy deferral
-        ['srcset', 'src'].forEach(function (attr) {
-          var val = img.getAttribute(attr);
-          if (val) { img.removeAttribute(attr); img.setAttribute(attr, val); }
+    function decodeImages(root) {
+      (root || document).querySelectorAll('.product-media__image--lqip').forEach(function (img) {
+        if (img.naturalWidth > 0) {
+          img.classList.add('is-loaded');
+          return;
+        }
+        img.decode().then(function () {
+          img.classList.add('is-loaded');
+        }).catch(function () {
+          // decode() rejected means image failed or was aborted —
+          // still reveal so the card doesn't stay blank.
+          img.classList.add('is-loaded');
         });
       });
     }
-    document.addEventListener('DOMContentLoaded', function () { forceLoadImages(document); });
-    // Also handle images added later (infinite scroll, quick-view, etc.)
+    document.addEventListener('DOMContentLoaded', function () { decodeImages(document); });
+    // Handle images added later by infinite scroll / quick-view
     new MutationObserver(function (mutations) {
       mutations.forEach(function (m) {
         m.addedNodes.forEach(function (node) {
-          if (node.nodeType === 1) forceLoadImages(node);
+          if (node.nodeType === 1) decodeImages(node);
         });
       });
     }).observe(document.documentElement, { childList: true, subtree: true });
