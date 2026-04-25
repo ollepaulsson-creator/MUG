@@ -184,6 +184,42 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
   }
+  // ── iOS Safari: force lazy images to actually fetch ──
+  // On iOS Safari, images parsed from HTML with loading="lazy" sometimes never
+  // fetch from the network at all — not just a missing load event but a genuine
+  // non-fetch. Dynamically-inserted images (e.g. "Visa mer") work because the
+  // browser ignores the lazy attribute on JS-injected elements.
+  // Fix: detect iOS Safari, strip the loading attribute, then reset src/srcset.
+  // Resetting the attributes restarts the browser's image-loading algorithm,
+  // this time without lazy deferral, mirroring what JS injection achieves.
+  (function () {
+    var ua = navigator.userAgent;
+    var isIOSSafari = /iP(hone|ad|od)/i.test(ua) &&
+                      /Safari/i.test(ua) &&
+                      !/CriOS|FxiOS|EdgiOS/i.test(ua);
+    if (!isIOSSafari) return;
+    function forceLoadImages(root) {
+      (root || document).querySelectorAll('.product-media__image--lqip[loading="lazy"]').forEach(function (img) {
+        if (img.naturalWidth > 0) return; // already decoded, skip
+        img.removeAttribute('loading');
+        // Reset src/srcset so the browser restarts the load without lazy deferral
+        ['srcset', 'src'].forEach(function (attr) {
+          var val = img.getAttribute(attr);
+          if (val) { img.removeAttribute(attr); img.setAttribute(attr, val); }
+        });
+      });
+    }
+    document.addEventListener('DOMContentLoaded', function () { forceLoadImages(document); });
+    // Also handle images added later (infinite scroll, quick-view, etc.)
+    new MutationObserver(function (mutations) {
+      mutations.forEach(function (m) {
+        m.addedNodes.forEach(function (node) {
+          if (node.nodeType === 1) forceLoadImages(node);
+        });
+      });
+    }).observe(document.documentElement, { childList: true, subtree: true });
+  })();
+
   document.addEventListener('DOMContentLoaded', function () { initLQIP(document); });
   // window.load fires after all page resources. Force-reveal anything still
   // hidden at that point — catches the iOS Safari lazy-loading bug where
@@ -194,10 +230,9 @@ document.addEventListener("DOMContentLoaded", function() {
       img.classList.add('is-loaded');
     });
   });
-  // iOS Safari belt-and-suspenders: poll every 500 ms for lazy images that
-  // loaded without firing any load/complete events. naturalWidth becomes
-  // non-zero as soon as the image is decoded, even when Safari stays silent.
-  // Stop polling after 12 s to avoid running forever on slow connections.
+  // Poll every 500 ms for images that loaded without firing events.
+  // naturalWidth becomes non-zero as soon as the browser decodes the image.
+  // Stop after 12 s to avoid running forever on slow connections.
   (function () {
     var deadline = Date.now() + 12000;
     var timer = setInterval(function () {
