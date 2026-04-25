@@ -208,6 +208,20 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 {% if template contains 'collection' %}
+<style>
+  /*
+    Pre-collapse the collection description immediately so it never flashes
+    at full height before the desc-expand JS initialises. The :not selector
+    drops away as soon as JS sets data-clamp-init, which happens within the
+    same synchronous call that inserts the wrapper — so the browser never
+    paints an uncollapsed in-between state.
+    4.5em = 3 lines at line-height: 1.5 (scales correctly with font-size).
+  */
+  rte-formatter[class*="text_twGGkJ"]:not([data-clamp-init]) {
+    max-height: 4.5em;
+    overflow: hidden;
+  }
+</style>
 <script>
 (function() {
   function initDescExpand() {
