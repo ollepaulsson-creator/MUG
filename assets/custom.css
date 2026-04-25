@@ -370,13 +370,21 @@ results-list[data-loading] .product-grid__item::after {
   z-index: 0;
   pointer-events: none;
 }
+@keyframes lqip-fallback-reveal {
+  to { opacity: 1; }
+}
 .product-media__image--lqip {
   position: relative;
   z-index: 1;
   opacity: 0;
+  /* Safety net: reveal after 3 s even if JS never adds .is-loaded.
+     Covers the iOS Safari lazy-loading bug where complete=true but the
+     load event never fires. Cancelled immediately if JS succeeds. */
+  animation: lqip-fallback-reveal 0s 3s forwards;
 }
 .product-media__image--lqip.is-loaded {
   opacity: 1;
+  animation: none; /* cancel the 3 s timer — JS won the race */
 }
 :has(> .product-media__image--lqip.is-loaded) .product-media__lqip {
   opacity: 0;
@@ -394,6 +402,7 @@ zoom-dialog .product-media__lqip {
 zoom-dialog .product-media__image--lqip {
   opacity: 1 !important;
   transition: none !important;
+  animation: none !important;
 }
 
 /* In the predictive search drawer images are always visible, so skip the
@@ -403,6 +412,7 @@ zoom-dialog .product-media__image--lqip {
 .predictive-search-dropdown .product-media__image--lqip {
   opacity: 1;
   transition: none;
+  animation: none;
 }
 .predictive-search-dropdown .product-media__lqip {
   display: none;

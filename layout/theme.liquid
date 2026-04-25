@@ -173,7 +173,10 @@ document.addEventListener("DOMContentLoaded", function() {
   function initLQIP(root) {
     (root || document).querySelectorAll('.product-media__image--lqip:not(.is-loaded)').forEach(function (img) {
       function onLoad() { img.classList.add('is-loaded'); }
-      if (img.complete && img.naturalWidth > 0) {
+      // Use naturalWidth as the primary signal — it is 0 until the image is
+      // actually decoded and ready, unlike img.complete which iOS Safari sets
+      // to true immediately on lazy images before the fetch even starts.
+      if (img.naturalWidth > 0) {
         onLoad();
       } else {
         img.addEventListener('load', onLoad, { once: true });
@@ -182,6 +185,15 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
   document.addEventListener('DOMContentLoaded', function () { initLQIP(document); });
+  // window.load fires after all page resources. Force-reveal anything still
+  // hidden at that point — catches the iOS Safari lazy-loading bug where
+  // complete=true but the load event never fires.
+  window.addEventListener('load', function () {
+    initLQIP(document);
+    document.querySelectorAll('.product-media__image--lqip:not(.is-loaded)').forEach(function (img) {
+      img.classList.add('is-loaded');
+    });
+  });
   new MutationObserver(function (mutations) {
     mutations.forEach(function (m) {
       m.addedNodes.forEach(function (node) {
