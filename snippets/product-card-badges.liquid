@@ -10,6 +10,7 @@
 {%- enddoc -%}
 
 {%- assign is_nyhet = false -%}
+{%- assign is_bstock = false -%}
 {%- assign now_seconds = 'now' | date: '%s' | plus: 0 -%}
 {%- assign published_seconds = product.published_at | date: '%s' | plus: 0 -%}
 {%- assign age_days = now_seconds | minus: published_seconds | divided_by: 86400 -%}
@@ -18,6 +19,9 @@
     {%- if age_days <= 60 -%}
       {%- assign is_nyhet = true -%}
     {%- endif -%}
+  {%- endif -%}
+  {%- if tag == 'B-stock' -%}
+    {%- assign is_bstock = true -%}
   {%- endif -%}
 {%- endfor -%}
 
@@ -45,12 +49,11 @@
       Begagnad
     </div>
   {%- endif -%}
-  {%- if product.tags contains 'B-stock' -%}
+  {%- if is_bstock -%}
     <div class="product-badges__badge product-badges__badge--rectangle color-scheme-bstock">
       B-stock
     </div>
-  {%- endif -%}
-  {%- if product.compare_at_price > product.price and product.available -%}
+  {%- elsif product.compare_at_price > product.price and product.available -%}
     <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sale_color_scheme }} color-scheme-sale">
       {{- 'content.product_badge_sale' | t -}}
     </div>
@@ -116,7 +119,7 @@
   /* B-stock badge */
   .product-badges__badge.color-scheme-bstock {
     background: #fff;
-    color: #b35c00;
+    color: red;
     font-size: 13px!important;
     letter-spacing: 1px;
   }
