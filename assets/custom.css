@@ -379,8 +379,10 @@ results-list[data-loading] .product-grid__item::after {
   opacity: 0;
   /* Safety net: reveal after 3 s even if JS never adds .is-loaded.
      Covers the iOS Safari lazy-loading bug where complete=true but the
-     load event never fires. Cancelled immediately if JS succeeds. */
-  animation: lqip-fallback-reveal 0s 3s forwards;
+     load event never fires. Cancelled immediately if JS succeeds.
+     NOTE: duration must be > 0 — iOS Safari ignores 0s animations entirely
+     so the forwards fill never applies. Use 1ms as the minimum viable value. */
+  animation: lqip-fallback-reveal 1ms 3s forwards;
 }
 .product-media__image--lqip.is-loaded {
   opacity: 1;

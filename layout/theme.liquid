@@ -194,6 +194,24 @@ document.addEventListener("DOMContentLoaded", function() {
       img.classList.add('is-loaded');
     });
   });
+  // iOS Safari belt-and-suspenders: poll every 500 ms for lazy images that
+  // loaded without firing any load/complete events. naturalWidth becomes
+  // non-zero as soon as the image is decoded, even when Safari stays silent.
+  // Stop polling after 12 s to avoid running forever on slow connections.
+  (function () {
+    var deadline = Date.now() + 12000;
+    var timer = setInterval(function () {
+      var pending = false;
+      document.querySelectorAll('.product-media__image--lqip:not(.is-loaded)').forEach(function (img) {
+        if (img.naturalWidth > 0) {
+          img.classList.add('is-loaded');
+        } else {
+          pending = true;
+        }
+      });
+      if (!pending || Date.now() > deadline) clearInterval(timer);
+    }, 500);
+  })();
   new MutationObserver(function (mutations) {
     mutations.forEach(function (m) {
       m.addedNodes.forEach(function (node) {
