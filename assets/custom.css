@@ -402,6 +402,19 @@ results-list[data-loading] .product-grid__item::after {
   }
 }
 
+/* ── Fix iOS Safari blank product cards ──
+   slideshow-slide uses content-visibility:auto + contain-intrinsic-size:auto none
+   which gives it a 0px height until the browser confirms the slide is in the
+   viewport. The slideshow JS sets aria-hidden="false" via scheduler.schedule(),
+   but on iOS Safari the intersection detection during initial paint is unreliable
+   so slides never escape the 0-height state. "Visa mer" works because the JS is
+   already initialised by then. For product-card thumbnails we always want the
+   slide content rendered immediately — there is no benefit to lazy-skipping them. */
+.card-gallery slideshow-slide.product-media-container {
+  content-visibility: visible;
+  contain-intrinsic-size: initial;
+}
+
 /* deferred-media must sit above the product preview image (z-index: 1) so the play button is clickable */
 .product-media :is(deferred-media, product-model) {
   z-index: 2;
