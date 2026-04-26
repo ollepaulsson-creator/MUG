@@ -203,6 +203,13 @@
     .pagination__item a { text-decoration: none; }
     .pagination__item--current { font-weight: 600; outline: 1px solid var(--color-border, #ddd); }
     .pagination__item--prev a, .pagination__item--next a { font-weight: 500; outline: none}
+
+    @media (max-width: 749px) {
+      /* Compact mobile pagination — keep only prev / current / next */
+      .pagination__item:not(.pagination__item--current):not(.pagination__item--prev):not(.pagination__item--next) {
+        display: none;
+      }
+    }
   {% endif %}
 
 {% endstyle %}
