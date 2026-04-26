@@ -147,23 +147,31 @@
                 </li>
               {%- endif -%}
 
+              {%- assign next_page_num = paginate.current_page | plus: 1 -%}
               {%- for part in paginate.parts -%}
-                {% if part.is_link %}
-                  <li class="pagination__item">
+                {%- assign item_class = 'pagination__item' -%}
+                {%- if part.is_link -%}
+                  {%- if part.title == next_page_num -%}
+                    {%- assign item_class = item_class | append: ' pagination__item--next-page' -%}
+                  {%- endif -%}
+                  {%- if part.title == paginate.pages -%}
+                    {%- assign item_class = item_class | append: ' pagination__item--last-page' -%}
+                  {%- endif -%}
+                  <li class="{{ item_class }}">
                     <a href="{{ part.url | escape }}#ResultsList"
                       aria-label="{{ 'general.pagination.page' | t: number: part.title }}">
                       {{ part.title }}
                     </a>
                   </li>
-                {% elsif part.title == paginate.current_page %}
-                  <li class="pagination__item pagination__item--current" aria-current="page">
+                {%- elsif part.title == paginate.current_page -%}
+                  <li class="{{ item_class }} pagination__item--current" aria-current="page">
                     {{ part.title }}
                   </li>
-                {% else %}
-                  <li class="pagination__item pagination__item--ellipsis">
+                {%- else -%}
+                  <li class="{{ item_class }} pagination__item--ellipsis">
                     <span class="pagination__ellipsis">{{ part.title }}</span>
                   </li>
-                {% endif %}
+                {%- endif -%}
               {%- endfor -%}
 
               {%- if paginate.next -%}
@@ -205,8 +213,8 @@
     .pagination__item--prev a, .pagination__item--next a { font-weight: 500; outline: none}
 
     @media (max-width: 749px) {
-      /* Compact mobile pagination — keep only prev / current / next */
-      .pagination__item:not(.pagination__item--current):not(.pagination__item--prev):not(.pagination__item--next) {
+      /* Compact mobile pagination — show current, next page number, last page */
+      .pagination__item:not(.pagination__item--current):not(.pagination__item--next-page):not(.pagination__item--last-page):not(.pagination__item--prev):not(.pagination__item--next) {
         display: none;
       }
     }
