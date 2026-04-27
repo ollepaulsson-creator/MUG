@@ -201,7 +201,7 @@
                 "corner_radius": 0,
                 "padding-block-start": 15,
                 "padding-block-end": 0,
-                "padding-inline-start": 5,
+                "padding-inline-start": 15,
                 "padding-inline-end": 0
               },
               "blocks": {}
@@ -226,7 +226,7 @@
                 "corner_radius": 0,
                 "padding-block-start": 6,
                 "padding-block-end": 6,
-                "padding-inline-start": 5,
+                "padding-inline-start": 15,
                 "padding-inline-end": 15
               },
               "blocks": {}
@@ -248,7 +248,7 @@
                 "color": "var(--color-foreground)",
                 "padding-block-start": 0,
                 "padding-block-end": 15,
-                "padding-inline-start": 5,
+                "padding-inline-start": 15,
                 "padding-inline-end": 0
               },
               "blocks": {}
