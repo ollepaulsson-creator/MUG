@@ -928,10 +928,22 @@ h5 {
     border-right: 1px solid #e4e4e4;
     border-top: none;
 }
-/* Remove right padding from all card content blocks — Shopify backend
-   may override JSON settings so this ensures no gap on the right side. */
-.product-card__content .spacing-style {
-    padding-inline-end: 0 !important;
+/* Remove right-side padding/margin on mobile product cards.
+   product-grid.liquid forces padding-inline-end: max(--padding-xs, …) on
+   .product-grid__card and a matching negative margin on .card-gallery
+   whenever full_width_on_mobile is active. Zero the right side so card
+   text is flush right while the image still bleeds left. */
+@media screen and (max-width: 749px) {
+  :is(.collection-wrapper--full-width, .collection-wrapper--full-width-on-mobile)
+    [product-grid-view='default'] .product-grid__card,
+  :is(.collection-wrapper--full-width, .collection-wrapper--full-width-on-mobile)
+    [product-grid-view='mobile-single'] .product-grid__card {
+    padding-inline-end: 0;
+  }
+  :is(.collection-wrapper--full-width) .card-gallery,
+  :is(.collection-wrapper--full-width-on-mobile) .card-gallery {
+    margin-inline-end: 0;
+  }
 }
 ul.product-grid {
     border-top: 1px solid #e4e4e4;
