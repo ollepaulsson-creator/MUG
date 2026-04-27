@@ -147,19 +147,21 @@
                 </li>
               {%- endif -%}
 
-              {%- assign prev_page_num = paginate.current_page | minus: 1 -%}
-              {%- assign next_page_num = paginate.current_page | plus: 1 -%}
+              {%- comment -%} 4-page sliding window for mobile, centred on current page {%- endcomment -%}
+              {%- assign win_start = paginate.current_page | minus: 1 -%}
+              {%- if win_start < 1 -%}{%- assign win_start = 1 -%}{%- endif -%}
+              {%- assign win_end = win_start | plus: 3 -%}
+              {%- if win_end > paginate.pages -%}
+                {%- assign win_end = paginate.pages -%}
+                {%- assign win_start = win_end | minus: 3 -%}
+                {%- if win_start < 1 -%}{%- assign win_start = 1 -%}{%- endif -%}
+              {%- endif -%}
               {%- for part in paginate.parts -%}
                 {%- assign item_class = 'pagination__item' -%}
                 {%- if part.is_link -%}
-                  {%- if part.title == prev_page_num -%}
-                    {%- assign item_class = item_class | append: ' pagination__item--prev-page' -%}
-                  {%- endif -%}
-                  {%- if part.title == next_page_num -%}
-                    {%- assign item_class = item_class | append: ' pagination__item--next-page' -%}
-                  {%- endif -%}
-                  {%- if part.title == paginate.pages -%}
-                    {%- assign item_class = item_class | append: ' pagination__item--last-page' -%}
+                  {%- assign part_num = part.title | plus: 0 -%}
+                  {%- if part_num >= win_start and part_num <= win_end -%}
+                    {%- assign item_class = item_class | append: ' pagination__item--in-window' -%}
                   {%- endif -%}
                   <li class="{{ item_class }}">
                     <a href="{{ part.url | escape }}#ResultsList"
@@ -168,7 +170,7 @@
                     </a>
                   </li>
                 {%- elsif part.title == paginate.current_page -%}
-                  <li class="{{ item_class }} pagination__item--current" aria-current="page">
+                  <li class="{{ item_class }} pagination__item--current pagination__item--in-window" aria-current="page">
                     {{ part.title }}
                   </li>
                 {%- else -%}
@@ -217,14 +219,32 @@
     .pagination__item--prev a, .pagination__item--next a { font-weight: 500; outline: none}
 
     @media (max-width: 749px) {
-      /* Hide text nav buttons on mobile — numbers only */
+      /* Hide text nav buttons — numbers only */
       .pagination__item--prev,
       .pagination__item--next {
         display: none;
       }
-      /* Show 4 page numbers: prev | current | next | last */
-      .pagination__item:not(.pagination__item--prev-page):not(.pagination__item--current):not(.pagination__item--next-page):not(.pagination__item--last-page) {
+      /* Show only the 4-page sliding window */
+      .pagination__item:not(.pagination__item--in-window) {
         display: none;
+      }
+      /* Square items — fixed size fits double digits */
+      .pagination__item {
+        width: 2.5rem;
+        height: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        flex-shrink: 0;
+      }
+      .pagination__item a,
+      .pagination__item--current {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
       }
     }
   {% endif %}
