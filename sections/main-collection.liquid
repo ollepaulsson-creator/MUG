@@ -134,8 +134,36 @@
       {% if section.settings.enable_pagination %}
         {%- comment -%} Pagination controls {%- endcomment -%}
         {% if paginate.pages > 1 %}
+
+          {%- comment -%}
+            Mobile window: 4 consecutive pages centred on current, clamped to [1..pages].
+            We build URLs manually so the window is always fully populated regardless
+            of what Shopify includes in paginate.parts (page 1 often has an ellipsis
+            before page 4, making it invisible in the parts loop).
+          {%- endcomment -%}
+          {%- assign win_start = paginate.current_page | minus: 1 -%}
+          {%- if win_start < 1 -%}{%- assign win_start = 1 -%}{%- endif -%}
+          {%- assign win_end = win_start | plus: 3 -%}
+          {%- if win_end > paginate.pages -%}
+            {%- assign win_end = paginate.pages -%}
+            {%- assign win_start = win_end | minus: 3 -%}
+            {%- if win_start < 1 -%}{%- assign win_start = 1 -%}{%- endif -%}
+          {%- endif -%}
+
+          {%- comment -%} Strip page= from query string so we can append any page number {%- endcomment -%}
+          {%- assign qs_parts = request.query_string | split: '&' -%}
+          {%- assign mobile_base_params = '' -%}
+          {%- for param in qs_parts -%}
+            {%- unless param contains 'page=' -%}
+              {%- if mobile_base_params != '' -%}{%- assign mobile_base_params = mobile_base_params | append: '&' -%}{%- endif -%}
+              {%- assign mobile_base_params = mobile_base_params | append: param -%}
+            {%- endunless -%}
+          {%- endfor -%}
+
           <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
-            <ul class="pagination__list" role="list">
+
+            {%- comment -%} Desktop list: full paginate.parts with prev/next buttons {%- endcomment -%}
+            <ul class="pagination__list pagination__list--desktop" role="list">
 
               {%- if paginate.previous -%}
                 <li class="pagination__item pagination__item--prev">
@@ -147,34 +175,20 @@
                 </li>
               {%- endif -%}
 
-              {%- comment -%} 4-page sliding window for mobile, centred on current page {%- endcomment -%}
-              {%- assign win_start = paginate.current_page | minus: 1 -%}
-              {%- if win_start < 1 -%}{%- assign win_start = 1 -%}{%- endif -%}
-              {%- assign win_end = win_start | plus: 3 -%}
-              {%- if win_end > paginate.pages -%}
-                {%- assign win_end = paginate.pages -%}
-                {%- assign win_start = win_end | minus: 3 -%}
-                {%- if win_start < 1 -%}{%- assign win_start = 1 -%}{%- endif -%}
-              {%- endif -%}
               {%- for part in paginate.parts -%}
-                {%- assign item_class = 'pagination__item' -%}
                 {%- if part.is_link -%}
-                  {%- assign part_num = part.title | plus: 0 -%}
-                  {%- if part_num >= win_start and part_num <= win_end -%}
-                    {%- assign item_class = item_class | append: ' pagination__item--in-window' -%}
-                  {%- endif -%}
-                  <li class="{{ item_class }}">
+                  <li class="pagination__item">
                     <a href="{{ part.url | escape }}#ResultsList"
                       aria-label="{{ 'general.pagination.page' | t: number: part.title }}">
                       {{ part.title }}
                     </a>
                   </li>
                 {%- elsif part.title == paginate.current_page -%}
-                  <li class="{{ item_class }} pagination__item--current pagination__item--in-window" aria-current="page">
+                  <li class="pagination__item pagination__item--current" aria-current="page">
                     {{ part.title }}
                   </li>
                 {%- else -%}
-                  <li class="{{ item_class }} pagination__item--ellipsis">
+                  <li class="pagination__item pagination__item--ellipsis">
                     <span class="pagination__ellipsis">{{ part.title }}</span>
                   </li>
                 {%- endif -%}
@@ -191,6 +205,29 @@
               {%- endif -%}
 
             </ul>
+
+            {%- comment -%} Mobile list: always exactly win_end−win_start+1 square items {%- endcomment -%}
+            <ul class="pagination__list pagination__list--mobile" role="list" aria-hidden="true">
+              {%- for i in (win_start..win_end) -%}
+                {%- if i == paginate.current_page -%}
+                  <li class="pagination__item pagination__item--current" aria-current="page">{{ i }}</li>
+                {%- else -%}
+                  {%- if mobile_base_params != '' -%}
+                    {%- capture mobile_page_url %}{{ request.path }}?{{ mobile_base_params }}&page={{ i }}{% endcapture %}
+                  {%- else -%}
+                    {%- capture mobile_page_url %}{{ request.path }}?page={{ i }}{% endcapture %}
+                  {%- endif -%}
+                  <li class="pagination__item">
+                    <a href="{{ mobile_page_url | escape }}#ResultsList"
+                      tabindex="-1"
+                      aria-label="{{ 'general.pagination.page' | t: number: i }}">
+                      {{ i }}
+                    </a>
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+
           </nav>
         {% endif %}
       {% endif %}
@@ -212,24 +249,26 @@
       color: #000000;
     }
     .pagination { margin-top: var(--spacing-6, 36px); text-align: center; }
-    .pagination__list { display: inline-flex; gap: 8px; align-items: center;list-style: none; }
+    .pagination__list { display: inline-flex; gap: 8px; align-items: center; list-style: none; padding: 0; margin: 0; }
+    .pagination__list--mobile { display: none; }
     .pagination__item { padding: 2px; border-radius: 0px; }
     .pagination__item a { text-decoration: none; }
     .pagination__item--current { font-weight: 600; outline: 1px solid var(--color-border, #ddd); }
-    .pagination__item--prev a, .pagination__item--next a { font-weight: 500; outline: none}
+    .pagination__item--prev a, .pagination__item--next a { font-weight: 500; outline: none; }
 
     @media (max-width: 749px) {
-      /* Hide text nav buttons — numbers only */
-      .pagination__item--prev,
-      .pagination__item--next {
-        display: none;
+      /* Swap lists: hide desktop (with ellipsis/prev/next), show mobile window */
+      .pagination__list--desktop { display: none; }
+      .pagination__list--mobile {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        list-style: none;
+        padding: 0;
+        margin: 0;
       }
-      /* Show only the 4-page sliding window */
-      .pagination__item:not(.pagination__item--in-window) {
-        display: none;
-      }
-      /* Square items — fixed size fits double digits */
-      .pagination__item {
+      /* Square items — fixed size works for double digits */
+      .pagination__list--mobile .pagination__item {
         width: 2.5rem;
         height: 2.5rem;
         display: flex;
@@ -238,7 +277,7 @@
         padding: 0;
         flex-shrink: 0;
       }
-      .pagination__item a {
+      .pagination__list--mobile .pagination__item a {
         display: flex;
         align-items: center;
         justify-content: center;
