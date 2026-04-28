@@ -1138,6 +1138,19 @@ h4.predictive-search-results__heading {
   .product-information__media slideshow-slides {
     flex-grow: 1;
     max-height: none !important;
+    height: 100%;
+  }
+
+  /* Make the slide and media container fill the gallery height so
+     object-fit: cover can fill the space rather than leaving grey bands */
+  .product-information__media slideshow-slide,
+  .product-information__media .product-media-container {
+    height: 100%;
+  }
+
+  .product-information__media .product-media-container img {
+    height: 100%;
+    object-fit: cover;
   }
 }
 
