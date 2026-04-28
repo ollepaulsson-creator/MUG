@@ -34,24 +34,21 @@
     --badge-text-transform: {{ settings.badge_text_transform }};
   "
 >
-  {%- if is_nyhet -%}
-    <div class="product-badges__badge product-badges__badge--rectangle color-scheme-nyhet">
-      Nyhet
-    </div>
-  {%- endif -%}
-  {%- if product.available == false -%}
-    <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sold_out_color_scheme }}">
-      {{- 'content.product_badge_sold_out' | t -}}
-    </div>
-  {%- endif -%}
   {%- if product.tags contains 'Status:Begagnad' -%}
     <div class="product-badges__badge product-badges__badge--rectangle color-scheme-begagnad">
       Begagnad
     </div>
-  {%- endif -%}
-  {%- if is_bstock -%}
+  {%- elsif is_bstock -%}
     <div class="product-badges__badge product-badges__badge--rectangle color-scheme-bstock">
       B-stock
+    </div>
+  {%- elsif is_nyhet -%}
+    <div class="product-badges__badge product-badges__badge--rectangle color-scheme-nyhet">
+      Nyhet
+    </div>
+  {%- elsif product.available == false -%}
+    <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sold_out_color_scheme }}">
+      {{- 'content.product_badge_sold_out' | t -}}
     </div>
   {%- elsif product.compare_at_price > product.price and product.available -%}
     <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sale_color_scheme }} color-scheme-sale">
