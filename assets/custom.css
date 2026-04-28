@@ -1101,6 +1101,14 @@ h4.predictive-search-results__heading {
 
 
 
+/* Remove any top/bottom spacing from the product page image section */
+.product-information.spacing-style {
+  padding-block-start: 0 !important;
+  padding-block-end: 0 !important;
+  margin-block-start: 0 !important;
+  margin-block-end: 0 !important;
+}
+
 @media (min-width: 768px) {
   /* Stretch media column to fill row height (for border and background) */
   .product-information__media {
