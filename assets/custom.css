@@ -1104,7 +1104,7 @@ h4.predictive-search-results__heading {
 /* Remove any top/bottom spacing from the product page image section */
 /* Hide product count on mobile */
 @media (max-width: 749px) {
-  .facets-toggle__products-count {
+  .products-count-wrapper {
     display: none !important;
   }
 }
