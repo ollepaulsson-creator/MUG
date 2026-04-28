@@ -67,7 +67,6 @@
           id: 'media-gallery',
           closest.product: closest.product
         -%}
-        {%- render 'product-card-badges', product: closest.product, settings: settings -%}
       </div>
     {% endcapture %}
    
@@ -295,7 +294,7 @@
     background: #f0f0f0;
   }
 
-  .product-information__media .product-badges {
+  .product-information__media media-gallery .product-badges {
     top: 16px !important;
     left: 16px !important;
     bottom: auto !important;

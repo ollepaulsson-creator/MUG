@@ -1138,7 +1138,6 @@ h4.predictive-search-results__heading {
   .product-information__media slideshow-slides {
     flex-grow: 1;
     max-height: none !important;
-    height: 100%;
   }
 
   /* Make the slide and media container fill the gallery height so

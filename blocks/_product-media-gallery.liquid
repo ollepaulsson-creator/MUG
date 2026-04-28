@@ -564,6 +564,7 @@
       window.ProductModel.loadShopifyXR();
     </script>
   {%- endif -%}
+  {%- render 'product-card-badges', product: closest.product -%}
 </media-gallery>
   {%- if section.settings.enable_custom_css_liquid -%}
   {% style %}
