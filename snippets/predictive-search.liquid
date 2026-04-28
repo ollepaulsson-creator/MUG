@@ -126,6 +126,7 @@
     const input = comp.querySelector('.search-input');
     const focusSearch = () => {
       if (!input) return;
+      if (window.innerWidth < 750) return; // Don't auto-focus on mobile (avoids keyboard pop-up)
       requestAnimationFrame(() => {
         input.focus({ preventScroll: true });
         const v = input.value || '';
