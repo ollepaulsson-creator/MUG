@@ -1127,6 +1127,8 @@ h4.predictive-search-results__heading {
 
   .product-information__media slideshow-component {
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   .product-information__media slideshow-container {
