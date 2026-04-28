@@ -927,10 +927,12 @@ h5 {
 .product-card__content {
     border-right: 1px solid #e4e4e4;
     border-top: none;
+}
+.product-card__content .text-block {
     padding-inline-start: 15px !important;
 }
 @media screen and (max-width: 749px) {
-    .product-card__content {
+    .product-card__content .text-block {
         padding-inline-start: 10px !important;
     }
 }
