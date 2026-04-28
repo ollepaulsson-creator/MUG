@@ -1102,10 +1102,13 @@ h4.predictive-search-results__heading {
 
 
 /* Remove any top/bottom spacing from the product page image section */
-/* Hide product count on mobile */
+/* Hide product count on mobile.
+   .facets-toggle__products-count has display:flex !important in the bundled
+   stylesheet (same specificity, later source) — chaining both classes gives
+   specificity (0,2,0) which beats the bundled (0,1,0) regardless of order. */
 @media (max-width: 749px) {
   .products-count-wrapper,
-  .facets-toggle__products-count {
+  .products-count-wrapper.facets-toggle__products-count {
     display: none !important;
   }
 }

@@ -134,6 +134,14 @@
       });
     };
 
+    // On mobile, showModal() auto-focuses the first focusable element (the input),
+    // which pops up the keyboard. Blur it immediately after the dialog opens.
+    const blurOnMobile = () => {
+      if (window.innerWidth < 750 && input) {
+        requestAnimationFrame(() => input.blur());
+      }
+    };
+
     // 1) Focus when the enclosing dialog opens
     const dlg = comp.closest('dialog, .dialog-modal, [role="dialog"]');
     if (dlg) {
@@ -145,7 +153,7 @@
           dlg.getAttribute('aria-hidden') === 'false' ||
           dlg.dataset.open === 'true' ||
           dlg.getAttribute('aria-expanded') === 'true';
-        if (isOpen) setTimeout(focusSearch, 10);
+        if (isOpen) { setTimeout(focusSearch, 10); blurOnMobile(); }
       };
       new MutationObserver(checkOpen).observe(dlg, {
         attributes: true,
