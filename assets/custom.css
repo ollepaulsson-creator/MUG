@@ -1113,6 +1113,8 @@ h4.predictive-search-results__heading {
     min-height: calc(100vh - var(--sticky-header-offset, 0px));
     display: flex !important;
     flex-direction: column;
+    padding-block-start: 0 !important;
+    padding-block-end: 0 !important;
   }
 
   .product-information__media slideshow-component {
