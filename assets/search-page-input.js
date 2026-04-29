@@ -19,7 +19,7 @@ class SearchPageInputComponent extends Component {
   connectedCallback() {
     super.connectedCallback();
 
-    if (!this.#isEmptyState()) {
+    if (!this.#isEmptyState() && window.innerWidth >= 750) {
       const { searchPageInput } = this.refs;
       if (searchPageInput instanceof HTMLInputElement) {
         searchPageInput.focus();
