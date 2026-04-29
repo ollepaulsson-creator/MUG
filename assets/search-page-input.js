@@ -23,7 +23,8 @@ class SearchPageInputComponent extends Component {
       const { searchPageInput } = this.refs;
       if (searchPageInput instanceof HTMLInputElement) {
         searchPageInput.focus();
-        searchPageInput.select();
+        const len = searchPageInput.value.length;
+        searchPageInput.setSelectionRange(len, len);
       }
     }
   }
