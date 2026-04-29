@@ -1603,3 +1603,8 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
     padding-right: 6px !important;
   }
 }
+
+/* Show sale price in black instead of red */
+.price--sale {
+  color: var(--color-foreground) !important;
+}
