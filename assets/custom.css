@@ -945,9 +945,6 @@ ul.product-grid {
     border-top: 1px solid #e4e4e4;
     overflow: hidden;
 }
-.product-recommendations .resource-list__item {
-    border-bottom: 1px solid #e4e4e4;
-}
 .text-block h1, .text-block.h1 > * {
     font-size: 32px;
     font-weight: 400;
