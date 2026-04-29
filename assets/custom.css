@@ -1615,9 +1615,27 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
   }
 }
 
-/* Bottom border on cart summary — mobile only */
+/* Bottom border on cart drawer dialog — mobile only */
 @media screen and (max-width: 749px) {
-  .cart-drawer__summary {
+  .cart-drawer__dialog {
     border-bottom: 1px solid #ddd !important;
   }
+}
+
+/* Empty cart: make content fill the drawer height so flex centering works.
+   The stylesheet-block rule uses height: calc(100% - var(--header-height))
+   which requires --header-height on a parent, not the element itself.
+   Override to flex: 1 so the empty body's justify-content: center works. */
+.cart-drawer--empty .cart-drawer__content {
+  flex: 1 !important;
+  height: auto !important;
+}
+
+.cart-drawer__empty-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
