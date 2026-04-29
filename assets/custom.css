@@ -1609,9 +1609,11 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
   color: var(--color-foreground) !important;
 }
 
-/* Top border on filter, cart, and search drawers */
-.cart-drawer__dialog,
-.search-modal__content,
-.facets--drawer {
-  border-top: 1px solid #e5e5e5 !important;
+/* Top border on filter, cart, and search drawers — mobile only */
+@media screen and (max-width: 749px) {
+  .cart-drawer__dialog,
+  .search-modal__content,
+  .facets--drawer {
+    border-top: 1px solid #e5e5e5 !important;
+  }
 }
