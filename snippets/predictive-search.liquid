@@ -134,11 +134,16 @@
       });
     };
 
-    // On mobile, showModal() auto-focuses the first focusable element (the input),
-    // which pops up the keyboard. Blur it immediately after the dialog opens.
-    const blurOnMobile = () => {
+    // On mobile, prevent the keyboard from appearing when showModal() auto-focuses
+    // the input. We set inputmode="none" in the capture phase (before showDialog
+    // runs) so the browser won't show a virtual keyboard for that focus event.
+    // We remove it shortly after so the user can type normally when they tap.
+    // This avoids calling blur(), which corrupts the dialog's scroll restoration
+    // (body position:fixed + blur causes iOS to jump the page on close).
+    const suppressKeyboardOnMobile = () => {
       if (window.innerWidth < 750 && input) {
-        requestAnimationFrame(() => input.blur());
+        input.setAttribute('inputmode', 'none');
+        setTimeout(() => input.removeAttribute('inputmode'), 400);
       }
     };
 
@@ -146,14 +151,16 @@
     const dlg = comp.closest('dialog, .dialog-modal, [role="dialog"]');
     if (dlg) {
       const checkOpen = () => {
-        const isOpen =
+        const isClosing = dlg.classList.contains('dialog-closing');
+        const isOpen = !isClosing && (
           (dlg instanceof HTMLDialogElement && dlg.open) ||
           dlg.hasAttribute('open') ||
           dlg.classList.contains('is-open') ||
           dlg.getAttribute('aria-hidden') === 'false' ||
           dlg.dataset.open === 'true' ||
-          dlg.getAttribute('aria-expanded') === 'true';
-        if (isOpen) { setTimeout(focusSearch, 10); blurOnMobile(); }
+          dlg.getAttribute('aria-expanded') === 'true'
+        );
+        if (isOpen) setTimeout(focusSearch, 10);
       };
       new MutationObserver(checkOpen).observe(dlg, {
         attributes: true,
@@ -163,8 +170,9 @@
       checkOpen();
     }
 
-    // 2) Also focus right after any opener with on:click="…showDialog"
+    // 2) Opener buttons — suppress keyboard on mobile, focus input on desktop
     document.querySelectorAll('[on\\:click*="showDialog"]').forEach(btn => {
+      btn.addEventListener('click', suppressKeyboardOnMobile, true); // capture: before showDialog
       btn.addEventListener('click', () => setTimeout(focusSearch, 60));
     });
 
