@@ -246,6 +246,18 @@ h4.predictive-search-results__title {
   border-right: 1px solid #dcdcdc; /* box border */
 }
 
+/* Top border on first row (3-col desktop: items 1–3) */
+.predictive-search-results__wrapper-products .predictive-search-results__card:nth-child(-n+3) {
+  border-top: 1px solid #e5e5e5;
+}
+
+/* On mobile (2-col): item 3 starts row 2, remove its top border */
+@media screen and (max-width: 749px) {
+  .predictive-search-results__wrapper-products .predictive-search-results__card:nth-child(3) {
+    border-top: none;
+  }
+}
+
 .resource-card__content {
   padding: 10px;
     border-top: 1px solid #dcdcdc;
