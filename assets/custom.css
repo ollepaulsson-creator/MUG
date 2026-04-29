@@ -1622,6 +1622,12 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
   }
 }
 
+/* Remove the old padding-top: 80% hack from base.css that was used to
+   push the empty-cart heading down before proper flex centering existed. */
+span.cart-drawer__heading.h3.cart-drawer__heading--empty {
+  padding-top: 0 !important;
+}
+
 /* Empty cart: make content fill the drawer height so flex centering works.
    The stylesheet-block rule uses height: calc(100% - var(--header-height))
    which requires --header-height on a parent, not the element itself.
