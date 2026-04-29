@@ -135,15 +135,15 @@
     };
 
     // On mobile, prevent the keyboard from appearing when showModal() auto-focuses
-    // the input. We set inputmode="none" in the capture phase (before showDialog
-    // runs) so the browser won't show a virtual keyboard for that focus event.
-    // We remove it shortly after so the user can type normally when they tap.
-    // This avoids calling blur(), which corrupts the dialog's scroll restoration
-    // (body position:fixed + blur causes iOS to jump the page on close).
+    // the input. We temporarily mark the input as `inert` in the capture phase
+    // (before showDialog fires), so showModal() skips it and focuses the next
+    // focusable element (a button), which doesn't trigger the soft keyboard.
+    // The inert attribute is removed in the next animation frame once showModal()
+    // has already chosen its focus target.
     const suppressKeyboardOnMobile = () => {
       if (window.innerWidth < 750 && input) {
-        input.setAttribute('inputmode', 'none');
-        setTimeout(() => input.removeAttribute('inputmode'), 400);
+        input.setAttribute('inert', '');
+        requestAnimationFrame(() => input.removeAttribute('inert'));
       }
     };
 
