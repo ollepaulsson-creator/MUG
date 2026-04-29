@@ -267,13 +267,41 @@ document.addEventListener("DOMContentLoaded", function() {
       if (!pending || Date.now() > deadline) clearInterval(timer);
     }, 500);
   })();
+  // Handle newly added nodes (infinite scroll) AND srcset attribute changes
+  // (morph after filter).  When morph patches an existing image element in
+  // place the childList observer never fires — only an attributes observer
+  // on srcset detects the change.  Re-running initLQIP on the parent
+  // re-attaches the load listener so is-loaded is added the moment the new
+  // product image arrives, ending the blurry LQIP state as quickly as
+  // possible.
   new MutationObserver(function (mutations) {
     mutations.forEach(function (m) {
-      m.addedNodes.forEach(function (node) {
-        if (node.nodeType === 1) initLQIP(node);
-      });
+      if (m.type === 'attributes') {
+        // srcset changed on an img (morph replaced the product image)
+        initLQIP(m.target.parentElement || document.body);
+      } else {
+        m.addedNodes.forEach(function (node) {
+          if (node.nodeType === 1) initLQIP(node);
+        });
+      }
     });
-  }).observe(document.body, { childList: true, subtree: true });
+  }).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['srcset'] });
+
+  // After a filter update, morph may also reset is-loaded on same-product
+  // images whose srcset is unchanged (so the observer above doesn't fire).
+  // Run a 5-second fast polling burst to re-add is-loaded to any image
+  // whose naturalWidth is already > 0 (already decoded, just had its class
+  // stripped by morph).
+  document.addEventListener('filter:update', function () {
+    initLQIP(document);
+    var burstStart = Date.now();
+    var burst = setInterval(function () {
+      document.querySelectorAll('.product-media__image--lqip:not(.is-loaded)').forEach(function (img) {
+        if (img.naturalWidth > 0) img.classList.add('is-loaded');
+      });
+      if (Date.now() - burstStart > 5000) clearInterval(burst);
+    }, 100);
+  });
 })();
 </script>
 
