@@ -1614,3 +1614,10 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
     border-top: 1px solid #e5e5e5 !important;
   }
 }
+
+/* Bottom border on cart summary — mobile only */
+@media screen and (max-width: 749px) {
+  .cart-drawer__summary {
+    border-bottom: 1px solid #ddd !important;
+  }
+}
