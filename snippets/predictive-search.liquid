@@ -168,6 +168,23 @@
       });
       dlg.addEventListener('transitionend', checkOpen);
       checkOpen();
+
+      // Fix scroll-jump on close. dialog.js calls window.scrollTo() before
+      // dialog.close(), but dialog.close() is what fires the toggle event that
+      // removes html[scroll-lock] (overflow:hidden). While overflow:hidden is
+      // active, scrollTo() is a no-op on iOS, so the page jumps when the lock
+      // is removed. Re-apply the saved position after dialog:close, by which
+      // point html[scroll-lock] is gone and scrollTo actually works.
+      let savedScrollY = 0;
+      const dialogComp = dlg.closest('dialog-component');
+      if (dialogComp) {
+        dialogComp.addEventListener('dialog:open', () => {
+          savedScrollY = parseInt(document.body.style.top || '0') * -1;
+        });
+        dialogComp.addEventListener('dialog:close', () => {
+          requestAnimationFrame(() => window.scrollTo(0, savedScrollY));
+        });
+      }
     }
 
     // 2) Opener buttons — suppress keyboard on mobile, focus input on desktop
