@@ -56,6 +56,11 @@
     {% assign int_id = _id | times: 1 %}
     {% assign product = products | find: 'id', int_id %}
     {% if product %}
+      {% if count < 3 %}
+        {% assign img_loading = 'eager' %}
+      {% else %}
+        {% assign img_loading = 'lazy' %}
+      {% endif %}
       <li
         id="search-product-{{ product.id }}"
         class="predictive-search-results__card predictive-search-results__card--product"
@@ -64,11 +69,11 @@
         {% render 'resource-card',
           resource_type: 'product',
           resource: product,
-          image_width: 1000,
+          image_width: 400,
           image_hover: false,
           image_aspect_ratio: '5 / 5',
           image_sizes: '(min-width: 750px) 240px, 33vw',
-          image_loading: 'eager'
+          image_loading: img_loading
         %}
       </li>
       {% assign count = count | plus: 1 %}
@@ -76,6 +81,11 @@
   {% endfor %}
 {% else %}
   {% for product in products limit: limit %}
+    {% if forloop.index <= 3 %}
+      {% assign img_loading = 'eager' %}
+    {% else %}
+      {% assign img_loading = 'lazy' %}
+    {% endif %}
     <li
       id="search-product-{{ product.id }}"
       class="predictive-search-results__card predictive-search-results__card--product"
@@ -84,11 +94,11 @@
       {% render 'resource-card',
         resource_type: 'product',
         resource: product,
-        image_width: 1000,
+        image_width: 400,
         image_hover: false,
         image_aspect_ratio: '5 / 5',
         image_sizes: '(min-width: 750px) 240px, 33vw',
-        image_loading: 'eager'
+        image_loading: img_loading
       %}
     </li>
   {% endfor %}
@@ -109,6 +119,11 @@
         assign limit = limit | default: 24
       %}
       {% for product in products limit: limit %}
+        {% if forloop.index <= 3 %}
+          {% assign img_loading = 'eager' %}
+        {% else %}
+          {% assign img_loading = 'lazy' %}
+        {% endif %}
         <li
           id="search-product-{{ product.id }}"
           class="predictive-search-results__card predictive-search-results__card--product"
@@ -117,11 +132,11 @@
           {% render 'resource-card',
             resource_type: 'product',
             resource: product,
-            image_width: 1000,
+            image_width: 400,
             image_hover: false,
             image_aspect_ratio: '5 / 5',
             image_sizes: '(min-width: 750px) 240px, 33vw',
-            image_loading: 'eager'
+            image_loading: img_loading
           %}
         </li>
       {% endfor %}
