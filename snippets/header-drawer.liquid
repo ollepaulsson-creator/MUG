@@ -66,6 +66,7 @@
         {{- 'icon-close.svg' | inline_asset_content -}}
       </span>
     </summary>
+    <div class="menu-drawer__bg-settle" aria-hidden="true"></div>
     <div
       data-header-drawer
       class="
@@ -995,25 +996,20 @@ nav.footer-block ul li{
     }
 
     /**
-     * Replay the settle animation when the user navigates back from a submenu.
-     * Both the drawer (settle) and its content children (counter-settle) must
-     * restart together so the net visual scale stays ≈ 1.0 for text throughout.
-     * Overriding `animation` with "none" + forcing a single reflow then clearing
-     * the override causes the browser to restart all CSS animations from scratch.
+     * Replay the settle animation on the bg-settle element when the user
+     * navigates back from a submenu. The bg-settle is the drawer's preceding
+     * sibling (inside the same <details>), so walk up to the parent and find it.
+     * The drawer content (nav, footer, etc.) is never touched by the animation.
      */
     document.addEventListener('click', function (e) {
       if (!e.target.closest('.menu-drawer__back-button')) return;
       var drawer = document.querySelector('[data-header-drawer]');
       if (!drawer) return;
-
-      var targets = [drawer];
-      drawer.querySelectorAll(
-        'nav.menu-drawer__navigation, footer.site-footer, .menu-drawer__utility-links, .menu-drawer__featured-content'
-      ).forEach(function (el) { targets.push(el); });
-
-      targets.forEach(function (el) { el.style.animation = 'none'; });
-      void drawer.offsetWidth; // single reflow commits "none" for all targets
-      targets.forEach(function (el) { el.style.animation = ''; });
+      var bg = drawer.parentElement && drawer.parentElement.querySelector('.menu-drawer__bg-settle');
+      if (!bg) return;
+      bg.style.animation = 'none';
+      void bg.offsetWidth; // force reflow so the browser commits "none"
+      bg.style.animation = '';
     });
   })();
 </script>
@@ -1219,28 +1215,31 @@ nav.footer-block ul li{
     visibility: visible;
     display: flex;
     flex-direction: column;
-    transform-origin: top center;
-    animation: menu-drawer-settle 0.8s ease-in-out both;
+    background-color: transparent; /* bg-settle sibling provides the white background */
   }
 
   /*
-   * Counter-scale: the drawer background settles from scaleY(1.3) → scaleY(1).
-   * Direct content children are counter-scaled scaleY(0.769) → scaleY(1) so
-   * their net visual scale stays ≈ 1.0 throughout. Only the white background
-   * area appears to grow and settle — text and content are stable.
-   * The backdrop is position:fixed and display:none so it is unaffected.
+   * The settle animation lives on .menu-drawer__bg-settle — a sibling of the
+   * drawer, not a parent/ancestor. This keeps the drawer's content (nav, footer,
+   * etc.) completely untouched by the transform so no elements shift or scale.
+   * The bg-settle is position:fixed so it lines up exactly behind the drawer.
    */
-  @keyframes menu-drawer-counter-settle {
-    from { transform: scaleY(0.769); }
-    to   { transform: scaleY(1);     }
+  .menu-drawer__bg-settle {
+    display: none;
+    position: fixed;
+    top: var(--header-bottom, 60px);
+    left: 0;
+    width: 100vw;
+    height: calc(100dvh - var(--header-bottom, 60px));
+    background-color: var(--color-background);
+    z-index: calc(var(--layer-menu-drawer) - 1);
+    pointer-events: none;
+    transform-origin: top center;
   }
 
-  .menu-open > .menu-drawer > nav.menu-drawer__navigation,
-  .menu-open > .menu-drawer > footer.site-footer,
-  .menu-open > .menu-drawer > .menu-drawer__utility-links,
-  .menu-open > .menu-drawer > .menu-drawer__featured-content {
-    transform-origin: top center;
-    animation: menu-drawer-counter-settle 0.8s ease-in-out both;
+  .menu-open > .menu-drawer__bg-settle {
+    display: block;
+    animation: menu-drawer-settle 0.8s ease-in-out both;
   }
 
   /* When a submenu is active, make it visible — its transform stays at translateX(100%).
