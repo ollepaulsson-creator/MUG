@@ -1040,6 +1040,11 @@ nav.footer-block ul li{
 
   .menu-drawer__navigation {
     padding: 0;
+    /* Prevent the flex-column drawer from shrinking the nav to make room for the
+       footer/utility sections below it. Without this, flex-shrink distributes the
+       height deficit proportionally, causing the bottom nav items (e.g. Nyheter)
+       to be cut off. The drawer's overflow-y:auto handles scrolling instead. */
+    flex-shrink: 0;
 
     @media screen and (min-width: 750px) {
     margin-top: var(--drawer-header-desktop-top);
