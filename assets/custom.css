@@ -1408,6 +1408,10 @@ p.search-results-summary {
 }
 
 
+.announcement-bar__text:first-child {
+  line-height: 23px;
+}
+
 /* ── Featured section slots: hidden until JS injects into grid ── */
 [id*="__featured_"] {
   display: none;
