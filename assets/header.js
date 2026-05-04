@@ -122,7 +122,18 @@ class HeaderComponent extends Component {
     } else {
       this.refs.headerDrawerContainer.classList.add('desktop:hidden');
       this.#menuDrawerHiddenWidth = null;
+      // When showing the nav after it was hidden, the overflow-list has all items
+      // in the hidden overflow slot (height=0). Its reflow runs via rAF+setTimeout,
+      // so for one frame all items are momentarily in the default flex-wrap slot
+      // and can render as a vertical column before the reflow corrects them.
+      // Keep the element visually hidden until the reflow frame has painted.
+      this.refs.headerMenu.style.setProperty('visibility', 'hidden');
       this.refs.headerMenu.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          this.refs.headerMenu.style.removeProperty('visibility');
+        });
+      });
     }
   }
 
