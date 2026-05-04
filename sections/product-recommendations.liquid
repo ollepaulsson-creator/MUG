@@ -215,7 +215,7 @@
       </div>
 
       <!-- Show More Button -->
-      <div class="show-more-wrapper" style="text-align:center; margin-top: 20px; justify-content: center; display: flex;">
+      <div id="show-more-products-wrapper" class="show-more-wrapper" style="text-align:center; margin-top: 36px; margin-bottom: 36px; justify-content: center; display: flex;">
         <button id="show-more-products" class="button">VISA FLER</button>
       </div>
 
@@ -255,6 +255,7 @@ function setupShowMore() {
 
   const grid = productSection.querySelector('.resource-list--grid');
   const showMoreBtn = productSection.querySelector('#show-more-products');
+  const showMoreWrapper = productSection.querySelector('#show-more-products-wrapper');
 
   if (!grid || !showMoreBtn) return false;
 
@@ -272,16 +273,16 @@ function setupShowMore() {
     if (index >= visible) item.style.display = 'none';
   });
 
-  // Hide button if all items already visible
-  if (items.length <= visible) showMoreBtn.style.display = 'none';
+  // Hide wrapper (not just button) so no space is left when all items are visible
+  if (items.length <= visible) { if (showMoreWrapper) showMoreWrapper.style.display = 'none'; }
 
-  // Button click: reveal next batch, hide button when all shown
+  // Button click: reveal next batch, hide wrapper when all shown
   showMoreBtn.addEventListener('click', () => {
     visible += batchSize;
     items.forEach((item, index) => {
       if (index < visible) item.style.display = '';
     });
-    if (visible >= items.length) showMoreBtn.style.display = 'none';
+    if (visible >= items.length && showMoreWrapper) showMoreWrapper.style.display = 'none';
   });
 
   showMoreBtn.dataset.showMoreSetup = 'true';
