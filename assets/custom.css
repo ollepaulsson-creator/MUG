@@ -692,6 +692,7 @@ text-component.cart__total-value.cart-secondary-typography {
 
 .pagination {
     margin-top: var(--spacing-6, 36px);
+    margin-bottom: 36px;
     text-align: center;
 }
 .pagination__list {
