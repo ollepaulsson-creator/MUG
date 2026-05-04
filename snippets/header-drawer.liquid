@@ -1173,10 +1173,12 @@ nav.footer-block ul li{
     animation: none;
   }
 
-  /* Stagger slide-down + fade-in for menu items when the drawer opens */
+  /* Stagger slide-down + fade-in for menu items when the drawer opens.
+     Keep the multiplier small so high-index items (e.g. "Nyheter" at position 8)
+     don't sit invisible for too long — 0.025s gives ~200 ms max delay vs ~400 ms at 0.05s. */
   .menu-open > .menu-drawer .menu-drawer__list-item {
     --index: var(--menu-drawer-animation-index, 0);
-    animation: slide-down-fade-in 0.35s ease-out calc(var(--index) * 0.05s) backwards;
+    animation: slide-down-fade-in 0.35s ease-out calc(var(--index) * 0.025s) backwards;
   }
 
   .menu-drawer__submenu {
@@ -1528,7 +1530,9 @@ nav.footer-block ul li{
     display: none;
   }
 
-  .menu-drawer:has(.menu-drawer__menu-container.menu-open) .site-footer {
+  .menu-drawer:has(.menu-drawer__menu-container.menu-open) .site-footer,
+  .menu-drawer:has(.menu-drawer__menu-container.menu-open) .menu-drawer__featured-content,
+  .menu-drawer:has(.menu-drawer__menu-container.menu-open) .menu-drawer__utility-links {
     display: none;
   }
 
