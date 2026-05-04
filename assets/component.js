@@ -90,6 +90,11 @@ export class Component extends DeclarativeShadowElement {
    * This method is called to keep the `refs` object in sync with the DOM.
    */
   #updateRefs() {
+    const smartMenu = document.querySelector('.tmenu_wrapper');
+if (!smartMenu) {
+  window.dispatchEvent(new CustomEvent('SETUP_MEGAMENU'));
+  window.dispatchEvent(new CustomEvent('SETUP_MOBILEMENU'));
+}
     const refs = /** @type any */ ({});
     const elements = this.roots.reduce((acc, root) => {
       for (const element of root.querySelectorAll('[ref]')) {
