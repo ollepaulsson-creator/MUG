@@ -957,6 +957,45 @@ nav.footer-block ul li{
   </details>
 </header-drawer>
 
+<script>
+  (function () {
+    /**
+     * Reads the header's current bottom edge and writes --header-bottom
+     * directly onto the .menu-drawer element as an inline style.
+     * Inline style specificity overrides the inherited value set on <body>
+     * by header.js, so the drawer always sees the freshest value.
+     */
+    function syncDrawerTop() {
+      var header = document.getElementById('header-component');
+      var drawer = document.querySelector('[data-header-drawer]');
+      if (!header || !drawer) return;
+      var bottom = Math.max(0, header.getBoundingClientRect().bottom);
+      drawer.style.setProperty('--header-bottom', bottom + 'px');
+    }
+
+    var raf;
+    function scheduleSync() {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(syncDrawerTop);
+    }
+
+    function init() {
+      var header = document.getElementById('header-component');
+      if (header && 'ResizeObserver' in window) {
+        new ResizeObserver(scheduleSync).observe(header);
+      }
+      window.addEventListener('resize', scheduleSync, { passive: true });
+      syncDrawerTop();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
+
 {% stylesheet %}
   .header__icon--menu {
     position: initial;
