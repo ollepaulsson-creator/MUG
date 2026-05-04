@@ -995,17 +995,21 @@ nav.footer-block ul li{
     }
 
     /**
-     * Replay the settle animation when the user navigates back from a submenu.
-     * Overriding `animation` with "none" + forcing a reflow then clearing the
-     * override causes the browser to restart the CSS animation fresh.
+     * Replay the settle animation on the nav when the user navigates back from
+     * a submenu. Overriding `animation` with "none" + forcing a reflow then
+     * clearing the override causes the browser to restart the CSS animation.
+     * The animation targets the nav element (not the whole drawer) so the
+     * position:absolute submenu panel is never affected.
      */
     document.addEventListener('click', function (e) {
       if (!e.target.closest('.menu-drawer__back-button')) return;
       var drawer = document.querySelector('[data-header-drawer]');
       if (!drawer) return;
-      drawer.style.animation = 'none';
-      void drawer.offsetWidth; // force reflow so the browser commits "none"
-      drawer.style.animation = '';
+      var nav = drawer.querySelector('nav.menu-drawer__navigation');
+      if (!nav) return;
+      nav.style.animation = 'none';
+      void nav.offsetWidth; // force reflow so the browser commits "none"
+      nav.style.animation = '';
     });
   })();
 </script>
@@ -1142,7 +1146,6 @@ nav.footer-block ul li{
     border-right: var(--style-border-drawer);
     box-shadow: none;
     flex-direction: column;
-    transform-origin: top center;
 
     @media screen and (min-width: 750px) {
       width: 25rem;
@@ -1212,7 +1215,17 @@ nav.footer-block ul li{
     visibility: visible;
     display: flex;
     flex-direction: column;
-    will-change: transform;
+  }
+
+  /*
+   * Settle animation is applied to the nav (a normal flex child), not to
+   * .menu-drawer itself. The drawer's overflow-y: auto clips the child's
+   * visual transform, preventing page content from bleeding through the
+   * compositing layer. The position:absolute submenu panel is unaffected
+   * because it is a sibling, not a descendant, of the nav.
+   */
+  .menu-open > .menu-drawer > nav.menu-drawer__navigation {
+    transform-origin: top center;
     animation: menu-drawer-settle 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
 

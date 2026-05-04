@@ -217,8 +217,15 @@
   }
 
   .header-actions__action svg {
-    width: var(--icon-size-lg);
-    height: var(--icon-size-lg);
+    width: var(--icon-size-md);
+    height: var(--icon-size-md);
+  }
+
+  @media screen and (max-width: 749px) {
+    .header-actions__action svg {
+      width: var(--icon-size-lg);
+      height: var(--icon-size-lg);
+    }
   }
 
   .header-actions__cart-icon {
