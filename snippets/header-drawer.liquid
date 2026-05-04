@@ -998,6 +998,13 @@ nav.footer-block ul li{
 </script>
 
 {% stylesheet %}
+  /* Reinforce scroll-lock: also block overscroll-chaining at the root so that
+     trackpad momentum / inertia can't propagate past the drawer to the page. */
+  html[scroll-lock] {
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+
   .header__icon--menu {
     position: initial;
   }
@@ -1127,6 +1134,7 @@ nav.footer-block ul li{
     background-color: var(--color-background);
     overflow-y: auto;
     overflow-x: clip; /* clip (not hidden) properly constrains GPU-composited children (e.g. translateX submenus) even when the drawer itself has a compositing layer from clip-path */
+    overscroll-behavior: none; /* prevent scroll chaining: when the drawer reaches its scroll boundary, don't propagate the scroll event to the page behind */
     scrollbar-width: none;
     &::-webkit-scrollbar { display: none; }
     display: flex;
