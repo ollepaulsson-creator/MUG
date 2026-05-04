@@ -993,6 +993,20 @@ nav.footer-block ul li{
     } else {
       init();
     }
+
+    /**
+     * Replay the settle animation when the user navigates back from a submenu.
+     * Overriding `animation` with "none" + forcing a reflow then clearing the
+     * override causes the browser to restart the CSS animation fresh.
+     */
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.menu-drawer__back-button')) return;
+      var drawer = document.querySelector('[data-header-drawer]');
+      if (!drawer) return;
+      drawer.style.animation = 'none';
+      void drawer.offsetWidth; // force reflow so the browser commits "none"
+      drawer.style.animation = '';
+    });
   })();
 </script>
 
@@ -1124,6 +1138,7 @@ nav.footer-block ul li{
     border-right: var(--style-border-drawer);
     box-shadow: none;
     flex-direction: column;
+    transform-origin: top center;
 
     @media screen and (min-width: 750px) {
       width: 25rem;
@@ -1163,6 +1178,12 @@ nav.footer-block ul li{
     }
   }
 
+  /* Drawer background settles from 30% oversized to actual size */
+  @keyframes menu-drawer-settle {
+    from { transform: scaleY(1.3); }
+    to   { transform: scaleY(1);   }
+  }
+
   .menu-drawer {
     transition: clip-path 0.3s ease-out, visibility 0.3s ease-out;
   }
@@ -1188,6 +1209,7 @@ nav.footer-block ul li{
     display: flex;
     flex-direction: column;
     will-change: transform;
+    animation: menu-drawer-settle 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
 
   /* When a submenu is active, make it visible — its transform stays at translateX(100%).
