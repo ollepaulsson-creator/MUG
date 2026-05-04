@@ -1413,6 +1413,14 @@ p.search-results-summary {
   line-height: 23px;
 }
 
+/* ── Search modal: collection/article/page carousels ──
+   The CSS always sets slideshow-slides { display: none } inside these
+   components, so only the section header renders with nothing below it.
+   Hide the entire slideshow-component to remove the dead space. */
+slideshow-component.predictive-search-results__list {
+  display: none !important;
+}
+
 /* ── Featured section slots: hidden until JS injects into grid ── */
 [id*="__featured_"] {
   display: none;
