@@ -1081,11 +1081,11 @@ nav.footer-block ul li{
     filter: blur(4px);
   }
 
-  /* Hamburger icon: visible by default */
+  /* Hamburger icon: visible by default — slightly larger on mobile */
   .header__icon--summary .header-drawer-icon--open {
     display: flex !important;
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1.2);
     filter: blur(0px);
   }
 
@@ -1102,8 +1102,12 @@ nav.footer-block ul li{
     filter: blur(0px);
   }
 
-  /* On desktop: always show hamburger, never ✕ */
+  /* On desktop: always show hamburger at normal scale, never ✕ */
   @media screen and (min-width: 750px) {
+    .header__icon--summary .header-drawer-icon--open {
+      transform: scale(1);
+    }
+
     details[open] .header__icon--menu .header-drawer-icon--open {
       opacity: 1;
       transform: scale(1);
