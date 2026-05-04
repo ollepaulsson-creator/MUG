@@ -995,21 +995,25 @@ nav.footer-block ul li{
     }
 
     /**
-     * Replay the settle animation on the nav when the user navigates back from
-     * a submenu. Overriding `animation` with "none" + forcing a reflow then
-     * clearing the override causes the browser to restart the CSS animation.
-     * The animation targets the nav element (not the whole drawer) so the
-     * position:absolute submenu panel is never affected.
+     * Replay the settle animation when the user navigates back from a submenu.
+     * Both the drawer (settle) and its content children (counter-settle) must
+     * restart together so the net visual scale stays ≈ 1.0 for text throughout.
+     * Overriding `animation` with "none" + forcing a single reflow then clearing
+     * the override causes the browser to restart all CSS animations from scratch.
      */
     document.addEventListener('click', function (e) {
       if (!e.target.closest('.menu-drawer__back-button')) return;
       var drawer = document.querySelector('[data-header-drawer]');
       if (!drawer) return;
-      var nav = drawer.querySelector('nav.menu-drawer__navigation');
-      if (!nav) return;
-      nav.style.animation = 'none';
-      void nav.offsetWidth; // force reflow so the browser commits "none"
-      nav.style.animation = '';
+
+      var targets = [drawer];
+      drawer.querySelectorAll(
+        'nav.menu-drawer__navigation, footer.site-footer, .menu-drawer__utility-links, .menu-drawer__featured-content'
+      ).forEach(function (el) { targets.push(el); });
+
+      targets.forEach(function (el) { el.style.animation = 'none'; });
+      void drawer.offsetWidth; // single reflow commits "none" for all targets
+      targets.forEach(function (el) { el.style.animation = ''; });
     });
   })();
 </script>
@@ -1215,18 +1219,28 @@ nav.footer-block ul li{
     visibility: visible;
     display: flex;
     flex-direction: column;
+    transform-origin: top center;
+    animation: menu-drawer-settle 0.8s ease-in-out both;
   }
 
   /*
-   * Settle animation is applied to the nav (a normal flex child), not to
-   * .menu-drawer itself. The drawer's overflow-y: auto clips the child's
-   * visual transform, preventing page content from bleeding through the
-   * compositing layer. The position:absolute submenu panel is unaffected
-   * because it is a sibling, not a descendant, of the nav.
+   * Counter-scale: the drawer background settles from scaleY(1.3) → scaleY(1).
+   * Direct content children are counter-scaled scaleY(0.769) → scaleY(1) so
+   * their net visual scale stays ≈ 1.0 throughout. Only the white background
+   * area appears to grow and settle — text and content are stable.
+   * The backdrop is position:fixed and display:none so it is unaffected.
    */
-  .menu-open > .menu-drawer > nav.menu-drawer__navigation {
+  @keyframes menu-drawer-counter-settle {
+    from { transform: scaleY(0.769); }
+    to   { transform: scaleY(1);     }
+  }
+
+  .menu-open > .menu-drawer > nav.menu-drawer__navigation,
+  .menu-open > .menu-drawer > footer.site-footer,
+  .menu-open > .menu-drawer > .menu-drawer__utility-links,
+  .menu-open > .menu-drawer > .menu-drawer__featured-content {
     transform-origin: top center;
-    animation: menu-drawer-settle 0.8s ease-in-out forwards;
+    animation: menu-drawer-counter-settle 0.8s ease-in-out both;
   }
 
   /* When a submenu is active, make it visible — its transform stays at translateX(100%).
