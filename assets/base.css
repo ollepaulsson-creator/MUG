@@ -4399,3 +4399,9 @@ facet-status-component.facets__status {
     font-size: 14px;
     color: black !important;
 }
+
+/* QIKIFY - SMART MENU - HIDE THEME'S MENU */
+.overflow-menu {
+  opacity: 0;
+}
+/* QIKIFY - END */
