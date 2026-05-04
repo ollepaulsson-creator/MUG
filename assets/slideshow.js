@@ -629,7 +629,10 @@ export class Slideshow extends Component {
       this.#scroll.to(newSlide);
 
       this.removeAttribute('dragging');
-      this.releasePointerCapture(event.pointerId);
+      // Wrapped in try/catch because the pointerdown→onPointerUp path (the zoom-dialog
+      // tap fix on line ~667) fires onPointerUp with a *new* touch's pointerId that was
+      // never captured, which throws InvalidPointerId on some browsers.
+      try { this.releasePointerCapture(event.pointerId); } catch { /* not captured */ }
 
       this.#centerSelectedThumbnail(newIndex);
 

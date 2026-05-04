@@ -161,11 +161,29 @@ export class ZoomDialog extends Component {
 
     mostVisibleElement.style.setProperty('view-transition-name', transitionName);
 
-    await startViewTransition(() => {
-      mostVisibleElement.style.removeProperty('view-transition-name');
-      slide.style.setProperty('view-transition-name', transitionName);
-      this.closeDialog();
-    });
+    // Safety net: iOS Safari's View Transitions API can occasionally fail to
+    // invoke the callback when the transition involves elements in the CSS top
+    // layer (the <dialog>). If that happens, closeDialog() is never called and
+    // the page scroll stays permanently locked because the modal is still open.
+    // The failsafe ensures the dialog is always dismissed within a reasonable
+    // window regardless of what the browser does with the transition.
+    const failsafe = setTimeout(() => {
+      if (dialog.open) this.closeDialog();
+    }, 800);
+
+    try {
+      await startViewTransition(() => {
+        mostVisibleElement.style.removeProperty('view-transition-name');
+        slide.style.setProperty('view-transition-name', transitionName);
+        this.closeDialog();
+      });
+    } catch {
+      // startViewTransition threw (e.g. browser rejected the snapshot capture).
+      // The callback may not have run, so ensure the dialog is closed.
+      if (dialog.open) this.closeDialog();
+    } finally {
+      clearTimeout(failsafe);
+    }
 
     slide.style.removeProperty('view-transition-name');
     dialog.classList.remove('dialog--closed');
