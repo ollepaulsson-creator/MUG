@@ -1121,7 +1121,7 @@ nav.footer-block ul li{
     padding: 0;
     background-color: var(--color-background);
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: clip; /* clip (not hidden) properly constrains GPU-composited children (e.g. translateX submenus) even when the drawer itself has a compositing layer from clip-path */
     scrollbar-width: none;
     &::-webkit-scrollbar { display: none; }
     display: flex;
