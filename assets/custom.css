@@ -926,7 +926,7 @@ h5 {
     font-size: 13px !important;
 }
 .product-card__content {
-    border-right: 1px solid #e5e5e5;
+    border-right: 1px solid #d5d5d5 !important;
     border-top: none;
 }
 .product-card__content .text-block {
@@ -938,15 +938,15 @@ h5 {
     }
 }
 ul.product-grid {
-    border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #d5d5d5 !important;
 }
 .product-grid__item {
     border: none;
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #d5d5d5 !important;
 }
 
 .product-recommendations .resource-list--grid {
-    border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #d5d5d5 !important;
 }
 .text-block h1, .text-block.h1 > * {
     font-size: 32px;
