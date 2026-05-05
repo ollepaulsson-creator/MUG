@@ -1676,9 +1676,9 @@ select {
    Move the border to the wrapper, remove double border from the inner select,
    and hide the theme's built-in caret SVG. */
 .variant-option__select-wrapper {
-  border: 1px solid #E2E2E2;
-  box-shadow: none;
-  border-radius: 2px;
+  border: 1px solid #E2E2E2 !important;
+  box-shadow: none !important;
+  border-radius: 2px !important;
 }
 
 .variant-option__select {
