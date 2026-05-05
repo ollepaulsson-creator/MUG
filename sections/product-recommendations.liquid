@@ -230,11 +230,13 @@
 </product-recommendations>
 
 {% stylesheet %}
-  /* Row separators: box-shadow 1px below each item.
-     The overflow:hidden already on .resource-list--grid in custom.css
-     clips the last row's shadow, so no trailing line after the final row. */
+  /* Row separators */
   product-recommendations .resource-list--grid .resource-list__item {
-    box-shadow: 0 1px 0 0 #c8c8c8;
+    border-bottom: 1px solid #888888;
+  }
+
+  product-recommendations .resource-list--grid .resource-list__item:nth-last-child(-n+4) {
+    border-bottom: none;
   }
 
   .product-recommendations__skeleton-item {
