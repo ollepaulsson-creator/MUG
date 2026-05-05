@@ -1685,7 +1685,7 @@ select {
 
 .variant-option__select {
   box-shadow: none;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .variant-option__select-wrapper .icon {
