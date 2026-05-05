@@ -1669,7 +1669,7 @@ select {
   background-color: var(--color-background);
   background-image: url("data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.79998 8.54316L11 8.54316H16.2L11 14.6569L5.79998 8.54316Z' fill='black'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right var(--padding-md) center;
+  background-position: right var(--padding-lg) center;
   background-size: 22px 22px;
   padding-inline: var(--padding-xl) calc(var(--padding-md) + 22px);
 }
