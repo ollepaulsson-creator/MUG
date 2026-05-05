@@ -1671,3 +1671,20 @@ select {
   background-size: 22px 22px;
   padding-inline: var(--padding-xl) calc(var(--padding-xl) + 22px);
 }
+
+/* Variant picker: the select lives inside a wrapper that adds its own border.
+   Move the border to the wrapper (secondary button style), remove double border
+   from the inner select, and hide the theme's built-in caret SVG. */
+.variant-option__select-wrapper {
+  border: none;
+  box-shadow: inset 0 0 0 var(--style-border-width-secondary) var(--color-secondary-button-border);
+  border-radius: 2px;
+}
+
+.variant-option__select {
+  box-shadow: none;
+}
+
+.variant-option__select-wrapper .icon {
+  display: none;
+}
