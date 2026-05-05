@@ -230,12 +230,22 @@
 </product-recommendations>
 
 {% stylesheet %}
+  /* Row separators: border-top on every item, removed from the first row */
   product-recommendations .resource-list--grid .resource-list__item {
-    border-bottom: 1px solid #e4e4e4;
+    border-top: 1px solid #e4e4e4;
   }
 
-  product-recommendations .resource-list--grid .resource-list__item:nth-last-child(-n+4) {
-    border-bottom: none;
+  /* First 4 items = first desktop row (4 columns) — no top border */
+  product-recommendations .resource-list--grid .resource-list__item:nth-child(-n+4) {
+    border-top: none;
+  }
+
+  /* Mobile: 2 columns — items 3 & 4 start the second row, restore their border */
+  @media screen and (max-width: 749px) {
+    product-recommendations .resource-list--grid .resource-list__item:nth-child(3),
+    product-recommendations .resource-list--grid .resource-list__item:nth-child(4) {
+      border-top: 1px solid #e4e4e4;
+    }
   }
 
   .product-recommendations__skeleton-item {
