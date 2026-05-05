@@ -230,14 +230,21 @@
 </product-recommendations>
 
 {% stylesheet %}
-  /* Row separators: border-bottom on the card content element (same as column
-     border-right), so visual weight matches. Last row suppressed via nth-last-child. */
-  product-recommendations .resource-list--grid .product-card__content {
-    border-bottom: 1px solid #e4e4e4;
+  /* Row separators: absolutely-positioned pseudo-element 1px below each item.
+     overflow:hidden on the grid (already in custom.css) clips the last row's
+     line automatically — no nth-child logic needed. */
+  product-recommendations .resource-list--grid .resource-list__item {
+    position: relative;
   }
 
-  product-recommendations .resource-list--grid .resource-list__item:nth-last-child(-n+4) .product-card__content {
-    border-bottom: none;
+  product-recommendations .resource-list--grid .resource-list__item::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #e4e4e4;
   }
 
   .product-recommendations__skeleton-item {
