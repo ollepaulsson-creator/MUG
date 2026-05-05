@@ -230,21 +230,14 @@
 </product-recommendations>
 
 {% stylesheet %}
-  /* Row separators: border-top on every item except the first row.
-     Using border-top means there is never a trailing line after the last row. */
-  product-recommendations .resource-list--grid .resource-list__item {
-    border-top: 1px solid #e4e4e4;
+  /* Row separators: border-bottom on the card content element (same as column
+     border-right), so visual weight matches. Last row suppressed via nth-last-child. */
+  product-recommendations .resource-list--grid .product-card__content {
+    border-bottom: 1px solid #e4e4e4;
   }
 
-  product-recommendations .resource-list--grid .resource-list__item:nth-child(-n+4) {
-    border-top: none;
-  }
-
-  @media screen and (max-width: 749px) {
-    product-recommendations .resource-list--grid .resource-list__item:nth-child(3),
-    product-recommendations .resource-list--grid .resource-list__item:nth-child(4) {
-      border-top: 1px solid #e4e4e4;
-    }
+  product-recommendations .resource-list--grid .resource-list__item:nth-last-child(-n+4) .product-card__content {
+    border-bottom: none;
   }
 
   .product-recommendations__skeleton-item {
