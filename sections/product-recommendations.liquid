@@ -230,7 +230,24 @@
 </product-recommendations>
 
 {% stylesheet %}
-.product-recommendations__skeleton-item {
+  /* Row separators: absolutely-positioned pseudo-element 1px below each item.
+     overflow:hidden on the grid (already in custom.css) clips the last row's
+     line automatically — no nth-child logic needed. */
+  product-recommendations .resource-list--grid .resource-list__item {
+    position: relative;
+  }
+
+  product-recommendations .resource-list--grid .resource-list__item::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #c8c8c8;
+  }
+
+  .product-recommendations__skeleton-item {
     aspect-ratio: 3 / 4;
     background-color: var(--color-foreground);
     opacity: var(--skeleton-opacity);
