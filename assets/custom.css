@@ -1663,21 +1663,21 @@ select {
   appearance: none;
   border-radius: 2px;
   border: none;
-  box-shadow: inset 0 0 0 var(--style-border-width-secondary) var(--color-secondary-button-border);
+  box-shadow: inset 0 0 0 1px #E2E2E2;
   background-color: var(--color-background);
   background-image: url("data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.79998 8.54316L11 8.54316H16.2L11 14.6569L5.79998 8.54316Z' fill='black'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right var(--padding-xl) center;
+  background-position: right var(--padding-md) center;
   background-size: 22px 22px;
-  padding-inline: var(--padding-xl) calc(var(--padding-xl) + 22px);
+  padding-inline: var(--padding-xl) calc(var(--padding-md) + 22px);
 }
 
 /* Variant picker: the select lives inside a wrapper that adds its own border.
-   Move the border to the wrapper (secondary button style), remove double border
-   from the inner select, and hide the theme's built-in caret SVG. */
+   Move the border to the wrapper, remove double border from the inner select,
+   and hide the theme's built-in caret SVG. */
 .variant-option__select-wrapper {
   border: none;
-  box-shadow: inset 0 0 0 var(--style-border-width-secondary) var(--color-secondary-button-border);
+  box-shadow: inset 0 0 0 1px #E2E2E2;
   border-radius: 2px;
 }
 
