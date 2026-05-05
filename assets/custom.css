@@ -938,26 +938,9 @@ h5 {
     }
 }
 ul.product-grid {
-    border-top: 1px solid #c8c8c8;
-    box-shadow: inset 0 -1px 0 0 #c8c8c8;
-    overflow: hidden;
-}
-.product-grid__item {
-    position: relative;
-}
-.product-grid__item::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background-color: #c8c8c8;
 }
 
 .product-recommendations .resource-list--grid {
-    border-top: 1px solid #c8c8c8;
-    overflow: hidden;
 }
 .text-block h1, .text-block.h1 > * {
     font-size: 32px;
