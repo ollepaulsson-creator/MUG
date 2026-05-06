@@ -1717,16 +1717,23 @@ select {
   line-height: var(--font-paragraph--line-height);
 }
 
-/* ── Zoom button: disable pointer events at mobile viewport widths ──
-   drag-zoom-wrapper.js skips zoom initialisation below 750px
-   (isMobileBreakpoint). The button element is still rendered in HTML,
-   however — its position:absolute / width:100% / height:100% overlay
-   intercepts scroll on a desktop browser at narrow viewport widths,
-   causing the "stuck zoom cursor + can't scroll" bug.
-   Nullify pointer events to match the JS behaviour. */
+/* ── Zoom: disable at mobile viewport widths ──
+   The block's stylesheet sets cursor:zoom-in on the container
+   (.product-media-container--zoomable.product-media-container--image)
+   and base.css sets cursor:zoom-in + full-size overlay on the button
+   (.product-media-container__zoom-button). Both apply regardless of
+   viewport width.
+   drag-zoom-wrapper.js already skips zoom init below 750px; these
+   rules bring the CSS in line with that JS behaviour. */
 @media screen and (max-width: 749px) {
+  /* Grid mode: hide the transparent overlay button so it can't
+     intercept clicks or pointer events */
   .product-media-container__zoom-button {
-    pointer-events: none;
+    display: none;
+  }
+  /* Both grid and carousel: remove the zoom-in cursor from the
+     container so hovering over the gallery doesn't show zoom-in */
+  .product-media-container--zoomable.product-media-container--image {
     cursor: default;
   }
 }
