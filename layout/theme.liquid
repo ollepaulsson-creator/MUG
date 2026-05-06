@@ -357,6 +357,37 @@ document.addEventListener("DOMContentLoaded", function() {
 })();
 </script>
 
+<script>
+// ── Patch collection links to pre-apply the in-stock filter ──
+// Rewrites every <a href="/collections/…"> to include filter.v.availability=1
+// so users never trigger the double-load redirect in main-collection.liquid.
+// MutationObserver covers links injected after load (Qikify mega menu, etc.).
+(function () {
+  function patchLinks(root) {
+    (root || document).querySelectorAll('a[href*="/collections/"]').forEach(function (a) {
+      try {
+        var url = new URL(a.href);
+        if (url.host !== location.host) return;                      // external links: leave alone
+        if (/^\/collections\/?$/.test(url.pathname)) return;         // /collections index: leave alone
+        if (url.searchParams.has('filter.v.availability')) return;   // already set: skip
+        url.searchParams.set('filter.v.availability', '1');
+        a.href = url.toString();
+      } catch (e) {}
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () { patchLinks(document); });
+
+  new MutationObserver(function (mutations) {
+    mutations.forEach(function (m) {
+      m.addedNodes.forEach(function (node) {
+        if (node.nodeType === 1) patchLinks(node);
+      });
+    });
+  }).observe(document.documentElement, { childList: true, subtree: true });
+})();
+</script>
+
 {% if template contains 'collection' %}
 <script>
 (function() {
