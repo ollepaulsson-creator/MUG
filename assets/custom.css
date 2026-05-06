@@ -926,8 +926,10 @@ h5 {
     font-size: 13px !important;
 }
 .product-card__content {
-    border-right: 1px solid #e5e5e5;
-    border-top: none;
+    border-top: none !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    border-right: 1px solid #e5e5e5 !important;
 }
 .product-card__content .text-block {
     padding-inline-start: 15px !important;
@@ -943,6 +945,9 @@ ul.product-grid {
 .product-grid__item {
     border: none;
     border-bottom: 1px solid #e5e5e5;
+}
+.product-grid__item:last-child {
+    border-bottom: none;
 }
 
 .product-recommendations .resource-list--grid {
