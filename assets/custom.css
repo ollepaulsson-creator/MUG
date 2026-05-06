@@ -1737,3 +1737,13 @@ select {
     cursor: default;
   }
 }
+
+/* ── Gallery carousel: contain horizontal overscroll ──
+   slideshow-slides uses overflow-x:scroll + scroll-snap-type:x mandatory.
+   Without overscroll-behavior-x:contain, a trackpad scroll gesture with
+   any horizontal component can be absorbed by the carousel, causing the
+   page to briefly stall. Containing horizontal overscroll keeps carousel
+   snapping isolated so it cannot interfere with vertical page scroll. */
+media-gallery slideshow-slides {
+  overscroll-behavior-x: contain;
+}
