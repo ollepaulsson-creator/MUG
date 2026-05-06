@@ -1738,12 +1738,29 @@ select {
   }
 }
 
-/* ── Gallery carousel: contain horizontal overscroll ──
-   slideshow-slides uses overflow-x:scroll + scroll-snap-type:x mandatory.
-   Without overscroll-behavior-x:contain, a trackpad scroll gesture with
-   any horizontal component can be absorbed by the carousel, causing the
-   page to briefly stall. Containing horizontal overscroll keeps carousel
-   snapping isolated so it cannot interfere with vertical page scroll. */
+/* ── Gallery carousel: prevent horizontal scroll from stalling page scroll ──
+   slideshow-slides has overflow-x:scroll + scroll-snap-type:x mandatory.
+   On desktop with a trackpad, a vertical scroll gesture with any horizontal
+   component gets absorbed by the carousel, which then initiates a mandatory
+   snap animation — this animation can stall vertical page scroll.
+
+   Two complementary fixes:
+
+   1. overscroll-behavior-x:contain — prevents horizontal overscroll from
+      chaining to the parent (handles the at-boundary case).
+
+   2. scroll-snap-type:none on desktop — removes the snap animation entirely
+      so horizontal nudges don't stall vertical scroll. !important is required
+      because scrolling.js (Scroller.snap setter) manages snap via inline
+      styles, which override normal CSS. On desktop, the JS Scroller handles
+      programmatic snapping via scrollTo() anyway (arrows, thumbnails, drag),
+      so CSS snap is only needed for mobile native touch swipe. */
 media-gallery slideshow-slides {
   overscroll-behavior-x: contain;
+}
+
+@media screen and (min-width: 750px) {
+  media-gallery slideshow-slides {
+    scroll-snap-type: none !important;
+  }
 }
