@@ -96,6 +96,15 @@
 
   assign widths = '240, 352, 832, 1200, 1600, 1920, 2560, 3840'
 
+  # Compute meaningful alt text with content-type-specific fallback
+  if content_type == 'articles'
+    assign image_alt = image_resource.alt | default: closest.article.title | default: ''
+  elsif content_type == 'collections'
+    assign image_alt = image_resource.alt | default: closest.collection.title | default: ''
+  else
+    assign image_alt = image_resource.alt | default: ''
+  endif
+
   # Generate placeholder info based on content type
   if content_type == 'articles'
     assign placeholder_prefix = 'blog-apparel-'
@@ -154,7 +163,7 @@
     {{
       image_resource
       | image_url: width: 1920
-      | image_tag: widths: widths, class: 'image-block__image', sizes: sizes, loading: loading, width: image_resource.width, height: image_resource.height, fetchpriority: fetch_priority, decoding: 'async'
+      | image_tag: widths: widths, class: 'image-block__image', sizes: sizes, loading: loading, width: image_resource.width, height: image_resource.height, fetchpriority: fetch_priority, decoding: 'async', alt: image_alt
     }}
   </div>
 {% else %}

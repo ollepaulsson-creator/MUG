@@ -7,6 +7,7 @@
   @param {string} [text_fallback] - text to display if image is blank
   @param {boolean} [unset_image_tag] - if true, ignores the image focal point
   @param {string} [style] - additional styles
+  @param {string} [alt] - override alt text (falls back to image.alt)
   @param {string} [loading] - loading attribute (lazy/eager)
   @param {string} [fetchpriority] - fetchpriority attribute (high/low/auto)
   @param {string} [decoding] - decoding attribute (async/sync/auto)
@@ -25,6 +26,7 @@
 
   {% assign style_value = style | default: '' %}
   {% assign decoding_value = decoding | default: 'async' %}
+  {% assign alt_value = alt | default: image.alt %}
 
   {% comment %} Compute intrinsic width matching the rendered height to preserve aspect ratio for CLS prevention {% endcomment %}
   {% assign intrinsic_width = image_height | times: image.aspect_ratio | ceil %}
@@ -44,7 +46,8 @@
       style: style_value,
       loading: loading,
       fetchpriority: fetchpriority,
-      decoding: decoding_value
+      decoding: decoding_value,
+      alt: alt_value
   }}
 {% elsif text_fallback %}
   {{ text_fallback }}

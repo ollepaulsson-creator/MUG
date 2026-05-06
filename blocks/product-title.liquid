@@ -1,12 +1,23 @@
 
 
 
+{%- liquid
+  assign preset = block.settings.type_preset | default: 'rte'
+  if preset == 'h1' or preset == 'h2' or preset == 'h3' or preset == 'h4' or preset == 'h5' or preset == 'h6'
+    assign title_tag = preset
+  else
+    assign title_tag = 'p'
+  endif
+  assign open_tag = '<' | append: title_tag | append: '>'
+  assign close_tag = '</' | append: title_tag | append: '>'
+-%}
+
 {% if closest.product == blank %}
   {% assign text = 'placeholders.product_title' | t %}
-  {% assign product_title = '<p>' | append: text | append: '</p>' %}
+  {% assign product_title = open_tag | append: text | append: close_tag %}
   {% render 'text', fallback_text: product_title, block: block %}
 {% elsif closest.product != blank %}
-  {% assign product_title = '<p>' | append: closest.product.title | append: '</p>' %}
+  {% assign product_title = open_tag | append: closest.product.title | append: close_tag %}
   {% render 'text', fallback_text: product_title, block: block %}
 {% endif %}
 

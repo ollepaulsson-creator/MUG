@@ -23,7 +23,7 @@
   decoding="async"
   width="{{ image.width }}"
   height="{{ image.height }}"
-  alt="{{ image.alt | escape }}"
+  alt="{{ image.alt | default: article.title | escape }}"
   class="
     border-style
     blog-post-card__image

@@ -225,6 +225,120 @@
           <span>{{ page_title }}</span>
       {%- endcase -%}
     </nav>
+
+    <script type="application/ld+json">
+    {%- assign bc_pos = 1 -%}
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": {{ bc_pos }},
+          "name": {{ section.settings.home_label | default: 'Start' | json }},
+          "item": {{ request.origin | json }}
+        }
+        {%- case t -%}
+          {%- when 'page' -%}
+            {%- assign bc_pos = bc_pos | plus: 1 -%}
+            ,{
+              "@type": "ListItem",
+              "position": {{ bc_pos }},
+              "name": {{ page.title | json }}
+            }
+          {%- when 'product' -%}
+            {%- if prod_grandparent_title -%}
+              {%- assign bc_pos = bc_pos | plus: 1 -%}
+              ,{
+                "@type": "ListItem",
+                "position": {{ bc_pos }},
+                "name": {{ prod_grandparent_title | json }},
+                "item": {{ request.origin | append: prod_grandparent_url | json }}
+              }
+            {%- endif -%}
+            {%- if prod_parent_title -%}
+              {%- assign bc_pos = bc_pos | plus: 1 -%}
+              ,{
+                "@type": "ListItem",
+                "position": {{ bc_pos }},
+                "name": {{ prod_parent_title | json }},
+                "item": {{ request.origin | append: prod_parent_url | json }}
+              }
+            {%- endif -%}
+            {%- if crumb_collection != nil -%}
+              {%- assign bc_pos = bc_pos | plus: 1 -%}
+              ,{
+                "@type": "ListItem",
+                "position": {{ bc_pos }},
+                "name": {{ crumb_collection.title | json }},
+                "item": {{ request.origin | append: crumb_collection.url | json }}
+              }
+            {%- endif -%}
+            {%- assign bc_pos = bc_pos | plus: 1 -%}
+            ,{
+              "@type": "ListItem",
+              "position": {{ bc_pos }},
+              "name": {{ product.title | json }}
+            }
+          {%- when 'collection' -%}
+            {%- if crumb_grandparent_title -%}
+              {%- assign bc_pos = bc_pos | plus: 1 -%}
+              ,{
+                "@type": "ListItem",
+                "position": {{ bc_pos }},
+                "name": {{ crumb_grandparent_title | json }},
+                "item": {{ request.origin | append: crumb_grandparent_url | json }}
+              }
+            {%- endif -%}
+            {%- if crumb_parent_title -%}
+              {%- assign bc_pos = bc_pos | plus: 1 -%}
+              ,{
+                "@type": "ListItem",
+                "position": {{ bc_pos }},
+                "name": {{ crumb_parent_title | json }},
+                "item": {{ request.origin | append: crumb_parent_url | json }}
+              }
+            {%- endif -%}
+            {%- assign bc_pos = bc_pos | plus: 1 -%}
+            ,{
+              "@type": "ListItem",
+              "position": {{ bc_pos }},
+              "name": {{ collection.title | json }},
+              "item": {{ request.origin | append: collection.url | json }}
+            }
+          {%- when 'blog' -%}
+            {%- assign bc_pos = bc_pos | plus: 1 -%}
+            ,{
+              "@type": "ListItem",
+              "position": {{ bc_pos }},
+              "name": {{ blog.title | json }},
+              "item": {{ request.origin | append: blog.url | json }}
+            }
+          {%- when 'article' -%}
+            {%- assign bc_pos = bc_pos | plus: 1 -%}
+            ,{
+              "@type": "ListItem",
+              "position": {{ bc_pos }},
+              "name": {{ blog.title | json }},
+              "item": {{ request.origin | append: blog.url | json }}
+            }
+            {%- assign bc_pos = bc_pos | plus: 1 -%}
+            ,{
+              "@type": "ListItem",
+              "position": {{ bc_pos }},
+              "name": {{ article.title | json }}
+            }
+          {%- when 'search' -%}
+            {%- assign bc_pos = bc_pos | plus: 1 -%}
+            ,{
+              "@type": "ListItem",
+              "position": {{ bc_pos }},
+              "name": {{ 'content.search' | t | json }}
+            }
+        {%- endcase -%}
+      ]
+    }
+    </script>
   {%- endunless -%}
 {% endif %}
 

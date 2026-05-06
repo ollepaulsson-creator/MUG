@@ -115,10 +115,45 @@
       data-product-transition="{{ settings.transition_to_main_product }}"
       data-template="{{ template }}"
     >
+      {% if template == 'index' %}
+        <h1 class="visually-hidden">{{ shop.name }}</h1>
+      {% endif %}
       {{ content_for_layout }}
     </main>
 
     {% sections 'footer-group' %}
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MusicStore",
+      "name": {{ shop.name | json }},
+      "description": {{ shop.description | json }},
+      "url": {{ request.origin | json }},
+      {% if shop.phone != blank %}
+        "telephone": {{ shop.phone | json }},
+      {% endif %}
+      {% if shop.email != blank %}
+        "email": {{ shop.email | json }},
+      {% endif %}
+      {% if shop.address %}
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": {{ shop.address.address1 | json }},
+          "addressLocality": {{ shop.address.city | json }},
+          "postalCode": {{ shop.address.zip | json }},
+          "addressCountry": {{ shop.address.country_code | json }}
+        },
+      {% endif %}
+      {% if settings.logo %}
+        "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
+        "image": {{ settings.logo | image_url: width: 1200 | prepend: "https:" | json }},
+      {% endif %}
+      "sameAs": [
+        {{ request.origin | json }}
+      ]
+    }
+    </script>
 
     {% render 'search-modal' %}
 
