@@ -946,8 +946,13 @@ ul.product-grid {
     border: none;
     border-bottom: 1px solid #e5e5e5;
 }
-.product-grid__item:last-child {
+.product-grid__item:nth-last-child(-n+4) {
     border-bottom: none;
+}
+@media screen and (max-width: 749px) {
+    .product-grid__item:nth-last-child(-n+2) {
+        border-bottom: none;
+    }
 }
 
 .product-recommendations .resource-list--grid {
