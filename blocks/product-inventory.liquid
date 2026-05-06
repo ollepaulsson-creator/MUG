@@ -108,22 +108,12 @@
   endif
 
   # --- Warehouse/source messaging ---
-  # Use custom metafield for store availability (stable across location renames).
+  # Driven solely by the custom.finns_i_butik boolean metafield.
+  assign raw = product.metafields.custom.finns_i_butik
   assign finns_i_butik = false
-  if product.metafields.custom.finns_i_butik == true or product.metafields.custom.finns_i_butik == 'true'
+  if raw == true or raw == 'true' or raw == 1
     assign finns_i_butik = true
   endif
-
-  # Fall back to location name scan only for web warehouse detection.
-  assign available_in_web = false
-  for sa in variant.store_availabilities
-    if sa.available
-      assign loc = sa.location.name | downcase
-      if loc contains 'webblager' or loc contains 'online'
-        assign available_in_web = true
-      endif
-    endif
-  endfor
 -%}
 
 <product-inventory
