@@ -118,7 +118,7 @@
   <!-- 🔹 IMAGE -->
   <a href="{{ item.url }}" class="search-result__image-wrapper">
     <div class="product-media__lqip" style="background-image: url('{{ item.featured_image | image_url: width: 100 }}')"></div>
-    {{ item.featured_image | image_url: width: 600 | image_tag: class: 'product-media__image--lqip', loading: 'lazy', decoding: 'async', widths: '200, 400, 600', sizes: '(min-width: 750px) 25vw, 50vw' }}
+    {{ item.featured_image | image_url: width: 600 | image_tag: alt: item.featured_image.alt | default: item.title, class: 'product-media__image--lqip', loading: 'lazy', decoding: 'async', widths: '200, 400, 600', sizes: '(min-width: 750px) 25vw, 50vw' }}
   </a>
 </div>
 
@@ -127,7 +127,7 @@
 {% if brand %}
   <div class="product-vendor">{{ brand }}</div>
 {% endif %}
-<h1 class="product-title"><a href="{{ item.url }}">{{ item.title }}</a></h1>
+<h2 class="product-title"><a href="{{ item.url }}">{{ item.title }}</a></h2>
 
             <p class="product-price">
   {% if item.compare_at_price > item.price %}

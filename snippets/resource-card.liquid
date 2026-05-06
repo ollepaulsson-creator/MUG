@@ -76,6 +76,7 @@
           featured_image
           | image_url: width: image_width
           | image_tag:
+            alt: featured_image.alt | default: resource.title,
             loading: image_loading,
             class: 'resource-card__image product-media__image--lqip',
             widths: widths,
@@ -96,6 +97,7 @@
             resource.media[1]
             | image_url: width: image_width
             | image_tag:
+              alt: resource.media[1].alt | default: resource.title,
               loading: image_loading,
               class: 'resource-card__image resource-card__image--secondary',
               widths: widths,
@@ -121,7 +123,7 @@
             {{
               product.featured_image
               | image_url: width: image_width
-              | image_tag: loading: 'lazy', class: 'resource-card__collection-image', sizes: image_sizes, widths: widths
+              | image_tag: alt: product.featured_image.alt | default: product.title, loading: 'lazy', class: 'resource-card__collection-image', sizes: image_sizes, widths: widths
             }}
           {% endfor %}
         </div>
