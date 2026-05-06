@@ -108,16 +108,18 @@
   endif
 
   # --- Warehouse/source messaging ---
-  # Scan ALL store_availabilities and classify available locations by name.
-  assign available_in_store = false
-  assign available_in_web   = false
+  # Use custom metafield for store availability (stable across location renames).
+  assign finns_i_butik = false
+  if product.metafields.custom.finns_i_butik == true or product.metafields.custom.finns_i_butik == 'true'
+    assign finns_i_butik = true
+  endif
 
+  # Fall back to location name scan only for web warehouse detection.
+  assign available_in_web = false
   for sa in variant.store_availabilities
     if sa.available
       assign loc = sa.location.name | downcase
-      if loc contains 'butik' or loc contains 'store'
-        assign available_in_store = true
-      elsif loc contains 'webblager' or loc contains 'online'
+      if loc contains 'webblager' or loc contains 'online'
         assign available_in_web = true
       endif
     endif
@@ -145,8 +147,8 @@
     >
       {%- if status == 'out_of_stock' -%}
         Slut i lager
-      {%- elsif available_in_store -%}
-        I butik: Leverans 1–2 arbetsdagar
+      {%- elsif finns_i_butik -%}
+        Finns i butik
       {%- elsif available_in_web -%}
         I webblager: Leverans 1–3 arbetsdagar
       {%- else -%}
