@@ -46,6 +46,10 @@
   content="{{ shop.name }}"
 >
 <meta
+  property="og:locale"
+  content="{{ request.locale.iso_code | replace: '-', '_' }}"
+>
+<meta
   property="og:url"
   content="{{ og_url }}"
 >
