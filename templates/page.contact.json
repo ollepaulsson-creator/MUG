@@ -7,11 +7,11 @@
           "type": "text",
           "name": "t:names.title",
           "settings": {
-            "text": "<h2>{{ closest.page.title }}</h2>",
+            "text": "<h1>{{ closest.page.title }}</h1>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "center",
-            "type_preset": "h2",
+            "type_preset": "h1",
             "font": "var(--font-primary--family)",
             "font_size": "",
             "line_height": "normal",
@@ -134,9 +134,20 @@
         "padding-block-start": 32,
         "padding-block-end": 84
       }
+    },
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "name": "Breadcrumbs",
+      "settings": {
+        "enable": true,
+        "nav_menu": "main-menu",
+        "home_label": "Start",
+        "aria_label": "Breadcrumbs"
+      }
     }
   },
   "order": [
+    "breadcrumbs",
     "main",
     "form"
   ]

@@ -1703,3 +1703,16 @@ select {
 .variant-option__select-wrapper .icon {
   display: none;
 }
+
+/* ── Product card titles: semantic <h2> sized as body text ──
+   Product card titles use type_preset: h2 for heading hierarchy, but
+   should visually match body text size (not the theme's h2 heading size).
+   The .h2 class is added by the text block when type_preset == 'h2'. */
+.product-card .h2,
+.product-card .h2 h2 {
+  font-size: 0.9375rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  line-height: var(--font-paragraph--line-height);
+}
