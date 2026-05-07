@@ -995,20 +995,26 @@ ul.product-grid {
 }
 .product-grid__item {
     border: none;
+    border-bottom: 1px solid #e5e5e5;
 }
-/* Row separators: border-top on every item after the first row.
-   Counting from the top avoids the nth-last-child problem where an
-   incomplete final row causes the 4th-from-last item (in the previous
-   row) to lose its bottom border. */
-.product-grid__item:not(:nth-child(-n+4)) {
-    border-top: 1px solid #e5e5e5;
+/* Remove border-bottom from the last row ONLY.
+   nth-child(4n+1) = first cell of any row (desktop 4-col).
+   nth-last-child(-n+4) = one of the last 4 items.
+   Their intersection is always the first cell of the last row.
+   The ~ combinator strips the remaining cells in that row too.
+   This works for any number of items in the last row (1–4) without
+   accidentally removing the border from the last cell of a complete
+   row when the next row is incomplete. */
+@media screen and (min-width: 750px) {
+    .product-grid__item:nth-child(4n+1):nth-last-child(-n+4),
+    .product-grid__item:nth-child(4n+1):nth-last-child(-n+4) ~ .product-grid__item {
+        border-bottom: none;
+    }
 }
 @media screen and (max-width: 749px) {
-    .product-grid__item:not(:nth-child(-n+4)) {
-        border-top: none;
-    }
-    .product-grid__item:not(:nth-child(-n+2)) {
-        border-top: 1px solid #e5e5e5;
+    .product-grid__item:nth-child(2n+1):nth-last-child(-n+2),
+    .product-grid__item:nth-child(2n+1):nth-last-child(-n+2) ~ .product-grid__item {
+        border-bottom: none;
     }
 }
 
