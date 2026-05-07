@@ -2,6 +2,33 @@
   box-sizing: border-box;
 }
 
+/* ── iOS Safari: prevent layout-viewport expansion from horizontal overflow ──
+   Chrome DevTools mobile simulation clips overflow visually but keeps the layout
+   viewport at 100vw. iOS Safari actually EXPANDS the layout viewport to fit any
+   overflowing element, which shifts ALL positioned elements (fixed, absolute) and
+   makes the page look broken globally — even though the overflow source may be a
+   single small element. overflow-x: hidden on body clips that expansion.
+   We use body (not html) to avoid iOS Safari's quirk where overflow: hidden on the
+   root element can interfere with position:fixed elements. */
+body {
+  overflow-x: hidden;
+}
+
+/* ── iOS Safari fallback for .visually-hidden ──
+   base.css hides elements via .visually-hidden:not(:focus, :active) using
+   clip: rect(0 0 0 0). The :not() with multiple comma-separated arguments
+   requires iOS Safari 15.4+. On older versions the entire rule is skipped,
+   making all visually-hidden elements render as visible text. This simpler
+   selector applies the hiding unconditionally as a safe fallback. */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  margin: -1px !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+}
 
 /* ============================================================
  * Qikify Smart Menu — theme integration (mockup)
