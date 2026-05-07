@@ -958,6 +958,11 @@ p, li {
 .button-primary:active {
   transform: scale(0.96);
 }
+
+/* ── Black (primary) buttons: match white button font-size ── */
+.button:not(.button-secondary, .button-unstyled) {
+  font-size: 13.5px !important;
+}
 :is(.quantity-minus, .quantity-plus):active .svg-wrapper {
   transform: scale(0.96);
 }
