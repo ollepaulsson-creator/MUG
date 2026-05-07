@@ -1411,12 +1411,11 @@ p.search-results-summary {
   }
 
   .announcement-bar__slider {
-    overflow: visible !important;
+    /* Do NOT add overflow:visible here — the original overflow:hidden contains the
+       slide content. We previously added it to stop clip:rect() from breaking the
+       visually-hidden spans, but clip-path:inset(50%) now handles that without
+       needing to remove the containment. */
     flex: unset !important;
-  }
-
-  .announcement-bar__slides {
-    overflow: visible !important;
   }
 
   /* Give each slide a stacking context so the position:absolute
@@ -1425,29 +1424,33 @@ p.search-results-summary {
      to the top of the viewport). */
   .announcement-bar__slide {
     position: relative;
-    overflow: visible !important;
   }
 
   .announcement-bar__text {
     white-space: normal !important;
     text-align: center !important;
-    overflow: visible !important;
-    text-overflow: clip !important;
   }
 }
 
 /* ── iOS Safari: clip: rect() is deprecated and unreliable ──
-   Ancestors with overflow:visible break it (e.g. the mobile
-   announcement bar override above sets overflow:visible on slides,
-   which causes visually-hidden spans inside to paint at full size —
-   duplicating the announcement text and showing the cart counter).
-   clip-path: inset(50%) is the modern, well-supported alternative and
-   works regardless of ancestor overflow. */
+   base.css uses clip:rect(0 0 0 0) to visually hide .visually-hidden elements.
+   This deprecated property is not supported reliably in modern iOS Safari and
+   can leave text visible. clip-path:inset(50%) is the modern equivalent —
+   well-supported and not subject to the same rendering quirks.
+
+   .is-visually-hidden-mobile has the same issue inside its media query. */
 .visually-hidden:not(:focus, :active) {
   clip-path: inset(50%);
-  /* white-space must be nowrap so the 1px-wide element does not
-     force a 100%-wide layout box that spills outside the clip. */
+  /* white-space:nowrap prevents the text from forcing a wide layout box
+     within the 1px-wide element. */
   white-space: nowrap;
+}
+
+@media screen and (max-width: 749px) {
+  .is-visually-hidden-mobile:not(:focus, :active) {
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
 }
 
 
