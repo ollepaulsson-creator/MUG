@@ -1208,9 +1208,14 @@ p.search-results-summary {
     right: auto !important;
     z-index: auto !important;
 }
-/* ── Zoom dialog mobile: center image vertically ── */
+/* ── Zoom dialog mobile: center image vertically ──
+   Must use dialog[open] — not dialog — so the rule only applies when the
+   dialog is actually shown. Without [open] the browser's UA display:none is
+   overridden by display:flex !important even on the closed dialog, leaving an
+   invisible 100vw × 100vh sheet that intercepts all pointer events and paints
+   the zoom-out cursor across the entire page. */
 @media screen and (max-width: 749px) {
-  zoom-dialog dialog {
+  zoom-dialog dialog[open] {
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
