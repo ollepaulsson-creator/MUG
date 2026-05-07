@@ -1738,29 +1738,41 @@ select {
   }
 }
 
-/* ── Gallery carousel: prevent horizontal scroll from stalling page scroll ──
-   slideshow-slides has overflow-x:scroll + scroll-snap-type:x mandatory.
-   On desktop with a trackpad, a vertical scroll gesture with any horizontal
-   component gets absorbed by the carousel, which then initiates a mandatory
-   snap animation — this animation can stall vertical page scroll.
+/* ── Gallery carousel: prevent scroll interference on pointer-fine devices ──
+   Two issues on desktop (trackpad/mouse) and DevTools mobile simulation:
 
-   Two complementary fixes:
+   1. scroll-snap-type:x mandatory causes the snap animation to stall
+      vertical page scroll when trackpad gestures have a horizontal component.
 
-   1. overscroll-behavior-x:contain — prevents horizontal overscroll from
-      chaining to the parent (handles the at-boundary case).
+   2. slideshow.js calls event.preventDefault() on every mousedown over the
+      carousel scroller. In DevTools touch simulation this cancels the entire
+      scroll gesture for that drag — locking page scroll if the drag starts
+      on or over the gallery.
 
-   2. scroll-snap-type:none on desktop — removes the snap animation entirely
-      so horizontal nudges don't stall vertical scroll. !important is required
-      because scrolling.js (Scroller.snap setter) manages snap via inline
-      styles, which override normal CSS. On desktop, the JS Scroller handles
-      programmatic snapping via scrollTo() anyway (arrows, thumbnails, drag),
-      so CSS snap is only needed for mobile native touch swipe. */
+   Fixes applied for pointer:fine devices (real desktop / DevTools simulation)
+   only — does NOT apply to pointer:coarse (real mobile touch), preserving
+   native horizontal swipe snapping on actual touch devices:
+
+   - touch-action:pan-y: browser guarantees vertical pan regardless of any
+     event.preventDefault() calls in JS (touch-action overrides preventDefault
+     for the allowed gesture type per spec). Pointer events still fire so
+     the JS drag handler in slideshow.js can still move the carousel.
+
+   - scroll-snap-type:none: removes the snap animation so diagonal trackpad
+     scroll can't trigger a snap that stalls vertical page scroll. !important
+     is required because scrolling.js (Scroller.snap setter) overrides CSS
+     via inline styles. JS-driven snapping via Scroller.to() (arrows,
+     thumbnails, drag) still works without CSS snap.
+
+   - overscroll-behavior-x:contain (unconditional): prevents horizontal
+     overscroll from chaining to the page even on mobile. */
 media-gallery slideshow-slides {
   overscroll-behavior-x: contain;
 }
 
-@media screen and (min-width: 750px) {
+@media (pointer: fine) {
   media-gallery slideshow-slides {
+    touch-action: pan-y;
     scroll-snap-type: none !important;
   }
 }
