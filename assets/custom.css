@@ -1403,6 +1403,13 @@ p.search-results-summary {
     justify-content: center !important;
   }
 
+  /* Desktop-only nav links: must be hidden on mobile.
+     The section stylesheet already sets display:none here, but !important
+     ensures no other rule can accidentally surface them on iOS. */
+  .announcement-menu {
+    display: none !important;
+  }
+
   .announcement-bar__slider {
     overflow: visible !important;
     flex: unset !important;
@@ -1412,7 +1419,12 @@ p.search-results-summary {
     overflow: visible !important;
   }
 
+  /* Give each slide a stacking context so the position:absolute
+     announcement-bar__link stays contained within the slide, not
+     relative to a distant ancestor (which on iOS can make it escape
+     to the top of the viewport). */
   .announcement-bar__slide {
+    position: relative;
     overflow: visible !important;
   }
 
@@ -1422,6 +1434,20 @@ p.search-results-summary {
     overflow: visible !important;
     text-overflow: clip !important;
   }
+}
+
+/* ── iOS Safari: clip: rect() is deprecated and unreliable ──
+   Ancestors with overflow:visible break it (e.g. the mobile
+   announcement bar override above sets overflow:visible on slides,
+   which causes visually-hidden spans inside to paint at full size —
+   duplicating the announcement text and showing the cart counter).
+   clip-path: inset(50%) is the modern, well-supported alternative and
+   works regardless of ancestor overflow. */
+.visually-hidden:not(:focus, :active) {
+  clip-path: inset(50%);
+  /* white-space must be nowrap so the 1px-wide element does not
+     force a 100%-wide layout box that spills outside the clip. */
+  white-space: nowrap;
 }
 
 
