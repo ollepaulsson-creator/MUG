@@ -995,14 +995,20 @@ ul.product-grid {
 }
 .product-grid__item {
     border: none;
-    border-bottom: 1px solid #e5e5e5;
 }
-.product-grid__item:nth-last-child(-n+4) {
-    border-bottom: none;
+/* Row separators: border-top on every item after the first row.
+   Counting from the top avoids the nth-last-child problem where an
+   incomplete final row causes the 4th-from-last item (in the previous
+   row) to lose its bottom border. */
+.product-grid__item:not(:nth-child(-n+4)) {
+    border-top: 1px solid #e5e5e5;
 }
 @media screen and (max-width: 749px) {
-    .product-grid__item:nth-last-child(-n+2) {
-        border-bottom: none;
+    .product-grid__item:not(:nth-child(-n+4)) {
+        border-top: none;
+    }
+    .product-grid__item:not(:nth-child(-n+2)) {
+        border-top: 1px solid #e5e5e5;
     }
 }
 
