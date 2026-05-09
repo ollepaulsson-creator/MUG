@@ -991,31 +991,14 @@ h5 {
 }
 ul.product-grid {
     border-top: 1px solid #e5e5e5;
-    border-bottom: 1px solid #e5e5e5;
+    /* No border-bottom on the UL: every item carries its own border-bottom,
+       so the last row's items act as the outer bottom line.
+       This eliminates the double-border that appeared when the grid's
+       border-bottom stacked with items that still had their own border. */
 }
 .product-grid__item {
     border: none;
     border-bottom: 1px solid #e5e5e5;
-}
-/* Remove border-bottom from the last row ONLY.
-   nth-child(4n+1) = first cell of any row (desktop 4-col).
-   nth-last-child(-n+4) = one of the last 4 items.
-   Their intersection is always the first cell of the last row.
-   The ~ combinator strips the remaining cells in that row too.
-   This works for any number of items in the last row (1–4) without
-   accidentally removing the border from the last cell of a complete
-   row when the next row is incomplete. */
-@media screen and (min-width: 750px) {
-    .product-grid__item:nth-child(4n+1):nth-last-child(-n+4),
-    .product-grid__item:nth-child(4n+1):nth-last-child(-n+4) ~ .product-grid__item {
-        border-bottom: none;
-    }
-}
-@media screen and (max-width: 749px) {
-    .product-grid__item:nth-child(2n+1):nth-last-child(-n+2),
-    .product-grid__item:nth-child(2n+1):nth-last-child(-n+2) ~ .product-grid__item {
-        border-bottom: none;
-    }
 }
 
 .product-recommendations .resource-list--grid {
