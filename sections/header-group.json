@@ -81,7 +81,7 @@
           "type": "_header-menu",
           "static": true,
           "settings": {
-            "menu": "main-menu-copy",
+            "menu": "main-menu",
             "menu_style": "featured_products",
             "featured_products_aspect_ratio": "4 / 5",
             "featured_collections_aspect_ratio": "16 / 9",
