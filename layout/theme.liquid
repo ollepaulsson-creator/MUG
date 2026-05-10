@@ -395,37 +395,33 @@ document.addEventListener("DOMContentLoaded", function() {
     var block = document.querySelector('rte-formatter[class*="text_twGGkJ"]');
     if (!block || block.dataset.clampInit) return false;
 
-    var ref = block.querySelector('p') || block;
-    var lh = parseFloat(window.getComputedStyle(ref).lineHeight);
-    if (!lh || isNaN(lh)) return false;
-    var maxH = Math.round(lh) * 3;
+    // Read the pre-collapse CSS clamp height BEFORE removing it.
+    // This avoids computing line-height, which returns "normal" (unparseable)
+    // when the block uses line-height: normal — the previous source of the NaN
+    // guard early-return that was silently aborting the whole function.
+    var maxH = block.getBoundingClientRect().height;
+    if (!maxH || maxH <= 0) return false;
 
     var originalHTML = block.innerHTML;
 
-    // Move content into a plain div BEFORE measuring height.
-    // block.scrollHeight is unreliable on the rte-formatter custom element
-    // (can return 0 when the pre-collapse CSS has overflow:hidden applied).
-    // Measuring on a regular wrapper div is always accurate.
+    // Move content into a plain div, then remove the pre-collapse CSS
+    // constraint by setting data-clamp-init.
     var wrapper = document.createElement('div');
     wrapper.style.overflow = 'hidden';
     while (block.firstChild) {
       wrapper.appendChild(block.firstChild);
     }
     block.appendChild(wrapper);
-
-    // Setting clampInit removes the pre-collapse :not([data-clamp-init]) CSS
-    // rule so the wrapper is the sole clipping mechanism.
     block.dataset.clampInit = '1';
 
     // Measure full content height on the plain wrapper (reliable)
     var fullH = wrapper.scrollHeight;
     if (fullH <= maxH + 4) {
-      // Content fits — restore wrapper as passthrough, no ellipsis needed
       wrapper.style.overflow = '';
-      return true;
+      return true; // content fits — no ellipsis needed
     }
 
-    // Apply height constraint
+    // Apply the same height constraint that the CSS was using
     wrapper.style.maxHeight = maxH + 'px';
 
     // Collect all non-empty text nodes inside wrapper (depth-first)
