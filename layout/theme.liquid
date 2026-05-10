@@ -403,53 +403,58 @@ document.addEventListener("DOMContentLoaded", function() {
     if (block.scrollHeight <= maxH + 4) return true; // fits, no clamp needed
 
     block.dataset.clampInit = '1';
+    var originalHTML = block.innerHTML;
 
-    // Wrap block's children in a plain div so position:relative works reliably
-    var wrapper = document.createElement('div');
-    wrapper.className = 'desc-read-more-wrapper';
-    wrapper.style.maxHeight = maxH + 'px';
-    wrapper.style.overflow = 'hidden';
-    wrapper.style.position = 'relative';
-    while (block.firstChild) {
-      wrapper.appendChild(block.firstChild);
+    // Clip the block without a gradient
+    block.style.maxHeight = maxH + 'px';
+    block.style.overflow = 'hidden';
+
+    // Collect all non-empty text nodes inside block (depth-first)
+    var allTextNodes = [];
+    (function collect(el) {
+      el.childNodes.forEach(function(n) {
+        if (n.nodeType === Node.TEXT_NODE && n.textContent.trim()) {
+          allTextNodes.push(n);
+        } else if (n.nodeType === Node.ELEMENT_NODE) {
+          collect(n);
+        }
+      });
+    })(block);
+
+    if (!allTextNodes.length) return true;
+
+    // Build inline "… Läs mer" and insert after the last text node
+    var lastTN = allTextNodes[allTextNodes.length - 1];
+    var parentEl = lastTN.parentNode;
+    var ellipsis = document.createElement('span');
+    ellipsis.className = 'desc-ellipsis-inline';
+    var readMoreLink = document.createElement('a');
+    readMoreLink.href = '#';
+    readMoreLink.className = 'desc-read-more-btn';
+    readMoreLink.textContent = 'Läs mer';
+    ellipsis.appendChild(document.createTextNode('… '));
+    ellipsis.appendChild(readMoreLink);
+    var nextSib = lastTN.nextSibling;
+    if (nextSib) {
+      parentEl.insertBefore(ellipsis, nextSib);
+    } else {
+      parentEl.appendChild(ellipsis);
     }
-    block.appendChild(wrapper);
 
-    var overlay = document.createElement('span');
-    overlay.className = 'desc-read-more-overlay';
-    var link = document.createElement('a');
-    link.href = '#';
-    link.textContent = 'Läs mer';
-    link.className = 'desc-read-more-btn';
-    overlay.appendChild(link);
-    link.addEventListener('click', function(e) {
+    // Trim the last text node character by character until block fits
+    while (block.scrollHeight > maxH + 4 && lastTN.textContent.length > 0) {
+      lastTN.textContent = lastTN.textContent.slice(0, -1);
+    }
+    // Strip trailing whitespace/punctuation before the ellipsis
+    lastTN.textContent = lastTN.textContent.replace(/[\s.,;:!?]+$/, '');
+
+    readMoreLink.addEventListener('click', function(e) {
       e.preventDefault();
-      // Animate max-height from the current clamped pixel value to the
-      // full scrollHeight. CSS transitions can't go from a px value to
-      // `auto`/empty, so we set an explicit target then clean up once
-      // the transition finishes.
-      var fullHeight = wrapper.scrollHeight;
-      wrapper.style.maxHeight = wrapper.offsetHeight + 'px';
-      // Force reflow so the browser registers the starting value before
-      // we change to the target value, otherwise the transition skips.
-      void wrapper.offsetHeight;
-      overlay.classList.add('is-fading');
-      // Trigger mask-image transition: the bottom fade mask slides off
-      // so the previously-faded last line fades IN smoothly.
-      wrapper.classList.add('is-expanded');
-      wrapper.style.maxHeight = fullHeight + 'px';
-      wrapper.addEventListener('transitionend', function onEnd(ev) {
-        if (ev.propertyName !== 'max-height') return;
-        wrapper.style.maxHeight = '';
-        wrapper.style.overflow = '';
-        wrapper.style.position = '';
-        overlay.remove();
-      }, { once: true });
+      block.style.maxHeight = '';
+      block.style.overflow = '';
+      block.innerHTML = originalHTML;
     });
-    // Append overlay to block (after wrapper) so "Läs mer" appears as a
-    // normal flow element below the truncated text rather than floating
-    // over the last visible line inside the overflow:hidden wrapper.
-    block.appendChild(overlay);
+
     return true;
   }
 
