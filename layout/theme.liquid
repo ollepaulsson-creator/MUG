@@ -441,12 +441,25 @@ document.addEventListener("DOMContentLoaded", function() {
       parentEl.appendChild(ellipsis);
     }
 
-    // Trim the last text node character by character until block fits
-    while (block.scrollHeight > maxH + 4 && lastTN.textContent.length > 0) {
-      lastTN.textContent = lastTN.textContent.slice(0, -1);
+    // Binary-search the last text node to find the maximum length where the
+    // ellipsis span is still fully within the clipped block.
+    // We compare rendered positions (getBoundingClientRect) rather than
+    // scrollHeight because scrollHeight can be <= maxH+4 even when the
+    // ellipsis has just barely wrapped onto the hidden 4th line.
+    var blockBottom = block.getBoundingClientRect().bottom;
+    var orig = lastTN.textContent;
+    var lo = 0, hi = orig.length;
+    while (lo < hi) {
+      var mid = Math.ceil((lo + hi) / 2);
+      lastTN.textContent = orig.slice(0, mid);
+      if (ellipsis.getBoundingClientRect().bottom <= blockBottom + 1) {
+        lo = mid; // fits — try keeping more text
+      } else {
+        hi = mid - 1; // ellipsis below clip edge — trim more
+      }
     }
     // Strip trailing whitespace/punctuation before the ellipsis
-    lastTN.textContent = lastTN.textContent.replace(/[\s.,;:!?]+$/, '');
+    lastTN.textContent = orig.slice(0, lo).replace(/[\s.,;:!?]+$/, '');
 
     readMoreLink.addEventListener('click', function(e) {
       e.preventDefault();
