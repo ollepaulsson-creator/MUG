@@ -1054,7 +1054,7 @@ ul.product-grid {
 
 @media(max-width:768px){
     span.menu-drawer__menu-item-text {
-        font-size: 16px;
+        font-size: 15px;
     }
     .facets-toggle {
         max-width: 100% !important;
