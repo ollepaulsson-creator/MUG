@@ -400,31 +400,50 @@ document.addEventListener("DOMContentLoaded", function() {
     if (!lh || isNaN(lh)) return false;
     var maxH = Math.round(lh) * 3;
 
-    if (block.scrollHeight <= maxH + 4) return true; // fits, no clamp needed
-
-    block.dataset.clampInit = '1';
     var originalHTML = block.innerHTML;
 
-    // Clip the block without a gradient
-    block.style.maxHeight = maxH + 'px';
-    block.style.overflow = 'hidden';
+    // Move content into a plain div BEFORE measuring height.
+    // block.scrollHeight is unreliable on the rte-formatter custom element
+    // (can return 0 when the pre-collapse CSS has overflow:hidden applied).
+    // Measuring on a regular wrapper div is always accurate.
+    var wrapper = document.createElement('div');
+    wrapper.style.overflow = 'hidden';
+    while (block.firstChild) {
+      wrapper.appendChild(block.firstChild);
+    }
+    block.appendChild(wrapper);
 
-    // Collect all non-empty text nodes inside block (depth-first)
-    var allTextNodes = [];
+    // Setting clampInit removes the pre-collapse :not([data-clamp-init]) CSS
+    // rule so the wrapper is the sole clipping mechanism.
+    block.dataset.clampInit = '1';
+
+    // Measure full content height on the plain wrapper (reliable)
+    var fullH = wrapper.scrollHeight;
+    if (fullH <= maxH + 4) {
+      // Content fits — restore wrapper as passthrough, no ellipsis needed
+      wrapper.style.overflow = '';
+      return true;
+    }
+
+    // Apply height constraint
+    wrapper.style.maxHeight = maxH + 'px';
+
+    // Collect all non-empty text nodes inside wrapper (depth-first)
+    var textNodes = [];
     (function collect(el) {
       el.childNodes.forEach(function(n) {
-        if (n.nodeType === Node.TEXT_NODE && n.textContent.trim()) {
-          allTextNodes.push(n);
+        if (n.nodeType === Node.TEXT_NODE && /\S/.test(n.textContent)) {
+          textNodes.push(n);
         } else if (n.nodeType === Node.ELEMENT_NODE) {
           collect(n);
         }
       });
-    })(block);
+    })(wrapper);
 
-    if (!allTextNodes.length) return true;
+    if (!textNodes.length) return true;
 
     // Build inline "… Läs mer" and insert after the last text node
-    var lastTN = allTextNodes[allTextNodes.length - 1];
+    var lastTN = textNodes[textNodes.length - 1];
     var parentEl = lastTN.parentNode;
     var ellipsis = document.createElement('span');
     ellipsis.className = 'desc-ellipsis-inline';
@@ -441,30 +460,25 @@ document.addEventListener("DOMContentLoaded", function() {
       parentEl.appendChild(ellipsis);
     }
 
-    // Binary-search the last text node to find the maximum length where the
-    // ellipsis span is still fully within the clipped block.
-    // We compare rendered positions (getBoundingClientRect) rather than
-    // scrollHeight because scrollHeight can be <= maxH+4 even when the
-    // ellipsis has just barely wrapped onto the hidden 4th line.
-    var blockBottom = block.getBoundingClientRect().bottom;
+    // Binary-search the last text node length so the ellipsis bottom edge
+    // sits within the wrapper's visible clip boundary.
+    var wrapperBottom = wrapper.getBoundingClientRect().bottom;
     var orig = lastTN.textContent;
     var lo = 0, hi = orig.length;
     while (lo < hi) {
       var mid = Math.ceil((lo + hi) / 2);
       lastTN.textContent = orig.slice(0, mid);
-      if (ellipsis.getBoundingClientRect().bottom <= blockBottom + 1) {
+      if (ellipsis.getBoundingClientRect().bottom <= wrapperBottom + 1) {
         lo = mid; // fits — try keeping more text
       } else {
         hi = mid - 1; // ellipsis below clip edge — trim more
       }
     }
-    // Strip trailing whitespace/punctuation before the ellipsis
+    // Strip trailing whitespace/punctuation right before the ellipsis
     lastTN.textContent = orig.slice(0, lo).replace(/[\s.,;:!?]+$/, '');
 
     readMoreLink.addEventListener('click', function(e) {
       e.preventDefault();
-      block.style.maxHeight = '';
-      block.style.overflow = '';
       block.innerHTML = originalHTML;
     });
 
