@@ -11,13 +11,6 @@
       {% render 'spacing-style', settings: section.settings %}
     "
   >
-    {% assign heading_text = 'content.search' | t %}
-    {% if search.performed %}
-      {% assign heading_text = 'content.search_results' | t %}
-    {% endif %}
-
-    <h1 style="text-align: {{ section.settings.alignment }};">{{ heading_text }}</h1>
-
     {% content_for 'block', id: 'search', type: '_search-input' %}
 
   </div>
