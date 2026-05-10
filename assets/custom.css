@@ -1653,6 +1653,10 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
   font-size: 15px;
 }
 
+.dialog-modal .predictive-search-form__header {
+  padding-bottom: 4px !important;
+}
+
 /* ── Search drawer full-height on mobile ──
    The dialog is already height: 100dvh on mobile (base.css).
    The content-wrapper is position: absolute; top: 100% below the
