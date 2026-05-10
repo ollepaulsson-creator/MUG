@@ -1650,7 +1650,7 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
 
 
 .search-input {
-  font-size: var(--font-size--s);
+  font-size: 15px;
 }
 
 /* ── Search drawer full-height on mobile ──
