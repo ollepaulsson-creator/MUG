@@ -1549,7 +1549,10 @@ slideshow-component.predictive-search-results__list {
   cursor: default;
 }
 
-/* ── Collection description: 3-line clamp ── */
+/* ── Collection description: clamp + width ── */
+rte-formatter[class*="text_twGGkJ"] {
+  max-width: 85%;
+}
 .desc-ellipsis-inline {
   display: inline;
 }
