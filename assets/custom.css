@@ -1551,7 +1551,17 @@ slideshow-component.predictive-search-results__list {
 
 /* ── Collection description: clamp + width ── */
 rte-formatter[class*="text_twGGkJ"] {
-  max-width: 85%;
+  max-width: 90%; /* mobile */
+}
+@media (min-width: 750px) {
+  rte-formatter[class*="text_twGGkJ"] {
+    max-width: 95%; /* tablet / medium */
+  }
+}
+@media (min-width: 1281px) {
+  rte-formatter[class*="text_twGGkJ"] {
+    max-width: 85%; /* wide desktop */
+  }
 }
 .desc-ellipsis-inline {
   display: inline;
