@@ -51,10 +51,10 @@
         rule is parsed before the body renders. The :not([data-clamp-init])
         selector drops away the moment JS wraps the content, so the browser
         never paints an intermediate uncollapsed state.
-        4.5em ≈ 3 lines at line-height 1.5.
+        6em ≈ 4–5 lines at line-height 1.5.
       */
       rte-formatter[class*="text_twGGkJ"]:not([data-clamp-init]) {
-        max-height: 4.5em;
+        max-height: 6em;
         overflow: hidden;
       }
     </style>
@@ -404,7 +404,7 @@ document.addEventListener("DOMContentLoaded", function() {
     initialized = true;
 
     var fs       = parseFloat(window.getComputedStyle(block).fontSize) || 16;
-    var maxH     = fs * 4.5;
+    var maxH     = fs * 6;
     var origHTML = block.innerHTML;
     // Flatten all text (handles multi-<p> descriptions, normalises whitespace)
     var fullText = block.textContent.trim().replace(/\s+/g, ' ');
