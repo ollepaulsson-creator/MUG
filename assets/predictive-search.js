@@ -352,6 +352,7 @@ class PredictiveSearchComponent extends Component {
     url.searchParams.set('q', searchTerm);
     url.searchParams.set('resources[limit_scope]', 'each');
     url.searchParams.set('resources[limit]', '9');
+    url.searchParams.set('resources[options][fields]', 'title,product_type,variants.title,vendor,tag');
 
     const { predictiveSearchResults } = this.refs;
 
