@@ -1560,7 +1560,7 @@ rte-formatter[class*="text_twGGkJ"] {
 }
 @media (min-width: 1281px) {
   rte-formatter[class*="text_twGGkJ"] {
-    max-width: 85%; /* wide desktop */
+    max-width: 90%; /* wide desktop */
   }
 }
 .desc-ellipsis-inline {
