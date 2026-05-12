@@ -391,105 +391,94 @@ document.addEventListener("DOMContentLoaded", function() {
 {% if template contains 'collection' %}
 <script>
 (function() {
+  var initialized = false;
+
   function initDescExpand() {
+    if (initialized) return;
+
     var block = document.querySelector('rte-formatter[class*="text_twGGkJ"]');
-    if (!block || block.dataset.clampInit) return false;
+    if (!block) return; // not in DOM yet — next trigger will retry
 
-    // Read the pre-collapse CSS clamp height BEFORE removing it.
-    // This avoids computing line-height, which returns "normal" (unparseable)
-    // when the block uses line-height: normal — the previous source of the NaN
-    // guard early-return that was silently aborting the whole function.
-    var maxH = block.getBoundingClientRect().height;
-    if (!maxH || maxH <= 0) return false;
+    if (block.dataset.clampInit) { initialized = true; return; }
 
+    // Use the element's own font-size to compute 4.5em in pixels.
+    // font-size always resolves to a px value; line-height can return "normal"
+    // (unparseable), which was silently aborting previous versions.
+    var fs = parseFloat(window.getComputedStyle(block).fontSize) || 16;
+    var maxH = fs * 4.5;
+
+    initialized = true;
     var originalHTML = block.innerHTML;
 
-    // Move content into a plain div, then remove the pre-collapse CSS
-    // constraint by setting data-clamp-init.
+    // Move content into a plain wrapper div so overflow:hidden clips a
+    // normal element (not the custom rte-formatter whose layout can differ).
     var wrapper = document.createElement('div');
     wrapper.style.overflow = 'hidden';
-    while (block.firstChild) {
-      wrapper.appendChild(block.firstChild);
-    }
+    while (block.firstChild) wrapper.appendChild(block.firstChild);
     block.appendChild(wrapper);
-    block.dataset.clampInit = '1';
+    block.dataset.clampInit = '1'; // drops the pre-collapse :not([data-clamp-init]) CSS
 
-    // Measure full content height on the plain wrapper (reliable)
+    // Measure full content height on the plain div
     var fullH = wrapper.scrollHeight;
     if (fullH <= maxH + 4) {
-      wrapper.style.overflow = '';
-      return true; // content fits — no ellipsis needed
+      wrapper.style.overflow = ''; // fits — restore as passthrough
+      return;
     }
 
-    // Apply the same height constraint that the CSS was using
     wrapper.style.maxHeight = maxH + 'px';
 
     // Collect all non-empty text nodes inside wrapper (depth-first)
     var textNodes = [];
-    (function collect(el) {
+    (function walk(el) {
       el.childNodes.forEach(function(n) {
         if (n.nodeType === Node.TEXT_NODE && /\S/.test(n.textContent)) {
           textNodes.push(n);
         } else if (n.nodeType === Node.ELEMENT_NODE) {
-          collect(n);
+          walk(n);
         }
       });
     })(wrapper);
 
-    if (!textNodes.length) return true;
+    if (!textNodes.length) return;
 
-    // Build inline "… Läs mer" and insert after the last text node
+    // Insert inline "… Läs mer" after the last text node
     var lastTN = textNodes[textNodes.length - 1];
-    var parentEl = lastTN.parentNode;
-    var ellipsis = document.createElement('span');
-    ellipsis.className = 'desc-ellipsis-inline';
-    var readMoreLink = document.createElement('a');
-    readMoreLink.href = '#';
-    readMoreLink.className = 'desc-read-more-btn';
-    readMoreLink.textContent = 'Läs mer';
-    ellipsis.appendChild(document.createTextNode('… '));
-    ellipsis.appendChild(readMoreLink);
-    var nextSib = lastTN.nextSibling;
-    if (nextSib) {
-      parentEl.insertBefore(ellipsis, nextSib);
-    } else {
-      parentEl.appendChild(ellipsis);
-    }
+    var ell = document.createElement('span');
+    ell.className = 'desc-ellipsis-inline';
+    var link = document.createElement('a');
+    link.href = '#';
+    link.className = 'desc-read-more-btn';
+    link.textContent = 'Läs mer';
+    ell.appendChild(document.createTextNode('… '));
+    ell.appendChild(link);
+    var ns = lastTN.nextSibling;
+    if (ns) lastTN.parentNode.insertBefore(ell, ns);
+    else lastTN.parentNode.appendChild(ell);
 
-    // Binary-search the last text node length so the ellipsis bottom edge
-    // sits within the wrapper's visible clip boundary.
-    var wrapperBottom = wrapper.getBoundingClientRect().bottom;
+    // Binary-search: find maximum text length where ellipsis stays visible
+    var wBottom = wrapper.getBoundingClientRect().bottom;
     var orig = lastTN.textContent;
     var lo = 0, hi = orig.length;
     while (lo < hi) {
       var mid = Math.ceil((lo + hi) / 2);
       lastTN.textContent = orig.slice(0, mid);
-      if (ellipsis.getBoundingClientRect().bottom <= wrapperBottom + 1) {
-        lo = mid; // fits — try keeping more text
-      } else {
-        hi = mid - 1; // ellipsis below clip edge — trim more
-      }
+      if (ell.getBoundingClientRect().bottom <= wBottom + 1) lo = mid;
+      else hi = mid - 1;
     }
-    // Strip trailing whitespace/punctuation right before the ellipsis
     lastTN.textContent = orig.slice(0, lo).replace(/[\s.,;:!?]+$/, '');
 
-    readMoreLink.addEventListener('click', function(e) {
+    link.addEventListener('click', function(e) {
       e.preventDefault();
       block.innerHTML = originalHTML;
     });
-
-    return true;
   }
 
-  var mo = new MutationObserver(function() {
-    if (initDescExpand()) mo.disconnect();
-  });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
-  if (!initDescExpand()) {
-    [200, 600, 1200].forEach(function(d) {
-      setTimeout(function() { if (initDescExpand()) mo.disconnect(); }, d);
-    });
-  }
+  // Multiple triggers to handle any timing scenario
+  initDescExpand();
+  document.addEventListener('DOMContentLoaded', initDescExpand);
+  window.addEventListener('load', initDescExpand);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(initDescExpand);
+  [100, 300, 700, 1500].forEach(function(d) { setTimeout(initDescExpand, d); });
 })();
 </script>
 {% endif %}
