@@ -1050,6 +1050,7 @@ ul.product-grid {
 }
 .breadcrumbs {
     margin: 0px 0px 0px 0px;
+    padding: 10px 15px 10px 15px;
 }
 
 @media(max-width:768px){
