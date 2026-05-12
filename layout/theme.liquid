@@ -397,83 +397,62 @@ document.addEventListener("DOMContentLoaded", function() {
     if (initialized) return;
 
     var block = document.querySelector('rte-formatter[class*="text_twGGkJ"]');
-    if (!block) return; // not in DOM yet — next trigger will retry
-
+    if (!block) return;
     if (block.dataset.clampInit) { initialized = true; return; }
-
-    // Use the element's own font-size to compute 4.5em in pixels.
-    // font-size always resolves to a px value; line-height can return "normal"
-    // (unparseable), which was silently aborting previous versions.
-    var fs = parseFloat(window.getComputedStyle(block).fontSize) || 16;
-    var maxH = fs * 4.5;
+    if (!block.offsetWidth) return; // not laid out yet – retry on next trigger
 
     initialized = true;
-    var originalHTML = block.innerHTML;
 
-    // Move content into a plain wrapper div so overflow:hidden clips a
-    // normal element (not the custom rte-formatter whose layout can differ).
+    var fs       = parseFloat(window.getComputedStyle(block).fontSize) || 16;
+    var maxH     = fs * 4.5;
+    var origHTML = block.innerHTML;
+    // Flatten all text (handles multi-<p> descriptions, normalises whitespace)
+    var fullText = block.textContent.trim().replace(/\s+/g, ' ');
+
+    // Drop the pre-collapse CSS rule
+    block.dataset.clampInit = '1';
+
+    // Place text in a plain <p> inside a plain <div> for reliable scrollHeight
     var wrapper = document.createElement('div');
-    wrapper.style.overflow = 'hidden';
-    while (block.firstChild) wrapper.appendChild(block.firstChild);
+    var p       = document.createElement('p');
+    p.style.cssText = 'margin:0;padding:0';
+    p.textContent   = fullText;
+    wrapper.appendChild(p);
+    block.innerHTML = '';
     block.appendChild(wrapper);
-    block.dataset.clampInit = '1'; // drops the pre-collapse :not([data-clamp-init]) CSS
 
-    // Measure full content height on the plain div
     var fullH = wrapper.scrollHeight;
-    if (fullH <= maxH + 4) {
-      wrapper.style.overflow = ''; // fits — restore as passthrough
+    if (fullH <= maxH + 2) {
+      // Text fits without truncation – restore original markup
+      block.innerHTML = origHTML;
       return;
     }
 
-    wrapper.style.maxHeight = maxH + 'px';
-
-    // Collect all non-empty text nodes inside wrapper (depth-first)
-    var textNodes = [];
-    (function walk(el) {
-      el.childNodes.forEach(function(n) {
-        if (n.nodeType === Node.TEXT_NODE && /\S/.test(n.textContent)) {
-          textNodes.push(n);
-        } else if (n.nodeType === Node.ELEMENT_NODE) {
-          walk(n);
-        }
-      });
-    })(wrapper);
-
-    if (!textNodes.length) return;
-
-    // Insert inline "… Läs mer" after the last text node
-    var lastTN = textNodes[textNodes.length - 1];
-    var ell = document.createElement('span');
-    ell.className = 'desc-ellipsis-inline';
-    var link = document.createElement('a');
-    link.href = '#';
-    link.className = 'desc-read-more-btn';
-    link.textContent = 'Läs mer';
-    ell.appendChild(document.createTextNode('… '));
-    ell.appendChild(link);
-    var ns = lastTN.nextSibling;
-    if (ns) lastTN.parentNode.insertBefore(ell, ns);
-    else lastTN.parentNode.appendChild(ell);
-
-    // Binary-search: find maximum text length where ellipsis stays visible
-    var wBottom = wrapper.getBoundingClientRect().bottom;
-    var orig = lastTN.textContent;
-    var lo = 0, hi = orig.length;
+    // Binary-search the trim point by character count using scrollHeight
+    var lo = 1, hi = fullText.length;
     while (lo < hi) {
       var mid = Math.ceil((lo + hi) / 2);
-      lastTN.textContent = orig.slice(0, mid);
-      if (ell.getBoundingClientRect().bottom <= wBottom + 1) lo = mid;
+      p.textContent = fullText.slice(0, mid) + '… Läs mer';
+      if (wrapper.scrollHeight <= maxH) lo = mid;
       else hi = mid - 1;
     }
-    lastTN.textContent = orig.slice(0, lo).replace(/[\s.,;:!?]+$/, '');
+
+    var truncText = fullText.slice(0, lo).replace(/[\s.,;:!?]+$/, '');
+
+    var link       = document.createElement('a');
+    link.href      = '#';
+    link.className = 'desc-read-more-btn';
+    link.textContent = 'Läs mer';
+
+    p.textContent = truncText + '… ';
+    p.appendChild(link);
 
     link.addEventListener('click', function(e) {
       e.preventDefault();
-      block.innerHTML = originalHTML;
+      block.innerHTML = origHTML;
     });
   }
 
-  // Multiple triggers to handle any timing scenario
   initDescExpand();
   document.addEventListener('DOMContentLoaded', initDescExpand);
   window.addEventListener('load', initDescExpand);
