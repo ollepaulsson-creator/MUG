@@ -46,18 +46,15 @@
     --badge-text-transform: {{ settings.badge_text_transform }};
   "
 >
-  {%- if has_status -%}
-    {%- for status in status_list -%}
-      {%- assign status_slug = status | strip | downcase | replace: ' ', '-' -%}
-      <div class="product-badges__badge product-badges__badge--rectangle color-scheme-status color-scheme-status--{{ status_slug }}">
-        {{- status | strip -}}
-      </div>
-    {%- endfor -%}
-    {%- if is_nyhet -%}
-      <div class="product-badges__badge product-badges__badge--rectangle color-scheme-nyhet">
-        Nyhet
-      </div>
-    {%- endif -%}
+  {%- comment %} ── One badge at a time, in priority order ── {%- endcomment -%}
+  {%- if status_list contains 'Begagnad' -%}
+    <div class="product-badges__badge product-badges__badge--rectangle color-scheme-status color-scheme-status--begagnad">
+      Begagnad
+    </div>
+  {%- elsif status_list contains 'B-stock' -%}
+    <div class="product-badges__badge product-badges__badge--rectangle color-scheme-status color-scheme-status--b-stock">
+      B-stock
+    </div>
   {%- elsif is_nyhet -%}
     <div class="product-badges__badge product-badges__badge--rectangle color-scheme-nyhet">
       Nyhet
