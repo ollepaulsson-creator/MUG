@@ -1862,13 +1862,10 @@ media-gallery slideshow-slides {
 
 /* ── Homepage section headings: semantic <h2> styled as original <h3> ──
    Changed from <h3> to <h2> for correct heading hierarchy. The old h3 look
-   came from the global "h3" rule below (14px, uppercase, weight 400) — not
-   from the theme's --font-h3--* vars. Replicate those exact values here. */
-.text-block--product_list_text_yizz4P h2,
-.text-block--product_list_text_CGEhqa h2,
-.text-block--product_list_text_aKMaAt h2,
-.text-block--product_list_text_KVPQTQ h2,
-.text-block--product_list_text_QAxFba h2 {
+   came from the global "h3" rule (14px, uppercase, weight 400). Shopify
+   prepends an encoded section ID to block classes, so we use [class*=] to
+   match the shared block-ID suffix rather than the full generated class name. */
+[class*="product_list_text_"] h2 {
   font-size: 14px !important;
   text-transform: uppercase !important;
   font-weight: 400 !important;
@@ -1876,11 +1873,10 @@ media-gallery slideshow-slides {
 }
 
 /* ── Product page "Relaterade produkter": semantic <h2> styled as original <h4> ──
-   Changed from <h4> to <h2>. The old h4 appearance was determined by
-   .text-block h4 { font-size: 15px; text-transform: initial } in custom.css.
-   Without that rule the h4-wrapper class applies theme h4 vars (uppercase etc.).
-   Restore the original look on this specific block. */
-.text-block--text_cbcgyb h2 {
+   Changed from <h4> to <h2>. The old h4 look came from
+   .text-block h4 { font-size: 15px; text-transform: initial }.
+   Same Shopify class-prefix issue — match via [class*=] on the block ID. */
+[class*="text_cbcgyb"] h2 {
   font-size: 15px !important;
   text-transform: none !important;
   font-weight: inherit;
