@@ -35,6 +35,7 @@
     <a
       href="{{ settings.link }}"
       class="group-block__link"
+      aria-label="{{ settings.link | split: '/' | last | replace: '-', ' ' | capitalize }}"
       {% if settings.open_in_new_tab %}
         target="_blank" rel="noopener"
       {% endif %}
