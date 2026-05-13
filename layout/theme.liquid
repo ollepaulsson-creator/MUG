@@ -21,15 +21,40 @@
       >
     {%- endif -%}
 
-    {% comment %} This a way to wait for main content to load when navigating to a new page so that the view transitions can work consistently {% endcomment %}
-    {% # theme-check-disable RemoteAsset %}
-    <link
-      rel="expect"
-      href="#MainContent"
-      blocking="render"
-      id="view-transition-render-blocker"
-    >
-    {% # theme-check-enable RemoteAsset %}
+    {% comment %} View-transition render blocker removed — view transitions are
+      disabled (navigation:none in custom.css) so blocking="render" only adds
+      latency without benefit. {% endcomment %}
+
+    {% comment %} Speculation Rules: prerender product pages on hover so navigation
+      feels near-instant. Moderate eagerness = triggers ~200ms after hover, not on
+      every link entering the viewport. Excludes cart/checkout/account to avoid
+      side-effects. Gracefully ignored by Safari/Firefox. {% endcomment %}
+    <script type="speculationrules">
+    {
+      "prerender": [
+        {
+          "where": {
+            "and": [
+              { "href_matches": "/products/*" },
+              { "not": { "href_matches": "/*\\?*add*" } }
+            ]
+          },
+          "eagerness": "moderate"
+        }
+      ],
+      "prefetch": [
+        {
+          "where": {
+            "and": [
+              { "href_matches": "/collections/*" },
+              { "not": { "href_matches": "/*\\?*add*" } }
+            ]
+          },
+          "eagerness": "moderate"
+        }
+      ]
+    }
+    </script>
 
     {%- render 'meta-tags' -%}
     {%- render 'fonts' -%}
