@@ -1854,3 +1854,8 @@ media-gallery slideshow-slides {
   margin-block: var(--font-h6--spacing);
   line-height: 23px;
 }
+
+/* Footer: reduce outer horizontal margin to 15px on all screen sizes */
+#shopify-section-group-footer-group [class*="page-width-"] {
+  --page-margin: 15px;
+}
