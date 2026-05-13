@@ -134,14 +134,7 @@
               echo '<show-more-component class="show-more" data-expanded="false" data-skip-node-update="true">'
             endif
           endif
-          assign should_use_pills = true
-
-          for value in filter.values
-            if value.label.size > 3
-              assign should_use_pills = false
-              break
-            endif
-          endfor
+          assign should_use_pills = false
 
           if filter.type == 'boolean'
             assign should_use_pills = false
