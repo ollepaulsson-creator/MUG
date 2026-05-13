@@ -349,13 +349,7 @@ class PredictiveSearchComponent extends Component {
     if (!this.dataset.sectionId) return;
 
     const url = new URL(Theme.routes.predictive_search_url, location.origin);
-    // Expand query to also match products whose typ:/status: tags contain the term,
-    // since the predictive search API prefix-matches full tag strings and won't
-    // tokenise "status:begagnat" → "begagnat" the way the full search page does.
-    const expandedQuery = searchTerm.includes(':')
-      ? searchTerm
-      : `${searchTerm} OR tag:typ:${searchTerm} OR tag:status:${searchTerm}`;
-    url.searchParams.set('q', expandedQuery);
+    url.searchParams.set('q', searchTerm);
     url.searchParams.set('resources[limit_scope]', 'each');
     url.searchParams.set('resources[limit]', '9');
     url.searchParams.set('resources[options][fields]', 'title,product_type,variants.title,vendor,tag');
