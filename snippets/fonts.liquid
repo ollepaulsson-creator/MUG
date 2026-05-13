@@ -37,7 +37,10 @@
     crossorigin
   >
 {%- endunless -%}
-{%- unless settings.type_accent_font.system? -%}
+{%- unless settings.type_accent_font.system?
+  or settings.type_accent_font | font_url == settings.type_heading_font | font_url
+  or settings.type_accent_font | font_url == settings.type_body_font | font_url
+  or settings.type_accent_font | font_url == settings.type_subheading_font | font_url -%}
   <link
     rel="preload"
     as="font"
