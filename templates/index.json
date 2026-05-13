@@ -64,7 +64,7 @@
               "type": "_product-list-text",
               "name": "t:names.collection_title",
               "settings": {
-                "text": "<h3>Teenage Engineering</h3>",
+                "text": "<h2>Teenage Engineering</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -321,7 +321,7 @@
               "type": "_product-list-text",
               "name": "t:names.collection_title",
               "settings": {
-                "text": "<h3>Effektpedaler</h3>",
+                "text": "<h2>Effektpedaler</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -572,7 +572,7 @@
               "type": "_product-list-text",
               "name": "t:names.collection_title",
               "settings": {
-                "text": "<h3>20% på D'Addario EXL strängar!</h3>",
+                "text": "<h2>20% på D'Addario EXL strängar!</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -823,7 +823,7 @@
               "type": "_product-list-text",
               "name": "t:names.collection_title",
               "settings": {
-                "text": "<h3>Synthar & Moduler</h3>",
+                "text": "<h2>Synthar & Moduler</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1074,7 +1074,7 @@
               "type": "_product-list-text",
               "name": "t:names.collection_title",
               "settings": {
-                "text": "<h3>Ljudhealing & Meditation</h3>",
+                "text": "<h2>Ljudhealing & Meditation</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",

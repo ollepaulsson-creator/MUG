@@ -376,7 +376,7 @@
           "type": "text",
           "name": "t:names.header",
           "settings": {
-            "text": "<h4>Relaterade produkter</h4>",
+            "text": "<h2>Relaterade produkter</h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
