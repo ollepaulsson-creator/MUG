@@ -1878,7 +1878,8 @@ media-gallery slideshow-slides {
    Same Shopify class-prefix issue — match via [class*=] on the block ID. */
 [class*="text_cbcgyb"] h2 {
   font-size: 15px !important;
-  text-transform: none !important;
-  font-weight: inherit;
+  text-transform: uppercase !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.9px;
   padding-top: 15px;
 }
