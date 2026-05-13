@@ -9,8 +9,8 @@
   {% render 'product-card-badges', product: product, settings: settings %}
 {%- enddoc -%}
 
+{%- comment %} ── Nyheter: keep tag-based logic intact ── {%- endcomment -%}
 {%- assign is_nyhet = false -%}
-{%- assign is_bstock = false -%}
 {%- assign now_seconds = 'now' | date: '%s' | plus: 0 -%}
 {%- assign published_seconds = product.published_at | date: '%s' | plus: 0 -%}
 {%- assign age_days = now_seconds | minus: published_seconds | divided_by: 86400 -%}
@@ -20,10 +20,22 @@
       {%- assign is_nyhet = true -%}
     {%- endif -%}
   {%- endif -%}
-  {%- if tag == 'B-stock' -%}
-    {%- assign is_bstock = true -%}
-  {%- endif -%}
 {%- endfor -%}
+
+{%- comment %} ── Status: read from metafield, support list and single-value types ── {%- endcomment -%}
+{%- assign status_meta = product.metafields.custom.status -%}
+{%- assign status_list = '' -%}
+{%- if status_meta != blank -%}
+  {%- if status_meta.type contains 'list' -%}
+    {%- assign status_list = status_meta.value -%}
+  {%- else -%}
+    {%- assign status_list = status_meta.value | split: ',' -%}
+  {%- endif -%}
+{%- endif -%}
+{%- assign has_status = false -%}
+{%- if status_list != blank -%}
+  {%- assign has_status = true -%}
+{%- endif -%}
 
 <div
   class="product-badges product-badges--{{ settings.badge_position }}"
@@ -34,14 +46,18 @@
     --badge-text-transform: {{ settings.badge_text_transform }};
   "
 >
-  {%- if product.tags contains 'Status:Begagnad' -%}
-    <div class="product-badges__badge product-badges__badge--rectangle color-scheme-begagnad">
-      Begagnad
-    </div>
-  {%- elsif is_bstock -%}
-    <div class="product-badges__badge product-badges__badge--rectangle color-scheme-bstock">
-      B-stock
-    </div>
+  {%- if has_status -%}
+    {%- for status in status_list -%}
+      {%- assign status_slug = status | strip | downcase | replace: ' ', '-' -%}
+      <div class="product-badges__badge product-badges__badge--rectangle color-scheme-status color-scheme-status--{{ status_slug }}">
+        {{- status | strip -}}
+      </div>
+    {%- endfor -%}
+    {%- if is_nyhet -%}
+      <div class="product-badges__badge product-badges__badge--rectangle color-scheme-nyhet">
+        Nyhet
+      </div>
+    {%- endif -%}
   {%- elsif is_nyhet -%}
     <div class="product-badges__badge product-badges__badge--rectangle color-scheme-nyhet">
       Nyhet
@@ -105,20 +121,17 @@
     text-transform: uppercase;
   }
 
-  /* Begagnad badge */
-  .product-badges__badge.color-scheme-begagnad {
-    background: rgb(255, 255, 255);
-    color: black;
-    letter-spacing: 1px;
+  /* Status metafield badges (default) */
+  .product-badges__badge.color-scheme-status {
+    background: #fff;
+    color: #000;
     font-size: 12px!important;
+    letter-spacing: 1px;
   }
 
-  /* B-stock badge */
-  .product-badges__badge.color-scheme-bstock {
-    background: #fff;
+  /* B-stock status override */
+  .product-badges__badge.color-scheme-status--b-stock {
     color: red;
-    font-size: 12px!important;
-    letter-spacing: 1px;
   }
 
   /* Rea/Sale badge */
