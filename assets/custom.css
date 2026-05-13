@@ -1856,6 +1856,6 @@ media-gallery slideshow-slides {
 }
 
 /* Footer: reduce outer horizontal margin to 15px on all screen sizes */
-#shopify-section-group-footer-group [class*="page-width-"] {
+#shopify-section-group-footer-group {
   --page-margin: 15px;
 }
