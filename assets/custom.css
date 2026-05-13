@@ -1866,7 +1866,7 @@ media-gallery slideshow-slides {
    prepends an encoded section ID to block classes, so we use [class*=] to
    match the shared block-ID suffix rather than the full generated class name. */
 [class*="product_list_text_"] h2 {
-  font-size: 14px !important;
+  font-size: 15px !important;
   text-transform: uppercase !important;
   font-weight: 400 !important;
   letter-spacing: normal;
