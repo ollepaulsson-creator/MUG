@@ -1855,7 +1855,7 @@ media-gallery slideshow-slides {
   line-height: 23px;
 }
 
-/* Footer: reduce outer horizontal margin to 15px on all screen sizes */
+/* Footer: reduce outer horizontal margin to 30px on all screen sizes */
 .shopify-section-group-footer-group .section {
-  --page-margin: 15px;
+  --page-margin: 30px;
 }
