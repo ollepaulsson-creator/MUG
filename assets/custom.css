@@ -1859,3 +1859,23 @@ media-gallery slideshow-slides {
 .shopify-section-group-footer-group .section {
   --page-margin: 30px;
 }
+
+/* ── Homepage section headings: semantic <h2> styled as <h3> ──
+   Changed from <h3> to <h2> for correct heading hierarchy (h1 is the page
+   title). These five blocks are targeted by their unique text-block IDs so
+   only the homepage product-list section titles are affected. All --font-h3--*
+   custom properties are applied so the visual appearance is identical to before. */
+.text-block--product_list_text_yizz4P h2,
+.text-block--product_list_text_CGEhqa h2,
+.text-block--product_list_text_aKMaAt h2,
+.text-block--product_list_text_KVPQTQ h2,
+.text-block--product_list_text_QAxFba h2 {
+  font-family: var(--font-h3--family);
+  font-style: var(--font-h3--style);
+  font-weight: var(--font-h3--weight);
+  font-size: var(--font-h3--size);
+  line-height: var(--font-h3--line-height);
+  letter-spacing: var(--font-h3--letter-spacing);
+  text-transform: var(--font-h3--case);
+  margin-block: var(--font-h3--spacing);
+}
