@@ -85,12 +85,12 @@ body {
   padding: 0px 0px 0px !important;
   /* Clip shadow flush at the top so it doesn't bleed over the header */
   clip-path: inset(0 -50px -50px -50px) !important;
+  margin-top: 0 !important;
 }
 
 /* Submenu must paint above the sticky header (--layer-sticky: 8, max theme layer: 20) */
 .tmenu_item_active > .tmenu_submenu {
   z-index: 200 !important;
-  margin-top: 12px !important;
   animation: none !important;
 }
 
