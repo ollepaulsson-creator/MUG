@@ -1880,6 +1880,6 @@ media-gallery slideshow-slides {
   font-size: 15px !important;
   text-transform: uppercase !important;
   font-weight: 400 !important;
-  letter-spacing: 0.9px;
+  letter-spacing: 0.9px !important;
   padding-top: 15px;
 }
