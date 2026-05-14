@@ -68,7 +68,8 @@ Produkters konkurrenturlar hanteras i `competitor_product_urls`-tabellen. Urlar 
 
 ### Prislogik
 
-- **Prisgolv:** `kostnadspris × (1 + marginal / 100)` — standardmarginal 15%
+- **Kostnadspris:** Hämtas från Shopify Admin GraphQL API via `inventoryItem.unitCost.amount` (returneras i SEK som decimal, konverteras till ören genom `Math.round(amount * 100)`). Fältet är Shopifys inbyggda "Cost per item"-fält. Om `unitCost` är null eller 0 för en produkt behandlas det som saknat kostnadspris.
+- **Prisgolv:** `kostnadspris_i_ören × (1 + marginal / 100)` — standardmarginal 15%
 - **Mål:** Lägsta konkurrentpris − 0 kr (vi matchar exakt, ej underskrider), avrundat nedåt till 10-tal
 - **Uppåtjustering:** Om lägsta konkurrentpris > nuvarande pris, sätt nytt pris = `Math.floor(lägsta_konkurrent / 10) * 10`. Taket är `price_history.original_price` — priset kan aldrig höjas över det ursprungliga priset vid taggning.
 - **Prisgolvskontroll:** Om beräknat pris < prisgolv, sätt pris = `Math.ceil(prisgolv / 10) * 10`
