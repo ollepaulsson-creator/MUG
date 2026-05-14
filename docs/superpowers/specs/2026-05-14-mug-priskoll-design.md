@@ -70,7 +70,7 @@ Produkters konkurrenturlar hanteras i `competitor_product_urls`-tabellen. Urlar 
 
 - **Kostnadspris:** Hämtas från Shopify Admin GraphQL API via `inventoryItem.unitCost.amount` (returneras i SEK som decimal, konverteras till ören genom `Math.round(amount * 100)`). Fältet är Shopifys inbyggda "Cost per item"-fält. Om `unitCost` är null eller 0 för en produkt behandlas det som saknat kostnadspris.
 - **Prisgolv:** `kostnadspris_i_ören × (1 + marginal / 100)` — standardmarginal 15%
-- **Mål:** Lägsta konkurrentpris − 0 kr (vi matchar exakt, ej underskrider), avrundat nedåt till 10-tal
+- **Mål:** Lägsta konkurrentpris, avrundat nedåt till 10-tal. Per-produkt underprissättning i % appliceras efter detta (se nedan).
 - **Uppåtjustering:** Om lägsta konkurrentpris > nuvarande pris, sätt nytt pris = `Math.floor(lägsta_konkurrent / 10) * 10`. Taket är `price_history.original_price` — priset kan aldrig höjas över det ursprungliga priset vid taggning.
 - **Prisgolvskontroll:** Om beräknat pris < prisgolv, sätt pris = `Math.ceil(prisgolv / 10) * 10`
 - **Saknar kostnadspris:** Produkten flaggas med varning och priset ändras inte
@@ -78,6 +78,26 @@ Produkters konkurrenturlar hanteras i `competitor_product_urls`-tabellen. Urlar 
 
 **Avrundningsregel (nedåt):** `Math.floor(pris / 10) * 10`  
 **Avrundningsregel (prisgolv uppåt):** `Math.ceil(prisgolv / 10) * 10`
+
+### Per-produkt prisstrategi
+
+Varje produkt kan ha en individuell prisstrategi som åsidosätter standardbeteendet. Strategin lagras i tabellen `product_strategies`.
+
+**Strategialternativ:**
+- `standard` — följ globala inställningar (matcha lägsta konkurrentpris, 0% underprissättning)
+- `custom` — underprissätt med `undercut_pct` procent under lägsta konkurrentpris
+- `exact` — matcha lägsta konkurrentpris exakt (alias för `custom` med `undercut_pct = 0`)
+
+**Beräkning vid `custom`:**
+```
+råpris = lägsta_konkurrentpris × (1 − undercut_pct / 100)
+nytt_pris = max(Math.floor(råpris / 10) * 10, prisgolv_avrundat_uppåt)
+nytt_pris = min(nytt_pris, original_price)
+```
+
+Prisstrategi sätts via **kontextmenyn** (···) i slutet av varje produktrad → "Prisstrategi" → modal med förhandsgranskning i realtid baserat på senast kända konkurrentpris.
+
+Produkter med en anpassad strategi (`custom`) visas med en lila badge i produkttabellen ("−X% strategi").
 
 ### Produktmatchning mot konkurrenter
 
@@ -152,6 +172,13 @@ Tröskelvärdet för fuzzy match är globalt konfigurerbart via `settings`-tabel
 - `role` (text) — `owner` | `member`
 - `created_at` (timestamptz)
 
+**`product_strategies`** (per-produkt prisstrategier)
+- `shopify_product_id` (text, PK) — Shopify GID
+- `strategy` (text) — `standard` | `custom` | `exact`
+- `undercut_pct` (numeric, nullable) — procentuell underprissättning (0–50), används när `strategy = custom`
+- `updated_at` (timestamptz)
+- `updated_by` (uuid, FK → auth.users)
+
 **`scrape_jobs`** (tillstånd för manuellt triggade skrapjobb)
 - `id` (uuid, PK) — används som `jobId` i API-svaret
 - `status` (text) — `running` | `done` | `error`
@@ -187,6 +214,10 @@ Standardvärden i `settings`:
 | `/api/cron/scrape` | GET | Anropas av Vercel Cron Job. Kontrollerar `settings.cron_enabled` innan körning. |
 | `/api/shopify/products` | GET | Hämtar produkter taggade "priskoll" från Shopify Admin API |
 | `/api/shopify/products/[id]/price` | PATCH | Uppdaterar pris för en produkt i Shopify |
+| `/api/shopify/test` | GET | Testar Shopify-anslutning, returnerar butiksnamn vid lyckat anrop |
+| `/api/products/[id]/strategy` | GET | Hämtar prisstrategi för en produkt |
+| `/api/products/[id]/strategy` | PUT | Sparar prisstrategi. Body: `{ strategy: 'standard'\|'custom'\|'exact', undercut_pct?: number }` |
+| `/api/scrape/test` | POST | Testar skrapning mot en URL. Body: `{ url, css_selector?, use_json_ld? }`. Returnerar `{ price, raw_value, method, response_time_ms, selector_hits }`. Kräver autentisering. |
 
 Vercel Cron konfigureras i `vercel.json` med fast schema (`0 1 * * *` = 03:00 CET). Toggeln i UI sätter `settings.cron_enabled = false/true` — cron-endpointen respekterar denna flagga och avbryter om den är `false`. Klocktiden är alltså alltid 03:00 och kan inte ändras via UI utan en redeploy.
 
@@ -245,6 +276,20 @@ Produkttabell för alla produkter taggade "priskoll". Produktdata (namn, leveran
 
 **Toolbar:** Sökfält (produktnamn, SKU, streckkod), filter (kategori, leverantör, status), CSV-export, "Hämta priser nu"-knapp i topbar.
 
+**Kontextmeny (···) per produktrad:** En tre-punkts-knapp i slutet av varje rad öppnar en dropdown med följande alternativ:
+- **Prisstrategi** — öppnar modal för att sätta individuell prisstrategi (se nedan)
+- **Redigera produkt** — öppnar modal för att justera matchningsdata (konkurrent-URLar etc.)
+- **Öppna i Shopify** — extern länk till produkten i Shopify admin
+- *(separator)*
+- **Kör skrapning nu** — triggar skrapning för just denna produkt via POST `/api/scrape` med produktfilter
+- **Visa prishistorik** — öppnar modal med logg över alla prisändringar för produkten
+
+**Prisstrategimodal:** Öppnas från kontextmenyn. Innehåller:
+- Strategival: Standard / Anpassad underprissättning / Matcha exakt
+- Procentfält (visas vid "Anpassad"): 0–50%
+- Förhandsgranskning i realtid: visar beräknat nytt pris baserat på senast kända konkurrentpris, med prisgolv och avrundning
+- Spara → PUT `/api/products/[id]/strategy`
+
 **Manuell skrapningstrigger:** Klick på "Hämta priser nu" → POST `/api/scrape` → UI visar progress-indikator, pollar `/api/scrape/[jobId]` var 3:e sekund tills `done` eller `error`.
 
 **Paginering** i tabellens nederkant (25 produkter per sida).
@@ -260,6 +305,16 @@ Tabell över alla konkurrenter med deras skrapningskonfiguration.
 **Kolumner:** Logo, Konkurrent (namn + URL), Skrapningskonfiguration (JSON-LD-badge och/eller CSS-selektor), Senaste körning, Status, Matchade produkter, Åtgärder (Redigera/Ta bort).
 
 **Lägg till konkurrent:** Formulär inline med fält för namn, URL, logo-URL, CSS-selektor, search_url_template och kryssruta för JSON-LD.
+
+**Kontextmeny (···) per konkurrentrad:** Dropdown med Redigera, Testa skrapning, Ta bort.
+
+**Testa skrapning-modal:** Öppnas från konkurrentradens kontextmeny. Innehåller:
+- Flik "CSS-selektor" och flik "JSON-LD / Schema.org"
+- Fält för produkt-URL att testa mot
+- Fält för CSS-selektor (förifyllt med konkurrentens konfigurerade selektor)
+- "Kör test"-knapp → POST `/api/scrape/test`
+- Resultat visas direkt: hämtat pris, metod (badge), råvärde, responstid, selektorträffar
+- "Spara selektor"-knapp uppdaterar konkurrentens `css_selector`
 
 **CSV-export:** Alla konkurrenter, alla kolumner.
 
