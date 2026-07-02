@@ -493,6 +493,10 @@ zoom-dialog .product-media__image--lqip {
   animation: cardEnter 0.15s ease-in-out both;
   animation-delay: calc(var(--card-index, 0) * 25ms);
   border-bottom: 1px solid #e4e4e4;
+  /* Prevent base.css @starting-style transition from re-flashing cards (and
+     badges) to opacity:0 when JS adds results-list[initialized] after the
+     cardEnter animation has already completed (slow network / JS load). */
+  transition: none;
 }
 
 media-gallery slideshow-slide {
