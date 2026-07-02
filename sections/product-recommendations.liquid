@@ -230,18 +230,14 @@
 </product-recommendations>
 
 {% stylesheet %}
+  /* Every item carries its own border-bottom and the container has none
+     (see custom.css), so the last VISIBLE row always draws the outer bottom
+     line. The old :nth-last-child(-n+columns) approach broke when "VISA FLER"
+     hid trailing items with display:none — nth-last-child counts hidden
+     items, so the visible last row kept its border and doubled up with the
+     container's border-bottom. */
   product-recommendations .resource-list--grid .resource-list__item {
     border-bottom: 1px solid #e5e5e5;
-  }
-
-  product-recommendations .resource-list--grid .resource-list__item:nth-last-child(-n+{{ section.settings.columns }}) {
-    border-bottom: none;
-  }
-
-  @media screen and (max-width: 749px) {
-    product-recommendations .resource-list--grid .resource-list__item:nth-last-child(-n+{{ section.settings.mobile_columns }}) {
-      border-bottom: none;
-    }
   }
 
 .product-recommendations__skeleton-item {

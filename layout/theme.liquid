@@ -71,16 +71,40 @@
     {% if template contains 'collection' %}
     <style>
       /*
-        Pre-collapse the collection description so it never flashes at full
-        height before the "Läs mer" JS initialises. Placed in <head> so the
-        rule is parsed before the body renders. The :not([data-clamp-init])
-        selector drops away the moment JS wraps the content, so the browser
-        never paints an intermediate uncollapsed state.
-        6em ≈ 4–5 lines at line-height 1.5.
+        Collection description clamp — pure CSS so the block has its final
+        height from the very first paint and never changes during load.
+        JS (end of body) only adds the "Läs mer" overlay link when the text
+        actually overflows; clicking it adds .desc-expanded. Because the
+        clamp itself is CSS, a late or re-run script can never cause the
+        height to jump.
       */
-      rte-formatter[class*="text_twGGkJ"]:not([data-clamp-init]) {
-        max-height: 6em;
-        overflow: hidden;
+      rte-formatter[class*="text_twGGkJ"] {
+        position: relative;
+      }
+      /* Two clamping mechanisms on purpose: -webkit-line-clamp needs
+         display:-webkit-box, but something (adopted stylesheet) forces
+         display:flow-root on this element and wins the cascade on some
+         pages. The max-height in em (3 lines x line-height 1.4) caps the
+         box identically regardless of which display value wins, so the
+         height — and the "Läs mer" overlay pinned to its bottom right —
+         is stable on every viewport. */
+      rte-formatter[class*="text_twGGkJ"]:not(.desc-expanded) {
+        display: -webkit-box !important;
+        -webkit-box-orient: vertical !important;
+        -webkit-line-clamp: 3;
+        max-height: 4.2em !important;
+        overflow: hidden !important;
+      }
+      .desc-read-more-btn {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        padding-left: 48px;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0), #fff 40%);
+        color: inherit;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        cursor: pointer;
       }
     </style>
     {% endif %}
@@ -414,73 +438,36 @@ document.addEventListener("DOMContentLoaded", function() {
 {% if template contains 'collection' %}
 <script>
 (function() {
-  var initialized = false;
-
+  // The clamp itself is pure CSS (see <head>): the description paints at its
+  // final 3-line height immediately. This script only adds the "Läs mer"
+  // overlay when the text overflows — appearing late never changes height.
   function initDescExpand() {
-    if (initialized) return;
-
     var block = document.querySelector('rte-formatter[class*="text_twGGkJ"]');
     if (!block) return;
-    if (block.dataset.clampInit) { initialized = true; return; }
-    if (!block.offsetWidth) return; // not laid out yet – retry on next trigger
+    if (block.classList.contains('desc-expanded')) return;
+    if (block.querySelector('.desc-read-more-btn')) return;
+    if (block.scrollHeight <= block.clientHeight + 2) return; // fits -- no link
 
-    initialized = true;
-
-    var fs       = parseFloat(window.getComputedStyle(block).fontSize) || 16;
-    var maxH     = fs * 6;
-    var origHTML = block.innerHTML;
-    // Flatten all text (handles multi-<p> descriptions, normalises whitespace)
-    var fullText = block.textContent.trim().replace(/\s+/g, ' ');
-
-    // Drop the pre-collapse CSS rule
-    block.dataset.clampInit = '1';
-
-    // Place text in a plain <p> inside a plain <div> for reliable scrollHeight
-    var wrapper = document.createElement('div');
-    var p       = document.createElement('p');
-    p.style.cssText = 'margin:0;padding:0';
-    p.textContent   = fullText;
-    wrapper.appendChild(p);
-    block.innerHTML = '';
-    block.appendChild(wrapper);
-
-    var fullH = wrapper.scrollHeight;
-    if (fullH <= maxH + 2) {
-      // Text fits without truncation – restore original markup
-      block.innerHTML = origHTML;
-      return;
-    }
-
-    // Binary-search the trim point by character count using scrollHeight
-    var lo = 1, hi = fullText.length;
-    while (lo < hi) {
-      var mid = Math.ceil((lo + hi) / 2);
-      p.textContent = fullText.slice(0, mid) + '… Läs mer';
-      if (wrapper.scrollHeight <= maxH) lo = mid;
-      else hi = mid - 1;
-    }
-
-    var truncText = fullText.slice(0, lo).replace(/[\s.,;:!?]+$/, '');
-
-    var link       = document.createElement('a');
-    link.href      = '#';
+    var link = document.createElement('a');
+    link.href = '#';
     link.className = 'desc-read-more-btn';
     link.textContent = 'Läs mer';
-
-    p.textContent = truncText + '… ';
-    p.appendChild(link);
-
     link.addEventListener('click', function(e) {
       e.preventDefault();
-      block.innerHTML = origHTML;
+      block.classList.add('desc-expanded');
+      link.remove();
     });
+    block.appendChild(link);
   }
 
-  initDescExpand();
-  document.addEventListener('DOMContentLoaded', initDescExpand);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDescExpand);
+  } else {
+    initDescExpand();
+  }
+  // Re-check after full load in case rte-formatter re-rendered its content
+  // and dropped the injected link (height is CSS-stable either way).
   window.addEventListener('load', initDescExpand);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(initDescExpand);
-  [100, 300, 700, 1500].forEach(function(d) { setTimeout(initDescExpand, d); });
 })();
 </script>
 {% endif %}

@@ -52,6 +52,16 @@ export class DialogComponent extends Component {
     document.body.style.top = `-${scrollY}px`;
 
     dialog.showModal();
+
+    // showModal() auto-focuses the first focusable control, and iOS Safari
+    // draws its focus ring even for touch-initiated opens, making e.g. the
+    // first filter checkbox look pre-selected. On coarse-pointer devices,
+    // move focus to the dialog itself instead.
+    if (window.matchMedia('(pointer: coarse)').matches) {
+      dialog.setAttribute('tabindex', '-1');
+      dialog.focus({ preventScroll: true });
+    }
+
     this.dispatchEvent(new DialogOpenEvent());
 
     // Wait until the next tick to add the event listeners to avoid race condition

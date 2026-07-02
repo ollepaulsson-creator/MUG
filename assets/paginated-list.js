@@ -187,6 +187,11 @@ export default class PaginatedList extends Component {
       if (!nextPageItemElements) return;
     }
 
+    // Mark items appended by infinite scroll so CSS can animate their
+    // entrance without animating the initial server-rendered page.
+    for (const item of nextPageItemElements) {
+      item.classList.add('product-grid__item--appended');
+    }
     grid.append(...nextPageItemElements);
 
     this.#aspectRatioHelper.processNewElements();

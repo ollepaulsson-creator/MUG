@@ -490,13 +490,19 @@ zoom-dialog .product-media__image--lqip {
 }
 
 .product-grid__item {
-  animation: cardEnter 0.15s ease-in-out both;
-  animation-delay: calc(var(--card-index, 0) * 25ms);
   border-bottom: 1px solid #e4e4e4;
   /* Prevent base.css @starting-style transition from re-flashing cards (and
      badges) to opacity:0 when JS adds results-list[initialized] after the
      cardEnter animation has already completed (slow network / JS load). */
   transition: none;
+}
+
+/* Entrance animation only for cards appended by infinite scroll
+   (class added in paginated-list.js). The initial server-rendered page
+   renders instantly with no per-card stagger — one stable reveal. */
+.product-grid__item--appended {
+  animation: cardEnter 0.15s ease-in-out both;
+  animation-delay: calc(var(--card-index, 0) * 25ms);
 }
 
 media-gallery slideshow-slide {
@@ -1008,7 +1014,10 @@ ul.product-grid {
 
 .product-recommendations .resource-list--grid {
     border-top: 1px solid #e5e5e5;
-    border-bottom: 1px solid #e5e5e5;
+    /* No border-bottom here: each item carries its own border-bottom
+       (product-recommendations.liquid), so the last visible row draws the
+       outer bottom line. A container border doubled up with the item borders
+       whenever "VISA FLER" kept hidden items at the end of the list. */
 }
 .text-block h1, .text-block.h1 > * {
     font-size: 32px;
@@ -1700,11 +1709,26 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
     padding-inline-start: 5px !important;
     padding-right: 6px !important;
   }
+
+  /* Product-list carousels (homepage etc.): the slides run flush with the
+     viewport edge, while collection-grid cards sit behind an 8px gutter.
+     5px + 8px = 13px puts carousel card text at the same visual inset as
+     collection cards. */
+  .ui-test-product-list .product-card__content .text-block {
+    padding-inline-start: 13px !important;
+  }
 }
 
 /* Show sale price in black instead of red */
 .price--sale {
   color: var(--color-foreground) !important;
+}
+
+/* Drawers receive focus on open (dialog.js moves it off the first control
+   on touch devices) — never draw an outline on the dialog itself. */
+dialog:focus,
+dialog:focus-visible {
+  outline: none;
 }
 
 /* Top border on filter, cart, and search drawers — mobile only */
