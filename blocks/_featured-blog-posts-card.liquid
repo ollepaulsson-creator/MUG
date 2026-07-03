@@ -123,7 +123,11 @@
     min-width: 0;
   }
 
-   .resource-list--grid {
+  /* Scoped with :has() — {% stylesheet %} blocks are aggregated globally,
+     so a bare .resource-list--grid rule here leaked a border-bottom onto
+     every resource grid on the site (e.g. doubled borders under product
+     recommendations). Only grids that actually contain blog cards get it. */
+  .resource-list--grid:has(.featured-blog-posts-card) {
     border-bottom: 1px solid #ddd;
   }
 
