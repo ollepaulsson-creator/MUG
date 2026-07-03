@@ -1738,6 +1738,13 @@ body:has(.tmenu_wrapper) .overflow-menu {
   line-height: 1.4 !important;
 }
 
+/* Collections: the section reserves bottom padding for pagination controls.
+   When none are rendered (single-page collections, infinite scroll), collapse
+   it so the grid meets the next section without dead space. */
+results-list.section:not(:has(.pagination)) {
+  padding-block-end: 0 !important;
+}
+
 /* Show sale price in black instead of red */
 .price--sale {
   color: var(--color-foreground) !important;
