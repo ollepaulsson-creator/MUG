@@ -92,13 +92,25 @@
         display: -webkit-box !important;
         -webkit-box-orient: vertical !important;
         -webkit-line-clamp: 3;
+        /* 3lh = exactly three line boxes regardless of the element's
+           font-size/line-height at any viewport — the 4.2em line before it
+           is only a fallback for browsers without the lh unit. A wrong
+           assumption here cuts a line in half and strands the Läs mer
+           overlay mid-text. */
         max-height: 4.2em !important;
+        max-height: 3lh !important;
         overflow: hidden !important;
       }
+      /* left:auto + fit-content guard against a global rule that stretches
+         absolutely-positioned links (left 0 + right 0), which pushed the
+         link text to the block's left edge. */
       .desc-read-more-btn {
-        position: absolute;
-        right: 0;
-        bottom: 0;
+        position: absolute !important;
+        left: auto !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        top: auto !important;
+        width: fit-content !important;
         padding-left: 48px;
         background: linear-gradient(to right, rgba(255, 255, 255, 0), #fff 40%);
         color: inherit;

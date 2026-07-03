@@ -1719,6 +1719,20 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
   }
 }
 
+/* Backup for the Qikify-owned hide rule in base.css (the app injects and
+   sometimes silently removes it, leaving both menus visible). Scoped with
+   :has() so the theme menu is only hidden when the Qikify embed is actually
+   on the page — if the app is ever disabled, the theme menu comes back. */
+body:has(#qikify-smartmenu-config) .overflow-menu {
+  opacity: 0;
+}
+
+/* Carousel cards: roomier line-height on the vendor heading, which wraps to
+   two tight lines (--font-h5--line-height is 1.1) for long brand names. */
+.ui-test-product-list .product-card__content .text-block h5 {
+  line-height: 1.4 !important;
+}
+
 /* Show sale price in black instead of red */
 .price--sale {
   color: var(--color-foreground) !important;
