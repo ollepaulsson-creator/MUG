@@ -1719,11 +1719,16 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
   }
 }
 
-/* Backup for the Qikify-owned hide rule in base.css (the app injects and
-   sometimes silently removes it, leaving both menus visible). Scoped with
-   :has() so the theme menu is only hidden when the Qikify embed is actually
-   on the page — if the app is ever disabled, the theme menu comes back. */
-body:has(#qikify-smartmenu-config) .overflow-menu {
+/* The Qikify mega menu is bound per-theme in the app admin and REPLACES
+   .overflow-menu when it mounts. Qikify's own rule in base.css hides the
+   standard menu unconditionally, which leaves a theme with NO menu at all
+   wherever the app doesn't mount (unbound theme, app disabled, script
+   failure). Make it self-correcting: show the standard menu unless the
+   Qikify menu (.tmenu_wrapper) is actually in the DOM. */
+body:not(:has(.tmenu_wrapper)) .overflow-menu {
+  opacity: 1;
+}
+body:has(.tmenu_wrapper) .overflow-menu {
   opacity: 0;
 }
 
