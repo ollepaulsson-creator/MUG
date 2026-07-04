@@ -1738,6 +1738,13 @@ body:has(.tmenu_wrapper) .overflow-menu {
   line-height: 1.4 !important;
 }
 
+/* "VISA FLER" buttons (related products, search results, show-more sections):
+   one spacing step smaller than the default button (16px 24px). */
+.show-more-wrapper .button,
+.show-more-products .button {
+  padding: 12px 18px;
+}
+
 /* Collections: the section reserves bottom padding for pagination controls.
    When none are rendered (single-page collections, infinite scroll), collapse
    it so the grid meets the next section without dead space. */
