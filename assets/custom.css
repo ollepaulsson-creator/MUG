@@ -1704,6 +1704,13 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
   }
 }
 
+/* Product-list carousel cards: right padding so wrapping titles don't touch
+   the card edge (matches the 15px left inset; overridden to 13px on mobile
+   in the media block below). */
+.ui-test-product-list .product-card__content .text-block {
+  padding-inline-end: 15px !important;
+}
+
 @media screen and (max-width: 749px) {
   .product-card__content .text-block {
     padding-inline-start: 5px !important;
@@ -1716,6 +1723,7 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
      collection cards. */
   .ui-test-product-list .product-card__content .text-block {
     padding-inline-start: 13px !important;
+    padding-inline-end: 13px !important;
   }
 }
 
