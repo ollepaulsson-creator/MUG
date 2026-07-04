@@ -80,7 +80,7 @@ input[type="search"]::-ms-clear {
 
   .dialog-modal[open].search-modal__content {
     transform-origin: bottom center;
-    animation: search-element-slide-in-bottom 300ms var(--ease-out-quad) forwards;
+    animation: search-element-slide-in-bottom 350ms ease-in-out forwards;
     box-shadow: var(--shadow-popover);
   }
 
@@ -143,9 +143,10 @@ input[type="search"]::-ms-clear {
   }
 
   /* 2. Animation override — kill the mobile slide-from-bottom and pin the
-     right-edge slide at 250ms ease-in-out. Intentionally deviates from the
-     theme's --drawer-animation-speed / --animation-easing (which the cart
-     drawer uses) to give the search drawer an independent, snappier feel.
+     right-edge slide at 350ms ease-in-out (open) / 250ms (close).
+     Intentionally deviates from the theme's --drawer-animation-speed /
+     --animation-easing (which the cart drawer uses) to give the search
+     drawer an independent feel.
      See docs/superpowers/specs/2026-04-20-search-drawer-design.md. */
   .dialog-modal[open].search-modal__content {
     animation: none;
@@ -153,7 +154,7 @@ input[type="search"]::-ms-clear {
   }
 
   .search-modal__content.dialog-drawer[open] {
-    animation: slideInLeft 250ms ease-in-out forwards;
+    animation: slideInLeft 350ms ease-in-out forwards;
   }
 
   .search-modal__content.dialog-drawer.dialog-closing {
