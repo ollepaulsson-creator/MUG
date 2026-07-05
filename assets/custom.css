@@ -505,6 +505,18 @@ zoom-dialog .product-media__image--lqip {
   animation-delay: calc(var(--card-index, 0) * 25ms);
 }
 
+/* Sequenced left-to-right image reveal on the initial collection grid
+   (script in product-grid.liquid). Cell layout and card text render
+   immediately; only the product image is held back and faded in in order.
+   The classes are removed after the animation, so hover behaviours are
+   untouched afterwards. */
+.product-grid__item.seq-pending .card-gallery img {
+  opacity: 0 !important;
+}
+.product-grid__item.seq-anim .card-gallery img {
+  transition: opacity 400ms ease-in-out;
+}
+
 media-gallery slideshow-slide {
   animation: cardEnter 0.15s ease-in-out both;
   animation-delay: calc(var(--index, 0) * 40ms);
