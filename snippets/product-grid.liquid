@@ -124,6 +124,68 @@
         {{ children }}
       </ul>
       {% unless hide_viewmore or section.settings.enable_pagination %}<span ref="viewMoreNext"></span>{% endunless %}
+
+      {% unless request.design_mode %}
+        {% comment %}
+          Sequenced image reveal: cells and text render immediately (layout is
+          fully reserved), then card images fade in strictly left-to-right as
+          they finish loading — an image never appears before its left
+          neighbour. Runs synchronously right after the grid markup so the
+          hide-classes are applied before first paint (no flash).
+        {% endcomment %}
+        <script>
+          (function () {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            var grid = document.querySelector('.product-grid--{{ section.id }}');
+            if (!grid) return;
+            var cards = Array.prototype.slice.call(grid.querySelectorAll(':scope > .product-grid__item'));
+            if (!cards.length) return;
+
+            var STAGGER = 90;        // ms between reveals (also the poll tick)
+            var HEAD_MAX_WAIT = 1200; // ms a slow image may block the queue
+            var GLOBAL_CAP = 5000;    // ms until everything is force-revealed
+
+            var entries = cards.map(function (card) {
+              var img = card.querySelector('.card-gallery img');
+              var entry = { card: card, ready: !img };
+              if (img) {
+                if (img.complete) {
+                  entry.ready = true;
+                } else {
+                  var markReady = function () { entry.ready = true; };
+                  img.addEventListener('load', markReady, { once: true });
+                  img.addEventListener('error', markReady, { once: true });
+                }
+              }
+              card.classList.add('seq-pending');
+              return entry;
+            });
+
+            function reveal(card) {
+              card.classList.add('seq-anim');
+              card.classList.remove('seq-pending');
+              setTimeout(function () { card.classList.remove('seq-anim'); }, 700);
+            }
+
+            var idx = 0;
+            var headSince = Date.now();
+            var timer = setInterval(function () {
+              if (idx >= entries.length) { clearInterval(timer); return; }
+              var head = entries[idx];
+              if (head.ready || Date.now() - headSince > HEAD_MAX_WAIT) {
+                reveal(head.card);
+                idx++;
+                headSince = Date.now();
+              }
+            }, STAGGER);
+
+            setTimeout(function () {
+              clearInterval(timer);
+              while (idx < entries.length) reveal(entries[idx++].card);
+            }, GLOBAL_CAP);
+          })();
+        </script>
+      {% endunless %}
     {% endif %}
   </div>
 </div>
