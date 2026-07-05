@@ -268,7 +268,7 @@
       "settings": {
         "enable_custom_css_liquid": true,
         "custom_css_liquid": ".price{\ncolor: red;\n}\n\n.compare-at-price{\ncolor: black;\n}\n.price--regular {\n  color: #000000;\n}\n.product-badges__badge.product-badges__badge--rectangle.color-scheme-1{\ncolor:red;\n}\nimg{\n  border-bottom: 0px solid #DCDCDC;\nborder-top:none ;\n}\nh4{\nfont-size:14px;\ntext-transform:none;\nmargin:0;\n}",
-        "product_shown": 24,
+        "product_shown": 28,
         "layout_type": "grid",
         "product_card_size": "medium",
         "mobile_product_card_size": "small",
