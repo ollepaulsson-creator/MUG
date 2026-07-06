@@ -888,6 +888,17 @@ nav.footer-block ul li{
         new ResizeObserver(scheduleSync).observe(header);
       }
       window.addEventListener('resize', scheduleSync, { passive: true });
+
+      // The header's bottom edge moves when the page scrolls (announcement
+      // bar scrolls away, sticky header pins to the top), so a value read at
+      // load is stale by the time the user opens the menu — leaving a gap
+      // above the drawer. Re-read it synchronously at the moment the drawer
+      // toggles open.
+      var details = document.getElementById('Details-menu-drawer-container');
+      if (details) {
+        details.addEventListener('toggle', syncDrawerTop);
+      }
+
       syncDrawerTop();
     }
 
