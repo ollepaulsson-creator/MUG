@@ -1773,8 +1773,11 @@ results-list.section {
   padding-block-end: 0 !important;
 }
 
+/* Single spacing band below the pagination, matching its top margin
+   (the section's own bottom padding is collapsed above, so this is the
+   only space between the page numbers and the next section). */
 .pagination {
-  margin-bottom: 0 !important;
+  margin-bottom: var(--spacing-6, 36px) !important;
 }
 
 /* Product page: the full-width divider under the product section is the
