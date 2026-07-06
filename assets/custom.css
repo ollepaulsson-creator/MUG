@@ -1777,13 +1777,14 @@ results-list.section {
   margin-bottom: 0 !important;
 }
 
-/* Product page: the full-width divider under the product section renders
-   1px below the media gallery's thumbnail-strip border, doubling the line
-   under the gallery column. Nudge the divider up so the two lines coincide
-   as a single 1px line across the full width. */
-.shopify-section:has(.product-information) + .shopify-section .divider__line {
-  position: relative;
-  top: -1px;
+/* Product page: the full-width divider under the product section is the
+   single bottom line for both columns. The thumbnail strip's own bottom
+   borders sat at the same edge — two overlapping antialiased 1px lines
+   composite into a visibly darker/thicker line — so the strip's bottom
+   borders are removed and the divider alone draws the line. */
+.product-information__media .slideshow-controls__thumbnail,
+.product-information__media button.slideshow-control {
+  border-bottom-color: transparent !important;
 }
 
 /* Show sale price in black instead of red */
