@@ -1739,17 +1739,31 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
   }
 }
 
-/* The Qikify mega menu is bound per-theme in the app admin and REPLACES
-   .overflow-menu when it mounts. Qikify's own rule in base.css hides the
-   standard menu unconditionally, which leaves a theme with NO menu at all
-   wherever the app doesn't mount (unbound theme, app disabled, script
-   failure). Make it self-correcting: show the standard menu unless the
-   Qikify menu (.tmenu_wrapper) is actually in the DOM. */
-body:not(:has(.tmenu_wrapper)) .overflow-menu {
+/* Qikify mega menu loading sequence: keep the native menu hidden from first
+   paint (no flash of the wrong menu) and fade the Qikify menu in when it
+   mounts. A script in theme.liquid adds .qikify-menu-fallback on <body> if
+   Qikify hasn't mounted a few seconds after load — the native menu then
+   appears so the site is never menu-less (unbound theme, app disabled,
+   script failure). The :has() rule is last so a late Qikify mount wins
+   over the fallback. */
+.overflow-menu {
+  opacity: 0;
+}
+body.qikify-menu-fallback .overflow-menu {
   opacity: 1;
+  transition: opacity 200ms ease-in-out;
 }
 body:has(.tmenu_wrapper) .overflow-menu {
   opacity: 0;
+}
+
+.menu-list .tmenu_wrapper {
+  animation: qikifyMenuFadeIn 300ms ease-in-out both;
+}
+
+@keyframes qikifyMenuFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* Carousel cards: roomier line-height on the vendor heading, which wraps to

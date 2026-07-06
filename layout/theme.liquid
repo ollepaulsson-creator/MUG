@@ -447,6 +447,27 @@ document.addEventListener("DOMContentLoaded", function() {
 })();
 </script>
 
+<script>
+  // Menu fallback: the native menu is hidden from first paint (custom.css)
+  // so the Qikify mega menu can fade in without a native-menu flash. If
+  // Qikify hasn't mounted a few seconds after load (unbound theme, app
+  // disabled, script failure), reveal the native menu so the site is never
+  // menu-less. The body:has(.tmenu_wrapper) rule re-hides it if Qikify
+  // mounts even later.
+  (function () {
+    function check() {
+      if (!document.querySelector('.tmenu_wrapper')) {
+        document.body.classList.add('qikify-menu-fallback');
+      }
+    }
+    if (document.readyState === 'complete') {
+      setTimeout(check, 3000);
+    } else {
+      window.addEventListener('load', function () { setTimeout(check, 2500); });
+    }
+  })();
+</script>
+
 {% if template contains 'collection' %}
 <script>
 (function() {
