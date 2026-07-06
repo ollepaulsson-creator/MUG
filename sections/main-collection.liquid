@@ -109,24 +109,54 @@
       {% if show_featured_slot %}
         <script>
         (function() {
-          function injectFeatured() {
-            if (window.innerWidth < 1024) return;
+          // Keep a persistent reference to the featured section node:
+          // filters/sort re-render the grid via the Section Rendering API,
+          // which delivers a NEW empty placeholder and detaches the
+          // previously moved node. We hold the reference and re-adopt the
+          // node into whatever placeholder currently sits in the grid —
+          // without this the featured section disappears after the first
+          // filter change or reset.
+          var sectionEl = null;
+
+          function findSection() {
+            if (sectionEl) return sectionEl;
             var featuredKey = '{{ featured_key }}';
             var sectionKey = 'featured_' + featuredKey.replace(/-/g, '_');
-            var sectionEl = document.querySelector('[id$="__' + sectionKey + '"]');
-            if (!sectionEl) return;
+            sectionEl = document.querySelector('[id$="__' + sectionKey + '"]');
+            return sectionEl;
+          }
+
+          function injectFeatured() {
+            if (window.innerWidth < 1024) return;
+            var el = findSection();
+            if (!el) return;
             var grid = document.querySelector('.product-grid--{{ section.id }}');
             if (!grid) return;
             var placeholder = grid.querySelector(':scope > [data-featured-slot]');
-            if (!placeholder || placeholder.firstElementChild) return;
-            sectionEl.style.setProperty('display', 'block', 'important');
-            placeholder.appendChild(sectionEl);
+            if (!placeholder) return;
+            if (el.parentElement === placeholder) return; // already in place
+            el.style.setProperty('display', 'block', 'important');
+            placeholder.appendChild(el);
           }
+
+          var scheduled = false;
+          function schedule() {
+            if (scheduled) return;
+            scheduled = true;
+            requestAnimationFrame(function () {
+              scheduled = false;
+              injectFeatured();
+            });
+          }
+
           if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', injectFeatured);
           } else {
             injectFeatured();
           }
+
+          var host = document.querySelector('results-list') || document.body;
+          new MutationObserver(schedule).observe(host, { childList: true, subtree: true });
         })();
         </script>
       {% endif %}
