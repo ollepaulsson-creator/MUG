@@ -1781,10 +1781,30 @@ results-list.section {
    single bottom line for both columns. The thumbnail strip's own bottom
    borders sat at the same edge — two overlapping antialiased 1px lines
    composite into a visibly darker/thicker line — so the strip's bottom
-   borders are removed and the divider alone draws the line. */
+   border WIDTH is removed (a transparent border still occupies 1px, which
+   showed as a white gap over video thumbnails' dark content). */
 .product-information__media .slideshow-controls__thumbnail,
+.product-information__media .slideshow-controls__thumbnail[aria-selected='true'],
 .product-information__media button.slideshow-control {
-  border-bottom-color: transparent !important;
+  border-bottom-width: 0 !important;
+}
+
+/* Selected thumbnail: draw its black bottom edge as an overlay that sits on
+   top of the divider line below the strip — one black line instead of a
+   black border with the grey divider doubled underneath. */
+.product-information__media .slideshow-controls__thumbnail[aria-selected='true'] {
+  position: relative;
+}
+.product-information__media .slideshow-controls__thumbnail[aria-selected='true']::after {
+  content: '';
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.81);
+  z-index: 2;
+  pointer-events: none;
 }
 
 /* Show sale price in black instead of red */
