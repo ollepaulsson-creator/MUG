@@ -182,15 +182,39 @@
             {% endif %}
             name="{{ filter.label }}"
           >
+            {%- comment -%}
+              Two passes over the values: Shopify sorts filter values with
+              plain Unicode collation, which puts Å/Ä/Ö among A and O. Swedish
+              alphabetical order has them LAST, so pass 1 renders everything
+              except values starting with Å/Ä/Ö and pass 2 renders those.
+              value_index replaces forloop.index so ids and the show-more
+              hidden threshold stay continuous across both passes.
+            {%- endcomment -%}
+            {%- assign value_index = 0 -%}
+            {%- for sv_pass in (1..2) -%}
             {%- for value in filter.values -%}
+              {%- liquid
+                assign first_char = value.label | slice: 0 | upcase
+                assign is_sv_letter = false
+                if first_char == 'Å' or first_char == 'Ä' or first_char == 'Ö'
+                  assign is_sv_letter = true
+                endif
+                if sv_pass == 1 and is_sv_letter
+                  continue
+                endif
+                if sv_pass == 2 and is_sv_letter == false
+                  continue
+                endif
+                assign value_index = value_index | plus: 1
+              -%}
               {% liquid
-                assign input_id = 'Filter-' | append: filter.param_name | escape | append: '-' | append: forloop.index | replace: '.', '-' | append: '-' | append: filter_style | append: '-' | append: in_drawer
+                assign input_id = 'Filter-' | append: filter.param_name | escape | append: '-' | append: value_index | replace: '.', '-' | append: '-' | append: filter_style | append: '-' | append: in_drawer
                 assign is_disabled = false
                 if value.count == 0 and value.active == false
                   assign is_disabled = true
                 endif
                 assign hidden_class = null
-                if forloop.index > inital_visible_values and render_show_more
+                if value_index > inital_visible_values and render_show_more
                   assign hidden_class = 'hidden'
                   if filter_style == 'horizontal'
                     assign hidden_class = 'mobile:hidden'
@@ -482,6 +506,7 @@
                 {% endif %}
               </li>
               {% endunless %}
+            {%- endfor -%}
             {%- endfor -%}
           </ul>
         </div>
