@@ -176,7 +176,44 @@ export async function morphSection(sectionId, html) {
   }
 
   preserveFilterAccordions(existingElement, newElement);
+  preserveAccordionOpenState(existingElement, newElement);
   morph(existingElement, newElement);
+}
+
+/**
+ * The server never renders the `open` attribute on filter accordion
+ * <details> — it is set client-side by accordion-custom on connect. When a
+ * filter change morphs the section, the diff sees the attribute missing in
+ * the incoming HTML and strips it, randomly collapsing groups the user had
+ * open. Copy each accordion's current open state onto the incoming markup so
+ * the morph preserves it (both open and user-collapsed states survive).
+ *
+ * @param {HTMLElement} existingElement - The current section element in the DOM
+ * @param {HTMLElement} newElement - The parsed new section element (not yet in DOM)
+ */
+function preserveAccordionOpenState(existingElement, newElement) {
+  const accordions = existingElement.querySelectorAll('accordion-custom[data-filter-param-name]');
+
+  for (const accordion of accordions) {
+    const key = accordion.getAttribute('data-filter-param-name');
+    const details = accordion.querySelector('details');
+    if (!key || !details) continue;
+
+    // Scope the match to the same form so the horizontal bar and the drawer
+    // (which render the same filters) don't cross-contaminate.
+    const formId = accordion.closest('form')?.id;
+    const scope = formId ? newElement.querySelector(`#${CSS.escape(formId)}`) : newElement;
+    const target = scope?.querySelector(
+      `accordion-custom[data-filter-param-name="${CSS.escape(key)}"] details`
+    );
+    if (!target) continue;
+
+    if (details.open) {
+      target.setAttribute('open', '');
+    } else {
+      target.removeAttribute('open');
+    }
+  }
 }
 
 /**
