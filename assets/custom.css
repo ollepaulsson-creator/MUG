@@ -1765,11 +1765,16 @@ body:has(.tmenu_wrapper) .overflow-menu {
   padding: 12px 18px;
 }
 
-/* Collections: the section reserves bottom padding for pagination controls.
-   When none are rendered (single-page collections, infinite scroll), collapse
-   it so the grid meets the next section without dead space. */
-results-list.section:not(:has(.pagination)) {
+/* Collections: collapse the section's bottom padding entirely. Without
+   pagination the grid should meet the next section without dead space, and
+   with pagination the nav's own margin-top provides its spacing — the
+   section padding under it doubled up against the following image sections. */
+results-list.section {
   padding-block-end: 0 !important;
+}
+
+.pagination {
+  margin-bottom: 0 !important;
 }
 
 /* Show sale price in black instead of red */
