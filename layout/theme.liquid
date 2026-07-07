@@ -493,13 +493,13 @@ document.addEventListener("DOMContentLoaded", function() {
     block.appendChild(link);
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initDescExpand);
-  } else {
-    initDescExpand();
-  }
-  // Re-check after full load in case rte-formatter re-rendered its content
-  // and dropped the injected link (height is CSS-stable either way).
+  // Run immediately: this script sits at the end of <body>, so the
+  // description block already exists. Waiting for DOMContentLoaded made the
+  // link appear noticeably after the text (module scripts delay that event).
+  initDescExpand();
+  // Re-check after full load in case fonts changed the line wrapping or
+  // rte-formatter re-rendered its content and dropped the injected link
+  // (height is CSS-stable either way).
   window.addEventListener('load', initDescExpand);
 })();
 </script>
