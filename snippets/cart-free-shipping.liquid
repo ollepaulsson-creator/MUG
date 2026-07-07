@@ -23,7 +23,7 @@
       {%- if remaining > 0 -%}
         Handla för <strong>{{ remaining | money }}</strong> till, så bjuder vi på fri frakt!
       {%- else -%}
-        <strong>Fri frakt ingår i din order!</strong>
+        Fri frakt ingår i din order!
       {%- endif -%}
     </p>
     <div class="cart-free-shipping__track">
@@ -34,13 +34,13 @@
 
 {% stylesheet %}
   .cart-free-shipping {
-    padding: 14px 20px 16px;
+    padding: 22px 20px 24px;
     border-bottom: 1px solid #e5e5e5;
     flex-shrink: 0;
   }
 
   .cart-free-shipping__text {
-    margin: 0 0 10px;
+    margin: 0 0 12px;
     font-size: 14px;
     text-align: center;
     color: var(--color-foreground);
