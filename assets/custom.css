@@ -1844,6 +1844,15 @@ dialog:focus-visible {
   outline: none;
 }
 
+/* Cart drawer: more compact quantity stepper (base buttons are 44x44) */
+.cart-items__quantity .quantity-selector .quantity-minus,
+.cart-items__quantity .quantity-selector .quantity-plus {
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+}
+
 /* No box shadows on the cart and search overlays */
 .cart-drawer__dialog,
 .search-modal__content {
