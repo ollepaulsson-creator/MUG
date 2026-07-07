@@ -460,10 +460,12 @@ document.addEventListener("DOMContentLoaded", function() {
         var pr = panel.getBoundingClientRect();
         if (pr.height < 50 || pr.bottom < 0) return; // closed/hidden panel
         panel.querySelectorAll('.tmenu_item_layout_image').forEach(function (item) {
-          item.style.marginTop = '0px';
+          // Qikify's stylesheet declares item margins !important, so the
+          // override must carry !important priority too.
+          item.style.setProperty('margin-top', '0px', 'important');
           var ir = item.getBoundingClientRect();
           var delta = Math.floor((pr.bottom - 25) - ir.bottom);
-          if (delta > 0) item.style.marginTop = delta + 'px';
+          if (delta > 0) item.style.setProperty('margin-top', delta + 'px', 'important');
         });
       });
     }
