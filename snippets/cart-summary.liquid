@@ -128,6 +128,16 @@
     gap: 6px;
     padding: 0 20px 14px;
     flex-shrink: 0;
+    /* Bottom-align in the drawer's flex column: pushed down against the
+       summary separator regardless of how few items the cart holds. */
+    margin-top: auto;
+  }
+
+  /* The summary block has its own margin-top: auto (base), which would split
+     the spare space 50/50 with the icons' auto margin. With the icons
+     present, let THEM take all the space so they sit right on the separator. */
+  .cart-drawer__content:has(.cart-summary__payment-icons) .cart-drawer__summary {
+    margin-top: 0 !important;
   }
 
   .cart-summary__payment-icons .icon {
