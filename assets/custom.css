@@ -1766,23 +1766,12 @@ body:has(.tmenu_wrapper) .overflow-menu {
   to   { opacity: 1; }
 }
 
-/* Mega menu, first column: pin the image card (with its caption link) to the
-   bottom of the panel instead of leaving dead space under it. The image item
-   is positioned against the masonry column (full panel height); the two
-   intermediate wrappers must be static so they don't become the containing
-   block. Offsets mirror the column's padding (20px 25px 25px 15px). */
-@media screen and (min-width: 1024px) {
-  .tmenu_wrapper .tmenu_masonry_col:first-child > .tmenu_item_level_1,
-  .tmenu_wrapper .tmenu_masonry_col:first-child > .tmenu_item_level_1 > ul {
-    position: static !important;
-  }
-  .tmenu_wrapper .tmenu_masonry_col:first-child .tmenu_item_layout_image {
-    position: absolute !important;
-    bottom: 25px !important;
-    left: 15px !important;
-    right: 25px !important;
-    margin: 0 !important;
-  }
+/* Mega menu image cards are bottom-aligned by a measuring script in
+   theme.liquid (Qikify renders duplicate JS-positioned copies of the column,
+   so static CSS pinning either overlaps short panels or targets the wrong
+   copy). The transition keeps the JS margin adjustment smooth. */
+.tmenu_wrapper .tmenu_item_layout_image {
+  transition: margin-top 150ms ease-out;
 }
 
 /* Carousel cards: roomier line-height on the vendor heading, which wraps to
