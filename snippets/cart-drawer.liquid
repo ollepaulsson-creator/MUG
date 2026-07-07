@@ -84,6 +84,7 @@
     aria-label="{{ 'accessibility.cart' | t }}"
     style="--header-height: 60px;"
   >
+    {% render 'cart-free-shipping' %}
     <scroll-hint class="cart-drawer__items">
       {% render 'cart-products' %}
     </scroll-hint>

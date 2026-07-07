@@ -3,6 +3,12 @@
 {%- enddoc -%}
 
 <div class="cart__summary-totals">
+  <div class="cart-summary__payment-icons" aria-hidden="true">
+    {%- for type in shop.enabled_payment_types -%}
+      {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+    {%- endfor -%}
+  </div>
+
   {% # We need to keep this node in place to allow morphing to work properly # %}
   <div class="cart__original-total-container cart-primary-typography">
     {%- if cart.cart_level_discount_applications.size > 0 -%}
@@ -121,6 +127,19 @@
   {% endif %}
 
 {% stylesheet %}
+  .cart-summary__payment-icons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-bottom: 12px;
+  }
+
+  .cart-summary__payment-icons .icon {
+    width: 38px;
+    height: 24px;
+  }
+
   .cart-actions {
     display: flex;
     flex-direction: column;
