@@ -1844,6 +1844,22 @@ dialog:focus-visible {
   outline: none;
 }
 
+/* Cart drawer summary footer: no side borders, a bit more air above Summa,
+   muted tax note, tighter gap between "Betala:" and the price. */
+.cart-drawer__summary {
+  border-left: none !important;
+  border-right: none !important;
+  padding-top: 30px !important;
+}
+
+.cart-drawer__summary .tax-note {
+  color: #787878 !important;
+}
+
+.cart__checkout-button .btn-price {
+  padding-left: 5px !important;
+}
+
 /* Cart drawer: more compact quantity stepper (base buttons are 44x44) */
 .cart-items__quantity .quantity-selector .quantity-minus,
 .cart-items__quantity .quantity-selector .quantity-plus {
