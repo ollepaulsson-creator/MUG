@@ -147,21 +147,25 @@
 
             var entries = cards.map(function (card) {
               var img = card.querySelector('.card-gallery img');
-              var entry = { card: card, ready: !img };
-              if (img) {
-                if (img.complete) {
-                  entry.ready = true;
-                } else {
-                  var markReady = function () { entry.ready = true; };
-                  img.addEventListener('load', markReady, { once: true });
-                  img.addEventListener('error', markReady, { once: true });
-                }
+              var entry = { card: card, ready: true };
+              // Only hold back images that are actually still loading.
+              // Cached images (reloads, back-navigation) are complete already
+              // and paint with the first frame — hiding and re-fading those
+              // reads as the whole grid blinking.
+              if (img && !img.complete) {
+                entry.ready = false;
+                var markReady = function () { entry.ready = true; };
+                img.addEventListener('load', markReady, { once: true });
+                img.addEventListener('error', markReady, { once: true });
+                card.classList.add('seq-pending');
               }
-              card.classList.add('seq-pending');
               return entry;
             });
 
+            if (!entries.some(function (e) { return !e.ready; })) return; // everything cached — nothing to sequence
+
             function reveal(card) {
+              if (!card.classList.contains('seq-pending')) return;
               card.classList.add('seq-anim');
               card.classList.remove('seq-pending');
               setTimeout(function () { card.classList.remove('seq-anim'); }, 700);
