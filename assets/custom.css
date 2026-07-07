@@ -1766,6 +1766,25 @@ body:has(.tmenu_wrapper) .overflow-menu {
   to   { opacity: 1; }
 }
 
+/* Mega menu, first column: pin the image card (with its caption link) to the
+   bottom of the panel instead of leaving dead space under it. The image item
+   is positioned against the masonry column (full panel height); the two
+   intermediate wrappers must be static so they don't become the containing
+   block. Offsets mirror the column's padding (20px 25px 25px 15px). */
+@media screen and (min-width: 1024px) {
+  .tmenu_wrapper .tmenu_masonry_col:first-child > .tmenu_item_level_1,
+  .tmenu_wrapper .tmenu_masonry_col:first-child > .tmenu_item_level_1 > ul {
+    position: static !important;
+  }
+  .tmenu_wrapper .tmenu_masonry_col:first-child .tmenu_item_layout_image {
+    position: absolute !important;
+    bottom: 25px !important;
+    left: 15px !important;
+    right: 25px !important;
+    margin: 0 !important;
+  }
+}
+
 /* Carousel cards: roomier line-height on the vendor heading, which wraps to
    two tight lines (--font-h5--line-height is 1.1) for long brand names. */
 .ui-test-product-list .product-card__content .text-block h5 {
