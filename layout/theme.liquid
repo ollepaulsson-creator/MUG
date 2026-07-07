@@ -467,10 +467,18 @@ document.addEventListener("DOMContentLoaded", function() {
         });
       });
     }
-    document.addEventListener('mouseover', function (e) {
-      if (e.target && e.target.closest && e.target.closest('.tmenu_item--root')) {
-        setTimeout(alignImages, 60);
+    function maybeAlign(e) {
+      if (e.target && e.target.closest && e.target.closest('.tmenu_navbar, .tmenu_item--root')) {
+        setTimeout(alignImages, 80);
       }
+    }
+    document.addEventListener('mouseover', maybeAlign, { passive: true });
+    var lastMove = 0;
+    document.addEventListener('mousemove', function (e) {
+      var now = Date.now();
+      if (now - lastMove < 300) return;
+      lastMove = now;
+      maybeAlign(e);
     }, { passive: true });
   })();
 </script>
