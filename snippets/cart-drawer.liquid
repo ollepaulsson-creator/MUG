@@ -89,6 +89,13 @@
       {% render 'cart-products' %}
     </scroll-hint>
 
+    <div class="cart-summary__payment-icons" aria-hidden="true">
+      {%- for type in shop.enabled_payment_types -%}
+        {%- if type == 'blik' or type == 'mobilepay' or type == 'mobile_pay' -%}{%- continue -%}{%- endif -%}
+        {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+      {%- endfor -%}
+    </div>
+
     <div class="cart-drawer__summary">
       {% render 'cart-summary' %}
     </div>

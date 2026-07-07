@@ -21,6 +21,8 @@
     role="list"
   >
     {%- for type in shop.enabled_payment_types -%}
+      {%- comment -%} BLIK and MobilePay are hidden per store preference {%- endcomment -%}
+      {%- if type == 'blik' or type == 'mobilepay' or type == 'mobile_pay' -%}{%- continue -%}{%- endif -%}
       <li class="payment-icons__item">
         {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
       </li>
