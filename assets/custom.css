@@ -1844,6 +1844,12 @@ dialog:focus-visible {
   outline: none;
 }
 
+/* No box shadows on the cart and search overlays */
+.cart-drawer__dialog,
+.search-modal__content {
+  box-shadow: none !important;
+}
+
 /* Top border on filter, cart, and search drawers — mobile only */
 @media screen and (max-width: 749px) {
   .cart-drawer__dialog,
