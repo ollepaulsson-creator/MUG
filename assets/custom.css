@@ -1860,11 +1860,17 @@ dialog:focus-visible {
   padding-left: 5px !important;
 }
 
-/* Cart drawer: more compact quantity stepper (base buttons are 44x44) */
+/* Cart drawer: more compact quantity stepper (base buttons are 44x44,
+   base box min-height 44px) */
+.cart-items__quantity .quantity-selector {
+  min-height: 0 !important;
+  height: 34px !important;
+}
+
 .cart-items__quantity .quantity-selector .quantity-minus,
 .cart-items__quantity .quantity-selector .quantity-plus {
   width: 34px !important;
-  height: 34px !important;
+  height: 32px !important;
   min-width: 0 !important;
   min-height: 0 !important;
 }
