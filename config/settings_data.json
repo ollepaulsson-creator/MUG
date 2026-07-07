@@ -47,7 +47,7 @@
     "type_letter_spacing_h6": "heading-loose",
     "page_width": "wide",
     "page_transition_enabled": false,
-    "transition_to_main_product": false,
+    "transition_to_main_product": true,
     "add_to_cart_animation": false,
     "card_hover_effect": "none",
     "badge_position": "top-left",
@@ -109,14 +109,14 @@
         "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
         "disabled": true,
         "settings": {
+          "greeting_message": "",
           "button_color": "#000000",
           "secondary_color": "#ffffff",
           "ternary_color": "#6a6a6a",
           "button_icon": "chat_bubble",
           "button_text": "chat_with_us",
           "button_horizontal_position": "bottom_right",
-          "button_vertical_position": "lowest",
-          "greeting_message": ""
+          "button_vertical_position": "lowest"
         }
       }
     },
