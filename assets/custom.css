@@ -1852,7 +1852,8 @@ dialog:focus-visible {
   padding-top: 30px !important;
 }
 
-.cart-drawer__summary .tax-note {
+.cart-drawer__summary .tax-note,
+.cart-drawer__summary .tax-note * {
   color: #787878 !important;
 }
 
