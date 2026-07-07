@@ -1861,6 +1861,24 @@
         "step": 1,
         "unit": "px",
         "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Fri frakt-indikator"
+      },
+      {
+        "type": "checkbox",
+        "id": "free_shipping_bar_enabled",
+        "label": "Visa fri frakt-indikator i varukorgen",
+        "info": "Visar hur mycket som saknas till fri frakt, med en progressbar. Visas bara för kundvagnar i SEK.",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Fri frakt-gräns (kr)",
+        "info": "Måste matcha gränsen i dina fraktinställningar.",
+        "default": 2000
       }
     ]
   },

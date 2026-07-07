@@ -1,0 +1,63 @@
+{%- doc -%}
+  Free shipping progress strip for the cart drawer.
+
+  Shows how much more the customer needs to spend (in SEK) to reach the
+  free shipping threshold (theme setting), with a progress bar. Shows a
+  confirmation once the threshold is reached. Renders only when enabled,
+  the cart is non-empty, and the cart currency is SEK — the threshold in
+  the theme settings must match the actual free shipping rate configured
+  in Shopify admin (Settings → Shipping).
+{%- enddoc -%}
+
+{%- liquid
+  assign threshold = settings.free_shipping_threshold | default: 0 | times: 100
+-%}
+
+{%- if settings.free_shipping_bar_enabled and threshold > 0 and cart.item_count > 0 and cart.currency.iso_code == 'SEK' -%}
+  {%- liquid
+    assign remaining = threshold | minus: cart.total_price
+    assign pct = cart.total_price | times: 100 | divided_by: threshold | at_most: 100
+  -%}
+  <div class="cart-free-shipping" aria-live="polite">
+    <p class="cart-free-shipping__text">
+      {%- if remaining > 0 -%}
+        Handla för <strong>{{ remaining | money }}</strong> till, så bjuder vi på fri frakt!
+      {%- else -%}
+        <strong>Fri frakt ingår i din order!</strong>
+      {%- endif -%}
+    </p>
+    <div class="cart-free-shipping__track">
+      <div class="cart-free-shipping__bar{% if remaining <= 0 %} cart-free-shipping__bar--full{% endif %}" style="width: {{ pct }}%"></div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .cart-free-shipping {
+    padding: 14px 20px 16px;
+    border-bottom: 1px solid #e5e5e5;
+    flex-shrink: 0;
+  }
+
+  .cart-free-shipping__text {
+    margin: 0 0 10px;
+    font-size: 14px;
+    text-align: center;
+    color: var(--color-foreground);
+  }
+
+  .cart-free-shipping__track {
+    height: 6px;
+    border-radius: 3px;
+    background: #ececec;
+    overflow: hidden;
+  }
+
+  .cart-free-shipping__bar {
+    height: 100%;
+    border-radius: 3px;
+    background: #22c55e;
+    transition: width 350ms ease-in-out;
+    min-width: 6px;
+  }
+{% endstylesheet %}
