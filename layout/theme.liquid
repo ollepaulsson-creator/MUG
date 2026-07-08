@@ -81,42 +81,35 @@
       rte-formatter[class*="text_twGGkJ"] {
         position: relative;
       }
-      /* Two clamping mechanisms on purpose: -webkit-line-clamp needs
-         display:-webkit-box, but something (adopted stylesheet) forces
-         display:flow-root on this element and wins the cascade on some
-         pages. The max-height in em (3 lines x line-height 1.4) caps the
-         box identically regardless of which display value wins, so the
-         height — and the "Läs mer" overlay pinned to its bottom right —
-         is stable on every viewport. */
+      /* Block + max-height clamp (no -webkit-line-clamp). The max-height in
+         lh caps the box at exactly three line boxes regardless of
+         font-size/line-height at any viewport — the 4.2em before it is only
+         a fallback for browsers without the lh unit — so the height is
+         stable from the first paint. The JS below trims the visible text to
+         fit and drops the "Läs mer" link inline right after the truncation. */
       rte-formatter[class*="text_twGGkJ"]:not(.desc-expanded) {
-        display: -webkit-box !important;
-        -webkit-box-orient: vertical !important;
-        -webkit-line-clamp: 3;
-        /* 3lh = exactly three line boxes regardless of the element's
-           font-size/line-height at any viewport — the 4.2em line before it
-           is only a fallback for browsers without the lh unit. A wrong
-           assumption here cuts a line in half and strands the Läs mer
-           overlay mid-text. */
+        display: block !important;
         max-height: 4.2em !important;
         max-height: 3lh !important;
         overflow: hidden !important;
       }
-      /* left:auto + fit-content guard against a global rule that stretches
-         absolutely-positioned links (left 0 + right 0), which pushed the
-         link text to the block's left edge. */
+      /* Inline link sitting right after the trimmed text. left:auto/static
+         guard against a global rule that stretches links across the block. */
       .desc-read-more-btn {
-        position: absolute !important;
+        position: static !important;
         left: auto !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        top: auto !important;
-        width: fit-content !important;
-        padding-left: 48px;
-        background: linear-gradient(to right, rgba(255, 255, 255, 0), #fff 40%);
+        right: auto !important;
+        width: auto !important;
+        display: inline !important;
         color: inherit;
         text-decoration: underline;
         text-underline-offset: 2px;
+        white-space: nowrap;
         cursor: pointer;
+      }
+      /* Ellipsis marking the truncation, printed just before "Läs mer". */
+      .desc-read-more-btn::before {
+        content: "… ";
       }
     </style>
     {% endif %}
@@ -510,14 +503,19 @@ document.addEventListener("DOMContentLoaded", function() {
 <script>
 (function() {
   // The clamp itself is pure CSS (see <head>): the description paints at its
-  // final 3-line height immediately. This script only adds the "Läs mer"
-  // overlay when the text overflows — appearing late never changes height.
+  // final 3-line height immediately. This script trims the visible text to
+  // fit three lines and drops the "Läs mer" link inline right after the
+  // truncation point. Height is CSS-stable either way, so running late only
+  // swaps text for text within the already-reserved 3-line box.
   function initDescExpand() {
     var block = document.querySelector('rte-formatter[class*="text_twGGkJ"]');
     if (!block) return;
     if (block.classList.contains('desc-expanded')) return;
     if (block.querySelector('.desc-read-more-btn')) return;
     if (block.scrollHeight <= block.clientHeight + 2) return; // fits -- no link
+
+    // Remember the full markup so the link can restore it on expand.
+    if (!block.dataset.fullHtml) block.dataset.fullHtml = block.innerHTML;
 
     var link = document.createElement('a');
     link.href = '#';
@@ -526,9 +524,54 @@ document.addEventListener("DOMContentLoaded", function() {
     link.addEventListener('click', function(e) {
       e.preventDefault();
       block.classList.add('desc-expanded');
-      link.remove();
+      block.innerHTML = block.dataset.fullHtml;
     });
-    block.appendChild(link);
+
+    function fits() { return block.scrollHeight <= block.clientHeight + 1; }
+
+    // 1. Drop whole block-level children that begin below the 3-line fold,
+    //    plus any empty spacer paragraphs, so the last remaining child is
+    //    the one holding the last visible line of text.
+    var clampH = block.clientHeight;
+    var kids = [].slice.call(block.children);
+    var lastVisible = null;
+    for (var i = 0; i < kids.length; i++) {
+      var rel = kids[i].getBoundingClientRect().top - block.getBoundingClientRect().top;
+      if (rel < clampH - 4 && (kids[i].textContent || '').trim() !== '') {
+        lastVisible = kids[i];
+      }
+    }
+    if (lastVisible) {
+      var strip = false;
+      for (var j = 0; j < kids.length; j++) {
+        if (kids[j] === lastVisible) { strip = true; continue; }
+        if (strip) kids[j].remove();
+      }
+    }
+    var host = lastVisible || block;
+    host.appendChild(link);
+
+    // 2. Trim trailing words (dropping now-empty inline nodes such as links)
+    //    until the text plus the "Läs mer" link fits in the 3-line box.
+    var guard = 0;
+    while (!fits() && guard++ < 800) {
+      var tw = document.createTreeWalker(host, NodeFilter.SHOW_TEXT, null);
+      var lastText = null, n;
+      while ((n = tw.nextNode())) {
+        if (link.contains(n)) continue;
+        if (n.nodeValue.trim()) lastText = n;
+      }
+      if (!lastText) break;
+      var trimmed = lastText.nodeValue.replace(/\s*\S+\s*$/, '');
+      if (trimmed === lastText.nodeValue) {
+        // Nothing left to trim in this node — drop it (or its inline parent).
+        var p = lastText.parentNode;
+        if (p && p !== host && p !== link && !p.contains(link)) p.remove();
+        else lastText.remove();
+      } else {
+        lastText.nodeValue = trimmed;
+      }
+    }
   }
 
   // Run immediately: this script sits at the end of <body>, so the
