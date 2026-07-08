@@ -1743,7 +1743,9 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
 
 @media screen and (max-width: 749px) {
   .product-card__content .text-block {
-    padding-inline-start: 5px !important;
+    /* Left inset doubled (was 5px) so first-column card text isn't flush with
+       the viewport edge on mobile. */
+    padding-inline-start: 10px !important;
     padding-right: 6px !important;
   }
 
