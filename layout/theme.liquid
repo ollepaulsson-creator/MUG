@@ -176,13 +176,19 @@
       {% if template == 'index' %}
         <h1 class="visually-hidden">{{ shop.name }}</h1>
       {% endif %}
+      {%- comment -%} Shopify policy pages (/policies/*) are a special route: they
+        ignore custom templates (template is blank) and render the built-in policy
+        body. Inject the breadcrumb here so they match the other static pages. {%- endcomment -%}
+      {%- if request.path contains '/policies/' -%}
+        {% section 'breadcrumbs' %}
+      {%- endif -%}
       {{ content_for_layout }}
     </main>
 
-    {%- comment -%} Policy pages (/policies/*) can only use a .liquid template and
-      can't render section groups themselves, so the shared "image grid above the
-      footer" group is injected here for them (matches the other static pages). {%- endcomment -%}
-    {%- if template == 'policy' -%}
+    {%- comment -%} Same reason as above: policy pages can't render section groups
+      themselves, so the shared "image grid above the footer" group is injected
+      here for them (matches the other static pages). {%- endcomment -%}
+    {%- if request.path contains '/policies/' -%}
       {% sections 'store-grid-group' %}
     {%- endif -%}
 
