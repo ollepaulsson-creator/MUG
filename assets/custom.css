@@ -2174,17 +2174,20 @@ body .tmenu_app .tmenu_nav .tmenu_item--root > .tmenu_item_link {
   border: 0 !important;
 }
 
-/* Collection title on mobile: tighter line-height and less spacing above/below.
-   The two-line title otherwise has large line gaps and too much surrounding
-   space. Title uses the preset class text_tqQTNE (description uses text_twGGkJ). */
+/* Collection title on mobile: smaller title, tighter line-height, and more
+   breathing room above the title and below the description (before the filter
+   bar). Title uses the preset class text_tqQTNE (description uses text_twGGkJ);
+   font-size is driven by the inline --font-size custom property. */
 @media screen and (max-width: 749px) {
   [class*="text_tqQTNE"] {
-    padding-top: 8px !important;
+    padding-top: 20px !important; /* more spacing above (below the breadcrumb) */
+    --font-size: 1.5rem !important; /* smaller title on mobile (was 2rem / 32px) */
   }
   [class*="text_tqQTNE"] p {
     line-height: 1.2 !important;
   }
   .layout-panel-flex:has(> [class*="text_tqQTNE"]) {
     gap: 4px !important;
+    padding-bottom: 20px !important; /* more spacing below, before the filter bar */
   }
 }
