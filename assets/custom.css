@@ -957,7 +957,7 @@ h4.predictive-search-results__title {
 }
 
 p,span,li,button,div, a, #text,h1,h2,h3,h4,h5,h6, input {
-    font-family: "Inter Variable", sans-serif !important;
+    font-family: "NeueHaasUnica", sans-serif !important;
     font-feature-settings: 'ss07' 1;
 }
 
@@ -1229,7 +1229,7 @@ span.menu-drawer__menu-item-text {
 small {
     color: black;
     font-size: 14px;
-    font-family: "Inter Variable", sans-serif;
+    font-family: "NeueHaasUnica", sans-serif;
     font-feature-settings: 'ss07' 1;
 }
 
