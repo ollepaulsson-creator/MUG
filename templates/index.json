@@ -580,7 +580,7 @@
               "type": "_product-list-text",
               "name": "t:names.collection_title",
               "settings": {
-                "text": "<h2>20% på D'Addario EXL strängar!</h2>",
+                "text": "<h2>Effektpedaler</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -757,7 +757,7 @@
       },
       "name": "t:names.products_carousel",
       "settings": {
-        "collection": "exl-kampnanj-20-procent",
+        "collection": "gitarreffekter",
         "layout_type": "carousel",
         "carousel_on_mobile": false,
         "max_products": 12,
