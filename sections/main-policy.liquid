@@ -1,0 +1,61 @@
+{%- comment -%}
+  Renders a Shopify policy page (refund, privacy, terms, shipping) inside a
+  custom policy template. Shopify exposes the policy heading as page_title and
+  the policy body HTML as page_description on /policies/* pages.
+{%- endcomment -%}
+<div class="section page-width-content color-{{ section.settings.color_scheme }}">
+  <div
+    class="policy-page spacing-style"
+    style="{% render 'spacing-style', settings: section.settings %}"
+  >
+    <h1 class="policy-page__title">{{ page_title }}</h1>
+    <div class="rte policy-page__body">
+      {{ page_description }}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .policy-page__title {
+    margin-block-end: var(--margin-lg, 1rem);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Policy",
+  "class": "section-wrapper",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 80
+    }
+  ]
+}
+{% endschema %}
