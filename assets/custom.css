@@ -2144,3 +2144,18 @@ body .tmenu_app .tmenu_nav .tmenu_item--root > .tmenu_item_link {
 .product-card__content .h4 {
   line-height: calc(1.3em + 1px) !important;
 }
+
+/* ── Header nav (Qikify Smart Menu): the app forces "Inter Variable" on menu
+   items at up to 0,6,0 specificity with !important. Override to NeueHaasUnica
+   (body-prefixed selectors mirror Qikify's so each wins). Child text spans
+   inherit from the links. ── */
+body .tmenu_wrapper.tmenu_wrapper [class*="tmenu_item"] {
+  font-family: "NeueHaasUnica", sans-serif !important;
+}
+body .tmenu_wrapper .tmenu_item--root > .tmenu_item_link,
+body .tmenu_navbar .tmenu_item--root > .tmenu_item_link,
+body .tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link,
+body .tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link:hover,
+body .tmenu_wrapper .tmenu_submenu--desktop .tmenu_item_layout_text:not(.tmenu_item_display_header) > .tmenu_item_link.tmenu_item_link_active {
+  font-family: "NeueHaasUnica", sans-serif !important;
+}
