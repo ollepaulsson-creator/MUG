@@ -17,9 +17,14 @@
   <nav class="announcement-menu">
     <ul>
       {% for link in linklists[section.settings.menu].links %}
+        {%- comment -%} Hide placeholder links whose target page doesn't exist yet
+          (menu URL left as "#"), e.g. "Sälj till oss". Reappears automatically
+          once a real URL is set on the menu item. {%- endcomment -%}
+        {%- unless link.url == '#' -%}
         <li>
           <a href="{{ link.url }}">{{ link.title }}</a>
         </li>
+        {%- endunless -%}
       {% endfor %}
     </ul>
   </nav>
