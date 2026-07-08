@@ -2,10 +2,7 @@
 <div class="__instant iI7U1ghpHEsKlqiF3" data-instant-id="I7U1ghpHEsKlqiF3" data-instant-version="4.6.4" data-instant-layout="PAGE" data-section-id="{{ section.id }}">
   {%- style -%}
     			.__instant[data-section-id='{{ section.id }}'] [data-instant-type='root'] {
-    				--instant-font-family__type_header_font: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
-    --instant-font-style__type_header_font: {{ settings.type_header_font.style }};
-    --instant-font-weight__type_header_font: {{ settings.type_header_font.weight }};
-    --instant-font-family__type_base_font: {{ settings.type_base_font.family }}, {{ settings.type_base_font.fallback_families }};
+    				--instant-font-family__type_base_font: {{ settings.type_base_font.family }}, {{ settings.type_base_font.fallback_families }};
     --instant-font-style__type_base_font: {{ settings.type_base_font.style }};
     --instant-font-weight__type_base_font: {{ settings.type_base_font.weight }};
     			}
@@ -18,7 +15,8 @@
       assign preload = false
     endif
   -%}
-  {{ 'instant-I7U1ghpHEsKlqiF3.css' | asset_url | stylesheet_tag: preload: preload }}
+  {{ 'instant-I7U1ghpHEsKlqiF3.css' | asset_url | stylesheet_tag: preload: preload -}}
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&amp;display=swap" rel="stylesheet">
   <style>
     @font-face {
       font-family: 'Basic Commercial LT Com-Roman';
