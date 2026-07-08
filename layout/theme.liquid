@@ -81,42 +81,48 @@
       rte-formatter[class*="text_twGGkJ"] {
         position: relative;
       }
-      /* Two clamping mechanisms on purpose: -webkit-line-clamp needs
-         display:-webkit-box, but something (adopted stylesheet) forces
-         display:flow-root on this element and wins the cascade on some
-         pages. The max-height in em (3 lines x line-height 1.4) caps the
-         box identically regardless of which display value wins, so the
-         height — and the "Läs mer" overlay pinned to its bottom right —
-         is stable on every viewport. */
+      /* Block + max-height clamp (no -webkit-line-clamp) so we can use a
+         float to place the "Läs mer" link inline right after the truncated
+         text. The max-height in lh caps the box at exactly three line boxes
+         regardless of font-size/line-height at any viewport — the 4.2em
+         before it is only a fallback for browsers without the lh unit — so
+         the height is stable from the first paint. */
       rte-formatter[class*="text_twGGkJ"]:not(.desc-expanded) {
-        display: -webkit-box !important;
-        -webkit-box-orient: vertical !important;
-        -webkit-line-clamp: 3;
-        /* 3lh = exactly three line boxes regardless of the element's
-           font-size/line-height at any viewport — the 4.2em line before it
-           is only a fallback for browsers without the lh unit. A wrong
-           assumption here cuts a line in half and strands the Läs mer
-           overlay mid-text. */
+        display: block !important;
         max-height: 4.2em !important;
         max-height: 3lh !important;
         overflow: hidden !important;
       }
-      /* left:auto + fit-content guard against a global rule that stretches
-         absolutely-positioned links (left 0 + right 0), which pushed the
-         link text to the block's left edge. */
+      /* Float spacer: a zero-width right float two lines tall reserves the
+         right edge of lines 1–2. The read-more link (also floated right,
+         cleared) then drops onto line 3 and the body text wraps up to it,
+         so "Läs mer" sits immediately after the truncated text instead of
+         at the block's far-right edge. */
+      rte-formatter[class*="text_twGGkJ"]:not(.desc-expanded)::before {
+        content: "";
+        float: right;
+        width: 0;
+        height: 2.8em;
+        height: 2lh;
+      }
+      /* clear:right drops the link below the spacer onto the last line;
+         margin-left opens a small gap from the preceding word. The leading
+         ellipsis (added in ::before) marks the truncation. */
       .desc-read-more-btn {
-        position: absolute !important;
-        left: auto !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        top: auto !important;
-        width: fit-content !important;
-        padding-left: 48px;
-        background: linear-gradient(to right, rgba(255, 255, 255, 0), #fff 40%);
+        float: right !important;
+        clear: right !important;
+        position: static !important;
+        width: auto !important;
+        margin-left: 0.4em;
         color: inherit;
         text-decoration: underline;
         text-underline-offset: 2px;
+        white-space: nowrap;
         cursor: pointer;
+      }
+      .desc-read-more-btn::before {
+        content: "… ";
+        text-decoration: none;
       }
     </style>
     {% endif %}
