@@ -1844,6 +1844,17 @@ dialog:focus-visible {
   outline: none;
 }
 
+/* Cart drawer line item: the media grid track is sized from 15cqi (~150px)
+   while the thumbnail box is a fixed 120px left-aligned inside it, leaving
+   ~30px of slack that widened the image→text gap to 45px. Pin the track to
+   the 120px box and set a 22px column-gap so the image→details spacing
+   equals the drawer's outer side padding (22px). Scoped to the drawer so
+   the full cart page keeps its own layout. */
+.cart-drawer__dialog .cart-items__table-row {
+  grid-template-columns: 120px minmax(0, 1fr) minmax(0, auto) !important;
+  column-gap: 22px !important;
+}
+
 /* Cart drawer summary footer: no side borders, a bit more air above Summa,
    muted tax note, tighter gap between "Betala:" and the price. */
 .cart-drawer__summary {
