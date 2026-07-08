@@ -251,7 +251,7 @@
       ],
       "name": "t:names.products_carousel",
       "settings": {
-        "collection": "teenage-engineering",
+        "collection": "sommarpriser-pa-akustiska-gitarrer",
         "layout_type": "carousel",
         "carousel_on_mobile": false,
         "max_products": 12,
@@ -268,6 +268,24 @@
         "color_scheme": "scheme-1",
         "padding-block-start": 10,
         "padding-block-end": 0
+      }
+    },
+    "instant_7_gb_anx3l_r_rw_z9zv4_7FX3GE": {
+      "type": "instant-7GBAnx3lRRwZ9zv4",
+      "name": "Sommarpriser 2",
+      "settings": {
+        "url_WmvbnSuEG9MdhgJN": "https://www.mug.se/collections/sommarpriser-pa-elgitarrer",
+        "text_EqYu0AHo47LHA238": "<p>SOMMAR</p>",
+        "text_1cBMqA9yditBNf5S": "<p>SOMMAR–</p><p>PRISER</p>",
+        "text_8vhx96SWHdgXFXg8": "<p>Elgitarrer</p>",
+        "text_cLFwYB9iBABBjKOB": "<p>Upptäck!</p>",
+        "url_hJ3ya4xYBOLIZXEi": "https://www.mug.se/collections/sommarpriser-pa-elgitarrer",
+        "text_wBmbIKZL7HfYFGVD": "<p>PRISER</p>",
+        "text_1towtukkjtyFo0Rf": "<p>SOMMAR–</p><p>PRISER</p>",
+        "text_rEPlXxhw6QhkrHep": "<p>Elgitarrer</p>",
+        "text_aYhTijbVOmMU89y5": "<p>Upptäck!</p>",
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "instant_rz_rs_pn_fwscmy3wd_q_NNqBCt": {
@@ -1698,6 +1716,7 @@
   "order": [
     "instant_ar4_s_cet6_pkr_x_jp0y_7JHymK",
     "product_list_ncKqDm",
+    "instant_7_gb_anx3l_r_rw_z9zv4_7FX3GE",
     "instant_rz_rs_pn_fwscmy3wd_q_NNqBCt",
     "product_list_fze8iq",
     "product_list_f3kizb",
