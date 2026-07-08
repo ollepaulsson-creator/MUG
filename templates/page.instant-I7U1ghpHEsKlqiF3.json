@@ -1,1 +1,31 @@
-{"sections":{"instant-I7U1ghpHEsKlqiF3":{"type":"instant-I7U1ghpHEsKlqiF3","settings":{}}},"order":["instant-I7U1ghpHEsKlqiF3"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "instant-I7U1ghpHEsKlqiF3": {
+      "type": "instant-I7U1ghpHEsKlqiF3",
+      "settings": {}
+    },
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "name": "Breadcrumbs",
+      "settings": {
+        "enable": true,
+        "nav_menu": "main-menu",
+        "home_label": "Start",
+        "aria_label": "Breadcrumbs"
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "instant-I7U1ghpHEsKlqiF3"
+  ]
+}

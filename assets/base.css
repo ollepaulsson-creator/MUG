@@ -1247,13 +1247,13 @@ results-list[initialized] {
 
 /* stylelint-disable value-keyword-case */
 .dialog-drawer {
-  --dialog-drawer-opening-animation: slideInLeft;
-  --dialog-drawer-closing-animation: slideOutLeft;
+  --dialog-drawer-opening-animation: themeSlideInLeft;
+  --dialog-drawer-closing-animation: themeSlideOutLeft;
 }
 
 .dialog-drawer--right {
-  --dialog-drawer-opening-animation: slideInRight;
-  --dialog-drawer-closing-animation: slideOutRight;
+  --dialog-drawer-opening-animation: themeSlideInRight;
+  --dialog-drawer-closing-animation: themeSlideOutRight;
 }
 /* stylelint-enable value-keyword-case */
 
@@ -2807,7 +2807,7 @@ fly-to-cart {
   }
 }
 
-@keyframes slideInLeft {
+@keyframes themeSlideInLeft {
   from {
     transform: translateX(var(--custom-transform-from, 100%));
   }
@@ -2823,7 +2823,7 @@ fly-to-cart {
   }
 }
 
-@keyframes slideOutRight {
+@keyframes themeSlideOutRight {
   from {
     transform: translateX(0);
   }
@@ -2833,7 +2833,7 @@ fly-to-cart {
   }
 }
 
-@keyframes slideInRight {
+@keyframes themeSlideInRight {
   from {
     transform: translateX(200%);
   }
@@ -2843,7 +2843,7 @@ fly-to-cart {
   }
 }
 
-@keyframes slideOutLeft {
+@keyframes themeSlideOutLeft {
   from {
     transform: translateX(0);
   }

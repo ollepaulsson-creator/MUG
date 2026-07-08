@@ -12,9 +12,20 @@
     "instant-oeUOeODDB2bS2Xp6": {
       "type": "instant-oeUOeODDB2bS2Xp6",
       "settings": {}
+    },
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "name": "Breadcrumbs",
+      "settings": {
+        "enable": true,
+        "nav_menu": "main-menu",
+        "home_label": "Start",
+        "aria_label": "Breadcrumbs"
+      }
     }
   },
   "order": [
+    "breadcrumbs",
     "instant-oeUOeODDB2bS2Xp6"
   ]
 }

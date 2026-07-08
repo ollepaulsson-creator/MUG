@@ -12,9 +12,20 @@
     "instant-SnfKZA7bWkYJoYD4": {
       "type": "instant-SnfKZA7bWkYJoYD4",
       "settings": {}
+    },
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "name": "Breadcrumbs",
+      "settings": {
+        "enable": true,
+        "nav_menu": "main-menu",
+        "home_label": "Start",
+        "aria_label": "Breadcrumbs"
+      }
     }
   },
   "order": [
+    "breadcrumbs",
     "instant-SnfKZA7bWkYJoYD4"
   ]
 }
