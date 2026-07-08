@@ -107,9 +107,11 @@
         white-space: nowrap;
         cursor: pointer;
       }
-      /* Ellipsis marking the truncation, printed just before "Läs mer". */
-      .desc-read-more-btn::before {
-        content: "… ";
+      /* Ellipsis marking the truncation — a plain text span before the link,
+         so the dots are neither underlined nor clickable. */
+      .desc-ellipsis {
+        text-decoration: none;
+        cursor: text;
       }
     </style>
     {% endif %}
@@ -510,7 +512,14 @@ document.addEventListener("DOMContentLoaded", function() {
         if (strip) kids[j].remove();
       }
     }
+    // Ellipsis is a separate plain-text span (not inside the link) so the
+    // truncation dots are neither underlined nor clickable.
+    var ellipsis = document.createElement('span');
+    ellipsis.className = 'desc-ellipsis';
+    ellipsis.textContent = '… ';
+
     var host = lastVisible || block;
+    host.appendChild(ellipsis);
     host.appendChild(link);
 
     // 2. Trim trailing words (dropping now-empty inline nodes such as links)
@@ -520,7 +529,7 @@ document.addEventListener("DOMContentLoaded", function() {
       var tw = document.createTreeWalker(host, NodeFilter.SHOW_TEXT, null);
       var lastText = null, n;
       while ((n = tw.nextNode())) {
-        if (link.contains(n)) continue;
+        if (link.contains(n) || ellipsis.contains(n)) continue;
         if (n.nodeValue.trim()) lastText = n;
       }
       if (!lastText) break;
