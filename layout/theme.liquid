@@ -441,44 +441,6 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 <script>
-  // Mega menu: bottom-align image cards within their column. Measured per
-  // open, because Qikify's panels vary in height per menu and viewport and
-  // the DOM contains duplicate JS-positioned copies of the columns — the
-  // image is pushed down only by the actual spare space in the VISIBLE
-  // panel, so short panels never overlap.
-  (function () {
-    function alignImages() {
-      if (window.innerWidth < 1024) return;
-      document.querySelectorAll('.tmenu_masonry').forEach(function (panel) {
-        var pr = panel.getBoundingClientRect();
-        if (pr.height < 50 || pr.bottom < 0) return; // closed/hidden panel
-        panel.querySelectorAll('.tmenu_item_layout_image').forEach(function (item) {
-          // Qikify's stylesheet declares item margins !important, so the
-          // override must carry !important priority too.
-          item.style.setProperty('margin-top', '0px', 'important');
-          var ir = item.getBoundingClientRect();
-          var delta = Math.floor((pr.bottom - 25) - ir.bottom);
-          if (delta > 0) item.style.setProperty('margin-top', delta + 'px', 'important');
-        });
-      });
-    }
-    function maybeAlign(e) {
-      if (e.target && e.target.closest && e.target.closest('.tmenu_navbar, .tmenu_item--root')) {
-        setTimeout(alignImages, 80);
-      }
-    }
-    document.addEventListener('mouseover', maybeAlign, { passive: true });
-    var lastMove = 0;
-    document.addEventListener('mousemove', function (e) {
-      var now = Date.now();
-      if (now - lastMove < 300) return;
-      lastMove = now;
-      maybeAlign(e);
-    }, { passive: true });
-  })();
-</script>
-
-<script>
   // Menu fallback: the native menu is hidden from first paint (custom.css)
   // so the Qikify mega menu can fade in without a native-menu flash. If
   // Qikify hasn't mounted a few seconds after load (unbound theme, app
