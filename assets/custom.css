@@ -2182,7 +2182,7 @@ body .tmenu_app .tmenu_nav .tmenu_item--root > .tmenu_item_link {
     padding-top: 8px !important;
   }
   [class*="text_tqQTNE"] p {
-    line-height: 1.1 !important;
+    line-height: 1.2 !important;
   }
   .layout-panel-flex:has(> [class*="text_tqQTNE"]) {
     gap: 4px !important;
