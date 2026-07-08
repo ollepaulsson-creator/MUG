@@ -1860,7 +1860,7 @@ dialog:focus-visible {
 .cart-drawer__summary {
   border-left: none !important;
   border-right: none !important;
-  padding-top: 26px !important;
+  padding-top: 18px !important;
 }
 
 /* Cart line item: tighten title→price gap, force the price to solid black
