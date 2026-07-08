@@ -2170,3 +2170,18 @@ body .tmenu_app .tmenu_nav .tmenu_item--root > .tmenu_item_link {
 .template-page .shopify-section[id*="instant"] div:empty:last-child {
   border: 0 !important;
 }
+
+/* Collection title on mobile: tighter line-height and less spacing above/below.
+   The two-line title otherwise has large line gaps and too much surrounding
+   space. Title uses the preset class text_tqQTNE (description uses text_twGGkJ). */
+@media screen and (max-width: 749px) {
+  [class*="text_tqQTNE"] {
+    padding-top: 8px !important;
+  }
+  [class*="text_tqQTNE"] p {
+    line-height: 1.1 !important;
+  }
+  .layout-panel-flex:has(> [class*="text_tqQTNE"]) {
+    gap: 4px !important;
+  }
+}
