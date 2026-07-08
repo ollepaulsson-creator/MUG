@@ -53,11 +53,13 @@ export class DialogComponent extends Component {
 
     dialog.showModal();
 
-    // showModal() auto-focuses the first focusable control, and iOS Safari
-    // draws its focus ring even for touch-initiated opens, making e.g. the
-    // first filter checkbox look pre-selected. On coarse-pointer devices,
-    // move focus to the dialog itself instead.
-    if (window.matchMedia('(pointer: coarse)').matches) {
+    // showModal() auto-focuses the first focusable control, and Safari (iOS and
+    // macOS) draws its focus ring even for pointer-initiated opens, making e.g.
+    // the first filter checkbox look pre-selected. Chrome/Firefox don't do this
+    // for pointer opens, so only Safari needs the desktop workaround. On coarse-
+    // pointer devices, or in Safari, move focus to the dialog itself instead.
+    const isSafari = /^((?!chrome|android|crios|fxios|edg).)*safari/i.test(navigator.userAgent);
+    if (window.matchMedia('(pointer: coarse)').matches || isSafari) {
       dialog.setAttribute('tabindex', '-1');
       dialog.focus({ preventScroll: true });
     }
