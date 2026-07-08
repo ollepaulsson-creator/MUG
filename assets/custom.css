@@ -934,7 +934,10 @@ a.cart-items__media-container {
 .cart-drawer__heading .cart-bubble {
     display: none;
 }
-.cart-drawer__heading, h3 {
+/* Scoped to the cart drawer heading only. Previously this selector also
+   listed a bare `h3`, which forced every h3 on the site (incl. Instant page
+   headings) to 14px uppercase !important, overriding their own styles. */
+.cart-drawer__heading {
     font-size: 14px!important;
     text-transform: uppercase!important;
     font-weight: 400!important;
