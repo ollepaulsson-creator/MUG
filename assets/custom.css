@@ -2193,3 +2193,9 @@ body .tmenu_app .tmenu_nav .tmenu_item--root > .tmenu_item_link {
     padding-bottom: 20px !important; /* more spacing below, before the filter bar */
   }
 }
+
+/* Footer column headings (MUSIK UTAN GRÄNSER / ÖPPETIDER / MER OM OSS): regular
+   weight instead of bold. Theme renders them as h3.footer-title at 700. */
+.footer-title {
+  font-weight: 400 !important;
+}
