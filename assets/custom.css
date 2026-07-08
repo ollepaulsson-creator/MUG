@@ -1638,6 +1638,21 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
   margin-top: 20px;
 }
 
+/* Tighter gap between the collection description and the active-filter pills
+   (only when pills are shown; the no-pill spacing is unchanged). */
+.collection-wrapper.grid.gap-style:has(.facets-remove__pill) {
+  margin-top: 8px;
+}
+
+/* Tablet/iPad: the collection-description column is capped at 65%, leaving a
+   lot of empty width. Widen the panel in the tablet range so the description
+   uses more of the available width. Desktop (>=1281px) keeps its own layout. */
+@media (min-width: 750px) and (max-width: 1280px) {
+  .layout-panel-flex:has(> rte-formatter[class*="text_twGGkJ"]) {
+    max-width: 90% !important;
+  }
+}
+
 /* ── Vendor link hover on product page ── */
 .template-product a[href*="/collections/vendors?q="]:hover {
   text-decoration: underline;
