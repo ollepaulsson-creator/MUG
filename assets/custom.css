@@ -2103,3 +2103,14 @@ media-gallery slideshow-slides {
   padding-top: 0px;
   padding-bottom: 9px;
 }
+
+/* Product page: the info column (.product-details) centers its content inside
+   a column wider than the content, leaving ~58px on the left while the top
+   inset is 40px. Left-align it and set a matching 40px inline-start inset so
+   the gap from the media divider equals the top spacing. Desktop + media-left. */
+@media screen and (min-width: 750px) {
+  .product-information--media-left .product-details {
+    justify-content: flex-start !important;
+    padding-inline-start: 40px !important;
+  }
+}
