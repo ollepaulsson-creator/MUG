@@ -1,0 +1,15 @@
+{%- comment -%}
+  Custom Liquid template for Shopify policy pages (/policies/refund-policy,
+  /policies/privacy-policy, /policies/terms-of-service, /policies/shipping-policy).
+
+  Policy pages do NOT support JSON templates, so sections are wired up here in
+  Liquid instead of a .json template:
+    - breadcrumbs  : Start / <policy title>
+    - main-policy  : the policy content (page_title + page_description)
+
+  The "image grid above the footer" (store-grid-group section group) can't be
+  rendered from a template — {% raw %}{% sections %}{% endraw %} is layout-only — so it is injected for
+  policy pages in layout/theme.liquid instead.
+{%- endcomment -%}
+{% section 'breadcrumbs' %}
+{% section 'main-policy' %}

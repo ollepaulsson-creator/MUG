@@ -179,6 +179,13 @@
       {{ content_for_layout }}
     </main>
 
+    {%- comment -%} Policy pages (/policies/*) can only use a .liquid template and
+      can't render section groups themselves, so the shared "image grid above the
+      footer" group is injected here for them (matches the other static pages). {%- endcomment -%}
+    {%- if template == 'policy' -%}
+      {% sections 'store-grid-group' %}
+    {%- endif -%}
+
     {% sections 'footer-group' %}
 
     <script type="application/ld+json">
