@@ -18,7 +18,7 @@
           "type": "_announcement",
           "settings": {
             "text": "Snabba leveranser & personlig service! 🎸 Öppettider: Mån-Fre 11–18, Lör 11–16",
-            "link": "shopify://pages/butiken",
+            "link": "shopify://pages/besok-butiken",
             "font": "var(--font-subheading--family)",
             "font_size": "0.9375rem",
             "weight": "",
