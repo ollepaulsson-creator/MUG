@@ -2144,3 +2144,12 @@ body .tmenu_app .tmenu_nav .tmenu_item--root > .tmenu_item_link {
 .product-card__content .h4 {
   line-height: calc(1.3em + 1px) !important;
 }
+
+/* ── Page-builder pages (Shogun/Instant content in page.content) ──
+   These render on the default page template, which also prints the page-title
+   H1 block over the builder design. Hide that title block. The width cap is
+   dropped in sections/main-page.liquid (omits .page-width-content), so the
+   builder content spans full width. Scoped to .page--builder set there. */
+.page--builder .section-content-wrapper > .text-block:has(h1) {
+  display: none;
+}
