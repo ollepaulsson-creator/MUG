@@ -1,1 +1,22 @@
-{"sections":{"instant-7H2mVXTBcpM0diIT":{"type":"instant-7H2mVXTBcpM0diIT","settings":{}}},"order":["instant-7H2mVXTBcpM0diIT"]}
+{
+  "sections": {
+    "instant-7H2mVXTBcpM0diIT": {
+      "type": "instant-7H2mVXTBcpM0diIT",
+      "settings": {}
+    },
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "name": "Breadcrumbs",
+      "settings": {
+        "enable": true,
+        "nav_menu": "main-menu",
+        "home_label": "Start",
+        "aria_label": "Breadcrumbs"
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "instant-7H2mVXTBcpM0diIT"
+  ]
+}

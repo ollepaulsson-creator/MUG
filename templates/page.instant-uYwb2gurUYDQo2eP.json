@@ -1,1 +1,22 @@
-{"sections":{"instant-uYwb2gurUYDQo2eP":{"type":"instant-uYwb2gurUYDQo2eP","settings":{}}},"order":["instant-uYwb2gurUYDQo2eP"]}
+{
+  "sections": {
+    "instant-uYwb2gurUYDQo2eP": {
+      "type": "instant-uYwb2gurUYDQo2eP",
+      "settings": {}
+    },
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "name": "Breadcrumbs",
+      "settings": {
+        "enable": true,
+        "nav_menu": "main-menu",
+        "home_label": "Start",
+        "aria_label": "Breadcrumbs"
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "instant-uYwb2gurUYDQo2eP"
+  ]
+}

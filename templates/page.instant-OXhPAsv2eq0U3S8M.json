@@ -12,9 +12,20 @@
     "instant-OXhPAsv2eq0U3S8M": {
       "type": "instant-OXhPAsv2eq0U3S8M",
       "settings": {}
+    },
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "name": "Breadcrumbs",
+      "settings": {
+        "enable": true,
+        "nav_menu": "main-menu",
+        "home_label": "Start",
+        "aria_label": "Breadcrumbs"
+      }
     }
   },
   "order": [
+    "breadcrumbs",
     "instant-OXhPAsv2eq0U3S8M"
   ]
 }

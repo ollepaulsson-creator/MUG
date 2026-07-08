@@ -12,9 +12,20 @@
     "instant-GVigVB9D34VsTakx": {
       "type": "instant-GVigVB9D34VsTakx",
       "settings": {}
+    },
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "name": "Breadcrumbs",
+      "settings": {
+        "enable": true,
+        "nav_menu": "main-menu",
+        "home_label": "Start",
+        "aria_label": "Breadcrumbs"
+      }
     }
   },
   "order": [
+    "breadcrumbs",
     "instant-GVigVB9D34VsTakx"
   ]
 }
