@@ -2153,3 +2153,9 @@ body .tmenu_app .tmenu_nav .tmenu_item--root > .tmenu_item_link {
 .page--builder .section-content-wrapper > .text-block:has(h1) {
   display: none;
 }
+
+/* Carousel/featured-collection section titles: 22px line-height so two-line
+   headings (e.g. "SOMMARPRISER PÅ AKUSTISKA GITARRER") have proper leading. */
+.section-resource-list__header h2 {
+  line-height: 22px !important;
+}
