@@ -288,20 +288,6 @@
         "padding_bottom": 0
       }
     },
-    "instant_rz_rs_pn_fwscmy3wd_q_NNqBCt": {
-      "type": "instant-RzRsPnFwscmy3wdQ",
-      "name": "Pedaler",
-      "settings": {
-        "url_cMTfgDMrjT910Q2M": "https://www.mug.se/products/imperial-preamp-pedal",
-        "text_dCwV0rGv1rLjl2tP": "<p>Tone King Imperial Preamp</p>",
-        "text_xSP8ekfTcJcicPpB": "<p>I lager igen!</p>",
-        "url_JMjmBJM357JG0ifl": "https://www.mug.se/collections/earthquaker-devices",
-        "text_Nv9WIx1ejRlF5MX8": "<p></p><p></p><p>EarthQuaker Devices</p>",
-        "text_PmKxTUccR5lcbxTf": "<p></p><p></p><p>UPPTÄCK</p>",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
     "product_list_fze8iq": {
       "type": "product-list",
       "blocks": {
@@ -343,7 +329,7 @@
               "type": "_product-list-text",
               "name": "t:names.collection_title",
               "settings": {
-                "text": "<h2>Effektpedaler</h2>",
+                "text": "<h2>Sommarpriser på elgitarrer</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -520,7 +506,7 @@
       },
       "name": "t:names.products_carousel",
       "settings": {
-        "collection": "gitarreffekter",
+        "collection": "sommarpriser-pa-elgitarrer",
         "layout_type": "carousel",
         "carousel_on_mobile": false,
         "max_products": 12,
@@ -537,6 +523,20 @@
         "color_scheme": "scheme-1",
         "padding-block-start": 10,
         "padding-block-end": 0
+      }
+    },
+    "instant_rz_rs_pn_fwscmy3wd_q_NNqBCt": {
+      "type": "instant-RzRsPnFwscmy3wdQ",
+      "name": "Pedaler",
+      "settings": {
+        "url_cMTfgDMrjT910Q2M": "https://www.mug.se/products/imperial-preamp-pedal",
+        "text_dCwV0rGv1rLjl2tP": "<p>Tone King Imperial Preamp</p>",
+        "text_xSP8ekfTcJcicPpB": "<p>I lager igen!</p>",
+        "url_JMjmBJM357JG0ifl": "https://www.mug.se/collections/earthquaker-devices",
+        "text_Nv9WIx1ejRlF5MX8": "<p></p><p></p><p>EarthQuaker Devices</p>",
+        "text_PmKxTUccR5lcbxTf": "<p></p><p></p><p>UPPTÄCK</p>",
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "product_list_f3kizb": {
@@ -1717,8 +1717,8 @@
     "instant_ar4_s_cet6_pkr_x_jp0y_7JHymK",
     "product_list_ncKqDm",
     "instant_7_gb_anx3l_r_rw_z9zv4_7FX3GE",
-    "instant_rz_rs_pn_fwscmy3wd_q_NNqBCt",
     "product_list_fze8iq",
+    "instant_rz_rs_pn_fwscmy3wd_q_NNqBCt",
     "product_list_f3kizb",
     "instant_qy1r_eh3vvf_ow5_deq_j6d4Ln",
     "product_list_iqtATg",
