@@ -1015,7 +1015,7 @@ nav.footer-block ul li{
 
   details[open] .header__icon--menu .header-drawer-icon--close {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1.25); /* close (✕) a touch bigger than before (was 1); hamburger unchanged */
     filter: blur(0px);
   }
 
@@ -1077,19 +1077,20 @@ nav.footer-block ul li{
     backdrop-filter: brightness(0.75);
     z-index: var(--layer-heightened);
     opacity: 0;
-    transition: opacity var(--drawer-animation-speed) ease;
+    transition: opacity 0.2s ease-in-out;
 
     .menu-open & {
       opacity: 1;
     }
   }
 
+  /* Mobile menu open/close: faster + ease-in-out */
   .menu-drawer {
-    transition: clip-path 0.3s ease-out, visibility 0.3s ease-out;
+    transition: clip-path 0.2s ease-in-out, visibility 0.2s ease-in-out;
   }
 
   .menu-drawer__submenu {
-    transition: transform var(--drawer-animation-speed) ease, visibility var(--drawer-animation-speed) ease;
+    transition: transform 0.2s ease-in-out, visibility 0.2s ease-in-out;
   }
 
   .menu-open > .menu-drawer {
@@ -1468,7 +1469,7 @@ nav.footer-block ul li{
 
   /* Main menu slides out left when a submenu is active */
   .menu-drawer__menu.has-submenu {
-    transition: transform var(--drawer-animation-speed) ease;
+    transition: transform 0.2s ease-in-out;
   }
 
   .menu-drawer:has(.menu-drawer__menu-container.menu-open) .menu-drawer__menu.has-submenu {
