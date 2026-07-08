@@ -1,7 +1,18 @@
 
 
+{%- liquid
+  # Detect page-builder content (Shogun / Instant) stored in page.content.
+  # Those pages are full custom designs, so the theme's page-title H1 block
+  # and its "normal" width cap sit on top of the builder layout. On these
+  # pages we drop the width cap here and hide the title block via custom.css
+  # (.page--builder). Ordinary pages are unaffected.
+  assign is_builder = false
+  if page.content contains 'SHOGUN' or page.content contains 'data-shogun' or page.content contains 'shg-' or page.content contains 'data-instant' or page.content contains '__instant'
+    assign is_builder = true
+  endif
+-%}
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
-<div class="section page-width-content color-{{ section.settings.color_scheme }}">
+<div class="section {% if is_builder %}page--builder{% else %}page-width-content{% endif %} color-{{ section.settings.color_scheme }}">
   <div
     class="
       spacing-style
