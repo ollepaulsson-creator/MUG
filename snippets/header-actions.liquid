@@ -229,7 +229,10 @@
   }
 
   .header-actions__cart-icon {
-    --cart-bubble-size: 20px;
+    /* 15px matches the actual bubble size; the donut mask below is sized from
+       this var (radius = size + 2px), so keeping them equal trims the white
+       cut-out ring around the bubble to a hair. */
+    --cart-bubble-size: 15px;
     --cart-bubble-top: 4.5px;
     --cart-bubble-right: 2.5px;
 
