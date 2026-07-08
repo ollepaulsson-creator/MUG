@@ -21,8 +21,13 @@
           (menu URL left as "#"), e.g. "Sälj till oss". Reappears automatically
           once a real URL is set on the menu item. {%- endcomment -%}
         {%- unless link.url == '#' -%}
+          {%- comment -%} "Kontakta oss" repointed to /pages/butiken per request.
+            (Alternatively change the URL on the announcements-menu item in
+            Shopify Navigation and remove this override.) {%- endcomment -%}
+          {%- assign link_url = link.url -%}
+          {%- if link.url contains '/pages/kontakt' -%}{%- assign link_url = '/pages/butiken' -%}{%- endif -%}
         <li>
-          <a href="{{ link.url }}">{{ link.title }}</a>
+          <a href="{{ link_url }}">{{ link.title }}</a>
         </li>
         {%- endunless -%}
       {% endfor %}
