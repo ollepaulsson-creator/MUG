@@ -2159,3 +2159,14 @@ body .tmenu_app .tmenu_nav .tmenu_item--root > .tmenu_item_link {
 .section-resource-list__header h2 {
   line-height: 22px !important;
 }
+
+/* Static pages: hide the builder-added trailing divider at the end of the page
+   content (Shogun <hr> or an empty bordered <div> in Instant content), so it
+   doesn't double up with the image grid now appended above the footer. */
+.template-page [id$="__main"] .rte hr,
+.template-page rte-formatter hr {
+  display: none !important;
+}
+.template-page .shopify-section[id*="instant"] div:empty:last-child {
+  border: 0 !important;
+}
