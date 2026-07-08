@@ -1849,7 +1849,19 @@ dialog:focus-visible {
 .cart-drawer__summary {
   border-left: none !important;
   border-right: none !important;
-  padding-top: 20px !important;
+  padding-top: 26px !important;
+}
+
+/* Cart line item: tighten title→price gap, force the price to solid black
+   (details column is otherwise 70% opacity), and halve the gap down to the
+   quantity stepper. */
+.cart-items__details > div {
+  margin-block-start: 2px !important;
+  color: var(--color-foreground) !important;
+}
+
+.cart-items__quantity {
+  margin-block-start: 4px !important;
 }
 
 /* Remove (trash) button: same height as the compact stepper so the icon
