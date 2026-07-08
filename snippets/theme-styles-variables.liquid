@@ -1,53 +1,35 @@
 {% style %}
-  {%- liquid
-    assign primary_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
-    assign primary_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
-    assign primary_font_bold_italic = primary_font_bold | font_modify: 'style', 'italic'
-  %}
-
-  {{ settings.type_body_font | font_face: font_display: 'swap' }}
-  {{ primary_font_bold | font_face: font_display: 'swap' }}
-  {{ primary_font_italic | font_face: font_display: 'swap' }}
-  {{ primary_font_bold_italic | font_face: font_display: 'swap' }}
-
-  {% if settings.type_subheading_font != settings.type_body_font %}
-    {%- liquid
-      assign secondary_font_bold = settings.type_subheading_font | font_modify: 'weight', 'bold'
-      assign secondary_font_italic = settings.type_subheading_font | font_modify: 'style', 'italic'
-      assign secondary_font_bold_italic = secondary_font_bold | font_modify: 'style', 'italic'
-    %}
-
-    {{ settings.type_subheading_font | font_face: font_display: 'swap' }}
-    {{ secondary_font_bold | font_face: font_display: 'swap' }}
-    {{ secondary_font_italic | font_face: font_display: 'swap' }}
-    {{ secondary_font_bold_italic | font_face: font_display: 'swap' }}
-  {% endif %}
-
-  {% if settings.type_heading_font != settings.type_body_font and settings.type_heading_font != settings.type_subheading_font %}
-    {%- liquid
-      assign tertiary_font_bold = settings.type_heading_font | font_modify: 'weight', 'bold'
-      assign tertiary_font_italic = settings.type_heading_font | font_modify: 'style', 'italic'
-      assign tertiary_font_bold_italic = tertiary_font_bold | font_modify: 'style', 'italic'
-    %}
-
-    {{ settings.type_heading_font | font_face: font_display: 'swap' }}
-    {{ tertiary_font_bold | font_face: font_display: 'swap' }}
-    {{ tertiary_font_italic | font_face: font_display: 'swap' }}
-    {{ tertiary_font_bold_italic | font_face: font_display: 'swap' }}
-  {% endif %}
-
-  {% if settings.type_accent_font != settings.type_body_font and settings.type_accent_font != settings.type_subheading_font and settings.type_accent_font != settings.type_heading_font %}
-    {%- liquid
-      assign accent_font_bold = settings.type_accent_font | font_modify: 'weight', 'bold'
-      assign accent_font_italic = settings.type_accent_font | font_modify: 'style', 'italic'
-      assign accent_font_bold_italic = accent_font_bold | font_modify: 'style', 'italic'
-    %}
-
-    {{ settings.type_accent_font | font_face: font_display: 'swap' }}
-    {{ accent_font_bold | font_face: font_display: 'swap' }}
-    {{ accent_font_italic | font_face: font_display: 'swap' }}
-    {{ accent_font_bold_italic | font_face: font_display: 'swap' }}
-  {% endif %}
+  {%- comment -%}
+    Self-hosted NeueHaasUnica (replaces Shopify-hosted Inter). Only Regular,
+    Medium and Italic were supplied, so Medium covers 500–900: heading/accent
+    weights (700) render as true Medium instead of faux-bold. The italic face
+    covers all italic weights. The old Inter font_face loaders are removed so
+    Inter is no longer downloaded.
+  {%- endcomment -%}
+  @font-face {
+    font-family: "NeueHaasUnica";
+    src: url("{{ 'NeueHaasUnica-Regular.woff2' | asset_url }}") format("woff2"),
+         url("{{ 'NeueHaasUnica-Regular.woff' | asset_url }}") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "NeueHaasUnica";
+    src: url("{{ 'NeueHaasUnica-Medium.woff2' | asset_url }}") format("woff2"),
+         url("{{ 'NeueHaasUnica-Medium.woff' | asset_url }}") format("woff");
+    font-weight: 500 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "NeueHaasUnica";
+    src: url("{{ 'NeueHaasUnica-Italic.woff2' | asset_url }}") format("woff2"),
+         url("{{ 'NeueHaasUnica-Italic.woff' | asset_url }}") format("woff");
+    font-weight: 400 900;
+    font-style: italic;
+    font-display: swap;
+  }
 
   :root {
     /* Page Layout */
@@ -81,16 +63,16 @@
     --letter-spacing-md: 0.13em;
 
     /* Font families */
-    --font-body--family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+    --font-body--family: "NeueHaasUnica", {{ settings.type_body_font.fallback_families }};
     --font-body--style: {{ settings.type_body_font.style }};
     --font-body--weight: {{ settings.type_body_font.weight }};
-    --font-subheading--family: {{ settings.type_subheading_font.family }}, {{ settings.type_subheading_font.fallback_families }};
+    --font-subheading--family: "NeueHaasUnica", {{ settings.type_subheading_font.fallback_families }};
     --font-subheading--style: {{ settings.type_subheading_font.style }};
     --font-subheading--weight: {{ settings.type_subheading_font.weight }};
-    --font-heading--family: {{ settings.type_heading_font.family }}, {{ settings.type_heading_font.fallback_families }};
+    --font-heading--family: "NeueHaasUnica", {{ settings.type_heading_font.fallback_families }};
     --font-heading--style: {{ settings.type_heading_font.style }};
     --font-heading--weight: {{ settings.type_heading_font.weight }};
-    --font-accent--family: {{ settings.type_accent_font.family }}, {{ settings.type_accent_font.fallback_families }};
+    --font-accent--family: "NeueHaasUnica", {{ settings.type_accent_font.fallback_families }};
     --font-accent--style: {{ settings.type_accent_font.style }};
     --font-accent--weight: {{ settings.type_accent_font.weight }};
 
