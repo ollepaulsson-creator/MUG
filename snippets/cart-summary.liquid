@@ -80,7 +80,19 @@
       </span>
     {% endif %}
     <div class="cart__summary-item tax-note cart-primary-typography">
-      {% render 'tax-info', has_discounts_enabled: settings.show_add_discount_code %}
+      {%- liquid
+        assign fs_threshold = settings.free_shipping_threshold | default: 0 | times: 100
+        assign fs_met = false
+        if settings.free_shipping_bar_enabled and fs_threshold > 0 and cart.item_count > 0 and cart.currency.iso_code == 'SEK' and cart.total_price >= fs_threshold
+          assign fs_met = true
+        endif
+      -%}
+      {%- if fs_met -%}
+        {%- comment -%} Free-shipping threshold reached: swap the "shipping calculated at checkout" note for a free-shipping confirmation. {%- endcomment -%}
+        <small>Tullavgifter och skatter ingår. Fri frakt ingår.</small>
+      {%- else -%}
+        {% render 'tax-info', has_discounts_enabled: settings.show_add_discount_code %}
+      {%- endif -%}
     </div>
   </div>
 </div>

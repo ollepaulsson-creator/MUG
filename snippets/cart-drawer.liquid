@@ -92,7 +92,16 @@
     <div class="cart-summary__payment-icons" aria-hidden="true">
       {%- for type in shop.enabled_payment_types -%}
         {%- if type == 'blik' or type == 'mobilepay' or type == 'mobile_pay' -%}{%- continue -%}{%- endif -%}
-        {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+        {%- comment -%}
+          Swish's SVG paints via userSpaceOnUse radial gradients with fixed IDs.
+          The same icon is inlined again in the footer, so the duplicate IDs
+          collide and one copy renders blank. Namespace this instance's IDs.
+        {%- endcomment -%}
+        {%- if type == 'swish' -%}
+          {{ type | payment_type_svg_tag: class: 'icon icon--full-color' | replace: 'pi-swish', 'pi-swish-cd' }}
+        {%- else -%}
+          {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+        {%- endif -%}
       {%- endfor -%}
     </div>
 
@@ -165,7 +174,7 @@
     position: sticky;
     bottom: 0;
     z-index: 3;
-    border: 1px solid #ddd;
+    border: 1px solid #e4e4e4;
   }
 
   .cart-drawer__empty-body {

@@ -24,7 +24,16 @@
       {%- comment -%} BLIK and MobilePay are hidden per store preference {%- endcomment -%}
       {%- if type == 'blik' or type == 'mobilepay' or type == 'mobile_pay' -%}{%- continue -%}{%- endif -%}
       <li class="payment-icons__item">
-        {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+        {%- comment -%}
+          Swish paints via userSpaceOnUse radial gradients with fixed IDs; the
+          cart drawer inlines the same icon, so the duplicate IDs collide and
+          this copy renders blank. Namespace this block's IDs with block.id.
+        {%- endcomment -%}
+        {%- if type == 'swish' -%}
+          {{ type | payment_type_svg_tag: class: 'icon icon--full-color' | replace: 'pi-swish', 'pi-swish-ft' }}
+        {%- else -%}
+          {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+        {%- endif -%}
       </li>
     {%- endfor -%}
   </ul>
