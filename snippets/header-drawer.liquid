@@ -604,16 +604,10 @@
         <span>E:</span> <a href="mailto:order@mug.se">order@mug.se</a>
       </p>
     </section>
-    <!-- Hours -->
+    <!-- Hours (single source: Theme settings > Öppettider, shared with the site footer) -->
     <section class="footer-block">
       <h3 class="footer-title">ÖPPETIDER</h3>
-      <p>Öppettider i sommar, vecka 28–34.</p>
-      <ul class="hours">
-        <li><strong>Mån–Fre:</strong> 11.00–18.00</li>
-        <li><strong>Lördag:</strong> 11.00–16.00</li>
-        <li><strong>Söndag:</strong> Stängt</li>
-      </ul>
-      <p>Välkomna till MUG!</p>
+      {{ settings.opening_hours }}
     </section>
     <!-- Newsletter -->
     {%- comment -%}
