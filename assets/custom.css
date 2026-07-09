@@ -2229,3 +2229,14 @@ body {
 .announcement-menu a:focus-visible {
   outline: none !important;
 }
+
+/* Product gallery: hide the badge overlay (REA / NYHET / B-STOCK …) while the
+   visible carousel slide is a started video, so it doesn't sit on top of the
+   player. deferred-media gets data-media-loaded once the user starts the video;
+   badges come back when swiping to a non-video slide. */
+media-gallery:has(
+    slideshow-slide[aria-hidden='false'] deferred-media[data-media-loaded='true']
+  )
+  .product-badges {
+  display: none;
+}
