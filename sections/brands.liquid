@@ -70,11 +70,11 @@
     }
   }
 
-  /* Letter headings: one title size below the page title — the theme's h2
-     preset (fluid clamp, scales down on mobile by itself); weight follows the
-     site-wide preset. */
+  /* Letter headings: one title size below the 48px page title. The h2 preset
+     clamps to the same 48px on desktop, so h3 (2rem/32px) is the next distinct
+     step down; weight follows the site-wide preset. */
   .brands-group__letter {
-    font-size: var(--font-h2--size, 2.5rem);
+    font-size: var(--font-h3--size, 2rem);
     font-weight: var(--font-h2--weight, 400);
     line-height: 1;
     margin-top: 0;
