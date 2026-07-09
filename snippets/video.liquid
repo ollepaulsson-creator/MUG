@@ -152,6 +152,29 @@
     (() => {
       if (window.__liteYouTubeBound) return;
       window.__liteYouTubeBound = true;
+
+      function bindPoster(frame) {
+        let a = null;
+        try {
+          a = frame.contentDocument && frame.contentDocument.querySelector('a');
+        } catch (err) {
+          return; // already navigated to YouTube
+        }
+        if (!a || a.__mugBound) return;
+        a.__mugBound = true;
+        a.addEventListener('click', (ev) => {
+          if (window.matchMedia('(pointer: fine)').matches) {
+            ev.preventDefault();
+            // srcdoc takes precedence over src — set the autoplay URL first,
+            // then drop srcdoc so the iframe loads it.
+            frame.src = a.href;
+            frame.removeAttribute('srcdoc');
+          }
+        });
+      }
+
+      // Bind any posters that loaded before this script ran (bfcache, timing).
+      document.querySelectorAll('iframe.lite-youtube').forEach(bindPoster);
       // When the srcdoc poster is tapped, the iframe navigates to the real
       // embed and fires a second, cross-origin 'load'. Mark the wrapper as
       // playing so gallery badges hide and other playing media pause.
@@ -166,7 +189,18 @@
           } catch {
             sameOrigin = false;
           }
-          if (sameOrigin) return; // initial srcdoc poster load
+          if (sameOrigin) {
+            // Initial srcdoc poster load. On fine-pointer (desktop) devices the
+            // in-frame navigation does NOT carry the gesture into YouTube's new
+            // document, so autoplay is refused and a second click is needed.
+            // The srcdoc is same-origin, so the parent receives user activation
+            // from the click — intercept it and set the src from here, which
+            // grants the embed autoplay (same mechanism as the classic
+            // deferred-media flow that always worked on desktop). Touch devices
+            // keep the natural navigation, which is what works on iOS.
+            bindPoster(frame);
+            return;
+          }
           const media = frame.closest('deferred-media');
           if (!media) return;
           media.setAttribute('data-media-loaded', 'true');
