@@ -7,7 +7,8 @@
   page on "Laddar varumärken…" for a long time.
 {% endcomment %}
 
-<div class="brands-page page-width" id="brands-list">
+<div class="section page-width-content">
+  <div class="brands-page" id="brands-list">
   {%- liquid
     assign letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ'
     assign prev_key = nil
@@ -35,6 +36,7 @@
       </ul></div>
     {%- endif -%}
   {%- endfor -%}
+  </div>
 </div>
 
 {% style %}
