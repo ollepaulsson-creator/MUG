@@ -596,8 +596,10 @@ document.addEventListener("DOMContentLoaded", function() {
                  taller/wider than the pill), so both are corrected here.
                  :host !important beats the widget's inline style. */
               ':host{ height: auto !important; bottom: 12px !important; right: 12px !important; }',
-              '.chat-app{ margin: 0 !important; padding: 0 !important; width: auto !important;',
-              '  display: flex; justify-content: flex-end; }',
+              /* Closed-state layout only — the open chat window (and its close
+                 button below it) must keep the widget's own layout. */
+              '.chat-app:not(.chat-app--is-open){ margin: 0 !important; padding: 0 !important;',
+              '  width: auto !important; display: flex; justify-content: flex-end; }',
               'button.chat-toggle{',
               '  background: rgba(120, 104, 83, 0.1) !important;', /* #786853 @ 10% */
               '  -webkit-backdrop-filter: blur(30px);',
@@ -605,8 +607,8 @@ document.addEventListener("DOMContentLoaded", function() {
               '  border-radius: 100px !important;',
               '  box-shadow: none !important;',
               '  color: #000 !important;',
-              '  height: 44px !important;',
-              '  padding: 0 12px !important;',
+              '  height: 38px !important;',
+              '  padding: 0 16px !important;',
               '  margin: 0 !important;',
               '  display: flex; align-items: center;',
               '  transition: background-color 150ms ease;',
@@ -614,7 +616,7 @@ document.addEventListener("DOMContentLoaded", function() {
               'button.chat-toggle:hover{ background: rgba(120, 104, 83, 0.22) !important; }', /* darker on hover */
               'button.chat-toggle > svg{ display: none !important; }',
               '.chat-title{',
-              '  font: 400 14px/1 "Inter Variable", sans-serif !important;',
+              '  font: 400 13px/1 "Inter Variable", sans-serif !important;',
               '  color: #000 !important;',
               '  display: inline-flex; align-items: center; gap: 10px;', /* 8px + 2px after the dot */
               '  margin: 0 !important; padding: 0 !important;',
@@ -634,15 +636,60 @@ document.addEventListener("DOMContentLoaded", function() {
           }
 
           var title = sr.querySelector('.chat-title');
-          if (title && title.textContent !== LABEL) title.textContent = LABEL;
+          if (title) {
+            if (title.textContent !== LABEL) title.textContent = LABEL;
+          } else {
+            // Mobile: the widget renders an icon-only toggle with no
+            // .chat-title span — add our own so the pill shows dot + label.
+            var btn = sr.querySelector('button.chat-toggle');
+            if (btn) {
+              var span = document.createElement('span');
+              span.className = 'chat-title';
+              span.textContent = LABEL;
+              btn.appendChild(span);
+            }
+          }
           return true;
         }
 
+        // Average luminance of an image, cached per URL. Shopify's CDN sends
+        // CORS headers, so a crossOrigin re-load can be canvas-sampled.
+        var imgLum = {};
+        function imageLuminance(el, cb) {
+          var src = el.currentSrc || el.src;
+          if (!src) return cb(null);
+          if (src in imgLum) return cb(imgLum[src]);
+          var probe = new Image();
+          probe.crossOrigin = 'anonymous';
+          probe.onload = function () {
+            var lum = null;
+            try {
+              var c = document.createElement('canvas');
+              c.width = 8;
+              c.height = 8;
+              var ctx = c.getContext('2d');
+              ctx.drawImage(probe, 0, 0, 8, 8);
+              var d = ctx.getImageData(0, 0, 8, 8).data;
+              var sum = 0;
+              for (var i = 0; i < d.length; i += 4) sum += 0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2];
+              lum = sum / (d.length / 4) / 255;
+            } catch (e) {
+              /* tainted or decode issue — treat as unknown */
+            }
+            imgLum[src] = lum;
+            cb(lum);
+          };
+          probe.onerror = function () {
+            imgLum[src] = null;
+            cb(null);
+          };
+          probe.src = src;
+        }
+
         // Sample the page behind the pill and flip to light text when the
-        // backdrop is dark (footer, dark sections). Walks the hit-test stack
-        // beneath the widget to the first element with an effective background
-        // color and checks its luminance. (Images/video backdrops aren't
-        // sampled — background colors only.)
+        // backdrop is dark. Walks the hit-test stack beneath the widget to the
+        // first element that paints something — a background color, or an
+        // <img> (sampled via canvas) — and checks its luminance.
         function updateContrast(host) {
           var r = host.getBoundingClientRect();
           if (!r.width) return;
@@ -650,6 +697,12 @@ document.addEventListener("DOMContentLoaded", function() {
           for (var i = 0; i < stack.length; i++) {
             var el = stack[i];
             if (el === host || host.contains(el)) continue;
+            if (el.tagName === 'IMG') {
+              imageLuminance(el, function (lum) {
+                if (lum != null) host.classList.toggle('mug-chat-on-dark', lum < 0.45);
+              });
+              return;
+            }
             var m = getComputedStyle(el).backgroundColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
             if (!m || (m[4] !== undefined && parseFloat(m[4]) < 0.5)) continue;
             var lum = (0.2126 * m[1] + 0.7152 * m[2] + 0.0722 * m[3]) / 255;
