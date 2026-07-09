@@ -591,11 +591,11 @@ document.addEventListener("DOMContentLoaded", function() {
             var st = document.createElement('style');
             st.id = 'mug-chat-style';
             st.textContent = [
-              /* The pill should sit exactly 12px from the viewport edges — the
+              /* The pill should sit exactly 14px from the viewport edges — the
                  widget pins its host at 16/16 inline (and the host box is
                  taller/wider than the pill), so both are corrected here.
                  :host !important beats the widget's inline style. */
-              ':host{ height: auto !important; bottom: 12px !important; right: 12px !important; }',
+              ':host{ height: auto !important; bottom: 14px !important; right: 14px !important; }',
               /* Closed-state layout only — the open chat window (and its close
                  button below it) must keep the widget's own layout. */
               '.chat-app:not(.chat-app--is-open){ margin: 0 !important; padding: 0 !important;',
