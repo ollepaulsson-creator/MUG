@@ -92,8 +92,8 @@
     <div class="sell-form__success" data-success hidden>
       <h2 class="sell-form__success-title">
         <span class="sell-form__success-check" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 12.5 9.5 18 20 6.5" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.81641 8.61667L4.78353 11.1458C4.84991 11.232 4.93497 11.3022 5.03231 11.3509C5.12965 11.3995 5.23675 11.4255 5.34557 11.4268C5.45264 11.4281 5.55864 11.4054 5.65586 11.3606C5.75308 11.3157 5.83908 11.2497 5.90761 11.1674L12.1837 3.57275" stroke="white" stroke-width="1.65" stroke-linecap="square"/>
           </svg>
         </span>
         Tack så mycket!
@@ -111,7 +111,7 @@
 {% stylesheet %}
   .sell-form {
     max-width: 640px;
-    padding-block: 24px 60px;
+    padding-block: 12px 60px;
   }
 
   .sell-form__back {
@@ -142,15 +142,15 @@
 
   .sell-form__subheading {
     font-size: 1rem;
-    font-weight: 600;
-    margin: 40px 0 0;
+    font-weight: 500;
+    margin: 32px 0 0;
   }
 
   .sell-form__label {
     display: block;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 15px;
-    margin: 28px 0 0;
+    margin: 22px 0 0;
   }
 
   .sell-form__help {
@@ -163,7 +163,7 @@
   .sell-form__input {
     display: block;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 6px;
     padding: 12px 14px;
     font: inherit;
     font-size: 15px;
@@ -202,18 +202,17 @@
 
   .sell-form__dropzone {
     margin-top: 20px;
-    border: 1px dashed #c5c5c5;
-    background: #f7f7f7;
+    border: 1px dashed #b7b7b7;
+    background: #fafafa;
     padding: 56px 24px;
     text-align: center;
     cursor: pointer;
-    transition: background 150ms ease, border-color 150ms ease;
+    transition: background 150ms ease;
   }
 
   .sell-form__dropzone:hover,
   .sell-form__dropzone.is-dragover {
-    background: #efefef;
-    border-color: var(--color-foreground);
+    background: #f1f1f1;
   }
 
   .sell-form__dropzone-inner {
@@ -225,6 +224,7 @@
 
   .sell-form__dropzone-title {
     font-size: 15px;
+    font-weight: 500;
   }
 
   .sell-form__dropzone-hint {
@@ -232,15 +232,16 @@
     font-size: 14px;
   }
 
+  .sell-form .sell-form__dropzone .sell-form__browse.button,
   .sell-form__browse {
     margin-top: 14px;
     background: var(--color-background);
     color: var(--color-foreground);
     border: 1px solid #d9d9d9;
-    font-size: 13px;
+    font-size: 13px !important;
     letter-spacing: 1px;
     text-transform: uppercase;
-    padding: 12px 22px;
+    padding: 9px 16px;
     cursor: pointer;
   }
 
@@ -267,8 +268,25 @@
     gap: 12px;
     border: 1px solid #e5e5e5;
     border-radius: 8px;
-    padding: 10px 12px;
+    padding: 8px 12px;
     background: var(--color-background);
+    overflow: hidden;
+    animation: sell-card-in 240ms ease;
+  }
+
+  @keyframes sell-card-in {
+    from {
+      opacity: 0;
+      max-height: 0;
+      padding-block: 0;
+      border-width: 0;
+    }
+    to {
+      opacity: 1;
+      max-height: 80px;
+      padding-block: 8px;
+      border-width: 1px;
+    }
   }
 
   .sell-form__previews img {
@@ -285,7 +303,7 @@
     min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 0;
   }
 
   .sell-form__preview-name {
@@ -303,13 +321,13 @@
 
   .sell-form__previews button {
     flex-shrink: 0;
-    width: 30px;
-    height: 30px;
+    width: 34px;
+    height: 34px;
     border: 0;
     border-radius: 6px;
     background: transparent;
     color: var(--color-foreground);
-    font-size: 18px;
+    font-size: 22px;
     line-height: 1;
     cursor: pointer;
     display: flex;
