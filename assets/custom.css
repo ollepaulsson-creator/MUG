@@ -2207,6 +2207,7 @@ body .tmenu_app .tmenu_nav .tmenu_item--root > .tmenu_item_link {
 html:root {
   --font-h1--weight: 400;
   --font-h2--weight: 400;
+  --font-h3--weight: 400; /* h3-preset titles (e.g. 32px page titles) too */
 }
 
 /* Smoother font rendering on macOS. The theme only sets -webkit-font-smoothing
