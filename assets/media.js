@@ -111,8 +111,15 @@ class DeferredMedia extends Component {
 
   /**
    * Pauses the media
+   * @param {Event} [event] - The event that triggered the pause, if any
    */
-  pauseMedia() {
+  pauseMedia(event) {
+    // Don't pause ourselves when we're the one that just started playing. The
+    // original code relied on dispatch order (the started-playing event fired
+    // before the iframe was appended), but lite YouTube embeds have their
+    // iframe present from first render, so an explicit guard is needed.
+    if (event instanceof CustomEvent && event.detail?.resource === this) return;
+
     /** @type {HTMLIFrameElement | null} */
     const iframe = this.querySelector('iframe[data-video-type]');
 
