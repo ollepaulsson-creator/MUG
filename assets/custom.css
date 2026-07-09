@@ -2199,3 +2199,14 @@ body .tmenu_app .tmenu_nav .tmenu_item--root > .tmenu_item_link {
 .footer-title {
   font-weight: 400 !important;
 }
+
+/* Smoother font rendering on macOS. The theme only sets -webkit-font-smoothing
+   on paragraphs, so headings/nav/buttons still used the OS default (subpixel),
+   which looks heavier — most noticeable in Safari on Mac. Apply grayscale
+   antialiasing site-wide: -webkit- covers Safari + Chrome, -moz-osx- covers
+   Firefox. No effect on Windows/Linux (these are macOS-only hints). */
+html,
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
