@@ -1794,9 +1794,10 @@ body:has(.tmenu_wrapper) .overflow-menu {
   transition: margin-top 150ms ease-out;
 }
 
-/* Carousel cards: roomier line-height on the vendor heading, which wraps to
-   two tight lines (--font-h5--line-height is 1.1) for long brand names. */
-.ui-test-product-list .product-card__content .text-block h5 {
+/* Product cards: roomier line-height on the vendor heading, which wraps to
+   two tight lines (--font-h5--line-height is 1.1) for long brand names like
+   MEINL SONIC ENERGY. Applies to collection grids and carousels alike. */
+.product-card__content :is(h5, .h5) {
   line-height: 1.4 !important;
 }
 
