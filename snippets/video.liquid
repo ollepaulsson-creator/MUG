@@ -165,7 +165,10 @@
         a.addEventListener('click', (ev) => {
           if (window.matchMedia('(pointer: fine)').matches) {
             ev.preventDefault();
+            // srcdoc takes precedence over src — set the autoplay URL first,
+            // then drop srcdoc so the iframe loads it.
             frame.src = a.href;
+            frame.removeAttribute('srcdoc');
           }
         });
       }
