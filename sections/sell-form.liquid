@@ -55,11 +55,16 @@
         på serienummer/etikett/modellbetecking för att underlätta processen.
       </p>
 
-      {%- if section.settings.angles_image != blank -%}
-        <div class="sell-form__angles">
-          {{ section.settings.angles_image | image_url: width: 1400 | image_tag: alt: 'Framifrån, vinklat, detaljer och skavanker', loading: 'lazy', class: 'sell-form__angles-image' }}
-        </div>
-      {%- endif -%}
+      <div class="sell-form__angles">
+        <img
+          src="{{ 'sell-form-angles.png' | asset_url }}"
+          alt="Exempel på bildvinklar: framifrån, vinklat, detaljer och skavanker"
+          loading="lazy"
+          width="1378"
+          height="365"
+          class="sell-form__angles-image"
+        >
+      </div>
 
       <div class="sell-form__dropzone" data-dropzone tabindex="0" role="button" aria-label="Ladda upp bilder på ditt instrument">
         <div class="sell-form__dropzone-inner">
@@ -486,12 +491,6 @@
       "id": "endpoint",
       "label": "Endpoint URL",
       "info": "Cloudflare Worker-adressen som tar emot formuläret (se scripts/sell-form-worker/README.md). Lämnas den tom visar formuläret ett felmeddelande vid skick."
-    },
-    {
-      "type": "image_picker",
-      "id": "angles_image",
-      "label": "Illustration (bildvinklar)",
-      "info": "Bilden med Framifrån / Vinklat / Detaljer / Skavanker."
     },
     {
       "type": "url",
