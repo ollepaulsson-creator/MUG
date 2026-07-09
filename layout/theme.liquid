@@ -675,7 +675,10 @@ document.addEventListener("DOMContentLoaded", function() {
               updateContrast(host);
             });
           }
-          window.addEventListener('scroll', onScroll, { passive: true });
+          // The theme scrolls on <body> (overflow-y: auto), not the window, so
+          // window scroll events never fire. Scroll doesn't bubble, but a
+          // capture-phase document listener catches scrolls of any container.
+          document.addEventListener('scroll', onScroll, { capture: true, passive: true });
           window.addEventListener('resize', onScroll, { passive: true });
           updateContrast(host);
           return true;
