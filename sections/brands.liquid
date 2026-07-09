@@ -45,6 +45,16 @@
     padding-block-end: {{ section.settings.padding-block-end }}px;
   }
 
+  /* Widen the list beyond the theme's content column so the empty flanking
+     columns are half as wide: new width = (column + viewport) / 2, centered
+     via the negative margins. */
+  @media screen and (min-width: 990px) {
+    .brands-page {
+      width: calc(50% + 50vw);
+      margin-inline: calc((100% - 100vw) / 4);
+    }
+  }
+
   /* Letter groups arranged in a 3-column grid, matching the live site layout */
   #brands-list {
     display: grid;
@@ -60,13 +70,21 @@
     }
   }
 
+  /* Letter headings: same style as the big page title (48px / 700) */
   .brands-group__letter {
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
     margin-top: 0;
-    margin-bottom: 0.6rem;
+    margin-bottom: 1rem;
     padding-bottom: 0;
-    letter-spacing: 0.02em;
+    letter-spacing: normal;
+  }
+
+  @media screen and (max-width: 749px) {
+    .brands-group__letter {
+      font-size: 2.25rem;
+    }
   }
 
   .brands-group__list {
@@ -80,16 +98,24 @@
     line-height: 1.5;
   }
 
+  /* Vendor links: theme link style — underlined by default, underline lifts
+     on hover (matches .link), pressed state dims. */
   .brands-group__list a {
     color: var(--color-foreground);
     text-decoration: underline;
-    text-underline-offset: 2px;
-    text-decoration-color: transparent;
-    transition: text-decoration-color var(--animation-speed-medium, 150ms) ease;
+    text-decoration-thickness: 0.075em;
+    text-underline-offset: 0.125em;
+    text-decoration-color: currentColor;
+    transition: text-decoration-color var(--animation-speed-medium, 150ms) ease,
+      opacity var(--animation-speed-medium, 150ms) ease;
   }
 
   .brands-group__list a:hover {
-    text-decoration-color: currentColor;
+    text-decoration-color: transparent;
+  }
+
+  .brands-group__list a:active {
+    opacity: 0.6;
   }
 {% endstyle %}
 
