@@ -31,12 +31,15 @@
 
       <label class="sell-form__label" for="sell-name">Ditt namn:</label>
       <input class="sell-form__input" id="sell-name" name="name" type="text" placeholder="Förnamn och efternamn" autocomplete="name" required>
+      <p class="sell-form__field-error" id="err-sell-name" hidden>Fyll i ditt namn.</p>
 
       <label class="sell-form__label" for="sell-email">Din e-postadress:</label>
       <input class="sell-form__input" id="sell-email" name="email" type="email" placeholder="E-postadress" autocomplete="email" required>
+      <p class="sell-form__field-error" id="err-sell-email" hidden>Fyll i en giltig e-postadress.</p>
 
       <label class="sell-form__label" for="sell-phone">Ditt telefonnummer:</label>
-      <input class="sell-form__input" id="sell-phone" name="phone" type="tel" placeholder="Telefonnummer" autocomplete="tel">
+      <input class="sell-form__input" id="sell-phone" name="phone" type="tel" placeholder="Telefonnummer" autocomplete="tel" required>
+      <p class="sell-form__field-error" id="err-sell-phone" hidden>Fyll i ditt telefonnummer.</p>
 
       <h2 class="sell-form__subheading">Beskriv ditt instrument</h2>
 
@@ -46,6 +49,7 @@
         instrumentets tillverkningsår.
       </p>
       <input class="sell-form__input" id="sell-model" name="model" type="text" placeholder="Instrumentets märke och modell och år" required>
+      <p class="sell-form__field-error" id="err-sell-model" hidden>Fyll i märke och modell.</p>
 
       <label class="sell-form__label" for="sell-description">Beskrivning:</label>
       <p class="sell-form__help">
@@ -160,6 +164,24 @@
     line-height: 1.5;
   }
 
+  /* Fields following a help text get double breathing room */
+  .sell-form__help + .sell-form__input,
+  .sell-form__help + .sell-form__textarea {
+    margin-top: 12px;
+  }
+
+  .sell-form__field-error {
+    color: #c0392b;
+    font-size: 13px;
+    margin: 6px 0 0;
+  }
+
+  .sell-form__input--invalid {
+    border-color: #c0392b !important;
+  }
+
+
+
   .sell-form__input {
     display: block;
     width: 100%;
@@ -203,6 +225,7 @@
   .sell-form__dropzone {
     margin-top: 20px;
     border: 1px dashed #b7b7b7;
+    border-radius: 4px;
     background: #fafafa;
     padding: 56px 24px;
     text-align: center;
@@ -443,6 +466,49 @@
       errorEl.hidden = !msg;
     }
 
+    const REQUIRED = [
+      ['sell-name', 'Fyll i ditt namn.'],
+      ['sell-email', 'Fyll i en giltig e-postadress.'],
+      ['sell-phone', 'Fyll i ditt telefonnummer.'],
+      ['sell-model', 'Fyll i märke och modell.'],
+    ];
+
+    function setFieldError(el, err, bad) {
+      err.hidden = !bad;
+      el.classList.toggle('sell-form__input--invalid', bad);
+      el.setAttribute('aria-invalid', bad ? 'true' : 'false');
+    }
+
+    function validateFields() {
+      let firstBad = null;
+      REQUIRED.forEach(([id, msg]) => {
+        const el = document.getElementById(id);
+        const err = document.getElementById('err-' + id);
+        if (!el || !err) return;
+        let bad = !el.value.trim();
+        if (id === 'sell-email' && !bad) bad = !el.checkValidity();
+        err.textContent = msg;
+        setFieldError(el, err, bad);
+        if (bad && !firstBad) firstBad = el;
+      });
+      if (firstBad) {
+        firstBad.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        firstBad.focus({ preventScroll: true });
+        return false;
+      }
+      return true;
+    }
+
+    // Clear a field's error as soon as the user fixes it
+    REQUIRED.forEach(([id]) => {
+      const el = document.getElementById(id);
+      const err = document.getElementById('err-' + id);
+      if (!el || !err) return;
+      el.addEventListener('input', () => {
+        if (el.value.trim()) setFieldError(el, err, false);
+      });
+    });
+
     function formatBytes(b) {
       if (b < 1024 * 1024) return Math.max(1, Math.round(b / 1024)) + ' KB';
       return (b / 1048576).toFixed(1).replace('.', ',') + ' MB';
@@ -502,7 +568,9 @@
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.setAttribute('aria-label', 'Ta bort ' + (file.name || 'bild'));
-        btn.textContent = '×';
+        btn.innerHTML =
+          '<svg viewBox="0 0 14 14" width="14" height="14" fill="none" aria-hidden="true">' +
+          '<path d="M1.5 1.5l11 11M12.5 1.5l-11 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
         btn.addEventListener('click', () => {
           const i = [...previews.children].indexOf(li);
           if (i > -1) {
@@ -552,7 +620,7 @@
         showError('Formuläret är inte aktiverat ännu. Ring oss på 031-711 03 09 eller mejla order@mug.se.');
         return;
       }
-      if (!form.reportValidity()) return;
+      if (!validateFields()) return;
 
       submitBtn.disabled = true;
       submitBtn.textContent = 'Skickar…';
