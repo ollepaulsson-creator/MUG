@@ -1,0 +1,504 @@
+{% comment %}
+  Sälj/byt in — submission form (Ladda upp bilder och beskriv ditt instrument).
+  Posts multipart form data to a Cloudflare Worker (see scripts/sell-form-worker/)
+  which emails order@mug.se with the photos attached and sends a copy to the
+  submitter. Photos are compressed client-side (max 1600px JPEG) before upload
+  so phone photos stay well under the size limits.
+{% endcomment %}
+
+<div class="section page-width-content">
+  <div class="sell-form">
+    <a class="sell-form__back" href="{{ section.settings.back_url | default: '/pages/salj-byt' }}">&larr;&nbsp; Tillbaka</a>
+
+    <h1 class="sell-form__title">Ladda upp bilder och beskriv ditt instrument</h1>
+
+    <p class="sell-form__intro">
+      Har du något att sälja? Vi vill ha bilder och den info du har så kan vi ta nästa steg.
+      Vi värderar instrumenten och gör även i vissa fall hembesök. Vi har ett nära samarbete
+      med Godsroteln hos Polisen för att försäkra oss om att vi inte hanterar stulet gods,
+      och har många gånger hjälpt ägare få tillbaks sina ägodelar. Ge en detaljerad
+      beskrivning av allt som du tycker vi bör känna till, så återkommer vi med ett prisförslag.
+    </p>
+
+    <form class="sell-form__form" novalidate data-endpoint="{{ section.settings.endpoint | escape }}">
+      {%- comment -%} Honeypot — hidden from humans, bots fill it {%- endcomment -%}
+      <input type="text" name="company" class="sell-form__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <label class="sell-form__label" for="sell-name">Ditt namn:</label>
+      <input class="sell-form__input" id="sell-name" name="name" type="text" placeholder="Förnamn och efternamn" autocomplete="name" required>
+
+      <label class="sell-form__label" for="sell-email">Din e-postadress</label>
+      <input class="sell-form__input" id="sell-email" name="email" type="email" placeholder="E-postadress" autocomplete="email" required>
+
+      <label class="sell-form__label" for="sell-phone">Ditt telefonnummer:</label>
+      <input class="sell-form__input" id="sell-phone" name="phone" type="tel" placeholder="Telefonnummer" autocomplete="tel">
+
+      <h2 class="sell-form__subheading">Beskriv ditt instrument</h2>
+
+      <label class="sell-form__label" for="sell-model">Märke och modell:</label>
+      <p class="sell-form__help">
+        Här anger du vad du anser vara instrumentets tillverkare, modell och om du vet
+        instrumentets tillverkningsår.
+      </p>
+      <input class="sell-form__input" id="sell-model" name="model" type="text" placeholder="Instrumentets märke och modell och år" required>
+
+      <label class="sell-form__label" for="sell-description">Beskrivning:</label>
+      <p class="sell-form__help">
+        Ge en detaljerad beskrivning av allt som du tycker vi bör känna till
+        (ev skavanker, tillbehör, modifikationer, originalcase, etc)
+      </p>
+      <textarea class="sell-form__input sell-form__textarea" id="sell-description" name="description" rows="6" placeholder="Beskriv instrumentetet"></textarea>
+
+      <span class="sell-form__label">Bilder:</span>
+      <p class="sell-form__help">
+        Nedanstående exempel visar vilka bilder och vinklar vi vill se. Bifoga gärna en bild
+        på serienummer/etikett/modellbetecking för att underlätta processen.
+      </p>
+
+      {%- if section.settings.angles_image != blank -%}
+        <div class="sell-form__angles">
+          {{ section.settings.angles_image | image_url: width: 1400 | image_tag: alt: 'Framifrån, vinklat, detaljer och skavanker', loading: 'lazy', class: 'sell-form__angles-image' }}
+        </div>
+      {%- endif -%}
+
+      <div class="sell-form__dropzone" data-dropzone tabindex="0" role="button" aria-label="Ladda upp bilder på ditt instrument">
+        <div class="sell-form__dropzone-inner">
+          <strong class="sell-form__dropzone-title">Ladda upp bilder på ditt instrument</strong>
+          <span class="sell-form__dropzone-hint">Dra eller släpp bilderna här eller bläddra efter en fil.</span>
+          <span class="sell-form__browse button">Välj bilder&hellip;</span>
+        </div>
+        <input type="file" accept="image/*" multiple data-file-input class="sell-form__file-input" aria-hidden="true" tabindex="-1">
+      </div>
+
+      <ul class="sell-form__previews" data-previews></ul>
+
+      <p class="sell-form__error" data-error hidden></p>
+
+      <button type="submit" class="sell-form__submit button">Skicka</button>
+
+      <p class="sell-form__note">En kopia av dina svar kommer att skickas till den e-postadress du angett.</p>
+    </form>
+
+    <div class="sell-form__success" data-success hidden>
+      <h2>Tack för din anmälan!</h2>
+      <p>
+        Vi har tagit emot dina uppgifter och bilder, och en kopia har skickats till din
+        e-postadress. Vi återkommer med ett prisförslag så snart vi kan.
+      </p>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .sell-form {
+    max-width: 640px;
+    padding-block: 24px 60px;
+  }
+
+  .sell-form__back {
+    display: inline-block;
+    background: #f2f2f2;
+    color: var(--color-foreground);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 14px;
+    margin-bottom: 28px;
+  }
+
+  .sell-form__back:hover {
+    background: #e8e8e8;
+  }
+
+  .sell-form__title {
+    font-size: var(--font-h3--size, 2rem);
+    margin: 0 0 20px;
+  }
+
+  .sell-form__intro {
+    margin: 0 0 32px;
+    line-height: 1.6;
+  }
+
+  .sell-form__subheading {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 40px 0 0;
+  }
+
+  .sell-form__label {
+    display: block;
+    font-weight: 600;
+    font-size: 15px;
+    margin: 28px 0 0;
+  }
+
+  .sell-form__help {
+    margin: 6px 0 0;
+    color: rgb(var(--color-foreground-rgb) / 0.65);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .sell-form__input {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px 14px;
+    font: inherit;
+    font-size: 15px;
+    color: var(--color-foreground);
+    background: var(--color-background);
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+  }
+
+  .sell-form__input:focus-visible {
+    outline: 1px solid var(--color-foreground);
+    outline-offset: 0;
+  }
+
+  .sell-form__input::placeholder {
+    color: rgb(var(--color-foreground-rgb) / 0.4);
+  }
+
+  .sell-form__textarea {
+    resize: vertical;
+    min-height: 140px;
+  }
+
+  .sell-form__hp {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+
+  .sell-form__angles {
+    margin-top: 20px;
+  }
+
+  .sell-form__angles-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .sell-form__dropzone {
+    margin-top: 20px;
+    border: 1px dashed #c5c5c5;
+    background: #f7f7f7;
+    padding: 56px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 150ms ease, border-color 150ms ease;
+  }
+
+  .sell-form__dropzone:hover,
+  .sell-form__dropzone.is-dragover {
+    background: #efefef;
+    border-color: var(--color-foreground);
+  }
+
+  .sell-form__dropzone-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sell-form__dropzone-title {
+    font-size: 15px;
+  }
+
+  .sell-form__dropzone-hint {
+    color: rgb(var(--color-foreground-rgb) / 0.55);
+    font-size: 14px;
+  }
+
+  .sell-form__browse {
+    margin-top: 14px;
+    background: var(--color-background);
+    color: var(--color-foreground);
+    border: 1px solid #d9d9d9;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 12px 22px;
+    cursor: pointer;
+  }
+
+  .sell-form__file-input {
+    display: none;
+  }
+
+  .sell-form__previews {
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+    gap: 10px;
+  }
+
+  .sell-form__previews:empty {
+    display: none;
+  }
+
+  .sell-form__previews li {
+    position: relative;
+    aspect-ratio: 1;
+    border: 1px solid #e5e5e5;
+    overflow: hidden;
+  }
+
+  .sell-form__previews img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .sell-form__previews button {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 22px;
+    height: 22px;
+    border: 0;
+    border-radius: 50%;
+    background: rgb(0 0 0 / 0.65);
+    color: #fff;
+    font-size: 13px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sell-form__error {
+    color: #c0392b;
+    font-size: 14px;
+    margin: 16px 0 0;
+  }
+
+  .sell-form__submit {
+    display: block;
+    width: 100%;
+    margin-top: 28px;
+    padding: 16px;
+    background: var(--color-foreground);
+    color: var(--color-background);
+    border: 0;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .sell-form__submit:hover {
+    opacity: 0.85;
+  }
+
+  .sell-form__submit[disabled] {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  .sell-form__note {
+    margin: 14px 0 0;
+    text-align: center;
+    color: rgb(var(--color-foreground-rgb) / 0.55);
+    font-size: 14px;
+  }
+
+  .sell-form__success h2 {
+    font-size: var(--font-h4--size, 1.5rem);
+  }
+
+  @media screen and (max-width: 749px) {
+    .sell-form {
+      padding-block: 8px 40px;
+    }
+
+    .sell-form__dropzone {
+      padding: 36px 16px;
+    }
+  }
+{% endstylesheet %}
+
+<script>
+  (() => {
+    const root = document.currentScript.previousElementSibling ? document.querySelector('.sell-form') : null;
+    const form = document.querySelector('.sell-form__form');
+    if (!form || form.__bound) return;
+    form.__bound = true;
+
+    const dropzone = form.querySelector('[data-dropzone]');
+    const fileInput = form.querySelector('[data-file-input]');
+    const previews = form.querySelector('[data-previews]');
+    const errorEl = form.querySelector('[data-error]');
+    const submitBtn = form.querySelector('.sell-form__submit');
+    const successEl = document.querySelector('[data-success]');
+
+    const MAX_FILES = 10;
+    const MAX_SOURCE_BYTES = 30 * 1024 * 1024; // per original file
+    let items = []; // { file, blob, url }
+
+    function showError(msg) {
+      errorEl.textContent = msg;
+      errorEl.hidden = !msg;
+    }
+
+    // Downscale to max 1600px JPEG so phone photos upload fast and the email
+    // stays under the size cap. Falls back to the original file if the image
+    // can't be decoded (e.g. odd formats).
+    async function compress(file) {
+      try {
+        const bitmap = await createImageBitmap(file);
+        const scale = Math.min(1, 1600 / Math.max(bitmap.width, bitmap.height));
+        if (scale === 1 && file.size < 800 * 1024 && file.type === 'image/jpeg') return file;
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.round(bitmap.width * scale);
+        canvas.height = Math.round(bitmap.height * scale);
+        canvas.getContext('2d').drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+        bitmap.close();
+        const blob = await new Promise((res) => canvas.toBlob(res, 'image/jpeg', 0.82));
+        return blob || file;
+      } catch {
+        return file;
+      }
+    }
+
+    async function addFiles(fileList) {
+      showError('');
+      for (const file of fileList) {
+        if (items.length >= MAX_FILES) {
+          showError('Max ' + MAX_FILES + ' bilder.');
+          break;
+        }
+        if (!file.type.startsWith('image/')) {
+          showError('Endast bildfiler kan laddas upp.');
+          continue;
+        }
+        if (file.size > MAX_SOURCE_BYTES) {
+          showError('En bild är för stor (max 30 MB).');
+          continue;
+        }
+        const blob = await compress(file);
+        const url = URL.createObjectURL(blob);
+        items.push({ file, blob, url });
+        const li = document.createElement('li');
+        const img = document.createElement('img');
+        img.src = url;
+        img.alt = '';
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.setAttribute('aria-label', 'Ta bort bild');
+        btn.textContent = '×';
+        btn.addEventListener('click', () => {
+          const i = [...previews.children].indexOf(li);
+          if (i > -1) {
+            URL.revokeObjectURL(items[i].url);
+            items.splice(i, 1);
+          }
+          li.remove();
+        });
+        li.append(img, btn);
+        previews.appendChild(li);
+      }
+    }
+
+    dropzone.addEventListener('click', () => fileInput.click());
+    dropzone.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        fileInput.click();
+      }
+    });
+    fileInput.addEventListener('change', () => {
+      addFiles([...fileInput.files]);
+      fileInput.value = '';
+    });
+    ['dragover', 'dragenter'].forEach((t) =>
+      dropzone.addEventListener(t, (e) => {
+        e.preventDefault();
+        dropzone.classList.add('is-dragover');
+      })
+    );
+    ['dragleave', 'drop'].forEach((t) =>
+      dropzone.addEventListener(t, (e) => {
+        e.preventDefault();
+        dropzone.classList.remove('is-dragover');
+      })
+    );
+    dropzone.addEventListener('drop', (e) => {
+      if (e.dataTransfer && e.dataTransfer.files.length) addFiles([...e.dataTransfer.files]);
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      showError('');
+
+      const endpoint = form.dataset.endpoint;
+      if (!endpoint) {
+        showError('Formuläret är inte aktiverat ännu. Ring oss på 031-711 03 09 eller mejla order@mug.se.');
+        return;
+      }
+      if (!form.reportValidity()) return;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Skickar…';
+
+      try {
+        const fd = new FormData();
+        ['company', 'name', 'email', 'phone', 'model', 'description'].forEach((n) => {
+          fd.append(n, form.elements[n] ? form.elements[n].value : '');
+        });
+        items.forEach((it, i) => {
+          const base = (it.file.name || 'bild').replace(/\.[a-z0-9]+$/i, '');
+          fd.append('images', it.blob, base + '.jpg');
+        });
+
+        const res = await fetch(endpoint, { method: 'POST', body: fd });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.ok) throw new Error(data.error || 'send-failed');
+
+        form.hidden = true;
+        successEl.hidden = false;
+        successEl.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      } catch (err) {
+        showError('Något gick fel när formuläret skickades. Försök igen, eller mejla oss direkt på order@mug.se.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Skicka';
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Sälj/byt in-formulär",
+  "settings": [
+    {
+      "type": "text",
+      "id": "endpoint",
+      "label": "Endpoint URL",
+      "info": "Cloudflare Worker-adressen som tar emot formuläret (se scripts/sell-form-worker/README.md). Lämnas den tom visar formuläret ett felmeddelande vid skick."
+    },
+    {
+      "type": "image_picker",
+      "id": "angles_image",
+      "label": "Illustration (bildvinklar)",
+      "info": "Bilden med Framifrån / Vinklat / Detaljer / Skavanker."
+    },
+    {
+      "type": "url",
+      "id": "back_url",
+      "label": "Tillbaka-länk"
+    }
+  ],
+  "presets": []
+}
+{% endschema %}

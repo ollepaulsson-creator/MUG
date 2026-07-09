@@ -1,0 +1,10 @@
+name = "mug-sell-form"
+main = "worker.js"
+compatibility_date = "2026-01-01"
+
+# Non-secret config (change TO_EMAIL/FROM_EMAIL here if needed)
+[vars]
+TO_EMAIL = "order@mug.se"
+FROM_EMAIL = "Musik Utan Gränser <formular@mug.se>"
+
+# Secret (set with: npx wrangler secret put RESEND_API_KEY)
