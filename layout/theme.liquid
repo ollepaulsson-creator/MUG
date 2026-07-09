@@ -632,7 +632,7 @@ document.addEventListener("DOMContentLoaded", function() {
               '}',
               /* Low contrast against a dark backdrop (e.g. the footer): invert
                  the text. Toggled by the scroll sampler below. */
-              ':host(.mug-chat-on-dark) .chat-title{ color: #fff !important; }',
+              ':host(.mug-chat-on-dark) .chat-title{ color: #ffffffd9 !important; }',
               ':host(.mug-chat-on-dark) button.chat-toggle{ background: rgba(255, 255, 255, 0.12) !important; }',
               ':host(.mug-chat-on-dark) button.chat-toggle:hover{ background: rgba(255, 255, 255, 0.24) !important; }',
             ].join('\n');
@@ -642,6 +642,10 @@ document.addEventListener("DOMContentLoaded", function() {
           var title = sr.querySelector('.chat-title');
           if (title) {
             if (title.textContent !== LABEL) title.textContent = LABEL;
+            // Re-assert the dark-backdrop inline styles after a re-render
+            if (host.classList.contains('mug-chat-on-dark') && !title.style.color) {
+              applyDark(host, true);
+            }
           } else {
             // Mobile: the widget renders an icon-only toggle with no
             // .chat-title span — add our own so the pill shows dot + label.
@@ -690,6 +694,26 @@ document.addEventListener("DOMContentLoaded", function() {
           probe.src = src;
         }
 
+        // Flip the pill between dark-backdrop (white text) and normal styling.
+        // Inline styles with !important are used because the widget's own
+        // (cross-origin, uninspectable) stylesheet beats shadow rules for
+        // color/background specifically.
+        function applyDark(host, on) {
+          host.classList.toggle('mug-chat-on-dark', on);
+          var sr = host.shadowRoot;
+          if (!sr) return;
+          var t = sr.querySelector('.chat-title');
+          var b = sr.querySelector('button.chat-toggle');
+          if (t) {
+            if (on) t.style.setProperty('color', '#ffffffd9', 'important');
+            else t.style.removeProperty('color');
+          }
+          if (b) {
+            if (on) b.style.setProperty('background', 'rgba(255, 255, 255, 0.12)', 'important');
+            else b.style.removeProperty('background');
+          }
+        }
+
         // Sample the page behind the pill and flip to light text when the
         // backdrop is dark. Walks the hit-test stack beneath the widget to the
         // first element that paints something — a background color, or an
@@ -720,7 +744,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             if (img) {
               imageLuminance(img, function (lum) {
-                if (lum != null) host.classList.toggle('mug-chat-on-dark', lum < 0.45);
+                if (lum != null) applyDark(host, lum < 0.45);
               });
               return;
             }
@@ -728,10 +752,10 @@ document.addEventListener("DOMContentLoaded", function() {
             var m = getComputedStyle(el).backgroundColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
             if (!m || (m[4] !== undefined && parseFloat(m[4]) < 0.5)) continue;
             var lum = (0.2126 * m[1] + 0.7152 * m[2] + 0.0722 * m[3]) / 255;
-            host.classList.toggle('mug-chat-on-dark', lum < 0.45);
+            applyDark(host, lum < 0.45);
             return;
           }
-          host.classList.remove('mug-chat-on-dark');
+          applyDark(host, false);
         }
 
         function init() {
