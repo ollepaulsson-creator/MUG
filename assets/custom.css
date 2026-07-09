@@ -2230,6 +2230,25 @@ body {
   outline: none !important;
 }
 
+/* Gallery thumbnail play badge (video/3D thumbs): bigger and centered — was a
+   ~16px icon pinned in the top-right corner. White box with a slight radius,
+   light grey border and a drop shadow, per design mock. Size scales with the
+   thumbnail (clamped) so small mobile thumbs aren't swallowed by the badge. */
+.slideshow-controls__thumbnail-badge {
+  top: 50%;
+  right: auto;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(32px, 26%, 44px);
+  height: clamp(32px, 26%, 44px);
+  border-radius: 6px;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.18);
+}
+.slideshow-controls__thumbnail-badge svg {
+  opacity: 0.85;
+}
+
 /* Product gallery: hide the badge overlay (REA / NYHET / B-STOCK …) while the
    visible carousel slide is a started video, so it doesn't sit on top of the
    player. deferred-media gets data-media-loaded once the user starts the video;
