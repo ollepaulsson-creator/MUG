@@ -2344,5 +2344,17 @@
         "default": "equal-width-buttons"
       }
     ]
+  },
+  {
+    "name": "Öppettider",
+    "settings": [
+      {
+        "type": "richtext",
+        "id": "opening_hours",
+        "label": "Öppettider",
+        "info": "Visas i sidfoten och i mobilmenyns sidfot — redigera här för att uppdatera båda ställena samtidigt.",
+        "default": "<p>Öppettider i sommar, vecka 28–34.</p><p>Mån–Fre: 11.00–18.00<br>Lördag: 11.00–16.00<br>Söndag: Stängt</p><p>Välkomna till MUG!</p>"
+      }
+    ]
   }
 ]
