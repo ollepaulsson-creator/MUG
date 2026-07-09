@@ -1847,7 +1847,7 @@ results-list.section {
   right: -1px;
   bottom: -1px;
   height: 1px;
-  background: rgba(0, 0, 0, 0.81);
+  background: var(--color-foreground, #000);
   z-index: 2;
   pointer-events: none;
 }
