@@ -591,10 +591,11 @@ document.addEventListener("DOMContentLoaded", function() {
             var st = document.createElement('style');
             st.id = 'mug-chat-style';
             st.textContent = [
-              /* The pill should sit exactly 16px from the viewport edges (the
-                 host is fixed at 16/16 but is taller/wider than the pill, so
-                 the internal slack is removed here). */
-              ':host{ height: auto !important; }',
+              /* The pill should sit exactly 12px from the viewport edges — the
+                 widget pins its host at 16/16 inline (and the host box is
+                 taller/wider than the pill), so both are corrected here.
+                 :host !important beats the widget's inline style. */
+              ':host{ height: auto !important; bottom: 12px !important; right: 12px !important; }',
               '.chat-app{ margin: 0 !important; padding: 0 !important; width: auto !important;',
               '  display: flex; justify-content: flex-end; }',
               'button.chat-toggle{',
@@ -605,23 +606,29 @@ document.addEventListener("DOMContentLoaded", function() {
               '  box-shadow: none !important;',
               '  color: #000 !important;',
               '  height: 44px !important;',
-              '  padding: 0 14px !important;',
+              '  padding: 0 12px !important;',
               '  margin: 0 !important;',
               '  display: flex; align-items: center;',
-              '  transition: opacity 150ms ease;',
+              '  transition: background-color 150ms ease;',
               '}',
-              'button.chat-toggle:hover{ opacity: 0.7; }',
+              'button.chat-toggle:hover{ background: rgba(120, 104, 83, 0.22) !important; }', /* darker on hover */
               'button.chat-toggle > svg{ display: none !important; }',
               '.chat-title{',
               '  font: 400 14px/1 "Inter Variable", sans-serif !important;',
               '  color: #000 !important;',
               '  display: inline-flex; align-items: center; gap: 10px;', /* 8px + 2px after the dot */
               '  margin: 0 !important; padding: 0 !important;',
+              '  transition: color 150ms ease;',
               '}',
               '.chat-title::before{',
               "  content: ''; width: 10px; height: 10px; border-radius: 50%;",
               '  background: #34C759; display: inline-block; flex-shrink: 0;',
               '}',
+              /* Low contrast against a dark backdrop (e.g. the footer): invert
+                 the text. Toggled by the scroll sampler below. */
+              ':host(.mug-chat-on-dark) .chat-title{ color: #fff !important; }',
+              ':host(.mug-chat-on-dark) button.chat-toggle{ background: rgba(255, 255, 255, 0.12) !important; }',
+              ':host(.mug-chat-on-dark) button.chat-toggle:hover{ background: rgba(255, 255, 255, 0.24) !important; }',
             ].join('\n');
             sr.appendChild(st);
           }
@@ -631,12 +638,49 @@ document.addEventListener("DOMContentLoaded", function() {
           return true;
         }
 
+        // Sample the page behind the pill and flip to light text when the
+        // backdrop is dark (footer, dark sections). Walks the hit-test stack
+        // beneath the widget to the first element with an effective background
+        // color and checks its luminance. (Images/video backdrops aren't
+        // sampled — background colors only.)
+        function updateContrast(host) {
+          var r = host.getBoundingClientRect();
+          if (!r.width) return;
+          var stack = document.elementsFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+          for (var i = 0; i < stack.length; i++) {
+            var el = stack[i];
+            if (el === host || host.contains(el)) continue;
+            var m = getComputedStyle(el).backgroundColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+            if (!m || (m[4] !== undefined && parseFloat(m[4]) < 0.5)) continue;
+            var lum = (0.2126 * m[1] + 0.7152 * m[2] + 0.0722 * m[3]) / 255;
+            host.classList.toggle('mug-chat-on-dark', lum < 0.45);
+            return;
+          }
+          host.classList.remove('mug-chat-on-dark');
+        }
+
         function init() {
           var host = document.getElementById('ShopifyChat');
           if (!host || !customize(host)) return false;
           new MutationObserver(function () {
             customize(host);
           }).observe(host.shadowRoot, { childList: true, subtree: true, characterData: true });
+
+          var ticking = false;
+          function onScroll() {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(function () {
+              ticking = false;
+              updateContrast(host);
+            });
+          }
+          // The theme scrolls on <body> (overflow-y: auto), not the window, so
+          // window scroll events never fire. Scroll doesn't bubble, but a
+          // capture-phase document listener catches scrolls of any container.
+          document.addEventListener('scroll', onScroll, { capture: true, passive: true });
+          window.addEventListener('resize', onScroll, { passive: true });
+          updateContrast(host);
           return true;
         }
 
