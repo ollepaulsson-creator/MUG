@@ -88,6 +88,8 @@ export default {
         .join('') +
       '</table>';
 
+    console.log(JSON.stringify({ files: files.length, attachments: attachments.length, totalBytes: total, b64Lens: attachments.map((a) => a.content.length) }));
+
     // 1) To the store — with photos attached
     const storeMail = await sendEmail(env, {
       from: env.FROM_EMAIL,
@@ -97,6 +99,7 @@ export default {
       html: `<h2 style="font:600 18px sans-serif">Ny intresseanmälan – Sälj eller byt in</h2>${table}`,
       attachments,
     });
+    console.log('resend store response: ' + storeMail.status + ' ' + (await storeMail.clone().text()).slice(0, 300));
     if (!storeMail.ok) {
       // Surface Resend's error message (no secrets in it) to ease debugging.
       const detail = await storeMail.text().catch(() => '');

@@ -48,6 +48,11 @@
 
       {%- case t -%}
         {%- when 'page' -%}
+          {%- comment -%} Sub-pages: show their parent as a crumb {%- endcomment -%}
+          {%- if page.handle == 'ladda-upp-bilder' -%}
+            <span class="divider">/</span>
+            <a href="/pages/salj-byt">Sälj eller byt in</a>
+          {%- endif -%}
           <span class="divider">/</span>
           <span>{{ page.title }}</span>
 
@@ -240,6 +245,15 @@
         }
         {%- case t -%}
           {%- when 'page' -%}
+            {%- if page.handle == 'ladda-upp-bilder' -%}
+              {%- assign bc_pos = bc_pos | plus: 1 -%}
+              ,{
+                "@type": "ListItem",
+                "position": {{ bc_pos }},
+                "name": "Sälj eller byt in",
+                "item": {{ request.origin | append: '/pages/salj-byt' | json }}
+              }
+            {%- endif -%}
             {%- assign bc_pos = bc_pos | plus: 1 -%}
             ,{
               "@type": "ListItem",
