@@ -817,7 +817,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<h4>Öppetider</h4>",
+                "text": "<h4>Öppettider</h4>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
