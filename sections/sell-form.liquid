@@ -88,7 +88,7 @@
 
       <p class="sell-form__error" data-error hidden></p>
 
-      <button type="submit" class="sell-form__submit button">Skicka</button>
+      <button type="submit" class="sell-form__submit button">Skicka bilder</button>
 
       <p class="sell-form__note">En kopia av dina svar kommer att skickas till den e-postadress du angett.</p>
     </form>
@@ -146,13 +146,13 @@
 
   .sell-form__subheading {
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
     margin: 32px 0 0;
   }
 
   .sell-form__label {
     display: block;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 15px;
     margin: 22px 0 0;
   }
@@ -171,13 +171,13 @@
   }
 
   .sell-form__field-error {
-    color: #c0392b;
-    font-size: 13px;
+    color: #ee2f53;
+    font-size: 15px;
     margin: 6px 0 0;
   }
 
   .sell-form__input--invalid {
-    border-color: #c0392b !important;
+    border-color: #ee2f53 !important;
   }
 
 
@@ -247,7 +247,7 @@
 
   .sell-form__dropzone-title {
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   .sell-form__dropzone-hint {
@@ -363,8 +363,8 @@
   }
 
   .sell-form__error {
-    color: #c0392b;
-    font-size: 14px;
+    color: #ee2f53;
+    font-size: 15px;
     margin: 16px 0 0;
   }
 
@@ -653,7 +653,7 @@
       } catch (err) {
         showError('Något gick fel när formuläret skickades. Försök igen, eller mejla oss direkt på order@mug.se.');
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Skicka';
+        submitBtn.textContent = 'Skicka bilder';
       }
     });
   })();
