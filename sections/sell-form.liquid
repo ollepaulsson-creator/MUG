@@ -8,7 +8,12 @@
 
 <div class="section page-width-content">
   <div class="sell-form">
-    <a class="sell-form__back" href="{{ section.settings.back_url | default: '/pages/salj-byt' }}">&larr;&nbsp; Tillbaka</a>
+    <a class="sell-form__back" href="{{ section.settings.back_url | default: '/pages/salj-byt' }}">
+      <svg viewBox="0 0 16 16" width="15" height="15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M7.5 2.5 2 8l5.5 5.5M2.5 8H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Tillbaka
+    </a>
 
     <h1 class="sell-form__title">Ladda upp bilder och beskriv ditt instrument</h1>
 
@@ -85,11 +90,20 @@
     </form>
 
     <div class="sell-form__success" data-success hidden>
-      <h2>Tack för din anmälan!</h2>
-      <p>
-        Vi har tagit emot dina uppgifter och bilder, och en kopia har skickats till din
-        e-postadress. Vi återkommer med ett prisförslag så snart vi kan.
+      <h2 class="sell-form__success-title">
+        <span class="sell-form__success-check" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 12.5 9.5 18 20 6.5" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        Tack så mycket!
+      </h2>
+      <p class="sell-form__success-text">
+        Har frågor om hur det går till; Chatta med oss, ring på
+        <a href="tel:+46317110309">031-711 03 09</a>, maila till
+        <a href="mailto:order@mug.se">order@mug.se</a> eller kom helt enkelt in till oss i butiken.
       </p>
+      <button type="button" class="sell-form__submit sell-form__reset" data-reset>Ladda upp fler instrument</button>
     </div>
   </div>
 </div>
@@ -101,7 +115,9 @@
   }
 
   .sell-form__back {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     background: #f2f2f2;
     color: var(--color-foreground);
     text-decoration: none;
@@ -155,11 +171,6 @@
     background: var(--color-background);
     border: 1px solid #d9d9d9;
     border-radius: 4px;
-  }
-
-  .sell-form__input:focus-visible {
-    outline: 1px solid var(--color-foreground);
-    outline-offset: 0;
   }
 
   .sell-form__input::placeholder {
@@ -346,8 +357,38 @@
     font-size: 14px;
   }
 
-  .sell-form__success h2 {
-    font-size: var(--font-h4--size, 1.5rem);
+  .sell-form__success-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: var(--font-h3--size, 2rem);
+    margin: 0 0 20px;
+  }
+
+  .sell-form__success-check {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #2e9e44;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .sell-form__success-text {
+    line-height: 1.6;
+    margin: 0 0 32px;
+  }
+
+  .sell-form__success-text a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .sell-form__reset {
+    margin-top: 0;
   }
 
   @media screen and (max-width: 749px) {
@@ -513,8 +554,16 @@
         if (!res.ok || !data.ok) throw new Error(data.error || 'send-failed');
 
         form.hidden = true;
+        // Per design, the success view replaces the whole intro too
+        document.querySelector('.sell-form__title')?.setAttribute('hidden', '');
+        document.querySelector('.sell-form__intro')?.setAttribute('hidden', '');
         successEl.hidden = false;
         successEl.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        const resetBtn = successEl.querySelector('[data-reset]');
+        if (resetBtn && !resetBtn.__bound) {
+          resetBtn.__bound = true;
+          resetBtn.addEventListener('click', () => location.reload());
+        }
       } catch (err) {
         showError('Något gick fel när formuläret skickades. Försök igen, eller mejla oss direkt på order@mug.se.');
         submitBtn.disabled = false;
