@@ -2230,23 +2230,30 @@ body {
   outline: none !important;
 }
 
-/* Gallery thumbnail play badge (video/3D thumbs): bigger and centered — was a
-   ~16px icon pinned in the top-right corner. White box with a slight radius,
-   light grey border and a drop shadow, per design mock. Size scales with the
-   thumbnail (clamped) so small mobile thumbs aren't swallowed by the badge. */
+/* Gallery thumbnail play badge (video/3D thumbs): a bare white icon centered
+   on the thumbnail (no background box) — was a ~16px icon in a white box in
+   the top-right corner. The icon gets a thin grey stroke and a drop shadow so
+   it reads on light footage; its rounded corners are baked into the SVG path.
+   Per design mock. */
 .slideshow-controls__thumbnail-badge {
   top: 50%;
   right: auto;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: clamp(32px, 26%, 44px);
-  height: clamp(32px, 26%, 44px);
-  border-radius: 6px;
-  border: 1px solid #e5e5e5;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 0.18);
+  width: auto;
+  height: auto;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
 }
 .slideshow-controls__thumbnail-badge svg {
-  opacity: 0.85;
+  width: 24px;
+  height: 29px;
+  color: #fff; /* the path uses fill="currentColor" */
+  opacity: 1;
+  stroke: #e5e5e5;
+  stroke-width: 0.75;
+  filter: drop-shadow(0 1px 4px rgb(0 0 0 / 0.35));
 }
 
 /* Product gallery: hide the badge overlay (REA / NYHET / B-STOCK …) while the
