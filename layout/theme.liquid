@@ -693,16 +693,34 @@ document.addEventListener("DOMContentLoaded", function() {
         function updateContrast(host) {
           var r = host.getBoundingClientRect();
           if (!r.width) return;
-          var stack = document.elementsFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+          var cx = r.left + r.width / 2;
+          var cy = r.top + r.height / 2;
+          var stack = document.elementsFromPoint(cx, cy);
           for (var i = 0; i < stack.length; i++) {
             var el = stack[i];
             if (el === host || host.contains(el)) continue;
-            if (el.tagName === 'IMG') {
-              imageLuminance(el, function (lum) {
+
+            // Media images have pointer-events: none, so they never appear in
+            // the hit-test stack themselves — look inside each stack element
+            // for an <img> that covers the sample point.
+            var img = el.tagName === 'IMG' ? el : null;
+            if (!img) {
+              var imgs = el.getElementsByTagName('img');
+              for (var j = 0; j < imgs.length; j++) {
+                var ir = imgs[j].getBoundingClientRect();
+                if (ir.width > 0 && ir.left <= cx && ir.right >= cx && ir.top <= cy && ir.bottom >= cy) {
+                  img = imgs[j];
+                  break;
+                }
+              }
+            }
+            if (img) {
+              imageLuminance(img, function (lum) {
                 if (lum != null) host.classList.toggle('mug-chat-on-dark', lum < 0.45);
               });
               return;
             }
+
             var m = getComputedStyle(el).backgroundColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
             if (!m || (m[4] !== undefined && parseFloat(m[4]) < 0.5)) continue;
             var lum = (0.2126 * m[1] + 0.7152 * m[2] + 0.0722 * m[3]) / 255;
