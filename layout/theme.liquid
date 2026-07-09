@@ -608,6 +608,9 @@ document.addEventListener("DOMContentLoaded", function() {
               '  box-shadow: none !important;',
               '  color: #000 !important;',
               '  height: 38px !important;',
+              '  width: auto !important;', /* mobile toggle is icon-sized; let the label size it */
+              '  min-width: 0 !important;',
+              '  max-width: none !important;',
               '  padding: 0 16px !important;',
               '  margin: 0 !important;',
               '  display: flex; align-items: center;',
@@ -619,6 +622,7 @@ document.addEventListener("DOMContentLoaded", function() {
               '  font: 400 13px/1 "Inter Variable", sans-serif !important;',
               '  color: #000 !important;',
               '  display: inline-flex; align-items: center; gap: 10px;', /* 8px + 2px after the dot */
+              '  white-space: nowrap;',
               '  margin: 0 !important; padding: 0 !important;',
               '  transition: color 150ms ease;',
               '}',
