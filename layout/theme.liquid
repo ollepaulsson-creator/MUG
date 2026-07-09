@@ -626,6 +626,8 @@ document.addEventListener("DOMContentLoaded", function() {
               '  margin: 0 !important; padding: 0 !important;',
               '  transition: color 150ms ease;',
               '}',
+              /* Mobile: slightly larger label */
+              '@media (max-width: 749px){ .chat-title{ font-size: 15px !important; } }',
               '.chat-title::before{',
               "  content: ''; width: 10px; height: 10px; border-radius: 50%;",
               '  background: #34C759; display: inline-block; flex-shrink: 0;',
