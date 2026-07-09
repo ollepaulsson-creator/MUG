@@ -2210,3 +2210,22 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Remove the black box around clicked navigation links. base.css sets a global
+   :focus-visible { outline: 1.5px solid currentColor }; on the near-black menu
+   links that reads as a black box, and Safari on Mac paints :focus-visible on a
+   plain mouse click (Chrome/Firefox don't), so a tapped menu item looks boxed.
+   Scoped to the nav menus: Qikify mega menu, native fallback menu, mobile
+   drawer, and the top announcement-bar menu. */
+.tmenu_item_link:focus,
+.tmenu_item_link:focus-visible,
+.tmenu_nav a:focus,
+.tmenu_nav a:focus-visible,
+.menu-list a:focus,
+.menu-list a:focus-visible,
+.menu-drawer a:focus,
+.menu-drawer a:focus-visible,
+.announcement-menu a:focus,
+.announcement-menu a:focus-visible {
+  outline: none !important;
+}
