@@ -70,22 +70,17 @@
     }
   }
 
-  /* Letter headings: same style as the big page title (48px, weight follows
-     the site-wide h1 preset) */
+  /* Letter headings: one title size below the 48px page title. The h2 preset
+     clamps to the same 48px on desktop, so h3 (2rem/32px) is the next distinct
+     step down; weight follows the site-wide preset. */
   .brands-group__letter {
-    font-size: 3rem;
-    font-weight: var(--font-h1--weight, 400);
+    font-size: var(--font-h3--size, 2rem);
+    font-weight: var(--font-h2--weight, 400);
     line-height: 1;
     margin-top: 0;
     margin-bottom: 1rem;
     padding-bottom: 0;
     letter-spacing: normal;
-  }
-
-  @media screen and (max-width: 749px) {
-    .brands-group__letter {
-      font-size: 2.25rem;
-    }
   }
 
   .brands-group__list {
