@@ -554,6 +554,9 @@
         if (!res.ok || !data.ok) throw new Error(data.error || 'send-failed');
 
         form.hidden = true;
+        // Per design, the success view replaces the whole intro too
+        document.querySelector('.sell-form__title')?.setAttribute('hidden', '');
+        document.querySelector('.sell-form__intro')?.setAttribute('hidden', '');
         successEl.hidden = false;
         successEl.scrollIntoView({ block: 'center', behavior: 'smooth' });
         const resetBtn = successEl.querySelector('[data-reset]');
