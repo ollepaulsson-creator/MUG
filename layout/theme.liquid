@@ -572,5 +572,72 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 {% endif %}
 
+    {%- comment -%} Shopify Inbox chat launcher restyle: pill with green dot and
+      "Kontakta oss" copy on a translucent #786853 (10%) blur background. The
+      Inbox widget renders as <inbox-online-store-chat id="ShopifyChat"> with an
+      OPEN shadow root, so a <style> can be injected and the label swapped. The
+      MutationObserver re-applies the label when the widget re-renders the
+      launcher (e.g. after closing the chat window); the injected style node
+      itself survives re-renders. Open chat window UI is untouched. {%- endcomment -%}
+    <script>
+      (function () {
+        var LABEL = 'Kontakta oss';
+
+        function customize(host) {
+          var sr = host.shadowRoot;
+          if (!sr) return false;
+
+          if (!sr.querySelector('#mug-chat-style')) {
+            var st = document.createElement('style');
+            st.id = 'mug-chat-style';
+            st.textContent = [
+              'button.chat-toggle{',
+              '  background: rgba(120, 104, 83, 0.1) !important;', /* #786853 @ 10% */
+              '  -webkit-backdrop-filter: blur(30px);',
+              '  backdrop-filter: blur(30px);',
+              '  border-radius: 100px !important;',
+              '  box-shadow: none !important;',
+              '  color: #000 !important;',
+              '  height: 44px !important;',
+              '  padding: 0 18px !important;',
+              '  display: flex; align-items: center;',
+              '}',
+              'button.chat-toggle > svg{ display: none !important; }',
+              '.chat-title{',
+              '  font: 400 14px/1 "Inter Variable", sans-serif !important;',
+              '  color: #000 !important;',
+              '  display: inline-flex; align-items: center; gap: 8px;',
+              '  margin: 0 !important; padding: 0 !important;',
+              '}',
+              '.chat-title::before{',
+              "  content: ''; width: 10px; height: 10px; border-radius: 50%;",
+              '  background: #34C759; display: inline-block; flex-shrink: 0;',
+              '}',
+            ].join('\n');
+            sr.appendChild(st);
+          }
+
+          var title = sr.querySelector('.chat-title');
+          if (title && title.textContent !== LABEL) title.textContent = LABEL;
+          return true;
+        }
+
+        function init() {
+          var host = document.getElementById('ShopifyChat');
+          if (!host || !customize(host)) return false;
+          new MutationObserver(function () {
+            customize(host);
+          }).observe(host.shadowRoot, { childList: true, subtree: true, characterData: true });
+          return true;
+        }
+
+        if (!init()) {
+          var mo = new MutationObserver(function () {
+            if (init()) mo.disconnect();
+          });
+          mo.observe(document.body, { childList: true, subtree: true });
+        }
+      })();
+    </script>
   </body>
 </html>
