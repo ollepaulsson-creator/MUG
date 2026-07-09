@@ -21,7 +21,9 @@
     },
     "main": {
       "type": "sell-form",
-      "settings": {}
+      "settings": {
+        "endpoint": "https://mug-sell-form.mug-se.workers.dev"
+      }
     },
     "section_8aKKyY": {
       "type": "section",

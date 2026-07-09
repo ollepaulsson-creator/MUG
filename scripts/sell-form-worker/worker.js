@@ -98,7 +98,9 @@ export default {
       attachments,
     });
     if (!storeMail.ok) {
-      return json({ ok: false, error: 'send-failed' }, 502, cors);
+      // Surface Resend's error message (no secrets in it) to ease debugging.
+      const detail = await storeMail.text().catch(() => '');
+      return json({ ok: false, error: 'send-failed', detail: detail.slice(0, 300) }, 502, cors);
     }
 
     // 2) Copy to the submitter — without attachments (they have the photos)
