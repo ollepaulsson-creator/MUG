@@ -70,10 +70,11 @@
     }
   }
 
-  /* Letter headings: same style as the big page title (48px / 700) */
+  /* Letter headings: same style as the big page title (48px, weight follows
+     the site-wide h1 preset) */
   .brands-group__letter {
     font-size: 3rem;
-    font-weight: 700;
+    font-weight: var(--font-h1--weight, 400);
     line-height: 1;
     margin-top: 0;
     margin-bottom: 1rem;

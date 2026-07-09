@@ -2200,6 +2200,15 @@ body .tmenu_app .tmenu_nav .tmenu_item--root > .tmenu_item_link {
   font-weight: 400 !important;
 }
 
+/* Big titles (h1/h2 presets) in regular weight, not bold — system-wide. The
+   theme's heading font setting is a 700 variant, which flows into the h1/h2
+   type presets via --font-h1/h2--weight. html:root outranks the theme's :root
+   definition regardless of load order. */
+html:root {
+  --font-h1--weight: 400;
+  --font-h2--weight: 400;
+}
+
 /* Smoother font rendering on macOS. The theme only sets -webkit-font-smoothing
    on paragraphs, so headings/nav/buttons still used the OS default (subpixel),
    which looks heavier — most noticeable in Safari on Mac. Apply grayscale
