@@ -55,10 +55,15 @@
         assign loading = 'eager'
       endif
     %}
+    {%- comment -%} Background images are decorative (content is overlaid on top),
+      so always emit an alt attribute: the file's alt text if set, else an
+      explicit empty alt so assistive tech and SEO audits treat it as decorative
+      instead of flagging a missing attribute. {%- endcomment -%}
+    {%- assign bg_alt = background_image.alt | default: '' -%}
     {{
       background_image
       | image_url: width: 1920
-      | image_tag: sizes: sizes, widths: widths, loading: loading, fetchpriority: fetch_priority, decoding: 'async'
+      | image_tag: sizes: sizes, widths: widths, loading: loading, fetchpriority: fetch_priority, decoding: 'async', alt: bg_alt
     }}
   {%- else -%}
     {%- assign placeholder_name = placeholder | default: 'hero-apparel-2' -%}
