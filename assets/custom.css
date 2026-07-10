@@ -2203,9 +2203,10 @@ body .tmenu_app .tmenu_nav .tmenu_item--root > .tmenu_item_link {
 
 /* Standard form fields site-wide: 2px black border while active. Drawn as an
    inset outline so nothing shifts when the border "thickens". Checkboxes,
-   radios and buttons keep their own focus styles. */
+   radios, buttons and search fields keep their own focus styles (the search
+   drawer auto-focuses its input, which made Safari draw the border). */
 :is(
-    input:not([type='checkbox']):not([type='radio']):not([type='button']):not([type='submit']):not([type='reset']):not([type='file']):not([type='range']),
+    input:not([type='checkbox']):not([type='radio']):not([type='button']):not([type='submit']):not([type='reset']):not([type='file']):not([type='range']):not([type='search']),
     textarea,
     select
   ):focus:not([aria-invalid='true']) {
