@@ -32,6 +32,31 @@ export default {
     };
 
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
+
+    // GET /img?u=<url> — CORS passthrough for image luminance sampling on the
+    // storefront (the chat pill's contrast detection). Some image CDNs used on
+    // the site (cdn.instant.so) don't send CORS headers, which taints the
+    // canvas; this echoes the image with ACAO so it can be sampled.
+    const reqUrl = new URL(request.url);
+    if (request.method === 'GET' && reqUrl.pathname === '/img') {
+      let target;
+      try {
+        target = new URL(reqUrl.searchParams.get('u') || '');
+      } catch {
+        return new Response('bad url', { status: 400 });
+      }
+      const allowedHosts = ['cdn.instant.so', 'cdn.shopify.com'];
+      if (target.protocol !== 'https:' || !allowedHosts.includes(target.host)) {
+        return new Response('forbidden', { status: 403 });
+      }
+      const upstream = await fetch(target.toString(), { cf: { cacheEverything: true, cacheTtl: 86400 } });
+      const headers = new Headers();
+      headers.set('Content-Type', upstream.headers.get('Content-Type') || 'image/jpeg');
+      headers.set('Access-Control-Allow-Origin', '*');
+      headers.set('Cache-Control', 'public, max-age=86400');
+      return new Response(upstream.body, { status: upstream.status, headers });
+    }
+
     if (request.method !== 'POST') return json({ ok: false, error: 'method' }, 405, cors);
 
     let form;

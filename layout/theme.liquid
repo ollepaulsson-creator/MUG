@@ -663,12 +663,12 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         // Average luminance of an image, cached per URL. Shopify's CDN sends
-        // CORS headers, so a crossOrigin re-load can be canvas-sampled.
+        // CORS headers so a crossOrigin re-load can be canvas-sampled directly;
+        // CDNs without CORS (cdn.instant.so) are retried through the worker's
+        // /img passthrough, which adds the header.
+        var LUM_PROXY = 'https://mug-sell-form.mug-se.workers.dev/img?u=';
         var imgLum = {};
-        function imageLuminance(el, cb) {
-          var src = el.currentSrc || el.src;
-          if (!src) return cb(null);
-          if (src in imgLum) return cb(imgLum[src]);
+        function sampleImage(url, cb) {
           var probe = new Image();
           probe.crossOrigin = 'anonymous';
           probe.onload = function () {
@@ -684,16 +684,29 @@ document.addEventListener("DOMContentLoaded", function() {
               for (var i = 0; i < d.length; i += 4) sum += 0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2];
               lum = sum / (d.length / 4) / 255;
             } catch (e) {
-              /* tainted or decode issue — treat as unknown */
+              /* tainted or decode issue */
             }
-            imgLum[src] = lum;
             cb(lum);
           };
           probe.onerror = function () {
-            imgLum[src] = null;
             cb(null);
           };
-          probe.src = src;
+          probe.src = url;
+        }
+        function imageLuminance(el, cb) {
+          var src = el.currentSrc || el.src;
+          if (!src) return cb(null);
+          if (src in imgLum) return cb(imgLum[src]);
+          sampleImage(src, function (lum) {
+            if (lum != null) {
+              imgLum[src] = lum;
+              return cb(lum);
+            }
+            sampleImage(LUM_PROXY + encodeURIComponent(src), function (lum2) {
+              imgLum[src] = lum2;
+              cb(lum2);
+            });
+          });
         }
 
         // Flip the pill between dark-backdrop (white text) and normal styling.
@@ -781,6 +794,19 @@ document.addEventListener("DOMContentLoaded", function() {
           // capture-phase document listener catches scrolls of any container.
           document.addEventListener('scroll', onScroll, { capture: true, passive: true });
           window.addEventListener('resize', onScroll, { passive: true });
+          // The pill can sit over a dark image from the very first paint (e.g.
+          // collection banners) — the initial sample often runs before that
+          // image has loaded, so re-sample whenever an image finishes loading
+          // (capture-phase: load doesn't bubble) and a few times as the page
+          // settles.
+          document.addEventListener(
+            'load',
+            (e) => {
+              if (e.target instanceof HTMLImageElement) onScroll();
+            },
+            true
+          );
+          [600, 1500, 3000].forEach((ms) => setTimeout(() => updateContrast(host), ms));
           updateContrast(host);
           return true;
         }
