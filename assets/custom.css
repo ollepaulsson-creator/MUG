@@ -981,7 +981,7 @@ p,span,li,button,div, a, #text,h1,h2,h3,h4,h5,h6, input {
 }
 
 /* ── Text wrapping ── */
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, .h5 {
   text-wrap: balance;
 }
 p, li {
@@ -1013,7 +1013,9 @@ p, li {
 .card-gallery:hover .quick-add__button {
   will-change: opacity;
 }
-h5 {
+/* .h5 included: product-card vendor names render as <p class="h5"> to keep
+   heading semantics clean (they were 60+ h5 elements per page). */
+h5, .h5 {
     letter-spacing: 2px !important;
     font-size: 13px !important;
 }
@@ -1083,7 +1085,7 @@ ul.product-grid {
     padding-bottom: 0px;
     line-height: 18px;
 }
-.text-block h5 {
+.text-block :is(h5, .h5) {
     font-size: 14px!important;
 }
 .button-unstyled.slideshow-control.slideshow-control--shape-circle {
