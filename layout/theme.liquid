@@ -216,12 +216,34 @@
           "addressCountry": {{ shop.address.country_code | json }}
         },
       {% endif %}
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 57.70245,
+        "longitude": 11.96202
+      },
+      {%- comment -%} Keep in sync with the opening_hours theme setting (free text,
+        so the structured hours are maintained here by hand). {%- endcomment -%}
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "11:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "11:00",
+          "closes": "16:00"
+        }
+      ],
       {% if settings.logo %}
         "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
         "image": {{ settings.logo | image_url: width: 1200 | prepend: "https:" | json }},
       {% endif %}
       "sameAs": [
-        {{ request.origin | json }}
+        "https://www.facebook.com/musikutangranser",
+        "https://www.instagram.com/musikutangranser/"
       ]
     }
     </script>

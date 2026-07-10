@@ -5,7 +5,7 @@
 {% endcomment %}
 
 {% for group in robots.default_groups %}
-User-agent: {{ group.user_agent }}
+{{ group.user_agent }}
 {% for rule in group.rules -%}
 {{ rule.directive }}: {{ rule.value }}
 {% endfor %}

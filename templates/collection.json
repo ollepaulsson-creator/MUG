@@ -184,7 +184,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<h5>{{ closest.product.vendor }}</h5>",
+                "text": "<p>{{ closest.product.vendor }}</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -791,9 +791,6 @@
     "featured_akustisk_gitarr_1": {
       "type": "instant-zqWAHXqkOtl5ppiB",
       "settings": {
-        "url_0AbjTohRqMSoDScV": "",
-        "text_FikHozcQ4tRiwKyU": "<p>Akustisk gitarr 1</p>",
-        "text_JHbbKiPQr0subVfV": "<p></p><p></p><p>UPPTÄCK</p>",
         "padding_top": 0,
         "padding_bottom": 0
       }

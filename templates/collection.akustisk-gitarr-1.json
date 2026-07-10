@@ -205,7 +205,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<h5>{{ closest.product.vendor }}</h5>",
+                "text": "<p>{{ closest.product.vendor }}</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
