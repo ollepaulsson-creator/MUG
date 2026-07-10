@@ -781,6 +781,19 @@ document.addEventListener("DOMContentLoaded", function() {
           // capture-phase document listener catches scrolls of any container.
           document.addEventListener('scroll', onScroll, { capture: true, passive: true });
           window.addEventListener('resize', onScroll, { passive: true });
+          // The pill can sit over a dark image from the very first paint (e.g.
+          // collection banners) — the initial sample often runs before that
+          // image has loaded, so re-sample whenever an image finishes loading
+          // (capture-phase: load doesn't bubble) and a few times as the page
+          // settles.
+          document.addEventListener(
+            'load',
+            (e) => {
+              if (e.target instanceof HTMLImageElement) onScroll();
+            },
+            true
+          );
+          [600, 1500, 3000].forEach((ms) => setTimeout(() => updateContrast(host), ms));
           updateContrast(host);
           return true;
         }
