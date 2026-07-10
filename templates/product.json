@@ -147,7 +147,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<h5><a href=\"/collections/vendors?q={{ closest.product.vendor }}\">{{ closest.product.vendor }}</a></h5>",
+                    "text": "<p>{{ closest.product.vendor }}</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -445,7 +445,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<h5><a href=\"/collections/vendors?q={{ closest.product.vendor }}\">{{ closest.product.vendor }}</a></h5>",
+                "text": "<p>{{ closest.product.vendor }}</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
