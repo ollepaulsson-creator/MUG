@@ -909,6 +909,22 @@ span.svg-wrapper.add-to-cart-icon {
 .product-information__media {
     border-right: 1px solid #e4e4e4;
 }
+/* 1px line below the media thumbnails while the sticky gallery scrolls.
+   Drawn at bottom:-1px so that at the end of the sticky range (gallery
+   bottom == section bottom) it lands exactly on the divider section's
+   existing border — one line, never a double border. */
+@media screen and (min-width: 750px) {
+  .product-information__media media-gallery:has(slideshow-controls[thumbnails])::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background: #dcdcdc;
+    pointer-events: none;
+  }
+}
 .product-badges__badge.product-badges__badge--rectangle.color-scheme-3 {
     border-radius: 0px;
     letter-spacing: 1px;
