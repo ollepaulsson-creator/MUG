@@ -319,6 +319,16 @@
                           role="list"
                           tabindex="-1"
                         >
+                          {%- comment -%}
+                            The submenu tree below is ~200KB of markup repeated
+                            on every page. Like the desktop mega menu, it is only
+                            rendered when the header re-renders through the
+                            Section Rendering API (eager_loading) — the header
+                            hydrates itself on idle (see hydrate() in
+                            sections/header.liquid), which morphs this content
+                            in. Design mode never hydrates, so render inline.
+                          {%- endcomment -%}
+                          {% if eager_loading or request.design_mode %}
                           {% assign first_accordion_open = false -%}
                           {%- for childlink in link.links -%}
                             <li
@@ -564,6 +574,7 @@
                               {%- endif -%}
                             </li>
                           {%- endfor -%}
+                          {% endif %}
                         </ul>
                         {%- comment -%}Featured content inside submenu panels removed — products/collections not shown in mobile drawer.{%- endcomment -%}
                       </div>
