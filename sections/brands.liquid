@@ -30,7 +30,33 @@
         <h2 class="brands-group__letter">{{ key }}</h2>
         <ul class="brands-group__list">
     {%- endif -%}
-    <li><a href="{{ vendor | url_for_vendor }}">{{ vendor }}</a></li>
+    {%- liquid
+      # Link the brand's real collection when one exists (SEO-friendly, has
+      # meta description); fall back to the automatic vendor page otherwise.
+      # The case-map covers brands whose collection handle differs from
+      # handleize(vendor).
+      assign vendor_handle = vendor | handleize
+      case vendor
+        when 'PRS Guitars'
+          assign vendor_handle = 'prs'
+        when 'Ernie Ball Music Man'
+          assign vendor_handle = 'music-man'
+        when 'Zildjian'
+          assign vendor_handle = 'zildjan'
+        when 'Universal Audio'
+          assign vendor_handle = 'apollo'
+        when 'Ortega'
+          assign vendor_handle = 'ortega-1'
+        when 'Vintage'
+          assign vendor_handle = 'vintage-guitars'
+      endcase
+      assign vendor_collection = collections[vendor_handle]
+    -%}
+    {%- if vendor_collection.handle == vendor_handle -%}
+      <li><a href="{{ vendor_collection.url }}">{{ vendor }}</a></li>
+    {%- else -%}
+      <li><a href="{{ vendor | url_for_vendor }}">{{ vendor }}</a></li>
+    {%- endif -%}
     {%- assign prev_key = key -%}
     {%- if forloop.last -%}
       </ul></div>
