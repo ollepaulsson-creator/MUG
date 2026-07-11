@@ -26,7 +26,7 @@
           "type": "text",
           "name": "Title",
           "settings": {
-            "text": "<p>{{ closest.collection.title }}</p>",
+            "text": "<h1>{{ closest.collection.title }}</h1>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "left",
@@ -73,21 +73,11 @@
             "padding-inline-end": 15
           },
           "blocks": {}
-        },
-        "custom_liquid_8cptXw": {
-          "type": "custom-liquid",
-          "name": "t:names.custom_liquid",
-          "disabled": true,
-          "settings": {
-            "custom_liquid": "{%- if collection -%}\n  <h2 class=\"collection-title\">\n    {{ collection.title }}\n  </h1>\n{%- endif -%}\n\n<style>\nh2{\npadding-left: 15px;\n}\n</style>"
-          },
-          "blocks": {}
         }
       },
       "block_order": [
         "text_tqQTNE",
-        "text_twGGkJ",
-        "custom_liquid_8cptXw"
+        "text_twGGkJ"
       ],
       "custom_css": [
         "p {padding-top: 0;}",
