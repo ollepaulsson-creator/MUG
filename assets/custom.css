@@ -1058,6 +1058,11 @@ ul.product-grid {
     font-weight: 400;
     line-height: 42px;
 }
+/* Collection titles: <h1> inside a custom-preset text block (was a <p> with
+   line-height 1.4 before the H1 swap — keep the same rendering). */
+.text-block.custom-typography > h1 {
+    line-height: 1.4;
+}
 .text-block h4 {
     text-transform: initial;
     font-size: 15px;
