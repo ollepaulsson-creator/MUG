@@ -778,6 +778,7 @@
     },
     "instant_xz_pr8_zz3_v_iz3j_qtm_KGR6BN": {
       "type": "instant-XzPr8Zz3VIz3jQtm",
+      "disabled": true,
       "name": "Ibanez",
       "settings": {
         "url_MU5lqb3TD6LLVUqS": "https://www.mug.se/collections/ibanez-electric-guitars",
@@ -1006,6 +1007,7 @@
           ]
         }
       },
+      "disabled": true,
       "name": "t:names.products_carousel",
       "settings": {
         "collection": "ibanez-electric-guitars",
@@ -1029,6 +1031,7 @@
     },
     "instant_w_qg86ffb9_h_gydc9k_RqNRdJ": {
       "type": "instant-wQg86ffb9HGydc9k",
+      "disabled": true,
       "name": "Arturia hardware",
       "settings": {
         "url_xKiVRlgl4rvKdfBs": "https://www.mug.se/pages/arturia-digital-precision-moter-analog-sjal",
@@ -1258,6 +1261,7 @@
           ]
         }
       },
+      "disabled": true,
       "name": "t:names.products_carousel",
       "settings": {
         "collection": "arturia",
