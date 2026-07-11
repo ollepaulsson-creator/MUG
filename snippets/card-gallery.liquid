@@ -178,10 +178,21 @@
             continue
           endif
 
-          if forloop.first and section.index == null or section.index < 5
-            assign loading = 'eager'
-            assign card_fetchpriority = 'high'
-            assign sizes = image_sizes
+          comment
+            Only the FIRST image of a card in an early section should be
+            eager. The previous condition (`forloop.first and A or B`) parsed
+            as `(forloop.first and A) or B` — Liquid has no parentheses and
+            `and` binds tighter than `or` — which made EVERY card image in
+            sections 1-4 load eager with fetchpriority=high.
+            On the homepage the LCP is the hero banner, so card images stay
+            lazy there instead of competing with it for bandwidth.
+          endcomment
+          if forloop.first and template != 'index'
+            if section.index == null or section.index < 5
+              assign loading = 'eager'
+              assign card_fetchpriority = 'high'
+              assign sizes = image_sizes
+            endif
           endif
 
           assign class = 'product-media-container media-fit product-media-container--[media_type]' | replace: '[media_type]', media.media_type
