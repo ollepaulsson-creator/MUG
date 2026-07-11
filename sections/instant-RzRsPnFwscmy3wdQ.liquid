@@ -68,15 +68,27 @@
         ></a
       ><a class="iJMjmBJM357JG0ifl" data-instant-type="container" href="{{ section.settings.url_JMjmBJM357JG0ifl | default: 'https://www.mug.se/collections/earthquaker-devices' }}" rel="noopener noreferrer">
         {%- if section.settings.image_JMjmBJM357JG0ifl and section.settings.image_JMjmBJM357JG0ifl != blank -%}
-          {{ section.settings.image_JMjmBJM357JG0ifl | image_url: width: 1280 | image_tag: class: 'instant-fill instant-image__fill instant-responsive instant-responsive--desktop instant-responsive--laptop instant-responsive--tablet', alt: section.settings.image_JMjmBJM357JG0ifl.alt, fetchpriority: fetchpriority, loading: loading, decoding: 'async' }}
+          {{ section.settings.image_JMjmBJM357JG0ifl | image_url: width: 1280 | image_tag: class: 'instant-fill instant-image__fill instant-responsive instant-responsive--desktop', alt: section.settings.image_JMjmBJM357JG0ifl.alt, fetchpriority: fetchpriority, loading: loading, decoding: 'async' }}
         {%- else -%}
-          <img alt="" sizes="(max-width: 1280px) 100vw, 1280px" srcSet="https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=1080 1080w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=828 828w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=750 750w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=640 640w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=360 360w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=1280 1280w" src="https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=1280" width="1400" height="1643" class="instant-fill instant-image__fill instant-responsive instant-responsive--desktop instant-responsive--laptop instant-responsive--tablet" decoding="async" fetchpriority="{{ fetchpriority }}" loading="{{ loading }}" style="object-fit:cover">
+          <img alt="" sizes="(max-width: 1280px) 100vw, 1280px" srcSet="https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=1080 1080w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=828 828w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=750 750w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=640 640w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=360 360w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=1280 1280w" src="https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=1280" width="1400" height="1643" class="instant-fill instant-image__fill instant-responsive instant-responsive--desktop" decoding="async" fetchpriority="{{ fetchpriority }}" loading="{{ loading }}" style="object-fit:cover">
+        {%- endif -%}
+        <!--  -->
+        {%- if section.settings.image_JMjmBJM357JG0ifl_laptop and section.settings.image_JMjmBJM357JG0ifl_laptop != blank -%}
+          {{ section.settings.image_JMjmBJM357JG0ifl_laptop | image_url: width: 1280 | image_tag: class: 'instant-fill instant-image__fill instant-responsive instant-responsive--laptop', alt: section.settings.image_JMjmBJM357JG0ifl_laptop.alt, fetchpriority: fetchpriority, loading: loading, decoding: 'async' }}
+        {%- else -%}
+          <img alt="" sizes="(max-width: 1280px) 100vw, 1280px" srcSet="https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=1080 1080w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=828 828w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=750 750w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=640 640w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=360 360w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=1280 1280w" src="https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=1280" width="1400" height="1643" class="instant-fill instant-image__fill instant-responsive instant-responsive--laptop" decoding="async" fetchpriority="{{ fetchpriority }}" loading="{{ loading }}" style="object-fit:cover">
+        {%- endif -%}
+        <!--  -->
+        {%- if section.settings.image_JMjmBJM357JG0ifl_tablet and section.settings.image_JMjmBJM357JG0ifl_tablet != blank -%}
+          {{ section.settings.image_JMjmBJM357JG0ifl_tablet | image_url: width: 1280 | image_tag: class: 'instant-fill instant-image__fill instant-responsive instant-responsive--tablet', alt: section.settings.image_JMjmBJM357JG0ifl_tablet.alt, fetchpriority: fetchpriority, loading: loading, decoding: 'async' }}
+        {%- else -%}
+          <img alt="" sizes="(max-width: 1280px) 100vw, 1280px" srcSet="https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=1080 1080w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=828 828w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=750 750w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=640 640w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=360 360w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=1280 1280w" src="https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=1280" width="1400" height="1643" class="instant-fill instant-image__fill instant-responsive instant-responsive--tablet" decoding="async" fetchpriority="{{ fetchpriority }}" loading="{{ loading }}" style="object-fit:cover">
         {%- endif -%}
         <!--  -->
         {%- if section.settings.image_JMjmBJM357JG0ifl_mobile and section.settings.image_JMjmBJM357JG0ifl_mobile != blank -%}
           {{ section.settings.image_JMjmBJM357JG0ifl_mobile | image_url: width: 1280 | image_tag: class: 'instant-fill instant-image__fill instant-responsive instant-responsive--mobile', alt: section.settings.image_JMjmBJM357JG0ifl_mobile.alt, fetchpriority: fetchpriority, loading: loading, decoding: 'async' }}
         {%- else -%}
-          <img alt="" sizes="(max-width: 1280px) 100vw, 1280px" srcSet="https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/BXjCzjnAfX3Getiq/earthquake.gif?width=1080 1080w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/BXjCzjnAfX3Getiq/earthquake.gif?width=828 828w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/BXjCzjnAfX3Getiq/earthquake.gif?width=750 750w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/BXjCzjnAfX3Getiq/earthquake.gif?width=640 640w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/BXjCzjnAfX3Getiq/earthquake.gif?width=360 360w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/BXjCzjnAfX3Getiq/earthquake.gif?width=1280 1280w" src="https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/BXjCzjnAfX3Getiq/earthquake.gif?width=1280" width="1400" height="1643" class="instant-fill instant-image__fill instant-responsive instant-responsive--mobile" decoding="async" fetchpriority="{{ fetchpriority }}" loading="{{ loading }}" style="object-fit:cover">
+          <img alt="" sizes="(max-width: 1280px) 100vw, 1280px" srcSet="https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=1080 1080w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=828 828w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=750 750w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=640 640w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=360 360w, https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=1280 1280w" src="https://cdn.instant.so/sites/1u7BsAXQGocI8dOY/assets/aDn2MnMvxlyIOeRK/earthquake.webp?width=1280" width="1400" height="1643" class="instant-fill instant-image__fill instant-responsive instant-responsive--mobile" decoding="async" fetchpriority="{{ fetchpriority }}" loading="{{ loading }}" style="object-fit:cover">
         {%- endif -%}
         <div class="ilQWkMGxcJS3kcajI" data-instant-type="container"
           ><div data-instant-type="text" class="instant-rich-text iNv9WIx1ejRlF5MX8"
@@ -137,6 +149,16 @@
       "type": "image_picker",
       "id": "image_JMjmBJM357JG0ifl",
       "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_JMjmBJM357JG0ifl_laptop",
+      "label": "Image laptop"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_JMjmBJM357JG0ifl_tablet",
+      "label": "Image tablet"
     },
     {
       "type": "image_picker",
