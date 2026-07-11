@@ -30,7 +30,7 @@
         <h2 class="brands-group__letter">{{ key }}</h2>
         <ul class="brands-group__list">
     {%- endif -%}
-    <li><a href="{{ vendor | url_for_vendor }}">{{ vendor }}</a></li>
+    <li><a href="{{ vendor | url_for_vendor }}" data-h="{{ vendor | handleize }}">{{ vendor }}</a></li>
     {%- assign prev_key = key -%}
     {%- if forloop.last -%}
       </ul></div>
