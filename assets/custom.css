@@ -2219,9 +2219,11 @@ body .tmenu_app .tmenu_nav .tmenu_item--root > .tmenu_item_link {
 }
 
 /* Collection title on mobile: smaller title, tighter line-height, and more
-   breathing room above the title and below the description (before the filter
-   bar). Title uses the preset class text_tqQTNE (description uses text_twGGkJ);
-   font-size is driven by the inline --font-size custom property. */
+   breathing room above the title (below the breadcrumb). Title uses the preset
+   class text_tqQTNE (description uses text_twGGkJ); font-size is driven by the
+   inline --font-size custom property. No padding below the description — the
+   20px space before the filter bar comes from .collection-wrapper's
+   margin-top, same as on desktop, so the gap matches the one above the title. */
 @media screen and (max-width: 749px) {
   [class*="text_tqQTNE"] {
     padding-top: 20px !important; /* more spacing above (below the breadcrumb) */
@@ -2232,7 +2234,6 @@ body .tmenu_app .tmenu_nav .tmenu_item--root > .tmenu_item_link {
   }
   .layout-panel-flex:has(> [class*="text_tqQTNE"]) {
     gap: 4px !important;
-    padding-bottom: 20px !important; /* more spacing below, before the filter bar */
   }
 }
 
