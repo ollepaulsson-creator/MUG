@@ -177,6 +177,12 @@
 
 {%- assign meta_description = page_description | default: shop.description -%}
 {% if meta_description %}
+  {%- comment -%} Products fall back to a 320-char excerpt of the product
+    body — cut it at Google's ~160-char display limit. Collections and pages
+    carry hand-written descriptions already inside the limit. {%- endcomment -%}
+  {%- if request.page_type == 'product' -%}
+    {%- assign meta_description = meta_description | truncate: 158 -%}
+  {%- endif -%}
   <meta
     name="description"
     content="{{ meta_description | escape }}"
