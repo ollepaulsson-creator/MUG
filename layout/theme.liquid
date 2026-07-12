@@ -603,7 +603,41 @@ document.addEventListener("DOMContentLoaded", function() {
       OPEN shadow root, so a <style> can be injected and the label swapped. The
       MutationObserver re-applies the label when the widget re-renders the
       launcher (e.g. after closing the chat window); the injected style node
-      itself survives re-renders. Open chat window UI is untouched. {%- endcomment -%}
+      itself survives re-renders. Open chat window UI is untouched.
+
+      The label text adapts to the backdrop per-pixel via mix-blend-mode:
+      exclusion (white text inverts against whatever is behind). Because the
+      widget host is position:fixed — a stacking context, i.e. an isolated
+      blend group — a blended element INSIDE it could never blend with the
+      page. So the pill's own label is made transparent (it still sizes the
+      pill) and the visible text is a separate fixed overlay at body level
+      carrying the blend itself, aligned to the pill's known geometry
+      (bottom 14px, height 38px, right padding 16px). The overlay is
+      pointer-events: none, so clicks fall through to the real toggle. {%- endcomment -%}
+    <style>
+      /* Chat pill label overlay: white + exclusion inverts per-pixel against
+         whatever is painted beneath (page, drawer, footer, imagery) — the
+         same technique as a blend-mode fixed header. Geometry mirrors the
+         pill (bottom 14px, height 38px, 16px right padding inside it). */
+      #mug-chat-label {
+        position: fixed;
+        right: 30px;
+        bottom: 14px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        font: 400 13px/1 'Inter Variable', sans-serif;
+        color: #fff;
+        mix-blend-mode: exclusion;
+        pointer-events: none;
+        white-space: nowrap;
+        z-index: 2147483647;
+      }
+      @media (max-width: 749px) {
+        #mug-chat-label { font-size: 15px; }
+      }
+      #mug-chat-label[hidden] { display: none; }
+    </style>
     <script>
       (function () {
         var LABEL = 'Kontakta oss';
@@ -631,7 +665,6 @@ document.addEventListener("DOMContentLoaded", function() {
               '  backdrop-filter: blur(30px);',
               '  border-radius: 100px !important;',
               '  box-shadow: none !important;',
-              '  color: #000 !important;',
               '  height: 38px !important;',
               '  width: auto !important;', /* mobile toggle is icon-sized; let the label size it */
               '  min-width: 0 !important;',
@@ -643,25 +676,22 @@ document.addEventListener("DOMContentLoaded", function() {
               '}',
               'button.chat-toggle:hover{ background: rgba(120, 104, 83, 0.22) !important; }', /* darker on hover */
               'button.chat-toggle > svg{ display: none !important; }',
+              /* The in-pill label is transparent — it only sizes the pill; the
+                 visible text is the blended #mug-chat-label overlay outside
+                 the widget (see the comment above the script). */
               '.chat-title{',
               '  font: 400 13px/1 "Inter Variable", sans-serif !important;',
-              '  color: #000 !important;',
+              '  color: transparent !important;',
               '  display: inline-flex; align-items: center; gap: 10px;', /* 8px + 2px after the dot */
               '  white-space: nowrap;',
               '  margin: 0 !important; padding: 0 !important;',
-              '  transition: color 150ms ease;',
               '}',
-              /* Mobile: slightly larger label */
+              /* Mobile: slightly larger label (keep in sync with the overlay) */
               '@media (max-width: 749px){ .chat-title{ font-size: 15px !important; } }',
               '.chat-title::before{',
               "  content: ''; width: 10px; height: 10px; border-radius: 50%;",
               '  background: #34C759; display: inline-block; flex-shrink: 0;',
               '}',
-              /* Low contrast against a dark backdrop (e.g. the footer): invert
-                 the text. Toggled by the scroll sampler below. */
-              ':host(.mug-chat-on-dark) .chat-title{ color: #ffffffd9 !important; }',
-              ':host(.mug-chat-on-dark) button.chat-toggle{ background: rgba(255, 255, 255, 0.12) !important; }',
-              ':host(.mug-chat-on-dark) button.chat-toggle:hover{ background: rgba(255, 255, 255, 0.24) !important; }',
             ].join('\n');
             sr.appendChild(st);
           }
@@ -669,10 +699,6 @@ document.addEventListener("DOMContentLoaded", function() {
           var title = sr.querySelector('.chat-title');
           if (title) {
             if (title.textContent !== LABEL) title.textContent = LABEL;
-            // Re-assert the dark-backdrop inline styles after a re-render
-            if (host.classList.contains('mug-chat-on-dark') && !title.style.color) {
-              applyDark(host, true);
-            }
           } else {
             // Mobile: the widget renders an icon-only toggle with no
             // .chat-title span — add our own so the pill shows dot + label.
@@ -684,168 +710,33 @@ document.addEventListener("DOMContentLoaded", function() {
               btn.appendChild(span);
             }
           }
+
+          // The blended overlay only makes sense while the closed pill shows.
+          var overlay = document.getElementById('mug-chat-label');
+          if (overlay) {
+            var open = sr.querySelector('.chat-app--is-open');
+            var toggle = sr.querySelector('button.chat-toggle');
+            overlay.hidden = !!open || !toggle;
+          }
           return true;
-        }
-
-        // Average luminance of an image, cached per URL. Shopify's CDN sends
-        // CORS headers so a crossOrigin re-load can be canvas-sampled directly;
-        // CDNs without CORS (cdn.instant.so) are retried through the worker's
-        // /img passthrough, which adds the header.
-        var LUM_PROXY = 'https://mug-sell-form.mug-se.workers.dev/img?u=';
-        var imgLum = {};
-        function sampleImage(url, cb) {
-          var probe = new Image();
-          probe.crossOrigin = 'anonymous';
-          probe.onload = function () {
-            var lum = null;
-            try {
-              var c = document.createElement('canvas');
-              c.width = 8;
-              c.height = 8;
-              var ctx = c.getContext('2d');
-              ctx.drawImage(probe, 0, 0, 8, 8);
-              var d = ctx.getImageData(0, 0, 8, 8).data;
-              var sum = 0;
-              for (var i = 0; i < d.length; i += 4) sum += 0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2];
-              lum = sum / (d.length / 4) / 255;
-            } catch (e) {
-              /* tainted or decode issue */
-            }
-            cb(lum);
-          };
-          probe.onerror = function () {
-            cb(null);
-          };
-          probe.src = url;
-        }
-        function imageLuminance(el, cb) {
-          var src = el.currentSrc || el.src;
-          if (!src) return cb(null);
-          if (src in imgLum) return cb(imgLum[src]);
-          sampleImage(src, function (lum) {
-            if (lum != null) {
-              imgLum[src] = lum;
-              return cb(lum);
-            }
-            sampleImage(LUM_PROXY + encodeURIComponent(src), function (lum2) {
-              imgLum[src] = lum2;
-              cb(lum2);
-            });
-          });
-        }
-
-        // Flip the pill between dark-backdrop (white text) and normal styling.
-        // Inline styles with !important are used because the widget's own
-        // (cross-origin, uninspectable) stylesheet beats shadow rules for
-        // color/background specifically.
-        function applyDark(host, on) {
-          host.classList.toggle('mug-chat-on-dark', on);
-          var sr = host.shadowRoot;
-          if (!sr) return;
-          var t = sr.querySelector('.chat-title');
-          var b = sr.querySelector('button.chat-toggle');
-          if (t) {
-            if (on) t.style.setProperty('color', '#ffffffd9', 'important');
-            else t.style.removeProperty('color');
-          }
-          if (b) {
-            if (on) b.style.setProperty('background', 'rgba(255, 255, 255, 0.12)', 'important');
-            else b.style.removeProperty('background');
-          }
-        }
-
-        // Sample the page behind the pill and flip to light text when the
-        // backdrop is dark. Walks the hit-test stack beneath the widget to the
-        // first element that paints something — a background color, or an
-        // <img> (sampled via canvas) — and checks its luminance.
-        function updateContrast(host) {
-          var r = host.getBoundingClientRect();
-          if (!r.width) return;
-          var cx = r.left + r.width / 2;
-          var cy = r.top + r.height / 2;
-          var stack = document.elementsFromPoint(cx, cy);
-          for (var i = 0; i < stack.length; i++) {
-            var el = stack[i];
-            if (el === host || host.contains(el)) continue;
-
-
-            // Media images have pointer-events: none, so they never appear in
-            // the hit-test stack themselves — look inside each stack element
-            // for an <img> that covers the sample point.
-            var img = el.tagName === 'IMG' ? el : null;
-            if (!img) {
-              var imgs = el.getElementsByTagName('img');
-              for (var j = 0; j < imgs.length; j++) {
-                var ir = imgs[j].getBoundingClientRect();
-                if (ir.width > 0 && ir.left <= cx && ir.right >= cx && ir.top <= cy && ir.bottom >= cy) {
-                  img = imgs[j];
-                  break;
-                }
-              }
-            }
-            if (img) {
-              imageLuminance(img, function (lum) {
-                if (lum != null) applyDark(host, lum < 0.45);
-              });
-              return;
-            }
-
-            // Solid background color — or, when that's transparent, a CSS
-            // gradient background-image (the theme paints drawer panels and
-            // color-scheme sections that way): use its first color stop.
-            var rgbRe = /rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/;
-            var cs = getComputedStyle(el);
-            var m = cs.backgroundColor.match(rgbRe);
-            if (!m || (m[4] !== undefined && parseFloat(m[4]) < 0.5)) {
-              m = null;
-              if (cs.backgroundImage && cs.backgroundImage.indexOf('gradient') > -1) {
-                m = cs.backgroundImage.match(rgbRe);
-                if (m && m[4] !== undefined && parseFloat(m[4]) < 0.5) m = null;
-              }
-            }
-            if (!m) continue;
-            var lum = (0.2126 * m[1] + 0.7152 * m[2] + 0.0722 * m[3]) / 255;
-            applyDark(host, lum < 0.45);
-            return;
-          }
-          applyDark(host, false);
         }
 
         function init() {
           var host = document.getElementById('ShopifyChat');
-          if (!host || !customize(host)) return false;
+          if (!host || !host.shadowRoot) return false;
+
+          if (!document.getElementById('mug-chat-label')) {
+            var overlay = document.createElement('div');
+            overlay.id = 'mug-chat-label';
+            overlay.textContent = LABEL;
+            overlay.setAttribute('aria-hidden', 'true');
+            document.body.appendChild(overlay);
+          }
+
+          if (!customize(host)) return false;
           new MutationObserver(function () {
             customize(host);
-          }).observe(host.shadowRoot, { childList: true, subtree: true, characterData: true });
-
-          var ticking = false;
-          function onScroll() {
-            if (ticking) return;
-            ticking = true;
-            requestAnimationFrame(function () {
-              ticking = false;
-              updateContrast(host);
-            });
-          }
-          // The theme scrolls on <body> (overflow-y: auto), not the window, so
-          // window scroll events never fire. Scroll doesn't bubble, but a
-          // capture-phase document listener catches scrolls of any container.
-          document.addEventListener('scroll', onScroll, { capture: true, passive: true });
-          window.addEventListener('resize', onScroll, { passive: true });
-          // The pill can sit over a dark image from the very first paint (e.g.
-          // collection banners) — the initial sample often runs before that
-          // image has loaded, so re-sample whenever an image finishes loading
-          // (capture-phase: load doesn't bubble) and a few times as the page
-          // settles.
-          document.addEventListener(
-            'load',
-            (e) => {
-              if (e.target instanceof HTMLImageElement) onScroll();
-            },
-            true
-          );
-          [600, 1500, 3000].forEach((ms) => setTimeout(() => updateContrast(host), ms));
-          updateContrast(host);
+          }).observe(host.shadowRoot, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['class'] });
           return true;
         }
 
