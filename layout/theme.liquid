@@ -4,7 +4,10 @@
   lang="{{ request.locale.iso_code }}"
 >
   <head>
- {%- if content_for_header contains 'tapita-seo-script-tags' -%}{%- include 'tapita-seo-schema' -%}{%- endif -%} 
+    {%- comment -%} Charset must sit within the first 1024 bytes of the
+      document (HTML spec) — before preconnects and inline styles. {%- endcomment -%}
+    <meta charset="utf-8">
+ {%- if content_for_header contains 'tapita-seo-script-tags' -%}{%- include 'tapita-seo-schema' -%}{%- endif -%}
 
     <link rel="preconnect" href="https://cdn.shopify.com">
   <link rel="preconnect" href="https://cdn.instant.so" crossorigin>
