@@ -16,16 +16,22 @@ FROM_EMAIL = "Musik Utan Gränser <formular@mug.se>"
 SHOPIFY_SHOP = "mug-musik-utan-granser.myshopify.com"
 STORE_LOCATION_GID = "gid://shopify/Location/46748696738"
 # Must match the store code on the Google Business Profile linked in
-# Merchant Center (Företagsinformation -> Butiker).
-STORE_CODE = "MUG-GBG"
+# Merchant Center — the MUG profile has butikskod "1".
+STORE_CODE = "1"
 # Offer id format used by the Google & YouTube Shopify channel:
 # shopify_SE_<productId>_<variantId>. Verify against an item id in
 # Merchant Center (Products -> any product -> item id) before go-live.
 OFFER_ID_PREFIX = "shopify_SE_"
 # Light gate on the feed URL (stock presence is public on the site anyway)
 FEED_KEY = "cc387757f33417c7a057499d1019ba97"
+# Dev Dashboard app "local-inventory-feed" (read_products, read_inventory,
+# read_locations). The worker mints Admin API tokens itself via the client
+# credentials grant — client id is the public half.
+SHOPIFY_CLIENT_ID = "674a3a653e9a47f9571e376716e4d804"
 
 # Secrets (set with: npx wrangler secret put <NAME>)
-#   RESEND_API_KEY       - Resend API key (sell form)
-#   SHOPIFY_ADMIN_TOKEN  - Admin API token of a custom app with
-#                          read_products + read_inventory + read_locations
+#   RESEND_API_KEY         - Resend API key (sell form)
+#   SHOPIFY_CLIENT_SECRET  - "Hemlighet" of the local-inventory-feed app
+#                            (Dev Dashboard -> app -> Inställningar)
+#   SHOPIFY_ADMIN_TOKEN    - optional alternative: a classic shpat_ token;
+#                            used instead of client credentials if set

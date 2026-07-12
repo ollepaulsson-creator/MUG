@@ -67,7 +67,7 @@ export default {
         return new Response('forbidden', { status: 403 });
       }
       const cache = caches.default;
-      const cacheKey = new Request('https://feed.internal/local-inventory');
+      const cacheKey = new Request('https://feed.internal/local-inventory?v=' + env.STORE_CODE);
       let res = await cache.match(cacheKey);
       if (!res) {
         try {
@@ -178,7 +178,7 @@ export default {
       (async () => {
         const tsv = await buildLocalInventoryFeed(env);
         const cache = caches.default;
-        await cache.put(new Request('https://feed.internal/local-inventory'), feedResponse(tsv));
+        await cache.put(new Request('https://feed.internal/local-inventory?v=' + env.STORE_CODE), feedResponse(tsv));
         console.log('local inventory feed refreshed: ' + tsv.split('\n').length + ' lines');
       })().catch((e) => console.log('feed refresh failed: ' + (e && e.message)))
     );
@@ -198,12 +198,36 @@ function feedResponse(tsv) {
   });
 }
 
+// Admin API auth: a classic shpat_ token if configured, otherwise mint a
+// short-lived token with the client credentials grant (Dev Dashboard apps
+// don't expose a static Admin token).
+let cachedToken = null; // { token, expiresAt } per isolate
+async function shopifyToken(env) {
+  if (env.SHOPIFY_ADMIN_TOKEN) return env.SHOPIFY_ADMIN_TOKEN;
+  if (!env.SHOPIFY_CLIENT_SECRET) throw new Error('SHOPIFY_CLIENT_SECRET not set');
+  if (cachedToken && Date.now() < cachedToken.expiresAt - 60000) return cachedToken.token;
+  const res = await fetch(`https://${env.SHOPIFY_SHOP}/admin/oauth/access_token`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      grant_type: 'client_credentials',
+      client_id: env.SHOPIFY_CLIENT_ID,
+      client_secret: env.SHOPIFY_CLIENT_SECRET,
+    }),
+  });
+  if (!res.ok) throw new Error('token grant failed: ' + res.status + ' ' + (await res.text()).slice(0, 150));
+  const data = await res.json();
+  cachedToken = { token: data.access_token, expiresAt: Date.now() + (data.expires_in || 600) * 1000 };
+  return cachedToken.token;
+}
+
 async function shopifyGraphQL(env, query) {
+  const token = await shopifyToken(env);
   const res = await fetch(`https://${env.SHOPIFY_SHOP}/admin/api/2025-01/graphql.json`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-Shopify-Access-Token': env.SHOPIFY_ADMIN_TOKEN,
+      'X-Shopify-Access-Token': token,
     },
     body: JSON.stringify({ query }),
   });
@@ -216,7 +240,7 @@ async function shopifyGraphQL(env, query) {
 // status polls, one JSONL download — bounded API usage no matter how large
 // the location's inventory is.
 async function buildLocalInventoryFeed(env) {
-  if (!env.SHOPIFY_ADMIN_TOKEN) throw new Error('SHOPIFY_ADMIN_TOKEN not set');
+  
 
   const bulkQuery = `
     {
