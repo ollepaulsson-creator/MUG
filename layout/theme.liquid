@@ -768,14 +768,6 @@ document.addEventListener("DOMContentLoaded", function() {
             var el = stack[i];
             if (el === host || host.contains(el)) continue;
 
-            // Drawer/dialog surfaces are light but often paint via gradient
-            // background-images with a transparent background-color, so the
-            // walk would fall through to the dark page scrim behind them and
-            // wrongly flip the pill to light-on-light (invisible).
-            if (el.closest && el.closest('.menu-drawer, .menu-drawer-container, .cart-drawer, dialog[open]')) {
-              applyDark(host, false);
-              return;
-            }
 
             // Media images have pointer-events: none, so they never appear in
             // the hit-test stack themselves — look inside each stack element
@@ -798,8 +790,20 @@ document.addEventListener("DOMContentLoaded", function() {
               return;
             }
 
-            var m = getComputedStyle(el).backgroundColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
-            if (!m || (m[4] !== undefined && parseFloat(m[4]) < 0.5)) continue;
+            // Solid background color — or, when that's transparent, a CSS
+            // gradient background-image (the theme paints drawer panels and
+            // color-scheme sections that way): use its first color stop.
+            var rgbRe = /rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/;
+            var cs = getComputedStyle(el);
+            var m = cs.backgroundColor.match(rgbRe);
+            if (!m || (m[4] !== undefined && parseFloat(m[4]) < 0.5)) {
+              m = null;
+              if (cs.backgroundImage && cs.backgroundImage.indexOf('gradient') > -1) {
+                m = cs.backgroundImage.match(rgbRe);
+                if (m && m[4] !== undefined && parseFloat(m[4]) < 0.5) m = null;
+              }
+            }
+            if (!m) continue;
             var lum = (0.2126 * m[1] + 0.7152 * m[2] + 0.0722 * m[3]) / 255;
             applyDark(host, lum < 0.45);
             return;
