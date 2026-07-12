@@ -64,27 +64,44 @@
           {%- if crumb_collection == nil and collection and collection.handle -%}
             {%- assign crumb_collection = collection -%}
           {%- endif -%}
-          {%- comment -%} Fallback: find a product collection that exists in the nav menu {%- endcomment -%}
+          {%- comment -%} Fallback: find a product collection that exists in the
+            nav menu. product.collections is sorted alphabetically by title, so
+            a broad category ("Akustiska trummor") can shadow the specific one
+            ("Akustiska trumset") — prefer the collection whose title matches
+            the product's type, then fall back to the first menu match. {%- endcomment -%}
           {%- if crumb_collection == nil and section.settings.nav_menu != blank -%}
             {%- assign nav_fallback = linklists[section.settings.nav_menu] -%}
+            {%- assign crumb_fallback = nil -%}
             {%- for pc in product.collections -%}
               {%- if crumb_collection != nil -%}{% break %}{%- endif -%}
+              {%- assign pc_in_menu = false -%}
               {%- for l1 in nav_fallback.links -%}
-                {%- if crumb_collection != nil -%}{% break %}{%- endif -%}
+                {%- if pc_in_menu -%}{%- break -%}{%- endif -%}
                 {%- for l2 in l1.links -%}
                   {%- if l2.url == pc.url -%}
-                    {%- assign crumb_collection = pc -%}
+                    {%- assign pc_in_menu = true -%}
                     {%- break -%}
                   {%- endif -%}
                   {%- for l3 in l2.links -%}
                     {%- if l3.url == pc.url -%}
-                      {%- assign crumb_collection = pc -%}
+                      {%- assign pc_in_menu = true -%}
                       {%- break -%}
                     {%- endif -%}
                   {%- endfor -%}
+                  {%- if pc_in_menu -%}{%- break -%}{%- endif -%}
                 {%- endfor -%}
               {%- endfor -%}
+              {%- if pc_in_menu -%}
+                {%- if pc.title == product.type -%}
+                  {%- assign crumb_collection = pc -%}
+                {%- elsif crumb_fallback == nil -%}
+                  {%- assign crumb_fallback = pc -%}
+                {%- endif -%}
+              {%- endif -%}
             {%- endfor -%}
+            {%- if crumb_collection == nil -%}
+              {%- assign crumb_collection = crumb_fallback -%}
+            {%- endif -%}
           {%- endif -%}
           {%- if crumb_collection != nil -%}
             {%- comment -%} Walk the nav menu to find parent(s) of this collection {%- endcomment -%}
