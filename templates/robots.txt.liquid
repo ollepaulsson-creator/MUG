@@ -11,9 +11,12 @@
 {% endfor %}
 {%- if group.user_agent.value == '*' -%}
 # Extra: block sort/filter parameter URLs (duplicate content).
+# pf_* are legacy Boost-filter params still linked from old content.
 # Deliberately NOT blocking ?page= — pagination must stay crawlable.
 Disallow: /*?sort_by=
 Disallow: /*?filter.
+Disallow: /*?pf_*
+Disallow: /*&pf_*
 {% endif %}
 {% if group.sitemap -%}
 Sitemap: {{ group.sitemap.value }}
