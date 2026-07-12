@@ -9,15 +9,14 @@
 {% for rule in group.rules -%}
 {{ rule.directive }}: {{ rule.value }}
 {% endfor %}
+{%- if group.user_agent.value == '*' -%}
+# Extra: block sort/filter parameter URLs (duplicate content).
+# Deliberately NOT blocking ?page= — pagination must stay crawlable.
+Disallow: /*?sort_by=
+Disallow: /*?filter.
+{% endif %}
 {% if group.sitemap -%}
 Sitemap: {{ group.sitemap.value }}
 {% endif %}
 
 {% endfor %}
-
-# Block filter and sort parameter URLs (duplicate content)
-User-agent: *
-Disallow: /collections/*%3F*
-Disallow: /collections/*?*
-Disallow: /*?sort_by=
-Disallow: /*?filter.

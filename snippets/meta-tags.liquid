@@ -162,7 +162,10 @@
   {{ page_title }}
   {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
   {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-  {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  {%- comment -%} The homepage title is fully authored in Preferences (ends
+    with "| MUG") — appending the shop name doubled the branding and pushed
+    the title to 94 chars. {%- endcomment -%}
+  {%- unless page_title contains shop.name or template == 'index' %} &ndash; {{ shop.name }}{% endunless -%}
 </title>
 
 {%- if current_tags -%}
