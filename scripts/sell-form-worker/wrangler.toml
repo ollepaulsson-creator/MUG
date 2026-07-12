@@ -2,9 +2,30 @@ name = "mug-sell-form"
 main = "worker.js"
 compatibility_date = "2026-01-01"
 
+# Refresh the Google local-inventory feed cache every 4 hours
+[triggers]
+crons = ["17 */4 * * *"]
+
 # Non-secret config (change TO_EMAIL/FROM_EMAIL here if needed)
 [vars]
 TO_EMAIL = "order@mug.se"
 FROM_EMAIL = "Musik Utan Gränser <formular@mug.se>"
 
-# Secret (set with: npx wrangler secret put RESEND_API_KEY)
+# --- Google local inventory feed ---
+# Shopify shop + the "Finns i butik" location (physical store stock from Sitoo)
+SHOPIFY_SHOP = "mug-musik-utan-granser.myshopify.com"
+STORE_LOCATION_GID = "gid://shopify/Location/46748696738"
+# Must match the store code on the Google Business Profile linked in
+# Merchant Center (Företagsinformation -> Butiker).
+STORE_CODE = "MUG-GBG"
+# Offer id format used by the Google & YouTube Shopify channel:
+# shopify_SE_<productId>_<variantId>. Verify against an item id in
+# Merchant Center (Products -> any product -> item id) before go-live.
+OFFER_ID_PREFIX = "shopify_SE_"
+# Light gate on the feed URL (stock presence is public on the site anyway)
+FEED_KEY = "cc387757f33417c7a057499d1019ba97"
+
+# Secrets (set with: npx wrangler secret put <NAME>)
+#   RESEND_API_KEY       - Resend API key (sell form)
+#   SHOPIFY_ADMIN_TOKEN  - Admin API token of a custom app with
+#                          read_products + read_inventory + read_locations

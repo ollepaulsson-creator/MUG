@@ -42,3 +42,43 @@ with the photos attached, and sends a copy to the customer.
 The form has a honeypot field; submissions that fill it are silently
 accepted-and-dropped. If spam becomes a problem, add Cloudflare Turnstile
 (free) — the worker runs on Cloudflare already.
+
+## Google local inventory feed (`/local-inventory.tsv`)
+
+Tells Google Merchant Center which products are in stock in the physical
+store, so they can show as "i lager i butik" on Search/Maps. Data source:
+the Shopify location **"Finns i butik"** (synced from Sitoo).
+
+### One-time setup
+
+1. **Shopify Admin API token** (read-only):
+   - Admin → Inställningar → Appar och försäljningskanaler → Utveckla appar
+     → Skapa app ("local-inventory-feed")
+   - Konfigurera Admin API-omfång: `read_products`, `read_inventory`,
+     `read_locations` → Spara → Installera appen
+   - Kopiera **Admin API-åtkomsttoken** (visas en gång, börjar med `shpat_`)
+   - Keep it to yourself, don't paste it in chat. In a terminal:
+
+     ```sh
+     cd scripts/sell-form-worker
+     npx wrangler secret put SHOPIFY_ADMIN_TOKEN   # paste the token
+     ```
+
+2. **Merchant Center — link the store**:
+   - Företagsinformation → Butiker → link the Google Business Profile for
+     Kaserntorget 9. Set its **butikskod** to `MUG-GBG` (or change
+     `STORE_CODE` in wrangler.toml to whatever code the profile has,
+     then `npx wrangler deploy`).
+
+3. **Merchant Center — register the feed**:
+   - Datakällor → Lägg till datakälla → **Lokala produktlagerdata**
+   - Schemalagd hämtning, daily, URL:
+     `https://mug-sell-form.mug-se.workers.dev/local-inventory.tsv?key=<FEED_KEY from wrangler.toml>`
+
+4. **Verify the offer id format**: open any product in Merchant Center and
+   check that its item id looks like `shopify_SE_<numbers>_<numbers>`.
+   If the prefix differs, adjust `OFFER_ID_PREFIX` in wrangler.toml.
+
+The feed regenerates every 4 hours (cron) via a Shopify bulk operation and
+is edge-cached; ~1 500 in-stock items, `in_stock` + quantity per row.
+Products not in the feed count as out of stock locally, which is correct.

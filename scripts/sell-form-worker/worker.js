@@ -57,6 +57,30 @@ export default {
       return new Response(upstream.body, { status: upstream.status, headers });
     }
 
+    // GET /local-inventory.tsv?key=... — Google Merchant Center local product
+    // inventory feed: which products are in stock in the physical store.
+    // Built from the Shopify "Finns i butik" location (synced from Sitoo) via
+    // a bulk operation (3 API calls total), cached at the edge for 4h. The
+    // cron trigger keeps the cache warm so Google's fetch is instant.
+    if (request.method === 'GET' && reqUrl.pathname === '/local-inventory.tsv') {
+      if (reqUrl.searchParams.get('key') !== env.FEED_KEY) {
+        return new Response('forbidden', { status: 403 });
+      }
+      const cache = caches.default;
+      const cacheKey = new Request('https://feed.internal/local-inventory');
+      let res = await cache.match(cacheKey);
+      if (!res) {
+        try {
+          const tsv = await buildLocalInventoryFeed(env);
+          res = feedResponse(tsv);
+          await cache.put(cacheKey, res.clone());
+        } catch (e) {
+          return new Response('feed error: ' + (e && e.message), { status: 503 });
+        }
+      }
+      return res;
+    }
+
     if (request.method !== 'POST') return json({ ok: false, error: 'method' }, 405, cors);
 
     let form;
@@ -146,7 +170,124 @@ export default {
 
     return json({ ok: true }, 200, cors);
   },
+
+  // Cron (see wrangler.toml): regenerate the local inventory feed and warm
+  // the edge cache so Merchant Center's scheduled fetch never waits.
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(
+      (async () => {
+        const tsv = await buildLocalInventoryFeed(env);
+        const cache = caches.default;
+        await cache.put(new Request('https://feed.internal/local-inventory'), feedResponse(tsv));
+        console.log('local inventory feed refreshed: ' + tsv.split('\n').length + ' lines');
+      })().catch((e) => console.log('feed refresh failed: ' + (e && e.message)))
+    );
+  },
 };
+
+// ---------------------------------------------------------------------------
+// Google local inventory feed
+// ---------------------------------------------------------------------------
+
+function feedResponse(tsv) {
+  return new Response(tsv, {
+    headers: {
+      'Content-Type': 'text/tab-separated-values; charset=utf-8',
+      'Cache-Control': 'public, max-age=14400', // 4h — matches the cron cadence
+    },
+  });
+}
+
+async function shopifyGraphQL(env, query) {
+  const res = await fetch(`https://${env.SHOPIFY_SHOP}/admin/api/2025-01/graphql.json`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Shopify-Access-Token': env.SHOPIFY_ADMIN_TOKEN,
+    },
+    body: JSON.stringify({ query }),
+  });
+  const data = await res.json();
+  if (data.errors) throw new Error('shopify: ' + JSON.stringify(data.errors).slice(0, 200));
+  return data.data;
+}
+
+// Builds the TSV with a Shopify bulk operation: one mutation to start, a few
+// status polls, one JSONL download — bounded API usage no matter how large
+// the location's inventory is.
+async function buildLocalInventoryFeed(env) {
+  if (!env.SHOPIFY_ADMIN_TOKEN) throw new Error('SHOPIFY_ADMIN_TOKEN not set');
+
+  const bulkQuery = `
+    {
+      location(id: "${env.STORE_LOCATION_GID}") {
+        inventoryLevels {
+          edges {
+            node {
+              quantities(names: ["available"]) { name quantity }
+              item {
+                variant {
+                  legacyResourceId
+                  product { legacyResourceId status }
+                }
+              }
+            }
+          }
+        }
+      }
+    }`;
+
+  const start = await shopifyGraphQL(
+    env,
+    `mutation { bulkOperationRunQuery(query: """${bulkQuery}""") {
+       bulkOperation { id status } userErrors { field message } } }`
+  );
+  const errs = start.bulkOperationRunQuery.userErrors;
+  // "already in progress" is fine — poll whatever operation is running.
+  if (errs.length && !/already in progress/i.test(JSON.stringify(errs))) {
+    throw new Error('bulk start: ' + JSON.stringify(errs).slice(0, 200));
+  }
+
+  let url = null;
+  for (let i = 0; i < 35; i++) {
+    await new Promise((r) => setTimeout(r, 3000));
+    const poll = await shopifyGraphQL(
+      env,
+      '{ currentBulkOperation { status url errorCode } }'
+    );
+    const op = poll.currentBulkOperation;
+    if (!op) continue;
+    if (op.status === 'COMPLETED') {
+      url = op.url;
+      break;
+    }
+    if (op.status === 'FAILED' || op.status === 'CANCELED') {
+      throw new Error('bulk ' + op.status + ': ' + op.errorCode);
+    }
+  }
+  if (!url) throw new Error('bulk operation timed out');
+
+  const jsonl = await (await fetch(url)).text();
+  const lines = ['store_code\tid\tavailability\tquantity'];
+  for (const line of jsonl.split('\n')) {
+    if (!line) continue;
+    let row;
+    try {
+      row = JSON.parse(line);
+    } catch {
+      continue;
+    }
+    const variant = row.item && row.item.variant;
+    if (!variant || !variant.product) continue;
+    if (variant.product.status !== 'ACTIVE') continue;
+    const qty = ((row.quantities || [])[0] || {}).quantity || 0;
+    if (qty <= 0) continue;
+    const offerId = env.OFFER_ID_PREFIX + variant.product.legacyResourceId + '_' + variant.legacyResourceId;
+    lines.push(env.STORE_CODE + '\t' + offerId + '\tin_stock\t' + qty);
+  }
+  if (lines.length < 2) throw new Error('feed came out empty — refusing to publish');
+  return lines.join('\n') + '\n';
+}
 
 async function sendEmail(env, payload) {
   return fetch('https://api.resend.com/emails', {
