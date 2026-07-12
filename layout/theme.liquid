@@ -768,6 +768,15 @@ document.addEventListener("DOMContentLoaded", function() {
             var el = stack[i];
             if (el === host || host.contains(el)) continue;
 
+            // Drawer/dialog surfaces are light but often paint via gradient
+            // background-images with a transparent background-color, so the
+            // walk would fall through to the dark page scrim behind them and
+            // wrongly flip the pill to light-on-light (invisible).
+            if (el.closest && el.closest('.menu-drawer, .menu-drawer-container, .cart-drawer, dialog[open]')) {
+              applyDark(host, false);
+              return;
+            }
+
             // Media images have pointer-events: none, so they never appear in
             // the hit-test stack themselves — look inside each stack element
             // for an <img> that covers the sample point.
