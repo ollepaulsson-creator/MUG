@@ -1073,6 +1073,12 @@ a.vendor-link:hover {
     text-decoration: underline;
     text-underline-offset: 2px;
 }
+/* Inside product cards the card's absolute overlay link paints above static
+   content — lift the vendor link so it stays clickable. */
+.product-card__content a.vendor-link {
+    position: relative;
+    z-index: 1;
+}
 .text-block h4 {
     text-transform: initial;
     font-size: 15px;
