@@ -7,7 +7,18 @@
 {% for group in robots.default_groups %}
 {{ group.user_agent }}
 {% for rule in group.rules -%}
-{{ rule.directive }}: {{ rule.value }}
+{%- comment -%}
+  Shopify's default "*/collections/*filter*&*filter*" starts with "*" —
+  formally invalid robots syntax (paths must start with "/"), flagged by
+  validators. Emit a "/"-prefixed equivalent pair instead.
+{%- endcomment -%}
+{%- assign rule_value = rule.value -%}
+{%- if rule_value == '*/collections/*filter*&*filter*' -%}
+{{ rule.directive }}: /collections/*filter*&*filter*
+{{ rule.directive }}: /*/collections/*filter*&*filter*
+{% else -%}
+{{ rule.directive }}: {{ rule_value }}
+{% endif -%}
 {% endfor %}
 {%- if group.user_agent.value == '*' -%}
 # Extra: block sort/filter parameter URLs (duplicate content).
