@@ -526,23 +526,12 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
-    },
-    "store_hours": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<div class=\"store-hours rte\">{{ settings.opening_hours }}</div>",
-        "section_width": "page-width",
-        "color_scheme": "scheme-1",
-        "padding-block-start": 0,
-        "padding-block-end": 24
-      }
     }
   },
   "order": [
     "breadcrumbs",
     "seo_h1",
     "instant-7H2mVXTBcpM0diIT",
-    "store_hours",
     "section_8aKKyY",
     "section_t7Jwap"
   ]
