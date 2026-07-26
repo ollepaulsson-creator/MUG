@@ -520,7 +520,7 @@
     "seo_h1": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<h1 class=\"visually-hidden\">Besök butiken – Kaserntorget 9, Göteborg</h1>",
+        "custom_liquid": "<h1 class=\"visually-hidden\">Besök butiken – Kaserntorget 9, Göteborg</h1><style>.__instant.i7H2mVXTBcpM0diIT .instant-rich-text, .__instant.i7H2mVXTBcpM0diIT .instant-rich-text p, .__instant.i7H2mVXTBcpM0diIT .instant-rich-text a, .__instant.i7H2mVXTBcpM0diIT .instant-rich-text span { font-size: 14px !important; }</style>",
         "section_width": "page-width",
         "color_scheme": "scheme-1",
         "padding-block-start": 0,
