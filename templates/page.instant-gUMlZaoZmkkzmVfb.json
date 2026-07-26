@@ -516,10 +516,22 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "seo_h1": {
+      "type": "custom-liquid",
+      "custom_css": [],
+      "settings": {
+        "custom_liquid": "<h1 class=\"visually-hidden\">Sälj eller byt in dina instrument</h1>",
+        "section_width": "page-width",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     }
   },
   "order": [
     "breadcrumbs",
+    "seo_h1",
     "instant-gUMlZaoZmkkzmVfb",
     "section_8aKKyY",
     "section_t7Jwap"
