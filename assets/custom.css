@@ -2344,3 +2344,32 @@ media-gallery:has(
 .product-details h4 {
   line-height: 1.5 !important;
 }
+
+/* ── Carousel lazy load-more (homepage product lists) ── */
+.carousel-more-sentinel {
+  flex: 0 0 1px;
+  width: 1px;
+  align-self: stretch;
+}
+.carousel-more-loader {
+  flex: 0 0 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.carousel-more-spinner {
+  width: 26px;
+  height: 26px;
+  border: 2px solid #dcdcdc;
+  border-top-color: #111;
+  border-radius: 50%;
+  animation: mug-spin 0.8s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .carousel-more-spinner {
+    animation-duration: 2s;
+  }
+}
+@keyframes mug-spin {
+  to { transform: rotate(1turn); }
+}
