@@ -2373,3 +2373,9 @@ media-gallery:has(
 @keyframes mug-spin {
   to { transform: rotate(1turn); }
 }
+
+/* Page titles (main-page text-block h1, e.g. /pages/no1-guitarshop):
+   the theme's default heading leading is too tight when the title wraps. */
+.text-block h1 {
+  line-height: 1.2 !important;
+}
