@@ -2224,13 +2224,17 @@ body .tmenu_app .tmenu_nav .tmenu_item--root > .tmenu_item_link {
    inline --font-size custom property. No padding below the description — the
    20px space before the filter bar comes from .collection-wrapper's
    margin-top, same as on desktop, so the gap matches the one above the title. */
+/* All viewports: tighter spacing above the title and tighter title leading. */
+[class*="text_tqQTNE"] {
+  padding-top: 10px !important; /* spacing above (below the breadcrumb) */
+}
+[class*="text_tqQTNE"] p,
+[class*="text_tqQTNE"] h1 {
+  line-height: 1.15 !important;
+}
 @media screen and (max-width: 749px) {
   [class*="text_tqQTNE"] {
-    padding-top: 20px !important; /* more spacing above (below the breadcrumb) */
     --font-size: 1.5rem !important; /* smaller title on mobile (was 2rem / 32px) */
-  }
-  [class*="text_tqQTNE"] p {
-    line-height: 1.2 !important;
   }
   .layout-panel-flex:has(> [class*="text_tqQTNE"]) {
     gap: 4px !important;
@@ -2332,4 +2336,11 @@ media-gallery:has(
   )
   .product-badges {
   display: none;
+}
+
+/* Product-description subheadings (h4, e.g. "Seymour Duncan …-pickuper"):
+   the template sizes them 14px with margin 0 but leaves heading leading —
+   give wrapped titles room to breathe. */
+.product-details h4 {
+  line-height: 1.5 !important;
 }
