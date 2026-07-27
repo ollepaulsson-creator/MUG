@@ -605,20 +605,14 @@ document.addEventListener("DOMContentLoaded", function() {
       launcher (e.g. after closing the chat window); the injected style node
       itself survives re-renders. Open chat window UI is untouched.
 
-      The label text adapts to the backdrop per-pixel via mix-blend-mode:
-      exclusion (white text inverts against whatever is behind). Because the
-      widget host is position:fixed — a stacking context, i.e. an isolated
-      blend group — a blended element INSIDE it could never blend with the
-      page. So the pill's own label is made transparent (it still sizes the
-      pill) and the visible text is a separate fixed overlay at body level
-      carrying the blend itself, aligned to the pill's known geometry
-      (bottom 14px, height 38px, right padding 16px). The overlay is
-      pointer-events: none, so clicks fall through to the real toggle. {%- endcomment -%}
+      The pill's own label is transparent (it still sizes the pill) and the
+      visible text is a separate fixed overlay at body level in white at 90%
+      opacity, aligned to the pill's known geometry (bottom 14px, height 38px,
+      right padding 16px). The overlay is pointer-events: none, so clicks fall
+      through to the real toggle. {%- endcomment -%}
     <style>
-      /* Chat pill label overlay: white + exclusion inverts per-pixel against
-         whatever is painted beneath (page, drawer, footer, imagery) — the
-         same technique as a blend-mode fixed header. Geometry mirrors the
-         pill (bottom 14px, height 38px, 16px right padding inside it). */
+      /* Chat pill label overlay: plain white at 90% opacity. Geometry mirrors
+         the pill (bottom 14px, height 38px, 16px right padding inside it). */
       #mug-chat-label {
         position: fixed;
         right: 30px;
@@ -627,8 +621,7 @@ document.addEventListener("DOMContentLoaded", function() {
         display: flex;
         align-items: center;
         font: 400 13px/1 'Inter Variable', sans-serif;
-        color: #fff;
-        mix-blend-mode: exclusion;
+        color: rgba(255, 255, 255, 0.9);
         pointer-events: none;
         white-space: nowrap;
         z-index: 2147483647;
