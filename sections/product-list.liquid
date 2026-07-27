@@ -14,6 +14,9 @@
     spacing-style
     gap-style
   "
+  {% if request.page_type == 'index' and section.settings.layout_type == 'carousel' and section.settings.collection != blank %}
+    data-load-more-section="{{ section.id }}"
+  {% endif %}
   style="
     {% render 'spacing-style', settings: section.settings %}
     {% render 'gap-style', value: section.settings.gap %}
@@ -79,6 +82,10 @@
     {%- content_for 'blocks' -%}
   </div>
 </div>
+
+{% if request.page_type == 'index' and section.settings.layout_type == 'carousel' and section.settings.collection != blank %}
+  <script type="module" src="{{ 'carousel-load-more.js' | asset_url }}"></script>
+{% endif %}
 
 {% schema %}
 {
