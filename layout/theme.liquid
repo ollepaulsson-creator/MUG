@@ -796,8 +796,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (m) src = m[1];
               }
               if (src) {
+                var er = el.getBoundingClientRect();
+                var isLargePhoto = er.width * er.height > 40000; /* ~200x200+ */
                 imageLuminanceAt(src, el, ptX, ptY).then(function (lum) {
-                  if (lum != null) apply(lum); else walk(idx + 1);
+                  if (lum != null) apply(lum);
+                  /* Unsampleable large image (Instant's cdn.instant.so sends
+                     no CORS headers): it's decorative photography, not a
+                     white product shot — assume dark, use white text. */
+                  else if (isLargePhoto) apply(0);
+                  else walk(idx + 1);
                 });
                 return;
               }
