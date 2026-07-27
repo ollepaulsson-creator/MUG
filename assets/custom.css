@@ -2226,7 +2226,7 @@ body .tmenu_app .tmenu_nav .tmenu_item--root > .tmenu_item_link {
    margin-top, same as on desktop, so the gap matches the one above the title. */
 /* All viewports: tighter spacing above the title and tighter title leading. */
 [class*="text_tqQTNE"] {
-  padding-top: 28px !important; /* spacing above (below the breadcrumb) */
+  padding-top: 12px !important; /* spacing above (below the breadcrumb) */
 }
 [class*="text_tqQTNE"] p,
 [class*="text_tqQTNE"] h1 {
@@ -2235,7 +2235,6 @@ body .tmenu_app .tmenu_nav .tmenu_item--root > .tmenu_item_link {
 @media screen and (max-width: 749px) {
   [class*="text_tqQTNE"] {
     --font-size: 1.5rem !important; /* smaller title on mobile (was 2rem / 32px) */
-    padding-top: 12px !important; /* tighter than desktop's 28px */
   }
   .layout-panel-flex:has(> [class*="text_tqQTNE"]) {
     gap: 4px !important;
