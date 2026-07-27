@@ -790,8 +790,8 @@ document.addEventListener("DOMContentLoaded", function() {
               var el = stack[idx];
               var cs = getComputedStyle(el);
               var src = null;
-              if (el.tagName === 'IMG' && el.currentSrc) src = el.currentSrc;
-              else {
+              if (el.tagName === 'IMG') src = el.currentSrc || el.src || null;
+              if (!src) {
                 var m = (cs.backgroundImage || '').match(/url\("?([^")]+)/);
                 if (m) src = m[1];
               }
@@ -809,7 +809,9 @@ document.addEventListener("DOMContentLoaded", function() {
             })(0);
 
             function apply(lum) {
-              overlay.style.color = lum > 150 ? 'rgba(0,0,0,0.9)' : 'rgba(255,255,255,0.9)';
+              /* 165: mid-tone backdrops (foliage, wood, gear photos) read
+                 better with white — black only on clearly light ground. */
+              overlay.style.color = lum > 165 ? 'rgba(0,0,0,0.9)' : 'rgba(255,255,255,0.9)';
             }
           });
         }
