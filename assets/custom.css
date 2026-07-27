@@ -2235,6 +2235,7 @@ body .tmenu_app .tmenu_nav .tmenu_item--root > .tmenu_item_link {
 @media screen and (max-width: 749px) {
   [class*="text_tqQTNE"] {
     --font-size: 1.5rem !important; /* smaller title on mobile (was 2rem / 32px) */
+    padding-top: 12px !important; /* tighter than desktop's 28px */
   }
   .layout-panel-flex:has(> [class*="text_tqQTNE"]) {
     gap: 4px !important;
