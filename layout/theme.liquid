@@ -611,8 +611,10 @@ document.addEventListener("DOMContentLoaded", function() {
       right padding 16px). The overlay is pointer-events: none, so clicks fall
       through to the real toggle. {%- endcomment -%}
     <style>
-      /* Chat pill label overlay: plain white at 90% opacity. Geometry mirrors
-         the pill (bottom 14px, height 38px, 16px right padding inside it). */
+      /* Chat pill label overlay: 90% opacity, white on dark backdrops and
+         black on light ones (JS luminance sampling below sets the color).
+         Geometry mirrors the pill (bottom 14px, height 38px, 16px right
+         padding inside it). */
       #mug-chat-label {
         position: fixed;
         right: 30px;
@@ -714,6 +716,82 @@ document.addEventListener("DOMContentLoaded", function() {
           return true;
         }
 
+        /* Adaptive label color: black on light backdrops, white on dark.
+           The backdrop is found via elementsFromPoint under the pill center;
+           a solid background-color decides directly, while images (product
+           shots, Instant hero photos) are average-sampled on an 8x8 canvas —
+           Shopify's CDN sends CORS headers, so crossOrigin sampling works.
+           Falls back to black (white page) when nothing opaque is found. */
+        var lumCache = {};
+        function imageLuminance(src) {
+          if (src in lumCache) return Promise.resolve(lumCache[src]);
+          return new Promise(function (resolve) {
+            var img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = function () {
+              try {
+                var cv = document.createElement('canvas');
+                cv.width = 8; cv.height = 8;
+                var cx = cv.getContext('2d');
+                cx.drawImage(img, 0, 0, 8, 8);
+                var d = cx.getImageData(0, 0, 8, 8).data, sum = 0, n = 0;
+                for (var i = 0; i < d.length; i += 4) {
+                  if (d[i + 3] < 8) continue;
+                  sum += 0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2];
+                  n++;
+                }
+                lumCache[src] = n ? sum / n : null;
+              } catch (e) { lumCache[src] = null; }
+              resolve(lumCache[src]);
+            };
+            img.onerror = function () { lumCache[src] = null; resolve(null); };
+            img.src = src;
+          });
+        }
+
+        var colorPending = false;
+        function updateLabelColor() {
+          if (colorPending) return;
+          colorPending = true;
+          requestAnimationFrame(function () {
+            colorPending = false;
+            var overlay = document.getElementById('mug-chat-label');
+            var host = document.getElementById('ShopifyChat');
+            if (!overlay || overlay.hidden) return;
+            var r = overlay.getBoundingClientRect();
+            if (!r.width) return;
+            var stack = document.elementsFromPoint(r.left + r.width / 2, r.top + r.height / 2)
+              .filter(function (el) { return el !== overlay && el !== host && el.tagName !== 'HTML'; });
+
+            (function walk(idx) {
+              if (idx >= stack.length) return apply(255); /* white page default */
+              var el = stack[idx];
+              var cs = getComputedStyle(el);
+              var src = null;
+              if (el.tagName === 'IMG' && el.currentSrc) src = el.currentSrc;
+              else {
+                var m = (cs.backgroundImage || '').match(/url\("?([^")]+)/);
+                if (m) src = m[1];
+              }
+              if (src) {
+                imageLuminance(src).then(function (lum) {
+                  if (lum != null) apply(lum); else walk(idx + 1);
+                });
+                return;
+              }
+              var c = (cs.backgroundColor || '').match(/rgba?\(([\d.]+)[, ]+([\d.]+)[, ]+([\d.]+)(?:[,/ ]+([\d.]+))?/);
+              if (c && (c[4] === undefined || parseFloat(c[4]) > 0.4)) {
+                return apply(0.2126 * c[1] + 0.7152 * c[2] + 0.0722 * c[3]);
+              }
+              walk(idx + 1);
+            })(0);
+
+            function apply(lum) {
+              overlay.style.color = lum > 150 ? 'rgba(0,0,0,0.9)' : 'rgba(255,255,255,0.9)';
+            }
+          });
+        }
+
         function init() {
           var host = document.getElementById('ShopifyChat');
           if (!host || !host.shadowRoot) return false;
@@ -729,7 +807,11 @@ document.addEventListener("DOMContentLoaded", function() {
           if (!customize(host)) return false;
           new MutationObserver(function () {
             customize(host);
+            updateLabelColor();
           }).observe(host.shadowRoot, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['class'] });
+          window.addEventListener('scroll', updateLabelColor, { passive: true });
+          window.addEventListener('resize', updateLabelColor, { passive: true });
+          updateLabelColor();
           return true;
         }
 
