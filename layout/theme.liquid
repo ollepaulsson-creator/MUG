@@ -605,11 +605,19 @@ document.addEventListener("DOMContentLoaded", function() {
       (part="dialog"; header holds shopify-sign-in-button, body holds the chat
       iframe). Both shadow roots are open.
 
+      The widget boots in TWO STAGES: a fresh page load renders only a static
+      placeholder activator directly in the shopify-chat shadow root (no
+      runtime element at all); <shopify-agent-runtime> mounts lazily, e.g. on
+      first interaction. Styling must therefore target whichever root holds
+      button.activator right now and be re-applied when the runtime mounts —
+      waiting for the runtime alone leaves the placeholder unstyled (and, with
+      the flash-guard below, permanently invisible).
+
       Pill geometry/background is styled from document CSS via ::part(activator).
       Label text swap ("Chatt" → "Kontakta oss"), the green dot, hiding the
       sign-in button (customer accounts unused) and the adaptive label color
-      need the runtime's shadow root: a <style> is injected there and re-checked
-      by a MutationObserver since the runtime re-renders on open/close.
+      need the shadow root: a <style> is injected there and re-checked by
+      MutationObservers since the widget re-renders on open/close/upgrade.
 
       Label color adapts to the backdrop: black on light ground, white on dark,
       via the --mug-chat-ink custom property (inherits into the shadow).
@@ -687,10 +695,19 @@ document.addEventListener("DOMContentLoaded", function() {
           });
         }
 
-        function activatorButton() {
+        /* Whichever shadow root holds the activator right now: the runtime's
+           once mounted, otherwise the placeholder stage in the host's root. */
+        function currentRoot() {
           var host = document.querySelector('shopify-chat');
-          var runtime = host && host.shadowRoot && host.shadowRoot.querySelector('shopify-agent-runtime');
-          var rs = runtime && runtime.shadowRoot;
+          if (!host || !host.shadowRoot) return null;
+          var runtime = host.shadowRoot.querySelector('shopify-agent-runtime');
+          if (runtime && runtime.shadowRoot && runtime.shadowRoot.querySelector('button.activator')) {
+            return runtime.shadowRoot;
+          }
+          return host.shadowRoot.querySelector('button.activator') ? host.shadowRoot : null;
+        }
+        function activatorButton() {
+          var rs = currentRoot();
           return rs ? rs.querySelector('button.activator') : null;
         }
 
@@ -776,15 +793,27 @@ document.addEventListener("DOMContentLoaded", function() {
           return true;
         }
 
-        function init() {
+        var observedRoots = [];
+        function observeRoot(root) {
+          if (!root || observedRoots.indexOf(root) !== -1) return;
+          observedRoots.push(root);
+          new MutationObserver(applyStage).observe(root, { childList: true, subtree: true, characterData: true });
+        }
+        function applyStage() {
           var host = document.querySelector('shopify-chat');
-          var runtime = host && host.shadowRoot && host.shadowRoot.querySelector('shopify-agent-runtime');
-          var rs = runtime && runtime.shadowRoot;
+          if (!host || !host.shadowRoot) return false;
+          /* outer root: catches the lazy runtime mount replacing the placeholder */
+          observeRoot(host.shadowRoot);
+          var runtime = host.shadowRoot.querySelector('shopify-agent-runtime');
+          if (runtime) observeRoot(runtime.shadowRoot);
+          var rs = currentRoot();
           if (!rs) return false;
           customize(rs);
-          new MutationObserver(function () {
-            customize(rs);
-          }).observe(rs, { childList: true, subtree: true, characterData: true });
+          return true;
+        }
+
+        function init() {
+          if (!applyStage()) return false;
           window.addEventListener('scroll', updateLabelColor, { passive: true });
           window.addEventListener('resize', updateLabelColor, { passive: true });
           return true;
