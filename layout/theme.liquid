@@ -614,10 +614,11 @@ document.addEventListener("DOMContentLoaded", function() {
       the flash-guard below, permanently invisible).
 
       Pill geometry/background is styled from document CSS via ::part(activator).
-      Label text swap ("Chatt" → "Kontakta oss"), the green dot, hiding the
-      sign-in button (customer accounts unused) and the adaptive label color
-      need the shadow root: a <style> is injected there and re-checked by
-      MutationObservers since the widget re-renders on open/close/upgrade.
+      Label text swap ("Chatt" → "Kontakta oss"), the green dot, restyling the
+      sign-in button (black, matching site buttons — visitors use it to leave
+      contact details) and the adaptive label color need the shadow root: a
+      <style> is injected there and re-checked by MutationObservers since the
+      widget re-renders on open/close/upgrade.
 
       Label color adapts to the backdrop: black on light ground, white on dark,
       via the --mug-chat-ink custom property (inherits into the shadow).
@@ -780,10 +781,28 @@ document.addEventListener("DOMContentLoaded", function() {
               "  content: ''; width: 10px; height: 10px; border-radius: 50%;",
               '  background: #34C759; display: inline-block; flex-shrink: 0;',
               '}',
-              /* customer accounts unused — hide the sign-in button entirely */
-              '.panel__sign-in, shopify-sign-in-button { display: none !important; }',
             ].join('\n');
             rs.appendChild(st);
+          }
+          /* sign-in button (own shadow root, no exported parts): restyle the
+             default purple pill to match the site's black buttons so visitors
+             can log in and leave contact details */
+          var si = rs.querySelector('shopify-sign-in-button');
+          if (si && si.shadowRoot && !si.shadowRoot.querySelector('#mug-signin-style')) {
+            var ss = document.createElement('style');
+            ss.id = 'mug-signin-style';
+            ss.textContent = [
+              '.sign-in-button {',
+              '  background: #000 !important; color: #fff !important;',
+              '  border: 0 !important; border-radius: 2px !important;',
+              "  font: 500 11px/1 'Inter Variable', sans-serif !important;",
+              '  text-transform: uppercase !important; letter-spacing: 1px !important;',
+              '  padding: 9px 14px !important; cursor: pointer;',
+              '  transition: background-color 150ms ease;',
+              '}',
+              '.sign-in-button:hover { background: #222 !important; }',
+            ].join('\n');
+            si.shadowRoot.appendChild(ss);
           }
           var label = rs.querySelector('.activator__label');
           if (label && label.textContent !== LABEL) label.textContent = LABEL;
