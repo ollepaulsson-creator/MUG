@@ -777,6 +777,13 @@ document.addEventListener("DOMContentLoaded", function() {
               '  white-space: nowrap;',
               '}',
               '@media (max-width: 749px) { .activator__label { font-size: 15px !important; } }',
+              /* unread-reply badge: keep the widget's show/hide logic
+                 (--active class) but make it bigger and notification-red */
+              '.activator__indicator--active {',
+              '  background: #FF3B30 !important;',
+              '  width: 12px !important; height: 12px !important;',
+              '  border-radius: 50% !important;',
+              '}',
               '.activator__label::before {',
               "  content: ''; width: 10px; height: 10px; border-radius: 50%;",
               '  background: #34C759; display: inline-block; flex-shrink: 0;',
@@ -785,8 +792,9 @@ document.addEventListener("DOMContentLoaded", function() {
             rs.appendChild(st);
           }
           /* sign-in button (own shadow root, no exported parts): restyle the
-             default purple pill to match the site's black buttons so visitors
-             can log in and leave contact details */
+             default purple pill to match the site's white buttons (like "Lägg
+             till i varukorgen") so visitors can log in and leave contact
+             details */
           var si = rs.querySelector('shopify-sign-in-button');
           if (si && si.shadowRoot && !si.shadowRoot.querySelector('#mug-signin-style')) {
             var ss = document.createElement('style');
@@ -795,14 +803,15 @@ document.addEventListener("DOMContentLoaded", function() {
               /* the id selector outranks the widget's own !important rules in
                  its adopted stylesheets (importance ties break on specificity) */
               '#shopify-element-wrapper .sign-in-button {',
-              '  background: #000 !important; color: #fff !important;',
+              '  background: #fff !important; color: #000 !important;',
               '  border: 0 !important; border-radius: 2px !important;',
+              '  box-shadow: inset 0 0 0 1px #dcdcdc !important;',
               "  font: 500 11px/1 'Inter Variable', sans-serif !important;",
               '  text-transform: uppercase !important; letter-spacing: 1px !important;',
               '  padding: 9px 14px !important; cursor: pointer;',
               '  transition: background-color 150ms ease;',
               '}',
-              '#shopify-element-wrapper .sign-in-button:hover { background: #222 !important; }',
+              '#shopify-element-wrapper .sign-in-button:hover { background: #f5f5f5 !important; }',
             ].join('\n');
             si.shadowRoot.appendChild(ss);
           }
