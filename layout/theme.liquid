@@ -792,7 +792,9 @@ document.addEventListener("DOMContentLoaded", function() {
             var ss = document.createElement('style');
             ss.id = 'mug-signin-style';
             ss.textContent = [
-              '.sign-in-button {',
+              /* the id selector outranks the widget's own !important rules in
+                 its adopted stylesheets (importance ties break on specificity) */
+              '#shopify-element-wrapper .sign-in-button {',
               '  background: #000 !important; color: #fff !important;',
               '  border: 0 !important; border-radius: 2px !important;',
               "  font: 500 11px/1 'Inter Variable', sans-serif !important;",
@@ -800,7 +802,7 @@ document.addEventListener("DOMContentLoaded", function() {
               '  padding: 9px 14px !important; cursor: pointer;',
               '  transition: background-color 150ms ease;',
               '}',
-              '.sign-in-button:hover { background: #222 !important; }',
+              '#shopify-element-wrapper .sign-in-button:hover { background: #222 !important; }',
             ].join('\n');
             si.shadowRoot.appendChild(ss);
           }
