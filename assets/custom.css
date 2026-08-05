@@ -2408,3 +2408,13 @@ select.sorting-filter__select {
   text-decoration: underline !important;
   text-underline-offset: 3px;
 }
+
+/* Inter looks smeared in Safari because the theme only loads real cuts at
+   400/500/700 while some elements ask for 600 — Safari then synthesizes a
+   fake bold from the 500 cut. Disable weight synthesis so text snaps to the
+   nearest real cut instead ("style" keeps italic synthesis, since no italic
+   cuts are loaded). */
+html,
+body {
+  font-synthesis: style;
+}
