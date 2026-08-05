@@ -2226,7 +2226,7 @@ body .tmenu_app .tmenu_nav .tmenu_item--root > .tmenu_item_link {
    margin-top, same as on desktop, so the gap matches the one above the title. */
 /* All viewports: tighter spacing above the title and tighter title leading. */
 [class*="text_tqQTNE"] {
-  padding-top: 14px !important; /* spacing above (below the breadcrumb) */
+  padding-top: 16px !important; /* spacing above (below the breadcrumb) */
 }
 [class*="text_tqQTNE"] p,
 [class*="text_tqQTNE"] h1 {
@@ -2380,10 +2380,11 @@ media-gallery:has(
   line-height: 1.2 !important;
 }
 
-/* 1px top border on the cart and search drawers — separates the full-height
-   drawer from the browser chrome when it reaches the window top. */
+/* 1px top border on the cart, search and filter drawers — separates the
+   full-height drawer from the browser chrome when it reaches the window top. */
 .cart-drawer__dialog,
-.search-modal__content {
+.search-modal__content,
+.facets--drawer {
   border-top: 1px solid #dcdcdc !important;
 }
 
@@ -2399,4 +2400,11 @@ select.sorting-filter__select {
   border: 0 !important;
   border-radius: 0 !important;
   font-size: 16px !important; /* <16px triggers iOS auto-zoom on focus */
+}
+
+/* Empty cart drawer: underline the "Fortsätt handla" link so it reads as a
+   link, not plain text. */
+.cart-items__empty-button {
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
 }
