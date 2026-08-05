@@ -170,6 +170,13 @@
 {%- if current_tags -%}
   <meta name="robots" content="noindex, follow">
 {%- endif -%}
+{%- comment -%} /collections lists every collection incl. old campaigns and
+  internal duplicates over ~30 paginated pages — thin directory content.
+  Kept usable for visitors but out of the index; nav menus already link all
+  collections that matter. {%- endcomment -%}
+{%- if request.page_type == 'list-collections' -%}
+  <meta name="robots" content="noindex, follow">
+{%- endif -%}
 <link
   rel="canonical"
   href="{{ canonical_url }}"
