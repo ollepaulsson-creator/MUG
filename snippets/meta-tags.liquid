@@ -176,6 +176,10 @@
   collections that matter. {%- endcomment -%}
 {%- if request.page_type == 'list-collections' -%}
   <meta name="robots" content="noindex, follow">
+  {%- comment -%} /collections is a system route that can't be deleted or
+    301-redirected — send visitors to the homepage instead; menus and
+    breadcrumbs cover all real collection navigation. {%- endcomment -%}
+  <meta http-equiv="refresh" content="0; url=/">
 {%- endif -%}
 <link
   rel="canonical"
