@@ -2379,3 +2379,10 @@ media-gallery:has(
 .text-block h1 {
   line-height: 1.2 !important;
 }
+
+/* 1px top border on the cart and search drawers — separates the full-height
+   drawer from the browser chrome when it reaches the window top. */
+.cart-drawer__dialog,
+.search-modal__content {
+  border-top: 1px solid #dcdcdc !important;
+}
