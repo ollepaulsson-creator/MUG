@@ -2380,10 +2380,11 @@ media-gallery:has(
   line-height: 1.2 !important;
 }
 
-/* 1px top border on the cart and search drawers — separates the full-height
-   drawer from the browser chrome when it reaches the window top. */
+/* 1px top border on the cart, search and filter drawers — separates the
+   full-height drawer from the browser chrome when it reaches the window top. */
 .cart-drawer__dialog,
-.search-modal__content {
+.search-modal__content,
+.facets--drawer {
   border-top: 1px solid #dcdcdc !important;
 }
 
