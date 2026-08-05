@@ -2386,3 +2386,17 @@ media-gallery:has(
 .search-modal__content {
   border-top: 1px solid #dcdcdc !important;
 }
+
+/* Sort select: iOS Safari ignores the theme's appearance reset and renders
+   its native menulist (stepper glyph + inset border) on top of the custom
+   caret. Force the reset with the -webkit- prefix. */
+.sorting-filter__select,
+select.sorting-filter__select {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  background-color: #fff !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  font-size: 16px !important; /* <16px triggers iOS auto-zoom on focus */
+}
