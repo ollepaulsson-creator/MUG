@@ -1000,6 +1000,12 @@ p, li {
 .button-primary:active {
   transform: scale(0.96);
 }
+/* KÖP NU (Shopifys dynamiska checkout-knapp) står utanför temats
+   .button-klasser — ge den samma tryck-krympning som de vita knapparna
+   (som även de snäpper utan transform-transition). */
+.shopify-payment-button__button:active {
+  transform: scale(0.96);
+}
 
 /* ── Black (primary) buttons: match white button font-size ── */
 .button:not(.button-secondary, .button-unstyled) {
