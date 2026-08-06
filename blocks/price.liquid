@@ -84,8 +84,29 @@
   {%- endif -%}
 </product-price>
 
+{%- comment %} ── Kampanjnotis: styrs av temainställningarna (Kampanjbadge).
+  Automatiska rabatter syns annars inte förrän i kassan — notisen visar
+  pågående kampanj direkt under priset för produkter i kampanjserien. ── {%- endcomment -%}
+{%- if settings.campaign_badge_active and settings.campaign_badge_collection != blank -%}
+  {%- assign mug_campaign_handles = product_resource.collections | map: 'handle' -%}
+  {%- if mug_campaign_handles contains settings.campaign_badge_collection.handle -%}
+    <div class="mug-campaign-notice color-{{ settings.badge_sale_color_scheme }} color-scheme-sale">
+      {{ settings.campaign_badge_text_long | default: 'Rabatten dras automatiskt av i kassan.' }}
+    </div>
+  {%- endif -%}
+{%- endif -%}
+
 {% # theme-check-disable %}
 {% stylesheet %}
+  .mug-campaign-notice {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 6px 12px;
+    border-radius: 2px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
   .tax-note:empty {
     display: none;
   }

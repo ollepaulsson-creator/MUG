@@ -37,6 +37,15 @@
   {%- assign has_status = true -%}
 {%- endif -%}
 
+{%- comment %} ── Kampanjbadge: styrs av temainställningar (Kampanjbadge) ── {%- endcomment -%}
+{%- assign is_campaign = false -%}
+{%- if settings.campaign_badge_active and settings.campaign_badge_collection != blank -%}
+  {%- assign campaign_handles = product.collections | map: 'handle' -%}
+  {%- if campaign_handles contains settings.campaign_badge_collection.handle -%}
+    {%- assign is_campaign = true -%}
+  {%- endif -%}
+{%- endif -%}
+
 <div
   class="product-badges product-badges--{{ settings.badge_position }}"
   style="
@@ -55,9 +64,9 @@
     <div class="product-badges__badge product-badges__badge--rectangle color-scheme-status color-scheme-status--b-stock">
       B-stock
     </div>
-  {%- elsif product.compare_at_price > product.price and product.available -%}
+  {%- elsif is_campaign -%}
     <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sale_color_scheme }} color-scheme-sale">
-      {{- 'content.product_badge_sale' | t -}}
+      {{ settings.campaign_badge_text | default: 'Kampanj' }}
     </div>
   {%- elsif is_nyhet -%}
     <div class="product-badges__badge product-badges__badge--rectangle color-scheme-nyhet">
@@ -66,6 +75,10 @@
   {%- elsif product.available == false -%}
     <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sold_out_color_scheme }}">
       {{- 'content.product_badge_sold_out' | t -}}
+    </div>
+  {%- elsif product.compare_at_price > product.price and product.available -%}
+    <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sale_color_scheme }} color-scheme-sale">
+      {{- 'content.product_badge_sale' | t -}}
     </div>
   {%- endif -%}
 </div>

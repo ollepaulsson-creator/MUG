@@ -439,7 +439,11 @@
           "selected_variant_hover_border_color": "#1a1a1a"
         }
       }
-    }
+    },
+    "campaign_badge_active": true,
+    "campaign_badge_collection": "teenage-engineering",
+    "campaign_badge_text": "30 %",
+    "campaign_badge_text_long": "30 % rabatt dras automatiskt av i kassan — gäller t.o.m. 7 augusti."
   },
   "presets": {
     "Horizon": {
