@@ -443,7 +443,9 @@
     "campaign_badge_active": true,
     "campaign_badge_collection": "teenage-engineering",
     "campaign_badge_text": "30 %",
-    "campaign_badge_text_long": "30 % rabatt dras automatiskt av i kassan — gäller t.o.m. 7 augusti."
+    "campaign_badge_text_long": "30 % rabatt dras automatiskt av i kassan — gäller t.o.m. 7 augusti.",
+    "campaign_badge_start": "2026-08-06 09:00",
+    "campaign_badge_end": "2026-08-07 23:59"
   },
   "presets": {
     "Horizon": {
