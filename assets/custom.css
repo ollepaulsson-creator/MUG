@@ -2424,8 +2424,3 @@ html,
 body {
   font-synthesis: style;
 }
-
-/* Badge letter-spacing */
-.product-badges__badge {
-  letter-spacing: 0.1rem !important;
-}
