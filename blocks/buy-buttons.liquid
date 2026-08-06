@@ -216,7 +216,41 @@
   </local-pickup>
 {% endif %}
 
+{%- comment %} ── Kampanjnotis (Temainställningar → Kampanjbadge): visas under
+  köpknapparna, ovanför beskrivningen, för produkter i kampanjserien inom
+  kampanjens datumfönster. Endast produktsidor. ── {%- endcomment -%}
+{%- if settings.campaign_badge_active and settings.campaign_badge_collection != blank and request.page_type == 'product' -%}
+  {%- assign mug_now = 'now' | date: '%s' | plus: 0 -%}
+  {%- assign mug_window_ok = true -%}
+  {%- if settings.campaign_badge_start != blank -%}
+    {%- assign mug_cb_start = settings.campaign_badge_start | date: '%s' | plus: 0 -%}
+    {%- if mug_cb_start > mug_now -%}{%- assign mug_window_ok = false -%}{%- endif -%}
+  {%- endif -%}
+  {%- if settings.campaign_badge_end != blank -%}
+    {%- assign mug_cb_end = settings.campaign_badge_end | date: '%s' | plus: 0 -%}
+    {%- if mug_now > mug_cb_end -%}{%- assign mug_window_ok = false -%}{%- endif -%}
+  {%- endif -%}
+  {%- if mug_window_ok -%}
+    {%- assign mug_campaign_handles = closest.product.collections | map: 'handle' -%}
+    {%- if mug_campaign_handles contains settings.campaign_badge_collection.handle -%}
+      <div class="mug-campaign-notice">
+        {{ settings.campaign_badge_text_long | default: 'Rabatten dras automatiskt av i kassan.' }}
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}
+
 {% stylesheet %}
+  .mug-campaign-notice {
+    display: block;
+    margin-top: 12px;
+    padding: 10px 14px;
+    border: 1px solid #dcdcdc;
+    border-radius: 2px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
   .buy-buttons-block {
     width: 100%;
   }
