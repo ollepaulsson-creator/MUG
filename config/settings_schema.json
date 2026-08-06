@@ -2388,6 +2388,18 @@
         "label": "Notis på produktsidan",
         "info": "Visas under priset.",
         "default": "Rabatten dras automatiskt av i kassan."
+      },
+      {
+        "type": "text",
+        "id": "campaign_badge_start",
+        "label": "Startdatum",
+        "info": "ÅÅÅÅ-MM-DD TT:MM — ange samma som rabattens startdatum. Tomt = visas direkt."
+      },
+      {
+        "type": "text",
+        "id": "campaign_badge_end",
+        "label": "Slutdatum",
+        "info": "ÅÅÅÅ-MM-DD TT:MM — ange samma som rabattens slutdatum, så släcks badgen automatiskt. Tomt = ingen slutgräns. Obs: sidcachen kan ge upp till en timmes eftersläpning."
       }
     ]
   }

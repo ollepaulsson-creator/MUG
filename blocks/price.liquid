@@ -88,11 +88,23 @@
   Automatiska rabatter syns annars inte förrän i kassan — notisen visar
   pågående kampanj direkt under priset för produkter i kampanjserien. ── {%- endcomment -%}
 {%- if settings.campaign_badge_active and settings.campaign_badge_collection != blank -%}
-  {%- assign mug_campaign_handles = product_resource.collections | map: 'handle' -%}
-  {%- if mug_campaign_handles contains settings.campaign_badge_collection.handle -%}
-    <div class="mug-campaign-notice color-{{ settings.badge_sale_color_scheme }} color-scheme-sale">
-      {{ settings.campaign_badge_text_long | default: 'Rabatten dras automatiskt av i kassan.' }}
-    </div>
+  {%- assign mug_now = 'now' | date: '%s' | plus: 0 -%}
+  {%- assign mug_window_ok = true -%}
+  {%- if settings.campaign_badge_start != blank -%}
+    {%- assign mug_cb_start = settings.campaign_badge_start | date: '%s' | plus: 0 -%}
+    {%- if mug_cb_start > mug_now -%}{%- assign mug_window_ok = false -%}{%- endif -%}
+  {%- endif -%}
+  {%- if settings.campaign_badge_end != blank -%}
+    {%- assign mug_cb_end = settings.campaign_badge_end | date: '%s' | plus: 0 -%}
+    {%- if mug_now > mug_cb_end -%}{%- assign mug_window_ok = false -%}{%- endif -%}
+  {%- endif -%}
+  {%- if mug_window_ok -%}
+    {%- assign mug_campaign_handles = product_resource.collections | map: 'handle' -%}
+    {%- if mug_campaign_handles contains settings.campaign_badge_collection.handle -%}
+      <div class="mug-campaign-notice color-{{ settings.badge_sale_color_scheme }} color-scheme-sale">
+        {{ settings.campaign_badge_text_long | default: 'Rabatten dras automatiskt av i kassan.' }}
+      </div>
+    {%- endif -%}
   {%- endif -%}
 {%- endif -%}
 
