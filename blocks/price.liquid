@@ -87,7 +87,7 @@
 {%- comment %} ── Kampanjnotis: styrs av temainställningarna (Kampanjbadge).
   Automatiska rabatter syns annars inte förrän i kassan — notisen visar
   pågående kampanj direkt under priset för produkter i kampanjserien. ── {%- endcomment -%}
-{%- if settings.campaign_badge_active and settings.campaign_badge_collection != blank -%}
+{%- if settings.campaign_badge_active and settings.campaign_badge_collection != blank and request.page_type == 'product' -%}
   {%- assign mug_now = 'now' | date: '%s' | plus: 0 -%}
   {%- assign mug_window_ok = true -%}
   {%- if settings.campaign_badge_start != blank -%}
