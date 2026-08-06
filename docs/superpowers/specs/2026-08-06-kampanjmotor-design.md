@@ -73,26 +73,27 @@ Lease { campaign_id, run_id (ulid), operation: "activate"|"end"|"abort", heartbe
 
 ## 5. Arkitektur
 
-Cloudflare Worker i Bakhuvudet-familjen (samma mönster som mug-sell-form: wrangler, cron-triggers, hemligheter via `wrangler secret put`, Shopify-token via client credentials-grant från en Dev Dashboard-app).
+Modul i **Bakhuvudet** (`~/mug-priskoll`): Next.js 16 + Supabase (Postgres) på Vercel. Följer appens befintliga mönster: `lib/campaigns/` för logiken, `app/api/campaigns/` för UI-endpoints, `app/api/cron/campaigns-tick` registrerad i `vercel.json` (befintlig cron-katalog; sfkr-sale-scan kör redan `*/15` — kampanjticken kör `*/5` om planen tillåter, annars `*/15` vilket räcker: start/slut får då ±15 min slack utöver sidcachens ±60 min).
 
 ```
-┌─────────────────────────────┐
-│  Bakhuvudet: kampanjmodul   │
-│  - Admin-UI (formulär)      │
-│  - Kampanj-state (D1)       │
-│  - Cron var 5:e minut       │
-└──────┬───────┬──────────┬───┘
-       │       │          │
-   Shopify   Sitoo      Shopify
-   Admin API Vouchers   metafält
-   (prisswap) (API)     (badge-styrning)
+┌──────────────────────────────────────┐
+│  Bakhuvudet (Next.js/Vercel)         │
+│  - Sida i (app): Kampanjer           │
+│  - lib/campaigns + api-routes        │
+│  - Supabase: state + transaktioner   │
+│  - vercel.json-cron: campaigns-tick  │
+└──────┬───────────┬──────────────┬────┘
+       │           │              │
+   Shopify       Sitoo         Shopify
+   Admin API     Vouchers API  metafält
+   (prisswap)    (kampanj)     (badge-styrning)
 ```
 
-**Lagring:** D1 (SQLite) för kampanjer, snapshot-poster, lease och transaktionslogg. KV räcker inte — snapshoten kräver radnivå-uppdateringar och frågor.
+**Lagring:** Supabase Postgres-tabeller (`campaigns`, `campaign_snapshot_items`, `campaign_leases`, `campaign_tx_log`). Postgres-transaktioner bär snapshot-invarianten (§10) och lease-atomiciteten naturligt.
 
 **Shopify-scopes (ny eller utökad Dev Dashboard-app):** `read_products`, `write_products` (prisswap + produkt-metafält), `write_metafields`, `read_discounts` (dubbelrabattspärren §9.1 — primärspår). Beviljas `read_discounts` inte ersätts spärren av en intygs-checkbox i UI:t (fallback, §9.1). Medvetet INTE `write_discounts` — motorn rör aldrig Shopifys rabattsystem.
 
-**Sitoo-auth:** API-nyckel läggs som Worker-secret. Endpoints: `POST/PUT/DELETE /sites/{siteid}/vouchers` + `POST /sites/{siteid}/vouchers/{id}/products?product_identifier=sku`.
+**Sitoo-auth:** Bakhuvudet har redan SITOO_-miljövariabler (bl.a. `SITOO_SPI_TOKEN`). Verifiera i Bakhuvudet vilken token som gäller Sitoos Admin API (vouchers) — SPI-token är för plugin-gränssnittet och är sannolikt INTE samma behörighet. Endpoints: `POST/PUT/DELETE /sites/{siteid}/vouchers` + `POST /sites/{siteid}/vouchers/{id}/products?product_identifier=sku`.
 
 ## 6. Tillståndsmaskin och flöden
 
@@ -206,9 +207,14 @@ Formulär i Bakhuvudet: namn, procent, kollektionsväljare (hämtar Shopifys kol
 9. Samtidighet: trigga "Starta nu" och cron-aktivering parallellt → exakt en körning vinner leasen
 10. Spärrar: dubbelkampanj, presentkort, aktiv Shopify-autorabatt på urvalet
 
-## 13. Öppna frågor till beställaren
+## 13. Öppna frågor
 
-1. Var bor Bakhuvudets kod i dag (repo/miljö)? Ska kampanjmodulen in där eller som egen Worker likt mug-sell-form?
-2. Sitoo `siteid` + API-nyckel: finns de redan i någon Bakhuvudet-tjänst att återanvända?
+1. ~~Var bor koden?~~ **Besvarad:** modul i `~/mug-priskoll` (Bakhuvudet, Next.js/Vercel/Supabase) — se §5.
+2. **Delvis besvarad:** SITOO_-miljövariabler finns i appen; Bakhuvudet-sessionen verifierar om befintlig token täcker Admin API/vouchers eller om en ny behövs (SPI-token räcker sannolikt inte).
 3. Räcker det att kampanjen syns i butikskassan via vouchernamnet på kvittot, eller behöver personalen något mer?
-4. Slutrapport per mejl till `order@mug.se` — rätt mottagare?
+4. Slutrapport per mejl till `order@mug.se` — rätt mottagare? (Bakhuvudet har egna digest-mönster, t.ex. digest-sfkr-stale — återanvänd den kanalen?)
+
+## 14. Ansvarsfördelning vid bygge
+
+- **Bakhuvudet-sessionen (MUG/Bakhuvudet):** hela appmodulen — datamodell, cron, Sitoo- och Shopify-integrationerna, UI.
+- **Temasessionen (denna):** temaändringarna i §8 (badge/notis läser metafält, borttagning av temainställningarna) — koordineras när appens metafältsskrivning finns; metafältets JSON-format i §6.1 steg 6 är kontraktet mellan oss.
