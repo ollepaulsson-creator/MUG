@@ -90,27 +90,27 @@
   {%- comment %} ── One badge at a time, in priority order ── {%- endcomment -%}
   {%- if status_list contains 'Begagnad' -%}
     <div class="product-badges__badge product-badges__badge--rectangle color-scheme-status color-scheme-status--begagnad">
-      Begagnad
+      <span class="product-badges__badge-text">Begagnad</span>
     </div>
   {%- elsif status_list contains 'B-stock' -%}
     <div class="product-badges__badge product-badges__badge--rectangle color-scheme-status color-scheme-status--b-stock">
-      B-stock
+      <span class="product-badges__badge-text">B-stock</span>
     </div>
   {%- elsif is_campaign -%}
     <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sale_color_scheme }} color-scheme-sale">
-      {{ campaign_badge_label }}
+      <span class="product-badges__badge-text">{{ campaign_badge_label }}</span>
     </div>
   {%- elsif is_nyhet -%}
     <div class="product-badges__badge product-badges__badge--rectangle color-scheme-nyhet">
-      Nyhet
+      <span class="product-badges__badge-text">Nyhet</span>
     </div>
   {%- elsif product.available == false -%}
     <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sold_out_color_scheme }}">
-      {{- 'content.product_badge_sold_out' | t -}}
+      <span class="product-badges__badge-text">{{ 'content.product_badge_sold_out' | t }}</span>
     </div>
   {%- elsif product.compare_at_price > product.price and product.available -%}
     <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sale_color_scheme }} color-scheme-sale">
-      {{- 'content.product_badge_sale' | t -}}
+      <span class="product-badges__badge-text">{{ 'content.product_badge_sale' | t }}</span>
     </div>
   {%- endif -%}
 </div>
@@ -143,12 +143,14 @@
 
   .product-badges__badge {
     --badge-font-size: var(--font-size--xs);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    --badge-bg: var(--color-background);
+    /* Bakgrunden målas per textrad av .product-badges__badge-text
+       (box-decoration-break: clone) — långa labels får en tajt box per rad
+       i stället för en bred platta. Själva badgen är därför genomskinlig. */
+    display: block;
+    text-align: left;
     color: var(--color-foreground);
-    background: var(--color-background);
+    background: none;
     font-size: var(--badge-font-size);
     font-family: var(--badge-font-family);
     font-weight: var(--badge-font-weight);
@@ -158,14 +160,21 @@
   }
 
   .product-badges__badge--rectangle {
-    padding-block: 0.45em 0.4em;
-    padding-inline: 0.75em;
     text-transform: uppercase;
+  }
+
+  .product-badges__badge-text {
+    display: inline;
+    background: var(--badge-bg);
+    padding: 0.45em 0.75em 0.4em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    line-height: 2;
   }
 
   /* Status metafield badges (default) */
   .product-badges__badge.color-scheme-status {
-    background: #fff;
+    --badge-bg: #fff;
     color: #000;
     font-size: 12px!important;
     letter-spacing: 1px;
@@ -178,7 +187,7 @@
 
   /* Rea/Sale badge */
   .product-badges__badge.color-scheme-sale {
-    background: #fff;
+    --badge-bg: #fff;
     color: #e70a0a;
     font-size: 12px!important;
     letter-spacing: 1px;
@@ -186,7 +195,7 @@
 
   /* Nyhet badge */
   .product-badges__badge.color-scheme-nyhet {
-    background: #fff;
+    --badge-bg: #fff;
     color: #000;
     font-size: 12px!important;
     letter-spacing: 1px;
