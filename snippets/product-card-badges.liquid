@@ -37,11 +37,29 @@
   {%- assign has_status = true -%}
 {%- endif -%}
 
-{%- comment %} ── Kampanjbadge: styrs av temainställningar (Kampanjbadge).
-  Datumfönstret speglar rabattens aktiva datum så badgen tänds/släcks
-  själv (± sidcachens eftersläpning). ── {%- endcomment -%}
+{%- comment %} ── Kampanjbadge — två spår under övergången:
+  1) METAFÄLT (primärt): kampanjmotorn i Bakhuvudet skriver
+     shop.metafields.mug.campaign (json) + product.metafields.mug.campaign
+     (= kampanj-id) per swappad produkt. Kontrakt: spec §6.1 steg 6.
+  2) TEMAINSTÄLLNINGAR (utfasas): tas bort tillsammans med
+     settings_schema-sektionen Kampanjbadge när TE-kampanjen (7 aug) löpt ut.
+  Datumfönstret behålls som hängslen i båda spåren. ── {%- endcomment -%}
 {%- assign is_campaign = false -%}
-{%- if settings.campaign_badge_active and settings.campaign_badge_collection != blank -%}
+{%- assign campaign_badge_label = 'Kampanj' -%}
+
+{%- assign mug_shop_campaign = shop.metafields.mug.campaign.value -%}
+{%- if mug_shop_campaign and mug_shop_campaign.active -%}
+  {%- if product.metafields.mug.campaign.value == mug_shop_campaign.id -%}
+    {%- assign mf_start = mug_shop_campaign.starts_at | date: '%s' | plus: 0 -%}
+    {%- assign mf_end = mug_shop_campaign.ends_at | date: '%s' | plus: 0 -%}
+    {%- if now_seconds >= mf_start and now_seconds <= mf_end -%}
+      {%- assign is_campaign = true -%}
+      {%- assign campaign_badge_label = mug_shop_campaign.badge_text -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- if is_campaign == false and settings.campaign_badge_active and settings.campaign_badge_collection != blank -%}
   {%- assign campaign_window_ok = true -%}
   {%- if settings.campaign_badge_start != blank -%}
     {%- assign cb_start = settings.campaign_badge_start | date: '%s' | plus: 0 -%}
@@ -55,6 +73,7 @@
     {%- assign campaign_handles = product.collections | map: 'handle' -%}
     {%- if campaign_handles contains settings.campaign_badge_collection.handle -%}
       {%- assign is_campaign = true -%}
+      {%- assign campaign_badge_label = settings.campaign_badge_text | default: 'Kampanj' -%}
     {%- endif -%}
   {%- endif -%}
 {%- endif -%}
@@ -79,7 +98,7 @@
     </div>
   {%- elsif is_campaign -%}
     <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sale_color_scheme }} color-scheme-sale">
-      {{ settings.campaign_badge_text | default: 'Kampanj' }}
+      {{ campaign_badge_label }}
     </div>
   {%- elsif is_nyhet -%}
     <div class="product-badges__badge product-badges__badge--rectangle color-scheme-nyhet">
