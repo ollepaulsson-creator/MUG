@@ -1075,8 +1075,13 @@ a.vendor-link {
     color: inherit;
     text-decoration: none;
 }
+/* .text-block-wrapperns temaregel (.text-block:is(.h1..h6) a) sätter
+   text-decoration-color: transparent i styles.css som laddas EFTER custom.css
+   och vinner lika-specificitet — därför både högre specificitet och longhands. */
+.text-block a.vendor-link:hover,
 a.vendor-link:hover {
-    text-decoration: underline;
+    text-decoration-line: underline;
+    text-decoration-color: currentcolor;
     text-underline-offset: 2px;
 }
 /* Inside product cards the card's absolute overlay link paints above static
