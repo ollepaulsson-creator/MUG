@@ -94,7 +94,7 @@
     "variant_button_radius": 2,
     "variant_button_width": "equal-width-buttons",
     "opening_hours": "<p>Mån-Fre: 11.00–18.00<br/>Lördag: 11.00–16.00<br/>Söndag: 12.00–16.00 </p><p>Välkomna till MUG!</p>",
-    "campaign_badge_active": true,
+    "campaign_badge_active": false,
     "campaign_badge_collection": "teenage-engineering",
     "campaign_badge_text": "30% på Teenage Engineering",
     "campaign_badge_text_long": "Just nu får du 30% rabatt på hela sortimentet från Teenage Engineering. Kampanjen gäller till och med 7 augusti eller så länge lagret räcker. Rabatten dras av i kassan.",
