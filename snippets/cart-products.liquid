@@ -27,6 +27,23 @@
       {{ 'actions.continue_shopping' | t }}
     </a>
   {%- else -%}
+    {%- comment -%} ── Förhandsbeställningar: blandad korg (både förhandsrader och
+      lagerrader) delas i två leveranser — verktyget i Bakhuvudet håller bara
+      förhandsdelen. Kontrakt: mug-priskoll/docs/theme-contracts/preorder.md ── {%- endcomment -%}
+    {%- liquid
+      assign mug_has_preorder = false
+      assign mug_has_stock = false
+      for item in cart.items
+        if item.properties['Förhandsvara']
+          assign mug_has_preorder = true
+        else
+          assign mug_has_stock = true
+        endif
+      endfor
+    -%}
+    {%- if mug_has_preorder and mug_has_stock -%}
+      <p class="mug-cart-preorder-notice">Din order delas i två leveranser</p>
+    {%- endif -%}
     <span
       class="visually-hidden"
       ref="cartItemCount"
@@ -771,5 +788,13 @@
   .cart-items__properties dt,
   .cart-items__properties dd {
     display: inline;
+  }
+
+  .mug-cart-preorder-notice {
+    margin: 0;
+    padding: 10px 14px;
+    background: #f2f2f2;
+    font-size: 13px;
+    line-height: 1.5;
   }
 {% endstylesheet %}
