@@ -35,6 +35,30 @@
       assign add_to_cart_text = 'products.product.unavailable' | t
     endif
   endif
+
+  comment
+    ── Förhandsbeställning (fryst kontrakt: mug-priskoll/docs/theme-contracts/preorder.md).
+    Verktyget i Bakhuvudet sätter mug.preorder (json) + inventoryPolicy CONTINUE
+    när en förhandskampanj är aktiv, och raderar fältet när den slutar. ends_at
+    är bara ett hängslen-skydd om fältet skulle ligga kvar.
+  endcomment
+  assign mug_preorder = product.metafields.mug.preorder.value
+  assign mug_is_preorder = false
+  if mug_preorder
+    assign mug_pre_now = 'now' | date: '%s' | plus: 0
+    if mug_preorder.ends_at != blank
+      assign mug_pre_end = mug_preorder.ends_at | date: '%s' | plus: 0
+      if mug_pre_now <= mug_pre_end
+        assign mug_is_preorder = true
+      endif
+    else
+      assign mug_is_preorder = true
+    endif
+  endif
+  if mug_is_preorder
+    assign can_add_to_cart = true
+    assign add_to_cart_text = mug_preorder.button_text | default: 'Förhandsbeställ'
+  endif
 %}
 
 <span
@@ -64,6 +88,10 @@
           ref="variantId"
           value="{{ product.selected_or_first_available_variant.id }}"
         >
+        {%- if mug_is_preorder -%}
+          {%- comment -%} Synlig radegenskap — följer med till kassa, mail och följesedel. {%- endcomment -%}
+          <input type="hidden" name="properties[Förhandsvara]" value="{{ mug_preorder.shipping_message | escape }}">
+        {%- endif -%}
         {%- if block_settings.gift_card_form and product.gift_card? -%}
           {%- render 'gift-card-recipient-form', product: product, form: form, section: section, block: block -%}
         {%- endif -%}
@@ -96,6 +124,9 @@
             form_obj: form
           %}
         </div>
+        {%- if mug_is_preorder and mug_preorder.shipping_message != blank -%}
+          <p class="mug-preorder-shipping">{{ mug_preorder.shipping_message }}</p>
+        {%- endif -%}
       {%- endform -%}
     </product-form-component>
   {%- else -%}
@@ -282,6 +313,14 @@
 
   .mug-campaign-notice strong {
     font-weight: 700;
+  }
+
+  .mug-preorder-shipping {
+    margin: 8px 0 2px;
+    font-family: var(--font-body--family);
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.65);
   }
 
   .buy-buttons-block {
