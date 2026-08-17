@@ -133,7 +133,7 @@
           {%- render 'gift-card-recipient-form', product: product, form: form, section: section, block: block -%}
         {%- endif -%}
         <div
-          class="product-form-buttons spacing-style{% if block_settings.stacking %} product-form-buttons--stacked{% endif %}{% if mug_is_preorder %} product-form-buttons--preorder{% endif %}"
+          class="product-form-buttons spacing-style{% if block_settings.stacking %} product-form-buttons--stacked{% endif %}{% if mug_is_preorder %} product-form-buttons--preorder{% endif %}{% if mug_bis_show %} product-form-buttons--bis{% endif %}"
           style="{% render 'spacing-style', settings: block_settings %}"
         >
           {% content_for 'block', type: 'quantity', id: 'quantity' %}
@@ -417,6 +417,12 @@
   .mug-bis {
     display: block;
     margin-top: 8px;
+  }
+
+  /* När bevakningsknappen visas är den sidans CTA — den inaktiva
+     Slutsåld-knappen göms (produkter undantagna från bevakning behåller den). */
+  .product-form-buttons--bis .add-to-cart-button {
+    display: none;
   }
 
   .mug-bis__open {
