@@ -440,6 +440,16 @@
     /* Temats default .button är den svarta primärknappen — inga overrides. */
   }
 
+  /* Inaktiva knappar följer varukorgens gråa Betala-knapp
+     (.cart__checkout-button--disabled i cart-summary.liquid). */
+  .mug-bis .button:disabled {
+    background-color: #ccc !important;
+    color: #666 !important;
+    border-color: #ccc !important;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
   .mug-bis__dialog {
     margin: auto;
     padding: 24px;
@@ -763,7 +773,10 @@
       document.addEventListener('click', function (e) {
         var open = e.target.closest('.mug-bis__open');
         if (open) {
-          open.closest('.mug-bis').querySelector('.mug-bis__dialog').showModal();
+          var dlg = open.closest('.mug-bis').querySelector('.mug-bis__dialog');
+          dlg.showModal();
+          /* Autofyll kan redan ha fyllt fältet utan händelser — validera direkt. */
+          mugBisValidate(dlg.querySelector('.mug-bis__form'));
           return;
         }
         var close = e.target.closest('.mug-bis__close');
@@ -782,14 +795,22 @@
         }
       });
       /* Bevaka är inaktiv tills adressen har formen namn@domän.toppdomän —
-         strängare än webbläsarens e-postvalidering, som godkänner domän utan punkt. */
-      document.addEventListener('input', function (e) {
+         strängare än webbläsarens e-postvalidering, som godkänner domän utan punkt.
+         Kollas på input OCH change OCH när dialogen öppnas — autofyll avfyrar
+         inte alltid input-händelsen. */
+      var mugBisValidate = function (form) {
+        var email = form.querySelector('.mug-bis__email');
+        var ok = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(email.value.trim());
+        form.querySelector('.mug-bis__submit').disabled = !ok;
+      };
+      var mugBisOnType = function (e) {
         if (!e.target.classList || !e.target.classList.contains('mug-bis__email')) return;
         var form = e.target.closest('.mug-bis__form');
-        var ok = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(e.target.value.trim());
-        form.querySelector('.mug-bis__submit').disabled = !ok;
+        mugBisValidate(form);
         form.querySelector('.mug-bis__status').textContent = '';
-      });
+      };
+      document.addEventListener('input', mugBisOnType);
+      document.addEventListener('change', mugBisOnType);
       document.addEventListener('submit', function (e) {
         var form = e.target.closest('.mug-bis__form');
         if (!form) return;
