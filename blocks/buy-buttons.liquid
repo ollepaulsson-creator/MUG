@@ -185,7 +185,7 @@
           data-product-title="{{ product.title | escape }}"
           data-variant-title="{% unless variant.title == 'Default Title' %}{{ variant.title | escape }}{% endunless %}"
         >
-          <button type="button" class="button button-secondary mug-bis__open">
+          <button type="button" class="button mug-bis__open">
             Meddela mig när produkten finns i lager
           </button>
           <dialog class="mug-bis__dialog">
@@ -428,10 +428,7 @@
 
   .mug-bis__open {
     width: 100%;
-    /* Svart primärknapp — samma temavariabler som förhandsknappen använder. */
-    --button-color: var(--color-primary-button-text);
-    --button-background-color: var(--color-primary-button-background);
-    --button-border-color: var(--color-primary-button-border);
+    /* Temats default .button är den svarta primärknappen — inga overrides. */
   }
 
   .mug-bis__dialog {
