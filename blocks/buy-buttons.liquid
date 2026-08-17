@@ -96,7 +96,7 @@
           {%- render 'gift-card-recipient-form', product: product, form: form, section: section, block: block -%}
         {%- endif -%}
         <div
-          class="product-form-buttons spacing-style{% if block_settings.stacking %} product-form-buttons--stacked{% endif %}"
+          class="product-form-buttons spacing-style{% if block_settings.stacking %} product-form-buttons--stacked{% endif %}{% if mug_is_preorder %} product-form-buttons--preorder{% endif %}"
           style="{% render 'spacing-style', settings: block_settings %}"
         >
           {% content_for 'block', type: 'quantity', id: 'quantity' %}
@@ -117,15 +117,24 @@
               </span>
             </span>
           {%- endunless -%}
-          {% content_for 'block',
-            type: 'accelerated-checkout',
-            id: 'accelerated-checkout',
-            can_add_to_cart: can_add_to_cart,
-            form_obj: form
-          %}
+          {%- comment -%}
+            Förhandsbeställning visar EN köpknapp. Snabbkassan ("Köp nu") döljs:
+            två jämbördiga CTA:n gör det otydligt att köpet är en förbokning,
+            och förhandsknappens egen text är hela poängen.
+          {%- endcomment -%}
+          {%- unless mug_is_preorder -%}
+            {% content_for 'block',
+              type: 'accelerated-checkout',
+              id: 'accelerated-checkout',
+              can_add_to_cart: can_add_to_cart,
+              form_obj: form
+            %}
+          {%- endunless -%}
         </div>
         {%- if mug_is_preorder and mug_preorder.shipping_message != blank -%}
-          <p class="mug-preorder-shipping">{{ mug_preorder.shipping_message }}</p>
+          <div class="mug-campaign-notice mug-preorder-shipping">
+            <strong>Skickas:</strong> {{ mug_preorder.shipping_message }}
+          </div>
         {%- endif -%}
       {%- endform -%}
     </product-form-component>
@@ -315,12 +324,29 @@
     font-weight: 700;
   }
 
+  /* Ärver den grå rutan från .mug-campaign-notice — samma visuella språk som
+     kampanjbeskrivningen, bara med prefixet "Skickas:". */
   .mug-preorder-shipping {
-    margin: 8px 0 2px;
-    font-family: var(--font-body--family);
-    font-size: 13px;
-    line-height: 1.5;
-    color: rgba(0, 0, 0, 0.65);
+    margin-top: 8px;
+  }
+
+  /* Förhandsknappen är sidans enda CTA (snabbkassan döljs ovan), så den ska
+     bära primärknappens svarta utseende trots att add-to-cart-blocket är
+     inställt på "sekundär" för vanliga produkter. Färgerna kommer från temats
+     egna primärvariabler så den följer med om butiken byter färgtema. */
+  .product-form-buttons--preorder .add-to-cart-button {
+    --button-color: var(--color-primary-button-text);
+    --button-background-color: var(--color-primary-button-background);
+    --button-border-color: var(--color-primary-button-border);
+    --button-border-width: var(--style-border-width-primary);
+
+    border-radius: var(--style-border-radius-buttons-primary);
+  }
+
+  .product-form-buttons--preorder .add-to-cart-button:hover {
+    --button-color: var(--color-primary-button-hover-text);
+    --button-background-color: var(--color-primary-button-hover-background);
+    --button-border-color: var(--color-primary-button-hover-border);
   }
 
   .buy-buttons-block {

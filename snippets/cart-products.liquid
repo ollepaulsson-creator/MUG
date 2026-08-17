@@ -780,9 +780,14 @@
     }
   }
 
+  /* Radegenskaper är sekundär information (t.ex. "Förhandsvara: …") och ska
+     inte konkurrera med produktnamnet i storlek. */
   .cart-items__properties {
     display: block;
     margin-block-start: var(--margin-2xs);
+    font-size: 0.8em;
+    line-height: 1.4;
+    opacity: 0.75;
   }
 
   .cart-items__properties dt,
