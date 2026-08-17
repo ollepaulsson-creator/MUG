@@ -215,7 +215,7 @@
               <p class="mug-bis__gdpr">Vi mejlar dig en gång när varan finns i lager. Inget nyhetsbrev, ingen reklam.</p>
               <p class="mug-bis__status" role="status" aria-live="polite"></p>
               <div class="mug-bis__actions">
-                <button type="submit" class="button mug-bis__submit" disabled>Bevaka</button>
+                <button type="submit" class="button mug-bis__submit">Bevaka</button>
               </div>
             </form>
           </dialog>
@@ -741,14 +741,6 @@
             e.target.close();
           }
         }
-      });
-      /* Bevaka är inaktiv tills adressen har formen namn@domän.toppdomän —
-         strängare än webbläsarens e-postvalidering, som godkänner domän utan punkt. */
-      document.addEventListener('input', function (e) {
-        if (!e.target.classList || !e.target.classList.contains('mug-bis__email')) return;
-        var form = e.target.closest('.mug-bis__form');
-        var ok = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(e.target.value.trim());
-        form.querySelector('.mug-bis__submit').disabled = !ok;
       });
       document.addEventListener('submit', function (e) {
         var form = e.target.closest('.mug-bis__form');
