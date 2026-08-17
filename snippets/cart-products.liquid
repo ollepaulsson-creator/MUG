@@ -795,10 +795,12 @@
     display: inline;
   }
 
+  /* Ingen platta och ingen padding: notisen ska läsas som en inledande rad i
+     varukorgen, inte som en avvikande ruta. Utan padding hamnar vänsterkanten
+     i linje med produkternas tumnaglar, eftersom både notisen och tabellen
+     ligger flush i samma behållare. */
   .mug-cart-preorder-notice {
-    margin: 0;
-    padding: 10px 14px;
-    background: #f2f2f2;
+    margin: 0 0 20px;
     font-size: 13px;
     line-height: 1.5;
   }
