@@ -171,6 +171,17 @@
       <span class="svg-wrapper product-inventory__icon product-inventory__icon-{{ mug_icon_status }}">
         {{ 'in-stock.svg' | inline_asset_content }}
       </span>
+    {% else %}
+      {%- comment -%}
+        Slutsålt: samma cirkel men statisk (in-stock.svg pulserar via SMIL och
+        har hårdkodad grön fyllning — därför en egen ljusgrå variant) .
+      {%- endcomment -%}
+      <span class="svg-wrapper product-inventory__icon product-inventory__icon--soldout">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="10" cy="10" rx="10" ry="10" fill="#b3b3b3" fill-opacity="0.2"/>
+          <ellipse cx="10" cy="10" rx="4" ry="4" fill="#b3b3b3"/>
+        </svg>
+      </span>
     {% endif %}
 
     <span
