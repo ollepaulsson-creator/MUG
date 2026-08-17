@@ -715,7 +715,19 @@
           return;
         }
         var close = e.target.closest('.mug-bis__close');
-        if (close) close.closest('.mug-bis__dialog').close();
+        if (close) {
+          close.closest('.mug-bis__dialog').close();
+          return;
+        }
+        /* Klick utanför dialogen (på backdropen) stänger. Vid backdrop-klick är
+           e.target själva dialogen; koordinatkollen skiljer det från klick på
+           dialogens egen yta. */
+        if (e.target.classList && e.target.classList.contains('mug-bis__dialog')) {
+          var rect = e.target.getBoundingClientRect();
+          if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+            e.target.close();
+          }
+        }
       });
       document.addEventListener('submit', function (e) {
         var form = e.target.closest('.mug-bis__form');
