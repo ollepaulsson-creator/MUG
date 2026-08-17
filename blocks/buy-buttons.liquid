@@ -193,8 +193,9 @@
               <button type="button" class="mug-bis__close mug-bis__x" aria-label="Stäng">
                 <span class="svg-wrapper">{{ 'icon-close.svg' | inline_asset_content }}</span>
               </button>
-              <h3 class="mug-bis__heading">Meddela mig när den finns i lager</h3>
-              <p class="mug-bis__product">{{ product.title }}{% unless variant.title == 'Default Title' %} – {{ variant.title }}{% endunless %}</p>
+              <h3 class="mug-bis__heading">
+                Meddela mig när {{ product.title }}{% unless variant.title == 'Default Title' %} – {{ variant.title }}{% endunless %} åter finns i lager
+              </h3>
               <input
                 type="email"
                 name="email"
@@ -470,14 +471,10 @@
   }
 
   .mug-bis__heading {
-    margin: 0 0 4px;
-    font-size: 16px;
-  }
-
-  .mug-bis__product {
     margin: 0 0 16px;
-    font-size: 13px;
-    color: rgba(0, 0, 0, 0.65);
+    padding-right: 24px; /* håll undan för stängkrysset */
+    font-size: 20px;
+    line-height: 1.3;
   }
 
   .mug-bis__email {
