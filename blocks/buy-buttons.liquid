@@ -19,7 +19,22 @@
   endif
 
   if inventory_managed
-    if inventory_quantity <= 0 and inventory_policy == 'deny' or quantity_rule_soldout
+    comment
+      ── Tomt spårat lager = slutsålt, OAVSETT inventory policy ──
+      Tidigare krävdes policy 'deny' här, så en CONTINUE-produkt utan lager
+      förblev köpbar och produktsidan lovade "Leverans 1–3 arbetsdagar" för
+      något butiken inte kan skicka. CONTINUE ska bara öppna för köp när det
+      finns ett medvetet beslut bakom — och det beslutet är en förhandskampanj,
+      som sätter can_add_to_cart tillbaka till true längre ner.
+
+      OBS: villkoret löd tidigare "qty <= 0 and policy == 'deny' or
+      quantity_rule_soldout". Liquid binder höger-till-vänster, så det
+      betydde qty <= 0 and (deny or quantity_rule_soldout) — dvs
+      quantity_rule_soldout kunde aldrig ensamt göra en vara slutsåld.
+      Den latenta buggen lämnas orörd här; att aktivera den vore en
+      separat beteendeändring för produkter med minsta orderantal.
+    endcomment
+    if inventory_quantity <= 0
       assign can_add_to_cart = false
       assign add_to_cart_text = 'products.product.sold_out' | t
     else

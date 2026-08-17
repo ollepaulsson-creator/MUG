@@ -96,8 +96,17 @@
     assign inventory_quantity = variant.inventory_quantity | default: 0
   endif
 
-  # Availability status (respects policy: continue)
-  if variant.available
+  # Tomt spårat lager = slutsålt, OAVSETT inventory policy. variant.available
+  # är sant under CONTINUE även vid 0/minus, vilket fick raden att lova
+  # "Leverans 1–3 arbetsdagar" för varor butiken inte kan skicka. Förhandsvaror
+  # har sin egen rad nedan och påverkas inte.
+  assign mug_no_stock = false
+  if inventory_managed and inventory_quantity <= 0
+    assign mug_no_stock = true
+  endif
+
+  # Availability status
+  if variant.available and mug_no_stock == false
     if inventory_managed and inventory_quantity > 0 and inventory_quantity <= threshold
       assign status = 'low'
     else
@@ -144,8 +153,22 @@
   data-product-id="{{ product.id }}"
 >
   <span class="product-inventory__status">
-    {% if status != 'out_of_stock' %}
-      <span class="svg-wrapper product-inventory__icon product-inventory__icon-{{ status }}">
+    {%- comment -%}
+      Förhandsvaror har tomt lager och får därför status 'out_of_stock', men
+      ska ändå ha den gröna pricken — den signalerar att varan GÅR ATT
+      BESTÄLLA, vilket stämmer för en förhandsbeställning.
+    {%- endcomment -%}
+    {% if status != 'out_of_stock' or mug_is_preorder %}
+      {%- comment -%}
+        Färgen följer statusen, UTOM för förhandsvaror: de är formellt
+        out_of_stock och skulle annars få den röda pricken.
+      {%- endcomment -%}
+      {%- if mug_is_preorder -%}
+        {%- assign mug_icon_status = 'in_stock' -%}
+      {%- else -%}
+        {%- assign mug_icon_status = status -%}
+      {%- endif -%}
+      <span class="svg-wrapper product-inventory__icon product-inventory__icon-{{ mug_icon_status }}">
         {{ 'in-stock.svg' | inline_asset_content }}
       </span>
     {% endif %}
