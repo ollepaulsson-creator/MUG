@@ -217,15 +217,16 @@
                 style="position:absolute;left:-9999px;opacity:0;height:0;width:0;"
               >
               <p class="mug-bis__gdpr">Vi mejlar dig en gång när varan finns i lager. Inget nyhetsbrev, ingen reklam.</p>
+              <div class="mug-bis__actions">
+                <button type="submit" class="button mug-bis__submit" disabled>Bevaka</button>
+              </div>
+              {%- comment -%} Visas i stället för Bevaka-knappen när bevakningen sparats. {%- endcomment -%}
               <div class="mug-bis__saved">
                 <span class="svg-wrapper mug-bis__saved-icon">{{ 'icon-checkmark.svg' | inline_asset_content }}</span>
                 <div>
                   <p class="mug-bis__saved-heading">Bevakningen är sparad</p>
                   <p class="mug-bis__saved-text">Vi mejlar dig när varan finns i lager.</p>
                 </div>
-              </div>
-              <div class="mug-bis__actions">
-                <button type="submit" class="button mug-bis__submit" disabled>Bevaka</button>
               </div>
             </form>
           </dialog>
@@ -450,6 +451,16 @@
     opacity: 0.7;
   }
 
+  /* Sparad bevakning på produktsidan: inaktiv VIT knapp, som Slutsåld-knappen
+     såg ut — inte den gråa väntar-på-inmatning-stilen ovan. */
+  .mug-bis .mug-bis__open--saved:disabled {
+    background-color: #fff !important;
+    color: #787878 !important;
+    border-color: #dcdcdc !important;
+    cursor: default;
+    opacity: 1;
+  }
+
   .mug-bis__dialog {
     margin: auto;
     padding: 24px;
@@ -517,7 +528,7 @@
 
   .mug-bis__gdpr {
     margin: 10px 0 0;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.5;
     color: rgba(0, 0, 0, 0.65);
   }
@@ -845,6 +856,7 @@
             root.classList.add('mug-bis--done');
             var openBtn = root.querySelector('.mug-bis__open');
             openBtn.textContent = 'Bevakningen är sparad';
+            openBtn.classList.add('mug-bis__open--saved');
             openBtn.disabled = true;
           } else if (r.status === 400) {
             status.textContent = 'Kontrollera e-postadressen.';
