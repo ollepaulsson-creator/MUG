@@ -114,6 +114,25 @@
   if raw == true or raw == 'true' or raw == 1
     assign finns_i_butik = true
   endif
+
+  # --- Förhandsbeställning (fryst kontrakt: mug-priskoll/docs/theme-contracts/preorder.md) ---
+  # En förhandsprodukt har inventoryPolicy CONTINUE, vilket gör variant.available
+  # sant → status blir 'in_stock' och raden skulle utlova "Leverans 1–3
+  # arbetsdagar". Det motsäger leveransbeskedet under köpknappen, så
+  # förhandsprodukter får en egen ärlig statusrad utan grön lagerprick.
+  assign mug_preorder = product.metafields.mug.preorder.value
+  assign mug_is_preorder = false
+  if mug_preorder
+    assign mug_pre_now = 'now' | date: '%s' | plus: 0
+    if mug_preorder.ends_at != blank
+      assign mug_pre_end = mug_preorder.ends_at | date: '%s' | plus: 0
+      if mug_pre_now <= mug_pre_end
+        assign mug_is_preorder = true
+      endif
+    else
+      assign mug_is_preorder = true
+    endif
+  endif
 -%}
 
 <product-inventory
@@ -123,7 +142,7 @@
   data-product-id="{{ product.id }}"
 >
   <span class="product-inventory__status">
-    {% if status != 'out_of_stock' %}
+    {% if status != 'out_of_stock' and mug_is_preorder != true %}
       <span class="svg-wrapper product-inventory__icon product-inventory__icon-{{ status }}">
         {{ 'in-stock.svg' | inline_asset_content }}
       </span>
@@ -135,7 +154,9 @@
       role="status"
       aria-label="{{ 'accessibility.inventory_status' | t }}"
     >
-      {%- if status == 'out_of_stock' -%}
+      {%- if mug_is_preorder -%}
+        Förhandsbeställning
+      {%- elsif status == 'out_of_stock' -%}
         Slut i lager
       {%- elsif finns_i_butik -%}
         I butik: Leverans 1–2 arbetsdagar
