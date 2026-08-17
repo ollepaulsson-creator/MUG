@@ -119,7 +119,9 @@
   # En förhandsprodukt har inventoryPolicy CONTINUE, vilket gör variant.available
   # sant → status blir 'in_stock' och raden skulle utlova "Leverans 1–3
   # arbetsdagar". Det motsäger leveransbeskedet under köpknappen, så
-  # förhandsprodukter får en egen ärlig statusrad utan grön lagerprick.
+  # förhandsprodukter får en egen statusrad: "Förhandsbeställning". Den gröna
+  # pricken behålls medvetet — den signalerar att varan GÅR ATT BESTÄLLA, vilket
+  # stämmer; det var bara leveranslöftet som var fel.
   assign mug_preorder = product.metafields.mug.preorder.value
   assign mug_is_preorder = false
   if mug_preorder
@@ -142,7 +144,7 @@
   data-product-id="{{ product.id }}"
 >
   <span class="product-inventory__status">
-    {% if status != 'out_of_stock' and mug_is_preorder != true %}
+    {% if status != 'out_of_stock' %}
       <span class="svg-wrapper product-inventory__icon product-inventory__icon-{{ status }}">
         {{ 'in-stock.svg' | inline_asset_content }}
       </span>
