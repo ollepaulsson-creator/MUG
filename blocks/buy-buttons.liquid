@@ -72,7 +72,7 @@
   endif
   if mug_is_preorder
     assign can_add_to_cart = true
-    assign add_to_cart_text = mug_preorder.button_text | default: 'Förhandsbeställ'
+    assign add_to_cart_text = mug_preorder.button_text | default: 'Förhandsbeställ nu'
   endif
 %}
 
@@ -105,7 +105,7 @@
         >
         {%- if mug_is_preorder -%}
           {%- comment -%} Synlig radegenskap — följer med till kassa, mail och följesedel. {%- endcomment -%}
-          <input type="hidden" name="properties[Förhandsvara]" value="{{ mug_preorder.shipping_message | escape }}">
+          <input type="hidden" name="properties[Skickas]" value="{{ mug_preorder.shipping_message | escape }}">
         {%- endif -%}
         {%- if block_settings.gift_card_form and product.gift_card? -%}
           {%- render 'gift-card-recipient-form', product: product, form: form, section: section, block: block -%}

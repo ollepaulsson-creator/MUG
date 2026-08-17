@@ -34,7 +34,7 @@
       assign mug_has_preorder = false
       assign mug_has_stock = false
       for item in cart.items
-        if item.properties['Förhandsvara']
+        if item.properties['Skickas']
           assign mug_has_preorder = true
         else
           assign mug_has_stock = true
@@ -780,7 +780,7 @@
     }
   }
 
-  /* Radegenskaper är sekundär information (t.ex. "Förhandsvara: …") och ska
+  /* Radegenskaper är sekundär information (t.ex. "Skickas: …") och ska
      inte konkurrera med produktnamnet i storlek. */
   .cart-items__properties {
     display: block;
