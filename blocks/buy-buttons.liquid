@@ -482,9 +482,16 @@
     padding: 12px 14px;
     border: 1px solid #dcdcdc;
     border-radius: 0;
-    font-size: 16px; /* iOS: förhindrar autozoom */
+    font-size: 14px;
     font-family: inherit;
     -webkit-appearance: none;
+  }
+
+  /* Pekskärmar behåller 16px — under det autozoomar iOS Safari vid fokus. */
+  @media (pointer: coarse) {
+    .mug-bis__email {
+      font-size: 16px;
+    }
   }
 
   .mug-bis__gdpr {
