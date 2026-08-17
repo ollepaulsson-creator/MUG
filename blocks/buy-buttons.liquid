@@ -220,14 +220,6 @@
               <div class="mug-bis__actions">
                 <button type="submit" class="button mug-bis__submit" disabled>Bevaka</button>
               </div>
-              {%- comment -%} Visas i stället för Bevaka-knappen när bevakningen sparats. {%- endcomment -%}
-              <div class="mug-bis__saved">
-                <span class="svg-wrapper mug-bis__saved-icon">{{ 'icon-checkmark.svg' | inline_asset_content }}</span>
-                <div>
-                  <p class="mug-bis__saved-heading">Bevakningen är sparad</p>
-                  <p class="mug-bis__saved-text">Vi mejlar dig när varan finns i lager.</p>
-                </div>
-              </div>
             </form>
           </dialog>
         </div>
@@ -456,7 +448,9 @@
   .mug-bis .mug-bis__open--saved:disabled {
     background-color: #fff !important;
     color: #787878 !important;
-    border-color: #dcdcdc !important;
+    /* Hela border-shorthanden — temats .button kan ha bredd 0, då syns
+       enbart border-color aldrig. */
+    border: 1px solid #dcdcdc !important;
     cursor: default;
     opacity: 1;
   }
@@ -467,7 +461,7 @@
     max-width: 480px;
     width: calc(100% - 32px);
     border: 0;
-    border-radius: 6px;
+    border-radius: 4px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
     background: #fff;
     font-family: var(--font-body--family);
@@ -554,42 +548,8 @@
     flex: 1;
   }
 
-  /* ── Sparad-state: formuläret ersätts av en bekräftelse, och CTA:n på
-     produktsidan byter text + inaktiveras (sätts i JS). ── */
-  .mug-bis__saved {
-    display: none;
-  }
-
-  .mug-bis--done .mug-bis__saved {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-  }
-
-  /* Dialogens innehåll står kvar efter sparad bevakning — bara Bevaka-knappen
-     byts mot sparad-statusen. */
-  .mug-bis--done .mug-bis__actions {
-    display: none;
-  }
-
-  .mug-bis__saved-icon svg {
-    width: 22px;
-    height: 22px;
-    margin-top: 2px;
-  }
-
-  .mug-bis__saved-heading {
-    margin: 0 0 2px;
-    padding-right: 24px;
-    font-size: 16px;
-    font-weight: 700;
-  }
-
-  .mug-bis__saved-text {
-    margin: 0;
-    font-size: 13px;
-    color: rgba(0, 0, 0, 0.65);
-  }
+  /* Sparad-state: dialogen stängs direkt och sidans CTA bär statet (vit
+     inaktiv knapp med sparad-texten) — sätts i JS. */
 
   /* Förhandsknappen är sidans enda CTA (snabbkassan döljs ovan), så den ska
      bära primärknappens svarta utseende trots att add-to-cart-blocket är
@@ -851,12 +811,14 @@
           if (r.ok) {
             /* Servern svarar ok:true även för dubbletter/undantag — medvetet,
                samma bekräftelse oavsett så rutten inte läcker vilka adresser
-               butiken har. */
+               butiken har. Dialogen stängs direkt och sidans CTA bär statet,
+               som när en produkt läggs i varukorgen. */
             root.classList.add('mug-bis--done');
             var openBtn = root.querySelector('.mug-bis__open');
             openBtn.textContent = 'Bevakningen är sparad';
             openBtn.classList.add('mug-bis__open--saved');
             openBtn.disabled = true;
+            root.querySelector('.mug-bis__dialog').close();
           } else if (r.status === 400) {
             status.textContent = 'Kontrollera e-postadressen.';
           } else if (r.status === 429) {
