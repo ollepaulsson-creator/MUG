@@ -190,6 +190,9 @@
           </button>
           <dialog class="mug-bis__dialog">
             <form class="mug-bis__form" novalidate>
+              <button type="button" class="mug-bis__close mug-bis__x" aria-label="Stäng">
+                <span class="svg-wrapper">{{ 'icon-close.svg' | inline_asset_content }}</span>
+              </button>
               <h3 class="mug-bis__heading">Meddela mig när den finns i lager</h3>
               <p class="mug-bis__product">{{ product.title }}{% unless variant.title == 'Default Title' %} – {{ variant.title }}{% endunless %}</p>
               <input
@@ -211,7 +214,6 @@
               <p class="mug-bis__gdpr">Vi mejlar dig en gång när varan finns i lager. Inget nyhetsbrev, ingen reklam.</p>
               <p class="mug-bis__status" role="status" aria-live="polite"></p>
               <div class="mug-bis__actions">
-                <button type="button" class="button button-secondary mug-bis__close">Stäng</button>
                 <button type="submit" class="button mug-bis__submit">Bevaka</button>
               </div>
             </form>
@@ -430,9 +432,27 @@
     padding: 24px;
     max-width: 400px;
     width: calc(100% - 32px);
-    border: 1px solid #dcdcdc;
+    border: 0;
+    border-radius: 2px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
     background: #fff;
     font-family: var(--font-body--family);
+  }
+
+  .mug-bis__x {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 6px;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    line-height: 0;
+  }
+
+  .mug-bis__x svg {
+    width: 16px;
+    height: 16px;
   }
 
   .mug-bis__dialog::backdrop {
