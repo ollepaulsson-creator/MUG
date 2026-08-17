@@ -74,6 +74,28 @@
     assign can_add_to_cart = true
     assign add_to_cart_text = mug_preorder.button_text | default: 'Förhandsbeställ nu'
   endif
+
+  comment
+    ── Tillbaka i lager (fryst kontrakt: preorder.md §6–10). Bevakningsknapp
+    under Slutsåld-knappen: samma slutsåldvillkor som ovan (spårat lager ≤ 0),
+    aldrig på förhandsvaror, aldrig för produkter i kollektioner listade i
+    shop.metafields.mug.bis_excluded. Servern kontrollerar också undantagen —
+    temat döljer knappen så kunden aldrig ser något som ändå avvisas.
+  endcomment
+  assign mug_bis_show = false
+  if inventory_managed and inventory_quantity <= 0 and mug_is_preorder == false and variant != null
+    assign mug_bis_show = true
+    assign mug_bis_excluded = shop.metafields.mug.bis_excluded.value
+    if mug_bis_excluded
+      assign mug_product_handles = product.collections | map: 'handle'
+      for mug_bis_handle in mug_bis_excluded
+        if mug_product_handles contains mug_bis_handle
+          assign mug_bis_show = false
+          break
+        endif
+      endfor
+    endif
+  endif
 %}
 
 <span
@@ -152,6 +174,50 @@
           </div>
         {%- endif -%}
       {%- endform -%}
+      {%- if mug_bis_show -%}
+        {%- comment -%} Utanför produktformuläret — dialogens formulär får inte nästlas i det. {%- endcomment -%}
+        <div
+          class="mug-bis"
+          data-endpoint="https://mug-priskoll.vercel.app/api/public/bis-signup"
+          data-variant-gid="gid://shopify/ProductVariant/{{ variant.id }}"
+          data-product-gid="gid://shopify/Product/{{ product.id }}"
+          data-sku="{{ variant.sku | escape }}"
+          data-product-title="{{ product.title | escape }}"
+          data-variant-title="{% unless variant.title == 'Default Title' %}{{ variant.title | escape }}{% endunless %}"
+        >
+          <button type="button" class="button button-secondary mug-bis__open">
+            Meddela mig när den finns i lager
+          </button>
+          <dialog class="mug-bis__dialog">
+            <form class="mug-bis__form" novalidate>
+              <h3 class="mug-bis__heading">Meddela mig när den finns i lager</h3>
+              <p class="mug-bis__product">{{ product.title }}{% unless variant.title == 'Default Title' %} – {{ variant.title }}{% endunless %}</p>
+              <input
+                type="email"
+                name="email"
+                class="mug-bis__email"
+                placeholder="Din e-postadress"
+                autocomplete="email"
+                required
+              >
+              <input
+                type="text"
+                name="honeypot"
+                tabindex="-1"
+                autocomplete="off"
+                aria-hidden="true"
+                style="position:absolute;left:-9999px;opacity:0;height:0;width:0;"
+              >
+              <p class="mug-bis__gdpr">Vi mejlar dig en gång när varan finns i lager. Inget nyhetsbrev, ingen reklam.</p>
+              <p class="mug-bis__status" role="status" aria-live="polite"></p>
+              <div class="mug-bis__actions">
+                <button type="button" class="button button-secondary mug-bis__close">Stäng</button>
+                <button type="submit" class="button mug-bis__submit">Bevaka</button>
+              </div>
+            </form>
+          </dialog>
+        </div>
+      {%- endif -%}
     </product-form-component>
   {%- else -%}
     <div class="product-form-buttons">
@@ -345,6 +411,84 @@
     margin-top: 8px;
   }
 
+  /* ── Tillbaka i lager (kontrakt: preorder.md §6–10) ── */
+  .mug-bis {
+    display: block;
+    margin-top: 8px;
+  }
+
+  .mug-bis__open {
+    width: 100%;
+  }
+
+  .mug-bis__dialog {
+    margin: auto;
+    padding: 24px;
+    max-width: 400px;
+    width: calc(100% - 32px);
+    border: 1px solid #dcdcdc;
+    background: #fff;
+    font-family: var(--font-body--family);
+  }
+
+  .mug-bis__dialog::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .mug-bis__heading {
+    margin: 0 0 4px;
+    font-size: 16px;
+  }
+
+  .mug-bis__product {
+    margin: 0 0 16px;
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.65);
+  }
+
+  .mug-bis__email {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #dcdcdc;
+    border-radius: 0;
+    font-size: 16px; /* iOS: förhindrar autozoom */
+    font-family: inherit;
+    -webkit-appearance: none;
+  }
+
+  .mug-bis__gdpr {
+    margin: 10px 0 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.65);
+  }
+
+  .mug-bis__status {
+    margin: 10px 0 0;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .mug-bis__status:empty {
+    display: none;
+  }
+
+  .mug-bis__actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .mug-bis__actions .button {
+    flex: 1;
+  }
+
+  .mug-bis--done .mug-bis__email,
+  .mug-bis--done .mug-bis__gdpr,
+  .mug-bis--done .mug-bis__submit {
+    display: none;
+  }
+
   /* Förhandsknappen är sidans enda CTA (snabbkassan döljs ovan), så den ska
      bära primärknappens svarta utseende trots att add-to-cart-blocket är
      inställt på "sekundär" för vanliga produkter. Färgerna kommer från temats
@@ -527,6 +671,71 @@
     right: calc(var(--padding-2xl) - var(--icon-size-xs));
   }
 {% endstylesheet %}
+
+{%- if mug_bis_show -%}
+  <script>
+    /* Tillbaka i lager (kontrakt: preorder.md §7–8). Delegering på document
+       så lyssnarna överlever temats sektionsomrendering vid variantbyte. */
+    if (!window.mugBisInit) {
+      window.mugBisInit = true;
+      document.addEventListener('click', function (e) {
+        var open = e.target.closest('.mug-bis__open');
+        if (open) {
+          open.closest('.mug-bis').querySelector('.mug-bis__dialog').showModal();
+          return;
+        }
+        var close = e.target.closest('.mug-bis__close');
+        if (close) close.closest('.mug-bis__dialog').close();
+      });
+      document.addEventListener('submit', function (e) {
+        var form = e.target.closest('.mug-bis__form');
+        if (!form) return;
+        e.preventDefault();
+        var root = form.closest('.mug-bis');
+        var status = form.querySelector('.mug-bis__status');
+        var email = form.querySelector('.mug-bis__email');
+        if (!email.checkValidity()) {
+          status.textContent = 'Kontrollera e-postadressen.';
+          return;
+        }
+        var submit = form.querySelector('.mug-bis__submit');
+        submit.disabled = true;
+        status.textContent = '';
+        fetch(root.dataset.endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: email.value.trim(),
+            variant_gid: root.dataset.variantGid,
+            product_gid: root.dataset.productGid,
+            sku: root.dataset.sku,
+            product_title: root.dataset.productTitle,
+            variant_title: root.dataset.variantTitle,
+            honeypot: form.querySelector('[name="honeypot"]').value
+          })
+        }).then(function (r) {
+          if (r.ok) {
+            /* Servern svarar ok:true även för dubbletter/undantag — medvetet,
+               samma bekräftelse oavsett så rutten inte läcker vilka adresser
+               butiken har. */
+            root.classList.add('mug-bis--done');
+            status.textContent = 'Tack! Vi mejlar dig när varan finns i lager.';
+          } else if (r.status === 400) {
+            status.textContent = 'Kontrollera e-postadressen.';
+          } else if (r.status === 429) {
+            status.textContent = 'Försök igen om en stund.';
+          } else {
+            status.textContent = 'Något gick fel, försök igen.';
+          }
+        }).catch(function () {
+          status.textContent = 'Något gick fel, försök igen.';
+        }).finally(function () {
+          submit.disabled = false;
+        });
+      });
+    }
+  </script>
+{%- endif -%}
 
 {% schema %}
 {
