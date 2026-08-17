@@ -174,8 +174,11 @@
           </div>
         {%- endif -%}
       {%- endform -%}
-      {%- if mug_bis_show -%}
-        {%- comment -%} Utanför produktformuläret — dialogens formulär får inte nästlas i det. {%- endcomment -%}
+    </product-form-component>
+    {%- if mug_bis_show -%}
+      {%- comment -%} Utanför BÅDE produktformuläret och product-form-component:
+        komponentens submit-hanterare fångar annars dialogens submit och kör
+        varukorgsflödet (öppnade cart-drawern). {%- endcomment -%}
         <div
           class="mug-bis"
           data-endpoint="https://mug-priskoll.vercel.app/api/public/bis-signup"
@@ -204,6 +207,7 @@
                 autocomplete="email"
                 required
               >
+              <p class="mug-bis__status" role="status" aria-live="polite"></p>
               <input
                 type="text"
                 name="honeypot"
@@ -213,15 +217,20 @@
                 style="position:absolute;left:-9999px;opacity:0;height:0;width:0;"
               >
               <p class="mug-bis__gdpr">Vi mejlar dig en gång när varan finns i lager. Inget nyhetsbrev, ingen reklam.</p>
-              <p class="mug-bis__status" role="status" aria-live="polite"></p>
+              <div class="mug-bis__saved">
+                <span class="svg-wrapper mug-bis__saved-icon">{{ 'icon-checkmark.svg' | inline_asset_content }}</span>
+                <div>
+                  <p class="mug-bis__saved-heading">Bevakningen är sparad</p>
+                  <p class="mug-bis__saved-text">Vi mejlar dig när varan finns i lager.</p>
+                </div>
+              </div>
               <div class="mug-bis__actions">
-                <button type="submit" class="button mug-bis__submit">Bevaka</button>
+                <button type="submit" class="button mug-bis__submit" disabled>Bevaka</button>
               </div>
             </form>
           </dialog>
         </div>
-      {%- endif -%}
-    </product-form-component>
+    {%- endif -%}
   {%- else -%}
     <div class="product-form-buttons">
       <button
@@ -504,9 +513,10 @@
   }
 
   .mug-bis__status {
-    margin: 10px 0 0;
-    font-size: 13px;
+    margin: 8px 0 0;
+    font-size: 14px;
     line-height: 1.5;
+    color: #e70a0a;
   }
 
   .mug-bis__status:empty {
@@ -523,10 +533,42 @@
     flex: 1;
   }
 
+  /* ── Sparad-state: formuläret ersätts av en bekräftelse, och CTA:n på
+     produktsidan byter text + inaktiveras (sätts i JS). ── */
+  .mug-bis__saved {
+    display: none;
+  }
+
+  .mug-bis--done .mug-bis__saved {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .mug-bis--done .mug-bis__heading,
   .mug-bis--done .mug-bis__email,
   .mug-bis--done .mug-bis__gdpr,
-  .mug-bis--done .mug-bis__submit {
+  .mug-bis--done .mug-bis__actions {
     display: none;
+  }
+
+  .mug-bis__saved-icon svg {
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+  }
+
+  .mug-bis__saved-heading {
+    margin: 0 0 2px;
+    padding-right: 24px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .mug-bis__saved-text {
+    margin: 0;
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.65);
   }
 
   /* Förhandsknappen är sidans enda CTA (snabbkassan döljs ovan), så den ska
@@ -739,6 +781,15 @@
           }
         }
       });
+      /* Bevaka är inaktiv tills adressen har formen namn@domän.toppdomän —
+         strängare än webbläsarens e-postvalidering, som godkänner domän utan punkt. */
+      document.addEventListener('input', function (e) {
+        if (!e.target.classList || !e.target.classList.contains('mug-bis__email')) return;
+        var form = e.target.closest('.mug-bis__form');
+        var ok = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(e.target.value.trim());
+        form.querySelector('.mug-bis__submit').disabled = !ok;
+        form.querySelector('.mug-bis__status').textContent = '';
+      });
       document.addEventListener('submit', function (e) {
         var form = e.target.closest('.mug-bis__form');
         if (!form) return;
@@ -771,7 +822,9 @@
                samma bekräftelse oavsett så rutten inte läcker vilka adresser
                butiken har. */
             root.classList.add('mug-bis--done');
-            status.textContent = 'Tack! Vi mejlar dig när varan finns i lager.';
+            var openBtn = root.querySelector('.mug-bis__open');
+            openBtn.textContent = 'Bevakningen är sparad';
+            openBtn.disabled = true;
           } else if (r.status === 400) {
             status.textContent = 'Kontrollera e-postadressen.';
           } else if (r.status === 429) {
