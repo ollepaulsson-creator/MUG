@@ -18,11 +18,20 @@
 </script>
 
 {% comment %}
-  Slutsålda produkter ska HITTAS i sök (rankade sist via
-  options[unavailable_products]=last i sökformulären) — det gamla skriptet som
-  tvingade på filter.v.availability=1 är borttaget. "I lager" finns kvar som
-  valbart filter.
+  Slutsålda produkter ska HITTAS i sök, rankade sist. Formulären skickar
+  options[unavailable_products]=last, men direktlänkar och gamla URL:er saknar
+  parametern och får då butikens serverdefault (hide) — guarden nedan lägger
+  på den. (Ersätter det gamla skriptet som tvingade på filter.v.availability=1.)
 {% endcomment %}
+<script>
+  (function() {
+    const url = new URL(window.location.href);
+    if (url.searchParams.get("q") && !url.searchParams.has("options[unavailable_products]")) {
+      url.searchParams.set("options[unavailable_products]", "last");
+      window.location.replace(url.toString());
+    }
+  })();
+</script>
 
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <div

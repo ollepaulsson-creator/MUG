@@ -144,7 +144,7 @@
 
           <div class="predictive-search-results__view-all">
             <a
-              href="{{ routes.search_url }}?q={{ display_terms | url_encode }}"
+              href="{{ routes.search_url }}?q={{ display_terms | url_encode }}&options%5Bunavailable_products%5D=last"
               class="button button-primary predictive-search__view-all-button"
               ref="viewAllButton"
             >
