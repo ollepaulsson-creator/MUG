@@ -38,9 +38,61 @@
   endcase
 %}
 
-<script type="application/ld+json">
-  {{ closest.product | structured_data }}
-</script>
+{%- liquid
+  # Förhandsvaror: Shopifys structured_data-filter rapporterar InStock så fort
+  # varianten är köpbar (CONTINUE), vilket lurar Google/Merchant Center under
+  # förhandskampanjer. Aktiv mug.preorder → egen JSON-LD med PreOrder, och
+  # availabilityStarts när kampanjen bär ett leveransdatum (availability_date).
+  assign mug_pre_sd = closest.product.metafields.mug.preorder.value
+  assign mug_pre_sd_active = false
+  if mug_pre_sd
+    assign mug_sd_now = 'now' | date: '%s' | plus: 0
+    if mug_pre_sd.ends_at != blank
+      assign mug_sd_end = mug_pre_sd.ends_at | date: '%s' | plus: 0
+      if mug_sd_now <= mug_sd_end
+        assign mug_pre_sd_active = true
+      endif
+    else
+      assign mug_pre_sd_active = true
+    endif
+  endif
+-%}
+{%- if mug_pre_sd_active -%}
+  {%- assign mug_sd_variant = closest.product.selected_or_first_available_variant -%}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org/",
+      "@id": "{{ closest.product.url }}#product",
+      "@type": "Product",
+      "brand": { "@type": "Brand", "name": {{ closest.product.vendor | json }} },
+      "name": {{ closest.product.title | json }},
+      "description": {{ closest.product.description | strip_html | truncate: 500 | json }},
+      {%- if closest.product.featured_image %}
+        "image": {{ closest.product.featured_image | image_url: width: 1200 | prepend: 'https:' | json }},
+      {%- endif %}
+      "sku": {{ mug_sd_variant.sku | json }},
+      {%- if mug_sd_variant.barcode != blank %}
+        "gtin13": {{ mug_sd_variant.barcode | json }},
+      {%- endif %}
+      "offers": {
+        "@id": "{{ mug_sd_variant.url }}#offer",
+        "@type": "Offer",
+        "availability": "https://schema.org/PreOrder",
+        {%- if mug_pre_sd.availability_date %}
+          "availabilityStarts": {{ mug_pre_sd.availability_date | json }},
+        {%- endif %}
+        "price": "{{ mug_sd_variant.price | divided_by: 100.0 }}",
+        "priceCurrency": {{ cart.currency.iso_code | json }},
+        "url": "https://{{ request.host }}{{ mug_sd_variant.url }}"
+      },
+      "url": "https://{{ request.host }}{{ closest.product.url }}"
+    }
+  </script>
+{%- else -%}
+  <script type="application/ld+json">
+    {{ closest.product | structured_data }}
+  </script>
+{%- endif -%}
 
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <div
