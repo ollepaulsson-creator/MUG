@@ -2429,3 +2429,29 @@ html,
 body {
   font-synthesis: style;
 }
+
+/* ── Besök butiken (Instant-sidans hashade klasser; uppdatera om sidan
+   byggs om i Instant och klasserna byter namn) ── */
+/* +20px luft mellan brödsmulorna och fasadbilden */
+.ilKzw84cJcW0Fkg1a {
+  margin-top: 20px;
+}
+/* Fasadbilden 20 % högre: originalet är 3:2 (1,5) → 1,25 med beskärning */
+.ilKzw84cJcW0Fkg1a img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.25;
+  object-fit: cover;
+}
+/* Kontaktuppgifter & öppettider */
+.iHAtlEutza6RWGEOr p {
+  font-size: 15px;
+}
+
+/* Varukorgsdrawern på mobil: 20px smalare (95vw-regeln i styles.css gav ~20px
+   lucka; nu ~40px så sidan skymtar tydligare bakom) */
+@media screen and (max-width: 749px) {
+  .cart-drawer__dialog {
+    max-width: calc(100vw - 40px) !important;
+  }
+}
