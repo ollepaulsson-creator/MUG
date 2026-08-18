@@ -82,7 +82,7 @@
           {%- endif -%}
           <li
             id="{{ section.id }}-{{ product.id }}"
-            class="product-grid__item product-grid__item--{{ forloop.index0 }}"
+            class="product-grid__item product-grid__item--{{ forloop.index0 }}{% if product.available == false %} product-grid__item--soldout{% endif %}"
             data-page="{{ paginate.current_page }}"
             data-product-id="{{ product.id }}"
             ref="cards[]"
@@ -261,6 +261,12 @@
 
 
 {% style %}
+  /* Slutsålda sorteras sist inom sidan oavsett vald sortering — Shopifys
+     egen sortering kan inte trycka ner dem (CONTINUE-produkter räknas som
+     tillgängliga där), så flex/grid-order får göra jobbet per sida. */
+  .product-grid .product-grid__item--soldout {
+    order: 1;
+  }
 
   {% if section.settings.enable_pagination %}
     .collection-wrapper.grid.gap-style {
