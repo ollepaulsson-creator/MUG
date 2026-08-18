@@ -353,6 +353,8 @@ class PredictiveSearchComponent extends Component {
     url.searchParams.set('resources[limit_scope]', 'each');
     url.searchParams.set('resources[limit]', '9');
     url.searchParams.set('resources[options][fields]', 'title,product_type,variants.title,vendor');
+    // Slutsålda ska hittas men rankas sist (butikens default är hide).
+    url.searchParams.set('resources[options][unavailable_products]', 'last');
 
     const { predictiveSearchResults } = this.refs;
 
@@ -389,6 +391,8 @@ class PredictiveSearchComponent extends Component {
     url.searchParams.set('resources[type]', 'product');
     // url.searchParams.set('resources[limit]', '4'); // this is for recently viewed (product), safe to keep
     url.searchParams.set('resources[limit]', '24');
+    // Nyss visade produkter ska synas även om de hunnit bli slutsålda.
+    url.searchParams.set('resources[options][unavailable_products]', 'last');
 
     return sectionRenderer.getSectionHTML(this.dataset.sectionId, false, url);
   }

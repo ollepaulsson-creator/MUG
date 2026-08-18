@@ -32,6 +32,12 @@
     ref="form"
     on:keydown="/onSearchKeyDown"
   >
+    {%- comment -%} Slutsålda hittas men rankas sist (butikens default är hide). {%- endcomment -%}
+    <input
+      name="options[unavailable_products]"
+      value="last"
+      type="hidden"
+    >
     <div
       class="predictive-search-form__header"
     >
