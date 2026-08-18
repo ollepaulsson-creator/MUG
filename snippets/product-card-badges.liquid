@@ -105,7 +105,7 @@
       <span class="product-badges__badge-text">Nyhet</span>
     </div>
   {%- elsif product.available == false -%}
-    <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sold_out_color_scheme }}">
+    <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sold_out_color_scheme }} color-scheme-soldout">
       <span class="product-badges__badge-text">{{ 'content.product_badge_sold_out' | t }}</span>
     </div>
   {%- elsif product.compare_at_price > product.price and product.available -%}
@@ -195,6 +195,14 @@
 
   /* Nyhet badge */
   .product-badges__badge.color-scheme-nyhet {
+    --badge-bg: #fff;
+    color: #000;
+    font-size: 12px!important;
+    letter-spacing: 1px;
+  }
+
+  /* Slutsåld badge — vit platta som övriga, i stället för schemats grå */
+  .product-badges__badge.color-scheme-soldout {
     --badge-bg: #fff;
     color: #000;
     font-size: 12px!important;
