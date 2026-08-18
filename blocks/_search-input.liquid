@@ -36,6 +36,12 @@
       value="product"
       type="hidden"
     >
+    {%- comment -%} Slutsålda hittas men rankas sist (butikens default är hide). {%- endcomment -%}
+    <input
+      name="options[unavailable_products]"
+      value="last"
+      type="hidden"
+    >
     <input
       class="search-page-input{{ color_scheme }}"
       id="SearchPageInput--{{ block.id }}"
