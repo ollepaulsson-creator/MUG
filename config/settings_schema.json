@@ -2356,51 +2356,5 @@
         "default": "<p>Öppettider i sommar, vecka 28–34.</p><p>Mån–Fre: 11.00–18.00<br>Lördag: 11.00–16.00<br>Söndag: Stängt</p><p>Välkomna till MUG!</p>"
       }
     ]
-  },
-  {
-    "name": "Kampanjbadge",
-    "settings": [
-      {
-        "type": "paragraph",
-        "content": "Visar en kampanjbadge på produktkort och en notis på produktsidor för produkter i vald produktserie — använd tillsammans med en automatisk rabatt i Rabatter, som annars inte syns förrän i kassan."
-      },
-      {
-        "type": "checkbox",
-        "id": "campaign_badge_active",
-        "label": "Visa kampanjbadge",
-        "default": false
-      },
-      {
-        "type": "collection",
-        "id": "campaign_badge_collection",
-        "label": "Kampanjens produktserie",
-        "info": "Samma produktserie som den automatiska rabatten gäller för."
-      },
-      {
-        "type": "text",
-        "id": "campaign_badge_text",
-        "label": "Badgetext på produktkort",
-        "default": "Kampanj"
-      },
-      {
-        "type": "text",
-        "id": "campaign_badge_text_long",
-        "label": "Notis på produktsidan",
-        "info": "Visas under priset.",
-        "default": "Rabatten dras automatiskt av i kassan."
-      },
-      {
-        "type": "text",
-        "id": "campaign_badge_start",
-        "label": "Startdatum",
-        "info": "ÅÅÅÅ-MM-DD TT:MM — ange samma som rabattens startdatum. Tomt = visas direkt."
-      },
-      {
-        "type": "text",
-        "id": "campaign_badge_end",
-        "label": "Slutdatum",
-        "info": "ÅÅÅÅ-MM-DD TT:MM — ange samma som rabattens slutdatum, så släcks badgen automatiskt. Tomt = ingen slutgräns. Obs: sidcachen kan ge upp till en timmes eftersläpning."
-      }
-    ]
   }
 ]

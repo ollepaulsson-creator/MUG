@@ -353,14 +353,10 @@
   </local-pickup>
 {% endif %}
 
-{%- comment %} ── Kampanjnotis (Temainställningar → Kampanjbadge): visas under
-  köpknapparna, ovanför beskrivningen, för produkter i kampanjserien inom
-  kampanjens datumfönster. Endast produktsidor. ── {%- endcomment -%}
-{%- comment %} ── Kampanjnotis — två spår under övergången:
-  1) METAFÄLT (primärt): kampanjmotorn i Bakhuvudet skriver
-     shop.metafields.mug.campaign (json) + product.metafields.mug.campaign
-     (= kampanj-id). Kontrakt: spec §6.1 steg 6.
-  2) TEMAINSTÄLLNINGAR (utfasas när TE-kampanjen löpt ut 7 aug). ── {%- endcomment -%}
+{%- comment %} ── Kampanjnotis: kampanjmotorn i Bakhuvudet skriver
+  shop.metafields.mug.campaign (json: id, active, badge_text, notice_text,
+  starts_at, ends_at) + product.metafields.mug.campaign (= kampanj-id) per
+  swappad produkt. Fryst kontrakt: spec §6.1 steg 6. Endast produktsidor. ── {%- endcomment -%}
 {%- if request.page_type == 'product' -%}
   {%- assign mug_now = 'now' | date: '%s' | plus: 0 -%}
   {%- assign mug_notice_text = blank -%}
@@ -372,24 +368,6 @@
       {%- assign mf_end = mug_shop_campaign.ends_at | date: '%s' | plus: 0 -%}
       {%- if mug_now >= mf_start and mug_now <= mf_end -%}
         {%- assign mug_notice_text = mug_shop_campaign.notice_text -%}
-      {%- endif -%}
-    {%- endif -%}
-  {%- endif -%}
-
-  {%- if mug_notice_text == blank and settings.campaign_badge_active and settings.campaign_badge_collection != blank -%}
-    {%- assign mug_window_ok = true -%}
-    {%- if settings.campaign_badge_start != blank -%}
-      {%- assign mug_cb_start = settings.campaign_badge_start | date: '%s' | plus: 0 -%}
-      {%- if mug_cb_start > mug_now -%}{%- assign mug_window_ok = false -%}{%- endif -%}
-    {%- endif -%}
-    {%- if settings.campaign_badge_end != blank -%}
-      {%- assign mug_cb_end = settings.campaign_badge_end | date: '%s' | plus: 0 -%}
-      {%- if mug_now > mug_cb_end -%}{%- assign mug_window_ok = false -%}{%- endif -%}
-    {%- endif -%}
-    {%- if mug_window_ok -%}
-      {%- assign mug_campaign_handles = closest.product.collections | map: 'handle' -%}
-      {%- if mug_campaign_handles contains settings.campaign_badge_collection.handle -%}
-        {%- assign mug_notice_text = settings.campaign_badge_text_long | default: 'Rabatten dras automatiskt av i kassan.' -%}
       {%- endif -%}
     {%- endif -%}
   {%- endif -%}
