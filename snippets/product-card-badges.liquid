@@ -37,13 +37,10 @@
   {%- assign has_status = true -%}
 {%- endif -%}
 
-{%- comment %} ── Kampanjbadge — två spår under övergången:
-  1) METAFÄLT (primärt): kampanjmotorn i Bakhuvudet skriver
-     shop.metafields.mug.campaign (json) + product.metafields.mug.campaign
-     (= kampanj-id) per swappad produkt. Kontrakt: spec §6.1 steg 6.
-  2) TEMAINSTÄLLNINGAR (utfasas): tas bort tillsammans med
-     settings_schema-sektionen Kampanjbadge när TE-kampanjen (7 aug) löpt ut.
-  Datumfönstret behålls som hängslen i båda spåren. ── {%- endcomment -%}
+{%- comment %} ── Kampanjbadge: kampanjmotorn i Bakhuvudet skriver
+  shop.metafields.mug.campaign (json) + product.metafields.mug.campaign
+  (= kampanj-id) per swappad produkt. Fryst kontrakt: spec §6.1 steg 6.
+  Datumfönstret behålls som hängslen. ── {%- endcomment -%}
 {%- assign is_campaign = false -%}
 {%- assign campaign_badge_label = 'Kampanj' -%}
 
@@ -55,25 +52,6 @@
     {%- if now_seconds >= mf_start and now_seconds <= mf_end -%}
       {%- assign is_campaign = true -%}
       {%- assign campaign_badge_label = mug_shop_campaign.badge_text -%}
-    {%- endif -%}
-  {%- endif -%}
-{%- endif -%}
-
-{%- if is_campaign == false and settings.campaign_badge_active and settings.campaign_badge_collection != blank -%}
-  {%- assign campaign_window_ok = true -%}
-  {%- if settings.campaign_badge_start != blank -%}
-    {%- assign cb_start = settings.campaign_badge_start | date: '%s' | plus: 0 -%}
-    {%- if cb_start > now_seconds -%}{%- assign campaign_window_ok = false -%}{%- endif -%}
-  {%- endif -%}
-  {%- if settings.campaign_badge_end != blank -%}
-    {%- assign cb_end = settings.campaign_badge_end | date: '%s' | plus: 0 -%}
-    {%- if now_seconds > cb_end -%}{%- assign campaign_window_ok = false -%}{%- endif -%}
-  {%- endif -%}
-  {%- if campaign_window_ok -%}
-    {%- assign campaign_handles = product.collections | map: 'handle' -%}
-    {%- if campaign_handles contains settings.campaign_badge_collection.handle -%}
-      {%- assign is_campaign = true -%}
-      {%- assign campaign_badge_label = settings.campaign_badge_text | default: 'Kampanj' -%}
     {%- endif -%}
   {%- endif -%}
 {%- endif -%}
