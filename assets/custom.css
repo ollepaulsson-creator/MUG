@@ -2436,12 +2436,20 @@ body {
 .ilKzw84cJcW0Fkg1a {
   margin-top: 20px;
 }
-/* Fasadbilden 20 % högre: originalet är 3:2 (1,5) → 1,25 med beskärning */
-.ilKzw84cJcW0Fkg1a img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1.25;
-  object-fit: cover;
+/* Fasadbilden 20 % högre: bilden är en Instant-fill som fyller containern,
+   så det är containerns min-height som höjs (Instants trappa 640/600/460/260
+   × 1,2). Instant-CSS:en laddas efter custom.css → !important krävs. */
+.__instant .ilKzw84cJcW0Fkg1a {
+  min-height: 768px !important;
+}
+@media (max-width: 1024px) {
+  .__instant .ilKzw84cJcW0Fkg1a { min-height: 720px !important; }
+}
+@media (max-width: 768px) {
+  .__instant .ilKzw84cJcW0Fkg1a { min-height: 552px !important; }
+}
+@media (max-width: 575px) {
+  .__instant .ilKzw84cJcW0Fkg1a { min-height: 312px !important; }
 }
 /* Kontaktuppgifter & öppettider */
 .iHAtlEutza6RWGEOr p {
