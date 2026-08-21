@@ -103,6 +103,16 @@
               {%- assign crumb_collection = crumb_fallback -%}
             {%- endif -%}
           {%- endif -%}
+          {%- comment -%} Sista utvägen före produkttyp-länken: en kollektion vars
+            handle matchar produkttypen ("Gitarreffekter" → /collections/gitarreffekter).
+            Behövs när produkten inte ligger i någon meny-kollektion (t.ex. vid
+            navigering från sökdialogen). {%- endcomment -%}
+          {%- if crumb_collection == nil and product.type != blank -%}
+            {%- assign type_handle = product.type | handleize -%}
+            {%- if collections[type_handle].handle != blank -%}
+              {%- assign crumb_collection = collections[type_handle] -%}
+            {%- endif -%}
+          {%- endif -%}
           {%- if crumb_collection != nil -%}
             {%- comment -%} Walk the nav menu to find parent(s) of this collection {%- endcomment -%}
             {%- assign prod_parent_title = nil -%}
@@ -152,7 +162,8 @@
             <a href="{{ crumb_collection.url }}">{{ crumb_collection.title }}</a>
           {%- elsif product.type != blank -%}
             <span class="divider">/</span>
-            <a href="{{ routes.all_products_collection_url }}?filter.p.product_type={{ product.type | url_encode }}">{{ product.type }}</a>
+            {%- comment -%} /collections/all (11 000 produkter) svarar 500 — länka till söket i stället. {%- endcomment -%}
+            <a href="{{ routes.search_url }}?q={{ product.type | url_encode }}&type=product&options%5Bunavailable_products%5D=last">{{ product.type }}</a>
           {%- endif -%}
           <span class="divider">/</span>
           <span>{{ product.title }}</span>
