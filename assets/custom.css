@@ -1037,7 +1037,9 @@ h5, .h5, .text-block.h5 > p {
 }
 @media screen and (max-width: 749px) {
     .product-card__content .text-block {
-        padding-inline-start: 10px !important;
+        /* 7px + kortets 8px gutter = 15px, samma som textblockets padding-top —
+           vänsterindraget matchar därmed luften ovanför texten. */
+        padding-inline-start: 7px !important;
     }
 }
 ul.product-grid {
@@ -1794,9 +1796,10 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
 
 @media screen and (max-width: 749px) {
   .product-card__content .text-block {
-    /* Left inset doubled (was 5px) so first-column card text isn't flush with
-       the viewport edge on mobile. */
-    padding-inline-start: 10px !important;
+    /* 7px + kortets 8px gutter = 15px totalt, lika mycket som luften ovanför
+       texten (textblockets padding-top). Var 10px, vilket gav 18px och såg
+       ut som ett större indrag i högerkolumnen än ovanför texten. */
+    padding-inline-start: 7px !important;
     padding-right: 6px !important;
   }
 
@@ -1805,8 +1808,10 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
      5px + 8px = 13px puts carousel card text at the same visual inset as
      collection cards. */
   .ui-test-product-list .product-card__content .text-block {
-    padding-inline-start: 13px !important;
-    padding-inline-end: 13px !important;
+    /* Karusellslides går kant i kant med vyn (ingen 8px gutter), så hela
+       15px läggs här för samma visuella indrag som kollektionskorten. */
+    padding-inline-start: 15px !important;
+    padding-inline-end: 15px !important;
   }
 }
 
