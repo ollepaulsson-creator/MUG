@@ -2463,32 +2463,3 @@ body {
     max-width: calc(100vw - 40px) !important;
   }
 }
-
-/* ── Filterdrawerns sorteringsväljare: texten kolliderade med pilikonen på
-   mobil (temats ikonregel pekar på fel element — svg:n är syskon, inte barn).
-   Reservera plats för pilen och fäst den till höger. ── */
-.sorting-filter__select-wrapper {
-  position: relative;
-}
-select.sorting-filter__select {
-  padding-inline-end: 26px !important;
-}
-.sorting-filter__select-wrapper .icon-caret {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-}
-
-/* ── Tätare produktkort på mobil: mindre luft under priset och mellan
-   kortraderna. (Resterande "luft" under korta kort är radutjämning mot det
-   högsta kortet i raden och kan inte trimmas.) ── */
-@media screen and (max-width: 749px) {
-  .product-card__content .text-block:last-child {
-    padding-block-end: 8px !important;
-  }
-  .product-grid {
-    --product-grid-gap-mobile: 6px 12px;
-  }
-}
