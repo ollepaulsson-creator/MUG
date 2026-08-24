@@ -446,8 +446,9 @@
             kontroller för samma sak förvirrade. Värdet måste ändå följa med i
             formuläret, annars nollställs sorteringen när kunden filtrerar.
           {%- endcomment -%}
-          {% if block_settings.enable_sorting and sort_by != blank %}
-            <input type="hidden" name="sort_by" value="{{ sort_by }}">
+          {%- assign drawer_sort = sort_by | default: results.sort_by | default: results.default_sort_by -%}
+          {% if drawer_sort != blank %}
+            <input type="hidden" name="sort_by" value="{{ drawer_sort }}">
           {% endif %}
         </form>
       </facets-form-component>
