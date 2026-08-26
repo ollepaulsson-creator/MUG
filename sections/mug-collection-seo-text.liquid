@@ -14,7 +14,6 @@
       <div class="mug-seo-block__content" data-mug-seo-content>
         {{ mug_seo_text | metafield_tag }}
       </div>
-      <button type="button" class="mug-seo-block__more" data-mug-seo-more>Läs mer</button>
     </div>
   </div>
 
@@ -22,7 +21,7 @@
 
 {% stylesheet %}
   .mug-seo-block {
-    border-top: var(--style-border-width, 1px) solid var(--color-border, #e2e2e2);
+    border-top: var(--product-card-border-width, 1px) solid rgb(var(--color-border-rgb) / var(--product-card-border-opacity, 1));
     padding: 48px 20px 56px;
   }
   .mug-seo-block__inner {
@@ -38,44 +37,54 @@
     line-height: 1.2;
     margin: 0 0 16px;
   }
-  .mug-seo-block__content {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 5;
-    overflow: hidden;
+  .mug-seo-block__content { overflow: hidden; }
+  .mug-seo-block__suffix button {
+    appearance: none; background: none; border: none; padding: 0;
+    font: inherit; cursor: pointer;
+    text-decoration: underline; text-underline-offset: 2px;
   }
-  .mug-seo-block__content.is-expanded {
-    display: block;
-    -webkit-line-clamp: none;
-    overflow: visible;
-  }
+  .mug-seo-block__suffix button:hover { text-decoration-thickness: 2px; }
   .mug-seo-block__content h2 {
     font-size: 20px;
     margin: 24px 0 8px;
   }
   .mug-seo-block__content p { margin: 0 0 12px; }
   .mug-seo-block__content a { text-decoration: underline; text-underline-offset: 2px; }
-  .mug-seo-block__more {
-    appearance: none;
-    background: none;
-    border: none;
-    padding: 0;
-    margin-top: 4px;
-    font: inherit;
-    cursor: pointer;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-  .mug-seo-block__more:hover { text-decoration-thickness: 2px; }
 {% endstylesheet %}
 
 {% javascript %}
-  document.querySelectorAll('[data-mug-seo-more]').forEach(function (btn) {
-    var content = btn.closest('.mug-seo-block__inner').querySelector('[data-mug-seo-content]');
-    if (content.scrollHeight <= content.clientHeight + 2) { btn.hidden = true; return; }
-    btn.addEventListener('click', function () {
-      content.classList.add('is-expanded');
-      btn.hidden = true;
+  document.querySelectorAll('[data-mug-seo-content]').forEach(function (content) {
+    var full = content.innerHTML;
+    var lh = parseFloat(getComputedStyle(content).lineHeight) || 24;
+    var maxH = Math.round(lh * 5) + 2;
+    if (content.scrollHeight <= maxH) return;
+    content.style.maxHeight = 'none';
+    // göm block bortom det första tills det ryms, trimma sedan ord
+    var barn = Array.prototype.slice.call(content.children);
+    var passar = function () { return content.scrollHeight <= maxH; };
+    var i = barn.length - 1;
+    while (i > 0 && !passar()) { barn[i].style.display = 'none'; i--; }
+    var sista = barn[i];
+    var suffix = document.createElement('span');
+    suffix.className = 'mug-seo-block__suffix';
+    suffix.innerHTML = '\u2026 <button type="button">L\u00e4s mer</button>';
+    sista.appendChild(suffix);
+    var skydd = 400;
+    while (!passar() && skydd-- > 0) {
+      var noder = [];
+      (function samla(n) { n.childNodes.forEach(function (c) {
+        if (c === suffix) return;
+        if (c.nodeType === 3) noder.push(c); else samla(c);
+      }); })(sista);
+      var nod = null;
+      for (var j = noder.length - 1; j >= 0; j--) { if (noder[j].textContent.trim()) { nod = noder[j]; break; } }
+      if (!nod) break;
+      nod.textContent = nod.textContent.replace(/\s*\S+\s*$/, ' ');
+      if (!nod.textContent.trim()) nod.parentNode.removeChild(nod);
+    }
+    suffix.querySelector('button').addEventListener('click', function () {
+      content.innerHTML = full;
+      content.style.maxHeight = 'none';
     });
   });
 {% endjavascript %}
