@@ -20,13 +20,18 @@
 {%- endif -%}
 
 {% stylesheet %}
-  .mug-seo-block {
-    /* linjen ritas bara när pagination ligger emellan — annars står gridens kant för linjen */
-    border-top: none;
-    padding: 48px 20px 56px;
+  /* dras upp 1px så fullbreddslinjen ritas ÖVER produktkortens bottenlinje
+     (samma pixelrad) — en linje, alltid full bredd */
+  .shopify-section:has(> .mug-seo-block),
+  .shopify-section:has(.mug-seo-block) {
+    margin-top: -1px;
+    position: relative;
+    z-index: 1;
   }
-  .shopify-section:has(.pagination__item) + .shopify-section .mug-seo-block {
+  .mug-seo-block {
     border-top: 1px solid #e5e5e5;
+    background: #fff;
+    padding: 48px 20px 56px;
   }
   .mug-seo-block__inner {
     max-width: 50%;
