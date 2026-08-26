@@ -2513,10 +2513,10 @@ body {
 }
 
 
-/* ── Mobil: mer luft ovanför Filtrera-raden ── */
+/* ── Mobil: mer luft ovanför Filtrera/Sortera-raden (hela raden, symmetriskt) ── */
 @media screen and (max-width: 749px) {
-  .facets-toggle__wrapper {
-    padding-top: 24px !important;
+  .facets-toggle {
+    margin-top: 12px;
   }
 }
 
