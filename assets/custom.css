@@ -2484,7 +2484,8 @@ body {
   content: attr(aria-label);
   position: absolute;
   bottom: calc(100% + 7px);
-  left: -2px;
+  left: 50%;
+  transform: translateX(-50%);
   background: #111;
   color: #fff;
   font-size: 12px;
@@ -2499,9 +2500,22 @@ body {
   content: '';
   position: absolute;
   bottom: calc(100% + 2px);
-  left: 12px;
+  left: 50%;
+  transform: translateX(-50%);
   border: 5px solid transparent;
   border-top-color: #111;
   z-index: 12;
   pointer-events: none;
+}
+/* kantkolumnerna: justera in så labeln inte klipps av drawerkanten */
+.facets__inputs-list--swatches > :nth-child(4n+1) .variant-option--swatches:hover::after,
+.facets__inputs-list--swatches > .variant-option--swatches:nth-child(4n+1):hover::after {
+  left: -2px;
+  transform: none;
+}
+.facets__inputs-list--swatches > :nth-child(4n) .variant-option--swatches:hover::after,
+.facets__inputs-list--swatches > .variant-option--swatches:nth-child(4n):hover::after {
+  left: auto;
+  right: -2px;
+  transform: none;
 }
