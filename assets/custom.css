@@ -2474,8 +2474,8 @@ body {
    utrymme INOM klippregionen via padding-top + kompenserande negativ margin.
    Vänsterställd så den inte klipps av drawerkanten. */
 .facets__panel-content:has(.facets__inputs-list--swatches) {
-  padding-top: 34px;
-  margin-top: -30px;
+  padding-top: 34px !important;
+  margin-top: -30px !important;
 }
 .facets__inputs-list--swatches .variant-option--swatches {
   position: relative;
