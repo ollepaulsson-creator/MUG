@@ -63,9 +63,12 @@
     var cr = function () { return content.getBoundingClientRect(); };
     if (content.getBoundingClientRect().height <= maxH + 8) return;
     var barn = Array.prototype.slice.call(rot.children);
+    var arRubrik = function (el) { return /^H[1-6]$/.test(el.tagName); };
     // göm block vars överkant ligger bortom budgeten
     var i = barn.length - 1;
     while (i > 0 && barn[i].getBoundingClientRect().top - cr().top >= maxH) { barn[i].style.display = 'none'; i--; }
+    // sluta aldrig på en rubrik
+    while (i > 0 && arRubrik(barn[i])) { barn[i].style.display = 'none'; i--; }
     var suffix = document.createElement('span');
     suffix.className = 'mug-seo-block__suffix';
     suffix.innerHTML = '\u2026 <button type="button">L\u00e4s mer</button>';
@@ -77,6 +80,16 @@
     };
     var skydd = 800, st = lage();
     while ((st.over || st.ensam) && skydd-- > 0) {
+      if (arRubrik(sista)) {
+        sista.style.display = 'none';
+        i--;
+        if (i < 0) break;
+        while (i > 0 && arRubrik(barn[i])) { barn[i].style.display = 'none'; i--; }
+        sista = barn[i];
+        sista.appendChild(suffix);
+        st = lage();
+        continue;
+      }
       var noder = [];
       (function samla(n) { Array.prototype.forEach.call(n.childNodes, function (x) {
         if (x === suffix) return;
