@@ -2520,3 +2520,34 @@ body {
   }
 }
 
+
+
+/* ── Mobila filterchips (renderas av mug-mobile-chips.liquid) ── */
+.mug-mobile-chips {
+  display: none;
+}
+@media screen and (max-width: 749px) {
+  /* chipsen ligger först i .collection-wrapper — flytta separatorlinjen från
+     wrapperns border-top till chipsradens underkant så chipsen hamnar ÖVER linjen */
+  .collection-wrapper:has(.mug-mobile-chips) {
+    border-top: 0 !important;
+  }
+  .mug-mobile-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 4px 16px 16px;
+    border-bottom: 1px solid #e4e4e4;
+  }
+  .mug-mobile-chips__pill {
+    text-decoration: none;
+    color: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .mug-mobile-chips__x {
+    font-size: 15px;
+    line-height: 1;
+  }
+}

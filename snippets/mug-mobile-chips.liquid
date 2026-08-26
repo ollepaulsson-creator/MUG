@@ -42,28 +42,3 @@
     {%- endfor -%}
   </div>
 {%- endif -%}
-
-{% stylesheet %}
-  .mug-mobile-chips {
-    display: none;
-  }
-  @media screen and (max-width: 749px) {
-    .mug-mobile-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding: 24px 16px 0;
-    }
-    .mug-mobile-chips__pill {
-      text-decoration: none;
-      color: inherit;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .mug-mobile-chips__x {
-      font-size: 15px;
-      line-height: 1;
-    }
-  }
-{% endstylesheet %}
