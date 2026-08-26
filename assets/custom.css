@@ -2511,3 +2511,29 @@ body {
 .facets__inputs-list--swatches {
   gap: 12px 14px !important;
 }
+
+
+/* ── Mobil: mer luft ovanför Filtrera-raden ── */
+@media screen and (max-width: 749px) {
+  .facets-toggle__wrapper {
+    padding-top: 24px !important;
+  }
+}
+
+/* ── Mobil: visa aktiva filterchips ovanför griden (desktopformens chips-rad) ── */
+@media screen and (max-width: 749px) {
+  .facets--horizontal:has(facet-remove-component) {
+    display: block !important;
+  }
+  .facets--horizontal:has(facet-remove-component) > *:not(.facets__form-wrapper) {
+    display: none !important;
+  }
+  .facets--horizontal:has(facet-remove-component) .facets__form > *:not(.facets-remove) {
+    display: none !important;
+  }
+  .facets--horizontal .facets-remove--mobile-and-vertical:has(facet-remove-component) {
+    display: flex !important;
+    padding: 0 16px;
+    margin: 10px 0 0;
+  }
+}
