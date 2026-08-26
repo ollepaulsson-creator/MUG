@@ -2468,3 +2468,35 @@ body {
     max-width: calc(100vw - 40px) !important;
   }
 }
+
+/* ── Färgfiltret: svart hover-label över swatcharna ── */
+.facets__inputs-list--swatches .variant-option--swatches {
+  position: relative;
+}
+.facets__inputs-list--swatches .variant-option--swatches:hover::after {
+  content: attr(aria-label);
+  position: absolute;
+  bottom: calc(100% + 7px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1;
+  padding: 6px 9px;
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 12;
+  pointer-events: none;
+}
+.facets__inputs-list--swatches .variant-option--swatches:hover::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #111;
+  z-index: 12;
+  pointer-events: none;
+}
