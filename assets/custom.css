@@ -2507,15 +2507,33 @@ body {
   z-index: 12;
   pointer-events: none;
 }
-/* kantkolumnerna: justera in så labeln inte klipps av drawerkanten */
-.facets__inputs-list--swatches > :nth-child(4n+1) .variant-option--swatches:hover::after,
-.facets__inputs-list--swatches > .variant-option--swatches:nth-child(4n+1):hover::after {
-  left: -2px;
-  transform: none;
+/* luft mellan swatcharna */
+.facets__inputs-list--swatches {
+  gap: 12px 14px !important;
 }
-.facets__inputs-list--swatches > :nth-child(4n) .variant-option--swatches:hover::after,
-.facets__inputs-list--swatches > .variant-option--swatches:nth-child(4n):hover::after {
-  left: auto;
-  right: -2px;
-  transform: none;
+
+
+/* ── Mobil: mer luft ovanför Filtrera-raden ── */
+@media screen and (max-width: 749px) {
+  .facets-toggle__wrapper {
+    padding-top: 24px !important;
+  }
+}
+
+/* ── Mobil: visa aktiva filterchips ovanför griden (desktopformens chips-rad) ── */
+@media screen and (max-width: 749px) {
+  .facets--horizontal:has(facet-remove-component) {
+    display: block !important;
+  }
+  .facets--horizontal:has(facet-remove-component) > *:not(.facets__form-wrapper) {
+    display: none !important;
+  }
+  .facets--horizontal:has(facet-remove-component) .facets__form > *:not(.facets-remove) {
+    display: none !important;
+  }
+  .facets--horizontal .facets-remove--mobile-and-vertical:has(facet-remove-component) {
+    display: flex !important;
+    padding: 0 16px;
+    margin: 10px 0 0;
+  }
 }
