@@ -2507,15 +2507,7 @@ body {
   z-index: 12;
   pointer-events: none;
 }
-/* kantkolumnerna: justera in så labeln inte klipps av drawerkanten */
-.facets__inputs-list--swatches > :nth-child(4n+1) .variant-option--swatches:hover::after,
-.facets__inputs-list--swatches > .variant-option--swatches:nth-child(4n+1):hover::after {
-  left: -2px;
-  transform: none;
-}
-.facets__inputs-list--swatches > :nth-child(4n) .variant-option--swatches:hover::after,
-.facets__inputs-list--swatches > .variant-option--swatches:nth-child(4n):hover::after {
-  left: auto;
-  right: -2px;
-  transform: none;
+/* luft mellan swatcharna */
+.facets__inputs-list--swatches {
+  gap: 12px 14px !important;
 }
