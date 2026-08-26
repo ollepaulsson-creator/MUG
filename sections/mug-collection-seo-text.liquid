@@ -1,0 +1,89 @@
+{%- comment -%}
+  SEO-brödtext under produktgriden. Renderas ENDAST när kollektionen har
+  custom.seo_brodtext (rich text). Rubrik ur custom.seo_rubrik.
+  Layout enligt Figma-spec 2026-08-26: separatorlinje, centrerat block
+  två gridkolumner brett på desktop, 32px rubrik, 5-raders trunkering med Läs mer.
+{%- endcomment -%}
+{%- assign mug_seo_text = collection.metafields.custom.seo_brodtext -%}
+{%- if mug_seo_text != blank -%}
+  <div class="mug-seo-block">
+    <div class="mug-seo-block__inner">
+      {%- if collection.metafields.custom.seo_rubrik != blank -%}
+        <h2 class="mug-seo-block__rubrik">{{ collection.metafields.custom.seo_rubrik }}</h2>
+      {%- endif -%}
+      <div class="mug-seo-block__content" data-mug-seo-content>
+        {{ mug_seo_text | metafield_tag }}
+      </div>
+      <button type="button" class="mug-seo-block__more" data-mug-seo-more>Läs mer</button>
+    </div>
+  </div>
+
+{%- endif -%}
+
+{% stylesheet %}
+  .mug-seo-block {
+    border-top: var(--style-border-width, 1px) solid var(--color-border, #e2e2e2);
+    padding: 48px 20px 56px;
+  }
+  .mug-seo-block__inner {
+    max-width: 50%;
+    margin: 0 auto;
+  }
+  @media screen and (max-width: 749px) {
+    .mug-seo-block { padding: 32px 20px 40px; }
+    .mug-seo-block__inner { max-width: 100%; }
+  }
+  .mug-seo-block__rubrik {
+    font-size: 32px;
+    line-height: 1.2;
+    margin: 0 0 16px;
+  }
+  .mug-seo-block__content {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    overflow: hidden;
+  }
+  .mug-seo-block__content.is-expanded {
+    display: block;
+    -webkit-line-clamp: none;
+    overflow: visible;
+  }
+  .mug-seo-block__content h2 {
+    font-size: 20px;
+    margin: 24px 0 8px;
+  }
+  .mug-seo-block__content p { margin: 0 0 12px; }
+  .mug-seo-block__content a { text-decoration: underline; text-underline-offset: 2px; }
+  .mug-seo-block__more {
+    appearance: none;
+    background: none;
+    border: none;
+    padding: 0;
+    margin-top: 4px;
+    font: inherit;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .mug-seo-block__more:hover { text-decoration-thickness: 2px; }
+{% endstylesheet %}
+
+{% javascript %}
+  document.querySelectorAll('[data-mug-seo-more]').forEach(function (btn) {
+    var content = btn.closest('.mug-seo-block__inner').querySelector('[data-mug-seo-content]');
+    if (content.scrollHeight <= content.clientHeight + 2) { btn.hidden = true; return; }
+    btn.addEventListener('click', function () {
+      content.classList.add('is-expanded');
+      btn.hidden = true;
+    });
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "SEO-brödtext (kollektion)",
+  "settings": [],
+  "presets": [{ "name": "SEO-brödtext (kollektion)" }]
+}
+{% endschema %}
