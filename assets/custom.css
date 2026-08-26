@@ -2513,10 +2513,10 @@ body {
 }
 
 
-/* ── Mobil: mer luft ovanför Filtrera-raden ── */
+/* ── Mobil: dubbel spacing efter beskrivningstexten, symmetriskt över hela raden ── */
 @media screen and (max-width: 749px) {
-  .facets-toggle__wrapper {
-    padding-top: 24px !important;
+  .facets-toggle {
+    margin-top: 24px;
   }
 }
 

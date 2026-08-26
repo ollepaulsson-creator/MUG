@@ -1,0 +1,69 @@
+{%- comment -%}
+  Aktiva filterchips för mobil — länkbaserade pills (url_to_remove), renderas
+  ovanför Filtrera-raden. Desktop har temats egna chips; denna visas < 750px.
+  @param {object} filters
+{%- endcomment -%}
+{%- liquid
+  assign mug_chip_count = 0
+  for filter in filters
+    if filter.param_name == 'filter.v.availability'
+      continue
+    endif
+    if filter.type == 'price_range'
+      if filter.min_value.value != null or filter.max_value.value != null
+        assign mug_chip_count = mug_chip_count | plus: 1
+      endif
+    else
+      assign mug_chip_count = mug_chip_count | plus: filter.active_values.size
+    endif
+  endfor
+-%}
+{%- if mug_chip_count > 0 -%}
+  <div class="mug-mobile-chips">
+    {%- for filter in filters -%}
+      {%- if filter.param_name == 'filter.v.availability' -%}{%- continue -%}{%- endif -%}
+      {%- if filter.type == 'price_range' -%}
+        {%- if filter.min_value.value != null or filter.max_value.value != null -%}
+          <a class="pills__pill facets-remove__pill mug-mobile-chips__pill" href="{{ filter.url_to_remove }}">
+            {%- if filter.min_value.value != null -%}{{ filter.min_value.value | money }}{%- else -%}0{%- endif -%}
+            –
+            {%- if filter.max_value.value != null -%}{{ filter.max_value.value | money }}{%- endif %}
+            <span class="mug-mobile-chips__x" aria-hidden="true">&times;</span>
+          </a>
+        {%- endif -%}
+      {%- else -%}
+        {%- for value in filter.active_values -%}
+          <a class="pills__pill facets-remove__pill mug-mobile-chips__pill" href="{{ value.url_to_remove }}">
+            {{ value.label }}
+            <span class="mug-mobile-chips__x" aria-hidden="true">&times;</span>
+          </a>
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .mug-mobile-chips {
+    display: none;
+  }
+  @media screen and (max-width: 749px) {
+    .mug-mobile-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 24px 16px 0;
+    }
+    .mug-mobile-chips__pill {
+      text-decoration: none;
+      color: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .mug-mobile-chips__x {
+      font-size: 15px;
+      line-height: 1;
+    }
+  }
+{% endstylesheet %}

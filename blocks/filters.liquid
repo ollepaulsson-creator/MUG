@@ -235,6 +235,7 @@
     </div>
   </div>
 
+  {% render 'mug-mobile-chips', filters: filters %}
   <div
     class="facets-toggle{% if block_settings.enable_filtering == false %} facets-toggle--no-filters{% endif %}{% if block_settings.filter_style == 'horizontal' and block_settings.inherit_color_scheme == false %} color-{{ block_settings.color_scheme }}{% endif %}"
     style="
