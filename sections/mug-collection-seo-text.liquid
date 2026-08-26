@@ -21,7 +21,7 @@
 
 {% stylesheet %}
   .mug-seo-block {
-    border-top: var(--product-card-border-width, 1px) solid rgb(var(--color-border-rgb) / var(--product-card-border-opacity, 1));
+    border-top: 1px solid #e5e5e5;
     padding: 48px 20px 56px;
   }
   .mug-seo-block__inner {
@@ -55,36 +55,48 @@
 {% javascript %}
   document.querySelectorAll('[data-mug-seo-content]').forEach(function (content) {
     var full = content.innerHTML;
-    var lh = parseFloat(getComputedStyle(content).lineHeight) || 24;
-    var maxH = Math.round(lh * 5) + 2;
-    if (content.scrollHeight <= maxH) return;
-    content.style.maxHeight = 'none';
-    // göm block bortom det första tills det ryms, trimma sedan ord
-    var barn = Array.prototype.slice.call(content.children);
-    var passar = function () { return content.scrollHeight <= maxH; };
+    var rot = content;
+    while (rot.children.length === 1 && rot.children[0].children.length > 0) rot = rot.children[0];
+    var forsta = rot.querySelector('p') || rot;
+    var lh = parseFloat(getComputedStyle(forsta).lineHeight) || 24;
+    var maxH = Math.round(lh * 5) + 4;
+    var cr = function () { return content.getBoundingClientRect(); };
+    if (content.getBoundingClientRect().height <= maxH + 8) return;
+    var barn = Array.prototype.slice.call(rot.children);
+    // göm block vars överkant ligger bortom budgeten
     var i = barn.length - 1;
-    while (i > 0 && !passar()) { barn[i].style.display = 'none'; i--; }
-    var sista = barn[i];
+    while (i > 0 && barn[i].getBoundingClientRect().top - cr().top >= maxH) { barn[i].style.display = 'none'; i--; }
     var suffix = document.createElement('span');
     suffix.className = 'mug-seo-block__suffix';
     suffix.innerHTML = '\u2026 <button type="button">L\u00e4s mer</button>';
+    var sista = barn[i];
     sista.appendChild(suffix);
-    var skydd = 400;
-    while (!passar() && skydd-- > 0) {
+    var lage = function () {
+      var sr = suffix.getBoundingClientRect(); var c = cr();
+      return { over: (sr.bottom - c.top) > maxH, ensam: (sr.left - c.left) < 2 };
+    };
+    var skydd = 800, st = lage();
+    while ((st.over || st.ensam) && skydd-- > 0) {
       var noder = [];
-      (function samla(n) { n.childNodes.forEach(function (c) {
-        if (c === suffix) return;
-        if (c.nodeType === 3) noder.push(c); else samla(c);
+      (function samla(n) { Array.prototype.forEach.call(n.childNodes, function (x) {
+        if (x === suffix) return;
+        if (x.nodeType === 3) noder.push(x); else if (x.nodeType === 1) samla(x);
       }); })(sista);
       var nod = null;
       for (var j = noder.length - 1; j >= 0; j--) { if (noder[j].textContent.trim()) { nod = noder[j]; break; } }
-      if (!nod) break;
-      nod.textContent = nod.textContent.replace(/\s*\S+\s*$/, ' ');
-      if (!nod.textContent.trim()) nod.parentNode.removeChild(nod);
+      if (!nod) {
+        sista.style.display = 'none';
+        i--;
+        if (i < 0) break;
+        sista = barn[i];
+        sista.appendChild(suffix);
+      } else {
+        nod.textContent = nod.textContent.replace(/\s*\S+\s*$/, ' ');
+      }
+      st = lage();
     }
     suffix.querySelector('button').addEventListener('click', function () {
       content.innerHTML = full;
-      content.style.maxHeight = 'none';
     });
   });
 {% endjavascript %}
