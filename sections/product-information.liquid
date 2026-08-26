@@ -64,6 +64,7 @@
       "@context": "http://schema.org/",
       "@id": "{{ closest.product.url }}#product",
       "@type": "Product",
+      {%- render 'mug-schema-attributes', mug_schema_product: closest.product %}
       "brand": { "@type": "Brand", "name": {{ closest.product.vendor | json }} },
       "name": {{ closest.product.title | json }},
       "description": {{ closest.product.description | strip_html | truncate: 500 | json }},
@@ -90,7 +91,16 @@
   </script>
 {%- else -%}
   <script type="application/ld+json">
-    {{ closest.product | structured_data }}
+    {%- capture mug_schema_extra -%}{%- render 'mug-schema-attributes', mug_schema_product: closest.product -%}{%- endcapture -%}
+    {%- assign mug_schema_extra = mug_schema_extra | strip -%}
+    {%- comment -%} Injicera attributen i Shopifys schema; saknas ankaret lämnas schemat orört. {%- endcomment -%}
+    {%- if mug_schema_extra != '' -%}
+      {%- assign mug_schema_anchor = '"@type":"Product",' -%}
+      {%- assign mug_schema_repl = mug_schema_anchor | append: mug_schema_extra -%}
+      {{ closest.product | structured_data | replace_first: mug_schema_anchor, mug_schema_repl }}
+    {%- else -%}
+      {{ closest.product | structured_data }}
+    {%- endif -%}
   </script>
 {%- endif -%}
 

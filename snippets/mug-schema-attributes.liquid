@@ -1,0 +1,38 @@
+{%- comment -%}
+  JSON-fragment med produktattribut ur filtermetafälten (custom.filters_* m.fl.)
+  för produktsidans JSON-LD. Renderas mitt i ett Product-objekt: varje utskrivet
+  fält avslutas med kommatecken, och tom utdata är giltig (inga fält).
+  Parameter: mug_schema_product (product-objektet).
+{%- endcomment -%}
+{%- liquid
+  assign mp = mug_schema_product
+  assign mug_mat = mp.metafields.custom.filters_material.value
+  assign mug_size = mp.metafields.custom.storlek2.value | default: mp.metafields.custom.diameter.value
+-%}
+{%- if mug_mat -%}
+  "material": {{ mug_mat | join: ', ' | json }},
+{%- endif -%}
+{%- if mug_size -%}
+  "size": {{ mug_size | json }},
+{%- endif -%}
+{%- capture mug_props -%}
+  {%- if mp.metafields.custom.filters_typ.value -%}{"@type":"PropertyValue","name":"Typ","value":{{ mp.metafields.custom.filters_typ.value | join: ', ' | json }}},{%- endif -%}
+  {%- if mp.metafields.custom.filters_mikrofoner.value -%}{"@type":"PropertyValue","name":"Mikrofoner","value":{{ mp.metafields.custom.filters_mikrofoner.value | join: ', ' | json }}},{%- endif -%}
+  {%- if mp.metafields.custom.filters_form.value -%}{"@type":"PropertyValue","name":"Form","value":{{ mp.metafields.custom.filters_form.value | join: ', ' | json }}},{%- endif -%}
+  {%- if mp.metafields.custom.filters_format.value -%}{"@type":"PropertyValue","name":"Format","value":{{ mp.metafields.custom.filters_format.value | join: ', ' | json }}},{%- endif -%}
+  {%- if mp.metafields.custom.filters_effekt.value -%}{"@type":"PropertyValue","name":"Effekt","value":{{ mp.metafields.custom.filters_effekt.value | join: ', ' | json }}},{%- endif -%}
+  {%- if mp.metafields.custom.filters_karaktar.value -%}{"@type":"PropertyValue","name":"Karaktär","value":{{ mp.metafields.custom.filters_karaktar.value | join: ', ' | json }}},{%- endif -%}
+  {%- if mp.metafields.custom.filters_impedans.value -%}{"@type":"PropertyValue","name":"Impedans","value":{{ mp.metafields.custom.filters_impedans.value | join: ', ' | json }}},{%- endif -%}
+  {%- if mp.metafields.custom.filters_spanning.value -%}{"@type":"PropertyValue","name":"Strängspänning","value":{{ mp.metafields.custom.filters_spanning.value | join: ', ' | json }}},{%- endif -%}
+  {%- if mp.metafields.custom.filters_kanaler.value -%}{"@type":"PropertyValue","name":"Kanaler","value":{{ mp.metafields.custom.filters_kanaler.value | join: ', ' | json }}},{%- endif -%}
+  {%- if mp.metafields.custom.filters_tonart.value -%}{"@type":"PropertyValue","name":"Tonart","value":{{ mp.metafields.custom.filters_tonart.value | join: ', ' | json }}},{%- endif -%}
+  {%- if mp.metafields.custom.filters_gauge.value -%}{"@type":"PropertyValue","name":"Gauge","value":{{ mp.metafields.custom.filters_gauge.value | join: ', ' | json }}},{%- endif -%}
+  {%- if mp.metafields.custom.antal_strangar_ny.value -%}{"@type":"PropertyValue","name":"Antal strängar","value":{{ mp.metafields.custom.antal_strangar_ny.value | json }}},{%- endif -%}
+  {%- if mp.metafields.custom.antal_tagenter2.value -%}{"@type":"PropertyValue","name":"Antal tangenter","value":{{ mp.metafields.custom.antal_tagenter2.value | json }}},{%- endif -%}
+  {%- if mp.metafields.custom.diameter.value -%}{"@type":"PropertyValue","name":"Diameter","value":{{ mp.metafields.custom.diameter.value | json }}},{%- endif -%}
+{%- endcapture -%}
+{%- assign mug_props = mug_props | strip -%}
+{%- if mug_props != '' -%}
+  {%- assign mug_props_len = mug_props | size | minus: 1 -%}
+  "additionalProperty": [{{ mug_props | slice: 0, mug_props_len }}],
+{%- endif -%}
