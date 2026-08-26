@@ -21,7 +21,7 @@
 
 {% stylesheet %}
   .mug-seo-block {
-    border-top: var(--product-card-border-width, 1px) solid rgb(var(--color-border-rgb) / var(--product-card-border-opacity, 1));
+    border-top: 1px solid #e5e5e5;
     padding: 48px 20px 56px;
   }
   .mug-seo-block__inner {
@@ -55,36 +55,44 @@
 {% javascript %}
   document.querySelectorAll('[data-mug-seo-content]').forEach(function (content) {
     var full = content.innerHTML;
-    var lh = parseFloat(getComputedStyle(content).lineHeight) || 24;
-    var maxH = Math.round(lh * 5) + 2;
-    if (content.scrollHeight <= maxH) return;
-    content.style.maxHeight = 'none';
-    // göm block bortom det första tills det ryms, trimma sedan ord
+    var forsta = content.querySelector('p') || content;
+    var lh = parseFloat(getComputedStyle(forsta).lineHeight) || 26;
+    var maxH = Math.round(lh * 5) + 4;
+    if (content.scrollHeight <= maxH + 8) return;
     var barn = Array.prototype.slice.call(content.children);
-    var passar = function () { return content.scrollHeight <= maxH; };
-    var i = barn.length - 1;
-    while (i > 0 && !passar()) { barn[i].style.display = 'none'; i--; }
-    var sista = barn[i];
     var suffix = document.createElement('span');
     suffix.className = 'mug-seo-block__suffix';
     suffix.innerHTML = '\u2026 <button type="button">L\u00e4s mer</button>';
+    // göm block bortom det första som rimligen ryms
+    var i = barn.length - 1;
+    while (i > 0 && barn[i].offsetTop - content.offsetTop > maxH) { barn[i].style.display = 'none'; i--; }
+    var sista = barn[i];
     sista.appendChild(suffix);
-    var skydd = 400;
-    while (!passar() && skydd-- > 0) {
+    var lage = function () {
+      var cr = content.getBoundingClientRect();
+      var sr = suffix.getBoundingClientRect();
+      return { over: (sr.bottom - cr.top) > maxH, ensam: (sr.left - cr.left) < 2 };
+    };
+    var skydd = 600, st = lage();
+    while ((st.over || st.ensam) && skydd-- > 0) {
       var noder = [];
-      (function samla(n) { n.childNodes.forEach(function (c) {
+      (function samla(n) { Array.prototype.forEach.call(n.childNodes, function (c) {
         if (c === suffix) return;
-        if (c.nodeType === 3) noder.push(c); else samla(c);
+        if (c.nodeType === 3) noder.push(c); else if (c.nodeType === 1) samla(c);
       }); })(sista);
       var nod = null;
       for (var j = noder.length - 1; j >= 0; j--) { if (noder[j].textContent.trim()) { nod = noder[j]; break; } }
-      if (!nod) break;
-      nod.textContent = nod.textContent.replace(/\s*\S+\s*$/, ' ');
-      if (!nod.textContent.trim()) nod.parentNode.removeChild(nod);
+      if (!nod) {
+        if (i > 0) { sista.style.display = 'none'; i--; sista = barn[i]; sista.appendChild(suffix); }
+        else break;
+      } else {
+        nod.textContent = nod.textContent.replace(/\s*\S+\s*$/, ' ');
+        if (!nod.textContent.trim() && nod.parentNode !== sista) nod.parentNode.removeChild(nod);
+      }
+      st = lage();
     }
     suffix.querySelector('button').addEventListener('click', function () {
       content.innerHTML = full;
-      content.style.maxHeight = 'none';
     });
   });
 {% endjavascript %}
