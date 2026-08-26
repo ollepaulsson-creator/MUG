@@ -2469,7 +2469,14 @@ body {
   }
 }
 
-/* ── Färgfiltret: svart hover-label över swatcharna ── */
+/* ── Färgfiltret: svart hover-label över swatcharna ──
+   Panelen har overflow-y: clip (accordion-animationen), så tooltippen får
+   utrymme INOM klippregionen via padding-top + kompenserande negativ margin.
+   Vänsterställd så den inte klipps av drawerkanten. */
+.facets__panel-content:has(.facets__inputs-list--swatches) {
+  padding-top: 34px !important;
+  margin-top: -30px !important;
+}
 .facets__inputs-list--swatches .variant-option--swatches {
   position: relative;
 }
@@ -2499,4 +2506,16 @@ body {
   border-top-color: #111;
   z-index: 12;
   pointer-events: none;
+}
+/* kantkolumnerna: justera in så labeln inte klipps av drawerkanten */
+.facets__inputs-list--swatches > :nth-child(4n+1) .variant-option--swatches:hover::after,
+.facets__inputs-list--swatches > .variant-option--swatches:nth-child(4n+1):hover::after {
+  left: -2px;
+  transform: none;
+}
+.facets__inputs-list--swatches > :nth-child(4n) .variant-option--swatches:hover::after,
+.facets__inputs-list--swatches > .variant-option--swatches:nth-child(4n):hover::after {
+  left: auto;
+  right: -2px;
+  transform: none;
 }
