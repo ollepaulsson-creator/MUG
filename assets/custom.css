@@ -2564,11 +2564,16 @@ body {
 .product-inventory .product-inventory__status {
   align-items: flex-start;
 }
+/* +4px extra luft efter lagerraden */
+product-inventory.product-inventory {
+  margin-bottom: 4px;
+}
 .product-inventory .product-inventory__icon,
 .product-inventory .product-inventory__icon svg {
   width: 20px;
   height: 20px;
   margin-top: 2px;
+  flex-shrink: 0;
 }
 .product-inventory .product-inventory__icon svg {
   margin-top: 0;
