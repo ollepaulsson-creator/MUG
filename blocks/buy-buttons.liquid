@@ -262,9 +262,7 @@
 
   <local-pickup
     class="spacing-style product__pickup-availabilities"
-    {%- comment -%} göm även när butiksexemplar saknas — webblagervaror skickas
-        (direkt från distributör eller via ompack), de hämtas inte i butik {%- endcomment -%}
-    {% if pick_up_availabilities.size == 0 or pick_up_availabilities.first.available != true %}
+    {% if pick_up_availabilities.size == 0 %}
       hidden
     {% endif %}
     data-section-id="{{ section.id }}"
@@ -277,26 +275,30 @@
       <dialog-component>
         <div class="pickup-availability__row">
           <div class="pickup-availability__column">
-            <span class="svg-wrapper">
-              {% if pick_up_availabilities.first.available %}
-                {{- 'icon-available.svg' | inline_asset_content -}}
-              {% else %}
-                {{- 'icon-unavailable.svg' | inline_asset_content -}}
-              {% endif %}
-            </span>
-          </div>
-          <div class="pickup-availability__column">
-            {% if pick_up_availabilities.first.available %}
+            {%- liquid
+              # butiks- eller webblagerexemplar? Samma källa som lagerraden
+              # (custom.finns_i_butik). Shopifys store_availability duger inte:
+              # kassan erbjuder pickup for allt kopbart, sa available ar alltid
+              # sant och pick_up_time kan visa fel tid for webblagervaror.
+              assign mug_fib_raw = product.metafields.custom.finns_i_butik
+              assign mug_fib = false
+              if mug_fib_raw == true or mug_fib_raw == 'true' or mug_fib_raw == 1
+                assign mug_fib = true
+              endif
+            -%}
+            {% if mug_fib %}
               <p class="pickup-location__text-sm">
-                {%- comment -%} platsen heter "Finns i butik" internt — visa aldrig det namnet för kund {%- endcomment -%}
                 Upphämtning tillgänglig i butiken på Kaserntorget&nbsp;9
               </p>
               <p class="pickup-location__text-xs">
-                {{ 'content.pickup_ready_in' | t: pickup_time: pick_up_availabilities.first.pick_up_time }}
+                Vanligtvis redo inom 2 timmar
               </p>
             {% else %}
               <p class="pickup-location__text-sm">
-                {{ 'content.pickup_not_available' | t }}
+                Upphämtning i butiken på Kaserntorget&nbsp;9 möjlig
+              </p>
+              <p class="pickup-location__text-xs">
+                Skickas först till butiken &mdash; redo om 1&ndash;3 arbetsdagar
               </p>
             {% endif %}
             <button

@@ -2551,3 +2551,17 @@ body {
     line-height: 1;
   }
 }
+
+
+/* ── Upphämtningsrutan på produktsidan: ram som Klarna-rutan, 13px, ingen ikon ── */
+.product__pickup-availabilities .pickup-availability__row {
+  border: 1px solid #e2e2e2;
+  border-radius: 4px;
+  background: #fff;
+  padding: 10px 14px;
+}
+.product__pickup-availabilities .pickup-location__text-sm,
+.product__pickup-availabilities .pickup-location__text-xs,
+.product__pickup-availabilities .pickup-location__button {
+  font-size: 13px;
+}
