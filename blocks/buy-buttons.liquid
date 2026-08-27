@@ -286,24 +286,17 @@
                 assign mug_fib = true
               endif
             -%}
-            {% if mug_fib %}
-              <p class="pickup-location__text-sm">
-                Upphämtning tillgänglig i butiken på Kaserntorget&nbsp;9
-              </p>
-              <p class="pickup-location__text-xs">
-                Vanligtvis redo inom 2 timmar
-              </p>
-            {% else %}
-              <p class="pickup-location__text-sm">
-                Upphämtning i butiken på Kaserntorget&nbsp;9 möjlig
-              </p>
-            {% endif %}
-            <button
-              on:click="/showDialog"
-              class="button-unstyled pickup-location__button"
-            >
-              {{ 'actions.view_store_information' | t }}
-            </button>
+            <p class="pickup-location__text-sm">
+              {%- if mug_fib -%}
+                Upphämtning tillgänglig i butiken på Kaserntorget&nbsp;9. Vanligtvis redo inom 2&nbsp;timmar.
+              {%- else -%}
+                Upphämtning i butiken på Kaserntorget&nbsp;9 möjlig.
+              {%- endif %}
+              <button
+                on:click="/showDialog"
+                class="button-unstyled pickup-location__button"
+              >{{ 'actions.view_store_information' | t }}</button>
+            </p>
           </div>
         </div>
         <dialog
