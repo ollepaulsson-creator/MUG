@@ -2564,6 +2564,12 @@ body {
 .product-inventory .product-inventory__status {
   align-items: flex-start;
 }
-.product-inventory .product-inventory__icon {
+.product-inventory .product-inventory__icon,
+.product-inventory .product-inventory__icon svg {
+  width: 20px;
+  height: 20px;
   margin-top: 2px;
+}
+.product-inventory .product-inventory__icon svg {
+  margin-top: 0;
 }
