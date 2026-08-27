@@ -2561,7 +2561,15 @@ body {
   padding: 10px 14px;
 }
 .product__pickup-availabilities .pickup-location__text-sm,
-.product__pickup-availabilities .pickup-location__text-xs,
+.product__pickup-availabilities .pickup-location__text-xs {
+  font-size: 13px;
+}
 .product__pickup-availabilities .pickup-location__button {
   font-size: 13px;
+  font-weight: 400;
+  color: #000;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  display: inline;
+  padding: 0;
 }
