@@ -2564,6 +2564,9 @@ body {
 .product-inventory .product-inventory__status {
   align-items: flex-start;
 }
+.product-inventory .product-inventory__text strong {
+  font-weight: 600;
+}
 /* +4px extra luft efter lagerraden */
 product-inventory.product-inventory {
   margin-bottom: 4px;
