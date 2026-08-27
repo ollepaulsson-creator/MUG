@@ -128,7 +128,9 @@
 
   <local-pickup
     class="spacing-style product__pickup-availabilities"
-    {% if pick_up_availabilities.size == 0 %}
+    {%- comment -%} göm även när butiksexemplar saknas — webblagervaror skickas
+        (direkt från distributör eller via ompack), de hämtas inte i butik {%- endcomment -%}
+    {% if pick_up_availabilities.size == 0 or pick_up_availabilities.first.available != true %}
       hidden
     {% endif %}
     data-section-id="{{ section.id }}"
