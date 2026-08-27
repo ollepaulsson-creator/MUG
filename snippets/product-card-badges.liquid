@@ -22,6 +22,20 @@
   {%- endif -%}
 {%- endfor -%}
 
+{%- comment %} ── Förhandsbeställning (fryst kontrakt: preorder.md) — trumfar övriga badgar ── {%- endcomment -%}
+{%- assign mug_pre = product.metafields.mug.preorder.value -%}
+{%- assign mug_is_preorder = false -%}
+{%- if mug_pre -%}
+  {%- if mug_pre.ends_at != blank -%}
+    {%- assign mug_pre_end = mug_pre.ends_at | date: '%s' | plus: 0 -%}
+    {%- if now_seconds <= mug_pre_end -%}
+      {%- assign mug_is_preorder = true -%}
+    {%- endif -%}
+  {%- else -%}
+    {%- assign mug_is_preorder = true -%}
+  {%- endif -%}
+{%- endif -%}
+
 {%- comment %} ── Status: read from metafield, support list and single-value types ── {%- endcomment -%}
 {%- assign status_meta = product.metafields.custom.status -%}
 {%- assign status_list = '' -%}
@@ -66,7 +80,11 @@
   "
 >
   {%- comment %} ── One badge at a time, in priority order ── {%- endcomment -%}
-  {%- if status_list contains 'Begagnad' -%}
+  {%- if mug_is_preorder -%}
+    <div class="product-badges__badge product-badges__badge--rectangle color-scheme-preorder">
+      <span class="product-badges__badge-text">Förhandsbeställning</span>
+    </div>
+  {%- elsif status_list contains 'Begagnad' -%}
     <div class="product-badges__badge product-badges__badge--rectangle color-scheme-status color-scheme-status--begagnad">
       <span class="product-badges__badge-text">Begagnad</span>
     </div>
@@ -173,6 +191,14 @@
 
   /* Nyhet badge */
   .product-badges__badge.color-scheme-nyhet {
+    --badge-bg: #fff;
+    color: #000;
+    font-size: 12px!important;
+    letter-spacing: 1px;
+  }
+
+  /* Förhandsbeställning badge — samma vita platta som Nyhet */
+  .product-badges__badge.color-scheme-preorder {
     --badge-bg: #fff;
     color: #000;
     font-size: 12px!important;
