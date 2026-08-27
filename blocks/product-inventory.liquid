@@ -198,9 +198,9 @@
       {%- elsif status == 'out_of_stock' -%}
         Slut i lager
       {%- elsif finns_i_butik -%}
-        <strong>Finns i butik:</strong> Leverans 1–2 arbetsdagar. Upphämtning i butiken på <button type="button" class="mug-pickup-link">Kaserntorget&nbsp;9</button> möjlig inom 2&nbsp;timmar.
+        <strong>Finns i butik:</strong> Leverans 1–2 arbetsdagar. Upphämtning i butiken på <a class="mug-pickup-link" href="/pages/besok-butiken">Kaserntorget&nbsp;9</a> möjlig inom 2&nbsp;timmar.
       {%- else -%}
-        <strong>I webblager:</strong> Leverans 1–3 arbetsdagar. Upphämtning i butiken på <button type="button" class="mug-pickup-link">Kaserntorget&nbsp;9</button> möjlig inom 1–3 arbetsdagar.
+        <strong>I webblager:</strong> Leverans 1–3 arbetsdagar. Upphämtning i butiken på <a class="mug-pickup-link" href="/pages/besok-butiken">Kaserntorget&nbsp;9</a> möjlig inom 1–3 arbetsdagar.
       {%- endif -%}
 
       {%- if block_settings.show_inventory_quantity and inventory_managed and inventory_quantity > 0 -%}
@@ -210,24 +210,6 @@
   </span>
 </product-inventory>
 
-<script>
-  /* Kaserntorget 9-länken i lagerraden öppnar butiksinfo-dialogen som bor i
-     det (visuellt dolda) pickup-blocket. Delegering på document så lyssnaren
-     överlever sektionsomrendering vid variantbyte. */
-  if (!window.mugPickupLinkInit) {
-    window.mugPickupLinkInit = true;
-    document.addEventListener('click', function (e) {
-      var btn = e.target.closest('.mug-pickup-link');
-      if (!btn) return;
-      var lp = document.querySelector('.product__pickup-availabilities');
-      if (!lp) return;
-      var dc = lp.querySelector('dialog-component');
-      var dlg = lp.querySelector('dialog');
-      if (dc && typeof dc.showDialog === 'function') dc.showDialog();
-      else if (dlg && typeof dlg.showModal === 'function') dlg.showModal();
-    });
-  }
-</script>
 
 {% stylesheet %}
   .product-inventory__status {
