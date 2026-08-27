@@ -115,7 +115,8 @@
   {%- endif -%}
 </span>
 
-{% if block_settings.show_pickup_availability %}
+{%- comment -%} aldrig upphämtningslöfte på förhandsvaror — varan finns inte i butiken än (mug_is_preorder ur förhandskontraktet; != true är nil-säkert) {%- endcomment -%}
+{% if block_settings.show_pickup_availability and mug_is_preorder != true %}
   <script
     src="{{ 'local-pickup.js' | asset_url }}"
     type="module"
