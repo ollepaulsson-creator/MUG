@@ -285,7 +285,8 @@
           <div class="pickup-availability__column">
             {% if pick_up_availabilities.first.available %}
               <p class="pickup-location__text-sm">
-                {{ 'content.pickup_available_at_html' | t: location: pick_up_availabilities.first.location.name }}
+                {%- comment -%} platsen heter "Finns i butik" internt — visa aldrig det namnet för kund {%- endcomment -%}
+                Upphämtning tillgänglig i butiken på Kaserntorget&nbsp;9
               </p>
               <p class="pickup-location__text-xs">
                 {{ 'content.pickup_ready_in' | t: pickup_time: pick_up_availabilities.first.pick_up_time }}
@@ -328,7 +329,7 @@
           </div>
           {% for pick_up_availability in pick_up_availabilities %}
             <div class="pickup-location__wrapper">
-              <p class="pickup-location__text-bold">{{ pick_up_availability.location.name }}</p>
+              <p class="pickup-location__text-bold">Musik Utan Gränser</p>
               <div class="pickup-location__address-wrapper">
                 <span class="pickup-location__availability-wrapper">
                   {% if pick_up_availability.available %}
