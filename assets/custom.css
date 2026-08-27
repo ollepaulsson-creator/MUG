@@ -2560,3 +2560,11 @@ body {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+/* 13px + prick toppjusterad mot första textraden (raden kan bli flerradig) */
+.product-inventory .product-inventory__status {
+  align-items: flex-start;
+  font-size: 13px;
+}
+.product-inventory .product-inventory__icon {
+  margin-top: 2px;
+}
