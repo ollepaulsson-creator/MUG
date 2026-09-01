@@ -164,7 +164,10 @@
   {%- comment -%} The homepage title is fully authored in Preferences (ends
     with "| MUG") — appending the shop name doubled the branding and pushed
     the title to 94 chars. {%- endcomment -%}
-  {%- unless page_title contains shop.name or request.page_type == 'index' %} &ndash; {{ shop.name }}{% endunless -%}
+  {%- comment -%} Kort varumärkessuffix: "MUG" är vad kunderna faktiskt söker på
+    ("mug", "mug göteborg", "mug musik" är sajtens största sökfrågor), och det
+    frigör 15 tecken av Googles ~60 till produktinformation i titeln. {%- endcomment -%}
+  {%- unless page_title contains shop.name or page_title contains 'MUG' or request.page_type == 'index' %} | MUG{% endunless -%}
 </title>
 
 {%- if current_tags -%}
