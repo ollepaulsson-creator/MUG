@@ -122,12 +122,13 @@
           assign antal_text = rating_count | append: ' recensioner'
         endif
       -%}
-      <a
+      {%- comment -%} Knapp, inte <a>: ingen destination finns, och en #-länk scrollade sidan. {%- endcomment -%}
+      <button
+        type="button"
         class="rating-link"
-        href="{{ product.url }}#betyg"
         data-tooltip="Betyget baseras på {{ antal_text }}"
         aria-label="Betyget baseras på {{ antal_text }}"
-      >({{ rating_count }})</a>
+      >({{ rating_count }})</button>
     {%- endif -%}
 
     {%- if has_rating and block_settings.show_number or stars_style == 'single' -%}
@@ -202,8 +203,14 @@
   /* MUG 2026-09-03: länk med antal recensioner + svart hover-etikett */
   .rating-link {
     position: relative;
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font-family: inherit;
     font-size: 15px;
     line-height: 1;
+    cursor: default;
     color: var(--color-foreground);
     text-decoration: underline;
     text-underline-offset: 2px;
