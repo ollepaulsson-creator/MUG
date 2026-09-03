@@ -76,8 +76,9 @@
           <stop offset="50%" stop-color="{% if block_settings.stars_style == "outline" %}transparent{% else %}rgb(var(--star-fill-color-rgb) / var(--opacity-20){% endif %}"></stop>
         </linearGradient>
 
-        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="star">
-          <path d="M31.547 12a.848.848 0 00-.677-.577l-9.427-1.376-4.224-8.532a.847.847 0 00-1.516 0l-4.218 8.534-9.427 1.355a.847.847 0 00-.467 1.467l6.823 6.664-1.612 9.375a.847.847 0 001.23.893l8.428-4.434 8.432 4.432a.847.847 0 001.229-.894l-1.615-9.373 6.822-6.665a.845.845 0 00.214-.869z" />
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="5.4 5.4 14.2 14.2" id="star">
+          {%- comment -%} MUG:s stjärna (star-filled.svg / star-empty.svg, 2026-09-03) {%- endcomment -%}
+          <path d="M12.9189 6.27027L14.8483 10.0927L18.5617 10.4605C18.6501 10.4679 18.7345 10.5004 18.805 10.5543C18.8755 10.6081 18.9291 10.681 18.9594 10.7644C18.9898 10.8477 18.9956 10.9381 18.9762 11.0246C18.9568 11.1112 18.913 11.1904 18.85 11.2528L15.7939 14.2818L16.927 18.3977C16.9501 18.485 16.9476 18.5771 16.9197 18.663C16.8917 18.7489 16.8396 18.8249 16.7695 18.8818C16.6993 18.9388 16.6143 18.9743 16.5245 18.984C16.4347 18.9938 16.344 18.9774 16.2633 18.9368L12.4985 17.0726L8.73901 18.9345C8.65831 18.9751 8.56761 18.9915 8.47781 18.9817C8.38801 18.972 8.30294 18.9365 8.23283 18.8795C8.16272 18.8226 8.11056 18.7466 8.08262 18.6607C8.05467 18.5748 8.05214 18.4827 8.07532 18.3954L9.20837 14.2795L6.15 11.2505C6.087 11.1881 6.0432 11.1089 6.02381 11.0223C6.00441 10.9357 6.01022 10.8454 6.04056 10.7621C6.07089 10.6787 6.12448 10.6058 6.19497 10.552C6.26546 10.4981 6.34991 10.4656 6.43831 10.4582L10.1517 10.0904L12.0782 6.27027C12.1178 6.19289 12.178 6.12794 12.2522 6.08259C12.3264 6.03724 12.4116 6.01324 12.4985 6.01324C12.5855 6.01324 12.6707 6.03724 12.7449 6.08259C12.8191 6.12794 12.8793 6.19289 12.9189 6.27027Z" />
         </symbol>
       </defs>
     </svg>
@@ -89,7 +90,7 @@
       {% if stars_style == 'single' %}
         <svg
           class="stars {% if svg_filled_stars > 0 %}filled-star{% endif %}"
-          viewBox="0 0 32 32"
+          viewBox="5.4 5.4 14.2 14.2"
           style="--empty-star-fill-color: rgb(var(--star-fill-color-rgb) / var(--opacity-20)"
           role="presentation"
         >
@@ -99,13 +100,13 @@
         {%- for star in (1..star_count_rating) -%}
           <svg
             class="stars {% if star <= svg_filled_stars %}filled-star{% endif %}"
-            viewBox="0 0 32 32"
+            viewBox="5.4 5.4 14.2 14.2"
             style="--empty-star-fill-color:{% if stars_style == 'outline' %}transparent{% else %}rgb(var(--star-fill-color-rgb) / var(--opacity-20){% endif %}"
             role="presentation"
           >
             <use xlink:href="#star"{% if decimal_rating == 0.5 and star == svg_filled_stars %} fill="url(#half)"{% endif %}></use>
             {% if stars_style == "outline" %}
-              <use xlink:href="#star" fill="none" stroke="{% if star <= svg_filled_stars %}var(--star-fill-color){% else %}var(--empty-star-stroke-color, var(--star-fill-color)){% endif %}" stroke-width="var(--icon-stroke-width)"></use>
+              <use xlink:href="#star" fill="none" stroke="{% if star <= svg_filled_stars %}var(--star-fill-color){% else %}var(--empty-star-stroke-color, var(--star-fill-color)){% endif %}" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"></use>
             {% endif %}
           </svg>
         {%- endfor -%}
@@ -144,11 +145,6 @@
   .rating-color--foreground {
     --star-fill-color: var(--color-foreground);
     --star-fill-color-rgb: var(--color-foreground-rgb);
-  }
-
-  /* Ofyllda stjärnor i konturläge: grå kontur i stället för färgad */
-  .rating-wrapper {
-    --empty-star-stroke-color: rgb(var(--color-foreground-rgb) / 0.35);
   }
 
   /* Tomvariant: fem gråa konturstjärnor */
@@ -191,6 +187,11 @@
 
   .filled-star {
     fill: var(--star-fill-color);
+  }
+
+  /* Tomma stjärnans kontur: #C3C3C3 @ 83 % som i star-empty.svg */
+  .rating-wrapper {
+    --empty-star-stroke-color: rgb(195 195 195 / 0.83);
   }
 {% endstylesheet %}
 
