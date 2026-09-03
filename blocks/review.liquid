@@ -151,7 +151,8 @@
 {% stylesheet %}
   .rating-wrapper {
     width: 100%;
-    gap: var(--gap-xs);
+    /* MUG 2026-09-03: +1 px mellan stjärnraden och antalet */
+    gap: calc(var(--gap-xs) + 1px);
     flex-wrap: wrap;
   }
 
