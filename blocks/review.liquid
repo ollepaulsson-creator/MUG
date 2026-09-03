@@ -126,7 +126,7 @@
       <button
         type="button"
         class="rating-link"
-        data-tooltip="Betyget baseras på {{ antal_text }}"
+        title="Betyget baseras på {{ antal_text }}"
         aria-label="Betyget baseras på {{ antal_text }}"
       >({{ rating_count }})</button>
     {%- endif -%}
@@ -181,8 +181,8 @@
   }
 
   .rating {
-    /* MUG 2026-09-03: +1 px mellan stjärnorna, 2 px luft under raden */
-    gap: calc(var(--gap-3xs) + 1px);
+    /* MUG 2026-09-03: +3 px mellan stjärnorna, 2 px luft under raden */
+    gap: calc(var(--gap-3xs) + 3px);
     padding-block-end: 2px;
   }
 
@@ -200,7 +200,7 @@
     padding-right: var(--padding-xs);
   }
 
-  /* MUG 2026-09-03: länk med antal recensioner + svart hover-etikett */
+  /* MUG 2026-09-03: länk med antal recensioner; tooltip via title-attributet */
   .rating-link {
     position: relative;
     background: none;
@@ -217,28 +217,6 @@
     text-decoration-thickness: 1px;
   }
 
-  .rating-link::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    left: 0;
-    top: calc(100% + 6px);
-    background: #000;
-    color: #fff;
-    font-size: 12px;
-    line-height: 1.3;
-    padding: 5px 8px;
-    border-radius: 2px;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.15s ease;
-    z-index: 2;
-  }
-
-  .rating-link:hover::after,
-  .rating-link:focus-visible::after {
-    opacity: 1;
-  }
 
   .stars {
     height: var(--star-size);
