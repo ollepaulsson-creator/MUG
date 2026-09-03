@@ -243,7 +243,7 @@
                   "settings": {
                     "stars_style": "outline",
                     "show_number": false,
-                    "show_empty": true,
+                    "show_empty": false,
                     "rating_color": "foreground",
                     "star_color": "#000000",
                     "type_preset": "paragraph",
