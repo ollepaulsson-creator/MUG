@@ -38,71 +38,10 @@
   endcase
 %}
 
-{%- liquid
-  # Förhandsvaror: Shopifys structured_data-filter rapporterar InStock så fort
-  # varianten är köpbar (CONTINUE), vilket lurar Google/Merchant Center under
-  # förhandskampanjer. Aktiv mug.preorder → egen JSON-LD med PreOrder, och
-  # availabilityStarts när kampanjen bär ett leveransdatum (availability_date).
-  assign mug_pre_sd = closest.product.metafields.mug.preorder.value
-  assign mug_pre_sd_active = false
-  if mug_pre_sd
-    assign mug_sd_now = 'now' | date: '%s' | plus: 0
-    if mug_pre_sd.ends_at != blank
-      assign mug_sd_end = mug_pre_sd.ends_at | date: '%s' | plus: 0
-      if mug_sd_now <= mug_sd_end
-        assign mug_pre_sd_active = true
-      endif
-    else
-      assign mug_pre_sd_active = true
-    endif
-  endif
--%}
-{%- if mug_pre_sd_active -%}
-  {%- assign mug_sd_variant = closest.product.selected_or_first_available_variant -%}
-  <script type="application/ld+json">
-    {
-      "@context": "http://schema.org/",
-      "@id": "{{ closest.product.url }}#product",
-      "@type": "Product",
-      {%- render 'mug-schema-attributes', mug_schema_product: closest.product %}
-      "brand": { "@type": "Brand", "name": {{ closest.product.vendor | json }} },
-      "name": {{ closest.product.title | json }},
-      "description": {{ closest.product.description | strip_html | truncate: 500 | json }},
-      {%- if closest.product.featured_image %}
-        "image": {{ closest.product.featured_image | image_url: width: 1200 | prepend: 'https:' | json }},
-      {%- endif %}
-      "sku": {{ mug_sd_variant.sku | json }},
-      {%- if mug_sd_variant.barcode != blank %}
-        "gtin13": {{ mug_sd_variant.barcode | json }},
-      {%- endif %}
-      "offers": {
-        "@id": "{{ mug_sd_variant.url }}#offer",
-        "@type": "Offer",
-        "availability": "https://schema.org/PreOrder",
-        {%- if mug_pre_sd.availability_date %}
-          "availabilityStarts": {{ mug_pre_sd.availability_date | json }},
-        {%- endif %}
-        "price": "{{ mug_sd_variant.price | divided_by: 100.0 }}",
-        "priceCurrency": {{ cart.currency.iso_code | json }},
-        "url": "https://{{ request.host }}{{ mug_sd_variant.url }}"
-      },
-      "url": "https://{{ request.host }}{{ closest.product.url }}"
-    }
-  </script>
-{%- else -%}
-  <script type="application/ld+json">
-    {%- capture mug_schema_extra -%}{%- render 'mug-schema-attributes', mug_schema_product: closest.product -%}{%- endcapture -%}
-    {%- assign mug_schema_extra = mug_schema_extra | strip -%}
-    {%- comment -%} Injicera attributen i Shopifys schema; saknas ankaret lämnas schemat orört. {%- endcomment -%}
-    {%- if mug_schema_extra != '' -%}
-      {%- assign mug_schema_anchor = '"@type":"Product",' -%}
-      {%- assign mug_schema_repl = mug_schema_anchor | append: mug_schema_extra -%}
-      {{ closest.product | structured_data | replace_first: mug_schema_anchor, mug_schema_repl }}
-    {%- else -%}
-      {{ closest.product | structured_data }}
-    {%- endif -%}
-  </script>
-{%- endif -%}
+<script type="application/ld+json">
+  {{ closest.product | structured_data }}
+</script>
+{% render 'product-rating-json-ld', product: closest.product %}
 
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <div
@@ -129,6 +68,7 @@
           id: 'media-gallery',
           closest.product: closest.product
         -%}
+        {%- render 'product-card-badges', product: closest.product, settings: settings -%}
       </div>
     {% endcapture %}
    
@@ -356,7 +296,7 @@
     background: #f0f0f0;
   }
 
-  .product-information__media media-gallery .product-badges {
+  .product-information__media .product-badges {
     top: 16px !important;
     left: 16px !important;
     bottom: auto !important;

@@ -7,6 +7,21 @@
   assign scale_max = product.metafields.reviews.rating.value.scale_max
   assign rating_count = product.metafields.reviews.rating_count
 
+  # Tomvariant (MUG 2026-09-03): utan betyg ritas fem gråa konturstjärnor
+  # när show_empty är på, så raden finns på alla produktsidor. Antal och
+  # JSON-LD följer bara med när ett riktigt betyg finns.
+  assign has_rating = true
+  if rating == blank
+    assign has_rating = false
+    assign rating = 0
+    assign scale_max = 5
+    assign rating_count = 0
+  endif
+  assign stars_style = block_settings.stars_style
+  unless has_rating
+    assign stars_style = 'outline'
+  endunless
+
   if request.visual_preview_mode and product == blank
     assign product = collections.all.products.first
     assign rating = product.metafields.reviews.rating.value | default: 4
@@ -15,7 +30,7 @@
   endif
 -%}
 
-{%- if rating != blank -%}
+{%- if has_rating or block_settings.show_empty -%}
   {% liquid
     assign star_count_rating = scale_max
     assign decimal_rating = 0
@@ -33,8 +48,19 @@
     assign svg_filled_stars = rating | floor | plus: decimal_rounded
   %}
 
+  {%- liquid
+    assign wrapper_style = ''
+    if block_settings.rating_color == 'custom'
+      assign c = block_settings.star_color
+      assign r = c | color_extract: 'red'
+      assign g = c | color_extract: 'green'
+      assign b = c | color_extract: 'blue'
+      assign wrapper_style = '--star-fill-color: ' | append: c | append: '; --star-fill-color-rgb: ' | append: r | append: ' ' | append: g | append: ' ' | append: b | append: ';'
+    endif
+  -%}
   <div
-    class="rating-wrapper justify-{{ block_settings.alignment }} rating-color--{{ block_settings.rating_color }}"
+    class="rating-wrapper justify-{{ block_settings.alignment }} rating-color--{{ block_settings.rating_color }}{% unless has_rating %} rating--empty{% endunless %}"
+    {% if wrapper_style != blank %}style="{{ wrapper_style }}"{% endif %}
     {{ block.shopify_attributes }}
   >
     <svg
@@ -60,7 +86,7 @@
       style="--star-size: calc(var(--font-{{ block_settings.type_preset }}--size) * 1.1);"
       aria-label="{{ 'accessibility.rating' | t: rating: rating }}"
     >
-      {% if block_settings.stars_style == 'single' %}
+      {% if stars_style == 'single' %}
         <svg
           class="stars {% if svg_filled_stars > 0 %}filled-star{% endif %}"
           viewBox="0 0 32 32"
@@ -74,24 +100,24 @@
           <svg
             class="stars {% if star <= svg_filled_stars %}filled-star{% endif %}"
             viewBox="0 0 32 32"
-            style="--empty-star-fill-color:{% if block_settings.stars_style == 'outline' %}transparent{% else %}rgb(var(--star-fill-color-rgb) / var(--opacity-20){% endif %}"
+            style="--empty-star-fill-color:{% if stars_style == 'outline' %}transparent{% else %}rgb(var(--star-fill-color-rgb) / var(--opacity-20){% endif %}"
             role="presentation"
           >
             <use xlink:href="#star"{% if decimal_rating == 0.5 and star == svg_filled_stars %} fill="url(#half)"{% endif %}></use>
-            {% if block_settings.stars_style == "outline" %}
-              <use xlink:href="#star" fill="none" stroke="var(--star-fill-color)" stroke-width="var(--icon-stroke-width)"></use>
+            {% if stars_style == "outline" %}
+              <use xlink:href="#star" fill="none" stroke="{% if star <= svg_filled_stars %}var(--star-fill-color){% else %}var(--empty-star-stroke-color, var(--star-fill-color)){% endif %}" stroke-width="var(--icon-stroke-width)"></use>
             {% endif %}
           </svg>
         {%- endfor -%}
       {% endif %}
     </div>
 
-    {%- if block_settings.show_number or block_settings.stars_style == 'single' -%}
+    {%- if has_rating and block_settings.show_number or stars_style == 'single' -%}
       <p class="rating-count {{ block_settings.type_preset }}">
-        {%- if block_settings.stars_style == 'single' -%}
+        {%- if stars_style == 'single' -%}
           <span aria-hidden="true">{{- rating | round: 1 }}</span>
         {%- endif -%}
-        {%- if block_settings.stars_style == 'single' and block_settings.show_number -%}
+        {%- if stars_style == 'single' and block_settings.show_number -%}
           <span class="rating-count-separator">|</span>
         {%- endif -%}
         {%- if block_settings.show_number -%}
@@ -118,6 +144,16 @@
   .rating-color--foreground {
     --star-fill-color: var(--color-foreground);
     --star-fill-color-rgb: var(--color-foreground-rgb);
+  }
+
+  /* Ofyllda stjärnor i konturläge: grå kontur i stället för färgad */
+  .rating-wrapper {
+    --empty-star-stroke-color: rgb(var(--color-foreground-rgb) / 0.35);
+  }
+
+  /* Tomvariant: fem gråa konturstjärnor */
+  .rating--empty {
+    --star-fill-color: rgb(var(--color-foreground-rgb) / 0.35);
   }
 
   .rating-wrapper,
@@ -198,6 +234,12 @@
       "default": true
     },
     {
+      "type": "checkbox",
+      "id": "show_empty",
+      "label": "Visa tomma stjärnor när betyg saknas",
+      "default": false
+    },
+    {
       "type": "select",
       "id": "rating_color",
       "label": "t:settings.color",
@@ -209,9 +251,19 @@
         {
           "value": "primary",
           "label": "t:options.body"
+        },
+        {
+          "value": "custom",
+          "label": "Egen färg"
         }
       ],
       "default": "primary"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Egen stjärnfärg",
+      "default": "#F5B301"
     },
     {
       "type": "header",

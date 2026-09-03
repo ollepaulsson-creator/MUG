@@ -144,9 +144,10 @@
                   "blocks": {}
                 },
                 "text_mHiYiL": {
-                  "type": "vendor-link",
-                  "name": "Varumärkeslänk",
+                  "type": "text",
+                  "name": "t:names.text",
                   "settings": {
+                    "text": "<h5>{{ closest.product.vendor }}</h5>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -236,6 +237,18 @@
                     "custom_liquid": "<style>\n  .availability {\n    font-size: 14px;\n    margin-top: 5px;\n    display: flex;\n    align-items: center;\n    gap: 6px;\n  }\n\n  .status-dot {\n    width: 10px;\n    height: 10px;\n    border-radius: 50%;\n    display: inline-block;\n    margin-right: 8px;\n  }\n\n  .in-stock .status-dot {\n    background-color: #28a745;\n    animation: pulseGreen 1.5s infinite;\n  }\n\n  .out-of-stock .status-dot {\n    background-color: #dc3545;\n    animation: pulseRed 1.5s infinite;\n  }\n\n  @keyframes pulseGreen {\n    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(40,167,69, 0.7); }\n    70% { transform: scale(1.3); box-shadow: 0 0 10px 5px rgba(40,167,69, 0); }\n    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(40,167,69, 0); }\n  }\n\n  @keyframes pulseRed {\n    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220,53,69, 0.7); }\n    70% { transform: scale(1.3); box-shadow: 0 0 10px 5px rgba(220,53,69, 0); }\n    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220,53,69, 0); }\n  }\n</style>\n\n{% if product.selected_or_first_available_variant.available %}\n  <p class=\"availability in-stock\">\n    <span class=\"status-dot\"></span> In stock\n  </p>\n{% else %}\n  <p class=\"availability out-of-stock\">\n    <span class=\"status-dot\"></span> Out of stock\n  </p>\n{% endif %}"
                   },
                   "blocks": {}
+                },
+                "review_stars": {
+                  "type": "review",
+                  "settings": {
+                    "stars_style": "outline",
+                    "show_number": false,
+                    "show_empty": true,
+                    "rating_color": "foreground",
+                    "star_color": "#000000",
+                    "type_preset": "paragraph",
+                    "alignment": "left"
+                  }
                 }
               },
               "block_order": [
@@ -243,6 +256,7 @@
                 "text_mHiYiL",
                 "product_title_eYVzTU",
                 "price_tVjtKg",
+                "review_stars",
                 "product_inventory_DnACMz",
                 "custom_liquid_nqetQP"
               ]
@@ -368,37 +382,6 @@
         "padding-block-end": 0
       }
     },
-    "1785154556fa7aadf8": {
-      "type": "_blocks",
-      "disabled": true,
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "color_scheme": "",
-        "background_media": "none",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
     "product_recommendations_qggXJq": {
       "type": "product-recommendations",
       "blocks": {
@@ -406,7 +389,7 @@
           "type": "text",
           "name": "t:names.header",
           "settings": {
-            "text": "<h2>Relaterade produkter</h2>",
+            "text": "<h4>Relaterade produkter</h4>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -422,7 +405,7 @@
             "background_color": "#00000026",
             "corner_radius": 0,
             "padding-block-start": 0,
-            "padding-block-end": 12,
+            "padding-block-end": 15,
             "padding-inline-start": 15,
             "padding-inline-end": 0
           },
@@ -472,9 +455,10 @@
               "blocks": {}
             },
             "text_3Yrq36": {
-              "type": "vendor-link",
-              "name": "Varumärkeslänk",
+              "type": "text",
+              "name": "t:names.text",
               "settings": {
+                "text": "<h5>{{ closest.product.vendor }}</h5>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -577,7 +561,7 @@
         "gap": 0,
         "color_scheme": "scheme-1",
         "padding-block-start": 20,
-        "padding-block-end": 0
+        "padding-block-end": 40
       }
     },
     "show_more_product_6aRMeT": {
@@ -1103,7 +1087,6 @@
     "breadcrumbs_GrLYt4",
     "main",
     "divider_rjB4iR",
-    "1785154556fa7aadf8",
     "product_recommendations_qggXJq",
     "show_more_product_6aRMeT",
     "custom_liquid_BQTdPY",

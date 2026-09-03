@@ -1,0 +1,29 @@
+{%- comment -%}
+  Lägger aggregateRating i produktsidans JSON-LD, hämtat ur Shopifys
+  standardmetafält reviews.rating / reviews.rating_count (skrivs av Judge.me).
+
+  Samma @id som Shopifys structured_data-filter använder, så Google slår ihop
+  noderna till en Product. Renderas bara när ett betyg finns — utan betyg finns
+  ingen uppmärkning alls, i linje med Googles krav att betyget ska vara synligt
+  på sidan (temats blocks/review.liquid visar samma tal).
+{%- endcomment -%}
+{%- liquid
+  assign rating = product.metafields.reviews.rating.value
+  assign rating_count = product.metafields.reviews.rating_count
+-%}
+{%- if rating != blank and rating_count != blank and rating_count > 0 -%}
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org/",
+    "@id": {{ product.url | append: '#product' | json }},
+    "@type": "Product",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": {{ rating.rating | json }},
+      "bestRating": {{ rating.scale_max | default: 5 | json }},
+      "worstRating": {{ rating.scale_min | default: 1 | json }},
+      "ratingCount": {{ rating_count | json }}
+    }
+  }
+</script>
+{%- endif -%}
