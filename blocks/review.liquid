@@ -90,7 +90,7 @@
       {% if stars_style == 'single' %}
         <svg
           class="stars {% if svg_filled_stars > 0 %}filled-star{% endif %}"
-          viewBox="5.4 5.4 14.2 14.2"
+          viewBox="0 0 14.2 14.2"
           style="--empty-star-fill-color: rgb(var(--star-fill-color-rgb) / var(--opacity-20)"
           role="presentation"
         >
@@ -100,7 +100,7 @@
         {%- for star in (1..star_count_rating) -%}
           <svg
             class="stars {% if star <= svg_filled_stars %}filled-star{% endif %}"
-            viewBox="5.4 5.4 14.2 14.2"
+            viewBox="0 0 14.2 14.2"
             style="--empty-star-fill-color:{% if stars_style == 'outline' %}transparent{% else %}rgb(var(--star-fill-color-rgb) / var(--opacity-20){% endif %}"
             role="presentation"
           >
