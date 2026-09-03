@@ -27,9 +27,9 @@
 
 {% stylesheet %}
   /* MUG 2026-09-03: titelns line-height +4 px (h1-presetens 1.2 → 1.2em + 4px) */
-  /* Specificitet (0,3,1) — temats `.text-block.h1 > *` (0,2,0) vann annars */
+  /* !important behövs: temat sätter `.text-block h1 { line-height: 1.2 !important }` */
   .text-block.product-title-block.h1 > h1 {
-    line-height: calc(1.2em + 4px);
+    line-height: calc(1.2em + 4px) !important;
   }
 {% endstylesheet %}
 
