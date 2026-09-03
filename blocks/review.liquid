@@ -163,7 +163,9 @@
   }
 
   .rating {
-    gap: var(--gap-3xs);
+    /* MUG 2026-09-03: +1 px mellan stjärnorna, 2 px luft under raden */
+    gap: calc(var(--gap-3xs) + 1px);
+    padding-block-end: 2px;
   }
 
   .rating-wrapper .rating-text,
