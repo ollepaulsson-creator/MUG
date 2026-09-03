@@ -127,7 +127,7 @@
         href="{{ product.url }}#betyg"
         data-tooltip="Betyget baseras på {{ antal_text }}"
         aria-label="Betyget baseras på {{ antal_text }}"
-      >{{ rating_count }}</a>
+      >({{ rating_count }})</a>
     {%- endif -%}
 
     {%- if has_rating and block_settings.show_number or stars_style == 'single' -%}
