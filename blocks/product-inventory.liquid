@@ -194,7 +194,7 @@
       aria-label="{{ 'accessibility.inventory_status' | t }}"
     >
       {%- if mug_is_preorder -%}
-        Tillgänglig för förhandsbeställning
+        <span class="product-inventory__text--preorder">Tillgänglig för förhandsbeställning</span>
       {%- elsif status == 'out_of_stock' -%}
         Slut i lager
       {%- elsif finns_i_butik -%}
@@ -218,6 +218,11 @@
     font-size: var(--font-paragraph--size);
     line-height: var(--font-paragraph--line-height);
     gap: var(--padding-md);
+  }
+
+  /* MUG 2026-09-03: förhandsbeställningstexten i 13 px */
+  .product-inventory__text--preorder {
+    font-size: 13px;
   }
 
   .product-inventory__icon,
