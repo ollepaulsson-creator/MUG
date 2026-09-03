@@ -15,15 +15,22 @@
 {% if closest.product == blank %}
   {% assign text = 'placeholders.product_title' | t %}
   {% assign product_title = open_tag | append: text | append: close_tag %}
-  {% render 'text', fallback_text: product_title, block: block %}
+  {% render 'text', fallback_text: product_title, block: block, class: 'product-title-block' %}
 {% elsif closest.product != blank %}
   {% assign product_title = open_tag | append: closest.product.title | append: close_tag %}
-  {% render 'text', fallback_text: product_title, block: block %}
+  {% render 'text', fallback_text: product_title, block: block, class: 'product-title-block' %}
 {% endif %}
 
 
 
 
+
+{% stylesheet %}
+  /* MUG 2026-09-03: titelns line-height +4 px (h1-presetens 1.2 → 1.2em + 4px) */
+  .product-title-block h1 {
+    line-height: calc(1.2em + 4px);
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
