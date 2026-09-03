@@ -59,6 +59,7 @@
     endif
   -%}
   <div
+    id="betyg"
     class="rating-wrapper justify-{{ block_settings.alignment }} rating-color--{{ block_settings.rating_color }}{% unless has_rating %} rating--empty{% endunless %}"
     {% if wrapper_style != blank %}style="{{ wrapper_style }}"{% endif %}
     {{ block.shopify_attributes }}
@@ -112,6 +113,22 @@
         {%- endfor -%}
       {% endif %}
     </div>
+
+    {%- if has_rating -%}
+      {%- liquid
+        if rating_count == 1
+          assign antal_text = rating_count | append: ' recension'
+        else
+          assign antal_text = rating_count | append: ' recensioner'
+        endif
+      -%}
+      <a
+        class="rating-link"
+        href="{{ product.url }}#betyg"
+        data-tooltip="Betyget baseras på {{ antal_text }}"
+        aria-label="Betyget baseras på {{ antal_text }}"
+      >{{ antal_text }}</a>
+    {%- endif -%}
 
     {%- if has_rating and block_settings.show_number or stars_style == 'single' -%}
       <p class="rating-count {{ block_settings.type_preset }}">
@@ -180,6 +197,40 @@
     opacity: var(--opacity-20);
     padding-left: calc(var(--padding-xs) / 2);
     padding-right: var(--padding-xs);
+  }
+
+  /* MUG 2026-09-03: länk med antal recensioner + svart hover-etikett */
+  .rating-link {
+    position: relative;
+    font-size: 13px;
+    line-height: 1;
+    color: var(--color-foreground);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+  }
+
+  .rating-link::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 0;
+    top: calc(100% + 6px);
+    background: #000;
+    color: #fff;
+    font-size: 12px;
+    line-height: 1.3;
+    padding: 5px 8px;
+    border-radius: 2px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+    z-index: 2;
+  }
+
+  .rating-link:hover::after,
+  .rating-link:focus-visible::after {
+    opacity: 1;
   }
 
   .stars {
