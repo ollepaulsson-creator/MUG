@@ -194,8 +194,18 @@
   {%- comment -%} Products fall back to a 320-char excerpt of the product
     body — cut it at Google's ~160-char display limit. Collections and pages
     carry hand-written descriptions already inside the limit. {%- endcomment -%}
-  {%- if request.page_type == 'product' -%}
-    {%- assign meta_description = meta_description | truncate: 158 -%}
+  {%- if request.page_type == 'product' and meta_description.size > 158 -%}
+    {%- comment -%} Kapa vid ordgräns i stället för mitt i ett ord: ta de
+      första 158 tecknen, släng det sista (oftast halva) ordet om snittet
+      inte råkade hamna på ett mellanslag, och avsluta med ellips. {%- endcomment -%}
+    {%- assign cut = meta_description | slice: 0, 158 -%}
+    {%- assign next_char = meta_description | slice: 158, 1 -%}
+    {%- unless next_char == ' ' -%}
+      {%- assign last_word = cut | split: ' ' | last -%}
+      {%- assign keep = 158 | minus: last_word.size -%}
+      {%- assign cut = cut | slice: 0, keep -%}
+    {%- endunless -%}
+    {%- assign meta_description = cut | strip | append: '…' | replace: ',…', '…' | replace: ';…', '…' | replace: ':…', '…' | replace: ' –…', '…' | replace: ' -…', '…' | replace: '.…', '.' -%}
   {%- endif -%}
   <meta
     name="description"
