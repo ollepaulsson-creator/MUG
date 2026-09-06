@@ -18,13 +18,13 @@
 
   {%- render 'stylesheets' -%}
 
-    {%- if settings.favicon != blank -%}
-      <link
-        rel="icon"
-        type="image/png"
-        href="{{ settings.favicon | image_url: width: 32, height: 32 }}"
-      >
-    {%- endif -%}
+    {% comment %} Favicon: tätt beskuren kvadrat med logotypen (192 px = multipel av 48,
+      vilket Google kräver för ikonen i sökresultaten). 512 px till Android/PWA,
+      180 px till iOS. Källa: settings.favicon var 601 px med mycket luft runt logon,
+      vilket gav en pytteliten logo i Googles 16 px-ruta. {% endcomment %}
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ 'favicon-192.png' | asset_url }}">
+    <link rel="icon" type="image/png" sizes="512x512" href="{{ 'favicon-512.png' | asset_url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ 'apple-touch-icon.png' | asset_url }}">
 
     {% comment %} View-transition render blocker removed — view transitions are
       disabled (navigation:none in custom.css) so blocking="render" only adds
