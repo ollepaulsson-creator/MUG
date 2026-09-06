@@ -144,10 +144,9 @@
                   "blocks": {}
                 },
                 "text_mHiYiL": {
-                  "type": "text",
-                  "name": "t:names.text",
+                  "type": "vendor-link",
+                  "name": "Varumärkeslänk",
                   "settings": {
-                    "text": "<h5>{{ closest.product.vendor }}</h5>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -455,10 +454,9 @@
               "blocks": {}
             },
             "text_3Yrq36": {
-              "type": "text",
-              "name": "t:names.text",
+              "type": "vendor-link",
+              "name": "Varumärkeslänk",
               "settings": {
-                "text": "<h5>{{ closest.product.vendor }}</h5>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
