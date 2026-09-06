@@ -9,20 +9,6 @@
  */
 {
   "sections": {
-    "instant_r_ak_gq_g4oot_yii_mth_HFTFmA": {
-      "type": "instant-rAKGqG4ootYiiMth",
-      "name": "Tonex",
-      "settings": {
-        "url_P8aM5R0MtXbbzems": "https://www.mug.se/collections/tonex",
-        "text_FKkkUxqdhOGKnSzc": "<p>Tonex Board: En värld av effekter!</p>",
-        "text_VlEwFJ9gWg5A1sKl": "<p>Beställ nu!</p>",
-        "url_BrwyLJMv0Qlojp0t": "https://www.mug.se/collections/tonex",
-        "text_cXHHSntr3AyvjbGd": "<p>The TOnex Familly</p>",
-        "text_nW80B1fTpFBJ9BIg": "<p>Upptäck!</p>",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
     "product_list_fze8iq": {
       "type": "product-list",
       "blocks": {
@@ -258,6 +244,20 @@
         "color_scheme": "scheme-1",
         "padding-block-start": 10,
         "padding-block-end": 0
+      }
+    },
+    "instant_r_ak_gq_g4oot_yii_mth_QcnGQf": {
+      "type": "instant-rAKGqG4ootYiiMth",
+      "name": "Tonex",
+      "settings": {
+        "url_P8aM5R0MtXbbzems": "https://www.mug.se/products/tonex-board",
+        "text_FKkkUxqdhOGKnSzc": "<p>Tonex Board: En värld av effekter!</p>",
+        "text_VlEwFJ9gWg5A1sKl": "<p>Beställ nu!</p>",
+        "url_BrwyLJMv0Qlojp0t": "https://www.mug.se/collections/tonex",
+        "text_cXHHSntr3AyvjbGd": "<p>The TOnex Familly</p>",
+        "text_nW80B1fTpFBJ9BIg": "<p>Upptäck!</p>",
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "instant_u_x_qo4_ng_ebjmyp_ifm_x6W4E6": {
@@ -1450,7 +1450,7 @@
     }
   },
   "order": [
-    "instant_r_ak_gq_g4oot_yii_mth_HFTFmA",
+    "instant_r_ak_gq_g4oot_yii_mth_QcnGQf",
     "product_list_fze8iq",
     "instant_u_x_qo4_ng_ebjmyp_ifm_x6W4E6",
     "product_list_HAC7P3",
