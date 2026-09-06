@@ -260,6 +260,21 @@
         "padding-block-end": 0
       }
     },
+    "instant_u_x_qo4_ng_ebjmyp_ifm_x6W4E6": {
+      "type": "instant-uXQo4NGEbjmypIfm",
+      "name": "Begagnat & Vintage",
+      "settings": {
+        "url_D6v0yNcin7Exesxx": "https://www.mug.se/collections/begagnat",
+        "text_iyLI4duLXIxEhicm": "<h2>BEGAGNAT</h2><h2>OCH VINTAGE</h2>",
+        "text_34dwqgFoWShn8VMX": "<p>Begagnat och Vintage</p>",
+        "text_2qPCMby1Y3VJZiQG": "<p>UPPTÄCK</p>",
+        "url_y4aQDjZKjWYMlsEv": "https://www.mug.se/collections/begagnat",
+        "text_bMzSGJUdaYe8O9OC": "<p>Begagnat och Vintage</p>",
+        "text_nBfyGVDXLllBuady": "<p></p><p></p><p>UPPTÄCK</p>",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
     "instant_rz_rs_pn_fwscmy3wd_q_NNqBCt": {
       "type": "instant-RzRsPnFwscmy3wdQ",
       "name": "Pedaler",
@@ -509,21 +524,6 @@
         "color_scheme": "scheme-1",
         "padding-block-start": 10,
         "padding-block-end": 0
-      }
-    },
-    "instant_u_x_qo4_ng_ebjmyp_ifm_x6W4E6": {
-      "type": "instant-uXQo4NGEbjmypIfm",
-      "name": "Begagnat & Vintage",
-      "settings": {
-        "url_D6v0yNcin7Exesxx": "https://www.mug.se/collections/begagnat",
-        "text_iyLI4duLXIxEhicm": "<h2>BEGAGNAT</h2><h2>OCH VINTAGE</h2>",
-        "text_34dwqgFoWShn8VMX": "<p>Begagnat och Vintage</p>",
-        "text_2qPCMby1Y3VJZiQG": "<p>UPPTÄCK</p>",
-        "url_y4aQDjZKjWYMlsEv": "https://www.mug.se/collections/begagnat",
-        "text_bMzSGJUdaYe8O9OC": "<p>Begagnat och Vintage</p>",
-        "text_nBfyGVDXLllBuady": "<p></p><p></p><p>UPPTÄCK</p>",
-        "padding_top": 0,
-        "padding_bottom": 0
       }
     },
     "product_list_HAC7P3": {
@@ -1452,10 +1452,10 @@
   "order": [
     "instant_r_ak_gq_g4oot_yii_mth_xznwMX",
     "product_list_fze8iq",
-    "instant_rz_rs_pn_fwscmy3wd_q_NNqBCt",
-    "product_list_f3kizb",
     "instant_u_x_qo4_ng_ebjmyp_ifm_x6W4E6",
     "product_list_HAC7P3",
+    "instant_rz_rs_pn_fwscmy3wd_q_NNqBCt",
+    "product_list_f3kizb",
     "instant_rw_rmcj_hbeqy_h_ul_fu_MLLXnN",
     "product_list_NawcEz",
     "section_ygjNqf",
