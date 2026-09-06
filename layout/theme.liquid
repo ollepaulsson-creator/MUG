@@ -650,6 +650,14 @@ document.addEventListener("DOMContentLoaded", function() {
       shopify-chat::part(activator):hover {
         background: rgba(120, 104, 83, 0.3);
       }
+      /* Chattknappen får aldrig ligga över en öppen dialog (filterlådan,
+         varukorgen, snabbköp, sök). Dialogerna öppnas med showModal() och
+         ligger i top layer, men Inbox-widgeten hamnar där också (popover)
+         när dess runtime monteras efter att dialogen öppnats — då täckte
+         pillen "Se N artiklar"-knappen i filterlådan (sep 2026). */
+      html:has(dialog[open]) shopify-chat {
+        display: none !important;
+      }
     </style>
     <script>
       (function () {
