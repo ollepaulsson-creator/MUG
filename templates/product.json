@@ -1096,7 +1096,8 @@
       "type": "mug-reviews",
       "settings": {
         "endpoint": "https://bakhuvudet.mug.se/api/public/reviews"
-      }
+      },
+      "disabled": true
     }
   },
   "order": [
