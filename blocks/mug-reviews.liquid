@@ -155,11 +155,28 @@
         if (row.body) main.appendChild(el('p', 'mug-pr__body', row.body));
         if (row.reply_body) {
           var reply = el('div', 'mug-pr__reply');
+          var svarare = row.reply_author_name || 'Musik Utan Gränser';
+          var huvud = el('div', 'mug-pr__reply-head');
+          if (row.reply_author_avatar_url) {
+            var bild = document.createElement('img');
+            bild.className = 'mug-pr__reply-avatar';
+            bild.src = row.reply_author_avatar_url;
+            bild.alt = '';
+            bild.width = 28;
+            bild.height = 28;
+            bild.loading = 'lazy';
+            huvud.appendChild(bild);
+          } else {
+            huvud.appendChild(el('span', 'mug-pr__reply-avatar mug-pr__reply-avatar--initial', svarare.charAt(0).toUpperCase()));
+          }
           var rm = el('p', 'mug-pr__meta');
-          rm.appendChild(el('span', 'mug-pr__name', 'Musik Utan Gränser'));
+          rm.appendChild(el('span', 'mug-pr__name', svarare));
+          rm.appendChild(el('span', 'mug-pr__dot', '·'));
+          rm.appendChild(el('span', null, 'Musik Utan Gränser'));
           var rn = sedan(row.reply_at);
           if (rn) { rm.appendChild(el('span', 'mug-pr__dot', '·')); rm.appendChild(el('span', null, rn)); }
-          reply.appendChild(rm);
+          huvud.appendChild(rm);
+          reply.appendChild(huvud);
           reply.appendChild(el('p', 'mug-pr__body', row.reply_body));
           main.appendChild(reply);
         }
@@ -404,6 +421,33 @@
 
   .mug-pr__reply .mug-pr__body {
     margin-top: 4px;
+  }
+
+  .mug-pr__reply-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .mug-pr__reply-head .mug-pr__meta {
+    margin: 0;
+  }
+
+  .mug-pr__reply-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .mug-pr__reply-avatar--initial {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(var(--color-foreground-rgb) / 0.08);
+    font-weight: 600;
+    font-size: 13px;
   }
 
   .mug-pr__more-wrap {
