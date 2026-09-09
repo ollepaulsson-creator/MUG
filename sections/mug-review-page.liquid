@@ -238,7 +238,9 @@
         st.id = 'mug-pj-style';
         // Deras rubrik, stängkryss och logga i botten (vi visar loggan själva överst)
         st.textContent = '.close-icon{display:none!important}.rating_wrapper .rating-title{display:none!important}.pj_logo_wrapper,a:has(img),a img{display:none!important}'
-          + 'body{text-align:center}.modal{margin-left:auto!important;margin-right:auto!important}'
+          + 'body{text-align:center}'
+          // .modal är position:fixed med left:0 — left+right+auto-marginal centrerar den
+          + '.modal{left:0!important;right:0!important;margin-left:auto!important;margin-right:auto!important}'
           + '.main-container,.rating-wrapper,.rating_wrapper,.item-container-main,.icons-container{justify-content:center!important;align-items:center!important;text-align:center!important}';
         d.head.appendChild(st);
         return true;
