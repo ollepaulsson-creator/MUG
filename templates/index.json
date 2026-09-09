@@ -215,12 +215,25 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "review_stars": {
+              "type": "review",
+              "settings": {
+                "stars_style": "outline",
+                "show_number": false,
+                "show_empty": false,
+                "rating_color": "foreground",
+                "star_color": "#000000",
+                "type_preset": "paragraph",
+                "alignment": "left"
+              }
             }
           },
           "block_order": [
             "product_card_gallery_CmgWjR",
             "text_wnzBg8",
             "product_title_NYDrem",
+            "review_stars",
             "price_xtPFC7"
           ]
         }
@@ -481,12 +494,25 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "review_stars": {
+              "type": "review",
+              "settings": {
+                "stars_style": "outline",
+                "show_number": false,
+                "show_empty": false,
+                "rating_color": "foreground",
+                "star_color": "#000000",
+                "type_preset": "paragraph",
+                "alignment": "left"
+              }
             }
           },
           "block_order": [
             "product_card_gallery_tiBwKW",
             "text_bWTfX3",
             "product_title_RKXdGb",
+            "review_stars",
             "price_RB3K4t"
           ]
         }
@@ -732,12 +758,25 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "review_stars": {
+              "type": "review",
+              "settings": {
+                "stars_style": "outline",
+                "show_number": false,
+                "show_empty": false,
+                "rating_color": "foreground",
+                "star_color": "#000000",
+                "type_preset": "paragraph",
+                "alignment": "left"
+              }
             }
           },
           "block_order": [
             "product_card_gallery_irFaPe",
             "text_RnKzBU",
             "product_title_MANkHz",
+            "review_stars",
             "price_GT6qmJ"
           ]
         }
@@ -983,12 +1022,25 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "review_stars": {
+              "type": "review",
+              "settings": {
+                "stars_style": "outline",
+                "show_number": false,
+                "show_empty": false,
+                "rating_color": "foreground",
+                "star_color": "#000000",
+                "type_preset": "paragraph",
+                "alignment": "left"
+              }
             }
           },
           "block_order": [
             "product_card_gallery_9GzYBY",
             "text_L9U3TX",
             "product_title_CpxVWB",
+            "review_stars",
             "price_8fBXPM"
           ]
         }

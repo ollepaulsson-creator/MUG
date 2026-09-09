@@ -524,6 +524,18 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "review_stars": {
+              "type": "review",
+              "settings": {
+                "stars_style": "outline",
+                "show_number": false,
+                "show_empty": false,
+                "rating_color": "foreground",
+                "star_color": "#000000",
+                "type_preset": "paragraph",
+                "alignment": "left"
+              }
             }
           },
           "block_order": [
@@ -531,6 +543,7 @@
             "product_card_gallery_DNizbJ",
             "text_3Yrq36",
             "product_title_M7MJkb",
+            "review_stars",
             "price_gLWgA6"
           ]
         }
@@ -1078,12 +1091,19 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "mug_reviews": {
+      "type": "mug-reviews",
+      "settings": {
+        "endpoint": "https://bakhuvudet.mug.se/api/public/reviews"
+      }
     }
   },
   "order": [
     "custom_liquid_jJadKM",
     "breadcrumbs_GrLYt4",
     "main",
+    "mug_reviews",
     "divider_rjB4iR",
     "product_recommendations_qggXJq",
     "show_more_product_6aRMeT",

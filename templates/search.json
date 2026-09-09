@@ -264,12 +264,25 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "review_stars": {
+              "type": "review",
+              "settings": {
+                "stars_style": "outline",
+                "show_number": false,
+                "show_empty": false,
+                "rating_color": "foreground",
+                "star_color": "#000000",
+                "type_preset": "paragraph",
+                "alignment": "left"
+              }
             }
           },
           "block_order": [
             "product_card_gallery_cFExAi",
             "text_vendor",
             "product_title_j7qXTx",
+            "review_stars",
             "price_fYkUgG"
           ]
         }

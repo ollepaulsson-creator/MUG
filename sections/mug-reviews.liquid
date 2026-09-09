@@ -1,0 +1,287 @@
+{% comment %}
+  Recensioner (MUG 2026-09-09) — listar produktens recensioner från Bakhuvudet
+  (öppet API, se docs/theme-contracts/recensioner.md i mug-priskoll). Betyget i
+  stjärnraden under titeln kommer ur metafälten reviews.rating/rating_count som
+  Bakhuvudet skriver; den här sektionen hämtar själva texterna med fetch.
+  Renderar ingenting när produkten saknar publicerade recensioner.
+{% endcomment %}
+
+{%- if product -%}
+  {%- assign mug_reviews_endpoint = section.settings.endpoint | default: 'https://bakhuvudet.mug.se/api/public/reviews' -%}
+  <div
+    class="mug-reviews section page-width-content"
+    data-mug-reviews
+    data-endpoint="{{ mug_reviews_endpoint | escape }}"
+    data-product-id="{{ product.id }}"
+    hidden
+  >
+    <svg class="visually-hidden" style="width: 0; height: 0;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="presentation">
+      <defs>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="5.4 5.4 14.2 14.2" id="mug-review-star">
+          {%- comment -%} Samma stjärna som blocks/review.liquid (star-filled.svg) {%- endcomment -%}
+          <path d="M12.9189 6.27027L14.8483 10.0927L18.5617 10.4605C18.6501 10.4679 18.7345 10.5004 18.805 10.5543C18.8755 10.6081 18.9291 10.681 18.9594 10.7644C18.9898 10.8477 18.9956 10.9381 18.9762 11.0246C18.9568 11.1112 18.913 11.1904 18.85 11.2528L15.7939 14.2818L16.927 18.3977C16.9501 18.485 16.9476 18.5771 16.9197 18.663C16.8917 18.7489 16.8396 18.8249 16.7695 18.8818C16.6993 18.9388 16.6143 18.9743 16.5245 18.984C16.4347 18.9938 16.344 18.9774 16.2633 18.9368L12.4985 17.0726L8.73901 18.9345C8.65831 18.9751 8.56761 18.9915 8.47781 18.9817C8.38801 18.972 8.30294 18.9365 8.23283 18.8795C8.16272 18.8226 8.11056 18.7466 8.08262 18.6607C8.05467 18.5748 8.05214 18.4827 8.07532 18.3954L9.20837 14.2795L6.15 11.2505C6.087 11.1881 6.0432 11.1089 6.02381 11.0223C6.00441 10.9357 6.01022 10.8454 6.04056 10.7621C6.07089 10.6787 6.12448 10.6058 6.19497 10.552C6.26546 10.4981 6.34991 10.4656 6.43831 10.4582L10.1517 10.0904L12.0782 6.27027C12.1178 6.19289 12.178 6.12794 12.2522 6.08259C12.3264 6.03724 12.4116 6.01324 12.4985 6.01324C12.5855 6.01324 12.6707 6.03724 12.7449 6.08259C12.8191 6.12794 12.8793 6.19289 12.9189 6.27027Z" />
+        </symbol>
+      </defs>
+    </svg>
+
+    <div class="mug-reviews__head">
+      <h2 class="mug-reviews__title">Recensioner</h2>
+      <div class="mug-reviews__summary">
+        <span class="mug-reviews__stars" data-summary-stars aria-hidden="true"></span>
+        <span class="mug-reviews__summary-text" data-summary-text></span>
+      </div>
+    </div>
+
+    <ul class="mug-reviews__list" data-list></ul>
+
+    <button type="button" class="button mug-reviews__more" data-more hidden>Visa fler</button>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.querySelector('[data-mug-reviews]');
+      if (!root || root.dataset.mugReviewsInit) return;
+      root.dataset.mugReviewsInit = '1';
+
+      var endpoint = root.dataset.endpoint;
+      var productId = root.dataset.productId;
+      var list = root.querySelector('[data-list]');
+      var more = root.querySelector('[data-more]');
+      var summaryStars = root.querySelector('[data-summary-stars]');
+      var summaryText = root.querySelector('[data-summary-text]');
+      var page = 1;
+      var shown = 0;
+      var total = 0;
+      var loading = false;
+
+      function el(tag, className, text) {
+        var node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text !== undefined && text !== null) node.textContent = text;
+        return node;
+      }
+
+      function stars(rating) {
+        var wrap = el('span', 'mug-reviews__stars');
+        wrap.setAttribute('aria-label', 'Betyg ' + rating + ' av 5');
+        for (var i = 1; i <= 5; i++) {
+          var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+          svg.setAttribute('viewBox', '0 0 14.2 14.2');
+          svg.setAttribute('class', 'mug-reviews__star' + (i <= Math.round(rating) ? ' is-filled' : ''));
+          var use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+          use.setAttribute('href', '#mug-review-star');
+          svg.appendChild(use);
+          wrap.appendChild(svg);
+        }
+        return wrap;
+      }
+
+      function datum(iso) {
+        if (!iso) return '';
+        var d = new Date(iso);
+        if (isNaN(d)) return '';
+        return d.toLocaleDateString('sv-SE', { year: 'numeric', month: 'long', day: 'numeric' });
+      }
+
+      function render(row) {
+        var li = el('li', 'mug-reviews__item');
+        var head = el('div', 'mug-reviews__item-head');
+        head.appendChild(stars(row.rating || 0));
+        if (row.verified) head.appendChild(el('span', 'mug-reviews__verified', 'Verifierat köp'));
+        li.appendChild(head);
+        if (row.title) li.appendChild(el('p', 'mug-reviews__item-title', row.title));
+        if (row.body) li.appendChild(el('p', 'mug-reviews__body', row.body));
+        var meta = el('p', 'mug-reviews__meta');
+        meta.appendChild(el('span', 'mug-reviews__name', row.name || 'Kund'));
+        var when = datum(row.created_at);
+        if (when) meta.appendChild(el('span', 'mug-reviews__date', when));
+        li.appendChild(meta);
+        if (row.reply_body) {
+          var reply = el('div', 'mug-reviews__reply');
+          var replyMeta = el('p', 'mug-reviews__meta');
+          replyMeta.appendChild(el('span', 'mug-reviews__name', 'Musik Utan Gränser'));
+          var replyWhen = datum(row.reply_at);
+          if (replyWhen) replyMeta.appendChild(el('span', 'mug-reviews__date', replyWhen));
+          reply.appendChild(replyMeta);
+          reply.appendChild(el('p', 'mug-reviews__body', row.reply_body));
+          li.appendChild(reply);
+        }
+        return li;
+      }
+
+      function summary(data) {
+        var count = data.count || 0;
+        if (!count) return;
+        summaryStars.innerHTML = '';
+        summaryStars.appendChild(stars(data.rating || 0));
+        var snitt = Number(data.rating || 0).toFixed(1).replace('.', ',');
+        summaryText.textContent = snitt + ' av 5 · ' + count + (count === 1 ? ' recension' : ' recensioner');
+      }
+
+      function load() {
+        if (loading) return;
+        loading = true;
+        more.disabled = true;
+        var url = endpoint + (endpoint.indexOf('?') === -1 ? '?' : '&') + 'product=' + encodeURIComponent(productId) + '&page=' + page;
+        fetch(url, { credentials: 'omit' })
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (data) {
+            if (!data) return;
+            var rows = Array.isArray(data.rows) ? data.rows : [];
+            total = data.total || 0;
+            if (page === 1) {
+              if ((data.count || 0) === 0 && total === 0) return;
+              summary(data);
+              root.hidden = false;
+            }
+            rows.forEach(function (row) { list.appendChild(render(row)); });
+            shown += rows.length;
+            page += 1;
+            more.hidden = !(total > shown && rows.length > 0);
+          })
+          .catch(function () {})
+          .then(function () { loading = false; more.disabled = false; });
+      }
+
+      more.addEventListener('click', load);
+      load();
+    })();
+  </script>
+{%- endif -%}
+
+{% stylesheet %}
+  .mug-reviews {
+    max-width: 720px;
+    padding-block: 40px 60px;
+  }
+
+  .mug-reviews__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px 20px;
+    margin-bottom: 24px;
+  }
+
+  .mug-reviews__title {
+    font-size: var(--font-h3--size, 2rem);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .mug-reviews__summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+  }
+
+  .mug-reviews__stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .mug-reviews__star {
+    width: 15px;
+    height: 15px;
+    fill: transparent;
+    stroke: rgb(var(--color-foreground-rgb) / 0.35);
+    stroke-width: 1;
+    stroke-linejoin: round;
+  }
+
+  .mug-reviews__star.is-filled {
+    fill: var(--color-foreground);
+    stroke: var(--color-foreground);
+  }
+
+  .mug-reviews__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mug-reviews__item {
+    padding: 22px 0;
+    border-top: 1px solid rgb(var(--color-foreground-rgb) / 0.12);
+  }
+
+  .mug-reviews__item-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .mug-reviews__verified {
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    padding: 2px 8px;
+    border: 1px solid rgb(var(--color-foreground-rgb) / 0.25);
+    border-radius: 999px;
+  }
+
+  .mug-reviews__item-title {
+    font-weight: 600;
+    margin: 0 0 6px;
+  }
+
+  .mug-reviews__body {
+    margin: 0 0 10px;
+    line-height: 1.6;
+    white-space: pre-line;
+  }
+
+  .mug-reviews__meta {
+    display: flex;
+    gap: 10px;
+    margin: 0;
+    font-size: 14px;
+    color: rgb(var(--color-foreground-rgb) / 0.65);
+  }
+
+  .mug-reviews__name {
+    font-weight: 500;
+    color: var(--color-foreground);
+  }
+
+  .mug-reviews__reply {
+    margin-top: 14px;
+    padding: 14px 16px;
+    border-left: 2px solid rgb(var(--color-foreground-rgb) / 0.25);
+    background: rgb(var(--color-foreground-rgb) / 0.04);
+  }
+
+  .mug-reviews__reply .mug-reviews__meta {
+    margin-bottom: 6px;
+  }
+
+  .mug-reviews__reply .mug-reviews__body {
+    margin: 0;
+  }
+
+  .mug-reviews__more {
+    margin-top: 20px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Recensioner (Bakhuvudet)",
+  "settings": [
+    {
+      "type": "text",
+      "id": "endpoint",
+      "label": "API-adress",
+      "default": "https://bakhuvudet.mug.se/api/public/reviews",
+      "info": "Bakhuvudets öppna recensions-API. Sektionen lägger själv till ?product=<id>&page=<n>."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Recensioner (Bakhuvudet)"
+    }
+  ]
+}
+{% endschema %}
