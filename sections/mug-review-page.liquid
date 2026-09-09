@@ -44,7 +44,6 @@
       <div class="mug-rate__products" data-products></div>
       <div class="mug-rate__footer">
         <p class="sell-form__error" data-error hidden></p>
-        <p class="mug-rate__saved" data-saved hidden></p>
         <button type="button" class="sell-form__submit" data-submit>Skicka din recension</button>
       </div>
     </div>
@@ -73,7 +72,6 @@
         <h2 class="mug-rate__product-title"><a data-title data-product-link></a></h2>
         <p class="mug-rate__variant" data-variant hidden></p>
         <p class="mug-rate__price" data-price hidden></p>
-        <p class="mug-rate__already" data-already hidden>Du har redan betygsatt den här produkten — du kan ändra ditt betyg nedan.</p>
       </div>
     </div>
     <form class="mug-rate__form" novalidate>
@@ -87,7 +85,6 @@
       <label class="sell-form__label" data-body-label>Berätta gärna mer: <span class="mug-rate__optional">(frivilligt)</span></label>
       <p class="sell-form__help">Hur låter det, hur känns det, vad var bra eller mindre bra? Recensioner hjälper andra kunder att göra sitt val. Tack för att du tar dig tid!</p>
       <textarea class="sell-form__input sell-form__textarea" name="body" rows="5" maxlength="4000" placeholder="Skriv en kort recension..."></textarea>
-      <p class="mug-rate__saved mug-rate__saved--product" data-product-saved hidden>Publicerad</p>
     </form>
   </section>
 </template>
@@ -116,7 +113,6 @@
     var produkter = [];
     var submitButton = root.querySelector('[data-submit]');
     var globalError = root.querySelector('[data-error]');
-    var globalSaved = root.querySelector('[data-saved]');
     var skickar = false;
 
     function showState(name) {
@@ -252,7 +248,6 @@
       var variant = node.querySelector('[data-variant]');
       if (p.variantTitle && p.variantTitle !== 'Default Title') { variant.textContent = p.variantTitle; variant.hidden = false; }
       var already = p.rating !== null && p.rating !== undefined;
-      if (already) node.querySelector('[data-already]').hidden = false;
 
       var starsLabel = node.querySelector('[data-stars-label]');
       starsLabel.id = id + '-stars-label';
@@ -271,7 +266,6 @@
       starsEl.addEventListener('rating-change', function () { starsError.hidden = true; });
 
       var form = node.querySelector('form');
-      var savedEl = node.querySelector('[data-product-saved]');
       form.addEventListener('submit', function (e) { e.preventDefault(); skickaAlla(); });
 
       productsRoot.appendChild(node);
@@ -281,8 +275,7 @@
         form: form,
         getRating: getRating,
         starsError: starsError,
-        starsEl: starsEl,
-        savedEl: savedEl
+        starsEl: starsEl
       };
     }
 
@@ -322,16 +315,14 @@
           .catch(function () { return { ok: false }; })
           .then(function (data) { return { x: x, ok: !!(data && data.ok), error: data && data.error }; });
       })).then(function (resultat) {
-        var lyckade = resultat.filter(function (r) { return r.ok; });
         var fel = resultat.filter(function (r) { return !r.ok; });
-        lyckade.forEach(function (r) { r.x.savedEl.hidden = false; });
         if (fel.length === 0) {
-          globalSaved.textContent = lyckade.length > 1 ? 'Tack! Dina betyg är publicerade.' : 'Tack! Ditt betyg är publicerat.';
-          globalSaved.hidden = false;
           submitButton.textContent = 'Uppdatera din recension';
           showPrisjakt();
+          // Kvittot ÄR tack-steget med Prisjakt-widgeten — ta kunden dit.
+          var thanks = root.querySelector('[data-state="thanks"]');
+          if (thanks) thanks.scrollIntoView({ behavior: 'smooth', block: 'start' });
         } else {
-          globalSaved.hidden = true;
           globalError.textContent = fel.map(function (r) {
             return (r.x.p.title || 'Produkten') + ': ' + (r.error || 'något gick fel, försök igen om en stund.');
           }).join(' ');
@@ -447,11 +438,6 @@
     color: rgb(var(--color-foreground-rgb) / 0.55);
   }
 
-  .mug-rate__already {
-    margin: 6px 0 0;
-    font-size: 14px;
-  }
-
   .mug-rate__stars {
     display: flex;
     gap: 0;
@@ -487,12 +473,6 @@
   .mug-rate__star:focus-visible {
     outline: 2px solid var(--color-foreground);
     outline-offset: 2px;
-  }
-
-  .mug-rate__saved {
-    margin: 12px 0 0;
-    font-weight: 600;
-    color: #2e9e44;
   }
 
   .mug-rate__link-button {
@@ -552,10 +532,7 @@
     margin-top: 8px;
   }
 
-  .mug-rate__saved--product {
-    font-size: 14px;
-    margin-top: 8px;
-  }
+
 {% endstylesheet %}
 
 {% schema %}
