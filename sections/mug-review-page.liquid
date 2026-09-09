@@ -241,9 +241,36 @@
         d.head.appendChild(st);
         return true;
       }
+      // Iframen är 150 px hög oavsett innehåll — krymp till innehållet + 30 px,
+      // och följ med när widgeten byter steg.
+      function anpassaHojd() {
+        var frame = holder.querySelector('iframe');
+        if (!frame) return;
+        var d;
+        try { d = frame.contentDocument; } catch (e) { return; }
+        if (!d || !d.body) return;
+        var botten = 0;
+        [].forEach.call(d.body.querySelectorAll('*'), function (el) {
+          var r = el.getBoundingClientRect();
+          if (r.height > 0 && r.bottom > botten) botten = r.bottom;
+        });
+        if (botten > 0) frame.style.height = Math.ceil(botten + 30) + 'px';
+      }
+
       var forsok = 0;
       var timer = setInterval(function () {
-        if (stadaWidget() || ++forsok > 60) clearInterval(timer);
+        if (stadaWidget()) {
+          clearInterval(timer);
+          anpassaHojd();
+          var frame = holder.querySelector('iframe');
+          try {
+            new MutationObserver(anpassaHojd).observe(frame.contentDocument.body, {
+              childList: true, subtree: true, attributes: true
+            });
+          } catch (e) { /* iframen otillgänglig — behåll standardhöjden */ }
+        } else if (++forsok > 60) {
+          clearInterval(timer);
+        }
       }, 250);
     }
 
@@ -515,11 +542,14 @@
   /* Tack-steget (Olles skiss 2026-09-09): centrerat, widgeten i ett kort */
   .mug-rate__thanks {
     margin-top: 8px;
-    text-align: center;
+  }
+
+  /* Lika mycket luft under kortet som ovanför rubriken (58 px) */
+  .sell-form:has([data-state="thanks"]:not([hidden])) {
+    padding-block-end: 58px;
   }
 
   .mug-rate__thanks .sell-form__success-title {
-    justify-content: center;
     align-items: center;
     line-height: 39px;
     margin-bottom: 12px;
@@ -542,13 +572,14 @@
   }
 
   .mug-rate__prisjakt-logo {
-    text-align: center;
     margin: 0 0 20px;
   }
 
+  /* temats svg { display: block } gör att text-align inte biter — centrera med auto-marginal */
   .mug-rate__prisjakt-logo svg {
     height: 44px;
     width: auto;
+    margin: 0 auto;
   }
 
   .mug-rate__prisjakt-fraga {
