@@ -87,12 +87,13 @@
       <p class="sell-form__field-error" data-stars-error hidden>Välj antal stjärnor.</p>
       <label class="sell-form__label" data-name-label>Ditt förnamn: <span class="mug-rate__optional">(frivilligt)</span></label>
       <p class="sell-form__help">Förnamnet visas vid recensionen</p>
-      <input class="sell-form__input" name="name" type="text" maxlength="60" autocomplete="given-name" placeholder="Förnamn">
+      <input class="sell-form__input" name="name" type="text" maxlength="60" autocomplete="given-name" placeholder="Ditt förnamn...">
       <label class="sell-form__label" data-body-label>Berätta gärna mer: <span class="mug-rate__optional">(frivilligt)</span></label>
       <p class="sell-form__help">Hur låter det, hur känns det, vad var bra eller mindre bra?</p>
-      <textarea class="sell-form__input sell-form__textarea" name="body" rows="5" maxlength="4000" placeholder="Din recension"></textarea>
+      <p class="sell-form__help mug-rate__thanks-note">Recensioner hjälper andra kunder att göra sitt val. Tack för att du tar dig tid!</p>
+      <textarea class="sell-form__input sell-form__textarea" name="body" rows="5" maxlength="4000" placeholder="Skriv en kort recension..."></textarea>
       <p class="sell-form__error" data-error hidden></p>
-      <button type="submit" class="sell-form__submit">Spara recension</button>
+      <button type="submit" class="sell-form__submit">Skicka din recension</button>
       <p class="mug-rate__saved" data-saved hidden>Tack! Ditt betyg är publicerat.</p>
     </form>
   </section>
@@ -251,7 +252,7 @@
         var rating = getRating();
         if (!rating) { starsError.hidden = false; starsEl.focus(); return; }
         button.disabled = true;
-        button.textContent = 'Sparar…';
+        button.textContent = 'Skickar…';
         var payload = {
           token: token,
           productId: String(p.productId),
@@ -269,18 +270,18 @@
           .then(function (data) {
             if (data && data.ok) {
               savedEl.hidden = false;
-              button.textContent = 'Uppdatera recension';
+              button.textContent = 'Uppdatera din recension';
               showPrisjakt();
               return;
             }
             errorEl.textContent = (data && data.error) ? data.error : 'Något gick fel. Försök igen om en stund.';
             errorEl.hidden = false;
-            button.textContent = 'Spara recension';
+            button.textContent = 'Skicka din recension';
           })
           .catch(function () {
             errorEl.textContent = 'Något gick fel. Försök igen om en stund.';
             errorEl.hidden = false;
-            button.textContent = 'Spara recension';
+            button.textContent = 'Skicka din recension';
           })
           .then(function () { button.disabled = false; });
       });
@@ -348,6 +349,10 @@
   .mug-rate__price {
     margin: 6px 0 0;
     font-weight: 600;
+  }
+
+  .mug-rate__thanks-note {
+    margin-top: 2px;
   }
 
   .mug-rate__optional {
