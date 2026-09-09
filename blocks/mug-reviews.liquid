@@ -263,7 +263,7 @@
 
   .mug-pr__overview {
     text-align: center;
-    padding: 2px 16px 18px;
+    padding: 2px 16px 28px;
   }
 
   .mug-pr__average {
@@ -413,6 +413,10 @@
 
   .mug-pr__more-wrap:has([hidden]) {
     display: none;
+  }
+
+  .mug-pr__list:has(+ .mug-pr__more-wrap [hidden]) .mug-pr__item:last-child {
+    padding-bottom: 22px;
   }
 
   .mug-pr__more {
