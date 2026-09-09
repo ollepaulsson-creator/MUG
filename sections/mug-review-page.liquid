@@ -197,7 +197,11 @@
       uid += 1;
       var id = 'mug-rate-' + uid;
       var img = node.querySelector('img');
-      if (p.image) { img.src = p.image; img.hidden = false; }
+      if (p.image) {
+        // Shopify-CDN levererar originalstorlek (upp till 2048 px) — be om en liten variant.
+        img.src = /cdn\.shopify\.com/.test(p.image) ? p.image + (p.image.indexOf('?') === -1 ? '?' : '&') + 'width=192' : p.image;
+        img.hidden = false;
+      }
       node.querySelector('[data-title]').textContent = p.title || 'Produkt';
       var variant = node.querySelector('[data-variant]');
       if (p.variantTitle && p.variantTitle !== 'Default Title') { variant.textContent = p.variantTitle; variant.hidden = false; }
