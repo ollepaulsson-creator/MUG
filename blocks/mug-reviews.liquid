@@ -276,6 +276,11 @@
     height: 38px;
   }
 
+  /* 46-canvasen ger ~9 px luft per sida — dra ihop stjärnorna */
+  .mug-pr__stars--large .mug-pr__star + .mug-pr__star {
+    margin-left: -11px;
+  }
+
   .mug-pr__star.is-filled {
     fill: var(--color-foreground);
   }
