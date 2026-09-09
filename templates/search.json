@@ -268,7 +268,7 @@
             "review_stars": {
               "type": "review",
               "settings": {
-                "stars_style": "outline",
+                "stars_style": "shaded",
                 "show_number": false,
                 "show_empty": false,
                 "rating_color": "foreground",

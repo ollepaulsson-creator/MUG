@@ -1,0 +1,405 @@
+{% comment %}
+  Produktomdömen (MUG 2026-09-09) — hopfällbar ruta sist i produktspalten, efter
+  beskrivningen. Rubrik, snitt och antal kommer ur metafälten reviews.rating /
+  reviews.rating_count (skrivs av Bakhuvudet), så blocket renderar ingenting när
+  produkten saknar recensioner. Själva recensionerna hämtas från Bakhuvudets
+  öppna API när sidan laddats. Ersätter sections/mug-reviews.liquid.
+{% endcomment %}
+
+{%- liquid
+  assign product = closest.product
+  assign rating_value = product.metafields.reviews.rating.value.rating
+  assign rating_count = product.metafields.reviews.rating_count
+  assign endpoint = block.settings.endpoint | default: 'https://bakhuvudet.mug.se/api/public/reviews'
+-%}
+
+{%- if product and rating_value != blank and rating_count > 0 -%}
+  {%- liquid
+    assign rating_rounded = rating_value | round: 1
+    assign rating_text = rating_rounded | replace: '.', ','
+    assign decimal = rating_value | modulo: 1
+    assign half = 0
+    if decimal >= 0.25 and decimal < 0.75
+      assign half = 1
+    endif
+    assign full = rating_value | floor
+    if decimal >= 0.75
+      assign full = full | plus: 1
+    endif
+    assign half_index = full | plus: 1
+  -%}
+  <accordion-custom
+    class="mug-pr"
+    data-mug-pr
+    data-endpoint="{{ endpoint | escape }}"
+    data-product-id="{{ product.id }}"
+    {{ block.shopify_attributes }}
+  >
+    <details class="details mug-pr__details"{% if block.settings.open_by_default %} open{% endif %}>
+      <summary class="details__header mug-pr__summary">
+        <span class="mug-pr__caret" aria-hidden="true">
+          <svg viewBox="0 0 10 6" width="10" height="6"><path d="M0 0h10L5 6z" fill="currentColor"/></svg>
+        </span>
+        <span class="mug-pr__heading">Produktomdömen <span class="mug-pr__count">({{ rating_count }})</span></span>
+      </summary>
+
+      <div class="details-content mug-pr__content">
+        <svg class="visually-hidden" style="width: 0; height: 0;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="presentation">
+          <defs>
+            <linearGradient id="mug-pr-half" x1="0" x2="100%" y1="0" y2="0">
+              <stop offset="50%" stop-color="var(--color-foreground)"></stop>
+              <stop offset="50%" stop-color="#D9D9D9"></stop>
+            </linearGradient>
+            <symbol xmlns="http://www.w3.org/2000/svg" viewBox="10.6 10.6 23.9 23.9" id="mug-pr-star">
+              {%- comment -%} Samma stjärna som blocks/review.liquid (star-filled.svg) {%- endcomment -%}
+              <path d="M23.3048 11.3111L26.7852 18.2064L33.4839 18.87C33.6434 18.8833 33.7957 18.942 33.9229 19.0391C34.05 19.1362 34.1467 19.2678 34.2014 19.4182C34.2561 19.5685 34.2666 19.7314 34.2316 19.8876C34.1966 20.0437 34.1176 20.1866 34.004 20.2992L28.4911 25.7633L30.535 33.188C30.5768 33.3455 30.5722 33.5117 30.5218 33.6667C30.4714 33.8216 30.3773 33.9587 30.2509 34.0614C30.1244 34.1642 29.9709 34.2282 29.8089 34.2458C29.647 34.2634 29.4833 34.2338 29.3378 34.1606L22.5465 30.7977L15.7645 34.1564C15.619 34.2296 15.4553 34.2592 15.2934 34.2416C15.1314 34.224 14.9779 34.16 14.8514 34.0573C14.725 33.9545 14.6309 33.8174 14.5805 33.6625C14.53 33.5075 14.5255 33.3413 14.5673 33.1839L16.6112 25.7591L11.0942 20.2951C10.9805 20.1824 10.9015 20.0396 10.8665 19.8834C10.8315 19.7273 10.842 19.5644 10.8967 19.414C10.9515 19.2636 11.0481 19.1321 11.1753 19.0349C11.3024 18.9378 11.4548 18.8791 11.6142 18.8659L18.313 18.2022L21.7882 11.3111C21.8597 11.1715 21.9683 11.0543 22.1021 10.9725C22.2359 10.8907 22.3896 10.8474 22.5465 10.8474C22.7033 10.8474 22.8571 10.8907 22.9909 10.9725C23.1247 11.0543 23.2333 11.1715 23.3048 11.3111Z" />
+            </symbol>
+          </defs>
+        </svg>
+
+        <div class="mug-pr__overview">
+          <p class="mug-pr__average">{{ rating_text }}</p>
+          <div class="mug-pr__stars mug-pr__stars--large" aria-label="Betyg {{ rating_text }} av 5">
+            {%- for i in (1..5) -%}
+              <svg viewBox="0 0 14.2 14.2" class="mug-pr__star{% if i <= full %} is-filled{% elsif half == 1 and i == half_index %} is-half{% endif %}" aria-hidden="true"><use href="#mug-pr-star"></use></svg>
+            {%- endfor -%}
+          </div>
+          <p class="mug-pr__based">Baseras på {{ rating_count }} {% if rating_count == 1 %}betyg{% else %}betyg{% endif %}</p>
+          <p class="mug-pr__policy">Endast verifierade köpare kan skriva en recension. Produktomdömen och recensioner modereras och administreras av oss.</p>
+        </div>
+
+        <ul class="mug-pr__list" data-list></ul>
+
+        <div class="mug-pr__more-wrap">
+          <button type="button" class="mug-pr__more" data-more hidden>Visa fler</button>
+        </div>
+      </div>
+    </details>
+  </accordion-custom>
+
+  <script>
+    (function () {
+      var root = document.querySelector('[data-mug-pr]:not([data-init])');
+      if (!root) return;
+      root.dataset.init = '1';
+      var endpoint = root.dataset.endpoint;
+      var productId = root.dataset.productId;
+      var list = root.querySelector('[data-list]');
+      var more = root.querySelector('[data-more]');
+      var page = 1, shown = 0, total = 0, loading = false;
+
+      function el(tag, cls, text) {
+        var n = document.createElement(tag);
+        if (cls) n.className = cls;
+        if (text !== undefined && text !== null) n.textContent = text;
+        return n;
+      }
+
+      function stars(rating) {
+        var wrap = el('span', 'mug-pr__stars');
+        wrap.setAttribute('aria-label', 'Betyg ' + rating + ' av 5');
+        for (var i = 1; i <= 5; i++) {
+          var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+          svg.setAttribute('viewBox', '0 0 14.2 14.2');
+          svg.setAttribute('class', 'mug-pr__star' + (i <= Math.round(rating) ? ' is-filled' : ''));
+          svg.setAttribute('aria-hidden', 'true');
+          var use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+          use.setAttribute('href', '#mug-pr-star');
+          svg.appendChild(use);
+          wrap.appendChild(svg);
+        }
+        return wrap;
+      }
+
+      function sedan(iso) {
+        var d = new Date(iso);
+        if (!iso || isNaN(d)) return '';
+        var dagar = Math.floor((Date.now() - d.getTime()) / 86400000);
+        if (dagar <= 0) return 'idag';
+        if (dagar === 1) return 'igår';
+        if (dagar < 7) return dagar + ' dagar sedan';
+        var veckor = Math.floor(dagar / 7);
+        if (dagar < 30) return veckor === 1 ? '1 vecka sedan' : veckor + ' veckor sedan';
+        var manader = Math.floor(dagar / 30);
+        if (dagar < 365) return manader === 1 ? '1 månad sedan' : manader + ' månader sedan';
+        var ar = Math.floor(dagar / 365);
+        return ar === 1 ? '1 år sedan' : ar + ' år sedan';
+      }
+
+      function render(row) {
+        var li = el('li', 'mug-pr__item');
+        var namn = row.name || 'Kund';
+        li.appendChild(el('span', 'mug-pr__avatar', namn.charAt(0).toUpperCase()));
+        var main = el('div', 'mug-pr__item-main');
+        var meta = el('p', 'mug-pr__meta');
+        meta.appendChild(el('span', 'mug-pr__name', namn));
+        var nar = sedan(row.created_at);
+        if (nar) { meta.appendChild(el('span', 'mug-pr__dot', '·')); meta.appendChild(el('span', null, nar)); }
+        if (row.verified) { meta.appendChild(el('span', 'mug-pr__dot', '·')); meta.appendChild(el('span', null, 'Verifierad köpare')); }
+        main.appendChild(meta);
+        main.appendChild(stars(row.rating || 0));
+        if (row.title) main.appendChild(el('p', 'mug-pr__title', row.title));
+        if (row.body) main.appendChild(el('p', 'mug-pr__body', row.body));
+        if (row.reply_body) {
+          var reply = el('div', 'mug-pr__reply');
+          var rm = el('p', 'mug-pr__meta');
+          rm.appendChild(el('span', 'mug-pr__name', 'Musik Utan Gränser'));
+          var rn = sedan(row.reply_at);
+          if (rn) { rm.appendChild(el('span', 'mug-pr__dot', '·')); rm.appendChild(el('span', null, rn)); }
+          reply.appendChild(rm);
+          reply.appendChild(el('p', 'mug-pr__body', row.reply_body));
+          main.appendChild(reply);
+        }
+        li.appendChild(main);
+        return li;
+      }
+
+      function load() {
+        if (loading) return;
+        loading = true;
+        more.disabled = true;
+        var url = endpoint + (endpoint.indexOf('?') === -1 ? '?' : '&') + 'product=' + encodeURIComponent(productId) + '&page=' + page;
+        fetch(url, { credentials: 'omit' })
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (data) {
+            if (!data) return;
+            var rows = Array.isArray(data.rows) ? data.rows : [];
+            total = data.total || 0;
+            if (page === 1 && rows.length === 0) { root.hidden = true; return; }
+            rows.forEach(function (row) { list.appendChild(render(row)); });
+            shown += rows.length;
+            page += 1;
+            more.hidden = !(total > shown && rows.length > 0);
+          })
+          .catch(function () {})
+          .then(function () { loading = false; more.disabled = false; });
+      }
+
+      more.addEventListener('click', load);
+      load();
+    })();
+  </script>
+{%- endif -%}
+
+{% stylesheet %}
+  .mug-pr {
+    display: block;
+    width: 100%;
+    margin-top: 24px;
+    border: 1px solid rgb(var(--color-foreground-rgb) / 0.14);
+    border-radius: 8px;
+    background: var(--color-background);
+  }
+
+  .mug-pr__details {
+    border: 0;
+  }
+
+  .mug-pr__summary {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 20px;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .mug-pr__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mug-pr__caret {
+    display: inline-flex;
+    color: var(--color-foreground);
+    transition: transform 0.2s ease;
+  }
+
+  .mug-pr__details:not([open]) .mug-pr__caret {
+    transform: rotate(-90deg);
+  }
+
+  .mug-pr__heading {
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .mug-pr__count {
+    font-weight: 400;
+    color: rgb(var(--color-foreground-rgb) / 0.55);
+  }
+
+  .mug-pr__content {
+    padding: 0;
+  }
+
+  .mug-pr__overview {
+    text-align: center;
+    padding: 8px 24px 28px;
+  }
+
+  .mug-pr__average {
+    font-size: 48px;
+    line-height: 1.1;
+    margin: 0 0 6px;
+    font-weight: 400;
+  }
+
+  .mug-pr__stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .mug-pr__stars--large {
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+
+  .mug-pr__star {
+    width: 15px;
+    height: 15px;
+    fill: #D9D9D9;
+  }
+
+  .mug-pr__stars--large .mug-pr__star {
+    width: 24px;
+    height: 24px;
+  }
+
+  .mug-pr__star.is-filled {
+    fill: var(--color-foreground);
+  }
+
+  .mug-pr__star.is-half {
+    fill: url(#mug-pr-half);
+  }
+
+  .mug-pr__based {
+    margin: 0 0 14px;
+    color: rgb(var(--color-foreground-rgb) / 0.55);
+  }
+
+  .mug-pr__policy {
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .mug-pr__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mug-pr__item {
+    display: flex;
+    gap: 16px;
+    padding: 22px 20px;
+    border-top: 1px solid rgb(var(--color-foreground-rgb) / 0.14);
+  }
+
+  .mug-pr__avatar {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgb(var(--color-foreground-rgb) / 0.08);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 17px;
+  }
+
+  .mug-pr__item-main {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .mug-pr__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 6px;
+    color: rgb(var(--color-foreground-rgb) / 0.55);
+  }
+
+  .mug-pr__name {
+    font-weight: 700;
+    color: var(--color-foreground);
+  }
+
+  .mug-pr__title {
+    font-weight: 600;
+    margin: 10px 0 0;
+  }
+
+  .mug-pr__body {
+    margin: 10px 0 0;
+    line-height: 1.6;
+    white-space: pre-line;
+  }
+
+  .mug-pr__reply {
+    margin-top: 14px;
+    padding: 12px 14px;
+    border-left: 2px solid rgb(var(--color-foreground-rgb) / 0.25);
+    background: rgb(var(--color-foreground-rgb) / 0.04);
+  }
+
+  .mug-pr__reply .mug-pr__body {
+    margin-top: 4px;
+  }
+
+  .mug-pr__more-wrap {
+    text-align: center;
+    padding: 6px 20px 24px;
+  }
+
+  .mug-pr__more {
+    font: inherit;
+    font-size: 15px;
+    padding: 12px 24px;
+    border: 0;
+    background: rgb(var(--color-foreground-rgb) / 0.06);
+    color: var(--color-foreground);
+    cursor: pointer;
+  }
+
+  .mug-pr__more:hover {
+    background: rgb(var(--color-foreground-rgb) / 0.1);
+  }
+
+  .mug-pr__more:disabled {
+    opacity: 0.5;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Produktomdömen",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Hopfällbar ruta med produktens recensioner från Bakhuvudet. Visas bara när produkten har betyg."
+    },
+    {
+      "type": "checkbox",
+      "id": "open_by_default",
+      "label": "Öppen från början",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "endpoint",
+      "label": "API-adress",
+      "default": "https://bakhuvudet.mug.se/api/public/reviews"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Produktomdömen"
+    }
+  ]
+}
+{% endschema %}
