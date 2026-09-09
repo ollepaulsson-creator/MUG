@@ -31,18 +31,8 @@
       </defs>
     </svg>
 
-    <div data-state="loading">
-      <h1 class="sell-form__title">Hämtar ditt köp…</h1>
-    </div>
-
-    <div data-state="error" hidden>
-      <h1 class="sell-form__title">Länken verkar inte stämma</h1>
-      <p class="sell-form__intro">
-        Vi hittar inget köp kopplat till den här länken. Den kan ha gått ut, eller så
-        blev den avklippt i mejlet. Har du frågor är du välkommen att höra av dig till
-        <a href="mailto:order@mug.se">order@mug.se</a>.
-      </p>
-      <a class="sell-form__submit mug-rate__link-button" href="/">Till butiken</a>
+    <div class="mug-rate__loading" data-state="loading">
+      <p class="mug-rate__loading-text">Hämtar ditt köp…</p>
     </div>
 
     <div data-state="form" hidden>
@@ -52,6 +42,11 @@
         Bara stjärnorna är obligatoriska, men skriv gärna några rader.
       </p>
       <div class="mug-rate__products" data-products></div>
+      <div class="mug-rate__footer">
+        <p class="sell-form__error" data-error hidden></p>
+        <p class="mug-rate__saved" data-saved hidden></p>
+        <button type="button" class="sell-form__submit" data-submit>Skicka din recension</button>
+      </div>
     </div>
 
     <div class="mug-rate__thanks" data-state="thanks" hidden>
@@ -63,6 +58,7 @@
         </span>
         Tack! Vill du även betygsätta oss som butik på Prisjakt?
       </h2>
+      <div class="mug-rate__prisjakt-logo">{{ 'prisjakt-logo.svg' | inline_asset_content }}</div>
       <div data-prisjakt></div>
     </div>
   </div>
@@ -91,9 +87,7 @@
       <label class="sell-form__label" data-body-label>Berätta gärna mer: <span class="mug-rate__optional">(frivilligt)</span></label>
       <p class="sell-form__help">Hur låter det, hur känns det, vad var bra eller mindre bra? Recensioner hjälper andra kunder att göra sitt val. Tack för att du tar dig tid!</p>
       <textarea class="sell-form__input sell-form__textarea" name="body" rows="5" maxlength="4000" placeholder="Skriv en kort recension..."></textarea>
-      <p class="sell-form__error" data-error hidden></p>
-      <button type="submit" class="sell-form__submit">Skicka din recension</button>
-      <p class="mug-rate__saved" data-saved hidden>Tack! Ditt betyg är publicerat.</p>
+      <p class="mug-rate__saved mug-rate__saved--product" data-product-saved hidden>Publicerad</p>
     </form>
   </section>
 </template>
@@ -117,6 +111,12 @@
     var productsRoot = root.querySelector('[data-products]');
     var prisjaktShown = false;
     var uid = 0;
+    var NOT_FOUND_URL = '/404';
+    var produkter = [];
+    var submitButton = root.querySelector('[data-submit]');
+    var globalError = root.querySelector('[data-error]');
+    var globalSaved = root.querySelector('[data-saved]');
+    var skickar = false;
 
     function showState(name) {
       root.querySelectorAll('[data-state]').forEach(function (el) {
@@ -270,62 +270,91 @@
       starsEl.addEventListener('rating-change', function () { starsError.hidden = true; });
 
       var form = node.querySelector('form');
-      var errorEl = node.querySelector('[data-error]');
-      var savedEl = node.querySelector('[data-saved]');
-      var button = form.querySelector('button[type="submit"]');
+      var savedEl = node.querySelector('[data-product-saved]');
+      form.addEventListener('submit', function (e) { e.preventDefault(); skickaAlla(); });
 
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        errorEl.hidden = true;
-        var rating = getRating();
-        if (!rating) { starsError.hidden = false; starsEl.focus(); return; }
-        button.disabled = true;
-        button.textContent = 'Skickar…';
+      productsRoot.appendChild(node);
+      return {
+        p: p,
+        node: node,
+        form: form,
+        getRating: getRating,
+        starsError: starsError,
+        starsEl: starsEl,
+        savedEl: savedEl
+      };
+    }
+
+    // EN skicka-knapp för hela ordern: alla betygsatta produkter POST:as parallellt.
+    function skickaAlla() {
+      if (skickar) return;
+      globalError.hidden = true;
+      var attSkicka = produkter.filter(function (x) { return x.getRating() > 0; });
+      produkter.forEach(function (x) { x.starsError.hidden = true; });
+      if (attSkicka.length === 0) {
+        produkter[0].starsError.hidden = false;
+        produkter[0].starsEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+      // Namn: tomma namnfält får det första ifyllda namnet
+      var namn = '';
+      produkter.forEach(function (x) { if (!namn) namn = x.form.elements.name.value.trim(); });
+      skickar = true;
+      submitButton.disabled = true;
+      var ursprungligText = submitButton.textContent;
+      submitButton.textContent = 'Skickar…';
+      Promise.all(attSkicka.map(function (x) {
         var payload = {
           token: token,
-          productId: String(p.productId),
-          rating: rating,
-          name: form.elements.name.value.trim(),
-          body: form.elements.body.value.trim(),
-          website: form.elements.website.value
+          productId: String(x.p.productId),
+          rating: x.getRating(),
+          name: x.form.elements.name.value.trim() || namn,
+          body: x.form.elements.body.value.trim(),
+          website: x.form.elements.website.value
         };
-        fetch(submitEndpoint, {
+        return fetch(submitEndpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         })
           .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
-          .then(function (data) {
-            if (data && data.ok) {
-              savedEl.hidden = false;
-              button.textContent = 'Uppdatera din recension';
-              showPrisjakt();
-              return;
-            }
-            errorEl.textContent = (data && data.error) ? data.error : 'Något gick fel. Försök igen om en stund.';
-            errorEl.hidden = false;
-            button.textContent = 'Skicka din recension';
-          })
-          .catch(function () {
-            errorEl.textContent = 'Något gick fel. Försök igen om en stund.';
-            errorEl.hidden = false;
-            button.textContent = 'Skicka din recension';
-          })
-          .then(function () { button.disabled = false; });
+          .catch(function () { return { ok: false }; })
+          .then(function (data) { return { x: x, ok: !!(data && data.ok), error: data && data.error }; });
+      })).then(function (resultat) {
+        var lyckade = resultat.filter(function (r) { return r.ok; });
+        var fel = resultat.filter(function (r) { return !r.ok; });
+        lyckade.forEach(function (r) { r.x.savedEl.hidden = false; });
+        if (fel.length === 0) {
+          globalSaved.textContent = lyckade.length > 1 ? 'Tack! Dina betyg är publicerade.' : 'Tack! Ditt betyg är publicerat.';
+          globalSaved.hidden = false;
+          submitButton.textContent = 'Uppdatera din recension';
+          showPrisjakt();
+        } else {
+          globalSaved.hidden = true;
+          globalError.textContent = fel.map(function (r) {
+            return (r.x.p.title || 'Produkten') + ': ' + (r.error || 'något gick fel, försök igen om en stund.');
+          }).join(' ');
+          globalError.hidden = false;
+          submitButton.textContent = ursprungligText;
+        }
+        skickar = false;
+        submitButton.disabled = false;
       });
-
-      return node;
     }
 
-    if (!token) { showState('error'); return; }
+
+    // Okänd/saknad länk ⇒ butikens vanliga 404-sida (Olles beslut 2026-09-09); laddningsvyn ligger kvar tills svaret kommit.
+    function tillFyra04() { window.location.replace(NOT_FOUND_URL); }
+    if (!token) { tillFyra04(); return; }
     fetch(requestEndpoint + '?token=' + encodeURIComponent(token), { cache: 'no-store' })
       .then(function (r) { return r.json(); })
       .then(function (data) {
-        if (!data || !data.ok || !Array.isArray(data.products) || data.products.length === 0) { showState('error'); return; }
-        data.products.forEach(function (p) { productsRoot.appendChild(renderProduct(p)); });
+        if (!data || !data.ok || !Array.isArray(data.products) || data.products.length === 0) { tillFyra04(); return; }
+        data.products.forEach(function (p) { produkter.push(renderProduct(p)); });
         showState('form');
+        submitButton.addEventListener('click', skickaAlla);
       })
-      .catch(function () { showState('error'); });
+      .catch(tillFyra04);
   })();
 </script>
 
@@ -473,8 +502,58 @@
 
   .mug-rate__thanks {
     margin-top: 48px;
-    padding-top: 32px;
-    border-top: 1px solid rgb(var(--color-foreground-rgb) / 0.12);
+  }
+
+  /* Bocken linjerar i överkant mot texten; radhöjd 39 px (Olles skiss) */
+  .mug-rate__thanks .sell-form__success-title {
+    align-items: flex-start;
+    line-height: 39px;
+  }
+
+  .mug-rate__thanks .sell-form__success-check {
+    margin-top: 5px;
+  }
+
+  .mug-rate__prisjakt-logo {
+    text-align: center;
+    margin: 8px 0 16px;
+  }
+
+  .mug-rate__prisjakt-logo svg {
+    height: 32px;
+    width: auto;
+  }
+
+  /* Prisjakts widget i vårt typsnitt, utan stängkryss */
+  .checkout_rating_widget,
+  .checkout_rating_widget * {
+    font-family: var(--font-body--family, "Inter Variable", sans-serif) !important;
+  }
+
+  .checkout_rating_widget button[aria-label="Close"],
+  .checkout_rating_widget button[aria-label="Stäng"],
+  .checkout_rating_widget [class*="close"] {
+    display: none !important;
+  }
+
+  /* Laddningsvyn: centrerad, 15 px, 200 px luft över och under (sell-form har 50/100 i sig) */
+  .mug-rate__loading {
+    padding: 150px 0 100px;
+    text-align: center;
+  }
+
+  .mug-rate__loading-text {
+    margin: 0;
+    font-size: 15px;
+  }
+
+  .mug-rate__footer {
+    margin-top: 8px;
+  }
+
+  .mug-rate__saved--product {
+    font-size: 14px;
+    margin-top: 8px;
   }
 {% endstylesheet %}
 

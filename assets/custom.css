@@ -995,6 +995,14 @@ p, li {
   font-variant-numeric: tabular-nums;
 }
 
+/* Produktsidans stora pris (Olle 2026-09-09): regular vikt, vanliga siffror */
+.product-information .price,
+.product-information .compare-at-price {
+  font-weight: 400;
+  font-variant-numeric: normal;
+  font-feature-settings: normal;
+}
+
 /* ── Scale on press ── */
 .button:active,
 .button-primary:active {
