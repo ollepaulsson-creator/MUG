@@ -237,7 +237,7 @@
         var st = d.createElement('style');
         st.id = 'mug-pj-style';
         // Deras rubrik, stängkryss och logga i botten (vi visar loggan själva överst)
-        st.textContent = '.close-icon{display:none!important}.rating_wrapper .rating-title{display:none!important}a:has(img){display:none!important}a img{display:none!important}';
+        st.textContent = '.close-icon{display:none!important}.rating_wrapper .rating-title{display:none!important}.pj_logo_wrapper,a:has(img),a img{display:none!important}';
         d.head.appendChild(st);
         return true;
       }
@@ -249,8 +249,10 @@
         var d;
         try { d = frame.contentDocument; } catch (e) { return; }
         if (!d || !d.body) return;
+        // .modal/.widget-container sträcker sig till iframens höjd — mät innehållet i stället.
         var botten = 0;
         [].forEach.call(d.body.querySelectorAll('*'), function (el) {
+          if (el.classList.contains('modal') || el.classList.contains('widget-container')) return;
           var r = el.getBoundingClientRect();
           if (r.height > 0 && r.bottom > botten) botten = r.bottom;
         });
