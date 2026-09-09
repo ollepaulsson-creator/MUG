@@ -115,11 +115,12 @@
     var globalError = root.querySelector('[data-error]');
     var skickar = false;
 
+    // Vyerna är egna "sidor": laddning, formulär och tack (Prisjakt) visas aldrig samtidigt.
     function showState(name) {
       root.querySelectorAll('[data-state]').forEach(function (el) {
-        if (el.dataset.state === 'thanks') return;
         el.hidden = el.dataset.state !== name;
       });
+      window.scrollTo({ top: 0, behavior: 'auto' });
     }
 
     // price kommer som tal (kr) eller färdig sträng från API:t; formateras som produktsidans pris
@@ -199,7 +200,6 @@
       if (prisjaktShown) return;
       prisjaktShown = true;
       var thanks = root.querySelector('[data-state="thanks"]');
-      thanks.hidden = false;
       if (!widgetId) {
         thanks.querySelector('h2').textContent = 'Tack! Ditt betyg hjälper andra musiker att välja rätt.';
         return;
@@ -318,10 +318,8 @@
         var fel = resultat.filter(function (r) { return !r.ok; });
         if (fel.length === 0) {
           submitButton.textContent = 'Uppdatera din recension';
+          showState('thanks');
           showPrisjakt();
-          // Kvittot ÄR tack-steget med Prisjakt-widgeten — ta kunden dit.
-          var thanks = root.querySelector('[data-state="thanks"]');
-          if (thanks) thanks.scrollIntoView({ behavior: 'smooth', block: 'start' });
         } else {
           globalError.textContent = fel.map(function (r) {
             return (r.x.p.title || 'Produkten') + ': ' + (r.error || 'något gick fel, försök igen om en stund.');
@@ -340,7 +338,7 @@
 
     // Testläge: ?tack=1 visar tack-steget med Prisjakt-widgeten direkt, utan token.
     if (params.get('tack') === '1') {
-      root.querySelector('[data-state="loading"]').hidden = true;
+      showState('thanks');
       showPrisjakt();
       return;
     }
@@ -490,7 +488,7 @@
   }
 
   .mug-rate__thanks {
-    margin-top: 48px;
+    margin-top: 8px;
   }
 
   /* Bocken linjerar i överkant mot texten; radhöjd 39 px (Olles skiss) */
