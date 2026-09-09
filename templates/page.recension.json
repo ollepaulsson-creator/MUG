@@ -510,9 +510,20 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "name": "Breadcrumbs",
+      "settings": {
+        "enable": true,
+        "nav_menu": "main-menu",
+        "home_label": "Start",
+        "aria_label": "Breadcrumbs"
+      }
     }
   },
   "order": [
+    "breadcrumbs",
     "main",
     "section_8aKKyY",
     "section_t7Jwap"
