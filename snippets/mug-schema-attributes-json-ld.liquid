@@ -1,0 +1,19 @@
+{%- comment -%}
+  Egen JSON-LD-nod med produktattributen ur mug-schema-attributes (material,
+  size, additionalProperty). Samma @id som Shopifys structured_data-filter och
+  product-rating-json-ld, så Google slår ihop noderna till en Product.
+  Renderas bara när minst ett attribut finns.
+  Parameter: product (product-objektet).
+{%- endcomment -%}
+{%- capture mug_attrs -%}{%- render 'mug-schema-attributes', mug_schema_product: product -%}{%- endcapture -%}
+{%- assign mug_attrs = mug_attrs | strip -%}
+{%- if mug_attrs != '' -%}
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org/",
+    "@id": {{ product.url | append: '#product' | json }},
+    {{ mug_attrs }}
+    "@type": "Product"
+  }
+</script>
+{%- endif -%}
