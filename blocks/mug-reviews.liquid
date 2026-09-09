@@ -34,6 +34,7 @@
     {% if block.settings.open_by_default %}open-by-default-on-desktop open-by-default-on-mobile{% endif %}
     data-endpoint="{{ endpoint | escape }}"
     data-product-id="{{ product.id }}"
+    data-per-klick="{{ block.settings.per_klick | default: 2 }}"
     {{ block.shopify_attributes }}
   >
     <details class="details mug-pr__details">
@@ -91,8 +92,9 @@
       var productId = root.dataset.productId;
       var list = root.querySelector('[data-list]');
       var more = root.querySelector('[data-more]');
-      var page = 1, shown = 0, total = 0, loading = false;
-
+      var perKlick = parseInt(root.dataset.perKlick, 10) || 2;
+      var page = 1, shown = 0, total = 0, loading = false, slut = false;
+      var buffert = [];
       function el(tag, cls, text) {
         var n = document.createElement(tag);
         if (cls) n.className = cls;
@@ -159,25 +161,36 @@
         return li;
       }
 
-      function load() {
-        if (loading) return;
+      function visaNasta() {
+        var n = 0;
+        while (n < perKlick && buffert.length) { list.appendChild(render(buffert.shift())); shown += 1; n += 1; }
+        more.hidden = !(buffert.length > 0 || (!slut && total > shown));
+      }
+
+      function hamta(cb) {
+        if (loading || slut) { if (cb) cb(); return; }
         loading = true;
         more.disabled = true;
         var url = endpoint + (endpoint.indexOf('?') === -1 ? '?' : '&') + 'product=' + encodeURIComponent(productId) + '&page=' + page;
         fetch(url, { credentials: 'omit' })
           .then(function (r) { return r.ok ? r.json() : null; })
           .then(function (data) {
-            if (!data) return;
-            var rows = Array.isArray(data.rows) ? data.rows : [];
-            total = data.total || 0;
-            if (page === 1 && rows.length === 0) { root.hidden = true; return; }
-            rows.forEach(function (row) { list.appendChild(render(row)); });
-            shown += rows.length;
-            page += 1;
-            more.hidden = !(total > shown && rows.length > 0);
+            var rows = data && Array.isArray(data.rows) ? data.rows : [];
+            total = data ? (data.total || 0) : 0;
+            if (rows.length === 0) slut = true; else page += 1;
+            buffert = buffert.concat(rows);
+            if (shown + buffert.length >= total) slut = true;
           })
-          .catch(function () {})
-          .then(function () { loading = false; more.disabled = false; });
+          .catch(function () { slut = true; })
+          .then(function () { loading = false; more.disabled = false; if (cb) cb(); });
+      }
+
+      function load() {
+        if (buffert.length >= perKlick || slut) { visaNasta(); return; }
+        hamta(function () {
+          if (page === 2 && shown === 0 && buffert.length === 0) { root.hidden = true; return; }
+          visaNasta();
+        });
       }
 
       more.addEventListener('click', load);
@@ -385,13 +398,13 @@
     font-size: 15px;
     padding: 10px 20px;
     border: 0;
-    background: rgb(var(--color-foreground-rgb) / 0.06);
+    background: #F2F2F2;
     color: var(--color-foreground);
     cursor: pointer;
   }
 
   .mug-pr__more:hover {
-    background: rgb(var(--color-foreground-rgb) / 0.1);
+    background: #E8E8E8;
   }
 
   .mug-pr__more:disabled {
@@ -413,6 +426,16 @@
       "id": "open_by_default",
       "label": "Öppen från början",
       "default": true
+    },
+    {
+      "type": "range",
+      "id": "per_klick",
+      "label": "Recensioner per klick",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 2,
+      "info": "Så många visas från början och vid varje klick på Visa fler."
     },
     {
       "type": "text",
