@@ -14,7 +14,7 @@
       "settings": {
         "request_endpoint": "https://bakhuvudet.mug.se/api/public/review-request",
         "submit_endpoint": "https://bakhuvudet.mug.se/api/public/review-submit",
-        "prisjakt_widget_id": ""
+        "prisjakt_widget_id": "907d5279-6e9d-4933-9571-4a99ad498895"
       }
     }
   },
