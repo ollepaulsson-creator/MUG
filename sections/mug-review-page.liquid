@@ -55,10 +55,13 @@
             <path d="M2.81641 8.61667L4.78353 11.1458C4.84991 11.232 4.93497 11.3022 5.03231 11.3509C5.12965 11.3995 5.23675 11.4255 5.34557 11.4268C5.45264 11.4281 5.55864 11.4054 5.65586 11.3606C5.75308 11.3157 5.83908 11.2497 5.90761 11.1674L12.1837 3.57275" stroke="white" stroke-width="1.65" stroke-linecap="square"/>
           </svg>
         </span>
-        Tack! Vill du även betygsätta oss som butik på Prisjakt?
+        Tusen tack så mycket!
       </h2>
-      <div class="mug-rate__prisjakt-logo">{{ 'prisjakt-logo.svg' | inline_asset_content }}</div>
-      <div data-prisjakt></div>
+      <p class="mug-rate__thanks-intro">Skulle du även kunna ge oss ett betyg på Prisjakt? Så blir vi superglada!</p>
+      <div class="mug-rate__prisjakt-card">
+        <div class="mug-rate__prisjakt-logo">{{ 'prisjakt-logo.svg' | inline_asset_content }}</div>
+        <div data-prisjakt></div>
+      </div>
     </div>
   </div>
 </div>
@@ -201,7 +204,8 @@
       prisjaktShown = true;
       var thanks = root.querySelector('[data-state="thanks"]');
       if (!widgetId) {
-        thanks.querySelector('h2').textContent = 'Tack! Ditt betyg hjälper andra musiker att välja rätt.';
+        thanks.querySelector('.mug-rate__thanks-intro').textContent = 'Ditt betyg hjälper andra musiker att välja rätt.';
+        thanks.querySelector('.mug-rate__prisjakt-card').hidden = true;
         return;
       }
       var holder = thanks.querySelector('[data-prisjakt]');
@@ -487,27 +491,42 @@
     max-width: 260px;
   }
 
+  /* Tack-steget (Olles skiss 2026-09-09): centrerat, widgeten i ett kort */
   .mug-rate__thanks {
     margin-top: 8px;
+    text-align: center;
   }
 
-  /* Bocken linjerar i överkant mot texten; radhöjd 39 px (Olles skiss) */
   .mug-rate__thanks .sell-form__success-title {
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     line-height: 39px;
+    margin-bottom: 12px;
   }
 
   .mug-rate__thanks .sell-form__success-check {
-    margin-top: 5px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .mug-rate__thanks-intro {
+    margin: 0 0 28px;
+    line-height: 1.5;
+  }
+
+  .mug-rate__prisjakt-card {
+    border: 1px solid #E2E2E2;
+    border-radius: 6px;
+    padding: 32px 24px 24px;
   }
 
   .mug-rate__prisjakt-logo {
     text-align: center;
-    margin: 8px 0 16px;
+    margin: 0 0 20px;
   }
 
   .mug-rate__prisjakt-logo svg {
-    height: 32px;
+    height: 44px;
     width: auto;
   }
 
