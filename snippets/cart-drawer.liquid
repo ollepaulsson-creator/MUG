@@ -74,6 +74,18 @@
       </div>
     </div>
 
+    {%- comment -%} Betalikonerna visas även med tom varukorg (Olle 2026-09-09). {%- endcomment -%}
+    <div class="cart-summary__payment-icons" aria-hidden="true">
+      {%- for type in shop.enabled_payment_types -%}
+        {%- if type == 'blik' or type == 'mobilepay' or type == 'mobile_pay' -%}{%- continue -%}{%- endif -%}
+        {%- if type == 'swish' -%}
+          {{ type | payment_type_svg_tag: class: 'icon icon--full-color' | replace: 'pi-swish', 'pi-swish-cde' }}
+        {%- else -%}
+          {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
     <div class="cart-drawer__summary">
       {% render 'cart-summary' %}
     </div>
