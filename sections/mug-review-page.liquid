@@ -236,7 +236,8 @@
         if (!d || !d.head || !d.body || d.getElementById('mug-pj-style')) return !!(d && d.getElementById('mug-pj-style'));
         var st = d.createElement('style');
         st.id = 'mug-pj-style';
-        st.textContent = '.close-icon{display:none!important}.rating_wrapper .rating-title{display:none!important}';
+        // Deras rubrik, stängkryss och logga i botten (vi visar loggan själva överst)
+        st.textContent = '.close-icon{display:none!important}.rating_wrapper .rating-title{display:none!important}a:has(img){display:none!important}a img{display:none!important}';
         d.head.appendChild(st);
         return true;
       }
