@@ -31,11 +31,12 @@
   <accordion-custom
     class="mug-pr"
     data-mug-pr
+    {% if block.settings.open_by_default %}open-by-default-on-desktop open-by-default-on-mobile{% endif %}
     data-endpoint="{{ endpoint | escape }}"
     data-product-id="{{ product.id }}"
     {{ block.shopify_attributes }}
   >
-    <details class="details mug-pr__details"{% if block.settings.open_by_default %} open{% endif %}>
+    <details class="details mug-pr__details">
       <summary class="details__header mug-pr__summary">
         <span class="mug-pr__caret" aria-hidden="true">
           <svg viewBox="0 0 10 6" width="10" height="6"><path d="M0 0h10L5 6z" fill="currentColor"/></svg>
