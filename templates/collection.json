@@ -249,7 +249,7 @@
                 "stars_style": "shaded",
                 "show_number": false,
                 "show_empty": false,
-                "rating_color": "custom",
+                "rating_color": "foreground",
                 "star_color": "#FF5F00",
                 "type_preset": "paragraph",
                 "alignment": "left"
