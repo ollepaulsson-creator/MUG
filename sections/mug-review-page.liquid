@@ -237,11 +237,21 @@
         var st = d.createElement('style');
         st.id = 'mug-pj-style';
         // Deras rubrik, stängkryss och logga i botten (vi visar loggan själva överst)
-        st.textContent = '.close-icon{display:none!important}.rating_wrapper .rating-title{display:none!important}.pj_logo_wrapper,a:has(img),a img{display:none!important}'
-          + 'body{text-align:center}'
+        st.textContent = [
+          // Deras rubrik, stängkryss och logga (vi visar loggan själva överst)
+          '.close-icon{display:none!important}',
+          '.rating_wrapper .rating-title{display:none!important}',
+          '.pj_logo_wrapper,a:has(img),a img{display:none!important}',
           // .modal är position:fixed med left:0 — left+right+auto-marginal centrerar den
-          + '.modal{left:0!important;right:0!important;margin-left:auto!important;margin-right:auto!important}'
-          + '.main-container,.rating-wrapper,.rating_wrapper,.item-container-main,.icons-container{justify-content:center!important;align-items:center!important;text-align:center!important}';
+          '.modal{left:0!important;right:0!important;margin-left:auto!important;margin-right:auto!important}',
+          // Steg 1 (ansiktena) centrerat …
+          'body{text-align:left}',
+          '.main-container{justify-content:center!important}',
+          '.rating_wrapper,.rating-wrapper,.icons-container{justify-content:center!important;align-items:center!important;text-align:center!important}',
+          // … steg 2 (omdömesformuläret) vänsterställt
+          '.text-container,.textarea-container,.caption-container,.item-container,.option-container,',
+          '.email-disclaimer,.info-container,.base-title,.base-text,.title{text-align:left!important;align-items:flex-start!important}'
+        ].join('');
         d.head.appendChild(st);
         return true;
       }
