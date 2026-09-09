@@ -89,8 +89,7 @@
       <p class="sell-form__help">Förnamnet visas vid recensionen</p>
       <input class="sell-form__input" name="name" type="text" maxlength="60" autocomplete="given-name" placeholder="Ditt förnamn...">
       <label class="sell-form__label" data-body-label>Berätta gärna mer: <span class="mug-rate__optional">(frivilligt)</span></label>
-      <p class="sell-form__help">Hur låter det, hur känns det, vad var bra eller mindre bra?</p>
-      <p class="sell-form__help mug-rate__thanks-note">Recensioner hjälper andra kunder att göra sitt val. Tack för att du tar dig tid!</p>
+      <p class="sell-form__help">Hur låter det, hur känns det, vad var bra eller mindre bra? Recensioner hjälper andra kunder att göra sitt val. Tack för att du tar dig tid!</p>
       <textarea class="sell-form__input sell-form__textarea" name="body" rows="5" maxlength="4000" placeholder="Skriv en kort recension..."></textarea>
       <p class="sell-form__error" data-error hidden></p>
       <button type="submit" class="sell-form__submit">Skicka din recension</button>
@@ -302,20 +301,30 @@
 </script>
 
 {% stylesheet %}
+  /* Jämn rytm: 16 px mellan grupperna, 20 px efter ingressen */
+  .mug-rate .sell-form__intro {
+    margin-bottom: 20px;
+  }
+
+  .mug-rate .sell-form__label {
+    margin-top: 16px;
+  }
+
   .mug-rate__products {
     display: grid;
-    gap: 36px;
-    margin-top: 8px;
+    gap: 28px;
+    margin-top: 0;
   }
 
   .mug-rate__product {
-    padding-top: 8px;
+    padding-top: 0;
   }
 
   .mug-rate__product-head {
     display: flex;
     align-items: center;
     gap: 16px;
+    margin-bottom: 0;
   }
 
   .mug-rate__image {
@@ -354,10 +363,6 @@
     font-weight: 600;
   }
 
-  .mug-rate__thanks-note {
-    margin-top: 2px;
-  }
-
   .mug-rate__optional {
     font-weight: 400;
     color: rgb(var(--color-foreground-rgb) / 0.55);
@@ -371,7 +376,7 @@
   .mug-rate__stars {
     display: flex;
     gap: 0;
-    margin-top: 6px;
+    margin-top: 4px;
     margin-left: -8px;
   }
 
