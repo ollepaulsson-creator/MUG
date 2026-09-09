@@ -71,7 +71,7 @@
 <template data-product-template>
   <section class="mug-rate__product">
     <div class="mug-rate__product-head">
-      <a class="mug-rate__image-link" data-product-link><img class="mug-rate__image" alt="" width="96" height="96" loading="lazy" hidden></a>
+      <a class="mug-rate__image-link" data-product-link><img class="mug-rate__image" alt="" width="110" height="110" loading="lazy" hidden></a>
       <div>
         <p class="mug-rate__vendor" hidden><a data-vendor data-vendor-link></a></p>
         <h2 class="mug-rate__product-title"><a data-title data-product-link></a></h2>
@@ -232,7 +232,7 @@
       var img = node.querySelector('img');
       if (p.image) {
         // Shopify-CDN levererar originalstorlek (upp till 2048 px) — be om en liten variant.
-        img.src = /cdn\.shopify\.com/.test(p.image) ? p.image + (p.image.indexOf('?') === -1 ? '?' : '&') + 'width=192' : p.image;
+        img.src = /cdn\.shopify\.com/.test(p.image) ? p.image + (p.image.indexOf('?') === -1 ? '?' : '&') + 'width=220' : p.image;
         img.hidden = false;
       }
       node.querySelector('[data-title]').textContent = p.title || 'Produkt';
@@ -357,8 +357,8 @@
   }
 
   .mug-rate__image {
-    width: 96px;
-    height: 96px;
+    width: 110px;
+    height: 110px;
     object-fit: contain;
     flex-shrink: 0;
     padding: 6px;
