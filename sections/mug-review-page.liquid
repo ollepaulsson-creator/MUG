@@ -60,6 +60,7 @@
       <p class="mug-rate__thanks-intro">Skulle du även kunna ge oss ett betyg på Prisjakt? Så blir vi superglada!</p>
       <div class="mug-rate__prisjakt-card">
         <div class="mug-rate__prisjakt-logo">{{ 'prisjakt-logo.svg' | inline_asset_content }}</div>
+        <p class="mug-rate__prisjakt-fraga">Hur var din köpupplevelse på Musik Utan Gränser?</p>
         <div data-prisjakt></div>
       </div>
     </div>
@@ -224,6 +225,25 @@
       script.id = 'checkout-rating-script';
       script.src = 'https://cdn.pji.nu/b2b/widgets/checkout-rating/index.js';
       document.body.appendChild(script);
+
+      // Widgeten renderar i en tom (samma ursprung) iframe. Deras egen rubrik och
+      // stängkryss döljs där inne — vår fråga står i stället ovanför i kortet.
+      function stadaWidget() {
+        var frame = holder.querySelector('iframe');
+        if (!frame) return false;
+        var d;
+        try { d = frame.contentDocument; } catch (e) { return false; }
+        if (!d || !d.head || !d.body || d.getElementById('mug-pj-style')) return !!(d && d.getElementById('mug-pj-style'));
+        var st = d.createElement('style');
+        st.id = 'mug-pj-style';
+        st.textContent = '.close-icon{display:none!important}.rating_wrapper .rating-title{display:none!important}';
+        d.head.appendChild(st);
+        return true;
+      }
+      var forsok = 0;
+      var timer = setInterval(function () {
+        if (stadaWidget() || ++forsok > 60) clearInterval(timer);
+      }, 250);
     }
 
     function renderProduct(p) {
@@ -528,6 +548,11 @@
   .mug-rate__prisjakt-logo svg {
     height: 44px;
     width: auto;
+  }
+
+  .mug-rate__prisjakt-fraga {
+    margin: 0 0 4px;
+    font-weight: 600;
   }
 
   /* Prisjakts widget i vårt typsnitt, utan stängkryss */
