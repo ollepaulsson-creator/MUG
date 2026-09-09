@@ -71,10 +71,10 @@
 <template data-product-template>
   <section class="mug-rate__product">
     <div class="mug-rate__product-head">
-      <img class="mug-rate__image" alt="" width="96" height="96" loading="lazy" hidden>
+      <a class="mug-rate__image-link" data-product-link><img class="mug-rate__image" alt="" width="96" height="96" loading="lazy" hidden></a>
       <div>
-        <p class="mug-rate__vendor" data-vendor hidden></p>
-        <h2 class="mug-rate__product-title" data-title></h2>
+        <p class="mug-rate__vendor" hidden><a data-vendor data-vendor-link></a></p>
+        <h2 class="mug-rate__product-title"><a data-title data-product-link></a></h2>
         <p class="mug-rate__variant" data-variant hidden></p>
         <p class="mug-rate__price" data-price hidden></p>
         <p class="mug-rate__already" data-already hidden>Du har redan betygsatt den här produkten — du kan ändra ditt betyg nedan.</p>
@@ -133,6 +133,27 @@
       if (isNaN(n)) return String(v);
       // Butikens money-format: "3,995 kr" (komma som tusentalsavgränsare, inga ören)
       return n.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' kr';
+    }
+
+    function lankOn(a, url) {
+      if (!url) return;
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+    }
+
+    // Samma regel som snippets/vendor-collection-url.liquid: riktig varumärkeskollektion
+    // när den finns, annars den automatiska /collections/vendors-sidan.
+    var VENDOR_HANDLES = { 'PRS Guitars': 'prs', 'Ernie Ball Music Man': 'music-man', 'Zildjian': 'zildjan', 'Universal Audio': 'apollo', 'Ortega': 'ortega-1', 'Vintage': 'vintage-guitars' };
+    function handleize(v) {
+      return String(v).toLowerCase().replace(/[åä]/g, 'a').replace(/ö/g, 'o').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    }
+    function vendorUrl(v) {
+      var handle = VENDOR_HANDLES[v] || handleize(v);
+      var fallback = '/collections/vendors?q=' + encodeURIComponent(v);
+      return fetch('/collections/' + handle + '.json', { credentials: 'omit' })
+        .then(function (r) { return r.ok ? '/collections/' + handle : fallback; })
+        .catch(function () { return fallback; });
     }
 
     function starSvg() {
@@ -216,7 +237,14 @@
       }
       node.querySelector('[data-title]').textContent = p.title || 'Produkt';
       var vendor = node.querySelector('[data-vendor]');
-      if (p.vendor) { vendor.textContent = p.vendor; vendor.hidden = false; }
+      if (p.vendor) {
+        vendor.textContent = p.vendor;
+        vendor.parentNode.hidden = false;
+        vendorUrl(p.vendor).then(function (url) { lankOn(vendor, url); });
+      }
+      if (p.handle) {
+        node.querySelectorAll('[data-product-link]').forEach(function (a) { lankOn(a, '/products/' + encodeURIComponent(p.handle)); });
+      }
       var price = node.querySelector('[data-price]');
       var prisText = formatPris(p.price);
       if (prisText) { price.textContent = prisText; price.hidden = false; }
@@ -343,6 +371,23 @@
     font-size: var(--font-h5--size, 1.25rem);
     line-height: 1.25;
     margin: 0;
+  }
+
+  .mug-rate__product-title a,
+  .mug-rate__vendor a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .mug-rate__product-title a[href]:hover,
+  .mug-rate__vendor a[href]:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .mug-rate__image-link {
+    display: inline-flex;
+    flex-shrink: 0;
   }
 
   .mug-rate__variant {
