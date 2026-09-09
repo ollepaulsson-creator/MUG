@@ -376,7 +376,8 @@
   .mug-rate__stars {
     display: flex;
     gap: 0;
-    margin-top: 4px;
+    /* canvasen bär ~9 px luft upptill — dra upp mot rubriken */
+    margin-top: -6px;
     margin-left: -8px;
   }
 
@@ -391,7 +392,7 @@
 
   /* 46-canvasen ger ~9 px luft per sida — dra ihop stjärnorna */
   .mug-rate__star + .mug-rate__star {
-    margin-left: -11px;
+    margin-left: -15px;
   }
 
   .mug-rate__star svg {
