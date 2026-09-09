@@ -126,8 +126,9 @@
       <button
         type="button"
         class="rating-link"
-        title="Betyget baseras på {{ antal_text }}"
-        aria-label="Betyget baseras på {{ antal_text }}"
+        data-rating-link
+        title="Betyget baseras på {{ antal_text }} — visa recensionerna"
+        aria-label="Betyget baseras på {{ antal_text }} — visa recensionerna"
       >({{ rating_count }})</button>
     {%- endif -%}
 
@@ -147,6 +148,23 @@
     {%- endif -%}
   </div>
 {%- endif -%}
+
+<script>
+  // MUG 2026-09-09: antalet vid stjärnraden öppnar Produktomdömen-rutan (blocks/mug-reviews.liquid) och scrollar dit.
+  if (!window.mugRatingLinkInit) {
+    window.mugRatingLinkInit = true;
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('[data-rating-link]');
+      if (!link) return;
+      var box = document.querySelector('[data-mug-pr]');
+      if (!box) return;
+      e.preventDefault();
+      var details = box.querySelector('details');
+      if (details && !details.open) details.open = true;
+      box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+</script>
 
 {% stylesheet %}
   .rating-wrapper {
@@ -211,8 +229,8 @@
     font-family: inherit;
     font-size: 15px;
     line-height: 1;
-    cursor: default;
-    color: var(--color-foreground);
+    cursor: pointer;
+    color: #787878;
     text-decoration: underline;
     text-underline-offset: 2px;
     text-decoration-thickness: 1px;
