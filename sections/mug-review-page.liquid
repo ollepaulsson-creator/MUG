@@ -337,6 +337,14 @@
 
     // Okänd/saknad länk ⇒ butikens vanliga 404-sida (Olles beslut 2026-09-09); laddningsvyn ligger kvar tills svaret kommit.
     function tillFyra04() { window.location.replace(NOT_FOUND_URL); }
+
+    // Testläge: ?tack=1 visar tack-steget med Prisjakt-widgeten direkt, utan token.
+    if (params.get('tack') === '1') {
+      root.querySelector('[data-state="loading"]').hidden = true;
+      showPrisjakt();
+      return;
+    }
+
     if (!token) { tillFyra04(); return; }
     fetch(requestEndpoint + '?token=' + encodeURIComponent(token), { cache: 'no-store' })
       .then(function (r) { return r.json(); })
