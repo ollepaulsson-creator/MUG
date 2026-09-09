@@ -479,6 +479,22 @@
   .mug-pr__more:disabled {
     opacity: 0.5;
   }
+
+  @media screen and (max-width: 749px) {
+    /* Moderationstexten får mer bredd på liten skärm */
+    .mug-pr__policy {
+      max-width: 90%;
+    }
+
+    /* Svaret: avataren i överkant mot namnet, tätare till svarstexten */
+    .mug-pr__reply-head {
+      align-items: flex-start;
+    }
+
+    .mug-pr__reply .mug-pr__body {
+      margin-top: 0;
+    }
+  }
 {% endstylesheet %}
 
 {% schema %}
