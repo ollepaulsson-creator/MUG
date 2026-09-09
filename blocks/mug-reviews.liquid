@@ -188,7 +188,7 @@
     width: 100%;
     margin-top: 24px;
     border: 1px solid rgb(var(--color-foreground-rgb) / 0.14);
-    border-radius: 8px;
+    border-radius: 6px;
     background: var(--color-background);
   }
 
@@ -220,8 +220,8 @@
   }
 
   .mug-pr__heading {
-    font-weight: 700;
-    font-size: 16px;
+    font-weight: 600;
+    font-size: 15px;
   }
 
   .mug-pr__count {
@@ -282,6 +282,7 @@
 
   .mug-pr__policy {
     margin: 0;
+    font-size: 13px;
     line-height: 1.5;
   }
 
@@ -294,7 +295,7 @@
   .mug-pr__item {
     display: flex;
     gap: 16px;
-    padding: 22px 20px;
+    padding: 20px 20px 16px;
     border-top: 1px solid rgb(var(--color-foreground-rgb) / 0.14);
   }
 
@@ -307,8 +308,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
-    font-size: 17px;
+    font-weight: 600;
+    font-size: 15px;
   }
 
   .mug-pr__item-main {
@@ -325,7 +326,8 @@
   }
 
   .mug-pr__name {
-    font-weight: 700;
+    font-weight: 600;
+    font-size: 15px;
     color: var(--color-foreground);
   }
 
@@ -353,7 +355,11 @@
 
   .mug-pr__more-wrap {
     text-align: center;
-    padding: 6px 20px 24px;
+    padding: 0 20px 20px;
+  }
+
+  .mug-pr__more-wrap:has([hidden]) {
+    display: none;
   }
 
   .mug-pr__more {
