@@ -111,7 +111,8 @@
     var productsRoot = root.querySelector('[data-products]');
     var prisjaktShown = false;
     var uid = 0;
-    var NOT_FOUND_URL = '/404';
+    // /404 omdirigeras till startsidan i den här butiken — en okänd sidadress ger temats riktiga 404-mall
+    var NOT_FOUND_URL = '/pages/recension-hittades-inte';
     var produkter = [];
     var submitButton = root.querySelector('[data-submit]');
     var globalError = root.querySelector('[data-error]');
