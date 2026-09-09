@@ -42,6 +42,7 @@
   {{ closest.product | structured_data }}
 </script>
 {% render 'product-rating-json-ld', product: closest.product %}
+{% render 'mug-schema-attributes-json-ld', product: closest.product %}
 
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <div
