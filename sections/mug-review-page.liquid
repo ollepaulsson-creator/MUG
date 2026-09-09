@@ -125,13 +125,14 @@
       });
     }
 
-    // price kommer som tal (kr) eller färdig sträng från API:t
+    // price kommer som tal (kr) eller färdig sträng från API:t; formateras som produktsidans pris
     function formatPris(v) {
       if (v === null || v === undefined || v === '') return '';
       if (typeof v === 'string' && /kr/.test(v)) return v;
       var n = Number(v);
       if (isNaN(n)) return String(v);
-      return n.toLocaleString('sv-SE', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' kr';
+      // Butikens money-format: "3,995 kr" (komma som tusentalsavgränsare, inga ören)
+      return n.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' kr';
     }
 
     function starSvg() {
