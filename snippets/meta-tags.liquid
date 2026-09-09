@@ -173,6 +173,10 @@
 {%- if current_tags -%}
   <meta name="robots" content="noindex, follow">
 {%- endif -%}
+{%- comment -%} Betygsidan (mejllänkar med token) ska inte indexeras. {%- endcomment -%}
+{%- if template.suffix == 'recension' -%}
+  <meta name="robots" content="noindex, follow">
+{%- endif -%}
 {%- comment -%} /collections lists every collection incl. old campaigns and
   internal duplicates over ~30 paginated pages — thin directory content.
   Kept usable for visitors but out of the index; nav menus already link all

@@ -1,0 +1,24 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "mug-review-page",
+      "settings": {
+        "request_endpoint": "https://bakhuvudet.mug.se/api/public/review-request",
+        "submit_endpoint": "https://bakhuvudet.mug.se/api/public/review-submit",
+        "prisjakt_widget_id": ""
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

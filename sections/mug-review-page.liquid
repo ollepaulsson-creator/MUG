@@ -1,0 +1,409 @@
+{% comment %}
+  Betygsidan (MUG 2026-09-09) — landningssida för betygsmejlen från Bakhuvudet.
+  Mejlens stjärnlänkar pekar hit med ?token=…&produkt=<id>&betyg=1–5.
+  Sidan hämtar orderns produkter från Bakhuvudets öppna API, låter kunden
+  betygsätta varje produkt (stjärnor + frivilligt namn och text) och visar
+  efter första sparade recensionen ett tack-block med Prisjakts omdömeswidget.
+  Kontrakt: docs/theme-contracts/recensioner.md i mug-priskoll (etapp 3).
+  Formulärklasserna (sell-form__*) delas med Sälj/byt in-formuläret.
+{% endcomment %}
+
+{%- liquid
+  assign request_endpoint = section.settings.request_endpoint | default: 'https://bakhuvudet.mug.se/api/public/review-request'
+  assign submit_endpoint = section.settings.submit_endpoint | default: 'https://bakhuvudet.mug.se/api/public/review-submit'
+  assign widget_id = section.settings.prisjakt_widget_id | strip
+-%}
+
+<div class="section page-width-content">
+  <div
+    class="sell-form mug-rate"
+    data-mug-rate
+    data-request-endpoint="{{ request_endpoint | escape }}"
+    data-submit-endpoint="{{ submit_endpoint | escape }}"
+    data-prisjakt-widget-id="{{ widget_id | escape }}"
+  >
+    <svg class="visually-hidden" style="width: 0; height: 0;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="presentation">
+      <defs>
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="5.4 5.4 14.2 14.2" id="mug-rate-star">
+          {%- comment -%} Samma stjärna som blocks/review.liquid (star-filled.svg) {%- endcomment -%}
+          <path d="M12.9189 6.27027L14.8483 10.0927L18.5617 10.4605C18.6501 10.4679 18.7345 10.5004 18.805 10.5543C18.8755 10.6081 18.9291 10.681 18.9594 10.7644C18.9898 10.8477 18.9956 10.9381 18.9762 11.0246C18.9568 11.1112 18.913 11.1904 18.85 11.2528L15.7939 14.2818L16.927 18.3977C16.9501 18.485 16.9476 18.5771 16.9197 18.663C16.8917 18.7489 16.8396 18.8249 16.7695 18.8818C16.6993 18.9388 16.6143 18.9743 16.5245 18.984C16.4347 18.9938 16.344 18.9774 16.2633 18.9368L12.4985 17.0726L8.73901 18.9345C8.65831 18.9751 8.56761 18.9915 8.47781 18.9817C8.38801 18.972 8.30294 18.9365 8.23283 18.8795C8.16272 18.8226 8.11056 18.7466 8.08262 18.6607C8.05467 18.5748 8.05214 18.4827 8.07532 18.3954L9.20837 14.2795L6.15 11.2505C6.087 11.1881 6.0432 11.1089 6.02381 11.0223C6.00441 10.9357 6.01022 10.8454 6.04056 10.7621C6.07089 10.6787 6.12448 10.6058 6.19497 10.552C6.26546 10.4981 6.34991 10.4656 6.43831 10.4582L10.1517 10.0904L12.0782 6.27027C12.1178 6.19289 12.178 6.12794 12.2522 6.08259C12.3264 6.03724 12.4116 6.01324 12.4985 6.01324C12.5855 6.01324 12.6707 6.03724 12.7449 6.08259C12.8191 6.12794 12.8793 6.19289 12.9189 6.27027Z" />
+        </symbol>
+      </defs>
+    </svg>
+
+    <div data-state="loading">
+      <h1 class="sell-form__title">Hämtar ditt köp…</h1>
+    </div>
+
+    <div data-state="error" hidden>
+      <h1 class="sell-form__title">Länken verkar inte stämma</h1>
+      <p class="sell-form__intro">
+        Vi hittar inget köp kopplat till den här länken. Den kan ha gått ut, eller så
+        blev den avklippt i mejlet. Har du frågor är du välkommen att höra av dig till
+        <a href="mailto:order@mug.se">order@mug.se</a>.
+      </p>
+      <a class="sell-form__submit mug-rate__link-button" href="/">Till butiken</a>
+    </div>
+
+    <div data-state="form" hidden>
+      <h1 class="sell-form__title">Vad tyckte du om ditt köp?</h1>
+      <p class="sell-form__intro">
+        Ditt betyg publiceras på produktsidan och hjälper andra musiker att välja rätt.
+        Bara stjärnorna är obligatoriska, men skriv gärna några rader.
+      </p>
+      <div class="mug-rate__products" data-products></div>
+    </div>
+
+    <div class="mug-rate__thanks" data-state="thanks" hidden>
+      <h2 class="sell-form__success-title">
+        <span class="sell-form__success-check" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.81641 8.61667L4.78353 11.1458C4.84991 11.232 4.93497 11.3022 5.03231 11.3509C5.12965 11.3995 5.23675 11.4255 5.34557 11.4268C5.45264 11.4281 5.55864 11.4054 5.65586 11.3606C5.75308 11.3157 5.83908 11.2497 5.90761 11.1674L12.1837 3.57275" stroke="white" stroke-width="1.65" stroke-linecap="square"/>
+          </svg>
+        </span>
+        Tack! Vill du även betygsätta oss som butik på Prisjakt?
+      </h2>
+      <div data-prisjakt></div>
+    </div>
+  </div>
+</div>
+
+<template data-product-template>
+  <section class="mug-rate__product">
+    <div class="mug-rate__product-head">
+      <img class="mug-rate__image" alt="" width="96" height="96" loading="lazy" hidden>
+      <div>
+        <h2 class="mug-rate__product-title" data-title></h2>
+        <p class="mug-rate__variant" data-variant hidden></p>
+        <p class="mug-rate__already" data-already hidden>Du har redan betygsatt den här produkten — du kan ändra ditt betyg nedan.</p>
+      </div>
+    </div>
+    <form class="mug-rate__form" novalidate>
+      <input type="text" name="website" class="sell-form__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <span class="sell-form__label" id="" data-stars-label>Ditt betyg:</span>
+      <div class="mug-rate__stars" role="radiogroup" data-stars></div>
+      <p class="sell-form__field-error" data-stars-error hidden>Välj antal stjärnor.</p>
+      <label class="sell-form__label" data-name-label>Ditt förnamn:</label>
+      <p class="sell-form__help">Visas vid recensionen. Frivilligt.</p>
+      <input class="sell-form__input" name="name" type="text" maxlength="60" autocomplete="given-name" placeholder="Förnamn">
+      <label class="sell-form__label" data-body-label>Berätta gärna mer:</label>
+      <p class="sell-form__help">Hur låter det, hur känns det, vad var bra eller mindre bra? Frivilligt.</p>
+      <textarea class="sell-form__input sell-form__textarea" name="body" rows="5" maxlength="4000" placeholder="Din recension"></textarea>
+      <p class="sell-form__error" data-error hidden></p>
+      <button type="submit" class="sell-form__submit">Spara recension</button>
+      <p class="mug-rate__saved" data-saved hidden>Tack! Ditt betyg är publicerat.</p>
+    </form>
+  </section>
+</template>
+
+<script>
+  (function () {
+    var root = document.querySelector('[data-mug-rate]');
+    if (!root || root.dataset.init) return;
+    root.dataset.init = '1';
+
+    var params = new URLSearchParams(window.location.search);
+    var token = params.get('token') || '';
+    var paramProduct = params.get('produkt') || '';
+    var paramRating = parseInt(params.get('betyg'), 10);
+    if (!(paramRating >= 1 && paramRating <= 5)) paramRating = 0;
+
+    var requestEndpoint = root.dataset.requestEndpoint;
+    var submitEndpoint = root.dataset.submitEndpoint;
+    var widgetId = root.dataset.prisjaktWidgetId || '';
+    var template = document.querySelector('[data-product-template]');
+    var productsRoot = root.querySelector('[data-products]');
+    var prisjaktShown = false;
+    var uid = 0;
+
+    function showState(name) {
+      root.querySelectorAll('[data-state]').forEach(function (el) {
+        if (el.dataset.state === 'thanks') return;
+        el.hidden = el.dataset.state !== name;
+      });
+    }
+
+    function starSvg() {
+      var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('viewBox', '0 0 14.2 14.2');
+      svg.setAttribute('aria-hidden', 'true');
+      var use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+      use.setAttribute('href', '#mug-rate-star');
+      svg.appendChild(use);
+      return svg;
+    }
+
+    function buildStars(container, initial, labelId) {
+      var value = initial || 0;
+      var buttons = [];
+      function paint(n) {
+        buttons.forEach(function (b, i) { b.classList.toggle('is-filled', i < n); });
+      }
+      for (var i = 1; i <= 5; i++) {
+        (function (n) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'mug-rate__star';
+          b.setAttribute('role', 'radio');
+          b.setAttribute('aria-label', n + (n === 1 ? ' stjärna' : ' stjärnor'));
+          b.setAttribute('aria-checked', n === value ? 'true' : 'false');
+          b.appendChild(starSvg());
+          b.addEventListener('click', function () {
+            value = n;
+            buttons.forEach(function (x, i) { x.setAttribute('aria-checked', i + 1 === n ? 'true' : 'false'); });
+            paint(n);
+            container.dispatchEvent(new CustomEvent('rating-change'));
+          });
+          b.addEventListener('mouseenter', function () { paint(n); });
+          b.addEventListener('mouseleave', function () { paint(value); });
+          buttons.push(b);
+          container.appendChild(b);
+        })(i);
+      }
+      container.setAttribute('aria-labelledby', labelId);
+      paint(value);
+      return function () { return value; };
+    }
+
+    function showPrisjakt() {
+      if (prisjaktShown) return;
+      prisjaktShown = true;
+      var thanks = root.querySelector('[data-state="thanks"]');
+      thanks.hidden = false;
+      if (!widgetId) {
+        thanks.querySelector('h2').textContent = 'Tack! Ditt betyg hjälper andra musiker att välja rätt.';
+        return;
+      }
+      var holder = thanks.querySelector('[data-prisjakt]');
+      var css = document.createElement('link');
+      css.rel = 'stylesheet';
+      css.href = 'https://cdn.pji.nu/b2b/widgets/checkout-rating/index.css';
+      document.head.appendChild(css);
+      var div = document.createElement('div');
+      div.className = 'checkout_rating_widget';
+      div.setAttribute('data-shop-id', '582');
+      div.setAttribute('data-widget-id', widgetId);
+      div.setAttribute('data-market', 'SE');
+      holder.appendChild(div);
+      var script = document.createElement('script');
+      script.defer = true;
+      script.id = 'checkout-rating-script';
+      script.src = 'https://cdn.pji.nu/b2b/widgets/checkout-rating/index.js';
+      document.body.appendChild(script);
+    }
+
+    function renderProduct(p) {
+      var node = template.content.firstElementChild.cloneNode(true);
+      uid += 1;
+      var id = 'mug-rate-' + uid;
+      var img = node.querySelector('img');
+      if (p.image) { img.src = p.image; img.hidden = false; }
+      node.querySelector('[data-title]').textContent = p.title || 'Produkt';
+      var variant = node.querySelector('[data-variant]');
+      if (p.variantTitle && p.variantTitle !== 'Default Title') { variant.textContent = p.variantTitle; variant.hidden = false; }
+      var already = p.rating !== null && p.rating !== undefined;
+      if (already) node.querySelector('[data-already]').hidden = false;
+
+      var starsLabel = node.querySelector('[data-stars-label]');
+      starsLabel.id = id + '-stars-label';
+      node.querySelector('[data-name-label]').setAttribute('for', id + '-name');
+      node.querySelector('[name="name"]').id = id + '-name';
+      node.querySelector('[data-body-label]').setAttribute('for', id + '-body');
+      node.querySelector('[name="body"]').id = id + '-body';
+
+      var initial = 0;
+      if (paramProduct && String(p.productId) === String(paramProduct) && paramRating) initial = paramRating;
+      else if (already) initial = Number(p.rating) || 0;
+
+      var starsEl = node.querySelector('[data-stars]');
+      var getRating = buildStars(starsEl, initial, starsLabel.id);
+      var starsError = node.querySelector('[data-stars-error]');
+      starsEl.addEventListener('rating-change', function () { starsError.hidden = true; });
+
+      var form = node.querySelector('form');
+      var errorEl = node.querySelector('[data-error]');
+      var savedEl = node.querySelector('[data-saved]');
+      var button = form.querySelector('button[type="submit"]');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        errorEl.hidden = true;
+        var rating = getRating();
+        if (!rating) { starsError.hidden = false; starsEl.focus(); return; }
+        button.disabled = true;
+        button.textContent = 'Sparar…';
+        var payload = {
+          token: token,
+          productId: String(p.productId),
+          rating: rating,
+          name: form.elements.name.value.trim(),
+          body: form.elements.body.value.trim(),
+          website: form.elements.website.value
+        };
+        fetch(submitEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        })
+          .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
+          .then(function (data) {
+            if (data && data.ok) {
+              savedEl.hidden = false;
+              button.textContent = 'Uppdatera recension';
+              showPrisjakt();
+              return;
+            }
+            errorEl.textContent = (data && data.error) ? data.error : 'Något gick fel. Försök igen om en stund.';
+            errorEl.hidden = false;
+            button.textContent = 'Spara recension';
+          })
+          .catch(function () {
+            errorEl.textContent = 'Något gick fel. Försök igen om en stund.';
+            errorEl.hidden = false;
+            button.textContent = 'Spara recension';
+          })
+          .then(function () { button.disabled = false; });
+      });
+
+      return node;
+    }
+
+    if (!token) { showState('error'); return; }
+    fetch(requestEndpoint + '?token=' + encodeURIComponent(token), { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (!data || !data.ok || !Array.isArray(data.products) || data.products.length === 0) { showState('error'); return; }
+        data.products.forEach(function (p) { productsRoot.appendChild(renderProduct(p)); });
+        showState('form');
+      })
+      .catch(function () { showState('error'); });
+  })();
+</script>
+
+{% stylesheet %}
+  .mug-rate__products {
+    display: grid;
+    gap: 36px;
+    margin-top: 8px;
+  }
+
+  .mug-rate__product {
+    padding-top: 28px;
+    border-top: 1px solid rgb(var(--color-foreground-rgb) / 0.12);
+  }
+
+  .mug-rate__product-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .mug-rate__image {
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+    flex-shrink: 0;
+    background: #f5f5f5;
+  }
+
+  .mug-rate__product-title {
+    font-size: var(--font-h5--size, 1.25rem);
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  .mug-rate__variant {
+    margin: 4px 0 0;
+    font-size: 14px;
+    color: rgb(var(--color-foreground-rgb) / 0.65);
+  }
+
+  .mug-rate__already {
+    margin: 6px 0 0;
+    font-size: 14px;
+  }
+
+  .mug-rate__stars {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .mug-rate__star {
+    width: 34px;
+    height: 34px;
+    padding: 2px;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .mug-rate__star svg {
+    width: 100%;
+    height: 100%;
+    fill: transparent;
+    stroke: rgb(var(--color-foreground-rgb) / 0.35);
+    stroke-width: 1;
+    stroke-linejoin: round;
+  }
+
+  .mug-rate__star.is-filled svg {
+    fill: var(--color-foreground);
+    stroke: var(--color-foreground);
+  }
+
+  .mug-rate__star:focus-visible {
+    outline: 2px solid var(--color-foreground);
+    outline-offset: 2px;
+  }
+
+  .mug-rate__saved {
+    margin: 12px 0 0;
+    font-weight: 600;
+    color: #2e9e44;
+  }
+
+  .mug-rate__link-button {
+    text-align: center;
+    text-decoration: none;
+    max-width: 260px;
+  }
+
+  .mug-rate__thanks {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid rgb(var(--color-foreground-rgb) / 0.12);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Betygsida (Bakhuvudet)",
+  "settings": [
+    {
+      "type": "text",
+      "id": "request_endpoint",
+      "label": "API: hämta köp",
+      "default": "https://bakhuvudet.mug.se/api/public/review-request",
+      "info": "Bakhuvudets öppna API. Sidan lägger själv till ?token=…"
+    },
+    {
+      "type": "text",
+      "id": "submit_endpoint",
+      "label": "API: spara recension",
+      "default": "https://bakhuvudet.mug.se/api/public/review-submit"
+    },
+    {
+      "type": "text",
+      "id": "prisjakt_widget_id",
+      "label": "Prisjakt widget-id",
+      "info": "Genereras i Prisjakt Business Center → Integrationer → Widgetar. Tomt ⇒ inget Prisjakt-block efter Spara."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Betygsida (Bakhuvudet)"
+    }
+  ]
+}
+{% endschema %}
