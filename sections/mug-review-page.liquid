@@ -24,7 +24,7 @@
   >
     <svg class="visually-hidden" style="width: 0; height: 0;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="presentation">
       <defs>
-        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="10.6 10.6 23.9 23.9" id="mug-rate-star">
+        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 46" id="mug-rate-star">
           {%- comment -%} Samma stjärna som blocks/review.liquid (star-filled.svg) {%- endcomment -%}
           <path d="M23.3048 11.3111L26.7852 18.2064L33.4839 18.87C33.6434 18.8833 33.7957 18.942 33.9229 19.0391C34.05 19.1362 34.1467 19.2678 34.2014 19.4182C34.2561 19.5685 34.2666 19.7314 34.2316 19.8876C34.1966 20.0437 34.1176 20.1866 34.004 20.2992L28.4911 25.7633L30.535 33.188C30.5768 33.3455 30.5722 33.5117 30.5218 33.6667C30.4714 33.8216 30.3773 33.9587 30.2509 34.0614C30.1244 34.1642 29.9709 34.2282 29.8089 34.2458C29.647 34.2634 29.4833 34.2338 29.3378 34.1606L22.5465 30.7977L15.7645 34.1564C15.619 34.2296 15.4553 34.2592 15.2934 34.2416C15.1314 34.224 14.9779 34.16 14.8514 34.0573C14.725 33.9545 14.6309 33.8174 14.5805 33.6625C14.53 33.5075 14.5255 33.3413 14.5673 33.1839L16.6112 25.7591L11.0942 20.2951C10.9805 20.1824 10.9015 20.0396 10.8665 19.8834C10.8315 19.7273 10.842 19.5644 10.8967 19.414C10.9515 19.2636 11.0481 19.1321 11.1753 19.0349C11.3024 18.9378 11.4548 18.8791 11.6142 18.8659L18.313 18.2022L21.7882 11.3111C21.8597 11.1715 21.9683 11.0543 22.1021 10.9725C22.2359 10.8907 22.3896 10.8474 22.5465 10.8474C22.7033 10.8474 22.8571 10.8907 22.9909 10.9725C23.1247 11.0543 23.2333 11.1715 23.3048 11.3111Z" />
         </symbol>
@@ -73,8 +73,10 @@
     <div class="mug-rate__product-head">
       <img class="mug-rate__image" alt="" width="96" height="96" loading="lazy" hidden>
       <div>
+        <p class="mug-rate__vendor" data-vendor hidden></p>
         <h2 class="mug-rate__product-title" data-title></h2>
         <p class="mug-rate__variant" data-variant hidden></p>
+        <p class="mug-rate__price" data-price hidden></p>
         <p class="mug-rate__already" data-already hidden>Du har redan betygsatt den här produkten — du kan ändra ditt betyg nedan.</p>
       </div>
     </div>
@@ -83,11 +85,11 @@
       <span class="sell-form__label" id="" data-stars-label>Ditt betyg:</span>
       <div class="mug-rate__stars" role="radiogroup" data-stars></div>
       <p class="sell-form__field-error" data-stars-error hidden>Välj antal stjärnor.</p>
-      <label class="sell-form__label" data-name-label>Ditt förnamn:</label>
-      <p class="sell-form__help">Visas vid recensionen. Frivilligt.</p>
+      <label class="sell-form__label" data-name-label>Ditt förnamn: <span class="mug-rate__optional">(frivilligt)</span></label>
+      <p class="sell-form__help">Förnamnet visas vid recensionen</p>
       <input class="sell-form__input" name="name" type="text" maxlength="60" autocomplete="given-name" placeholder="Förnamn">
-      <label class="sell-form__label" data-body-label>Berätta gärna mer:</label>
-      <p class="sell-form__help">Hur låter det, hur känns det, vad var bra eller mindre bra? Frivilligt.</p>
+      <label class="sell-form__label" data-body-label>Berätta gärna mer: <span class="mug-rate__optional">(frivilligt)</span></label>
+      <p class="sell-form__help">Hur låter det, hur känns det, vad var bra eller mindre bra?</p>
       <textarea class="sell-form__input sell-form__textarea" name="body" rows="5" maxlength="4000" placeholder="Din recension"></textarea>
       <p class="sell-form__error" data-error hidden></p>
       <button type="submit" class="sell-form__submit">Spara recension</button>
@@ -123,9 +125,18 @@
       });
     }
 
+    // price kommer som tal (kr) eller färdig sträng från API:t
+    function formatPris(v) {
+      if (v === null || v === undefined || v === '') return '';
+      if (typeof v === 'string' && /kr/.test(v)) return v;
+      var n = Number(v);
+      if (isNaN(n)) return String(v);
+      return n.toLocaleString('sv-SE', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' kr';
+    }
+
     function starSvg() {
       var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      svg.setAttribute('viewBox', '0 0 14.2 14.2');
+      svg.setAttribute('viewBox', '0 0 46 46');
       svg.setAttribute('aria-hidden', 'true');
       var use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
       use.setAttribute('href', '#mug-rate-star');
@@ -203,6 +214,11 @@
         img.hidden = false;
       }
       node.querySelector('[data-title]').textContent = p.title || 'Produkt';
+      var vendor = node.querySelector('[data-vendor]');
+      if (p.vendor) { vendor.textContent = p.vendor; vendor.hidden = false; }
+      var price = node.querySelector('[data-price]');
+      var prisText = formatPris(p.price);
+      if (prisText) { price.textContent = prisText; price.hidden = false; }
       var variant = node.querySelector('[data-variant]');
       if (p.variantTitle && p.variantTitle !== 'Default Title') { variant.textContent = p.variantTitle; variant.hidden = false; }
       var already = p.rating !== null && p.rating !== undefined;
@@ -292,8 +308,7 @@
   }
 
   .mug-rate__product {
-    padding-top: 28px;
-    border-top: 1px solid rgb(var(--color-foreground-rgb) / 0.12);
+    padding-top: 8px;
   }
 
   .mug-rate__product-head {
@@ -322,6 +337,24 @@
     color: rgb(var(--color-foreground-rgb) / 0.65);
   }
 
+  .mug-rate__vendor {
+    margin: 0 0 4px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(var(--color-foreground-rgb) / 0.65);
+  }
+
+  .mug-rate__price {
+    margin: 6px 0 0;
+    font-weight: 600;
+  }
+
+  .mug-rate__optional {
+    font-weight: 400;
+    color: rgb(var(--color-foreground-rgb) / 0.55);
+  }
+
   .mug-rate__already {
     margin: 6px 0 0;
     font-size: 14px;
@@ -329,17 +362,23 @@
 
   .mug-rate__stars {
     display: flex;
-    gap: 6px;
-    margin-top: 8px;
+    gap: 0;
+    margin-top: 6px;
+    margin-left: -8px;
   }
 
   .mug-rate__star {
-    width: 34px;
-    height: 34px;
-    padding: 2px;
+    width: 38px;
+    height: 38px;
+    padding: 0;
     background: none;
     border: 0;
     cursor: pointer;
+  }
+
+  /* 46-canvasen ger ~9 px luft per sida — dra ihop stjärnorna */
+  .mug-rate__star + .mug-rate__star {
+    margin-left: -11px;
   }
 
   .mug-rate__star svg {
