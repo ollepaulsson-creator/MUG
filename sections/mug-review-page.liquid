@@ -298,7 +298,14 @@
       var img = node.querySelector('img');
       if (p.image) {
         // Shopify-CDN levererar originalstorlek (upp till 2048 px) — be om en liten variant.
-        img.src = /cdn\.shopify\.com/.test(p.image) ? p.image + (p.image.indexOf('?') === -1 ? '?' : '&') + 'width=220' : p.image;
+        // 2× för 110 px-rutan. Shopify bakar in en beställd storlek i filnamnet
+        // (…_80x80.jpg) och den tar över width= — skala bort suffixet först.
+        var src = p.image;
+        if (/cdn\.shopify\.com/.test(src)) {
+          src = src.replace(/_\d+x\d+(_crop_[a-z]+)?(\.[a-z0-9]+)(\?|$)/i, '$2$3');
+          src += (src.indexOf('?') === -1 ? '?' : '&') + 'width=220';
+        }
+        img.src = src;
         img.hidden = false;
       }
       node.querySelector('[data-title]').textContent = p.title || 'Produkt';
@@ -493,7 +500,7 @@
   }
 
   .mug-rate__vendor {
-    margin: 0 0 6px;
+    margin: 0 0 4px; /* Olle 2026-09-10: 2 px tätare mot titeln */
     font-size: 13px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
