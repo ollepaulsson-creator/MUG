@@ -41,13 +41,10 @@
       href="{{ canonical_url }}"
     >
 
-    {%- if settings.favicon != blank -%}
-      <link
-        rel="icon"
-        type="image/png"
-        href="{{ settings.favicon | image_url: width: 32, height: 32 }}"
-      >
-    {%- endif -%}
+    {%- comment -%} Samma favicon-filer som layout/theme.liquid (ordmärket på vit platta, 2026-09-10). {%- endcomment -%}
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ 'favicon-192.png' | asset_url }}">
+    <link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48" href="{{ 'favicon.ico' | asset_url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ 'apple-touch-icon.png' | asset_url }}">
 
     {%- unless settings.type_primary_font.system?
       and settings.type_secondary_font.system?
