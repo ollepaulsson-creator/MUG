@@ -28,6 +28,15 @@ Disallow: /*?sort_by=
 Disallow: /*?filter.
 Disallow: /*?pf_*
 Disallow: /*&pf_*
+# Undantag: sections/main-collection.liquid skickar varje kollektion vidare
+# till ?filter.v.availability=1 (döljer slutsålda). Googlebot kör JS och
+# följer med, så just den adressen (och dess sidnumrering) måste få läsas —
+# annars blir kollektionerna "Indexerad men blockerad av robots.txt".
+# Sidan pekar kanoniskt på den rena adressen. Längsta regeln vinner hos
+# Google, så dessa slår Disallow: /*?filter. ovan. Ta bort när
+# omdirigeringen är borta.
+Allow: /collections/*?filter.v.availability=1$
+Allow: /collections/*?filter.v.availability=1&page=
 {% endif %}
 {% if group.sitemap -%}
 Sitemap: {{ group.sitemap.value }}
