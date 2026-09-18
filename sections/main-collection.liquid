@@ -9,15 +9,14 @@
   {% assign featured_key = featured_key_raw | strip | downcase | replace: 'å', 'a' | replace: 'ä', 'a' | replace: 'ö', 'o' | replace: ' ', '-' %}
 {% endif %}
 
-<script>
-  (function() {
-    var url = new URL(window.location.href);
-    if (!url.searchParams.has('filter.v.availability')) {
-      url.searchParams.set('filter.v.availability', '1');
-      window.location.replace(url.toString());
-    }
-  })();
-</script>
+{% comment %}
+  Här låg ett skript som skickade alla besökare vidare till ?filter.v.availability=1
+  för att dölja slutsålda. Googlebot följde med, och robots.txt spärrade adressen —
+  ~260 kollektioner blev "Indexerad men blockerad av robots.txt" (sep 2026).
+  Sedan 2026-09-18 sorterar Bakhuvudets nattjobb i stället kollektionerna med
+  köpbara varor först och slutsålda sist, så den rena adressen kan visas som den är.
+  Lägg inte tillbaka omdirigeringen.
+{% endcomment %}
 
 {% unless section.settings.enable_pagination %}
 <script

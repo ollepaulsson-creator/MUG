@@ -33,8 +33,9 @@ Disallow: /*&pf_*
 # följer med, så just den adressen (och dess sidnumrering) måste få läsas —
 # annars blir kollektionerna "Indexerad men blockerad av robots.txt".
 # Sidan pekar kanoniskt på den rena adressen. Längsta regeln vinner hos
-# Google, så dessa slår Disallow: /*?filter. ovan. Ta bort när
-# omdirigeringen är borta.
+# Google, så dessa slår Disallow: /*?filter. ovan. Omdirigeringen togs bort
+# 2026-09-18; reglerna ligger kvar några veckor så Google kan läsa om de
+# spärrade adresserna och samla dem under den rena adressen. Ta bort därefter.
 Allow: /collections/*?filter.v.availability=1$
 Allow: /collections/*?filter.v.availability=1&page=
 {% endif %}
