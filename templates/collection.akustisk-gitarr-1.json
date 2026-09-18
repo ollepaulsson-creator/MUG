@@ -798,10 +798,6 @@
         "home_label": "Start",
         "aria_label": "Breadcrumbs"
       }
-    },
-    "featured_akustisk_gitarr_1": {
-      "type": "instant-zqWAHXqkOtl5ppiB",
-      "settings": {}
     }
   },
   "order": [
@@ -811,7 +807,6 @@
     "custom_liquid_KrgeXX",
     "main",
     "section_yFJeQH",
-    "section_KMH7q7",
-    "featured_akustisk_gitarr_1"
+    "section_KMH7q7"
   ]
 }
