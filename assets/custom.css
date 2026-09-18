@@ -2589,3 +2589,13 @@ product-inventory.product-inventory {
 .product-inventory .product-inventory__icon svg {
   margin-top: 0;
 }
+
+/* Filterpanelen (#filters-drawer) är en modal <dialog> och ligger normalt i
+   webbläsarens topplager. När filtren uppdateras ritas panelen om, och ibland
+   får den nya panelen bara attributet open utan showModal() — då faller den
+   ner till .drawer:s z-index 2, under det klistrade sidhuvudet (8) och
+   megamenyn (200), och menyraden syns rakt igenom panelen. Lagret här gäller
+   bara i det läget; i topplagret spelar z-index ingen roll. */
+dialog.facets--drawer[open] {
+  z-index: 300;
+}

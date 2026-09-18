@@ -463,6 +463,23 @@
       %}
     </dialog>
   </dialog-component>
+  <script>
+    // Öppnas panelen om efter en filteruppdatering utan att bli modal igen
+    // (open-attributet kopieras av morph, showModal() körs inte) hamnar den
+    // under sidhuvudet. Öppna om den som modal så fort det händer.
+    (function () {
+      var fixing = false;
+      function ensureModal() {
+        if (fixing) return;
+        var d = document.querySelector('#filters-drawer dialog[open]');
+        if (!d || d.matches(':modal')) return;
+        fixing = true;
+        try { d.close(); d.showModal(); } catch (e) {}
+        fixing = false;
+      }
+      new MutationObserver(ensureModal).observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ['open'] });
+    })();
+  </script>
 {% endif %}
 
 {% stylesheet %}
