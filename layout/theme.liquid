@@ -196,8 +196,10 @@
 
     {%- comment -%} Same reason as above: policy pages can't render section groups
       themselves, so the shared "image grid above the footer" group is injected
-      here for them (matches the other static pages). {%- endcomment -%}
-    {%- if request.path contains '/policies/' -%}
+      here for them (matches the other static pages). "Dina integritetsval" uses
+      templates/page.policy.json without the grid, so it gets it here too and the
+      sticky policy nav stops at the end of the text. {%- endcomment -%}
+    {%- if request.path contains '/policies/' or request.path == '/pages/data-sharing-opt-out' -%}
       {% sections 'store-grid-group' %}
     {%- endif -%}
 
