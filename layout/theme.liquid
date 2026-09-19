@@ -173,7 +173,7 @@
 
     <main
       id="MainContent"
-      class="content-for-layout"
+      class="content-for-layout{% if request.path contains '/policies/' or request.path == '/pages/data-sharing-opt-out' %} main--policy{% endif %}"
       role="main"
       data-page-transition-enabled="{{ settings.page_transition_enabled }}"
       data-product-transition="{{ settings.transition_to_main_product }}"
@@ -187,6 +187,9 @@
         body. Inject the breadcrumb here so they match the other static pages. {%- endcomment -%}
       {%- if request.path contains '/policies/' -%}
         {% section 'breadcrumbs' %}
+      {%- endif -%}
+      {%- if request.path contains '/policies/' or request.path == '/pages/data-sharing-opt-out' -%}
+        {% render 'mug-policy-nav' %}
       {%- endif -%}
       {{ content_for_layout }}
     </main>

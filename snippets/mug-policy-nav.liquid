@@ -1,0 +1,30 @@
+{%- comment -%}
+  Sidonavigering mellan de policysidor som hör ihop. Renderas från
+  layout/theme.liquid på /policies/*-sidor (Shopify ritar dem själv med
+  .shopify-policy__container, utan tema-sektioner) och på sidan
+  "Dina integritetsval". Namnen är samma som i footermenyn. Stilar i
+  assets/custom.css under "Policysidor".
+{%- endcomment -%}
+{%- assign current_path = request.path -%}
+{%- assign items = 'shipping|Frakt & leverans,refund|Retur & återbetalning,terms|Köpvillkor,privacy|Integritetspolicy,choices|Dina integritetsval' | split: ',' -%}
+<nav class="policy-nav" aria-label="Villkor och policyer">
+  <p class="policy-nav__heading">Villkor</p>
+  <ul class="policy-nav__list">
+    {%- for item in items -%}
+      {%- assign parts = item | split: '|' -%}
+      {%- case parts[0] -%}
+        {%- when 'shipping' -%}{%- assign href = shop.shipping_policy.url -%}
+        {%- when 'refund' -%}{%- assign href = shop.refund_policy.url -%}
+        {%- when 'terms' -%}{%- assign href = shop.terms_of_service.url -%}
+        {%- when 'privacy' -%}{%- assign href = shop.privacy_policy.url -%}
+        {%- else -%}{%- assign href = '/pages/data-sharing-opt-out' -%}
+      {%- endcase -%}
+      {%- if href == blank -%}{%- continue -%}{%- endif -%}
+      {%- assign is_current = false -%}
+      {%- if current_path == href -%}{%- assign is_current = true -%}{%- endif -%}
+      <li class="policy-nav__item{% if is_current %} policy-nav__item--current{% endif %}">
+        <a class="policy-nav__link" href="{{ href }}"{% if is_current %} aria-current="page"{% endif %}>{{ parts[1] }}</a>
+      </li>
+    {%- endfor -%}
+  </ul>
+</nav>
