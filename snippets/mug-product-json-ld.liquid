@@ -6,8 +6,8 @@
 
   Utöver Shopifys fält:
   - ett Offer per variant (upp till 50) med lagerstatus, skick, frakt och retur
-  - shippingDetails enligt fraktsidan: fraktfritt från 500 kr, annars 50 kr,
-    leverans 2–4 arbetsdagar inom Sverige
+  - shippingDetails enligt Shopifys fraktprofil: fraktfritt från 2 000 kr,
+    annars 89 kr, leverans 2–4 arbetsdagar inom Sverige
   - hasMerchantReturnPolicy: 14 dagars ångerrätt, kunden betalar returfrakten
   - aggregateRating ur reviews.rating / reviews.rating_count (Bakhuvudet)
   - material, size, additionalProperty ur filtermetafälten (mug-schema-attributes)
@@ -79,10 +79,10 @@
               assign availability = 'https://schema.org/PreOrder'
             endif
           endif
-          if price >= 500
+          if price >= 2000
             assign shipping_rate = 0
           else
-            assign shipping_rate = 50
+            assign shipping_rate = 89
           endif
         -%}
         {
