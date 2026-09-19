@@ -2615,7 +2615,9 @@ dialog.facets--drawer[open] {
   padding-inline: var(--page-margin, 16px);
   box-sizing: border-box;
 }
-.main--policy > .section-breadcrumbs { grid-column: 1 / -1; }
+.main--policy > .section-breadcrumbs,
+.main--policy > .shopify-section:not([id$="__main"]) { grid-column: 1 / -1; }
+.main--policy > [id$="__main"] .rte { max-width: 68ch; }
 .main--policy .shopify-policy__container {
   padding-block: 0 var(--padding-xl, 4rem);
   max-width: 68ch;
@@ -2692,6 +2694,10 @@ dialog.facets--drawer[open] {
   }
 }
 
+.main--policy .shopify-policy__title,
+.main--policy .shopify-policy__title h1 {
+  text-align: left;
+}
 .main--policy .shopify-policy__title h1 {
   font-size: clamp(1.875rem, 1.4rem + 1.6vw, 2.5rem);
   line-height: 1.15;
