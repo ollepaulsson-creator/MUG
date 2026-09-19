@@ -2615,7 +2615,7 @@ dialog.facets--drawer[open] {
      spänner alla kolumner (full bredd som på andra sidor) */
   grid-template-columns: var(--page-margin, 16px) minmax(0, 1fr) var(--page-margin, 16px);
   column-gap: 0;
-  row-gap: 1.5rem;
+  row-gap: calc(1.5rem + 10px);
 }
 .main--policy > .section-breadcrumbs { grid-column: 1 / -1; order: -1; }
 .main--policy > .shopify-section:not(.section-breadcrumbs):not([id$="__main"]) { grid-column: 1 / -1; }
