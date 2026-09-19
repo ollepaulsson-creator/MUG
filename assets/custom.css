@@ -2638,7 +2638,7 @@ dialog.facets--drawer[open] {
   padding-inline: 20px;
 }
 .main--policy > [id$="__main"] .section,
-.main--policy > [id$="__main"] .section-content-wrapper { padding-block-start: 0; }
+.main--policy > [id$="__main"] .section-content-wrapper { padding-block-start: 0; gap: 0; }
 .main--policy > [id$="__main"] .text-block { max-width: 78ch; }
 .main--policy > [id$="__main"] h1 { margin: 0 0 1.5rem; }
 @media screen and (min-width: 990px) {
