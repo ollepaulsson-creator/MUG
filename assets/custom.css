@@ -2628,6 +2628,18 @@ dialog.facets--drawer[open] {
   margin: 0;
 }
 .main--policy > [id$="__main"] .rte { max-width: 78ch; }
+/* "Dina integritetsval" (vanlig sida): temats main-page centrerar innehållet i
+   en smal spalt med luft ovanför — här ska det ligga som på policysidorna:
+   uppe till vänster i innehållskolumnen. */
+.main--policy > [id$="__main"] .section.page-width-content {
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: 0;
+}
+.main--policy > [id$="__main"] .section,
+.main--policy > [id$="__main"] .section-content-wrapper { padding-block-start: 0; }
+.main--policy > [id$="__main"] .text-block { max-width: 78ch; }
+.main--policy > [id$="__main"] h1 { margin: 0 0 1.5rem; }
 @media screen and (min-width: 990px) {
   .main--policy {
     /* sidmarginal | navigering | mellanrum | innehåll | sidmarginal */
