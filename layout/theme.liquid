@@ -173,7 +173,7 @@
 
     <main
       id="MainContent"
-      class="content-for-layout{% if request.path contains '/policies/' or request.path == '/pages/data-sharing-opt-out' %} main--policy{% endif %}"
+      class="content-for-layout{% if request.path contains '/policies/' %} main--policy{% elsif request.path == '/pages/data-sharing-opt-out' %} main--policy-page{% endif %}"
       role="main"
       data-page-transition-enabled="{{ settings.page_transition_enabled }}"
       data-product-transition="{{ settings.transition_to_main_product }}"

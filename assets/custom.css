@@ -2615,9 +2615,35 @@ dialog.facets--drawer[open] {
   padding-inline: var(--page-margin, 16px);
   box-sizing: border-box;
 }
-.main--policy > .section-breadcrumbs,
-.main--policy > .shopify-section:not([id$="__main"]) { grid-column: 1 / -1; }
-.main--policy > [id$="__main"] .rte { max-width: 68ch; }
+.main--policy > .section-breadcrumbs { grid-column: 1 / -1; }
+
+/* "Dina integritetsval" är en vanlig sida med egna sektioner — ingen kolumn,
+   bara navigeringen som chips ovanför innehållet (samma stil som på mobil). */
+.main--policy-page .policy-nav {
+  max-width: var(--page-width, 1440px);
+  margin: 1.5rem auto 0;
+  padding-inline: var(--page-margin, 16px);
+  box-sizing: border-box;
+}
+.main--policy-page .policy-nav__heading { display: none; }
+.main--policy-page .policy-nav__list {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.main--policy-page .policy-nav__link {
+  border: 1px solid rgb(0 0 0 / 0.12);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+.main--policy-page .policy-nav__item--current .policy-nav__link {
+  background: rgb(0 0 0 / 1);
+  color: #fff;
+  border-color: rgb(0 0 0 / 1);
+}
+.main--policy-page [id$="__main"] .rte { max-width: 68ch; }
 .main--policy .shopify-policy__container {
   padding-block: 0 var(--padding-xl, 4rem);
   max-width: 68ch;
