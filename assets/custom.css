@@ -2649,7 +2649,7 @@ dialog.facets--drawer[open] {
     padding-bottom: 2rem;
   }
   .main--policy > .section-breadcrumbs { grid-row: 1; }
-  .main--policy > .policy-nav { grid-column: 2; grid-row: 2; position: sticky; top: calc(var(--header-height, 60px) + 2rem); padding-top: 0.25rem; }
+  .main--policy > .policy-nav { grid-column: 2; grid-row: 2; position: sticky; top: var(--page-margin, 16px); padding-top: 0.25rem; }
   .main--policy > .shopify-policy__container,
   .main--policy > [id$="__main"] { grid-column: 4; grid-row: 2; }
 }
@@ -2666,7 +2666,7 @@ dialog.facets--drawer[open] {
 .policy-nav__link {
   display: block;
   padding: 0.5rem 0.75rem;
-  border-radius: 6px;
+  border-radius: 4px;
   font-size: 0.9375rem;
   line-height: 1.4;
   text-decoration: none;
