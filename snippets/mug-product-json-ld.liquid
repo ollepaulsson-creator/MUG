@@ -1,0 +1,123 @@
+{%- comment -%}
+  Produktsidans hela JSON-LD i ETT Product-objekt. Ersätter Shopifys
+  `structured_data`-filter plus de två fragmenten (betyg, attribut) som förr
+  låg i egna script-block med samma @id — tre Product-noder som Google fick
+  slå ihop själv.
+
+  Utöver Shopifys fält:
+  - ett Offer per variant (upp till 50) med lagerstatus, skick, frakt och retur
+  - shippingDetails enligt fraktsidan: fraktfritt från 500 kr, annars 50 kr,
+    leverans 2–4 arbetsdagar inom Sverige
+  - hasMerchantReturnPolicy: 14 dagars ångerrätt, kunden betalar returfrakten
+  - aggregateRating ur reviews.rating / reviews.rating_count (Bakhuvudet)
+  - material, size, additionalProperty ur filtermetafälten (mug-schema-attributes)
+  - PreOrder när varianten säljs vidare vid slut lager (förhandsbeställning)
+  - UsedCondition för taggen Status:Begagnad
+
+  Parameter: product.
+{%- endcomment -%}
+{%- liquid
+  assign shop_url = shop.url
+  assign product_url = shop_url | append: product.url
+  assign rating = product.metafields.reviews.rating.value
+  assign rating_count = product.metafields.reviews.rating_count
+  assign is_used = false
+  if product.tags contains 'Status:Begagnad' or product.tags contains 'status: Begagnad'
+    assign is_used = true
+  endif
+  assign description = product.description | strip_html | strip_newlines | truncate: 5000
+-%}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "@id": {{ product.url | append: '#product' | json }},
+    "name": {{ product.title | json }},
+    "url": {{ product_url | json }},
+    "description": {{ description | json }},
+    "sku": {{ product.selected_or_first_available_variant.sku | json }},
+    {%- assign gtin = product.selected_or_first_available_variant.barcode | strip -%}
+    {%- if gtin.size == 8 or gtin.size == 12 or gtin.size == 13 or gtin.size == 14 -%}
+    "gtin": {{ gtin | json }},
+    {%- endif -%}
+    {%- if product.vendor != blank -%}
+    "brand": { "@type": "Brand", "name": {{ product.vendor | json }} },
+    {%- endif -%}
+    {%- if product.category.name != blank -%}
+    "category": {{ product.category.name | json }},
+    {%- elsif product.type != blank -%}
+    "category": {{ product.type | json }},
+    {%- endif -%}
+    {%- capture image_list -%}
+      {%- for media in product.media limit: 6 -%}
+        {%- if media.media_type == 'image' -%}{{ media | image_url: width: 1920 | prepend: 'https:' | json }},{%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- assign image_list = image_list | strip -%}
+    {%- if image_list != '' -%}
+    {%- assign image_list_len = image_list | size | minus: 1 -%}
+    "image": [{{ image_list | slice: 0, image_list_len }}],
+    {%- endif -%}
+    {%- render 'mug-schema-attributes', mug_schema_product: product -%}
+    {%- if rating != blank and rating_count != blank and rating_count > 0 -%}
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": {{ rating.rating | json }},
+      "bestRating": {{ rating.scale_max | default: 5 | json }},
+      "worstRating": {{ rating.scale_min | default: 1 | json }},
+      "ratingCount": {{ rating_count | json }}
+    },
+    {%- endif -%}
+    "offers": [
+      {%- for variant in product.variants limit: 50 -%}
+        {%- liquid
+          assign price = variant.price | divided_by: 100.0
+          assign availability = 'https://schema.org/OutOfStock'
+          if variant.available
+            assign availability = 'https://schema.org/InStock'
+            if variant.inventory_management != blank and variant.inventory_quantity <= 0 and variant.inventory_policy == 'continue'
+              assign availability = 'https://schema.org/PreOrder'
+            endif
+          endif
+          if price >= 500
+            assign shipping_rate = 0
+          else
+            assign shipping_rate = 50
+          endif
+        -%}
+        {
+          "@type": "Offer",
+          "@id": {{ variant.url | append: '#offer' | json }},
+          "url": {{ shop_url | append: variant.url | json }},
+          "sku": {{ variant.sku | json }},
+          {%- assign vgtin = variant.barcode | strip -%}
+          {%- if vgtin.size == 8 or vgtin.size == 12 or vgtin.size == 13 or vgtin.size == 14 -%}
+          "gtin": {{ vgtin | json }},
+          {%- endif -%}
+          "price": {{ price | round: 2 | json }},
+          "priceCurrency": {{ cart.currency.iso_code | json }},
+          "availability": {{ availability | json }},
+          "itemCondition": {% if is_used %}"https://schema.org/UsedCondition"{% else %}"https://schema.org/NewCondition"{% endif %},
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingRate": { "@type": "MonetaryAmount", "value": {{ shipping_rate }}, "currency": "SEK" },
+            "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "SE" },
+            "deliveryTime": {
+              "@type": "ShippingDeliveryTime",
+              "handlingTime": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 3, "unitCode": "DAY" },
+              "transitTime": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 2, "unitCode": "DAY" }
+            }
+          },
+          "hasMerchantReturnPolicy": {
+            "@type": "MerchantReturnPolicy",
+            "applicableCountry": "SE",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+            "merchantReturnDays": 14,
+            "returnMethod": "https://schema.org/ReturnByMail",
+            "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility"
+          }
+        }{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    ]
+  }
+</script>
