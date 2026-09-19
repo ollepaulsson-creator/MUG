@@ -2611,16 +2611,17 @@ dialog.facets--drawer[open] {
    villkorstexten får en egen skala. */
 .main--policy {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  column-gap: 4rem;
+  /* sidmarginal | innehåll | sidmarginal — brödsmulor och övriga sektioner
+     spänner alla kolumner (full bredd som på andra sidor) */
+  grid-template-columns: var(--page-margin, 16px) minmax(0, 1fr) var(--page-margin, 16px);
+  column-gap: 0;
   row-gap: 1.5rem;
-  max-width: var(--page-width, 1440px);
-  margin-inline: auto;
-  padding-inline: var(--page-margin, 16px);
-  box-sizing: border-box;
 }
 .main--policy > .section-breadcrumbs { grid-column: 1 / -1; order: -1; }
 .main--policy > .shopify-section:not(.section-breadcrumbs):not([id$="__main"]) { grid-column: 1 / -1; }
+.main--policy > .policy-nav,
+.main--policy > .shopify-policy__container,
+.main--policy > [id$="__main"] { grid-column: 2; }
 .main--policy .shopify-policy__container {
   padding-block: 0 var(--padding-xl, 4rem);
   max-width: 68ch;
@@ -2629,14 +2630,15 @@ dialog.facets--drawer[open] {
 .main--policy > [id$="__main"] .rte { max-width: 68ch; }
 @media screen and (min-width: 990px) {
   .main--policy {
-    grid-template-columns: 220px minmax(0, 1fr);
+    /* sidmarginal | navigering | mellanrum | innehåll | sidmarginal */
+    grid-template-columns: var(--page-margin, 16px) 220px 4rem minmax(0, 1fr) var(--page-margin, 16px);
     align-items: start;
     padding-bottom: 2rem;
   }
   .main--policy > .section-breadcrumbs { grid-row: 1; }
-  .main--policy > .policy-nav { grid-column: 1; grid-row: 2; position: sticky; top: calc(var(--header-height, 60px) + 2rem); padding-top: 0.25rem; }
+  .main--policy > .policy-nav { grid-column: 2; grid-row: 2; position: sticky; top: calc(var(--header-height, 60px) + 2rem); padding-top: 0.25rem; }
   .main--policy > .shopify-policy__container,
-  .main--policy > [id$="__main"] { grid-column: 2; grid-row: 2; }
+  .main--policy > [id$="__main"] { grid-column: 4; grid-row: 2; }
 }
 
 .policy-nav__heading {
