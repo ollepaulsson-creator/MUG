@@ -2632,9 +2632,10 @@ dialog.facets--drawer[open] {
    en smal spalt med luft ovanför — här ska det ligga som på policysidorna:
    uppe till vänster i innehållskolumnen. */
 .main--policy > [id$="__main"] .section.page-width-content {
-  max-width: none;
+  display: block;
+  max-width: 78ch;
   margin-inline: 0;
-  padding-inline: 0;
+  padding-inline: 20px;
 }
 .main--policy > [id$="__main"] .section,
 .main--policy > [id$="__main"] .section-content-wrapper { padding-block-start: 0; }
