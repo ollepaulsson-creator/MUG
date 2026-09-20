@@ -1,0 +1,30 @@
+{%- comment -%}
+  Sidinnehåll för "Dina integritetsval" (templates/page.policy.json).
+  Shopify skriver den sidans text själv och skriver över alla ändringar i
+  admin/API vid nästa integritetsuppdatering, så mellanrubrikerna läggs in
+  här vid rendering i stället. Hittas inte styckena (ny text från Shopify)
+  visas texten som den är, utan rubriker.
+{%- endcomment -%}
+{%- liquid
+  assign content = page.content
+  assign p_right = '<p>Att dela personlig information för riktad reklam'
+  assign p_how = '<p>Om du besöker vår webbplats med den globala integritetskontrollens'
+  if content contains p_right
+    assign h_right = '<h2>Din rätt att tacka nej</h2>' | append: p_right
+    assign content = content | replace_first: p_right, h_right
+  endif
+  if content contains p_how
+    assign h_how = '<h2>Så tackar du nej</h2>' | append: p_how
+    assign content = content | replace_first: p_how, h_how
+  endif
+-%}
+<rte-formatter>
+  {{ content }}
+</rte-formatter>
+
+{% schema %}
+{
+  "name": "Integritetsval-text",
+  "class": "rte"
+}
+{% endschema %}

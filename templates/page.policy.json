@@ -39,7 +39,7 @@
           "blocks": {}
         },
         "page-content": {
-          "type": "page-content",
+          "type": "mug-page-content-policy",
           "settings": {},
           "blocks": {}
         }
