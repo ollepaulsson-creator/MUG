@@ -283,8 +283,16 @@ function setupShowMore() {
     if (index >= visible) item.style.display = 'none';
   });
 
-  // Hide wrapper (not just button) so no space is left when all items are visible
-  if (items.length <= visible) { if (showMoreWrapper) showMoreWrapper.style.display = 'none'; }
+  // Hide wrapper (not just button) so no space is left when all items are
+  // visible, and drop the section's bottom padding too so the grid sits
+  // directly on the store image grid below (the padding only exists to give
+  // the button room).
+  const spacing = productSection.querySelector('.spacing-style');
+  const hideShowMore = () => {
+    if (showMoreWrapper) showMoreWrapper.style.display = 'none';
+    if (spacing) spacing.style.setProperty('--padding-block-end', '0px');
+  };
+  if (items.length <= visible) hideShowMore();
 
   // Button click: reveal next batch, hide wrapper when all shown
   showMoreBtn.addEventListener('click', () => {
@@ -292,7 +300,7 @@ function setupShowMore() {
     items.forEach((item, index) => {
       if (index < visible) item.style.display = '';
     });
-    if (visible >= items.length && showMoreWrapper) showMoreWrapper.style.display = 'none';
+    if (visible >= items.length) hideShowMore();
   });
 
   showMoreBtn.dataset.showMoreSetup = 'true';
