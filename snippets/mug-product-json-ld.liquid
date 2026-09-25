@@ -36,8 +36,8 @@
     "url": {{ product_url | json }},
     "description": {{ description | json }},
     "sku": {{ product.selected_or_first_available_variant.sku | json }},
-    {%- assign gtin = product.selected_or_first_available_variant.barcode | strip -%}
-    {%- if gtin.size == 8 or gtin.size == 12 or gtin.size == 13 or gtin.size == 14 -%}
+    {%- capture gtin -%}{%- render 'mug-gtin', code: product.selected_or_first_available_variant.barcode -%}{%- endcapture -%}
+    {%- if gtin != blank -%}
     "gtin": {{ gtin | json }},
     {%- endif -%}
     {%- if product.vendor != blank -%}
@@ -103,8 +103,8 @@
           "@id": {{ offer_url | append: '#offer' | json }},
           "url": {{ offer_url | json }},
           "sku": {{ variant.sku | json }},
-          {%- assign vgtin = variant.barcode | strip -%}
-          {%- if vgtin.size == 8 or vgtin.size == 12 or vgtin.size == 13 or vgtin.size == 14 -%}
+          {%- capture vgtin -%}{%- render 'mug-gtin', code: variant.barcode -%}{%- endcapture -%}
+          {%- if vgtin != blank -%}
           "gtin": {{ vgtin | json }},
           {%- endif -%}
           "price": {{ price | round: 2 | json }},
