@@ -85,10 +85,23 @@
             assign shipping_rate = 89
           endif
         -%}
+        {%- comment -%}
+          Erbjudandets adress måste peka på den KANONISKA sidan. variant.url ger
+          alltid ?variant=<id>, och eftersom Googles canonical är den rena
+          adressen såg erbjudandet ut att ligga på en annan sida än produkten —
+          samma slags glapp som link-attributet hade i Merchant Center. Har
+          produkten bara en variant finns ingen anledning till parametern alls;
+          med flera behålls den så varje variant pekar på rätt val.
+        {%- endcomment -%}
+        {%- if product.variants.size > 1 -%}
+          {%- assign offer_url = shop_url | append: variant.url -%}
+        {%- else -%}
+          {%- assign offer_url = product_url -%}
+        {%- endif -%}
         {
           "@type": "Offer",
-          "@id": {{ variant.url | append: '#offer' | json }},
-          "url": {{ shop_url | append: variant.url | json }},
+          "@id": {{ offer_url | append: '#offer' | json }},
+          "url": {{ offer_url | json }},
           "sku": {{ variant.sku | json }},
           {%- assign vgtin = variant.barcode | strip -%}
           {%- if vgtin.size == 8 or vgtin.size == 12 or vgtin.size == 13 or vgtin.size == 14 -%}
@@ -96,6 +109,10 @@
           {%- endif -%}
           "price": {{ price | round: 2 | json }},
           "priceCurrency": {{ cart.currency.iso_code | json }},
+          {%- comment -%} Google behandlar ett erbjudande utan giltighetstid som
+            färskt bara en tid framåt; ett år räcker och skjuts fram vid varje
+            sidvisning eftersom datumet räknas från i dag. {%- endcomment -%}
+          "priceValidUntil": {{ 'now' | date: '%s' | plus: 31536000 | date: '%Y-%m-%d' | json }},
           "availability": {{ availability | json }},
           "itemCondition": {% if is_used %}"https://schema.org/UsedCondition"{% else %}"https://schema.org/NewCondition"{% endif %},
           "shippingDetails": {
