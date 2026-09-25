@@ -532,18 +532,6 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
-            },
-            "review_stars": {
-              "type": "review",
-              "settings": {
-                "stars_style": "shaded",
-                "show_number": false,
-                "show_empty": false,
-                "rating_color": "foreground",
-                "star_color": "#FF5F00",
-                "type_preset": "paragraph",
-                "alignment": "left"
-              }
             }
           },
           "block_order": [
@@ -551,7 +539,6 @@
             "product_card_gallery_DNizbJ",
             "text_3Yrq36",
             "product_title_M7MJkb",
-            "review_stars",
             "price_gLWgA6"
           ]
         }
