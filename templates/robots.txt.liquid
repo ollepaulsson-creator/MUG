@@ -28,6 +28,14 @@ Disallow: /*?sort_by=
 Disallow: /*?filter.
 Disallow: /*?pf_*
 Disallow: /*&pf_*
+# Shopifys interna sökresultatlänkar. De pekar kanoniskt rätt men utgör
+# största delen av de 26 405 adresser Google genomsöker om i onödan
+# (2026-09-25: 96 % av genomsökningen gick till "Uppdatering", 4 % till
+# att hitta nytt). Ingen av dem har eget sökvärde.
+# OBS: blockera aldrig ?variant= — mug-product-json-ld.liquid pekar dit
+# med Offer.url för flervariantprodukter.
+Disallow: /*?*_pos=
+Disallow: /*?*_ss=
 # Undantag: sections/main-collection.liquid skickar varje kollektion vidare
 # till ?filter.v.availability=1 (döljer slutsålda). Googlebot kör JS och
 # följer med, så just den adressen (och dess sidnumrering) måste få läsas —
