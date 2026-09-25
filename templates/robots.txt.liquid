@@ -46,6 +46,13 @@ Disallow: /*?*_ss=
 # spärrade adresserna och samla dem under den rena adressen. Ta bort därefter.
 Allow: /collections/*?filter.v.availability=1$
 Allow: /collections/*?filter.v.availability=1&page=
+# 2026-09-25: 11 394 exakta 301:or lades från /en<väg> till <väg> (ett
+# avpublicerat engelskt språkprefix som gav 18 318 st 404). Undantagen ovan
+# matchar bara /collections/, inte /en/collections/, så de gamla adresserna
+# låg kvar blockerade och Google kunde aldrig hämta dem för att upptäcka
+# omdirigeringen. Längsta regeln vinner, så denna slår Disallow: /*?filter.
+# Kan tas bort när Hittades inte (404) har arbetat av sig.
+Allow: /en/*?filter.
 {% endif %}
 {% if group.sitemap -%}
 Sitemap: {{ group.sitemap.value }}
