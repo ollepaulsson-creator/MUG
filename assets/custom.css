@@ -2748,3 +2748,24 @@ dialog.facets--drawer[open] {
 .main--policy .shopify-policy__body ol { margin: 0 0 0.6rem; padding-left: 1.5rem; }
 .main--policy .shopify-policy__body li { margin-bottom: 0.25rem; }
 .main--policy .shopify-policy__body a { text-decoration: underline; text-underline-offset: 0.15em; }
+
+/* ------------------------------------------------------------------
+   Sorteringsmenyn på mobil
+   Panelen är en position:fixed floating-panel-component vars bredd
+   sätts av innehållet (width: max-content). På en 375 px skärm blev den
+   224 px och lade sig som en lös ruta mitt över produktrutnätet, med
+   vänsterkanten en bit in på första kortet. Här får den i stället spänna
+   hela skärmbredden minus 8 px i kanterna, så den läser som en meny som
+   hör till verktygsraden ovanför. JS:et sätter left/right inline, därav
+   !important. Höjden kapas så listan aldrig når "Kontakta oss"-bubblan.
+   ------------------------------------------------------------------ */
+@media screen and (max-width: 749px) {
+  .sorting-filter__horizontal .sorting-filter__options {
+    left: 8px !important;
+    right: 8px !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: min(60svh, 420px) !important;
+    box-shadow: 0 10px 30px rgb(0 0 0 / 18%) !important;
+  }
+}
