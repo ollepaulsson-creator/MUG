@@ -205,6 +205,13 @@
 
     {% sections 'footer-group' %}
 
+    {%- comment -%} LocalBusiness hör hemma på sidan som representerar verksamheten,
+      inte på varje URL. På en produktsida konkurrerar den med Product-objektet om
+      resultatraden: 2026-09-25 visade px-s1100we-vit "Göteborg · Stängt" i stället
+      för pris, medan px-s1100-svart med identisk markering visade priset. Objektet
+      ligger kvar på startsidan och /pages/besok-butiken, så butiksdatan finns kvar.
+      Ta bort villkoret om prisraden inte kommer tillbaka. {%- endcomment -%}
+    {%- unless request.page_type == 'product' -%}
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -258,6 +265,7 @@
       ]
     }
     </script>
+    {%- endunless -%}
 
     {% render 'search-modal' %}
 
