@@ -109,10 +109,10 @@
           {%- endif -%}
           "price": {{ price | round: 2 | json }},
           "priceCurrency": {{ cart.currency.iso_code | json }},
-          {%- comment -%} Google behandlar ett erbjudande utan giltighetstid som
-            färskt bara en tid framåt; ett år räcker och skjuts fram vid varje
-            sidvisning eftersom datumet räknas från i dag. {%- endcomment -%}
-          "priceValidUntil": {{ 'now' | date: '%s' | plus: 31536000 | date: '%Y-%m-%d' | json }},
+          {%- comment -%} Inget priceValidUntil: Google läser det som slutet på en
+            kampanjperiod och kräver då validFrom (Search Console-varning
+            "Fältet validFrom saknas" 2026-09-27 på alla sidor genomsökta efter
+            att fältet lades till). Våra priser har ingen slutdag. {%- endcomment -%}
           "availability": {{ availability | json }},
           "itemCondition": {% if is_used %}"https://schema.org/UsedCondition"{% else %}"https://schema.org/NewCondition"{% endif %},
           "shippingDetails": {
