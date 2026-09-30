@@ -55,7 +55,10 @@
 
   {% if block_settings.show_tax_info %}
     <div class="tax-note">
-      {%- if cart.duties_included and cart.taxes_included -%}
+      {%- comment -%} Norge: se snippets/tax-info.liquid. {%- endcomment -%}
+      {%- if localization.country.iso_code == 'NO' -%}
+        {{ 'content.mug_norway_import_vat_short' | t }}
+      {%- elsif cart.duties_included and cart.taxes_included -%}
         {{ 'content.duties_and_taxes_included' | t }}
       {%- elsif cart.taxes_included -%}
         {{ 'content.taxes_included' | t }}

@@ -5,8 +5,14 @@
     has_discounts_enabled: {boolean} - whether discounts are enabled
 {%- endcomment -%}
 
+{%- comment -%} Norge (2026-09-30): MUG tar inte ut norsk moms och skickar inte
+  förtullat, så kunden betalar norsk moms och tullavgift vid leverans. Marknaden NO
+  har dynamisk skattevisning, så priset visas utan svensk moms. Temats standardtext
+  "Tullavgifter och skatter ingår" stämde alltså inte — den här raden ersätter den. {%- endcomment -%}
 <small>
-  {%- if cart.duties_included and cart.taxes_included -%}
+  {%- if localization.country.iso_code == 'NO' -%}
+    {{ 'content.mug_norway_import_vat' | t }}
+  {%- elsif cart.duties_included and cart.taxes_included -%}
     {%- if shop.shipping_policy.body == blank -%}
       {%- if has_discounts_enabled -%}
         {{ 'content.duties_and_taxes_included_shipping_at_checkout_without_policy_without_discounts' | t }}

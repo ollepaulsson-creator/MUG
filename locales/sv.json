@@ -145,6 +145,8 @@
     "price_compare_at": "Jämförpris",
     "price_sale": "Reapris",
     "duties_and_taxes_included": "Tullavgifter och skatter ingår.",
+    "mug_norway_import_vat": "Pris utan moms. Norsk moms och tullavgift betalas vid leverans. Frakt beräknas i kassan.",
+    "mug_norway_import_vat_short": "Pris utan moms. Norsk moms och tullavgift betalas vid leverans.",
     "duties_included": "Tullavgifter ingår.",
     "shipping_policy_html": "<a href=\"{{ link }}\">Frakt</a> beräknas i kassan.",
     "taxes_included": "Skatter ingår.",

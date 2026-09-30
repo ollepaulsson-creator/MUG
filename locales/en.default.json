@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "accessibility": {
     "account": "Open account menu",
@@ -151,6 +160,8 @@
     "discount_code_error": "Discount code cannot be applied to your cart",
     "discounts": "Discounts",
     "duties_and_taxes_included": "Duties and taxes included.",
+    "mug_norway_import_vat": "Price excludes VAT. Norwegian VAT and customs fees are paid on delivery. Shipping calculated at checkout.",
+    "mug_norway_import_vat_short": "Price excludes VAT. Norwegian VAT and customs fees are paid on delivery.",
     "duties_and_taxes_included_shipping_at_checkout_with_policy_html": "Duties and taxes included. Discounts and <a href=\"{{ link }}\">shipping</a> calculated at checkout.",
     "duties_and_taxes_included_shipping_at_checkout_with_policy_without_discounts_html": "Duties and taxes included. Shipping is calculated at checkout.",
     "duties_and_taxes_included_shipping_at_checkout_without_policy": "Duties and taxes included. Discounts and shipping calculated at checkout.",
