@@ -15,6 +15,27 @@
   content="#ffffff"
 >
 
+{%- comment -%} Produkttitel i sökfrasens ordning: "Wampler Pedalhead", inte
+  "Wampler - Pedalhead". Produkternas seo.title följer mallen "Märke - Produkt",
+  och Google skrev systematiskt om den till "Pedalhead - Wampler" (H1 först,
+  märket sist) — medan konkurrenterna visas som "Wampler Pedalhead …". Bara den
+  automatiska mallen byts; en handskriven seo.title lämnas orörd. Står märket
+  redan först i produktnamnet skrivs det inte två gånger. 2026-09-30. {%- endcomment -%}
+{%- liquid
+  if request.page_type == 'product' and product.vendor != blank
+    assign mug_auto_title = product.vendor | append: ' - ' | append: product.title
+    if page_title == mug_auto_title
+      assign mug_vendor_prefix = product.vendor | downcase | append: ' '
+      assign mug_prefix_len = mug_vendor_prefix | size
+      assign mug_title_start = product.title | downcase | slice: 0, mug_prefix_len
+      if mug_title_start == mug_vendor_prefix
+        assign page_title = product.title
+      else
+        assign page_title = product.vendor | append: ' ' | append: product.title
+      endif
+    endif
+  endif
+-%}
 {%- liquid
   assign og_title = page_title | default: shop.name
   assign og_url = canonical_url | default: request.origin
