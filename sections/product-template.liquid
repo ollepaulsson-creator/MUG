@@ -138,7 +138,7 @@
           {%- endif -%}
       
 
-          {% capture "form_classes" -%}
+          {% capture form_classes -%}
             product-form product-form-{{ section.id }}
             {%- unless section.settings.show_variant_labels %} product-form--hide-variant-labels {% endunless %}
             {%- if section.settings.enable_payment_button and product.has_only_default_variant %} product-form--payment-button-no-variants {%- endif -%}
@@ -673,4 +673,13 @@
       {% for variant in product.variants %}
         variantStock[{{- variant.id -}}] = {{ variant.inventory_quantity }};
       {% endfor %}
-    </script>
+    </script>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: '{% capture "form_classes" -%}'
+  to: "{% capture form_classes -%}"
+  position: 7494..7521
+{%- endcomment -%}
