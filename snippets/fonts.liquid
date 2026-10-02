@@ -37,10 +37,7 @@
     crossorigin
   >
 {%- endunless -%}
-{%- unless settings.type_accent_font.system?
-  or settings.type_accent_font | font_url == settings.type_heading_font | font_url
-  or settings.type_accent_font | font_url == settings.type_body_font | font_url
-  or settings.type_accent_font | font_url == settings.type_subheading_font | font_url -%}
+{%- unless settings.type_accent_font.system? or settings.type_accent_font or settings.type_accent_font or settings.type_accent_font -%}
   <link
     rel="preload"
     as="font"
@@ -50,3 +47,18 @@
   >
 {%- endunless -%}
 {% # theme-check-enable %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {%- unless settings.type_accent_font.system?
+      or settings.type_accent_font | font_url == settings.type_heading_font | font_url
+      or settings.type_accent_font | font_url == settings.type_body_font | font_url
+      or settings.type_accent_font | font_url == settings.type_subheading_font | font_url -%}
+  to: "{%- unless settings.type_accent_font.system? or settings.type_accent_font or
+    settings.type_accent_font or settings.type_accent_font -%}"
+  position: 883..1018
+{% endcomment %}
