@@ -233,6 +233,33 @@
     .cart-page .cart__checkout-button { order: 5; }
     .cart-page .additional-checkout-buttons { order: 6; }
   }
+
+  /* Justeringar (Olle 2026-10-06 kväll): ingen fri frakt-rad, ingen linje ovanför
+     Summa, skatteraden grå som i lådan, betalikonerna under kassaknappen,
+     linjen ovanför sammanfattningen i brödsmulornas grå. */
+  .cart-page .cart__total-container {
+    border-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  .cart-page .tax-note,
+  .cart-page .tax-note * {
+    color: rgb(120 120 120);
+  }
+
+  .cart-page .cart__checkout-button { order: 5 !important; }
+  .cart-page .additional-checkout-buttons { order: 6 !important; }
+  .cart-page .cart-page__payment-icons {
+    order: 7 !important;
+    padding: var(--padding-xs) 0 0;
+  }
+
+  .cart-page:not(.cart-page--empty) .cart-page__summary {
+    border-top: 1px solid rgb(229 229 229);
+    border-image: linear-gradient(rgb(229 229 229), rgb(229 229 229)) 1 0 0 0 / 1px 0 0 0 / 0 100vw;
+    margin-top: var(--padding-lg);
+    padding-top: var(--padding-xl);
+  }
 {% endstylesheet %}
 
 {% schema %}

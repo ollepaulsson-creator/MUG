@@ -126,6 +126,22 @@
 
 
 
+{%- if template.name == 'cart' -%}
+  {%- comment -%} Betalikonerna under kassaknappen på varukorgssidan — samma urval
+    som lådan (snippets/cart-drawer.liquid). Swish-ikonens gradient-id:n
+    namnrymds så de inte krockar med sidfotens kopia. {%- endcomment -%}
+  <div class="cart-summary__payment-icons cart-page__payment-icons" aria-hidden="true">
+    {%- for type in shop.enabled_payment_types -%}
+      {%- if type == 'blik' or type == 'mobilepay' or type == 'mobile_pay' -%}{%- continue -%}{%- endif -%}
+      {%- if type == 'swish' -%}
+        {{ type | payment_type_svg_tag: class: 'icon icon--full-color' | replace: 'pi-swish', 'pi-swish-cp' }}
+      {%- else -%}
+        {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+
   {% if additional_checkout_buttons and settings.show_accelerated_checkout_buttons %}
     <div class="additional-checkout-buttons additional-checkout-buttons--vertical">
       {{ content_for_additional_checkout_buttons }}
