@@ -111,6 +111,75 @@
       grid-template-columns: 1fr var(--sidebar-width);
     }
   }
+
+  /* ── Varukorgssidan: tabellen över hela bredden, sammanfattningen under —
+     anteckning/rabattkod till vänster, frakt, summa och kassaknapp till
+     höger (Olle 2026-10-06). ───────────────────────────────────────────── */
+  @media screen and (min-width: 750px) {
+    .cart-page:not(.cart-page--empty) {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+
+    .cart-page:not(.cart-page--empty) .cart-page__summary {
+      display: block;
+      grid-column: 1;
+      grid-row: auto;
+      height: auto;
+      padding-top: var(--padding-3xl);
+      border-top: 1px solid var(--color-border);
+      margin-top: var(--margin-xl);
+    }
+
+    .cart-page .cart__summary-container,
+    .cart-page .cart__summary-inner {
+      padding: 0;
+      height: auto;
+    }
+
+    .cart-page .cart__summary-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 26rem);
+      column-gap: var(--gap-5xl, 4rem);
+      row-gap: var(--gap-md);
+      align-items: start;
+    }
+
+    .cart-page .cart__summary-totals {
+      display: contents;
+    }
+
+    .cart-page .cart-actions {
+      grid-column: 1;
+      grid-row: 1 / span 6;
+      max-width: 32rem;
+    }
+
+    .cart-page .cart__summary-inner > *:not(.cart__summary-totals),
+    .cart-page .cart-free-shipping,
+    .cart-page .cart__original-total-container,
+    .cart-page .cart__total-container {
+      grid-column: 2;
+    }
+
+    .cart-page .cart-free-shipping {
+      padding: 0;
+      border: 0;
+    }
+
+    .cart-page .cart-free-shipping__text {
+      text-align: end;
+    }
+
+    .cart-page .cart__total-container .tax-note {
+      justify-content: flex-end;
+      text-align: end;
+    }
+
+    .cart-page .cart__checkout-button {
+      margin-top: var(--margin-md);
+    }
+  }
 {% endstylesheet %}
 
 {% schema %}

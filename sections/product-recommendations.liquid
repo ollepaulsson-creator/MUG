@@ -25,6 +25,13 @@
 
   # Determine if we have a real product context to render from (initial page load)
   assign source_product = section.settings.product | default: product
+  # Varukorgssidan har ingen produkt — där utgår rekommendationerna från första
+  # varan i korgen (inställningen use_cart_product, Olle 2026-10-06).
+  assign mug_rec_product = section.settings.product | default: product
+  if mug_rec_product == blank and section.settings.use_cart_product and cart.item_count > 0
+    assign mug_rec_product = cart.items.first.product
+  endif
+  assign source_product = mug_rec_product
   if source_product != blank
     assign has_product_context = true
   else
@@ -37,7 +44,7 @@
   class="product-recommendations"
   data-url="{{ routes.product_recommendations_url }}?limit=24"
   data-section-id="{{ section.id }}"
-  data-product-id="{{ section.settings.product.id | default: product.id }}"
+  data-product-id="{{ mug_rec_product.id }}"
   data-intent="{{ section.settings.recommendation_type }}"
   data-testid="product-recommendations-section"
   data-recommendations-performed="true"
@@ -70,7 +77,7 @@
     assign max_display = 24
   endif
 
-  assign current_product = section.settings.product | default: product
+  assign current_product = mug_rec_product
 
   if current_product != blank
     assign type_products = blank
@@ -161,6 +168,10 @@
     endif
 
     assign products = type_products | slice: 0, max_display
+
+  elsif section.settings.use_cart_product
+    # Tom varukorg: inga rekommendationer att utgå från — visa nyheterna i stället för platshållare
+    assign products = collections['senaste'].products | where: 'available', true | slice: 0, max_display
 
   else
     # Theme editor placeholder
@@ -368,6 +379,12 @@ document.addEventListener('DOMContentLoaded', () => {
       "type": "product",
       "id": "product",
       "label": "t:settings.product"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_cart_product",
+      "label": "Utgå från första varan i varukorgen",
+      "default": false
     },
     {
       "type": "select",
