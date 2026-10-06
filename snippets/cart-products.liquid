@@ -835,6 +835,17 @@
     line-height: 1.5;
   }
 
+  /* Märket som i produktkorten (vendor-link): 14 px, radhöjd 1.4, 2 px spärrning,
+     versaler, svart — i både låda och sida (Olle 2026-10-06) */
+  .cart-items__details h5 {
+    font-size: 14px;
+    line-height: 1.4;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: rgb(0 0 0);
+  }
+
   /* Märket i produktinformationen är en länk till märkessidan (låda och sida) */
   .cart-items__vendor {
     color: inherit;
@@ -857,7 +868,7 @@
     letter-spacing: 0.06em;
     text-transform: uppercase;
     text-align: start;
-    color: rgb(var(--color-foreground-rgb) / 0.7);
+    color: rgb(0 0 0);
   }
 
   /* Linjerna i samma grå som brödsmulornas (#e5e5e5) */
