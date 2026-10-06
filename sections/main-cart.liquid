@@ -260,6 +260,71 @@
     margin-top: var(--padding-lg);
     padding-top: var(--padding-xl);
   }
+
+  /* ── Två spalter igen (Olle 2026-10-06 kväll): tabellen till vänster,
+     sammanfattningen till höger under rubriken "Ordersammanfattning", som
+     ligger i linje med tabellens Produkt-rubrik och delar dess linje. ── */
+  .cart-page .cart-page__summary-heading {
+    order: 0;
+    align-self: stretch;
+    width: 100%;
+    margin: 0;
+    padding: 1px 0 calc(var(--padding-md) + 1px);
+    border-bottom: 1px solid rgb(229 229 229);
+    border-image: linear-gradient(rgb(229 229 229), rgb(229 229 229)) 0 0 1 0 / 0 0 1px 0 / 0 100vw;
+    font-family: var(--font-body--family);
+    font-size: var(--cart-font-size--xs);
+    font-weight: 500;
+    line-height: inherit;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgb(var(--color-foreground-rgb) / 0.7);
+  }
+
+  /* Rubriken har sin egen linje — ingen linje ovanför sammanfattningen */
+  .cart-page:not(.cart-page--empty) .cart-page__summary {
+    border-top: 0;
+    border-image: none;
+  }
+
+  @media screen and (min-width: 990px) {
+    .cart-page:not(.cart-page--empty) {
+      grid-template-columns: minmax(0, 1fr) 24rem;
+      grid-template-rows: auto auto 1fr;
+      column-gap: var(--gap-5xl, 4rem);
+    }
+
+    .cart-page:not(.cart-page--empty) .cart-page__title {
+      grid-column: 1 / -1;
+    }
+
+    .cart-page:not(.cart-page--empty) .cart-page__items {
+      grid-column: 1;
+      grid-row: 2 / -1;
+    }
+
+    .cart-page:not(.cart-page--empty) .cart-page__summary {
+      display: block;
+      grid-column: 2;
+      grid-row: 2;
+      height: auto;
+      margin-top: 0;
+      /* tabellen börjar 18 px ner i sin cell — samma här så rubrikerna linjerar */
+      padding-top: 18px;
+      position: sticky;
+      top: calc(var(--header-height, 0px) + var(--padding-xl));
+    }
+
+    .cart-page:not(.cart-page--empty) .cart-page__more-blocks {
+      grid-column: 1 / -1;
+    }
+
+    .cart-page .cart__summary-inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-md);
+    }
+  }
 {% endstylesheet %}
 
 {% schema %}
