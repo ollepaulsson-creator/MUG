@@ -210,9 +210,15 @@
   }
 
   /* Mer luft på sidorna på större skärmar (Olle 2026-10-06) */
+  @media screen and (min-width: 750px) {
+    .section--full-width > .cart-page {
+      padding-inline: 32px;
+    }
+  }
+
   @media screen and (min-width: 990px) {
     .section--full-width > .cart-page {
-      padding-inline: 40px;
+      padding-inline: 80px;
     }
   }
 
