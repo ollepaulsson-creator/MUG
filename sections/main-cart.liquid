@@ -209,6 +209,13 @@
     padding-inline: 15px;
   }
 
+  /* Mer luft på sidorna på större skärmar (Olle 2026-10-06) */
+  @media screen and (min-width: 990px) {
+    .section--full-width > .cart-page {
+      padding-inline: 40px;
+    }
+  }
+
   /* Mobil: samma ordning som lådan även när sammanfattningen ligger under tabellen */
   @media screen and (max-width: 749px) {
     .cart-page .cart__summary-inner {
