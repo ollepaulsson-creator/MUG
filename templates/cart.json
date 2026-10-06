@@ -23,7 +23,7 @@
           "static": true,
           "settings": {
             "gap": 24,
-            "image_ratio": "portrait",
+            "image_ratio": "square",
             "dividers": true,
             "vendor": true,
             "padding-block-start": 0,

@@ -81,12 +81,7 @@
           {%- if mug_page -%}
           <thead class="cart-items__head" role="rowgroup">
             <tr role="row" class="cart-items__table-row cart-items__head-row">
-              <th scope="col" role="columnheader" class="cart-items__head-back">
-                <a href="/collections/senaste" class="cart-items__continue">
-                  <span aria-hidden="true">←</span> {{ 'actions.continue_shopping' | t }}
-                </a>
-              </th>
-              <th id="productPrice" scope="col" role="columnheader" class="cart-items__head-price">Pris</th>
+              <th id="productInformation" scope="col" role="columnheader" class="cart-items__head-back">Produkt</th>
               <th id="quantity" scope="col" role="columnheader" class="cart-items__head-qty">Antal</th>
               <th id="productTotal" scope="col" role="columnheader" class="cart-items__head-total">Totalt</th>
             </tr>
@@ -178,7 +173,8 @@
                   headers="productInformation"
                 >
                   {% if item.product.vendor %}
-                  <h5>{{ item.product.vendor }}</h5>
+                  {%- capture mug_vendor_url -%}{% render 'vendor-collection-url', vendor: item.product.vendor %}{%- endcapture -%}
+                  <h5><a href="{{ mug_vendor_url | strip }}" class="cart-items__vendor">{{ item.product.vendor }}</a></h5>
                   {% endif %}
 
                   <p>
@@ -192,19 +188,6 @@
                       {{- item.product.title -}}
                     </a>
                   </p>
-                  {%- if mug_page -%}
-                    {%- assign can_remove_text = item.instructions.can_remove | default: true, allow_false: true -%}
-                    {%- if can_remove_text -%}
-                      <button
-                        class="cart-items__remove-text"
-                        type="button"
-                        aria-label="{{ 'accessibility.remove_item' | t: title: item.title | escape }}"
-                        on:click="/onLineItemRemove/{{ item.index | plus: 1 }}"
-                      >
-                        Ta bort
-                      </button>
-                    {%- endif -%}
-                  {%- endif -%}
                   
                   
                   {%- if item.item_components.size != 0 -%}
@@ -359,12 +342,6 @@
                       assign mug_unit = item.final_price | money
                     endif
                   -%}
-                  <td class="cart-items__unit cart-secondary-typography" role="cell" headers="productPrice">
-                    <span>{{ mug_unit }}</span>
-                    {%- if item.variant.compare_at_price > item.final_price -%}
-                      <s class="compare-at-price">{{ item.variant.compare_at_price | money }}</s>
-                    {%- endif -%}
-                  </td>
                   <td class="cart-items__line-total cart-secondary-typography" role="cell" headers="productTotal">
                     <text-component value="{{ mug_line | strip_html }}">{{ mug_line }}</text-component>
                   </td>
@@ -858,27 +835,19 @@
     line-height: 1.5;
   }
 
-  /* ── Varukorgssidan som tabell (Olle 2026-10-06) ─────────────────────── */
-  .cart-items--page .cart-items__remove {
-    display: none;
+  /* Märket i produktinformationen är en länk till märkessidan (låda och sida) */
+  .cart-items__vendor {
+    color: inherit;
+    text-decoration: none;
   }
 
-  .cart-items__remove-text {
-    margin-top: var(--margin-xs) !important;
-    padding: 0;
-    border: 0;
-    background: none;
-    color: rgb(var(--color-foreground-rgb) / 0.7);
-    font-size: var(--cart-font-size--xs);
+  .cart-items__vendor:hover {
     text-decoration: underline;
     text-underline-offset: 3px;
-    cursor: pointer;
   }
 
-  .cart-items__remove-text:hover {
-    color: var(--color-foreground);
-  }
-
+  /* ── Varukorgssidan som tabell (Olle 2026-10-06): produktinformationen som i
+     lådan (märke, titel, styckpris, antal + papperskorg), plus Totalt-kolumn. */
   .cart-items__head-row th {
     font-size: var(--cart-font-size--xs);
     font-weight: 500;
@@ -894,76 +863,55 @@
     margin-bottom: var(--cart-items-gap);
   }
 
-  .cart-items__continue {
-    color: var(--color-foreground);
-    text-decoration: none;
-  }
-
-  .cart-items__continue:hover {
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-
-  /* Mobil: bara länken i rubrikraden, styckpriset under titeln, radsumman till höger */
+  /* Mobil: som lådan, radsumman till höger */
   .cart-items--page .cart-items__head-row {
-    grid-template-columns: 1fr;
-    grid-template-areas: 'back';
+    grid-template-columns: 1fr auto;
+    grid-template-areas: 'back total';
   }
 
   .cart-items--page .cart-items__head-back {
     grid-area: back;
   }
 
-  .cart-items--page .cart-items__head-price,
-  .cart-items--page .cart-items__head-qty,
-  .cart-items--page .cart-items__head-total,
-  .cart-items--page .cart-items__unit {
+  .cart-items--page .cart-items__head-qty {
     display: none;
   }
 
+  .cart-items--page .cart-items__head-total,
   .cart-items--page .cart-items__line-total {
     grid-area: price;
     text-align: end;
-  }
-
-  /* Styckpriset i detaljcellen dubblerar radsumman — kolumnen Pris tar det på desktop */
-  .cart-items--page .cart-items__unit-price {
-    display: none;
-  }
-
-  .cart-items--page .cart-items__unit,
-  .cart-items--page .cart-items__line-total {
     white-space: nowrap;
+  }
+
+  .cart-items--page .cart-items__head-total {
+    grid-area: total;
   }
 
   @container cart-items (min-width: 720px) {
     .cart-items--page .cart-items__table-row {
-      grid-template-columns: 7.5rem minmax(0, 2.2fr) minmax(6rem, 1fr) minmax(8rem, 1fr) minmax(6rem, 1fr);
+      grid-template-columns: 7.5rem minmax(0, 2fr) minmax(10rem, 1fr) minmax(7rem, 1fr);
       grid-template-rows: 1fr auto;
+      column-gap: 22px;
       grid-template-areas:
-        'media details unit quantity total'
-        'media details error error error';
+        'media details quantity total'
+        'media details error error';
       align-items: center;
     }
 
     .cart-items--page .cart-items__head-row {
-      grid-template-areas: 'back back unit quantity total';
+      grid-template-columns: 7.5rem minmax(0, 2fr) minmax(10rem, 1fr) minmax(7rem, 1fr);
+      grid-template-areas: 'back back quantity total';
+      column-gap: 22px;
       grid-template-rows: auto;
     }
 
-    .cart-items--page .cart-items__head-price,
-    .cart-items--page .cart-items__head-qty,
-    .cart-items--page .cart-items__head-total,
-    .cart-items--page .cart-items__unit {
+    .cart-items--page .cart-items__head-qty {
       display: block;
+      grid-area: quantity;
+      justify-self: center;
     }
 
-    .cart-items--page .cart-items__head-price,
-    .cart-items--page .cart-items__unit {
-      grid-area: unit;
-    }
-
-    .cart-items--page .cart-items__head-qty,
     .cart-items--page .cart-items__quantity {
       grid-area: quantity;
       justify-self: center;
@@ -972,7 +920,6 @@
     .cart-items--page .cart-items__head-total,
     .cart-items--page .cart-items__line-total {
       grid-area: total;
-      text-align: end;
       justify-self: end;
     }
 
@@ -987,15 +934,6 @@
 
     .cart-items--page .cart-items__error {
       grid-area: error;
-    }
-
-    .cart-items--page .cart-items__unit-price {
-      display: none;
-    }
-
-    .cart-items--page .cart-items__unit .compare-at-price {
-      display: block;
-      font-size: var(--cart-font-size--xs);
     }
   }
 {% endstylesheet %}
