@@ -52,7 +52,7 @@
         "a.button.cart-items__empty-button {text-transform: none; margin: 0; /* padding: 0; */ /* text-decoration: underline !important; */}"
       ],
       "settings": {
-        "section_width": "page-width",
+        "section_width": "full-width",
         "color_scheme": "",
         "padding-block-start": 24,
         "padding-block-end": 0
@@ -732,9 +732,20 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "breadcrumbs_cart": {
+      "type": "breadcrumbs",
+      "name": "Breadcrumbs",
+      "settings": {
+        "enable": true,
+        "nav_menu": "main-menu",
+        "home_label": "Start",
+        "aria_label": "Breadcrumbs"
+      }
     }
   },
   "order": [
+    "breadcrumbs_cart",
     "cart-section",
     "mug_cart_recommendations",
     "section_8aKKyY",

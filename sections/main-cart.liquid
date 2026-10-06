@@ -167,17 +167,26 @@
       border: 0;
     }
 
-    .cart-page .cart-free-shipping__text {
-      text-align: end;
+    /* Högerspalten i samma ordning och form som varukorgslådan: fri frakt,
+       betalikoner, avdelare, Summa + belopp på en rad, skatteraden, knappen. */
+    .cart-page .cart-free-shipping { order: 1; }
+    .cart-page .cart-page__payment-icons { order: 2; }
+    .cart-page .cart__original-total-container { order: 3; }
+    .cart-page .cart__total-container {
+      order: 4;
+      border-top: 1px solid var(--color-border);
+      padding-top: var(--padding-lg);
+      row-gap: 0;
     }
+    .cart-page .cart__checkout-button { order: 5; }
+    .cart-page .additional-checkout-buttons { order: 6; }
 
-    .cart-page .cart__total-container .tax-note {
-      justify-content: flex-end;
-      text-align: end;
+    .cart-page .cart-free-shipping__text {
+      text-align: center;
     }
 
     .cart-page .cart__checkout-button {
-      margin-top: var(--margin-md);
+      margin-top: var(--margin-xs);
     }
   }
 
@@ -191,8 +200,38 @@
   }
 
   .cart-page .cart-page__payment-icons {
-    padding: var(--padding-md) 0 0;
+    padding: var(--padding-md) 0;
     margin-top: 0;
+  }
+
+  /* Samma yttermarginal som kollektionssidorna (15 px, Olle 2026-10-06) */
+  .section--full-width > .cart-page {
+    padding-inline: 15px;
+  }
+
+  /* Mobil: samma ordning som lådan även när sammanfattningen ligger under tabellen */
+  @media screen and (max-width: 749px) {
+    .cart-page .cart__summary-inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-md);
+    }
+
+    .cart-page .cart__summary-totals {
+      display: contents;
+    }
+
+    .cart-page .cart-free-shipping { order: 1; padding: 0; border: 0; }
+    .cart-page .cart-page__payment-icons { order: 2; }
+    .cart-page .cart__original-total-container { order: 3; }
+    .cart-page .cart__total-container {
+      order: 4;
+      border-top: 1px solid var(--color-border);
+      padding-top: var(--padding-lg);
+      row-gap: 0;
+    }
+    .cart-page .cart__checkout-button { order: 5; }
+    .cart-page .additional-checkout-buttons { order: 6; }
   }
 {% endstylesheet %}
 
