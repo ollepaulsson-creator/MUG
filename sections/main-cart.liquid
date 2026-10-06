@@ -348,6 +348,13 @@
   .cart-page .cart__total {
     width: 100%;
   }
+
+  /* Avdelaren före rekommendationerna i samma grå som sidans övriga linjer
+     (avdelaren ritar #DCDCDC i snippets/divider.liquid) */
+  body:has(.cart-page) [class*="__divider_rjB4iR"] .divider__line {
+    border-bottom-color: rgb(229 229 229);
+    border-right-color: rgb(229 229 229);
+  }
 {% endstylesheet %}
 
 {% schema %}
