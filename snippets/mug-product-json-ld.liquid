@@ -6,8 +6,9 @@
 
   Utöver Shopifys fält:
   - ett Offer per variant (upp till 50) med lagerstatus, skick, frakt och retur
-  - shippingDetails enligt Shopifys fraktprofil: fraktfritt från 2 000 kr,
-    annars 89 kr, leverans 2–4 arbetsdagar inom Sverige
+  - shippingDetails enligt fraktreglerna (2026-10-06, samma som Smartsend och
+    Merchant Center): över 35 kg 449 kr, 20–35 kg 249 kr, annars fraktfritt
+    från 2 000 kr och 89 kr under. Leverans 2–4 arbetsdagar inom Sverige
   - hasMerchantReturnPolicy: 14 dagars ångerrätt, kunden betalar returfrakten
   - aggregateRating ur reviews.rating / reviews.rating_count (Bakhuvudet)
   - material, size, additionalProperty ur filtermetafälten (mug-schema-attributes)
@@ -79,7 +80,12 @@
               assign availability = 'https://schema.org/PreOrder'
             endif
           endif
-          if price >= 2000
+          assign weight_g = variant.weight | default: 0
+          if weight_g > 35000
+            assign shipping_rate = 449
+          elsif weight_g > 20000
+            assign shipping_rate = 249
+          elsif price >= 2000
             assign shipping_rate = 0
           else
             assign shipping_rate = 89

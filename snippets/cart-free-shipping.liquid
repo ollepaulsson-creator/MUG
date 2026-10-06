@@ -11,6 +11,15 @@
 
 {%- liquid
   assign threshold = settings.free_shipping_threshold | default: 0 | times: 100
+  comment
+    Fri frakt gäller bara upp till 20 kg (2026-10-06). Tyngre kundvagnar
+    kostar 249 kr (20–35 kg) eller 449 kr (över 35 kg) — samma regel som
+    Smartsend och Merchant Center. cart.total_weight är i gram.
+  endcomment
+  assign heavy = false
+  if cart.total_weight > 20000
+    assign heavy = true
+  endif
 -%}
 
 {%- if settings.free_shipping_bar_enabled and threshold > 0 and cart.item_count > 0 and cart.currency.iso_code == 'SEK' -%}
@@ -20,14 +29,16 @@
   -%}
   <div class="cart-free-shipping" aria-live="polite">
     <p class="cart-free-shipping__text">
-      {%- if remaining > 0 -%}
+      {%- if heavy -%}
+        Tung försändelse: frakt {% if cart.total_weight > 35000 %}449 kr{% else %}249 kr{% endif %} (fri frakt gäller upp till 20 kg).
+      {%- elsif remaining > 0 -%}
         Handla för <strong>{{ remaining | money }}</strong> till, så bjuder vi på fri frakt!
       {%- else -%}
         Fri frakt ingår i din order!
       {%- endif -%}
     </p>
     <div class="cart-free-shipping__track">
-      <div class="cart-free-shipping__bar{% if remaining <= 0 %} cart-free-shipping__bar--full{% endif %}" style="width: {{ pct }}%"></div>
+      <div class="cart-free-shipping__bar{% if remaining <= 0 and heavy == false %} cart-free-shipping__bar--full{% endif %}" style="width: {{ pct }}%"></div>
     </div>
   </div>
 {%- endif -%}

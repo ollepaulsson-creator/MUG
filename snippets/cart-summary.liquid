@@ -83,7 +83,7 @@
       {%- liquid
         assign fs_threshold = settings.free_shipping_threshold | default: 0 | times: 100
         assign fs_met = false
-        if settings.free_shipping_bar_enabled and fs_threshold > 0 and cart.item_count > 0 and cart.currency.iso_code == 'SEK' and cart.total_price >= fs_threshold
+        if settings.free_shipping_bar_enabled and fs_threshold > 0 and cart.item_count > 0 and cart.currency.iso_code == 'SEK' and cart.total_price >= fs_threshold and cart.total_weight <= 20000
           assign fs_met = true
         endif
       -%}
