@@ -8,7 +8,7 @@
           "static": true,
           "settings": {
             "title": "Varukorg",
-            "show_count": true,
+            "show_count": false,
             "type_preset": "h1",
             "alignment": "left",
             "padding-block-start": 0,
