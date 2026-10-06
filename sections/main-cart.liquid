@@ -336,6 +336,18 @@
   .cart-page:not(.cart-page--empty) .cart-page__title {
     margin-bottom: 8px;
   }
+
+  /* Summa-raden över hela spaltens bredd så beloppet hamnar mot högerkanten */
+  .cart-page .cart__total-container,
+  .cart-page .cart__original-total-container,
+  .cart-page .cart__checkout-button {
+    align-self: stretch;
+    width: 100%;
+  }
+
+  .cart-page .cart__total {
+    width: 100%;
+  }
 {% endstylesheet %}
 
 {% schema %}
