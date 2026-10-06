@@ -256,7 +256,6 @@
 
   .cart-page:not(.cart-page--empty) .cart-page__summary {
     border-top: 1px solid rgb(229 229 229);
-    border-image: linear-gradient(rgb(229 229 229), rgb(229 229 229)) 1 0 0 0 / 1px 0 0 0 / 0 100vw;
     margin-top: var(--padding-lg);
     padding-top: var(--padding-xl);
   }
@@ -271,7 +270,6 @@
     margin: 0;
     padding: 1px 0 calc(var(--padding-md) + 1px);
     border-bottom: 1px solid rgb(229 229 229);
-    border-image: linear-gradient(rgb(229 229 229), rgb(229 229 229)) 0 0 1 0 / 0 0 1px 0 / 0 100vw;
     font-family: var(--font-body--family);
     font-size: var(--cart-font-size--xs);
     font-weight: 500;
@@ -291,7 +289,7 @@
     .cart-page:not(.cart-page--empty) {
       grid-template-columns: minmax(0, 1fr) 24rem;
       grid-template-rows: auto auto 1fr;
-      column-gap: var(--gap-5xl, 4rem);
+      column-gap: 3rem;
     }
 
     .cart-page:not(.cart-page--empty) .cart-page__title {
@@ -324,6 +322,11 @@
       flex-direction: column;
       gap: var(--gap-md);
     }
+  }
+
+  /* Luft ovanför linjen till "Du kanske också är intresserad av" */
+  .cart-page:not(.cart-page--empty) {
+    padding-bottom: 40px;
   }
 {% endstylesheet %}
 
