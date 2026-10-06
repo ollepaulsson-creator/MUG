@@ -1,4 +1,9 @@
 {% assign block_settings = block.settings %}
+{%- comment -%} Varukorgssidan (inte lådan) visas som tabell med kolumnerna
+  Pris / Antal / Totalt och en textlänk "Ta bort" (Olle 2026-10-06). Lådan
+  renderas aldrig på /cart (header-actions), så template-kollen räcker. {%- endcomment -%}
+{%- assign mug_page = false -%}
+{%- if template.name == 'cart' -%}{%- assign mug_page = true -%}{%- endif -%}
 
 <script
   src="{{ 'component-cart-items.js' | asset_url }}"
@@ -58,7 +63,7 @@
       method="post"
     >
       <div
-        class="cart-items spacing-style{% if block_settings.dividers %} cart-items--dividers{% endif %}"
+        class="cart-items spacing-style{% if block_settings.dividers %} cart-items--dividers{% endif %}{% if mug_page %} cart-items--page{% endif %}"
         style="{%  render 'spacing-style', settings: block_settings %} --cart-items-gap:{{ block_settings.gap | append: "px" }};"
       >
         <table
@@ -73,6 +78,15 @@
             <span>{{ cart.total_price | money_with_currency }}</span>
           </caption>
 
+          {%- if mug_page -%}
+          <thead class="cart-items__head" role="rowgroup">
+            <tr role="row" class="cart-items__table-row cart-items__head-row">
+              <th id="productInformation" scope="col" role="columnheader" class="cart-items__head-back">Produkt</th>
+              <th id="quantity" scope="col" role="columnheader" class="cart-items__head-qty">Antal</th>
+              <th id="productTotal" scope="col" role="columnheader" class="cart-items__head-total">Totalt</th>
+            </tr>
+          </thead>
+          {%- else -%}
           <thead
             class="visually-hidden"
             role="rowgroup"
@@ -111,6 +125,7 @@
               </th>
             </tr>
           </thead>
+          {%- endif -%}
 
           <tbody role="rowgroup">
             {% for item in cart.items %}
@@ -158,7 +173,8 @@
                   headers="productInformation"
                 >
                   {% if item.product.vendor %}
-                  <h5>{{ item.product.vendor }}</h5>
+                  {%- capture mug_vendor_url -%}{% render 'vendor-collection-url', vendor: item.product.vendor %}{%- endcapture -%}
+                  <h5><a href="{{ mug_vendor_url | strip }}" class="cart-items__vendor">{{ item.product.vendor }}</a></h5>
                   {% endif %}
 
                   <p>
@@ -237,7 +253,7 @@
                     </ul>
                   {% endif %}
 
-                  <div>
+                  <div class="cart-items__unit-price">
                     {% if item.original_price != item.final_price %}
                       <span class="visually-hidden">{{ 'content.price_sale' | t }}</span>
                       <span>{{ item.final_price | money }}</span>
@@ -316,7 +332,21 @@
                     ></small>
                   </div>
                 </td>
-                
+                {%- if mug_page -%}
+                  {%- liquid
+                    if settings.currency_code_enabled_cart_items
+                      assign mug_line = item.final_line_price | money_with_currency
+                      assign mug_unit = item.final_price | money_with_currency
+                    else
+                      assign mug_line = item.final_line_price | money
+                      assign mug_unit = item.final_price | money
+                    endif
+                  -%}
+                  <td class="cart-items__line-total cart-secondary-typography" role="cell" headers="productTotal">
+                    <text-component value="{{ mug_line | strip_html }}">{{ mug_line }}</text-component>
+                  </td>
+                {%- endif -%}
+
                 {% comment %}
                 <td
 
@@ -803,5 +833,107 @@
     margin: 0 0 20px;
     font-size: 13px;
     line-height: 1.5;
+  }
+
+  /* Märket i produktinformationen är en länk till märkessidan (låda och sida) */
+  .cart-items__vendor {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .cart-items__vendor:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* ── Varukorgssidan som tabell (Olle 2026-10-06): produktinformationen som i
+     lådan (märke, titel, styckpris, antal + papperskorg), plus Totalt-kolumn. */
+  .cart-items__head-row th {
+    font-size: var(--cart-font-size--xs);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: start;
+    color: rgb(var(--color-foreground-rgb) / 0.7);
+  }
+
+  .cart-items--page .cart-items__head .cart-items__head-row {
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: var(--padding-md);
+    margin-bottom: var(--cart-items-gap);
+  }
+
+  /* Mobil: som lådan, radsumman till höger */
+  .cart-items--page .cart-items__head-row {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: 'back total';
+  }
+
+  .cart-items--page .cart-items__head-back {
+    grid-area: back;
+  }
+
+  .cart-items--page .cart-items__head-qty {
+    display: none;
+  }
+
+  .cart-items--page .cart-items__head-total,
+  .cart-items--page .cart-items__line-total {
+    grid-area: price;
+    text-align: end;
+    white-space: nowrap;
+  }
+
+  .cart-items--page .cart-items__head-total {
+    grid-area: total;
+  }
+
+  @container cart-items (min-width: 720px) {
+    .cart-items--page .cart-items__table-row {
+      grid-template-columns: 7.5rem minmax(0, 2fr) minmax(10rem, 1fr) minmax(7rem, 1fr);
+      grid-template-rows: 1fr auto;
+      column-gap: 22px;
+      grid-template-areas:
+        'media details quantity total'
+        'media details error error';
+      align-items: center;
+    }
+
+    .cart-items--page .cart-items__head-row {
+      grid-template-columns: 7.5rem minmax(0, 2fr) minmax(10rem, 1fr) minmax(7rem, 1fr);
+      grid-template-areas: 'back back quantity total';
+      column-gap: 22px;
+      grid-template-rows: auto;
+    }
+
+    .cart-items--page .cart-items__head-qty {
+      display: block;
+      grid-area: quantity;
+      justify-self: center;
+    }
+
+    .cart-items--page .cart-items__quantity {
+      grid-area: quantity;
+      justify-self: center;
+    }
+
+    .cart-items--page .cart-items__head-total,
+    .cart-items--page .cart-items__line-total {
+      grid-area: total;
+      justify-self: end;
+    }
+
+    .cart-items--page .cart-items__media {
+      grid-area: media;
+    }
+
+    .cart-items--page .cart-items__details {
+      grid-area: details;
+      align-self: center;
+    }
+
+    .cart-items--page .cart-items__error {
+      grid-area: error;
+    }
   }
 {% endstylesheet %}

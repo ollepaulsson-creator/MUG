@@ -1,6 +1,6 @@
 {% comment %}
   Section: Breadcrumbs
-  Usage: Add to templates where you want breadcrumbs. The section will auto-hide on index, cart, and list-collections.
+  Usage: Add to templates where you want breadcrumbs. The section will auto-hide on index and list-collections.
   Matches the CSS and HTML structure used by product/search page custom-liquid breadcrumbs.
 {% endcomment %}
 
@@ -40,7 +40,7 @@
     }
   </style>
 
-  {%- unless template == 'index' or template == 'cart' or template == 'list-collections' -%}
+  {%- unless template == 'index' or template == 'list-collections' -%}
     {%- assign t = template | split: '.' | first -%}
 
     <nav class="breadcrumbs" role="navigation" aria-label="{{ section.settings.aria_label | escape }}">
@@ -252,6 +252,10 @@
         {%- when '404' -%}
           <span class="divider">/</span>
           <span>404</span>
+
+        {%- when 'cart' -%}
+          <span class="divider">/</span>
+          <span>Varukorg</span>
 
         {%- else -%}
           <span class="divider">/</span>

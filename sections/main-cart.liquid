@@ -111,6 +111,108 @@
       grid-template-columns: 1fr var(--sidebar-width);
     }
   }
+
+  /* ── Varukorgssidan i två kolumner (Olle 2026-10-06): tabellen till vänster,
+     sammanfattningen som egen spalt till höger — fri frakt, betalikoner,
+     avdelare, Summa, skatteraden och Betala, i samma ordning som lådan. ── */
+  .cart-page .cart__summary-container,
+  .cart-page .cart__summary-inner {
+    padding: 0;
+    height: auto;
+  }
+
+  .cart-page .cart__summary-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+  }
+
+  .cart-page .cart__summary-totals {
+    display: contents;
+  }
+
+  .cart-page .cart-free-shipping { order: 1; padding: 0; border: 0; }
+  .cart-page .cart-page__payment-icons { order: 2; }
+  .cart-page .cart__original-total-container { order: 3; }
+  .cart-page .cart__total-container {
+    order: 4;
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--padding-lg);
+    row-gap: 0;
+  }
+  .cart-page .cart__checkout-button { order: 5; }
+  .cart-page .additional-checkout-buttons { order: 6; }
+
+  .cart-page .cart-free-shipping__text {
+    text-align: center;
+  }
+
+  @media screen and (min-width: 990px) {
+    .cart-page:not(.cart-page--empty) {
+      grid-template-columns: minmax(0, 1fr) 24rem;
+      grid-template-rows: auto auto 1fr;
+      column-gap: var(--gap-5xl, 4rem);
+    }
+
+    .cart-page:not(.cart-page--empty) .cart-page__title {
+      grid-column: 1 / -1;
+    }
+
+    .cart-page:not(.cart-page--empty) .cart-page__items {
+      grid-column: 1;
+      grid-row: 2 / -1;
+    }
+
+    .cart-page:not(.cart-page--empty) .cart-page__summary {
+      display: block;
+      grid-column: 2;
+      grid-row: 2;
+      height: auto;
+      padding-top: 0;
+      position: sticky;
+      top: calc(var(--header-height, 0px) + var(--padding-xl));
+    }
+
+    .cart-page:not(.cart-page--empty) .cart-page__more-blocks {
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* 750–989 px och mobil: sammanfattningen under tabellen */
+  @media screen and (max-width: 989px) {
+    .cart-page:not(.cart-page--empty) {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+
+    .cart-page:not(.cart-page--empty) .cart-page__summary {
+      display: block;
+      grid-column: 1;
+      grid-row: auto;
+      height: auto;
+      padding-top: var(--padding-2xl);
+    }
+  }
+
+  /* Rubriken i samma storlek som kollektionssidornas (text-block: body-typsnitt, 2rem) */
+  .cart-page .cart-title h1 {
+    font-family: var(--font-body--family);
+    font-size: 2rem;
+    line-height: normal;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+
+  .cart-page .cart-page__payment-icons {
+    padding: var(--padding-md) 0;
+    margin-top: 0;
+  }
+
+  /* Samma yttermarginal som kollektionssidorna (15 px, Olle 2026-10-06) */
+  .section--full-width > .cart-page {
+    padding-inline: 15px;
+  }
+
 {% endstylesheet %}
 
 {% schema %}
