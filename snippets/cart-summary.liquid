@@ -3,10 +3,6 @@
 {%- enddoc -%}
 
 <div class="cart__summary-totals">
-  {%- if template.name == 'cart' -%}
-    {%- comment -%} Fri frakt-raden ovanför summan på varukorgssidan (lådan har den överst). {%- endcomment -%}
-    {% render 'cart-free-shipping' %}
-  {%- endif -%}
   {% # We need to keep this node in place to allow morphing to work properly # %}
   <div class="cart__original-total-container cart-primary-typography">
     {%- if cart.cart_level_discount_applications.size > 0 -%}
