@@ -751,11 +751,26 @@
         "home_label": "Start",
         "aria_label": "Breadcrumbs"
       }
+    },
+    "divider_rjB4iR": {
+      "type": "divider",
+      "name": "t:names.divider_section",
+      "settings": {
+        "color_scheme": "scheme-5",
+        "section_width": "full-width",
+        "thickness": 1,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     }
   },
   "order": [
     "breadcrumbs_cart",
     "cart-section",
+    "divider_rjB4iR",
     "mug_cart_recommendations",
     "section_8aKKyY",
     "section_t7Jwap"
