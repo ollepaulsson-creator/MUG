@@ -2643,8 +2643,11 @@ dialog.facets--drawer[open] {
 .main--policy > [id$="__main"] h1 { margin: 0 0 1.5rem; }
 @media screen and (min-width: 990px) {
   .main--policy {
-    /* sidmarginal | navigering | mellanrum | innehåll | sidmarginal */
-    grid-template-columns: var(--page-margin, 16px) 220px 4rem minmax(0, 1fr) var(--page-margin, 16px);
+    /* sidmarginal | navigering | mellanrum | innehåll | sidmarginal —
+       ytterkolumnerna delar lika på överskottet så att navigering + text
+       ligger centrerat i fönstret; innehållskolumnen är högst 78ch, samma
+       som textspalten (Olle 2026-10-06: "centrera layouten"). */
+    grid-template-columns: minmax(var(--page-margin, 16px), 1fr) 220px 4rem minmax(0, 78ch) minmax(var(--page-margin, 16px), 1fr);
     align-items: start;
     padding-bottom: 2rem;
   }
