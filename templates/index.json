@@ -9,6 +9,271 @@
  */
 {
   "sections": {
+    "instant_t1_wt_xo_ymjr_hm_xylw_37LVdR": {
+      "type": "instant-t1WtXOYmjrHmXylw",
+      "name": "Volt Gen 2",
+      "settings": {
+        "url_InhX1muMgWv6M3DJ": "https://www.mug.se/collections/universial-audio-andra-generationen-av-volt-och-volt-max",
+        "text_pleDkFib5JLDzdcI": "<p>Andra Generationen av VOLT och Volt MAX</p>",
+        "text_0MrD4fEuIk80JJqm": "<p>Beställ nu!</p>",
+        "url_kfwzqBkBxsapNDkp": "https://www.mug.se/collections/universial-audio-andra-generationen-av-volt-och-volt-max",
+        "text_txJoCspV0Et3gw95": "<p>Andra Generationen av VOLT och Volt MAX</p>",
+        "text_m6JAwRbrgUfucAua": "<p>Beställ nu!</p>",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "product_list_PmjHpA": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "center",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 8,
+            "padding-block-end": 2,
+            "padding-inline-start": 15,
+            "padding-inline-end": 15
+          },
+          "blocks": {
+            "product_list_text_MgpUrh": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h2>Andra generationen av Volt och Volt Max</h2>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "button_RG4VxR": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "SE ALLA",
+                "link": "{{ closest.collection.url }}",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 7,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 30
+              },
+              "blocks": {}
+            },
+            "swatches_db4FXe": {
+              "type": "swatches",
+              "name": "t:names.swatches",
+              "settings": {
+                "product_swatches_alignment": "flex-start",
+                "product_swatches_alignment_mobile": "flex-start",
+                "hide_padding": false,
+                "product_swatches_padding_top": 4,
+                "product_swatches_padding_bottom": 0,
+                "product_swatches_padding_left": 0,
+                "product_swatches_padding_right": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_MgpUrh",
+            "button_RG4VxR",
+            "swatches_db4FXe"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 2,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 15,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_nmtXnK": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_DdExFx": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>{{ closest.product.vendor }}</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 15,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_JThHBy": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 6,
+                "padding-block-end": 6,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_PUnGCE": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 15,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_nmtXnK",
+            "text_DdExFx",
+            "product_title_JThHBy",
+            "price_PUnGCE"
+          ]
+        }
+      },
+      "name": "t:names.products_carousel",
+      "settings": {
+        "collection": "universial-audio-andra-generationen-av-volt-och-volt-max",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "max_products": 8,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 0,
+        "rows_gap": 24,
+        "icons_style": "arrows_large",
+        "icons_shape": "circle",
+        "section_width": "full-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 18,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 10,
+        "padding-block-end": 0
+      }
+    },
+    "instant_r_ak_gq_g4oot_yii_mth_QcnGQf": {
+      "type": "instant-rAKGqG4ootYiiMth",
+      "name": "Tonex",
+      "settings": {
+        "url_P8aM5R0MtXbbzems": "https://www.mug.se/products/tonex-board",
+        "text_FKkkUxqdhOGKnSzc": "<p>Tonex Board: En värld av effekter!</p>",
+        "text_VlEwFJ9gWg5A1sKl": "<p>Beställ nu!</p>",
+        "url_BrwyLJMv0Qlojp0t": "https://www.mug.se/collections/tonex",
+        "text_cXHHSntr3AyvjbGd": "<p>The TOnex Familly</p>",
+        "text_nW80B1fTpFBJ9BIg": "<p>Upptäck!</p>",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
     "product_list_fze8iq": {
       "type": "product-list",
       "blocks": {
@@ -244,20 +509,6 @@
         "color_scheme": "scheme-1",
         "padding-block-start": 10,
         "padding-block-end": 0
-      }
-    },
-    "instant_r_ak_gq_g4oot_yii_mth_QcnGQf": {
-      "type": "instant-rAKGqG4ootYiiMth",
-      "name": "Tonex",
-      "settings": {
-        "url_P8aM5R0MtXbbzems": "https://www.mug.se/products/tonex-board",
-        "text_FKkkUxqdhOGKnSzc": "<p>Tonex Board: En värld av effekter!</p>",
-        "text_VlEwFJ9gWg5A1sKl": "<p>Beställ nu!</p>",
-        "url_BrwyLJMv0Qlojp0t": "https://www.mug.se/collections/tonex",
-        "text_cXHHSntr3AyvjbGd": "<p>The TOnex Familly</p>",
-        "text_nW80B1fTpFBJ9BIg": "<p>Upptäck!</p>",
-        "padding_top": 0,
-        "padding_bottom": 0
       }
     },
     "instant_u_x_qo4_ng_ebjmyp_ifm_x6W4E6": {
@@ -1450,6 +1701,8 @@
     }
   },
   "order": [
+    "instant_t1_wt_xo_ymjr_hm_xylw_37LVdR",
+    "product_list_PmjHpA",
     "instant_r_ak_gq_g4oot_yii_mth_QcnGQf",
     "product_list_fze8iq",
     "instant_u_x_qo4_ng_ebjmyp_ifm_x6W4E6",
