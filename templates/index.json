@@ -9,15 +9,15 @@
  */
 {
   "sections": {
-    "instant_t1_wt_xo_ymjr_hm_xylw_KP6rUL": {
+    "instant_t1_wt_xo_ymjr_hm_xylw_t4wpNk": {
       "type": "instant-t1WtXOYmjrHmXylw",
       "name": "Volt Gen 2",
       "settings": {
         "url_InhX1muMgWv6M3DJ": "https://www.mug.se/collections/universial-audio-andra-generationen-av-volt-och-volt-max",
-        "text_pleDkFib5JLDzdcI": "<p>Andra Generationen av VOLT och Volt MAX</p>",
+        "text_pleDkFib5JLDzdcI": "<p>Andra Generationen VOLT och Volt MAX</p>",
         "text_0MrD4fEuIk80JJqm": "<p>Beställ nu!</p>",
         "url_kfwzqBkBxsapNDkp": "https://www.mug.se/collections/universial-audio-andra-generationen-av-volt-och-volt-max",
-        "text_txJoCspV0Et3gw95": "<p>Andra Generationen av VOLT och Volt MAX</p>",
+        "text_txJoCspV0Et3gw95": "<p>Andra Generationen VOLT och Volt MAX</p>",
         "text_m6JAwRbrgUfucAua": "<p>Beställ nu!</p>",
         "padding_top": 0,
         "padding_bottom": 0
@@ -1701,7 +1701,7 @@
     }
   },
   "order": [
-    "instant_t1_wt_xo_ymjr_hm_xylw_KP6rUL",
+    "instant_t1_wt_xo_ymjr_hm_xylw_t4wpNk",
     "product_list_PmjHpA",
     "instant_r_ak_gq_g4oot_yii_mth_QcnGQf",
     "product_list_fze8iq",
