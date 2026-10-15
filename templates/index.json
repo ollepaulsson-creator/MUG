@@ -9,7 +9,7 @@
  */
 {
   "sections": {
-    "instant_t1_wt_xo_ymjr_hm_xylw_37LVdR": {
+    "instant_t1_wt_xo_ymjr_hm_xylw_KP6rUL": {
       "type": "instant-t1WtXOYmjrHmXylw",
       "name": "Volt Gen 2",
       "settings": {
@@ -1701,7 +1701,7 @@
     }
   },
   "order": [
-    "instant_t1_wt_xo_ymjr_hm_xylw_37LVdR",
+    "instant_t1_wt_xo_ymjr_hm_xylw_KP6rUL",
     "product_list_PmjHpA",
     "instant_r_ak_gq_g4oot_yii_mth_QcnGQf",
     "product_list_fze8iq",
