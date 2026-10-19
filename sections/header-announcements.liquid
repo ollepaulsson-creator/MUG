@@ -108,10 +108,11 @@
       padding-inline: 0.75em;
     }
 
-    /* Ingen sidmarginal: texten ska rulla kant till kant. */
+    /* Ingen sidmarginal: texten ska rulla kant till kant. !important behövs mot
+       assets/custom.css, som sätter padding: 12px !important på mobil. */
     aside.announcement-bar.spacing-style.section.section--page-width.color-scheme-5:has(.announcement-ticker) {
-      padding-left: 0;
-      padding-right: 0;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
     }
   }
 
