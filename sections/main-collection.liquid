@@ -185,10 +185,8 @@
           {%- endif -%}
           {%- assign url_parts = page_url_base | split: 'page=' -%}
           {%- assign url_head = url_parts[0] -%}
-          {%- assign url_tail = '' -%}
-          {%- if url_parts[1] contains '&' -%}
-            {%- assign url_tail = url_parts[1] | split: '&' | shift | join: '&' | prepend: '&' -%}
-          {%- endif -%}
+          {%- assign url_page_num = url_parts[1] | split: '&' | first | split: '#' | first -%}
+          {%- assign url_tail = url_parts[1] | remove_first: url_page_num -%}
 
           <nav class="pagination pagination--mobile" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
             <ul class="pagination__list" role="list">
