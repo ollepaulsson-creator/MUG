@@ -83,6 +83,7 @@
     endfor
     assign marquee_seconds = marquee_text.size | times: 0.24 | at_least: 8
   -%}
+  <!-- marquee-debug n={{ section.blocks.size }} t={{ section.blocks.first.settings.text | strip_html | escape }} m={{ marquee_text | escape }} -->
   {%- if marquee_text != '' -%}
     {%- capture marquee_half -%}<span class="announcement-marquee__item">{{ marquee_text | escape }}</span><span class="announcement-marquee__sep">•</span><span class="announcement-marquee__item">{{ marquee_text | escape }}</span><span class="announcement-marquee__sep">•</span>{%- endcapture -%}
     <{% if marquee_link != '' %}a href="{{ marquee_link }}"{% else %}div{% endif %}
