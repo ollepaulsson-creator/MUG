@@ -61,63 +61,67 @@
 
 </aside>
 
-{% stylesheet %}
+{%- comment -%} Tickerns CSS ligger inline (inte i stylesheet-taggen): Shopifys sammanställda
+  styles.css uppdateras med fördröjning efter en push, och då dolde en gammal regel texten. {%- endcomment -%}
+<style>
   /* Rullande textrad (mobil), byggd i blocks/_announcement.liquid. Dold på
      större skärmar och vid reducerad rörelse — då visas den vanliga texten. */
-  .announcement-marquee {
+  .announcement-ticker {
     display: none;
   }
 
   @media screen and (max-width: 768px) and (prefers-reduced-motion: no-preference) {
-    .announcement-bar:has(.announcement-marquee) .announcement-bar__text {
+    .announcement-bar:has(.announcement-ticker) .announcement-bar__text {
       display: none;
     }
 
-    .announcement-marquee {
+    .announcement-ticker {
       display: block;
       width: 100%;
       overflow: hidden;
       -webkit-tap-highlight-color: transparent;
     }
 
-    .announcement-bar:has(.announcement-marquee) .announcement-bar__slider,
-    .announcement-bar:has(.announcement-marquee) .announcement-bar__slides,
-    .announcement-bar:has(.announcement-marquee) .announcement-bar__slide {
+    .announcement-bar:has(.announcement-ticker) .announcement-bar__slider,
+    .announcement-bar:has(.announcement-ticker) .announcement-bar__slides,
+    .announcement-bar:has(.announcement-ticker) .announcement-bar__slide {
       width: 100%;
     }
 
-    .announcement-marquee__track {
+    .announcement-ticker__track {
       display: inline-flex;
       width: max-content;
       white-space: nowrap;
       font-size: 14px;
       line-height: 1;
-      animation: announcement-marquee var(--marquee-duration) linear infinite;
+      animation: announcement-ticker var(--marquee-duration) linear infinite;
       will-change: transform;
     }
 
-    .announcement-bar__slide:hover .announcement-marquee__track,
-    .announcement-bar__slide:active .announcement-marquee__track,
-    .announcement-bar__slide:focus-within .announcement-marquee__track {
+    .announcement-bar__slide:hover .announcement-ticker__track,
+    .announcement-bar__slide:active .announcement-ticker__track,
+    .announcement-bar__slide:focus-within .announcement-ticker__track {
       animation-play-state: paused;
     }
 
-    .announcement-marquee__sep {
+    .announcement-ticker__sep {
       padding-inline: 0.75em;
     }
 
     /* Ingen sidmarginal: texten ska rulla kant till kant. */
-    aside.announcement-bar.spacing-style.section.section--page-width.color-scheme-5:has(.announcement-marquee) {
+    aside.announcement-bar.spacing-style.section.section--page-width.color-scheme-5:has(.announcement-ticker) {
       padding-left: 0;
       padding-right: 0;
     }
   }
 
-  @keyframes announcement-marquee {
+  @keyframes announcement-ticker {
     from { transform: translate3d(0, 0, 0); }
     to { transform: translate3d(-50%, 0, 0); }
   }
+</style>
 
+{% stylesheet %}
 @media(max-width: 768px){
 aside.announcement-bar.spacing-style.section.section--page-width.color-scheme-5 {
     padding-top: 15px;

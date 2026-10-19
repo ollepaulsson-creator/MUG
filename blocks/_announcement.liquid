@@ -39,9 +39,9 @@
       jämn: varaktigheten räknas på textens längd. Skärmläsare får texten ovan.
     {%- endcomment -%}
     {%- assign marquee_seconds = plain_text.size | times: 0.24 | at_least: 8 -%}
-    {%- capture marquee_half -%}<span class="announcement-marquee__item">{{ block.settings.text }}</span><span class="announcement-marquee__sep">•</span><span class="announcement-marquee__item">{{ block.settings.text }}</span><span class="announcement-marquee__sep">•</span>{%- endcapture -%}
-    <div class="announcement-marquee" aria-hidden="true" style="--marquee-duration: {{ marquee_seconds }}s;">
-      <span class="announcement-marquee__track">{{ marquee_half }}{{ marquee_half }}</span>
+    {%- capture marquee_half -%}<span class="announcement-ticker__item">{{ block.settings.text }}</span><span class="announcement-ticker__sep">•</span><span class="announcement-ticker__item">{{ block.settings.text }}</span><span class="announcement-ticker__sep">•</span>{%- endcapture -%}
+    <div class="announcement-ticker" aria-hidden="true" style="--marquee-duration: {{ marquee_seconds }}s;">
+      <span class="announcement-ticker__track">{{ marquee_half }}{{ marquee_half }}</span>
     </div>
 
     {% if block_settings.link != blank %}
