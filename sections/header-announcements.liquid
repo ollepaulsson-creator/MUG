@@ -80,6 +80,10 @@
       width: 100%;
       overflow: hidden;
       -webkit-tap-highlight-color: transparent;
+      /* iOS Safari förstorar text i mycket breda block (spåret är ~2 500 px)
+         — utan detta blev raden större än brödtexten på iPhone. */
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
     }
 
     .announcement-bar:has(.announcement-ticker) .announcement-bar__slider,
@@ -92,8 +96,9 @@
       display: inline-flex;
       width: max-content;
       white-space: nowrap;
-      font-size: 14px;
-      line-height: 1;
+      /* Samma storlek som brödtexten; radhöjd över 1 så att g, p och j inte klipps. */
+      font-size: var(--font-paragraph--size, 0.9375rem);
+      line-height: 1.35;
       animation: announcement-ticker var(--marquee-duration) linear infinite;
       will-change: transform;
     }
@@ -113,6 +118,9 @@
     aside.announcement-bar.spacing-style.section.section--page-width.color-scheme-5:has(.announcement-ticker) {
       padding-left: 0 !important;
       padding-right: 0 !important;
+      /* Den högre radhöjden tas från luften ovan/under så att baren behåller sin höjd. */
+      padding-top: 9px !important;
+      padding-bottom: 9px !important;
     }
   }
 
