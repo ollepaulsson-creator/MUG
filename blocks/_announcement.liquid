@@ -32,6 +32,18 @@
       {{ block.settings.text }}
     </p>
 
+    {%- comment -%}
+      Mobil: rullande textrad (Olle 2026-10-19, förebild softervolumes.com).
+      Spåret har två likadana halvor och flyttas −50 % (CSS i
+      sections/header-announcements.liquid), så slingan går sömlöst. Farten hålls
+      jämn: varaktigheten räknas på textens längd. Skärmläsare får texten ovan.
+    {%- endcomment -%}
+    {%- assign marquee_seconds = plain_text.size | times: 0.24 | at_least: 8 -%}
+    {%- capture marquee_half -%}<span class="announcement-marquee__item">{{ block.settings.text }}</span><span class="announcement-marquee__sep">•</span><span class="announcement-marquee__item">{{ block.settings.text }}</span><span class="announcement-marquee__sep">•</span>{%- endcapture -%}
+    <div class="announcement-marquee" aria-hidden="true" style="--marquee-duration: {{ marquee_seconds }}s;">
+      <span class="announcement-marquee__track">{{ marquee_half }}{{ marquee_half }}</span>
+    </div>
+
     {% if block_settings.link != blank %}
       <a
         class="announcement-bar__link"

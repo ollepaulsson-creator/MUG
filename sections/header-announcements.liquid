@@ -59,51 +59,17 @@
     </div>
   </announcement-bar-component>
 
-  {%- comment -%}
-    Mobil: rullande textrad i stället för den kapade slidern (Olle 2026-10-19,
-    förebild softervolumes.com). Alla meddelanden i följd med • emellan. Spåret
-    har två likadana halvor och flyttas −50 %, så slingan går sömlöst. Farten
-    hålls jämn oavsett textlängd: varaktigheten räknas på antal tecken.
-    Stannar vid tryck/hovring; vid reducerad rörelse visas slidern som förut.
-  {%- endcomment -%}
-  {%- liquid
-    assign marquee_text = ''
-    assign marquee_link = ''
-    for b in section.blocks
-      assign t = b.settings.text | strip_html | strip_newlines | strip
-      if t != blank
-        if marquee_text != ''
-          assign marquee_text = marquee_text | append: '  •  '
-        endif
-        assign marquee_text = marquee_text | append: t
-        if marquee_link == '' and b.settings.link != blank
-          assign marquee_link = b.settings.link
-        endif
-      endif
-    endfor
-    assign marquee_seconds = marquee_text.size | times: 0.24 | at_least: 8
-  -%}
-  <!-- marquee-debug n={{ section.blocks.size }} t={{ section.blocks.first.settings.text | strip_html | escape }} m={{ marquee_text | escape }} -->
-  {%- if marquee_text != '' -%}
-    {%- capture marquee_half -%}<span class="announcement-marquee__item">{{ marquee_text | escape }}</span><span class="announcement-marquee__sep">•</span><span class="announcement-marquee__item">{{ marquee_text | escape }}</span><span class="announcement-marquee__sep">•</span>{%- endcapture -%}
-    <{% if marquee_link != '' %}a href="{{ marquee_link }}"{% else %}div{% endif %}
-      class="announcement-marquee"
-      style="--marquee-duration: {{ marquee_seconds }}s;"
-    >
-      <span class="visually-hidden">{{ marquee_text | escape }}</span>
-      <span class="announcement-marquee__track" aria-hidden="true">{{ marquee_half }}{{ marquee_half }}</span>
-    </{% if marquee_link != '' %}a{% else %}div{% endif %}>
-  {%- endif -%}
 </aside>
 
 {% stylesheet %}
-  /* Rullande textrad (mobil). Dold på större skärmar och vid reducerad rörelse. */
+  /* Rullande textrad (mobil), byggd i blocks/_announcement.liquid. Dold på
+     större skärmar och vid reducerad rörelse — då visas den vanliga texten. */
   .announcement-marquee {
     display: none;
   }
 
   @media screen and (max-width: 768px) and (prefers-reduced-motion: no-preference) {
-    .announcement-bar:has(.announcement-marquee) .announcement-bar__slider {
+    .announcement-bar:has(.announcement-marquee) .announcement-bar__text {
       display: none;
     }
 
@@ -111,9 +77,13 @@
       display: block;
       width: 100%;
       overflow: hidden;
-      color: var(--color-foreground);
-      text-decoration: none;
       -webkit-tap-highlight-color: transparent;
+    }
+
+    .announcement-bar:has(.announcement-marquee) .announcement-bar__slider,
+    .announcement-bar:has(.announcement-marquee) .announcement-bar__slides,
+    .announcement-bar:has(.announcement-marquee) .announcement-bar__slide {
+      width: 100%;
     }
 
     .announcement-marquee__track {
@@ -126,9 +96,9 @@
       will-change: transform;
     }
 
-    .announcement-marquee:hover .announcement-marquee__track,
-    .announcement-marquee:active .announcement-marquee__track,
-    .announcement-marquee:focus-visible .announcement-marquee__track {
+    .announcement-bar__slide:hover .announcement-marquee__track,
+    .announcement-bar__slide:active .announcement-marquee__track,
+    .announcement-bar__slide:focus-within .announcement-marquee__track {
       animation-play-state: paused;
     }
 
