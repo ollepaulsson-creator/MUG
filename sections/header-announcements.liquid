@@ -59,94 +59,69 @@
     </div>
   </announcement-bar-component>
 
-  {%- comment -%}
-    Mobil: rullande textrad i stället för den kapade slidern (Olle 2026-10-19,
-    förebild softervolumes.com). Alla meddelanden i följd med • emellan. Spåret
-    har två likadana halvor och flyttas −50 %, så slingan går sömlöst. Farten
-    hålls jämn oavsett textlängd: varaktigheten räknas på antal tecken.
-    Stannar vid tryck/hovring; vid reducerad rörelse visas slidern som förut.
-  {%- endcomment -%}
-  {%- liquid
-    assign marquee_text = ''
-    assign marquee_link = ''
-    for b in section.blocks
-      assign t = b.settings.text | strip_html | strip_newlines | strip
-      if t != blank
-        if marquee_text != ''
-          assign marquee_text = marquee_text | append: '  •  '
-        endif
-        assign marquee_text = marquee_text | append: t
-        if marquee_link == '' and b.settings.link != blank
-          assign marquee_link = b.settings.link
-        endif
-      endif
-    endfor
-    assign marquee_seconds = marquee_text.size | times: 0.24 | at_least: 8
-  -%}
-  {%- if marquee_text != '' -%}
-    {%- capture marquee_half -%}<span class="announcement-marquee__item">{{ marquee_text | escape }}</span><span class="announcement-marquee__sep">•</span><span class="announcement-marquee__item">{{ marquee_text | escape }}</span><span class="announcement-marquee__sep">•</span>{%- endcapture -%}
-    <{% if marquee_link != '' %}a href="{{ marquee_link }}"{% else %}div{% endif %}
-      class="announcement-marquee"
-      style="--marquee-duration: {{ marquee_seconds }}s;"
-    >
-      <span class="visually-hidden">{{ marquee_text | escape }}</span>
-      <span class="announcement-marquee__track" aria-hidden="true">{{ marquee_half }}{{ marquee_half }}</span>
-    </{% if marquee_link != '' %}a{% else %}div{% endif %}>
-  {%- endif -%}
 </aside>
 
-{% stylesheet %}
-  /* Rullande textrad (mobil). Dold på större skärmar och vid reducerad rörelse. */
-  .announcement-marquee {
+{%- comment -%} Tickerns CSS ligger inline (inte i stylesheet-taggen): Shopifys sammanställda
+  styles.css uppdateras med fördröjning efter en push, och då dolde en gammal regel texten. {%- endcomment -%}
+<style>
+  /* Rullande textrad (mobil), byggd i blocks/_announcement.liquid. Dold på
+     större skärmar och vid reducerad rörelse — då visas den vanliga texten. */
+  .announcement-ticker {
     display: none;
   }
 
   @media screen and (max-width: 768px) and (prefers-reduced-motion: no-preference) {
-    .announcement-bar:has(.announcement-marquee) .announcement-bar__slider {
+    .announcement-bar:has(.announcement-ticker) .announcement-bar__text {
       display: none;
     }
 
-    .announcement-marquee {
+    .announcement-ticker {
       display: block;
       width: 100%;
       overflow: hidden;
-      color: var(--color-foreground);
-      text-decoration: none;
       -webkit-tap-highlight-color: transparent;
     }
 
-    .announcement-marquee__track {
+    .announcement-bar:has(.announcement-ticker) .announcement-bar__slider,
+    .announcement-bar:has(.announcement-ticker) .announcement-bar__slides,
+    .announcement-bar:has(.announcement-ticker) .announcement-bar__slide {
+      width: 100%;
+    }
+
+    .announcement-ticker__track {
       display: inline-flex;
       width: max-content;
       white-space: nowrap;
       font-size: 14px;
       line-height: 1;
-      animation: announcement-marquee var(--marquee-duration) linear infinite;
+      animation: announcement-ticker var(--marquee-duration) linear infinite;
       will-change: transform;
     }
 
-    .announcement-marquee:hover .announcement-marquee__track,
-    .announcement-marquee:active .announcement-marquee__track,
-    .announcement-marquee:focus-visible .announcement-marquee__track {
+    .announcement-bar__slide:hover .announcement-ticker__track,
+    .announcement-bar__slide:active .announcement-ticker__track,
+    .announcement-bar__slide:focus-within .announcement-ticker__track {
       animation-play-state: paused;
     }
 
-    .announcement-marquee__sep {
+    .announcement-ticker__sep {
       padding-inline: 0.75em;
     }
 
     /* Ingen sidmarginal: texten ska rulla kant till kant. */
-    aside.announcement-bar.spacing-style.section.section--page-width.color-scheme-5:has(.announcement-marquee) {
+    aside.announcement-bar.spacing-style.section.section--page-width.color-scheme-5:has(.announcement-ticker) {
       padding-left: 0;
       padding-right: 0;
     }
   }
 
-  @keyframes announcement-marquee {
+  @keyframes announcement-ticker {
     from { transform: translate3d(0, 0, 0); }
     to { transform: translate3d(-50%, 0, 0); }
   }
+</style>
 
+{% stylesheet %}
 @media(max-width: 768px){
 aside.announcement-bar.spacing-style.section.section--page-width.color-scheme-5 {
     padding-top: 15px;
