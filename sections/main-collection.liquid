@@ -164,17 +164,48 @@
         {%- comment -%} Pagination controls {%- endcomment -%}
         {% if paginate.pages > 1 %}
 
-          {%- comment -%} 4-page window for mobile, centred on current page {%- endcomment -%}
-          {%- assign win_start = paginate.current_page | minus: 1 -%}
+          {%- comment -%}
+            Mobil: fem sidnummer centrerade kring aktuell sida (Olle 2026-10-19, var fyra).
+            Shopifys paginate.parts har bara ±2 sidor, så på sida 1 fanns aldrig sida 4–5 —
+            mobillistan byggs därför själv; datorns lista nedan är oförändrad.
+          {%- endcomment -%}
+          {%- assign win_start = paginate.current_page | minus: 2 -%}
           {%- if win_start < 1 -%}{%- assign win_start = 1 -%}{%- endif -%}
-          {%- assign win_end = win_start | plus: 3 -%}
+          {%- assign win_end = win_start | plus: 4 -%}
           {%- if win_end > paginate.pages -%}
             {%- assign win_end = paginate.pages -%}
-            {%- assign win_start = win_end | minus: 3 -%}
+            {%- assign win_start = win_end | minus: 4 -%}
             {%- if win_start < 1 -%}{%- assign win_start = 1 -%}{%- endif -%}
           {%- endif -%}
+          {%- comment -%} Sidans URL med ?page= ersatt — utgår från en befintlig sidlänk så att filter och sortering följer med. {%- endcomment -%}
+          {%- if paginate.next -%}
+            {%- assign page_url_base = paginate.next.url -%}
+          {%- else -%}
+            {%- assign page_url_base = paginate.previous.url -%}
+          {%- endif -%}
+          {%- assign url_parts = page_url_base | split: 'page=' -%}
+          {%- assign url_head = url_parts[0] -%}
+          {%- assign url_tail = '' -%}
+          {%- if url_parts[1] contains '&' -%}
+            {%- assign url_tail = url_parts[1] | split: '&' | shift | join: '&' | prepend: '&' -%}
+          {%- endif -%}
 
-          <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+          <nav class="pagination pagination--mobile" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+            <ul class="pagination__list" role="list">
+              {%- for n in (win_start..win_end) -%}
+                {%- if n == paginate.current_page -%}
+                  <li class="pagination__item pagination__item--current" aria-current="page">{{ n }}</li>
+                {%- else -%}
+                  <li class="pagination__item">
+                    <a href="{{ url_head | append: 'page=' | append: n | append: url_tail | escape }}#ResultsList"
+                      aria-label="{{ 'general.pagination.page' | t: number: n }}">{{ n }}</a>
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </nav>
+
+          <nav class="pagination pagination--desktop" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
             <ul class="pagination__list" role="list">
 
               {%- if paginate.previous -%}
@@ -282,15 +313,12 @@
     .pagination__item--current { font-weight: 600; outline: 1px solid var(--color-border, #ddd); }
     .pagination__item--prev a, .pagination__item--next a { font-weight: 500; outline: none; }
 
+    .pagination--mobile { display: none; }
+
     @media (max-width: 749px) {
-      /* Hide nav buttons and non-window items */
-      .pagination__item--prev,
-      .pagination__item--next {
-        display: none;
-      }
-      .pagination__item:not(.pagination__item--in-window) {
-        display: none;
-      }
+      /* Mobil: egen lista med fem sidnummer, datorns lista döljs */
+      .pagination--desktop { display: none; }
+      .pagination--mobile { display: block; }
       /* Square items — fixed size works for double digits */
       .pagination__item {
         width: 2.5rem;
