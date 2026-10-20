@@ -5,7 +5,8 @@
   två gridkolumner brett på desktop, 32px rubrik, 5-raders trunkering med Läs mer.
 {%- endcomment -%}
 {%- assign mug_seo_text = collection.metafields.custom.seo_brodtext -%}
-{%- if mug_seo_text != blank -%}
+{%- comment -%} Bara på sida 1 — samma text på varje sida gjorde sidorna till dubbletter (2026-10-20). {%- endcomment -%}
+{%- if mug_seo_text != blank and current_page <= 1 -%}
   <div class="mug-seo-block">
     <div class="mug-seo-block__inner">
       {%- if collection.metafields.custom.seo_rubrik != blank -%}

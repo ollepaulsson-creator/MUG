@@ -1,6 +1,23 @@
-
-
+{%- comment -%}
+  Kategorins beskrivning visas bara på sida 1 (Olle 2026-10-20). Samma text
+  på sida 2, 3 … gjorde sidorna till dubbletter, och Google rankade då ibland
+  ?page=2 i stället för kategorin (t.ex. piano-keyboard för "keyboard piano").
+  Blocket i kollektionsmallen har texten {{ closest.collection.description }};
+  den känns igen genom att jämföra med kategorins beskrivning.
+{%- endcomment -%}
+{%- liquid
+  assign skip_text_block = false
+  if template.name == 'collection' and current_page > 1 and collection.description != blank
+    assign block_plain = block.settings.text | strip_html | strip_newlines | strip | truncate: 120
+    assign desc_plain = collection.description | strip_html | strip_newlines | strip | truncate: 120
+    if block_plain == desc_plain
+      assign skip_text_block = true
+    endif
+  endif
+-%}
+{%- unless skip_text_block -%}
 {% render 'text', block: block %}
+{%- endunless -%}
 
 {% schema %}
 {

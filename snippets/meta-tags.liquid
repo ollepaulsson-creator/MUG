@@ -181,7 +181,7 @@
 <title>
   {{ page_title }}
   {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-  {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+  {%- if current_page != 1 %} &ndash; sida {{ current_page }}{% endif -%}
   {%- comment -%} The homepage title is fully authored in Preferences (ends
     with "| MUG") — appending the shop name doubled the branding and pushed
     the title to 94 chars. {%- endcomment -%}
@@ -231,6 +231,10 @@
       {%- assign cut = cut | slice: 0, keep -%}
     {%- endunless -%}
     {%- assign meta_description = cut | strip | append: '…' | replace: ',…', '…' | replace: ';…', '…' | replace: ':…', '…' | replace: ' –…', '…' | replace: ' -…', '…' | replace: '.…', '.' -%}
+  {%- endif -%}
+  {%- comment -%} Sida 2, 3 … får egen beskrivning så att de inte är dubbletter av sida 1. {%- endcomment -%}
+  {%- if current_page > 1 -%}
+    {%- assign meta_description = meta_description | append: ' Sida ' | append: current_page | append: '.' -%}
   {%- endif -%}
   <meta
     name="description"
