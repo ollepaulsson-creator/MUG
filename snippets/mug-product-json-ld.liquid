@@ -14,6 +14,8 @@
   - material, size, additionalProperty ur filtermetafälten (mug-schema-attributes)
   - PreOrder när varianten säljs vidare vid slut lager (förhandsbeställning)
   - UsedCondition för taggen Status:Begagnad
+  - sku utelämnas när den är tom eller innehåller mellanslag (Sitoo-nummer som
+    "BETA 58A"); Google underkänner sådana värden ("Ogiltigt värde i fältet sku")
 
   Parameter: product.
 {%- endcomment -%}
@@ -36,7 +38,10 @@
     "name": {{ product.title | json }},
     "url": {{ product_url | json }},
     "description": {{ description | json }},
-    "sku": {{ product.selected_or_first_available_variant.sku | json }},
+    {%- assign main_sku = product.selected_or_first_available_variant.sku | strip -%}
+    {%- unless main_sku == blank or main_sku contains ' ' -%}
+    "sku": {{ main_sku | json }},
+    {%- endunless -%}
     {%- capture gtin -%}{%- render 'mug-gtin', code: product.selected_or_first_available_variant.barcode -%}{%- endcapture -%}
     {%- if gtin != blank -%}
     "gtin": {{ gtin | json }},
@@ -108,7 +113,10 @@
           "@type": "Offer",
           "@id": {{ offer_url | append: '#offer' | json }},
           "url": {{ offer_url | json }},
-          "sku": {{ variant.sku | json }},
+          {%- assign vsku = variant.sku | strip -%}
+          {%- unless vsku == blank or vsku contains ' ' -%}
+          "sku": {{ vsku | json }},
+          {%- endunless -%}
           {%- capture vgtin -%}{%- render 'mug-gtin', code: variant.barcode -%}{%- endcapture -%}
           {%- if vgtin != blank -%}
           "gtin": {{ vgtin | json }},
