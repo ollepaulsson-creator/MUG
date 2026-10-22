@@ -9,16 +9,16 @@
  */
 {
   "sections": {
-    "instant_0nh459rct_mq_luf_ug_Yq4BRc": {
+    "instant_0nh459rct_mq_luf_ug_TFTECX": {
       "type": "instant-0nh459rctMQLufUg",
       "name": "EP–35 K.O.–AMP",
       "settings": {
         "url_kXgRhMzYqiah3PTa": "https://www.mug.se/collections/teenage-engineering",
-        "text_VVL3P9v4sV4cxMy8": "<p></p><p></p><p>EP–35 K.O.–AMP</p>",
-        "text_ucOLEZkQaj7fBQYR": "<p></p><p></p><p>multi–input speaker/amp</p>",
+        "text_VVL3P9v4sV4cxMy8": "<p></p><p></p><p>EP–35 K.O.AMP</p>",
+        "text_ucOLEZkQaj7fBQYR": "<p></p><p></p><p>multi–input/FX/speaker/amp</p>",
         "url_aAJLoS5A9n1nWMLe": "https://www.mug.se/collections/teenage-engineering",
-        "text_7Pmja7vrTVZ1687S": "<p></p><p></p><p>EP–35 K.O.–AMP</p>",
-        "text_WyywEz52UKx9b2wo": "<p></p><p></p><p>Med tillbehör</p>",
+        "text_7Pmja7vrTVZ1687S": "<p></p><p></p><p>EP–35 K.O.AMP</p>",
+        "text_WyywEz52UKx9b2wo": "<p></p><p></p><p>Med tillbehör!</p>",
         "padding_top": 0,
         "padding_bottom": 0
       }
@@ -1952,7 +1952,7 @@
     }
   },
   "order": [
-    "instant_0nh459rct_mq_luf_ug_Yq4BRc",
+    "instant_0nh459rct_mq_luf_ug_TFTECX",
     "product_list_PmjHpA",
     "instant_t1_wt_xo_ymjr_hm_xylw_t4wpNk",
     "product_list_g6D6TP",
