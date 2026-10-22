@@ -2761,14 +2761,28 @@ dialog.facets--drawer[open] {
    hela skärmbredden minus 8 px i kanterna, så den läser som en meny som
    hör till verktygsraden ovanför. JS:et sätter left/right inline, därav
    !important. Höjden kapas så listan aldrig når "Kontakta oss"-bubblan.
+   2026-10-22 (Olle): full bredd var för brett. Nu lika bred som
+   innehållet och högerställd under "Sortera", 8 px från kanten.
    ------------------------------------------------------------------ */
 @media screen and (max-width: 749px) {
   .sorting-filter__horizontal .sorting-filter__options {
-    left: 8px !important;
+    left: auto !important;
     right: 8px !important;
-    width: auto !important;
-    max-width: none !important;
+    width: max-content !important;
+    min-width: 220px !important;
+    max-width: calc(100vw - 16px) !important;
     max-height: min(60svh, 420px) !important;
     box-shadow: 0 10px 30px rgb(0 0 0 / 18%) !important;
+  }
+}
+
+/* Verktygsraden på mobil: "Filtrera", antalet och "Sortera" i brödtextens
+   storlek (15 px), samma som filterpillren ovanför (Olle 2026-10-22).
+   !important eftersom styles.css sätter .facets__label till 14px !important. */
+@media screen and (max-width: 749px) {
+  .facets-toggle__label,
+  .facets-toggle .filter-count-bubble__text,
+  .facets-toggle .facets__label {
+    font-size: 15px !important;
   }
 }
