@@ -70,9 +70,28 @@
       assign mug_is_preorder = true
     endif
   endif
+
+  comment
+    ── Beställningsvara (kind: backorder, kontraktet §1b). Löpande, utan datum:
+    finns varianten i lager säljs den som vanlig vara, och först vid tomt lager
+    tar beställningsläget över ("Köp nu" + Skickas-rutan). Radegenskapen
+    Skickas sätts bara i det läget — Bakhuvudet spärrar ordern på just den.
+  endcomment
+  assign mug_is_backorder = false
+  if mug_is_preorder and mug_preorder.kind == 'backorder'
+    if inventory_managed and inventory_quantity > 0
+      assign mug_is_preorder = false
+    else
+      assign mug_is_backorder = true
+    endif
+  endif
   if mug_is_preorder
     assign can_add_to_cart = true
-    assign add_to_cart_text = mug_preorder.button_text | default: 'Förhandsbeställ nu'
+    if mug_is_backorder
+      assign add_to_cart_text = mug_preorder.button_text | default: 'Köp nu'
+    else
+      assign add_to_cart_text = mug_preorder.button_text | default: 'Förhandsbeställ nu'
+    endif
   endif
 
   comment
