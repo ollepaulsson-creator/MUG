@@ -12,7 +12,8 @@
   - hasMerchantReturnPolicy: 14 dagars ångerrätt, kunden betalar returfrakten
   - aggregateRating ur reviews.rating / reviews.rating_count (Bakhuvudet)
   - material, size, additionalProperty ur filtermetafälten (mug-schema-attributes)
-  - PreOrder när varianten säljs vidare vid slut lager (förhandsbeställning)
+  - PreOrder när varianten säljs vidare vid slut lager (förhandsbeställning),
+    BackOrder när produkten i stället är en beställningsvara (mug.preorder kind)
   - UsedCondition för taggen Status:Begagnad
   - sku utelämnas när den är tom eller innehåller mellanslag (Sitoo-nummer som
     "BETA 58A"); Google underkänner sådana värden ("Ogiltigt värde i fältet sku")
@@ -24,6 +25,10 @@
   assign product_url = shop_url | append: product.url
   assign rating = product.metafields.reviews.rating.value
   assign rating_count = product.metafields.reviews.rating_count
+  assign mug_backorder = false
+  if product.metafields.mug.preorder.value.kind == 'backorder'
+    assign mug_backorder = true
+  endif
   assign is_used = false
   if product.tags contains 'Status:Begagnad' or product.tags contains 'status: Begagnad'
     assign is_used = true
@@ -82,7 +87,11 @@
           if variant.available
             assign availability = 'https://schema.org/InStock'
             if variant.inventory_management != blank and variant.inventory_quantity <= 0 and variant.inventory_policy == 'continue'
-              assign availability = 'https://schema.org/PreOrder'
+              if mug_backorder
+                assign availability = 'https://schema.org/BackOrder'
+              else
+                assign availability = 'https://schema.org/PreOrder'
+              endif
             endif
           endif
           assign weight_g = variant.weight | default: 0

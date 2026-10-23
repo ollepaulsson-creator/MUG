@@ -144,6 +144,17 @@
       assign mug_is_preorder = true
     endif
   endif
+
+  # Beställningsvara (kind: backorder, kontraktet §1b): i lager är den en vanlig
+  # vara med vanlig statusrad; först vid tomt lager blir raden beställningsvara.
+  assign mug_is_backorder = false
+  if mug_is_preorder and mug_preorder.kind == 'backorder'
+    if mug_no_stock
+      assign mug_is_backorder = true
+    else
+      assign mug_is_preorder = false
+    endif
+  endif
 -%}
 
 <product-inventory
@@ -193,7 +204,9 @@
       role="status"
       aria-label="{{ 'accessibility.inventory_status' | t }}"
     >
-      {%- if mug_is_preorder -%}
+      {%- if mug_is_backorder -%}
+        <strong>Beställningsvara:</strong> Leverans 7–14 dagar.
+      {%- elsif mug_is_preorder -%}
         <span class="product-inventory__text--preorder">Tillgänglig för förhandsbeställning</span>
       {%- elsif status == 'out_of_stock' -%}
         Slut i lager

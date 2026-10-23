@@ -34,6 +34,12 @@
   {%- else -%}
     {%- assign mug_is_preorder = true -%}
   {%- endif -%}
+  {%- comment %} Beställningsvara (kind: backorder, kontraktet §1b): ingen badge — den
+    säljs som vanlig vara, bara med längre leveranstid. CONTINUE håller
+    product.available sann, så Slutsåld-badgen visas inte heller. {%- endcomment -%}
+  {%- if mug_pre.kind == 'backorder' -%}
+    {%- assign mug_is_preorder = false -%}
+  {%- endif -%}
 {%- endif -%}
 
 {%- comment %} ── Status: read from metafield, support list and single-value types ── {%- endcomment -%}
