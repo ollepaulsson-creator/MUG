@@ -205,7 +205,7 @@
       aria-label="{{ 'accessibility.inventory_status' | t }}"
     >
       {%- if mug_is_backorder -%}
-        <strong>Beställningsvara:</strong> Leverans 7–14 dagar.
+        <strong>Beställningsvara:</strong> Leverans {{ mug_preorder.lead_time | default: '7–14 dagar' }}.
       {%- elsif mug_is_preorder -%}
         <span class="product-inventory__text--preorder">Tillgänglig för förhandsbeställning</span>
       {%- elsif status == 'out_of_stock' -%}
