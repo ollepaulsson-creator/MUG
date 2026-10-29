@@ -781,6 +781,12 @@ document.addEventListener("DOMContentLoaded", function() {
               "  content: ''; width: 10px; height: 10px; border-radius: 50%;",
               '  background: #34C759; display: inline-block; flex-shrink: 0;',
               '}',
+              /* search/collection pages: the widget swaps in a product-thumbnail
+                 stack + "Chat about these items" (.activator--search) and hides
+                 our label — keep the same "Kontakta oss" pill everywhere */
+              '.activator--search > :is(.thumbnail-stack, .activator__search-label) { display: none !important; }',
+              '.activator--search > .activator__label { display: inline-flex !important; }',
+              '.activator--search { width: auto !important; }',
             ].join('\n');
             rs.appendChild(st);
           }
