@@ -1323,6 +1323,10 @@ p.search-results-summary {
   padding: 5px 15px 25px 15px;
   font-size: 13px;
 }
+/* Active filter pills directly below: tighten the gap to the summary line */
+.template-search:has(.facets--horizontal .facets-remove facet-remove-component) p.search-results-summary {
+  padding-bottom: 8px;
+}
 .template-search .collection-wrapper {
   margin-top: 0 !important;
 }
