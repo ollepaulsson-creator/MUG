@@ -1327,6 +1327,29 @@ p.search-results-summary {
 .template-search:has(.facets--horizontal .facets-remove facet-remove-component) p.search-results-summary {
   padding-bottom: 8px;
 }
+
+/* ── Collection intro text: full width on mobile (block setting caps it at 90%) ── */
+@media (max-width: 749px) {
+  .template-collection .custom-section-content rte-formatter.text-block {
+    max-width: 100% !important;
+  }
+}
+
+/* ── Mobile menu drawer: tighter rows, 40px on every level ── */
+.menu-drawer .menu-drawer__menu > .menu-drawer__list-item,
+.menu-drawer .menu-drawer__menu--childlist > .menu-drawer__list-item,
+.menu-drawer .menu-drawer__menu-item {
+  min-height: 40px !important;
+}
+.menu-drawer .menu-drawer__menu .menu-drawer__list-item--flat {
+  margin-block-end: 0 !important;
+}
+.menu-drawer .menu-drawer__menu-item span.menu-drawer__menu-item-text {
+  height: 40px;
+}
+.menu-drawer .menu-drawer__menu-item > .svg-wrapper.icon-caret {
+  padding-block: 0;
+}
 .template-search .collection-wrapper {
   margin-top: 0 !important;
 }
