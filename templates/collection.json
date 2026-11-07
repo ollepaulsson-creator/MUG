@@ -780,6 +780,7 @@
     },
     "featured_bas_1": {
       "type": "instant-3Gzh5NpGBNGISxW3",
+      "disabled": true,
       "settings": {
         "url_B4ksPNblpibexG1C": "",
         "text_itdiCQPsjniWQ2wF": "<p>Bas 1</p>",
@@ -820,6 +821,7 @@
     },
     "featured_pa_1": {
       "type": "instant-NLnMgVf80h8UST5v",
+      "disabled": true,
       "settings": {
         "url_IcaK0JrjJBF4W0ST": "",
         "text_YFq23zLRaT0NPvqh": "<p>PA 1</p>",
