@@ -1066,10 +1066,9 @@ nav.footer-block ul li{
     visibility: hidden;
     height: calc(100dvh - var(--header-bottom, 60px));
     /* MUG 2026-11-08: Safari i iOS 26 ritar inte fasta element under det svävande verktygsfältet,
-       så lådan slutar alltid ovanför det (högre höjd hjälper inte). I stället tonar nederkanten ut
-       mjukt, och sidan bakom döljs medan lådan är öppen (se regeln efter .menu-drawer). */
-    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 32px), transparent);
-    mask-image: linear-gradient(to bottom, #000 calc(100% - 32px), transparent);
+       så lådan slutar alltid ovanför det (högre höjd hjälper inte). Sidan bakom döljs medan lådan
+       är öppen (regeln efter .menu-drawer), så ytan under blir vit i stället för produkter.
+       En utoning i nederkanten provades men lade sig över sidfoten – borttagen. */
     width: 100vw;
     max-width: 100vw;
     z-index: var(--layer-menu-drawer);
