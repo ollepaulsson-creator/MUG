@@ -138,6 +138,13 @@
     // första kortet i linje med rubriken. Rullaren själv behåller sin bredd,
     // så Swiper räknar kortbredderna som förut.
     function kant() {
+      // Rullarens bredd ska komma från behållaren, aldrig från innehållet. Instant
+      // lägger ibland rullaren i en kolumn-flex med align-items:center – då blir
+      // bredden innehållets, wrappern (100% + kanterna) gör innehållet bredare och
+      // Swiper gör korten bredare i en loop (TE-sidan blev 5,6 miljoner px hög 2026-11-07).
+      el.style.width = '100%';
+      el.style.maxWidth = '100%';
+      el.style.minWidth = '0';
       var r = el.getBoundingClientRect();
       var vw = document.documentElement.clientWidth;
       var v = Math.max(0, Math.round(r.left));
