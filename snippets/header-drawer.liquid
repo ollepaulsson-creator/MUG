@@ -1095,6 +1095,15 @@ nav.footer-block ul li{
 
   /* MUG 2026-11-08: sidan bakom syntes under lådan i iOS 26 (mellan lådans slut och verktygsfältet) */
   @media screen and (max-width: 749px) {
+    /* Safari 26 ritar inte ett fast element med HELT ogenomskinlig bakgrund under verktygsfältet,
+       men gör det med alfa < 1 (edoardolunardi.dev, "Safari 26 and the strange case of fixed overlays").
+       Lådan förankras därför mot skärmens nederkant och får 99 % täckande bakgrund. */
+    .menu-drawer {
+      height: auto;
+      bottom: 0;
+      background-color: rgb(var(--color-background-rgb) / 0.99);
+    }
+
     html:has(#Details-menu-drawer-container[open]) :is(main, .shopify-section-group-footer-group) {
       visibility: hidden;
     }
