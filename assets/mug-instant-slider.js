@@ -15,7 +15,84 @@
     '.instant-slider-css-mode>.instant-slider-wrapper{overflow-x:auto;overflow-y:hidden;' +
     'scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;overscroll-behavior-x:contain}' +
     '.instant-slider-css-mode>.instant-slider-wrapper::-webkit-scrollbar{display:none}' +
-    '.instant-slider-css-mode>.instant-slider-wrapper>.instant-slider-slide{scroll-snap-align:start}';
+    '.instant-slider-css-mode>.instant-slider-wrapper>.instant-slider-slide{scroll-snap-align:start}' +
+    // Produktkortens text som temats kollektionskort (Instant ger 15–16 px överallt).
+    '.instant-slider-slide .mug-kort-marke{font-size:14px!important;line-height:19.6px!important;' +
+    'font-weight:400!important;text-transform:uppercase!important;letter-spacing:2px!important}' +
+    '.instant-slider-slide .mug-kort-titel{font-size:15px!important;line-height:21px!important;' +
+    'font-weight:400!important;letter-spacing:normal!important;text-transform:none!important}' +
+    '.instant-slider-slide .mug-kort-pris{font-size:15px!important;line-height:21px!important;' +
+    'font-weight:400!important;letter-spacing:normal!important}' +
+    '.instant-slider-slide>.mug-kort-prisrad{margin-top:auto!important}';
+
+  var PRIS = /\d[\d\s.,]*\s?kr\b/i;
+
+  /**
+   * Instants klassnamn är hashade per sida, så korttexterna känns igen på
+   * innehåll: pris = text med "kr", märke = versaliserad text, titel = resten.
+   * Utan versaliserad text vågar vi inte gissa märke/titel och rör dem inte.
+   */
+  function kortText(slide) {
+    var texter = [].slice.call(slide.querySelectorAll('[data-instant-type="text"]'));
+    var ovriga = [];
+    texter.forEach(function (t) {
+      if (PRIS.test(t.textContent)) t.classList.add('mug-kort-pris');
+      else ovriga.push(t);
+    });
+    var marke = ovriga.filter(function (t) { return getComputedStyle(t).textTransform === 'uppercase'; });
+    if (marke.length !== 1) return;
+    marke[0].classList.add('mug-kort-marke');
+    ovriga.forEach(function (t) { if (t !== marke[0]) t.classList.add('mug-kort-titel'); });
+  }
+
+  /**
+   * Prisraden längst ned i kortet: en titel på två rader sköt annars ned
+   * priset, och rea-raden (pris + överstruket ord. pris) hamnade på en annan
+   * höjd än grannkortens pris. Korten är lika höga (flex, stretch), så
+   * margin-top:auto på prisraden linjerar alla priser i rullaren.
+   */
+  function prisrad(slide) {
+    var kallor = slide.querySelectorAll('[data-instant-dynamic-content-source="PRICE"], [data-instant-dynamic-content-source="COMPARE_AT"]');
+    for (var i = 0; i < kallor.length; i++) {
+      var e = kallor[i];
+      while (e.parentElement && e.parentElement !== slide) e = e.parentElement;
+      if (e.parentElement === slide) e.classList.add('mug-kort-prisrad');
+    }
+  }
+
+  /**
+   * Skarpare tumnaglar: Instant ger ibland bara en 320 px-bild till ett kort som
+   * visas ~300 px brett — suddigt på retina. Shopifys CDN skalar efter
+   * width-parametern, så vi bygger en srcset och låter webbläsaren välja.
+   */
+  function skarpBild(img) {
+    // Instant skriver om srcset efter att sidan laddat, så markören är vår
+    // egen 1200w-post, inte en flagga. Högst tre försök per bild.
+    if (/ 1200w/.test(img.getAttribute('srcset') || '')) return;
+    var forsok = +(img.dataset.mugSkarp || 0);
+    if (forsok >= 3) return;
+    var src = img.getAttribute('src') || '';
+    if (!/[?&]width=\d+/.test(src)) return; // src kommer senare: nästa svep tar den
+    var set = (img.getAttribute('srcset') || '').split(',').filter(function (s) { return s.trim(); });
+    if (set.length > 1 && !/width=320 320w/.test(img.getAttribute('srcset'))) return; // redan en riktig srcset
+    img.dataset.mugSkarp = String(forsok + 1);
+    var bredder = [400, 600, 800, 1000, 1200];
+    img.setAttribute('srcset', bredder.map(function (b) {
+      return src.replace(/([?&]width=)\d+/, '$1' + b) + ' ' + b + 'w';
+    }).join(', '));
+    var visad = Math.ceil(img.getBoundingClientRect().width) || 320;
+    img.setAttribute('sizes', visad + 'px');
+  }
+
+  function forbattraKort(el) {
+    var slides = el.querySelectorAll('.instant-slider-slide');
+    for (var i = 0; i < slides.length; i++) {
+      kortText(slides[i]);
+      prisrad(slides[i]);
+      var bilder = slides[i].querySelectorAll('img');
+      for (var j = 0; j < bilder.length; j++) skarpBild(bilder[j]);
+    }
+  }
 
   function stil() {
     if (document.getElementById('mug-instant-slider-css')) return;
@@ -97,17 +174,27 @@
 
   function svep() {
     var alla = document.querySelectorAll('.instant-slider');
-    for (var i = 0; i < alla.length; i++) forbattra(alla[i]);
+    if (alla.length) stil();
+    for (var i = 0; i < alla.length; i++) {
+      forbattraKort(alla[i]); // idempotent: körs om när Instant sätter bilder senare
+      forbattra(alla[i]);
+    }
+  }
+  var vantar = false;
+  function snartSvep() {
+    if (vantar) return;
+    vantar = true;
+    setTimeout(function () { vantar = false; svep(); }, 50); // inte rAF: pausas i bakgrundsflikar
   }
 
   // Instant initierar rullarna asynkront (och lata sektioner senare):
   // lyssna på deras initieringsattribut i stället för att gissa en tidpunkt.
-  var obs = new MutationObserver(svep);
+  var obs = new MutationObserver(snartSvep);
   function start() {
     svep();
     obs.observe(document.body, {
       subtree: true, childList: true,
-      attributes: true, attributeFilter: ['data-instant-slider-initialized'],
+      attributes: true, attributeFilter: ['data-instant-slider-initialized', 'src', 'srcset'],
     });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
