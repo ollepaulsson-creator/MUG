@@ -59,11 +59,15 @@
       aria-label="{{ 'accessibility.menu' | t }}"
       on:click="/toggle"
     >
-      <span class="svg-wrapper header-drawer-icon header-drawer-icon--open">
-        {{- 'icon-menu.svg' | inline_asset_content -}}
-      </span>
-      <span class="svg-wrapper header-drawer-icon header-drawer-icon--close">
-        {{- 'icon-close.svg' | inline_asset_content -}}
+      {%- comment -%}
+        MUG 2026-11-08: en ikon vars två streck rör sig i stället för två ikoner som tonar
+        i varandra – strecken glider ihop till mitten och vrids till ett kryss (och tillbaka).
+      {%- endcomment -%}
+      <span class="svg-wrapper header-drawer-icon mug-burger" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g class="mug-burger__rad mug-burger__rad--1"><path d="M1 7H13" stroke="currentColor" stroke-width="var(--icon-stroke-width)" stroke-linecap="round"/></g>
+          <g class="mug-burger__rad mug-burger__rad--2"><path d="M1 7H13" stroke="currentColor" stroke-width="var(--icon-stroke-width)" stroke-linecap="round"/></g>
+        </svg>
       </span>
     </summary>
     <div
@@ -991,65 +995,68 @@ nav.footer-block ul li{
     }
   }
 
-  /* Hamburger ↔ ✕ cross-fade animation */
+  /* MUG 2026-11-08: hamburgare ↔ ✕ som rörelse. Öppna: strecken glider ihop (160 ms),
+     sedan vrids de till ett kryss (160 ms). Stäng: samma sak baklänges. */
   .header__icon--summary {
     position: relative;
   }
 
-  .header__icon--summary .header-drawer-icon {
-    transition: opacity 0.2s cubic-bezier(0.2, 0, 0, 1),
-                transform 0.2s cubic-bezier(0.2, 0, 0, 1),
-                filter 0.2s cubic-bezier(0.2, 0, 0, 1);
-  }
-
-  /* Close icon: hidden by default, positioned over the hamburger */
-  .header__icon--summary .header-drawer-icon--close {
-    position: absolute;
-    inset: 0;
+  .header__icon--summary .mug-burger {
+    display: flex;
     margin: auto;
-    display: flex !important;
-    opacity: 0;
-    transform: scale(0.25);
-    filter: blur(4px);
-  }
-
-  /* Hamburger icon: visible by default — slightly larger on mobile */
-  .header__icon--summary .header-drawer-icon--open {
-    display: flex !important;
-    opacity: 1;
+    width: var(--icon-size-xs);
+    height: var(--icon-size-xs);
     transform: scale(1.2);
-    filter: blur(0px);
   }
 
-  /* When menu is open on mobile: swap icons */
-  details[open] .header__icon--menu .header-drawer-icon--open {
-    opacity: 0;
-    transform: scale(0.25);
-    filter: blur(4px);
+  .mug-burger svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
   }
 
-  details[open] .header__icon--menu .header-drawer-icon--close {
-    opacity: 1;
-    transform: scale(1.25); /* close (✕) a touch bigger than before (was 1); hamburger unchanged */
-    filter: blur(0px);
+  .mug-burger__rad,
+  .mug-burger__rad path {
+    transform-box: view-box;
+    transform-origin: 7px 7px;
+    transition: transform 160ms cubic-bezier(0.2, 0, 0, 1);
   }
 
-  /* On desktop: always show hamburger at normal scale, never ✕ */
+  /* Stängd: två streck isär. Vid stängning vrids de först tillbaka, sedan isär. */
+  .mug-burger__rad--1 { transform: translateY(-3.5px); transition-delay: 160ms; }
+  .mug-burger__rad--2 { transform: translateY(3.5px); transition-delay: 160ms; }
+  .mug-burger__rad path { transition-delay: 0ms; }
+
+  @media screen and (max-width: 749px) {
+    details[open] .header__icon--menu .mug-burger__rad {
+      transform: translateY(0);
+      transition-delay: 0ms;
+    }
+
+    details[open] .header__icon--menu .mug-burger__rad path {
+      transition-delay: 160ms;
+    }
+
+    details[open] .header__icon--menu .mug-burger__rad--1 path {
+      transform: rotate(45deg) scaleX(1.18);
+    }
+
+    details[open] .header__icon--menu .mug-burger__rad--2 path {
+      transform: rotate(-45deg) scaleX(1.18);
+    }
+  }
+
+  /* Desktop (lådan används 750–879 px): alltid hamburgare i normal storlek */
   @media screen and (min-width: 750px) {
-    .header__icon--summary .header-drawer-icon--open {
+    .header__icon--summary .mug-burger {
       transform: scale(1);
     }
+  }
 
-    details[open] .header__icon--menu .header-drawer-icon--open {
-      opacity: 1;
-      transform: scale(1);
-      filter: blur(0px);
-    }
-
-    details[open] .header__icon--menu .header-drawer-icon--close {
-      opacity: 0;
-      transform: scale(0.25);
-      filter: blur(4px);
+  @media (prefers-reduced-motion: reduce) {
+    .mug-burger__rad,
+    .mug-burger__rad path {
+      transition: none;
     }
   }
 
