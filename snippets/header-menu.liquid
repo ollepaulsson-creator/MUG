@@ -25,6 +25,8 @@
 
 {% capture children %}
   {% for link in block_settings.menu.links %}
+    {%- comment -%} MUG 2026-11-07: rader utan underrader (Nyheter) visas bara i mobilmenyn, som med Qikify {%- endcomment -%}
+    {%- if link.links == blank -%}{%- continue -%}{%- endif -%}
     <li
       role="presentation"
       class="menu-list__list-item"
@@ -53,15 +55,8 @@
             class="menu-list__submenu-inner"
             style="{% render 'submenu-font-styles', settings: block_settings %}"
           >
-            {% assign list_id = 'MegaMenuList-' | append: forloop.index %}
-            {% render 'mega-menu',
-              section: section,
-              parent_link: link,
-              id: list_id,
-              menu_content_type: menu_content_type,
-              content_aspect_ratio: ratio,
-              image_border_radius: image_border_radius
-            %}
+            {%- comment -%} MUG 2026-11-07: egen megameny (ersätter Qikify), se snippets/mug-megameny.liquid {%- endcomment -%}
+            {% render 'mug-megameny', section: section, parent_link: link %}
           </div>
         </div>
       {%- endif -%}

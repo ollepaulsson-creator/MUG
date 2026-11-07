@@ -103,7 +103,7 @@
       },
       "15623156175785154009": {
         "type": "shopify://apps/qikify-mega-menu-navigation/blocks/app-embed/19d2f1cd-1836-4a32-8937-03df3c601dc8",
-        "disabled": false,
+        "disabled": true,
         "settings": {}
       },
       "15683396631634586217": {

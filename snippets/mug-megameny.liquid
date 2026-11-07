@@ -1,0 +1,129 @@
+{%- doc -%}
+  MUG 2026-11-07 (etapp 3, ersätter Qikify): native megameny för desktop.
+  Utseendet följer Qikify-menyn som den var live (reglerna stod i custom.css):
+  fem spalter – genvägar + bildpuff | tre spalter med grupper | varumärken.
+
+  Innehåll:
+  - menyn "huvudmeny": rader utan underrader → stora genvägar i vänsterspalten,
+    rader med underrader → grupper i de tre mittspalterna, raden "Varumärken" → högerspalten
+  - menyn "megapuffar": toppnivå = kategorinamnet, första underraden = puffens rubrik och länk.
+    Bilden är filen megapuff-<kategorins handle>.jpg (eller .png) i Innehåll → Filer.
+  - vilken grupp som börjar spalt 2 och 3 står i spaltkarta nedan (som i Qikify).
+    Kategorier som saknas där: första gruppen i spalt 1, sista i spalt 3, resten i spalt 2.
+
+  @param {linklist} parent_link - Kategorin (toppnivålänken)
+  @param {object} section - Header-sektionen
+{%- enddoc -%}
+{%- liquid
+  assign spaltkarta = 'Elgitarr:Gitarrförstärkare,Strängar|Akustisk gitarr:Andra instrument,Tillbehör|Bas:Förstärkare,Tillbehör|Slagverk:Percussion,Tillbehör|Klaviatur:Synthar,Tillbehör|Studio & Inspelning:Lyssning,Tillbehör|PA & Live:Mikrofoner,Tillbehör' | split: '|'
+  assign brytningar = ''
+  for rad in spaltkarta
+    assign delar = rad | split: ':'
+    if delar[0] == parent_link.title
+      assign brytningar = delar[1] | split: ','
+    endif
+  endfor
+
+  assign antal_grupper = 0
+  for grupp in parent_link.links
+    if grupp.links != blank and grupp.title != 'Varumärken'
+      assign antal_grupper = antal_grupper | plus: 1
+    endif
+  endfor
+  assign sista_index = antal_grupper | minus: 1
+
+  assign spalt_1 = ''
+  assign spalt_2 = ''
+  assign spalt_3 = ''
+  assign spalt = 1
+  assign index = 0
+-%}
+{%- for grupp in parent_link.links -%}
+  {%- if grupp.links == blank or grupp.title == 'Varumärken' -%}{%- continue -%}{%- endif -%}
+  {%- liquid
+    if brytningar != ''
+      if grupp.title == brytningar[0]
+        assign spalt = 2
+      elsif grupp.title == brytningar[1]
+        assign spalt = 3
+      endif
+    else
+      if index == 0
+        assign spalt = 1
+      elsif index == sista_index
+        assign spalt = 3
+      else
+        assign spalt = 2
+      endif
+    endif
+    assign index = index | plus: 1
+  -%}
+  {%- capture html -%}
+    <div class="mug-mega__grupp">
+      <a class="mug-mega__rubrik" href="{{ grupp.url }}"><span>{{ grupp.title | escape }}</span></a>
+      <ul class="mug-mega__lista" role="list">
+        {%- for l in grupp.links -%}
+          {%- assign borjan = l.title | slice: 0, 5 -%}
+          <li><a class="mug-mega__lank{% if borjan == 'Alla ' %} mug-mega__lank--alla{% endif %}" href="{{ l.url }}">{{ l.title | escape }}</a></li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  {%- endcapture -%}
+  {%- liquid
+    case spalt
+      when 1
+        assign spalt_1 = spalt_1 | append: html
+      when 2
+        assign spalt_2 = spalt_2 | append: html
+      else
+        assign spalt_3 = spalt_3 | append: html
+    endcase
+  -%}
+{%- endfor -%}
+{%- liquid
+  assign mp = linklists['megapuffar'].links | where: 'title', parent_link.title | first
+  assign puff = mp.links.first
+  assign puffbild = blank
+  if puff
+    assign filnamn = 'megapuff-' | append: parent_link.handle
+    assign jpg = filnamn | append: '.jpg'
+    assign png = filnamn | append: '.png'
+    assign puffbild = images[jpg] | default: images[png]
+  endif
+  assign marken = parent_link.links | where: 'title', 'Varumärken' | first
+-%}
+<div class="mug-mega">
+  <div class="mug-mega__rad">
+    <div class="mug-mega__spalt mug-mega__spalt--forsta">
+      <ul class="mug-mega__genvagslista" role="list">
+        {%- for l in parent_link.links -%}
+          {%- if l.links == blank -%}
+            <li><a class="mug-mega__genvag" href="{{ l.url }}">{{ l.title | escape }}</a></li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+      {%- if puff and puffbild != blank -%}
+        <a class="mug-mega__puff" href="{{ puff.url }}">
+          {{- puffbild | image_url: width: 900 | image_tag: widths: '300, 450, 600, 900', sizes: '(min-width: 1281px) 20vw, 300px', loading: 'lazy', alt: puff.title, class: 'mug-mega__puffbild' -}}
+          <span class="mug-mega__pufftitel">{{ puff.title | escape }}</span>
+        </a>
+      {%- endif -%}
+    </div>
+    <div class="mug-mega__spalt">{{ spalt_1 }}</div>
+    <div class="mug-mega__spalt">{{ spalt_2 }}</div>
+    <div class="mug-mega__spalt">{{ spalt_3 }}</div>
+    <div class="mug-mega__spalt mug-mega__spalt--sista">
+      {%- if marken -%}
+        <div class="mug-mega__grupp">
+          <a class="mug-mega__rubrik" href="{{ marken.url }}"><span>{{ marken.title | escape }}</span></a>
+          <ul class="mug-mega__lista" role="list">
+            {%- for l in marken.links -%}
+              {%- assign borjan = l.title | slice: 0, 5 -%}
+              <li><a class="mug-mega__lank{% if borjan == 'Alla ' %} mug-mega__lank--alla{% endif %}" href="{{ l.url }}">{{ l.title | escape }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>

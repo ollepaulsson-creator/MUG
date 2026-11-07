@@ -1850,23 +1850,7 @@ rte-formatter[class*="text_twGGkJ"] a:hover {
   }
 }
 
-/* Qikify mega menu loading sequence: keep the native menu hidden from first
-   paint (no flash of the wrong menu) and fade the Qikify menu in when it
-   mounts. A script in theme.liquid adds .qikify-menu-fallback on <body> if
-   Qikify hasn't mounted a few seconds after load — the native menu then
-   appears so the site is never menu-less (unbound theme, app disabled,
-   script failure). The :has() rule is last so a late Qikify mount wins
-   over the fallback. */
-.overflow-menu {
-  opacity: 0;
-}
-body.qikify-menu-fallback .overflow-menu {
-  opacity: 1;
-  transition: opacity 200ms ease-in-out;
-}
-body:has(.tmenu_wrapper) .overflow-menu {
-  opacity: 0;
-}
+/* (Qikifys laddningssekvens borttagen 2026-11-07 – menyn är native, se mug-megameny.css) */
 
 .menu-list .tmenu_wrapper {
   animation: qikifyMenuFadeIn 300ms ease-in-out both;
@@ -2834,4 +2818,10 @@ dialog.facets--drawer[open] {
 .product-list-title__link:hover {
   text-decoration: underline;
   text-underline-offset: 0.15em;
+}
+
+/* MUG 2026-11-07: "Visa alla" överst i mobilmenyns underlistor (snippets/mug-visa-alla.liquid) */
+.mug-visa-alla .menu-drawer__menu-item-text {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }

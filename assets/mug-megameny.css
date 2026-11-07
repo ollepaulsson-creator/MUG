@@ -1,0 +1,208 @@
+/* MUG 2026-11-07 (etapp 3): native megameny för desktop, ersätter Qikify.
+   Markup: snippets/mug-megameny.liquid. Alla mått, färger och lägen är
+   Qikify-menyns som de stod i custom.css (sektionen "Qikify Smart Menu —
+   theme integration") och som de mättes live. */
+
+/* ── Toppnivån: 14px svart, 12px luft på var sida, understruken vid hovring ── */
+header-menu .menu-list {
+  --menu-horizontal-gap: 0px;
+}
+
+header-menu .overflow-menu::part(list) {
+  gap: 0;
+}
+
+header-menu .menu-list .menu-list__list-item:where(:not([slot='overflow'])) > .menu-list__link {
+  margin-inline: 0;
+  padding-inline: 12px;
+  font-size: 14px;
+  line-height: 19.6px;
+  font-feature-settings: 'ss07' 1;
+}
+
+/* Temat tonar ned länkarna som inte hovras (70 %) – Qikify höll alla svarta */
+header-menu .menu-list .menu-list__link,
+header-menu .menu-list .menu-list__link:hover {
+  color: var(--menu-top-level-font-color);
+}
+
+header-menu .menu-list__list-item:hover > .menu-list__link .menu-list__link-title,
+header-menu .menu-list__link[aria-expanded='true'] .menu-list__link-title {
+  text-decoration: underline;
+  text-underline-offset: 0.125em;
+}
+
+/* ── Panelen: full bredd, linje över och under, skugga ── */
+header-menu .menu-list__submenu {
+  padding-inline: 0;
+}
+
+/* Temat ger innerdelen flex + 28 px luft under – panelen ska sluta vid linjen */
+header-menu .menu-list__submenu-inner {
+  padding: 0;
+  /* temat: max 80vh med inre rullning – Qikify visade hela panelen */
+  max-height: none;
+  overflow: visible;
+}
+
+.mug-mega {
+  flex: 1 1 auto;
+  width: 100%;
+}
+
+/* Temat klipper panelen till en höjd som mäts när den öppnas (header-menu.js)
+   och ritar skuggan på en separat bakgrund med samma höjd. Blir innehållet
+   högre efteråt (bilder, typsnitt) klipps nederdelen bort. Qikify hade varken
+   klippning eller animation: panelen visas hel och bär skuggan själv. */
+header-menu .menu-list__list-item:where(:not([slot='overflow'])) > .menu-list__submenu {
+  /* som Qikify: skuggan klipps i överkant så den inte lägger sig över sidhuvudet */
+  clip-path: inset(0 -50px -50px -50px);
+  transition: none;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+header-menu .overflow-menu::after {
+  display: none;
+}
+
+/* Temat sätter white-space: nowrap på menyraderna – i panelen ska text brytas */
+.mug-mega {
+  white-space: normal;
+}
+
+.mug-mega {
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e4e4e4;
+  font-family: 'inter variable', sans-serif;
+  font-feature-settings: 'ss07' 1;
+  color: #000;
+}
+
+/* ── Fem spalter. Flex med innehållsbredd: alla spalter får lika bred text-
+   yta (Qikify: 290 px vid 1606 px fönster), linjerna går hela höjden. ── */
+.mug-mega__rad {
+  display: flex;
+  align-items: stretch;
+}
+
+.mug-mega__spalt {
+  flex: 1 1 0;
+  box-sizing: content-box;
+  min-width: 0;
+  padding: 20px 0 25px 24px;
+}
+
+.mug-mega__spalt--forsta {
+  padding: 20px 25px 25px 15px;
+  border-right: 1px solid #e4e4e4;
+}
+
+.mug-mega__spalt--sista {
+  padding: 20px 15px 25px 25px;
+  border-left: 1px solid #e4e4e4;
+}
+
+/* ── Vänsterspalt: genvägar och bildpuff ── */
+.mug-mega__genvagslista,
+.mug-mega__lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mug-mega__genvag {
+  display: block;
+  padding: 1px 0;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.55;
+  letter-spacing: 0;
+  color: #000;
+  text-decoration: none;
+}
+
+.mug-mega__genvag:hover {
+  opacity: 0.5;
+}
+
+.mug-mega__puff {
+  display: block;
+  padding-top: 30px;
+  color: #000;
+  text-decoration: none;
+}
+
+.mug-mega__puffbild {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.mug-mega__pufftitel {
+  display: block;
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 21px;
+  text-decoration: underline;
+  text-underline-offset: 0.125em;
+}
+
+.mug-mega__puff:hover .mug-mega__pufftitel {
+  text-decoration: none;
+}
+
+/* ── Grupper: rubrik i versaler, länkar, 20 px efter varje grupp ── */
+/* Qikify satte margin-bottom 4px på både länken och texten i rubriken → 8 px */
+.mug-mega__rubrik {
+  display: block;
+  margin-bottom: 4px;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19.6px;
+  letter-spacing: 0.96px;
+  text-transform: uppercase;
+  color: #000;
+  text-decoration: none;
+}
+
+.mug-mega__rubrik span {
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+.mug-mega__rubrik:hover span {
+  text-decoration: underline;
+  text-underline-offset: 0.125em;
+}
+
+.mug-mega__lista li:last-child {
+  padding-bottom: 20px;
+}
+
+.mug-mega__lank {
+  display: block;
+  padding: 4px 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19.6px;
+  letter-spacing: 0;
+  color: #000;
+  text-decoration: none;
+}
+
+.mug-mega__lank:hover,
+.mug-mega__lank--alla {
+  text-decoration: underline;
+  text-underline-offset: 0.125em;
+}
+
+.mug-mega__lank--alla:hover {
+  text-decoration: none;
+}
+
+/* Ingen egen brytpunkt: Qikify visade fem spalter med lika breda textytor
+   ända ned till 880 px (custom.css hade en grid-regel för 880–1280 px men den
+   slog aldrig igenom). Under 880 px tar mobilmenyn över (custom.css). */

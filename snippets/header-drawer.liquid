@@ -330,7 +330,18 @@
                           {%- endcomment -%}
                           {% if eager_loading or request.design_mode %}
                           {% assign first_accordion_open = false -%}
-                          {%- for childlink in link.links -%}
+                          {%- comment -%}
+                            MUG 2026-11-07: Nyheter först, sedan kategorierna (rader med underrader,
+                            inkl. Varumärken), sist övriga genvägar från desktopmenyns vänsterspalt.
+                          {%- endcomment -%}
+                          {%- liquid
+                            assign mug_genvagar = link.links | where: 'levels', 0
+                            assign mug_nyheter = mug_genvagar | where: 'title', 'Nyheter'
+                            assign mug_ovriga = mug_genvagar | reject: 'title', 'Nyheter'
+                            assign mug_grupper = link.links | where: 'levels', 1
+                            assign mug_rader = mug_nyheter | concat: mug_grupper | concat: mug_ovriga
+                          -%}
+                          {%- for childlink in mug_rader -%}
                             <li
                               class="
                                 menu-drawer__list-item
@@ -576,6 +587,9 @@
                           {%- endfor -%}
                           {% endif %}
                         </ul>
+                        {% if eager_loading or request.design_mode %}
+                          {% render 'mug-drawer-puffar', link: link %}
+                        {% endif %}
                         {%- comment -%}Featured content inside submenu panels removed — products/collections not shown in mobile drawer.{%- endcomment -%}
                       </div>
                     </div>

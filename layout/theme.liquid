@@ -452,41 +452,9 @@ document.addEventListener("DOMContentLoaded", function() {
 })();
 </script>
 
-<script>
-(function () {
-  function labelAllaLinks() {
-    var links = document.querySelectorAll('.tmenu_submenu--desktop .tmenu_item_link:not(.tmenu-alla-link)');
-    links.forEach(function (link) {
-      if (link.textContent.trim().startsWith('Alla')) {
-        link.classList.add('tmenu-alla-link');
-      }
-    });
-  }
-  var observer = new MutationObserver(labelAllaLinks);
-  observer.observe(document.documentElement, { childList: true, subtree: true });
-})();
-</script>
 
-<script>
-  // Menu fallback: the native menu is hidden from first paint (custom.css)
-  // so the Qikify mega menu can fade in without a native-menu flash. If
-  // Qikify hasn't mounted a few seconds after load (unbound theme, app
-  // disabled, script failure), reveal the native menu so the site is never
-  // menu-less. The body:has(.tmenu_wrapper) rule re-hides it if Qikify
-  // mounts even later.
-  (function () {
-    function check() {
-      if (!document.querySelector('.tmenu_wrapper')) {
-        document.body.classList.add('qikify-menu-fallback');
-      }
-    }
-    if (document.readyState === 'complete') {
-      setTimeout(check, 3000);
-    } else {
-      window.addEventListener('load', function () { setTimeout(check, 2500); });
-    }
-  })();
-</script>
+
+
 
 {% if template contains 'collection' %}
 <script>
@@ -639,7 +607,9 @@ document.addEventListener("DOMContentLoaded", function() {
          ligger i top layer, men Inbox-widgeten hamnar där också (popover)
          när dess runtime monteras efter att dialogen öppnats — då täckte
          pillen "Se N artiklar"-knappen i filterlådan (sep 2026). */
-      html:has(dialog[open]) shopify-chat {
+      html:has(dialog[open]) shopify-chat,
+      /* MUG 2026-11-07: mobilmenyn är en <details>, inte en dialog – pillen låg över menyn */
+      html:has(#Details-menu-drawer-container[open]) shopify-chat {
         display: none !important;
       }
     </style>

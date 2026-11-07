@@ -1,0 +1,48 @@
+{%- comment -%}
+  MUG 2026-11-07 (förslag, bara på temakopian): bildpuffar längst ned i mobilmenyns
+  kategoripanel (under listan, utan linjer). Styrs av menyn "Mobilpuffar" (handle mobilpuffar): toppnivån
+  heter som huvudmenyns kategorier, barnlänkarna blir kort.
+  Bild: kollektionens bild eller första produktens bild; för sidor metafältet
+  custom.puffbild. Kort utan bild visas inte.
+
+  Parametrar: link = huvudmenyns toppnivålänk
+{%- endcomment -%}
+{%- assign mug_puff = linklists['mobilpuffar'].links | where: 'title', link.title | first -%}
+{%- if mug_puff and mug_puff.links.size > 0 -%}
+  <div class="mug-puffar{% if mug_puff.links.size > 1 %} mug-puffar--flera{% endif %}" role="list">
+    {%- for puff in mug_puff.links -%}
+      {%- liquid
+        assign bild = blank
+        case puff.type
+          when 'collection_link'
+            assign bild = puff.object.image | default: puff.object.products.first.featured_image
+          when 'page_link'
+            assign bild = puff.object.metafields.custom.puffbild.value
+          when 'product_link'
+            assign bild = puff.object.featured_image
+        endcase
+      -%}
+      {%- if bild != blank -%}
+        <a class="mug-puff" href="{{ puff.url }}" role="listitem">
+          <span class="mug-puff__bild">
+            {{- bild | image_url: width: 600 | image_tag: widths: '300, 450, 600', sizes: '66vw', loading: 'lazy', alt: puff.title -}}
+          </span>
+          <span class="mug-puff__titel">{{ puff.title | escape }}</span>
+        </a>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+{%- if mug_puff and mug_puff.links.size > 0 -%}
+  <style>
+    .mug-puffar{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;
+      padding:16px 20px 24px 48px;scroll-padding-inline:48px 20px;box-sizing:border-box}
+    .mug-puffar::-webkit-scrollbar{display:none}
+    .mug-puff{flex:0 0 66%;max-width:280px;scroll-snap-align:start;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:6px}
+    .mug-puff__bild{display:block;aspect-ratio:4/3;overflow:hidden;background:rgb(0 0 0/.04)}
+    .mug-puff__bild img{width:100%;height:100%;object-fit:cover;display:block}
+    .mug-puff__titel{font-size:13px;line-height:17px;font-weight:500;white-space:normal;overflow-wrap:break-word;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+    /* Två eller fler puffar: två kort får plats bredvid varandra, inget kort kapas av skärmkanten */
+    .mug-puffar--flera .mug-puff{flex:0 0 calc((100% - 10px) / 2);max-width:none}
+  </style>
+{%- endif -%}
