@@ -1065,10 +1065,11 @@ nav.footer-block ul li{
     clip-path: inset(0 0 100% 0);
     visibility: hidden;
     height: calc(100dvh - var(--header-bottom, 60px));
-    /* MUG 2026-11-08: i iOS 26 svävar Safaris verktygsfält över sidan. Med dvh slutade lådan
-       ovanför fältet (vit remsa, innehållet kapat rakt av). lvh = hela skärmhöjden, så lådan
-       går in bakom det genomskinliga fältet; luften sist i menyn gör att allt går att skrolla fram. */
-    height: calc(100lvh - var(--header-bottom, 60px));
+    /* MUG 2026-11-08: Safari i iOS 26 ritar inte fasta element under det svävande verktygsfältet,
+       så lådan slutar alltid ovanför det (högre höjd hjälper inte). I stället tonar nederkanten ut
+       mjukt, och sidan bakom döljs medan lådan är öppen (se regeln efter .menu-drawer). */
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 32px), transparent);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 32px), transparent);
     width: 100vw;
     max-width: 100vw;
     z-index: var(--layer-menu-drawer);
@@ -1090,6 +1091,13 @@ nav.footer-block ul li{
     .header__drawer--desktop & {
       height: 100vh;
       top: 0;
+    }
+  }
+
+  /* MUG 2026-11-08: sidan bakom syntes under lådan i iOS 26 (mellan lådans slut och verktygsfältet) */
+  @media screen and (max-width: 749px) {
+    html:has(#Details-menu-drawer-container[open]) :is(main, .shopify-section-group-footer-group) {
+      visibility: hidden;
     }
   }
 
@@ -1479,7 +1487,6 @@ nav.footer-block ul li{
          which clips L3 grandchild submenus that extend to the right of L2.
        - Scrolling is handled by .menu-drawer__inner-submenu inside. */
     height: fit-content(calc(100dvh - var(--header-bottom, 60px)));
-    height: fit-content(calc(100lvh - var(--header-bottom, 60px)));
     left: 0;
     background-color: var(--color-background);
     z-index: var(--layer-flat);
