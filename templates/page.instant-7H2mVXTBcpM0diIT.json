@@ -534,7 +534,8 @@
             "lank": "",
             "kolumn": "vanster",
             "proportion": 59.26,
-            "proportion_mobil": 93
+            "proportion_mobil": 93,
+            "proportion_stor": 66.7
           }
         }
       },
@@ -557,7 +558,8 @@
         "marginal": 72,
         "luft_over_mobil": 10,
         "luft_under_mobil": 0,
-        "marginal_mobil": 20
+        "marginal_mobil": 20,
+        "maxbredd": 1400
       }
     },
     "mug_02": {
@@ -593,7 +595,8 @@
         "marginal": 72,
         "luft_over_mobil": 10,
         "luft_under_mobil": 0,
-        "marginal_mobil": 20
+        "marginal_mobil": 20,
+        "maxbredd": 1400
       }
     },
     "mug_03": {
@@ -607,7 +610,8 @@
             "lank": "",
             "kolumn": "vanster",
             "proportion": 65.5,
-            "proportion_mobil": 146
+            "proportion_mobil": 146,
+            "proportion_stor": 80
           }
         },
         "b2": {
@@ -618,7 +622,8 @@
             "lank": "",
             "kolumn": "hoger",
             "proportion": 65.5,
-            "proportion_mobil": 146
+            "proportion_mobil": 146,
+            "proportion_stor": 80
           }
         }
       },
@@ -642,7 +647,8 @@
         "marginal": 72,
         "luft_over_mobil": 10,
         "luft_under_mobil": 0,
-        "marginal_mobil": 20
+        "marginal_mobil": 20,
+        "maxbredd": 1400
       }
     },
     "mug_04": {
@@ -656,7 +662,8 @@
             "lank": "",
             "kolumn": "vanster",
             "proportion": 65.5,
-            "proportion_mobil": 146
+            "proportion_mobil": 146,
+            "proportion_stor": 80
           }
         },
         "b2": {
@@ -667,7 +674,8 @@
             "lank": "",
             "kolumn": "hoger",
             "proportion": 65.5,
-            "proportion_mobil": 146
+            "proportion_mobil": 146,
+            "proportion_stor": 80
           }
         }
       },
@@ -691,7 +699,8 @@
         "marginal": 72,
         "luft_over_mobil": 8,
         "luft_under_mobil": 40,
-        "marginal_mobil": 20
+        "marginal_mobil": 20,
+        "maxbredd": 1400
       }
     }
   },

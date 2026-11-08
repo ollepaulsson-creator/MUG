@@ -14,7 +14,7 @@
     --mc-bg: {{ s.bakgrund }}; --mc-farg: {{ s.textfarg }};
     --mc-over: {{ s.luft_over }}px; --mc-under: {{ s.luft_under }}px;
     --mc-over-mobil: {{ s.luft_over_mobil }}px; --mc-under-mobil: {{ s.luft_under_mobil }}px;
-    --mc-marg: {{ s.marginal }}px; --mc-marg-mobil: {{ s.marginal_mobil }}px;
+    --mc-marg: {{ s.marginal }}px; --mc-marg-mobil: {{ s.marginal_mobil }}px;{% if s.maxbredd > 0 %} --mc-max: {{ s.maxbredd }}px;{% endif %}
     --mc-v: {{ s.vanster_bredd }}%; --mc-h: {{ s.hoger_bredd }}%;
     --mc-v-ned: {{ s.vanster_forskjutning }}px; --mc-h-ned: {{ s.hoger_forskjutning }}px;
     --mc-rubrik: {{ s.rubrik_storlek }}px; --mc-rubrik-mobil: {{ s.rubrik_storlek_mobil }}px;
@@ -50,11 +50,13 @@
                   {%- liquid
                     if section.index <= 3
                       assign laddning = 'eager'
+                      assign prio = 'high'
                     else
                       assign laddning = 'lazy'
+                      assign prio = 'auto'
                     endif
                   -%}
-                  {%- capture luft -%}style="{% if laddning == 'lazy' %}background-image: url({{ block.settings.bild | image_url: width: 40 }});{% endif %}{% if block.settings.luft_over > 0 %}--mc-luft: {{ block.settings.luft_over }}px;{% endif %}{% if block.settings.bredd > 0 and block.settings.bredd < 100 %} --mc-bild-bredd: {{ block.settings.bredd }}%;{% endif %}{% if block.settings.proportion > 0 %} --mc-bild-prop: 100 / {{ block.settings.proportion }};{% endif %}{% if block.settings.proportion_mobil > 0 %} --mc-bild-prop-mobil: 100 / {{ block.settings.proportion_mobil }};{% endif %}"{%- endcapture -%}
+                  {%- capture luft -%}style="{% if laddning == 'lazy' %}background-image: url({{ block.settings.bild | image_url: width: 40 }});{% endif %}{% if block.settings.luft_over > 0 %}--mc-luft: {{ block.settings.luft_over }}px;{% endif %}{% if block.settings.bredd > 0 and block.settings.bredd < 100 %} --mc-bild-bredd: {{ block.settings.bredd }}%;{% endif %}{% if block.settings.proportion > 0 %} --mc-bild-prop: 100 / {{ block.settings.proportion }};{% endif %}{% if block.settings.proportion_mobil > 0 %} --mc-bild-prop-mobil: 100 / {{ block.settings.proportion_mobil }};{% endif %}{% if block.settings.proportion_stor > 0 %} --mc-bild-prop-stor: 100 / {{ block.settings.proportion_stor }};{% endif %}"{%- endcapture -%}
                   {%- if block.settings.lank != blank -%}<a class="mug-collage__bild{% if block.settings.proportion > 0 %} mug-collage__bild--prop{% endif %}{% if laddning == 'lazy' %} mug-prog{% endif %}{% if block.settings.sist_mobil %} mug-collage--sist-mobil{% endif %}" href="{{ block.settings.lank }}" {{ luft }} {{ block.shopify_attributes }}>{%- else -%}<div class="mug-collage__bild{% if block.settings.proportion > 0 %} mug-collage__bild--prop{% endif %}{% if laddning == 'lazy' %} mug-prog{% endif %}{% if block.settings.sist_mobil %} mug-collage--sist-mobil{% endif %}" {{ luft }} {{ block.shopify_attributes }}>{%- endif -%}
                     {%- liquid
                       if kolumn == 'vanster'
@@ -63,16 +65,20 @@
                         assign andel = s.hoger_bredd | divided_by: 100.0
                       endif
                       assign marg = s.marginal | times: 2
+                      assign bas_vw = '100vw'
+                      if s.maxbredd > 0
+                        assign bas_vw = 'min(100vw, ' | append: s.maxbredd | append: 'px + ' | append: marg | append: 'px)'
+                      endif
                       assign marg_mobil = s.marginal_mobil | times: 2
                       capture storlekar
                         if s.spalter_mobil
-                          echo '(min-width: 768px) calc((100vw - ' | append: marg | append: 'px) * ' | append: andel | append: '), calc((100vw - ' | append: marg_mobil | append: 'px) / 2)'
+                          echo '(min-width: 768px) calc((' | append: bas_vw | append: ' - ' | append: marg | append: 'px) * ' | append: andel | append: '), calc((100vw - ' | append: marg_mobil | append: 'px) / 2)'
                         else
-                          echo '(min-width: 768px) calc((100vw - ' | append: marg | append: 'px) * ' | append: andel | append: '), calc(100vw - ' | append: marg_mobil | append: 'px)'
+                          echo '(min-width: 768px) calc((' | append: bas_vw | append: ' - ' | append: marg | append: 'px) * ' | append: andel | append: '), calc(100vw - ' | append: marg_mobil | append: 'px)'
                         endif
                       endcapture
                     -%}
-                    {{- block.settings.bild | image_url: width: 1800 | image_tag: widths: '360, 480, 640, 800, 960, 1100, 1300, 1500, 1800', sizes: storlekar, loading: laddning, alt: alt -}}
+                    {{- block.settings.bild | image_url: width: 1800 | image_tag: widths: '360, 480, 640, 800, 960, 1100, 1300, 1500, 1800', sizes: storlekar, loading: laddning, fetchpriority: prio, alt: alt -}}
                   {%- if block.settings.lank != blank -%}</a>{%- else -%}</div>{%- endif -%}
                 {%- endif -%}
               {%- when 'text' -%}
@@ -142,6 +148,8 @@
     flex-direction: column;
     align-items: center;
     padding: var(--mc-over) var(--mc-marg) var(--mc-under);
+    /* valfri maxbredd: innehållet centreras och marginalen växer på stora skärmar */
+    padding-inline: max(var(--mc-marg), calc((100% - var(--mc-max, 100000px)) / 2));
     background: var(--mc-bg);
     color: var(--mc-farg);
   }
@@ -260,6 +268,12 @@
   .mug-collage__bild--prop img {
     aspect-ratio: var(--mc-bild-prop);
     object-fit: cover;
+  }
+
+  @media (min-width: 1600px) {
+    .mug-collage__bild--prop img {
+      aspect-ratio: var(--mc-bild-prop-stor, var(--mc-bild-prop));
+    }
   }
 
   .mug-collage__text--center {
@@ -467,6 +481,7 @@
     { "type": "number", "id": "luft_over", "label": "Över (px)", "default": 100 },
     { "type": "number", "id": "luft_under", "label": "Under (px)", "default": 100 },
     { "type": "number", "id": "marginal", "label": "Sidmarginal (px)", "default": 86 },
+    { "type": "number", "id": "maxbredd", "label": "Innehållets maxbredd (px, 0 = ingen)", "default": 0 },
     { "type": "number", "id": "luft_over_mobil", "label": "Över, mobil (px)", "default": 60 },
     { "type": "number", "id": "luft_under_mobil", "label": "Under, mobil (px)", "default": 60 },
     { "type": "number", "id": "marginal_mobil", "label": "Sidmarginal, mobil (px)", "default": 20 }
@@ -483,6 +498,7 @@
         { "type": "number", "id": "bredd", "label": "Bredd (% av spalten, centrerad)", "default": 100 },
         { "type": "number", "id": "proportion", "label": "Höjd i % av bredden (0 = bildens egen, annars beskärs den)", "default": 0 },
         { "type": "number", "id": "proportion_mobil", "label": "Höjd i % av bredden, mobil (0 = som ovan)", "default": 0 },
+        { "type": "number", "id": "proportion_stor", "label": "Höjd i % av bredden, skärmar ≥1600 px (0 = som ovan)", "default": 0 },
         { "type": "checkbox", "id": "sist_mobil", "label": "Sist i mobil (efter båda spalterna)", "default": false },
         {
           "type": "select",
