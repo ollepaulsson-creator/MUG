@@ -12,7 +12,7 @@
 -%}
 <div class="mug-media mug-media--{{ s.lage }}" style="--mm-bg: {{ s.bakgrund }}; --mm-farg: {{ s.textfarg }}; --mm-h: {{ s.hojd }}px; --mm-h-surf: {{ s.hojd_surfplatta }}px; --mm-h-mobil: {{ s.hojd_mobil }}px;">
   {%- if s.lage == 'yta' -%}
-    <div class="mug-media__yta">
+    <div class="mug-media__yta{% if s.video == blank and s.bild != blank %} mug-prog{% endif %}"{% if s.video == blank and s.bild != blank %} style="background-image: url({{ s.bild | image_url: width: 40 }});"{% endif %}>
       {%- if s.video != blank -%}
         {{- s.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'mug-media__bild', image_size: '1600x' -}}
       {%- elsif s.bild != blank -%}
@@ -25,15 +25,53 @@
     </div>
   {%- else -%}
     {%- if s.bild != blank -%}
-      <div class="mug-media__ram">
+      <div class="mug-media__ram"><div class="mug-prog" style="background-image: url({{ s.bild | image_url: width: 40 }});">
         {{- s.bild | image_url: width: 2400 | image_tag: widths: '800, 1200, 1600, 2000, 2400', sizes: '100vw', loading: 'lazy', alt: alt, class: 'mug-media__bild' -}}
-      </div>
+      </div></div>
     {%- endif -%}
     {% render 'mug-videorad', text: s.bildtext, youtube: s.youtube, lank: s.lank %}
   {%- endif -%}
 </div>
 
+<script>
+  (function () {
+    if (window.mugProgressiv) return;
+    window.mugProgressiv = true;
+    function klar(img) { img.classList.add('mug-prog--klar'); }
+    document.addEventListener('load', function (e) {
+      if (e.target.tagName === 'IMG' && e.target.closest('.mug-prog')) klar(e.target);
+    }, true);
+    function kolla() {
+      document.querySelectorAll('.mug-prog img').forEach(function (img) { if (img.complete && img.naturalWidth) klar(img); });
+    }
+    kolla();
+    document.addEventListener('DOMContentLoaded', kolla);
+    document.addEventListener('shopify:section:load', kolla);
+  })();
+</script>
+<noscript><style>.mug-prog img { opacity: 1 !important; }</style></noscript>
+
 {% stylesheet %}
+  /* progressiv laddning: suddig miniatyr som bakgrund, skarp bild tonar in när den laddats */
+  .mug-prog {
+    background-color: rgb(127 127 127 / 0.15);
+    background-position: center;
+    background-size: cover;
+  }
+
+  .mug-prog img {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .mug-prog img.mug-prog--klar {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mug-prog img { transition: none; }
+  }
+
   .mug-media {
     width: 100%;
     background: var(--mm-bg);

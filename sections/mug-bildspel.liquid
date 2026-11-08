@@ -1,0 +1,252 @@
+{%- doc -%}
+  MUG 2026-11-08 (etapp 4, ersätter bildspelet på Om oss i Instant).
+  En bild i taget med bildtext under, pilar i runda knappar över bildens kanter. Bläddras med pilar,
+  svep eller rullning (scroll-snap); fungerar utan skript, pilarna kräver det lilla skriptet nedan.
+{%- enddoc -%}
+{%- liquid
+  assign s = section.settings
+  assign marg = s.marginal | times: 2
+  assign marg_mobil = s.marginal_mobil | times: 2
+  capture storlekar
+    echo '(min-width: 768px) calc(100vw - ' | append: marg | append: 'px), calc(100vw - ' | append: marg_mobil | append: 'px)'
+  endcapture
+-%}
+<div
+  class="mug-bildspel"
+  style="--mb-over: {{ s.luft_over }}px; --mb-over-mobil: {{ s.luft_over_mobil | default: 50 }}px; --mb-under: {{ s.luft_under }}px; --mb-marg: {{ s.marginal }}px; --mb-marg-mobil: {{ s.marginal_mobil }}px; --mb-bg: {{ s.bakgrund }}; --mb-farg: {{ s.textfarg }};{% if s.proportion > 0 %} --mb-prop: 100 / {{ s.proportion }};{% endif %}{% if s.proportion_mobil > 0 %} --mb-prop-mobil: 100 / {{ s.proportion_mobil }};{% endif %}"
+>
+  <div class="mug-bildspel__ram">
+    <ul class="mug-bildspel__lista" role="list" aria-label="{{ s.etikett | escape }}">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.bild == blank -%}{%- continue -%}{%- endif -%}
+        <li class="mug-bildspel__bild" {{ block.shopify_attributes }}>
+          <figure>
+            {%- assign alt = block.settings.alt | default: block.settings.bild.alt | escape -%}
+            <div class="mug-bildspel__media mug-prog" style="background-image: url({{ block.settings.bild | image_url: width: 40 }});">
+              {{- block.settings.bild | image_url: width: 2400 | image_tag: widths: '400, 600, 800, 1000, 1300, 1600, 2000, 2400', sizes: storlekar, loading: 'lazy', alt: alt -}}
+            </div>
+            {%- if block.settings.bildtext != blank -%}
+              <figcaption class="mug-bildspel__text">{{ block.settings.bildtext }}</figcaption>
+            {%- endif -%}
+          </figure>
+        </li>
+      {%- endfor -%}
+    </ul>
+    {%- if section.blocks.size > 1 -%}
+      <button type="button" class="mug-bildspel__pil mug-bildspel__pil--forra" aria-label="Föregående bild" data-riktning="-1">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      </button>
+      <button type="button" class="mug-bildspel__pil mug-bildspel__pil--nasta" aria-label="Nästa bild" data-riktning="1">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      </button>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  (function () {
+    var rot = document.currentScript.previousElementSibling;
+    var lista = rot.querySelector('.mug-bildspel__lista');
+    var forra = rot.querySelector('.mug-bildspel__pil--forra');
+    var nasta = rot.querySelector('.mug-bildspel__pil--nasta');
+    if (!lista || !forra) return;
+    function uppdatera() {
+      var max = lista.scrollWidth - lista.clientWidth - 2;
+      forra.disabled = lista.scrollLeft <= 2;
+      nasta.disabled = lista.scrollLeft >= max;
+    }
+    rot.addEventListener('click', function (e) {
+      var knapp = e.target.closest('.mug-bildspel__pil');
+      if (!knapp) return;
+      lista.scrollBy({ left: Number(knapp.dataset.riktning) * lista.clientWidth, behavior: 'smooth' });
+    });
+    lista.addEventListener('scroll', function () { window.requestAnimationFrame(uppdatera); }, { passive: true });
+    uppdatera();
+  })();
+</script>
+
+<script>
+  (function () {
+    if (window.mugProgressiv) return;
+    window.mugProgressiv = true;
+    function klar(img) { img.classList.add('mug-prog--klar'); }
+    document.addEventListener('load', function (e) {
+      if (e.target.tagName === 'IMG' && e.target.closest('.mug-prog')) klar(e.target);
+    }, true);
+    function kolla() {
+      document.querySelectorAll('.mug-prog img').forEach(function (img) { if (img.complete && img.naturalWidth) klar(img); });
+    }
+    kolla();
+    document.addEventListener('DOMContentLoaded', kolla);
+    document.addEventListener('shopify:section:load', kolla);
+  })();
+</script>
+<noscript><style>.mug-prog img { opacity: 1 !important; }</style></noscript>
+
+{% stylesheet %}
+  /* progressiv laddning: suddig miniatyr som bakgrund, skarp bild tonar in när den laddats */
+  .mug-prog {
+    background-color: rgb(127 127 127 / 0.15);
+    background-position: center;
+    background-size: cover;
+  }
+
+  .mug-prog img {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .mug-prog img.mug-prog--klar {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mug-prog img { transition: none; }
+  }
+
+  .mug-bildspel {
+    padding: var(--mb-over) var(--mb-marg) var(--mb-under);
+    background: var(--mb-bg);
+    color: var(--mb-farg);
+  }
+
+  .mug-bildspel__ram {
+    position: relative;
+  }
+
+  .mug-bildspel__lista {
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    list-style: none;
+  }
+
+  .mug-bildspel__lista::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mug-bildspel__bild {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+  }
+
+  .mug-bildspel__bild figure {
+    margin: 0;
+  }
+
+  .mug-bildspel__bild img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: var(--mb-prop, auto);
+    object-fit: cover;
+  }
+
+  .mug-bildspel__text {
+    max-width: 65%;
+    margin: 20px auto 0;
+    font-size: 15px;
+    line-height: 1.6;
+    text-align: center;
+    text-wrap-style: pretty;
+  }
+
+  .mug-bildspel__text p {
+    margin: 0;
+    color: inherit;
+  }
+
+  .mug-bildspel__pil {
+    position: absolute;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-top: min(20vw, 280px);
+    border: 0;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.9);
+    color: #000;
+    cursor: pointer;
+  }
+
+  .mug-bildspel__pil--forra {
+    left: 16px;
+  }
+
+  .mug-bildspel__pil--nasta {
+    right: 16px;
+  }
+
+  .mug-bildspel__pil:disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  @media (max-width: 767px) {
+    .mug-bildspel {
+      padding: var(--mb-over-mobil) var(--mb-marg-mobil) var(--mb-under);
+    }
+
+    .mug-bildspel__bild img {
+      aspect-ratio: var(--mb-prop-mobil, auto);
+    }
+
+    .mug-bildspel__text {
+      max-width: 100%;
+      padding-inline: 10px;
+    }
+
+    .mug-bildspel__pil {
+      width: 36px;
+      height: 36px;
+      margin-top: 30vw;
+    }
+
+    .mug-bildspel__pil--forra {
+      left: 8px;
+    }
+
+    .mug-bildspel__pil--nasta {
+      right: 8px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MUG bildspel",
+  "tag": "section",
+  "class": "mug-bildspel-sektion",
+  "settings": [
+    { "type": "text", "id": "etikett", "label": "Namn för skärmläsare", "default": "Bilder" },
+    { "type": "color", "id": "bakgrund", "label": "Bakgrund", "default": "#ffffff" },
+    { "type": "color", "id": "textfarg", "label": "Textfärg", "default": "#000000" },
+    { "type": "number", "id": "proportion", "label": "Bildernas höjd i % av bredden (0 = egen, annars beskärs de)", "default": 52 },
+    { "type": "number", "id": "proportion_mobil", "label": "Bildernas höjd i % av bredden, mobil", "default": 67 },
+    { "type": "number", "id": "luft_over", "label": "Luft över (px)", "default": 100 },
+    { "type": "number", "id": "luft_under", "label": "Luft under (px)", "default": 0 },
+    { "type": "number", "id": "luft_over_mobil", "label": "Luft över, mobil (px)", "default": 50 },
+    { "type": "number", "id": "marginal", "label": "Sidmarginal (px)", "default": 108 },
+    { "type": "number", "id": "marginal_mobil", "label": "Sidmarginal, mobil (px)", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "bild",
+      "name": "Bild",
+      "settings": [
+        { "type": "image_picker", "id": "bild", "label": "Bild" },
+        { "type": "text", "id": "alt", "label": "Alt-text (annars bildens egen)" },
+        { "type": "richtext", "id": "bildtext", "label": "Bildtext" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "MUG bildspel" }]
+}
+{% endschema %}

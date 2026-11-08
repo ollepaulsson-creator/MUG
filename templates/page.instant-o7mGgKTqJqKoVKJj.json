@@ -793,7 +793,7 @@
         "horizontal_alignment": "flex-start",
         "gap": 18,
         "color_scheme": "scheme-1",
-        "padding-block-start": 30,
+        "padding-block-start": 10,
         "padding-block-end": 0
       }
     },
@@ -844,11 +844,11 @@
         "knapp_lank": "",
         "knapp_bakgrund": "#ffffff",
         "knapp_textfarg": "#2f1b1b",
-        "luft_over": 0,
-        "luft_under": 0,
+        "luft_over": 60,
+        "luft_under": 60,
         "marginal": 144,
-        "luft_over_mobil": 0,
-        "luft_under_mobil": 0,
+        "luft_over_mobil": 40,
+        "luft_under_mobil": 40,
         "marginal_mobil": 0
       }
     },
@@ -1067,7 +1067,7 @@
         "horizontal_alignment": "flex-start",
         "gap": 18,
         "color_scheme": "scheme-1",
-        "padding-block-start": 30,
+        "padding-block-start": 10,
         "padding-block-end": 0
       }
     },
@@ -1351,7 +1351,7 @@
         "horizontal_alignment": "flex-start",
         "gap": 18,
         "color_scheme": "scheme-1",
-        "padding-block-start": 30,
+        "padding-block-start": 10,
         "padding-block-end": 0
       }
     },
@@ -1700,7 +1700,7 @@
         "horizontal_alignment": "flex-start",
         "gap": 18,
         "color_scheme": "scheme-1",
-        "padding-block-start": 30,
+        "padding-block-start": 10,
         "padding-block-end": 0
       }
     },
@@ -1751,11 +1751,11 @@
         "knapp_lank": "",
         "knapp_bakgrund": "#ffffff",
         "knapp_textfarg": "#2f1b1b",
-        "luft_over": 0,
-        "luft_under": 0,
+        "luft_over": 60,
+        "luft_under": 60,
         "marginal": 144,
-        "luft_over_mobil": 0,
-        "luft_under_mobil": 0,
+        "luft_over_mobil": 40,
+        "luft_under_mobil": 40,
         "marginal_mobil": 0
       }
     },
@@ -1974,7 +1974,7 @@
         "horizontal_alignment": "flex-start",
         "gap": 18,
         "color_scheme": "scheme-1",
-        "padding-block-start": 30,
+        "padding-block-start": 10,
         "padding-block-end": 0
       }
     },
