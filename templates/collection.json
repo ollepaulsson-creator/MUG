@@ -769,75 +769,199 @@
       }
     },
     "featured_elgitarr_1": {
-      "type": "instant-pAIjqVrDW5Me8tFH",
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-qjwehp-prs.jpg",
+            "logga": "shopify://shop_images/banner-yyjsz1-prs.png",
+            "lank": "/pages/prs-hantverk-signerat-paul-reed-smith",
+            "textstil": "kort",
+            "rubrik": "Hantverk signerat Paul Reed Smith",
+            "brodtext": "Amerikanska PRS Guitars har sedan mitten av 1980-talet byggt upp ett rykte som en av världens mest respekterade gitarrtillverkare. Paul Reed Smith var inte nöjd med att bara spela – han ville förstå, förfina och konstant förbättra. Med balans mellan hantverk, innovation och estetik jagar PRS perfektion.",
+            "logga_bredd": 110,
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1"
+      ],
       "settings": {
-        "url_thI0BYbqKEg66mth": "",
-        "text_3QbMJ33hhdr14Ogv": "<p>Hantverk signerat Paul Reed Smith</p>",
-        "text_qcZr0E089eFO8TKm": "<p>Amerikanska PRS Guitars har sedan mitten av 1980-talet byggt upp ett rykte som en av världens mest respekterade gitarrtillverkare. Paul Reed Smith var inte nöjd med att bara spela – han ville förstå, förfina och konstant förbättra. Med balans mellan hantverk, innovation och estetik jagar PRS perfektion.</p>",
-        "padding_top": 0,
-        "padding_bottom": 0
+        "hojd_lage": "fyll",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
       }
     },
     "featured_bas_1": {
-      "type": "instant-3Gzh5NpGBNGISxW3",
-      "disabled": true,
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-i3r3sc-arturia.gif",
+            "lank": "/pages/arturia-digital-precision-moter-analog-sjal",
+            "textstil": "rad",
+            "rubrik": "Bas 1",
+            "uppmaning": "UPPTÄCK",
+            "dolj_uppmaning_mobil": true,
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1"
+      ],
       "settings": {
-        "url_B4ksPNblpibexG1C": "",
-        "text_itdiCQPsjniWQ2wF": "<p>Bas 1</p>",
-        "text_adwF0U6lVU7zpGHW": "<p></p><p></p><p>UPPTÄCK</p>",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
+        "hojd_lage": "fyll",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      },
+      "disabled": true
     },
     "featured_slagverk_1": {
-      "type": "instant-m2nFbDXTeAwVGGCk",
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-mcdj4q-section-arturia.jpg",
+            "logga": "shopify://shop_images/banner-vckrah-arturia.png",
+            "lank": "/pages/arturia-digital-precision-analog-sjal",
+            "textstil": "kort",
+            "rubrik": "Digital precision möter analog själ",
+            "brodtext": "Franska Arturia har blivit en nyckelspelare inom modern musikproduktion genom att kombinera analog värme med digital precision. Med sina prisbelönta synthar, mjukvaruinstrument och controllers erbjuder företaget verktyg som förenar klassiska ljud med framtidens teknik.",
+            "logga_bredd": 110,
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1"
+      ],
       "settings": {
-        "url_mpMq1u5nlfsAgWVZ": "",
-        "text_HcFuMvkyGzFi7SDv": "<p>Digital precision möter analog själ</p>",
-        "text_44Qot4YHhzfR8J1o": "<p>Franska Arturia har blivit en nyckelspelare inom modern musikproduktion genom att kombinera analog värme med digital precision. Med sina prisbelönta synthar, mjukvaruinstrument och controllers erbjuder företaget verktyg som förenar klassiska ljud med framtidens teknik. </p>",
-        "padding_top": 0,
-        "padding_bottom": 0
+        "hojd_lage": "fyll",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
       }
     },
     "featured_klaviatur_1": {
-      "type": "instant-GTIaL5v5E6BXEu1d",
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-1xxf1d-te.jpg",
+            "logga": "shopify://shop_images/banner-ikap2w-te.png",
+            "lank": "/pages/skapa-med-teenage-engineering",
+            "textstil": "kort",
+            "rubrik": "Skapa med Teenage Enginering",
+            "brodtext": "Här hittar du en samling av innovativa produkter skapade av svenska Teenage Engineering. Från smarta synthar, sequencers och samplers till portabla mixers och mikrofoner – allt designat för att ge dig maximal bärbar frihet.",
+            "logga_bredd": 110,
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1"
+      ],
       "settings": {
-        "url_9dOjiyJ2y1ACDnr7": "",
-        "text_JDAaKZPOnnfxJK4S": "<p>Skapa med Teenage Enginering</p>",
-        "text_pv4Vkfnk6fnlmMEX": "<p>Här hittar du en samling av innovativa produkter skapade av svenska Teenage Engineering. Från smarta synthar, sequencers och samplers till portabla mixers och mikrofoner – allt designat för att ge dig maximal bärbar frihet.</p>",
-        "padding_top": 0,
-        "padding_bottom": 0
+        "hojd_lage": "fyll",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
       }
     },
     "featured_studio_1": {
-      "type": "instant-MavBILcAnwgDQP2p",
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-sp7zg9-adam.jpg",
+            "logga": "shopify://shop_images/banner-kn7j5t-adamlogo.png",
+            "lank": "/pages/adam-audio-tysk-ljudteknik",
+            "textstil": "kort",
+            "rubrik": "Adam Audio – Tysk ljudteknik",
+            "brodtext": "ADAM Audio är en av världens mest respekterade tillverkare av professionella studiomonitorer, hörlurar och ljudverktyg för musikproduktion, mixning och mastering. Sedan starten i Berlin år 1999 har företaget byggt ett rykte på banbrytande teknologi, exceptionell byggkvalitet och ett kompromisslöst fokus på ljudprecision.",
+            "logga_bredd": 110,
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1"
+      ],
       "settings": {
-        "url_UQW4YCe5V4t4LmHx": "",
-        "text_Kk6UoaJfJHmXDb4p": "<p>Adam Audio – Tysk ljudteknik</p>",
-        "text_6mNReUJ8Q2IzgfwB": "<p>ADAM Audio är en av världens mest respekterade tillverkare av professionella studiomonitorer, hörlurar och ljudverktyg för musikproduktion, mixning och mastering. Sedan starten i Berlin år 1999 har företaget byggt ett rykte på banbrytande teknologi, exceptionell byggkvalitet och ett kompromisslöst fokus på ljudprecision.</p>",
-        "padding_top": 0,
-        "padding_bottom": 0
+        "hojd_lage": "fyll",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
       }
     },
     "featured_pa_1": {
-      "type": "instant-NLnMgVf80h8UST5v",
-      "disabled": true,
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-i3r3sc-arturia.gif",
+            "lank": "/pages/arturia-digital-precision-moter-analog-sjal",
+            "textstil": "rad",
+            "rubrik": "PA 1",
+            "uppmaning": "UPPTÄCK",
+            "dolj_uppmaning_mobil": true,
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1"
+      ],
       "settings": {
-        "url_IcaK0JrjJBF4W0ST": "",
-        "text_YFq23zLRaT0NPvqh": "<p>PA 1</p>",
-        "text_96X9SnQp1gsY5IvO": "<p></p><p></p><p>UPPTÄCK</p>",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
+        "hojd_lage": "fyll",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      },
+      "disabled": true
     },
     "featured_klaviatur_2": {
-      "type": "instant-m2nFbDXTeAwVGGCk",
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-mcdj4q-section-arturia.jpg",
+            "logga": "shopify://shop_images/banner-vckrah-arturia.png",
+            "lank": "/pages/arturia-digital-precision-analog-sjal",
+            "textstil": "kort",
+            "rubrik": "Digital precision möter analog själ",
+            "brodtext": "Franska Arturia har blivit en nyckelspelare inom modern musikproduktion genom att kombinera analog värme med digital precision. Med sina prisbelönta synthar, mjukvaruinstrument och controllers erbjuder företaget verktyg som förenar klassiska ljud med framtidens teknik.",
+            "logga_bredd": 110,
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1"
+      ],
       "settings": {
-        "url_mpMq1u5nlfsAgWVZ": "",
-        "text_HcFuMvkyGzFi7SDv": "<p>Digital precision möter analog själ</p>",
-        "text_44Qot4YHhzfR8J1o": "<p>Franska Arturia har blivit en nyckelspelare inom modern musikproduktion genom att kombinera analog värme med digital precision. Med sina prisbelönta synthar, mjukvaruinstrument och controllers erbjuder företaget verktyg som förenar klassiska ljud med framtidens teknik. </p>",
-        "padding_top": 0,
-        "padding_bottom": 0
+        "hojd_lage": "fyll",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
       }
     },
     "mug_seo_text": {

@@ -1,0 +1,326 @@
+{%- doc -%}
+  MUG 2026-11-08 (etapp 4, ersätter Instants bildbanners): en till fyra bildrutor
+  sida vid sida, var och en en länk med bild (egen mobilbild) eller video och text.
+
+  Textstilar per ruta:
+  - rad: rubrik till vänster och uppmaning till höger längst ned (15 px versaler) – startsidan
+  - kort: logga, rubrik 26 px och brödtext längst ned – kategorisidornas 2×2-kort
+  Stor text (valfri) ligger centrerad över bilden, t.ex. SOMMAR / PRISER.
+
+  Mått som Instant-sektionerna: rutor 4 px isär, höjd 880 / 800 (≤1024) / 561 (≤768),
+  under 576 px staplas rutorna (sista rutan först, som i Instant). "Fyll"-läget används
+  i kategorisidornas kortplats, där höjden kommer från rutnätet.
+{%- enddoc -%}
+{%- liquid
+  assign rutor = section.blocks.size
+-%}
+<div
+  class="mug-banner mug-banner--{{ section.settings.hojd_lage }}{% if section.settings.mobil_omvand %} mug-banner--omvand{% endif %}"
+  style="--mb-h: {{ section.settings.hojd_desktop }}px; --mb-h-laptop: {{ section.settings.hojd_laptop }}px; --mb-h-mobil: {{ section.settings.hojd_mobil }}px;"
+>
+  {%- for block in section.blocks -%}
+    {%- liquid
+      assign b = block.settings
+      assign tagg = 'div'
+      if b.lank != blank
+        assign tagg = 'a'
+      endif
+      assign alt = b.rubrik | default: b.stortext | default: b.bild.alt | escape
+      assign mediaklass = 'mug-banner__media mug-banner__media--' | append: b.bildlage
+      assign mediaklass_mobil = mediaklass | append: ' mug-banner__media--mobil'
+      assign mediaklass_desktop = mediaklass | append: ' mug-banner__media--desktop'
+      if forloop.first
+        assign laddning = 'eager'
+      else
+        assign laddning = 'lazy'
+      endif
+    -%}
+    <{{ tagg }}
+      class="mug-banner__ruta mug-banner__ruta--{{ b.textstil }}"
+      {% if b.lank != blank %}href="{{ b.lank }}"{% endif %}
+      style="--mb-text: {{ b.textfarg }}; --mb-bg: {{ b.bakgrundsfarg }}; --mb-stor: {{ b.stortext_storlek }}px; --mb-stor-laptop: {{ b.stortext_laptop }}px; --mb-stor-surf: {{ b.stortext_surfplatta }}px; --mb-stor-mobil: {{ b.stortext_mobil }}px;"
+      {{ block.shopify_attributes }}
+    >
+      {%- if b.video != blank -%}
+        {{- b.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'mug-banner__media', image_size: '1600x' -}}
+      {%- elsif b.bild != blank -%}
+        {%- if b.mobilbild != blank -%}
+          {{- b.mobilbild | image_url: width: 1200 | image_tag: widths: '600, 900, 1200', sizes: '100vw', loading: laddning, alt: alt, class: mediaklass_mobil -}}
+          {{- b.bild | image_url: width: 2400 | image_tag: widths: '800, 1200, 1600, 2000, 2400', sizes: '(min-width: 576px) 50vw, 100vw', loading: laddning, alt: alt, class: mediaklass_desktop -}}
+        {%- else -%}
+          {%- liquid
+            if rutor > 1
+              assign storlek = '(min-width: 576px) 50vw, 100vw'
+            else
+              assign storlek = '(min-width: 1024px) 50vw, 100vw'
+            endif
+          -%}
+          {{- b.bild | image_url: width: 2400 | image_tag: widths: '600, 900, 1200, 1600, 2000, 2400', sizes: storlek, loading: laddning, alt: alt, class: mediaklass -}}
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if b.stortext != blank -%}
+        <span class="mug-banner__stortext">{{ b.stortext | escape | newline_to_br }}</span>
+      {%- endif -%}
+
+      {%- if b.textstil == 'kort' -%}
+        <span class="mug-banner__kort">
+          {%- if b.logga != blank -%}
+            {%- assign loggastil = 'width: ' | append: b.logga_bredd | append: 'px' -%}
+            {{- b.logga | image_url: width: 600 | image_tag: loading: 'lazy', alt: '', class: 'mug-banner__logga', style: loggastil -}}
+          {%- endif -%}
+          {%- if b.rubrik != blank -%}<span class="mug-banner__kortrubrik">{{ b.rubrik | escape }}</span>{%- endif -%}
+          {%- if b.brodtext != blank -%}<span class="mug-banner__brodtext">{{ b.brodtext | escape }}</span>{%- endif -%}
+        </span>
+      {%- elsif b.rubrik != blank or b.uppmaning != blank -%}
+        <span class="mug-banner__rad">
+          <span class="mug-banner__rubrik">{{ b.rubrik | escape }}</span>
+          {%- if b.uppmaning != blank -%}
+            <span class="mug-banner__uppmaning{% if b.dolj_uppmaning_mobil %} mug-banner__uppmaning--dolj-mobil{% endif %}">{{ b.uppmaning | escape }}</span>
+          {%- endif -%}
+        </span>
+      {%- endif -%}
+    </{{ tagg }}>
+  {%- endfor -%}
+</div>
+
+{% stylesheet %}
+  .mug-banner {
+    display: flex;
+    gap: 4px;
+    width: 100%;
+    height: var(--mb-h);
+  }
+
+  .mug-banner--fyll {
+    height: 100%;
+    min-height: 100%;
+  }
+
+  /* Kategorisidans 2×2-plats (main-collection.liquid flyttar in sektionen i platsen) */
+  .product-grid__item--featured > .mug-banner-sektion {
+    height: 100%;
+  }
+
+  .mug-banner__ruta {
+    position: relative;
+    display: block;
+    flex: 1 1 0;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--mb-text);
+    text-decoration: none;
+    background: var(--mb-bg, #f2f2f2);
+  }
+
+  .mug-banner__media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .mug-banner__media--hela {
+    inset: 10%;
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+  }
+
+  .mug-banner__media--mobil {
+    display: none;
+  }
+
+  .mug-banner__stortext {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    text-align: center;
+    font-size: var(--mb-stor);
+    line-height: 1.15;
+    font-weight: 400;
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+
+  .mug-banner__rad {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 0 16px;
+    padding: 0 25px 25px;
+    font-size: 15px;
+    line-height: 1.15;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .mug-banner__kort {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    max-width: 642px;
+    padding: 25px;
+  }
+
+  .mug-banner__logga {
+    display: block;
+    height: auto;
+  }
+
+  .mug-banner__kortrubrik {
+    font-size: 26px;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+
+  .mug-banner__brodtext {
+    font-size: 14px;
+    line-height: 1.52;
+    font-weight: 400;
+  }
+
+  @media (max-width: 1024px) {
+    .mug-banner:not(.mug-banner--fyll) {
+      height: var(--mb-h-laptop);
+    }
+
+    .mug-banner__stortext {
+      font-size: var(--mb-stor-laptop);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .mug-banner:not(.mug-banner--fyll) {
+      height: var(--mb-h-mobil);
+    }
+
+    .mug-banner__uppmaning--dolj-mobil {
+      display: none;
+    }
+
+    .mug-banner__stortext {
+      font-size: var(--mb-stor-surf);
+    }
+
+  }
+
+  @media (max-width: 575px) {
+    .mug-banner:not(.mug-banner--fyll) {
+      flex-direction: column;
+      height: auto;
+    }
+
+    .mug-banner--omvand:not(.mug-banner--fyll) {
+      flex-direction: column-reverse;
+    }
+
+    .mug-banner:not(.mug-banner--fyll) .mug-banner__ruta {
+      flex: none;
+      height: var(--mb-h-mobil);
+    }
+
+    .mug-banner__stortext {
+      font-size: var(--mb-stor-mobil);
+    }
+
+    .mug-banner__media--mobil {
+      display: block;
+    }
+
+    .mug-banner__media--desktop {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MUG bildbanner",
+  "tag": "section",
+  "class": "mug-banner-sektion",
+  "settings": [
+    {
+      "type": "select",
+      "id": "hojd_lage",
+      "label": "Höjd",
+      "options": [
+        { "value": "fast", "label": "Fast höjd (startsidan)" },
+        { "value": "fyll", "label": "Fyll platsen (kategorisidans kort)" }
+      ],
+      "default": "fast"
+    },
+    { "type": "number", "id": "hojd_desktop", "label": "Höjd desktop (px)", "default": 880 },
+    { "type": "number", "id": "hojd_laptop", "label": "Höjd laptop, ≤1024 px (px)", "default": 800 },
+    { "type": "number", "id": "hojd_mobil", "label": "Höjd per ruta, surfplatta och mobil, ≤768 px (px)", "default": 561 },
+    { "type": "checkbox", "id": "mobil_omvand", "label": "Mobil: visa sista rutan först", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "ruta",
+      "name": "Ruta",
+      "settings": [
+        { "type": "image_picker", "id": "bild", "label": "Bild" },
+        { "type": "image_picker", "id": "mobilbild", "label": "Mobilbild (valfri)" },
+        { "type": "video", "id": "video", "label": "Video (ersätter bilden)" },
+        { "type": "url", "id": "lank", "label": "Länk" },
+        {
+          "type": "select",
+          "id": "textstil",
+          "label": "Textstil",
+          "options": [
+            { "value": "rad", "label": "Textrad längst ned" },
+            { "value": "kort", "label": "Kort: logga, rubrik, brödtext" }
+          ],
+          "default": "rad"
+        },
+        { "type": "text", "id": "rubrik", "label": "Rubrik" },
+        { "type": "text", "id": "uppmaning", "label": "Uppmaning (till höger, t.ex. Upptäck)" },
+        { "type": "checkbox", "id": "dolj_uppmaning_mobil", "label": "Dölj uppmaningen i mobil", "default": true },
+        { "type": "textarea", "id": "brodtext", "label": "Brödtext (kortstil)" },
+        { "type": "image_picker", "id": "logga", "label": "Logga (kortstil)" },
+        { "type": "range", "id": "logga_bredd", "label": "Loggans bredd", "min": 40, "max": 300, "step": 5, "unit": "px", "default": 110 },
+        { "type": "textarea", "id": "stortext", "label": "Stor text över bilden (valfri)" },
+        { "type": "range", "id": "stortext_storlek", "label": "Stora textens storlek, desktop", "min": 30, "max": 200, "step": 2, "unit": "px", "default": 110 },
+        { "type": "range", "id": "stortext_laptop", "label": "… laptop (≤1024 px)", "min": 30, "max": 200, "step": 2, "unit": "px", "default": 90 },
+        { "type": "range", "id": "stortext_surfplatta", "label": "… surfplatta (≤768 px)", "min": 30, "max": 200, "step": 2, "unit": "px", "default": 68 },
+        { "type": "range", "id": "stortext_mobil", "label": "… mobil (≤575 px)", "min": 30, "max": 200, "step": 2, "unit": "px", "default": 68 },
+        { "type": "color", "id": "textfarg", "label": "Textfärg", "default": "#ffffff" },
+        { "type": "color", "id": "bakgrundsfarg", "label": "Bakgrundsfärg (syns runt bilden i läget Hela bilden)", "default": "#f2f2f2" },
+        {
+          "type": "select",
+          "id": "bildlage",
+          "label": "Bildläge",
+          "options": [
+            { "value": "fyll", "label": "Fyll rutan" },
+            { "value": "hela", "label": "Hela bilden, centrerad" }
+          ],
+          "default": "fyll"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "MUG bildbanner",
+      "blocks": [{ "type": "ruta" }, { "type": "ruta" }]
+    }
+  ]
+}
+{% endschema %}

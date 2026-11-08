@@ -800,8 +800,32 @@
       }
     },
     "featured_klaviatur_1": {
-      "type": "instant-GTIaL5v5E6BXEu1d",
-      "settings": {}
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-1xxf1d-te.jpg",
+            "logga": "shopify://shop_images/banner-ikap2w-te.png",
+            "lank": "/pages/skapa-med-teenage-engineering",
+            "textstil": "kort",
+            "rubrik": "Skapa med Teenage Enginering",
+            "brodtext": "Här hittar du en samling av innovativa produkter skapade av svenska Teenage Engineering. Från smarta synthar, sequencers och samplers till portabla mixers och mikrofoner – allt designat för att ge dig maximal bärbar frihet.",
+            "logga_bredd": 110,
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1"
+      ],
+      "settings": {
+        "hojd_lage": "fyll",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      }
     }
   },
   "order": [

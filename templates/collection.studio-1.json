@@ -800,8 +800,32 @@
       }
     },
     "featured_studio_1": {
-      "type": "instant-MavBILcAnwgDQP2p",
-      "settings": {}
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-sp7zg9-adam.jpg",
+            "logga": "shopify://shop_images/banner-kn7j5t-adamlogo.png",
+            "lank": "/pages/adam-audio-tysk-ljudteknik",
+            "textstil": "kort",
+            "rubrik": "Adam Audio – Tysk ljudteknik",
+            "brodtext": "ADAM Audio är en av världens mest respekterade tillverkare av professionella studiomonitorer, hörlurar och ljudverktyg för musikproduktion, mixning och mastering. Sedan starten i Berlin år 1999 har företaget byggt ett rykte på banbrytande teknologi, exceptionell byggkvalitet och ett kompromisslöst fokus på ljudprecision.",
+            "logga_bredd": 110,
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1"
+      ],
+      "settings": {
+        "hojd_lage": "fyll",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      }
     }
   },
   "order": [

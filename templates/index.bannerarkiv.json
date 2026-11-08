@@ -1,0 +1,725 @@
+/* MUG 2026-11-08: arkiv för Instants opublicerade banners, omgjorda till MUG bildbanner. Visas bara via ?view=bannerarkiv. Flytta en sektion härifrån till index.json när den ska användas. */
+{
+  "sections": {
+    "sommarpriser_1": {
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-4xt9qn-akustisk.jpg",
+            "lank": "/collections/sommarpriser-pa-akustiska-gitarrer",
+            "stortext": "SOMMAR",
+            "stortext_storlek": 110,
+            "stortext_laptop": 90,
+            "stortext_surfplatta": 68,
+            "stortext_mobil": 68,
+            "textstil": "rad",
+            "rubrik": "Akustiska gitarter",
+            "uppmaning": "Upptäck!",
+            "dolj_uppmaning_mobil": true,
+            "textfarg": "#ffffff"
+          }
+        },
+        "ruta_2": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-3k8rg1-teenage.jpg",
+            "lank": "/collections/teenage-engineering",
+            "stortext": "PRISER",
+            "stortext_storlek": 110,
+            "stortext_laptop": 90,
+            "stortext_surfplatta": 68,
+            "stortext_mobil": 68,
+            "textstil": "rad",
+            "rubrik": "Teenage Engineering",
+            "uppmaning": "Upptäck!",
+            "dolj_uppmaning_mobil": true,
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1",
+        "ruta_2"
+      ],
+      "settings": {
+        "hojd_lage": "fast",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      }
+    },
+    "teenage_engineering": {
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-tprxwn-bg.png",
+            "logga": "shopify://shop_images/banner-rvu6zc-opxy.png",
+            "lank": "/pages/skapa-med-teenage-engineering",
+            "textstil": "kort",
+            "rubrik": "Teenage Engineering",
+            "brodtext": "UPPTÄCK",
+            "logga_bredd": 110,
+            "textfarg": "#ffffff"
+          }
+        },
+        "ruta_2": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-6wsh7f-te2.webp",
+            "lank": "/pages/skapa-med-teenage-engineering",
+            "textstil": "rad",
+            "rubrik": "Teenage Engineering",
+            "uppmaning": "UPPTÄCK",
+            "dolj_uppmaning_mobil": true,
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1",
+        "ruta_2"
+      ],
+      "settings": {
+        "hojd_lage": "fast",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      }
+    },
+    "hero_xmas_1": {
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-gs2bkn-xmas.jpg",
+            "textstil": "rad",
+            "textfarg": "#ffffff"
+          }
+        },
+        "ruta_2": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-o3hhod-gif2.gif",
+            "lank": "/collections/julens-storsaljare",
+            "textstil": "rad",
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1",
+        "ruta_2"
+      ],
+      "settings": {
+        "hojd_lage": "fast",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      }
+    },
+    "hero_xmas_2": {
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-saoaeb-elgitarr.jpg",
+            "mobilbild": "shopify://shop_images/banner-fj0avn-gitarrmobil.jpg",
+            "textstil": "rad",
+            "textfarg": "#ffffff"
+          }
+        },
+        "ruta_2": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-jusal1-tillbehor.jpg",
+            "mobilbild": "shopify://shop_images/banner-k3ghi9-effektermobil.jpg",
+            "textstil": "rad",
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1",
+        "ruta_2"
+      ],
+      "settings": {
+        "hojd_lage": "fast",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      }
+    },
+    "hero_xmas_3": {
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-vaswfi-loog.jpg",
+            "textstil": "rad",
+            "textfarg": "#ffffff"
+          }
+        },
+        "ruta_2": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-iayecc-piano.jpg",
+            "textstil": "rad",
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1",
+        "ruta_2"
+      ],
+      "settings": {
+        "hojd_lage": "fast",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      }
+    },
+    "hero_xmas_4": {
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-eoyeze-akustiskt.jpg",
+            "textstil": "rad",
+            "textfarg": "#ffffff"
+          }
+        },
+        "ruta_2": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-ttibug-data-duo2.gif",
+            "lank": "/products/dato-duo",
+            "textstil": "rad",
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1",
+        "ruta_2"
+      ],
+      "settings": {
+        "hojd_lage": "fast",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      }
+    },
+    "hero_xmas_5": {
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-lfcvan-inspelning.jpg",
+            "textstil": "rad",
+            "textfarg": "#ffffff"
+          }
+        },
+        "ruta_2": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-sgm3rq-trummor.jpg",
+            "textstil": "rad",
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1",
+        "ruta_2"
+      ],
+      "settings": {
+        "hojd_lage": "fast",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      }
+    },
+    "ibanez": {
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-icxira-ibanez3.jpg",
+            "lank": "/collections/ibanez-electric-guitars",
+            "textstil": "rad",
+            "rubrik": "Ibanez Electric Guitars",
+            "uppmaning": "Upptäck",
+            "dolj_uppmaning_mobil": true,
+            "textfarg": "#ffffff"
+          }
+        },
+        "ruta_2": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-gfgy6l-ibanez4.webp",
+            "lank": "/collections/ibanez-electric-guitars",
+            "textstil": "rad",
+            "rubrik": "Ibanez Electric Guitars",
+            "uppmaning": "Upptäck",
+            "dolj_uppmaning_mobil": true,
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1",
+        "ruta_2"
+      ],
+      "settings": {
+        "hojd_lage": "fast",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      }
+    },
+    "february_1": {
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-n9qzti-dusenberg.jpg",
+            "lank": "/collections/vendors?q=Duesenberg",
+            "textstil": "rad",
+            "rubrik": "DUSENBERG GUITARS",
+            "uppmaning": "UPPTÄCK",
+            "dolj_uppmaning_mobil": true,
+            "textfarg": "#ffffff"
+          }
+        },
+        "ruta_2": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-pffirv-pocket.jpg",
+            "lank": "/products/ptwo-akustisk-12w-practice-amp",
+            "textstil": "rad",
+            "rubrik": "ORTEGA PTWO AKUSTISK 12W",
+            "uppmaning": "UPPTÄCK",
+            "dolj_uppmaning_mobil": true,
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1",
+        "ruta_2"
+      ],
+      "settings": {
+        "hojd_lage": "fast",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      }
+    },
+    "au_kampanjer": {
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-qqcl3d-1.jpg",
+            "lank": "/collections/earthquaker-devices",
+            "textstil": "rad",
+            "rubrik": "NYTT: EARTHQUAKER DEVICES",
+            "uppmaning": "UPPTÄCK",
+            "dolj_uppmaning_mobil": true,
+            "textfarg": "#ffffff"
+          }
+        },
+        "ruta_2": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-qdx7ep-ua.gif",
+            "lank": "/collections/kampanjpriser-pa-uafx-effektpedaler",
+            "textstil": "rad",
+            "rubrik": "UAFX-PEDALER",
+            "uppmaning": "Upptäck",
+            "dolj_uppmaning_mobil": true,
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1",
+        "ruta_2"
+      ],
+      "settings": {
+        "hojd_lage": "fast",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      }
+    },
+    "arturia_hardware": {
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-zvs8b0-arturia.png",
+            "lank": "/pages/arturia-digital-precision-moter-analog-sjal",
+            "stortext": "ARTURIA\nHARDWARE",
+            "stortext_storlek": 78,
+            "stortext_laptop": 78,
+            "stortext_surfplatta": 54,
+            "stortext_mobil": 54,
+            "textstil": "rad",
+            "rubrik": "ARTURIA HARDWARE",
+            "uppmaning": "UPPTÄCK",
+            "dolj_uppmaning_mobil": true,
+            "textfarg": "#ffffff"
+          }
+        },
+        "ruta_2": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-r4zetr-arturia.webp",
+            "lank": "/pages/arturia-digital-precision-moter-analog-sjal",
+            "textstil": "rad",
+            "rubrik": "ARTURIA HARDWARE",
+            "uppmaning": "UPPTÄCK",
+            "dolj_uppmaning_mobil": true,
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1",
+        "ruta_2"
+      ],
+      "settings": {
+        "hojd_lage": "fast",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      }
+    },
+    "january_1": {
+      "type": "mug-bildbanner",
+      "settings": {
+        "hojd_lage": "fast",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      },
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "lank": "/collections/winter-sale",
+            "stortext": "SALE\nSALE\nSALE",
+            "stortext_storlek": 164,
+            "stortext_laptop": 140,
+            "stortext_surfplatta": 100,
+            "stortext_mobil": 124,
+            "textstil": "rad",
+            "rubrik": "WINTER SALE",
+            "uppmaning": "FYNDA",
+            "dolj_uppmaning_mobil": true,
+            "textfarg": "#ffffff",
+            "bakgrundsfarg": "#0c482c"
+          }
+        },
+        "ruta_2": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-bnogwj-gif1v2.gif",
+            "mobilbild": "shopify://shop_images/banner-fhsdq7-gif1.gif",
+            "bildlage": "hela",
+            "lank": "/collections/winter-sale",
+            "textstil": "rad",
+            "rubrik": "WINTER SALE",
+            "uppmaning": "FYNDA",
+            "dolj_uppmaning_mobil": true,
+            "textfarg": "#ffffff",
+            "bakgrundsfarg": "#0c482c"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1",
+        "ruta_2"
+      ]
+    },
+    "julens_storsaljare": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "center",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 8,
+            "padding-block-end": 2,
+            "padding-inline-start": 15,
+            "padding-inline-end": 15
+          },
+          "blocks": {
+            "product_list_text_kmdAw8": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h2>Julens storsäljare</h2>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "button_kyPFyt": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "SE ALLA",
+                "link": "{{ closest.collection.url }}",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 7,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 30
+              },
+              "blocks": {}
+            },
+            "swatches_8WFcrC": {
+              "type": "swatches",
+              "name": "t:names.swatches",
+              "settings": {
+                "product_swatches_alignment": "flex-start",
+                "product_swatches_alignment_mobile": "flex-start",
+                "hide_padding": false,
+                "product_swatches_padding_top": 4,
+                "product_swatches_padding_bottom": 0,
+                "product_swatches_padding_left": 0,
+                "product_swatches_padding_right": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_kmdAw8",
+            "button_kyPFyt",
+            "swatches_8WFcrC"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 2,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 15,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_tiBwKW": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_bWTfX3": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>{{ closest.product.vendor }}</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 15,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_RKXdGb": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 6,
+                "padding-block-end": 6,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_RB3K4t": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 15,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_tiBwKW",
+            "text_bWTfX3",
+            "product_title_RKXdGb",
+            "price_RB3K4t"
+          ]
+        }
+      },
+      "name": "t:names.products_carousel",
+      "settings": {
+        "collection": "julens-storsaljare",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "max_products": 8,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 0,
+        "rows_gap": 24,
+        "icons_style": "arrows_large",
+        "icons_shape": "circle",
+        "section_width": "full-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 18,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 10,
+        "padding-block-end": 0
+      }
+    }
+  },
+  "order": [
+    "sommarpriser_1",
+    "teenage_engineering",
+    "hero_xmas_1",
+    "hero_xmas_2",
+    "hero_xmas_3",
+    "hero_xmas_4",
+    "hero_xmas_5",
+    "january_1",
+    "ibanez",
+    "february_1",
+    "au_kampanjer",
+    "arturia_hardware",
+    "julens_storsaljare"
+  ]
+}
