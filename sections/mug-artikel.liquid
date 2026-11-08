@@ -1,0 +1,273 @@
+{%- doc -%}
+  MUG 2026-11-08 (etapp 4, ersätter Instant på Service & verkstad).
+  En smal textspalt för längre innehåll: rubriker, brödtext/ingress, prisrader (bildar en tabell när de
+  står i följd) och frågor med svar (dragspel med <details>, fungerar utan skript).
+{%- enddoc -%}
+{%- liquid
+  assign s = section.settings
+-%}
+<div
+  class="mug-artikel"
+  style="--ma-max: {{ s.maxbredd }}px; --ma-over: {{ s.luft_over }}px; --ma-under: {{ s.luft_under }}px; --ma-over-mobil: {{ s.luft_over_mobil }}px; --ma-under-mobil: {{ s.luft_under_mobil }}px; --ma-bg: {{ s.bakgrund }}; --ma-farg: {{ s.textfarg }}; --ma-linje: {{ s.linjefarg }};"
+>
+  <div class="mug-artikel__spalt">
+    {%- assign forra = '' -%}
+    {%- for block in section.blocks -%}
+      {%- assign b = block.settings -%}
+      {%- if block.type == 'prisrad' and forra != 'prisrad' -%}<div class="mug-artikel__prislista" role="table">{%- endif -%}
+      {%- if block.type != 'prisrad' and forra == 'prisrad' -%}</div>{%- endif -%}
+      {%- case block.type -%}
+        {%- when 'rubrik' -%}
+          {%- assign niva = b.niva | default: 'h2' -%}
+          <{{ niva }} class="mug-artikel__rubrik mug-artikel__rubrik--{{ niva }}" {{ block.shopify_attributes }}>{{ b.text | escape }}</{{ niva }}>
+        {%- when 'text' -%}
+          <div class="mug-artikel__text mug-artikel__text--{{ b.stil | default: 'brod' }}" {{ block.shopify_attributes }}>{{ b.text }}</div>
+        {%- when 'prisrad' -%}
+          <div class="mug-artikel__prisrad" role="row" {{ block.shopify_attributes }}>
+            <span role="cell">{{ b.namn | escape }}</span>
+            <span role="cell">{{ b.pris | escape }}</span>
+          </div>
+        {%- when 'fraga' -%}
+          <details class="mug-artikel__fraga" {{ block.shopify_attributes }}>
+            <summary>
+              <span>{{ b.fraga | escape }}</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 4v16M4 12h16" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+            </summary>
+            <div class="mug-artikel__svar">{{ b.svar }}</div>
+          </details>
+      {%- endcase -%}
+      {%- assign forra = block.type -%}
+    {%- endfor -%}
+    {%- if forra == 'prisrad' -%}</div>{%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .mug-artikel {
+    padding: var(--ma-over) 20px var(--ma-under);
+    background: var(--ma-bg);
+    color: var(--ma-farg);
+  }
+
+  .mug-artikel__spalt {
+    max-width: var(--ma-max, 900px);
+    margin-inline: auto;
+  }
+
+  .mug-artikel__rubrik {
+    color: inherit;
+    font-weight: 400;
+    letter-spacing: normal;
+    text-transform: none;
+    text-wrap-style: pretty;
+  }
+
+  .mug-artikel__rubrik--h2 {
+    margin: 64px 0 20px;
+    font-size: 26px;
+    line-height: 1.28;
+  }
+
+  .mug-artikel__rubrik--h3 {
+    margin: 40px 0 12px;
+    font-size: 22px;
+    line-height: 1.15;
+  }
+
+  .mug-artikel__spalt > :first-child {
+    margin-top: 0;
+  }
+
+  .mug-artikel__text {
+    margin: 0 0 16px;
+    font-size: 15px;
+    line-height: 1.7;
+    text-wrap-style: pretty;
+  }
+
+  .mug-artikel__text--ingress {
+    margin-bottom: 30px;
+    font-size: 20px;
+  }
+
+  .mug-artikel__text p,
+  .mug-artikel__text ul {
+    margin: 0;
+    color: inherit;
+  }
+
+  .mug-artikel__text p + p,
+  .mug-artikel__text p + ul,
+  .mug-artikel__text ul + p {
+    margin-top: 1em;
+  }
+
+  .mug-artikel__text ul {
+    padding-left: 1.3em;
+  }
+
+  .mug-artikel__text li + li {
+    margin-top: 0.25em;
+  }
+
+  .mug-artikel__text a,
+  .mug-artikel__svar a {
+    color: inherit;
+  }
+
+  .mug-artikel__prislista {
+    margin: 20px 0 8px;
+    border: 1px solid var(--ma-linje);
+    border-bottom: 0;
+  }
+
+  .mug-artikel__prisrad {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--ma-linje);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .mug-artikel__prisrad span {
+    padding: 10px;
+  }
+
+  .mug-artikel__prisrad span + span {
+    border-left: 1px solid var(--ma-linje);
+  }
+
+  .mug-artikel__fraga {
+    border-bottom: 1px solid var(--ma-linje);
+  }
+
+  .mug-artikel__fraga summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 0;
+    font-size: 16px;
+    line-height: 1.15;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .mug-artikel__fraga summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mug-artikel__fraga summary svg {
+    flex: none;
+    transition: transform 0.25s ease;
+  }
+
+  .mug-artikel__fraga[open] summary svg {
+    transform: rotate(45deg);
+  }
+
+  .mug-artikel__svar {
+    padding: 0 0 20px;
+    font-size: 15px;
+    line-height: 1.6;
+    text-wrap-style: pretty;
+  }
+
+  .mug-artikel__svar p {
+    margin: 0;
+    color: inherit;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mug-artikel__fraga summary svg { transition: none; }
+  }
+
+  @media (max-width: 767px) {
+    .mug-artikel {
+      padding: var(--ma-over-mobil) 20px var(--ma-under-mobil);
+    }
+
+    .mug-artikel__rubrik--h2 {
+      margin-top: 48px;
+    }
+
+    .mug-artikel__text--ingress {
+      font-size: 18px;
+    }
+
+    .mug-artikel__prisrad {
+      font-size: 14px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MUG artikel",
+  "tag": "section",
+  "class": "mug-artikel-sektion",
+  "settings": [
+    { "type": "number", "id": "maxbredd", "label": "Spaltens maxbredd (px)", "default": 900 },
+    { "type": "color", "id": "bakgrund", "label": "Bakgrund", "default": "#ffffff" },
+    { "type": "color", "id": "textfarg", "label": "Textfärg", "default": "#000000" },
+    { "type": "color", "id": "linjefarg", "label": "Linjer (prislista, frågor)", "default": "#e2e2e2" },
+    { "type": "number", "id": "luft_over", "label": "Luft över (px)", "default": 60 },
+    { "type": "number", "id": "luft_under", "label": "Luft under (px)", "default": 60 },
+    { "type": "number", "id": "luft_over_mobil", "label": "Luft över, mobil (px)", "default": 40 },
+    { "type": "number", "id": "luft_under_mobil", "label": "Luft under, mobil (px)", "default": 40 }
+  ],
+  "blocks": [
+    {
+      "type": "rubrik",
+      "name": "Rubrik",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Rubrik" },
+        {
+          "type": "select",
+          "id": "niva",
+          "label": "Nivå",
+          "options": [
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" }
+          ],
+          "default": "h2"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        { "type": "richtext", "id": "text", "label": "Text" },
+        {
+          "type": "select",
+          "id": "stil",
+          "label": "Stil",
+          "options": [
+            { "value": "brod", "label": "Brödtext" },
+            { "value": "ingress", "label": "Ingress (större)" }
+          ],
+          "default": "brod"
+        }
+      ]
+    },
+    {
+      "type": "prisrad",
+      "name": "Prisrad",
+      "settings": [
+        { "type": "text", "id": "namn", "label": "Tjänst" },
+        { "type": "text", "id": "pris", "label": "Pris" }
+      ]
+    },
+    {
+      "type": "fraga",
+      "name": "Fråga",
+      "settings": [
+        { "type": "text", "id": "fraga", "label": "Fråga" },
+        { "type": "richtext", "id": "svar", "label": "Svar" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "MUG artikel" }]
+}
+{% endschema %}
