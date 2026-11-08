@@ -1,4 +1,12 @@
-/* MUG 2026-11-08: arkiv för Instants opublicerade banners, omgjorda till MUG bildbanner. Visas bara via ?view=bannerarkiv. Flytta en sektion härifrån till index.json när den ska användas. */
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "sommarpriser_1": {
@@ -9,15 +17,15 @@
           "settings": {
             "bild": "shopify://shop_images/banner-4xt9qn-akustisk.jpg",
             "lank": "/collections/sommarpriser-pa-akustiska-gitarrer",
+            "textstil": "rad",
+            "rubrik": "Akustiska gitarter",
+            "uppmaning": "Upptäck!",
+            "dolj_uppmaning_mobil": true,
             "stortext": "SOMMAR",
             "stortext_storlek": 110,
             "stortext_laptop": 90,
             "stortext_surfplatta": 68,
             "stortext_mobil": 68,
-            "textstil": "rad",
-            "rubrik": "Akustiska gitarter",
-            "uppmaning": "Upptäck!",
-            "dolj_uppmaning_mobil": true,
             "textfarg": "#ffffff"
           }
         },
@@ -26,15 +34,15 @@
           "settings": {
             "bild": "shopify://shop_images/banner-3k8rg1-teenage.jpg",
             "lank": "/collections/teenage-engineering",
+            "textstil": "rad",
+            "rubrik": "Teenage Engineering",
+            "uppmaning": "Upptäck!",
+            "dolj_uppmaning_mobil": true,
             "stortext": "PRISER",
             "stortext_storlek": 110,
             "stortext_laptop": 90,
             "stortext_surfplatta": 68,
             "stortext_mobil": 68,
-            "textstil": "rad",
-            "rubrik": "Teenage Engineering",
-            "uppmaning": "Upptäck!",
-            "dolj_uppmaning_mobil": true,
             "textfarg": "#ffffff"
           }
         }
@@ -58,11 +66,11 @@
           "type": "ruta",
           "settings": {
             "bild": "shopify://shop_images/banner-tprxwn-bg.png",
-            "logga": "shopify://shop_images/banner-rvu6zc-opxy.png",
             "lank": "/pages/skapa-med-teenage-engineering",
             "textstil": "kort",
             "rubrik": "Teenage Engineering",
             "brodtext": "UPPTÄCK",
+            "logga": "shopify://shop_images/banner-rvu6zc-opxy.png",
             "logga_bredd": 110,
             "textfarg": "#ffffff"
           }
@@ -384,15 +392,15 @@
           "settings": {
             "bild": "shopify://shop_images/banner-zvs8b0-arturia.png",
             "lank": "/pages/arturia-digital-precision-moter-analog-sjal",
+            "textstil": "rad",
+            "rubrik": "ARTURIA HARDWARE",
+            "uppmaning": "UPPTÄCK",
+            "dolj_uppmaning_mobil": true,
             "stortext": "ARTURIA\nHARDWARE",
             "stortext_storlek": 78,
             "stortext_laptop": 78,
             "stortext_surfplatta": 54,
             "stortext_mobil": 54,
-            "textstil": "rad",
-            "rubrik": "ARTURIA HARDWARE",
-            "uppmaning": "UPPTÄCK",
-            "dolj_uppmaning_mobil": true,
             "textfarg": "#ffffff"
           }
         },
@@ -423,27 +431,20 @@
     },
     "january_1": {
       "type": "mug-bildbanner",
-      "settings": {
-        "hojd_lage": "fast",
-        "hojd_desktop": 880,
-        "hojd_laptop": 800,
-        "hojd_mobil": 561,
-        "mobil_omvand": true
-      },
       "blocks": {
         "ruta_1": {
           "type": "ruta",
           "settings": {
             "lank": "/collections/winter-sale",
+            "textstil": "rad",
+            "rubrik": "WINTER SALE",
+            "uppmaning": "FYNDA",
+            "dolj_uppmaning_mobil": true,
             "stortext": "SALE\nSALE\nSALE",
             "stortext_storlek": 164,
             "stortext_laptop": 140,
             "stortext_surfplatta": 100,
             "stortext_mobil": 124,
-            "textstil": "rad",
-            "rubrik": "WINTER SALE",
-            "uppmaning": "FYNDA",
-            "dolj_uppmaning_mobil": true,
             "textfarg": "#ffffff",
             "bakgrundsfarg": "#0c482c"
           }
@@ -453,21 +454,28 @@
           "settings": {
             "bild": "shopify://shop_images/banner-bnogwj-gif1v2.gif",
             "mobilbild": "shopify://shop_images/banner-fhsdq7-gif1.gif",
-            "bildlage": "hela",
             "lank": "/collections/winter-sale",
             "textstil": "rad",
             "rubrik": "WINTER SALE",
             "uppmaning": "FYNDA",
             "dolj_uppmaning_mobil": true,
             "textfarg": "#ffffff",
-            "bakgrundsfarg": "#0c482c"
+            "bakgrundsfarg": "#0c482c",
+            "bildlage": "hela"
           }
         }
       },
       "block_order": [
         "ruta_1",
         "ruta_2"
-      ]
+      ],
+      "settings": {
+        "hojd_lage": "fast",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      }
     },
     "julens_storsaljare": {
       "type": "product-list",
@@ -510,25 +518,7 @@
               "type": "_product-list-text",
               "name": "t:names.collection_title",
               "settings": {
-                "text": "<h2>Julens storsäljare</h2>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "text": "<h2>Julens storsäljare</h2>"
               },
               "blocks": {}
             },
