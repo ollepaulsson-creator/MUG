@@ -2492,6 +2492,11 @@ dialog.facets--drawer[open] {
   text-wrap-style: pretty;
 }
 
+/* Lagerstatusens text på produktsidan: kortare rader (85 % av bredden) */
+.product-inventory__text {
+  max-width: 85%;
+}
+
 /* Etapp 4: produktrullarna på landningssidorna (sektioner mug_*) är lika breda som startsidans
    (3rem glimt av nästa produkt) när det finns fler än fyra; med högst fyra produkter går de kant i kant. */
 [id*="__mug_"] .resource-list__carousel:not(:has(.resource-list__slide:nth-child(5))) {
