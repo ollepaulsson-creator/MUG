@@ -695,6 +695,229 @@
         "padding-block-start": 10,
         "padding-block-end": 0
       }
+    },
+    "sommarpriser_2": {
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-hznky1-elgitarr1.jpg",
+            "lank": "/collections/sommarpriser-pa-elgitarrer",
+            "stortext": "SOMMAR",
+            "stortext_storlek": 110,
+            "stortext_laptop": 90,
+            "stortext_surfplatta": 68,
+            "stortext_mobil": 68,
+            "textstil": "rad",
+            "rubrik": "Elgitarrer",
+            "uppmaning": "Upptäck!",
+            "dolj_uppmaning_mobil": true,
+            "textfarg": "#ffffff"
+          }
+        },
+        "ruta_2": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-xklecp-elgitarr2.jpg",
+            "lank": "/collections/sommarpriser-pa-elgitarrer",
+            "stortext": "PRISER",
+            "stortext_storlek": 110,
+            "stortext_laptop": 90,
+            "stortext_surfplatta": 68,
+            "stortext_mobil": 68,
+            "textstil": "rad",
+            "rubrik": "Elgitarrer",
+            "uppmaning": "Upptäck!",
+            "dolj_uppmaning_mobil": true,
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1",
+        "ruta_2"
+      ],
+      "settings": {
+        "hojd_lage": "fast",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      }
+    },
+    "spring_sale_1": {
+      "type": "mug-bildbanner",
+      "settings": {
+        "hojd_lage": "fast",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      },
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "lank": "/collections/spring-sale",
+            "bakgrundsfarg": "#ffea82",
+            "textfarg": "#000000",
+            "stortext": "SALE\nSALE\nSALE",
+            "stortext_storlek": 164,
+            "stortext_laptop": 140,
+            "stortext_surfplatta": 100,
+            "stortext_mobil": 124,
+            "rubrik": "SPRING SALE",
+            "uppmaning": "FYNDA",
+            "textstil": "rad",
+            "dolj_uppmaning_mobil": true
+          }
+        },
+        "ruta_2": {
+          "type": "ruta",
+          "settings": {
+            "lank": "/collections/spring-sale",
+            "bakgrundsfarg": "#ffea82",
+            "textfarg": "#000000",
+            "bild": "shopify://shop_images/banner-nnx57y-gif1.gif",
+            "bildlage": "hela",
+            "rubrik": "SPRING SALE",
+            "uppmaning": "FYNDA",
+            "textstil": "rad",
+            "dolj_uppmaning_mobil": true
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1",
+        "ruta_2"
+      ]
+    },
+    "spring_sale_2": {
+      "type": "mug-bildbanner",
+      "settings": {
+        "hojd_lage": "fast",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      },
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "lank": "/collections/spring-sale",
+            "bakgrundsfarg": "#ffea82",
+            "textfarg": "#000000",
+            "bild": "shopify://shop_images/banner-8tb32m-gif2.gif",
+            "bildlage": "hela",
+            "rubrik": "SPRING SALE",
+            "uppmaning": "FYNDA",
+            "textstil": "rad",
+            "dolj_uppmaning_mobil": true
+          }
+        },
+        "ruta_2": {
+          "type": "ruta",
+          "settings": {
+            "lank": "/collections/spring-sale",
+            "bakgrundsfarg": "#ffea82",
+            "textfarg": "#000000",
+            "bild": "shopify://shop_images/banner-egwhqo-gif3.gif",
+            "bildlage": "hela",
+            "rubrik": "SPRING SALE",
+            "uppmaning": "FYNDA",
+            "textstil": "rad",
+            "dolj_uppmaning_mobil": true
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1",
+        "ruta_2"
+      ]
+    },
+    "sandberg": {
+      "type": "mug-bildbanner",
+      "settings": {
+        "hojd_lage": "fast",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      },
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "lank": "/collections/kampanj-20-pa-utvalda-sandberg",
+            "textfarg": "#ffffff",
+            "bild": "shopify://shop_images/banner-ig34ku-sandberg1.gif",
+            "rubrik": "Upp till 20% på Sandberg",
+            "uppmaning": "FYNDA",
+            "textstil": "rad",
+            "dolj_uppmaning_mobil": true
+          }
+        },
+        "ruta_2": {
+          "type": "ruta",
+          "settings": {
+            "lank": "/collections/kampanj-20-pa-utvalda-sandberg",
+            "bakgrundsfarg": "#aee1f1",
+            "textfarg": "#000000",
+            "bild": "shopify://shop_images/banner-lbk9cu-sandberg2.gif",
+            "bildlage": "hela",
+            "rubrik": "Upp till 20% på Sandberg",
+            "uppmaning": "FYNDA",
+            "textstil": "rad",
+            "dolj_uppmaning_mobil": true
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1",
+        "ruta_2"
+      ]
+    },
+    "riddim_n_ting": {
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "lank": "/products/ep-40-riddim-ep-2350",
+            "textstil": "rad",
+            "rubrik": "EP-40 Riddim + EP-2350 Ting",
+            "uppmaning": "UPPTÄCK",
+            "dolj_uppmaning_mobil": true,
+            "textfarg": "#ffffff",
+            "video": "shopify://files/videos/banner-riddim.mov"
+          }
+        },
+        "ruta_2": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-ilwlpv-riddim.jpg",
+            "lank": "/products/ep-40-riddim-ep-2350",
+            "textstil": "rad",
+            "rubrik": "EP-40 Riddim + EP-2350 Ting",
+            "uppmaning": "UPPTÄCK",
+            "dolj_uppmaning_mobil": true,
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1",
+        "ruta_2"
+      ],
+      "settings": {
+        "hojd_lage": "fast",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      }
     }
   },
   "order": [
@@ -710,6 +933,11 @@
     "february_1",
     "au_kampanjer",
     "arturia_hardware",
+    "sommarpriser_2",
+    "spring_sale_1",
+    "spring_sale_2",
+    "sandberg",
+    "riddim_n_ting",
     "julens_storsaljare"
   ]
 }
