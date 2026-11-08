@@ -9,7 +9,7 @@
   assign niva = s.rubrikniva | default: 'h2'
 -%}
 <div
-  class="mug-collage{% if s.hoger_lage == 'nederst' %} mug-collage--hoger-nederst{% endif %}"
+  class="mug-collage{% if s.hoger_lage == 'nederst' %} mug-collage--hoger-nederst{% elsif s.hoger_lage == 'mitten' %} mug-collage--mitten{% endif %}"
   style="
     --mc-bg: {{ s.bakgrund }}; --mc-farg: {{ s.textfarg }};
     --mc-over: {{ s.luft_over }}px; --mc-under: {{ s.luft_under }}px;
@@ -55,7 +55,7 @@
                     endif
                   -%}
                   {%- capture luft -%}style="{% if laddning == 'lazy' %}background-image: url({{ block.settings.bild | image_url: width: 40 }});{% endif %}{% if block.settings.luft_over > 0 %}--mc-luft: {{ block.settings.luft_over }}px;{% endif %}{% if block.settings.bredd > 0 and block.settings.bredd < 100 %} --mc-bild-bredd: {{ block.settings.bredd }}%;{% endif %}{% if block.settings.proportion > 0 %} --mc-bild-prop: 100 / {{ block.settings.proportion }};{% endif %}"{%- endcapture -%}
-                  {%- if block.settings.lank != blank -%}<a class="mug-collage__bild{% if laddning == 'lazy' %} mug-prog{% endif %}{% if block.settings.sist_mobil %} mug-collage--sist-mobil{% endif %}" href="{{ block.settings.lank }}" {{ luft }} {{ block.shopify_attributes }}>{%- else -%}<div class="mug-collage__bild{% if laddning == 'lazy' %} mug-prog{% endif %}{% if block.settings.sist_mobil %} mug-collage--sist-mobil{% endif %}" {{ luft }} {{ block.shopify_attributes }}>{%- endif -%}
+                  {%- if block.settings.lank != blank -%}<a class="mug-collage__bild{% if block.settings.proportion > 0 %} mug-collage__bild--prop{% endif %}{% if laddning == 'lazy' %} mug-prog{% endif %}{% if block.settings.sist_mobil %} mug-collage--sist-mobil{% endif %}" href="{{ block.settings.lank }}" {{ luft }} {{ block.shopify_attributes }}>{%- else -%}<div class="mug-collage__bild{% if block.settings.proportion > 0 %} mug-collage__bild--prop{% endif %}{% if laddning == 'lazy' %} mug-prog{% endif %}{% if block.settings.sist_mobil %} mug-collage--sist-mobil{% endif %}" {{ luft }} {{ block.shopify_attributes }}>{%- endif -%}
                     {%- liquid
                       if kolumn == 'vanster'
                         assign andel = s.vanster_bredd | divided_by: 100.0
@@ -183,6 +183,35 @@
     width: 100%;
   }
 
+  /* mitten: spalterna blir ett rutnät så att en text centreras mot bilden bredvid (bildtexten under bilden räknas inte) */
+  .mug-collage--mitten .mug-collage__spalter {
+    display: grid;
+    grid-template-columns: var(--mc-v) var(--mc-h);
+    grid-auto-flow: dense;
+    align-items: center;
+    row-gap: 20px;
+  }
+
+  .mug-collage--mitten .mug-collage__spalt {
+    display: contents;
+  }
+
+  .mug-collage--mitten .mug-collage__spalt--vanster > * {
+    grid-column: 1;
+  }
+
+  .mug-collage--mitten .mug-collage__spalt--hoger > * {
+    grid-column: 2;
+  }
+
+  .mug-collage--mitten .mug-collage__bild {
+    justify-self: center;
+  }
+
+  .mug-collage--mitten .mug-collage__text--center {
+    align-self: start;
+  }
+
   .mug-collage--hoger-nederst .mug-collage__spalter {
     align-items: flex-end;
   }
@@ -222,7 +251,10 @@
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: var(--mc-bild-prop, auto);
+  }
+
+  .mug-collage__bild--prop img {
+    aspect-ratio: var(--mc-bild-prop);
     object-fit: cover;
   }
 
@@ -313,7 +345,9 @@
       font-size: var(--mc-rubrik-mobil);
     }
 
-    .mug-collage__spalter {
+    .mug-collage__spalter,
+    .mug-collage--mitten .mug-collage__spalter {
+      display: flex;
       flex-direction: column;
       gap: var(--mc-avstand-mobil) !important;
     }
@@ -394,7 +428,8 @@
       "label": "Spalternas lodräta läge",
       "options": [
         { "value": "overst", "label": "Överkant mot överkant" },
-        { "value": "nederst", "label": "Nederkant mot nederkant" }
+        { "value": "nederst", "label": "Nederkant mot nederkant" },
+        { "value": "mitten", "label": "Mitten mot mitten (text mot bild)" }
       ],
       "default": "overst"
     },

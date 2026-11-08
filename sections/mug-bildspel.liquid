@@ -12,7 +12,7 @@
   endcapture
 -%}
 <div
-  class="mug-bildspel"
+  class="mug-bildspel{% if s.proportion > 0 %} mug-bildspel--prop{% endif %}{% if s.proportion_mobil > 0 %} mug-bildspel--prop-mobil{% endif %}"
   style="--mb-over: {{ s.luft_over }}px; --mb-over-mobil: {{ s.luft_over_mobil | default: 50 }}px; --mb-under: {{ s.luft_under }}px; --mb-marg: {{ s.marginal }}px; --mb-marg-mobil: {{ s.marginal_mobil }}px; --mb-bg: {{ s.bakgrund }}; --mb-farg: {{ s.textfarg }};{% if s.proportion > 0 %} --mb-prop: 100 / {{ s.proportion }};{% endif %}{% if s.proportion_mobil > 0 %} --mb-prop-mobil: 100 / {{ s.proportion_mobil }};{% endif %}"
 >
   <div class="mug-bildspel__ram">
@@ -23,7 +23,7 @@
           <figure>
             {%- assign alt = block.settings.alt | default: block.settings.bild.alt | escape -%}
             <div class="mug-bildspel__media mug-prog" style="background-image: url({{ block.settings.bild | image_url: width: 40 }});">
-              {{- block.settings.bild | image_url: width: 2400 | image_tag: widths: '400, 600, 800, 1000, 1300, 1600, 2000, 2400', sizes: storlekar, loading: 'lazy', alt: alt -}}
+              {{- block.settings.bild | image_url: width: 2000 | image_tag: widths: '400, 600, 800, 1000, 1300, 1600, 2000', sizes: storlekar, loading: 'lazy', alt: alt -}}
             </div>
             {%- if block.settings.bildtext != blank -%}
               <figcaption class="mug-bildspel__text">{{ block.settings.bildtext }}</figcaption>
@@ -55,10 +55,30 @@
       forra.disabled = lista.scrollLeft <= 2;
       nasta.disabled = lista.scrollLeft >= max;
     }
+    // egen animering: 350 ms ease-in-out (webbläsarens smooth-rullning är långsam och går inte att styra)
+    var pagar = false;
+    function glid(riktning) {
+      if (pagar) return;
+      var fran = lista.scrollLeft;
+      var till = Math.max(0, Math.min(lista.scrollWidth - lista.clientWidth, Math.round(fran / lista.clientWidth + riktning) * lista.clientWidth));
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { lista.scrollLeft = till; return; }
+      var start = null, tid = 350;
+      pagar = true;
+      lista.style.scrollSnapType = 'none';
+      function steg(nu) {
+        if (start === null) start = nu;
+        var x = Math.min(1, (nu - start) / tid);
+        var e = x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+        lista.scrollLeft = fran + (till - fran) * e;
+        if (x < 1) { window.requestAnimationFrame(steg); }
+        else { lista.style.scrollSnapType = ''; pagar = false; uppdatera(); }
+      }
+      window.requestAnimationFrame(steg);
+    }
     rot.addEventListener('click', function (e) {
       var knapp = e.target.closest('.mug-bildspel__pil');
       if (!knapp) return;
-      lista.scrollBy({ left: Number(knapp.dataset.riktning) * lista.clientWidth, behavior: 'smooth' });
+      glid(Number(knapp.dataset.riktning));
     });
     lista.addEventListener('scroll', function () { window.requestAnimationFrame(uppdatera); }, { passive: true });
     uppdatera();
@@ -142,7 +162,10 @@
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: var(--mb-prop, auto);
+  }
+
+  .mug-bildspel--prop .mug-bildspel__bild img {
+    aspect-ratio: var(--mb-prop);
     object-fit: cover;
   }
 
@@ -194,8 +217,13 @@
       padding: var(--mb-over-mobil) var(--mb-marg-mobil) var(--mb-under);
     }
 
-    .mug-bildspel__bild img {
-      aspect-ratio: var(--mb-prop-mobil, auto);
+    .mug-bildspel--prop-mobil .mug-bildspel__bild img {
+      aspect-ratio: var(--mb-prop-mobil);
+      object-fit: cover;
+    }
+
+    .mug-bildspel--prop:not(.mug-bildspel--prop-mobil) .mug-bildspel__bild img {
+      aspect-ratio: auto;
     }
 
     .mug-bildspel__text {
