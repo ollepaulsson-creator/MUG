@@ -10,7 +10,6 @@
  {%- if content_for_header contains 'tapita-seo-script-tags' -%}{%- include 'tapita-seo-schema' -%}{%- endif -%}
 
     <link rel="preconnect" href="https://cdn.shopify.com">
-  <link rel="preconnect" href="https://cdn.instant.so" crossorigin>
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
   <link rel="preconnect" href="https://cdn.boostcommerce.io" crossorigin>
@@ -825,7 +824,5 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       })();
     </script>
-    {%- comment -%} MUG 2026-11-07: sidledes rullning i Instants produktrullare {%- endcomment -%}
-    <script src="{{ 'mug-instant-slider.js' | asset_url }}" defer></script>
   </body>
 </html>
