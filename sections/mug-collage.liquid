@@ -9,7 +9,7 @@
   assign niva = s.rubrikniva | default: 'h2'
 -%}
 <div
-  class="mug-collage{% if s.hoger_lage == 'nederst' %} mug-collage--hoger-nederst{% elsif s.hoger_lage == 'mitten' %} mug-collage--mitten{% endif %}"
+  class="mug-collage{% if s.spalter_mobil %} mug-collage--spalter-mobil{% endif %}{% if s.hoger_lage == 'nederst' %} mug-collage--hoger-nederst{% elsif s.hoger_lage == 'mitten' %} mug-collage--mitten{% endif %}"
   style="
     --mc-bg: {{ s.bakgrund }}; --mc-farg: {{ s.textfarg }};
     --mc-over: {{ s.luft_over }}px; --mc-under: {{ s.luft_under }}px;
@@ -37,7 +37,7 @@
   {%- endif -%}
 
   {%- if section.blocks.size > 0 -%}
-    <div class="mug-collage__spalter"{% if s.mellanrum > 0 %} style="justify-content: flex-start; gap: {{ s.mellanrum }}px;"{% endif %}>
+    <div class="mug-collage__spalter"{% if s.mellanrum > 0 %} style="justify-content: flex-start; column-gap: {{ s.mellanrum }}px;"{% endif %}>
       {%- assign kolumner = 'vanster,hoger' | split: ',' -%}
       {%- for kolumn in kolumner -%}
         <div class="mug-collage__spalt mug-collage__spalt--{{ kolumn }}">
@@ -54,7 +54,7 @@
                       assign laddning = 'lazy'
                     endif
                   -%}
-                  {%- capture luft -%}style="{% if laddning == 'lazy' %}background-image: url({{ block.settings.bild | image_url: width: 40 }});{% endif %}{% if block.settings.luft_over > 0 %}--mc-luft: {{ block.settings.luft_over }}px;{% endif %}{% if block.settings.bredd > 0 and block.settings.bredd < 100 %} --mc-bild-bredd: {{ block.settings.bredd }}%;{% endif %}{% if block.settings.proportion > 0 %} --mc-bild-prop: 100 / {{ block.settings.proportion }};{% endif %}"{%- endcapture -%}
+                  {%- capture luft -%}style="{% if laddning == 'lazy' %}background-image: url({{ block.settings.bild | image_url: width: 40 }});{% endif %}{% if block.settings.luft_over > 0 %}--mc-luft: {{ block.settings.luft_over }}px;{% endif %}{% if block.settings.bredd > 0 and block.settings.bredd < 100 %} --mc-bild-bredd: {{ block.settings.bredd }}%;{% endif %}{% if block.settings.proportion > 0 %} --mc-bild-prop: 100 / {{ block.settings.proportion }};{% endif %}{% if block.settings.proportion_mobil > 0 %} --mc-bild-prop-mobil: 100 / {{ block.settings.proportion_mobil }};{% endif %}"{%- endcapture -%}
                   {%- if block.settings.lank != blank -%}<a class="mug-collage__bild{% if block.settings.proportion > 0 %} mug-collage__bild--prop{% endif %}{% if laddning == 'lazy' %} mug-prog{% endif %}{% if block.settings.sist_mobil %} mug-collage--sist-mobil{% endif %}" href="{{ block.settings.lank }}" {{ luft }} {{ block.shopify_attributes }}>{%- else -%}<div class="mug-collage__bild{% if block.settings.proportion > 0 %} mug-collage__bild--prop{% endif %}{% if laddning == 'lazy' %} mug-prog{% endif %}{% if block.settings.sist_mobil %} mug-collage--sist-mobil{% endif %}" {{ luft }} {{ block.shopify_attributes }}>{%- endif -%}
                     {%- liquid
                       if kolumn == 'vanster'
@@ -65,14 +65,18 @@
                       assign marg = s.marginal | times: 2
                       assign marg_mobil = s.marginal_mobil | times: 2
                       capture storlekar
-                        echo '(min-width: 768px) calc((100vw - ' | append: marg | append: 'px) * ' | append: andel | append: '), calc(100vw - ' | append: marg_mobil | append: 'px)'
+                        if s.spalter_mobil
+                          echo '(min-width: 768px) calc((100vw - ' | append: marg | append: 'px) * ' | append: andel | append: '), calc((100vw - ' | append: marg_mobil | append: 'px) / 2)'
+                        else
+                          echo '(min-width: 768px) calc((100vw - ' | append: marg | append: 'px) * ' | append: andel | append: '), calc(100vw - ' | append: marg_mobil | append: 'px)'
+                        endif
                       endcapture
                     -%}
                     {{- block.settings.bild | image_url: width: 1800 | image_tag: widths: '360, 480, 640, 800, 960, 1100, 1300, 1500, 1800', sizes: storlekar, loading: laddning, alt: alt -}}
                   {%- if block.settings.lank != blank -%}</a>{%- else -%}</div>{%- endif -%}
                 {%- endif -%}
               {%- when 'text' -%}
-                <div class="mug-collage__text{% if block.settings.sist_mobil %} mug-collage--sist-mobil{% endif %}{% if block.settings.justering == 'center' %} mug-collage__text--center{% endif %}" style="--mc-text-bredd: {{ block.settings.bredd }}%;{% if block.settings.luft_over > 0 %} --mc-luft: {{ block.settings.luft_over }}px;{% endif %}" {{ block.shopify_attributes }}>
+                <div class="mug-collage__text{% if block.settings.sist_mobil %} mug-collage--sist-mobil{% endif %}{% if block.settings.justering == 'center' %} mug-collage__text--center{% endif %}" style="{% if block.settings.storlek > 0 %}font-size: {{ block.settings.storlek }}px; {% endif %}--mc-text-bredd: {{ block.settings.bredd }}%;{% if block.settings.luft_over > 0 %} --mc-luft: {{ block.settings.luft_over }}px;{% endif %}" {{ block.shopify_attributes }}>
                   {%- if block.settings.rubrik != blank -%}
                     <h2 class="mug-collage__textrubrik">{{ block.settings.rubrik | escape }}</h2>
                   {%- endif -%}
@@ -369,6 +373,22 @@
       order: 1;
     }
 
+    .mug-collage__bild--prop img {
+      aspect-ratio: var(--mc-bild-prop-mobil, var(--mc-bild-prop));
+    }
+
+    /* behåll spalterna sida vid sida i mobil */
+    .mug-collage--spalter-mobil .mug-collage__spalter {
+      flex-direction: row;
+    }
+
+    .mug-collage--spalter-mobil .mug-collage__spalt {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 0;
+      min-width: 0;
+    }
+
     /* centrerad bildtext direkt efter sin bild hålls nära bilden */
     .mug-collage__bild + .mug-collage__text--center {
       margin-top: calc(20px - var(--mc-avstand-mobil));
@@ -422,6 +442,7 @@
     { "type": "number", "id": "hoger_forskjutning", "label": "Höger spalt nedflyttad (px)", "default": 0 },
     { "type": "number", "id": "mellanrum", "label": "Fast avstånd mellan spalterna (px, 0 = spalterna mot var sin kant)", "default": 0 },
     { "type": "number", "id": "avstand_mobil", "label": "Avstånd mellan blocken, mobil (px)", "default": 20 },
+    { "type": "checkbox", "id": "spalter_mobil", "label": "Behåll spalterna sida vid sida i mobil", "default": false },
     {
       "type": "select",
       "id": "hoger_lage",
@@ -461,6 +482,7 @@
         { "type": "number", "id": "luft_over", "label": "Extra luft över (px)", "default": 0 },
         { "type": "number", "id": "bredd", "label": "Bredd (% av spalten, centrerad)", "default": 100 },
         { "type": "number", "id": "proportion", "label": "Höjd i % av bredden (0 = bildens egen, annars beskärs den)", "default": 0 },
+        { "type": "number", "id": "proportion_mobil", "label": "Höjd i % av bredden, mobil (0 = som ovan)", "default": 0 },
         { "type": "checkbox", "id": "sist_mobil", "label": "Sist i mobil (efter båda spalterna)", "default": false },
         {
           "type": "select",
@@ -481,6 +503,7 @@
         { "type": "text", "id": "rubrik", "label": "Rubrik (valfri)" },
         { "type": "richtext", "id": "text", "label": "Text" },
         { "type": "number", "id": "bredd", "label": "Bredd (% av spalten)", "default": 92 },
+        { "type": "number", "id": "storlek", "label": "Textstorlek (px, 0 = 15)", "default": 0 },
         {
           "type": "select",
           "id": "justering",

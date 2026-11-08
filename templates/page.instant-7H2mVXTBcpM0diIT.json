@@ -9,10 +9,6 @@
  */
 {
   "sections": {
-    "instant-7H2mVXTBcpM0diIT": {
-      "type": "instant-7H2mVXTBcpM0diIT",
-      "settings": {}
-    },
     "breadcrumbs": {
       "type": "breadcrumbs",
       "name": "Breadcrumbs",
@@ -520,18 +516,192 @@
     "seo_h1": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<h1 class=\"visually-hidden\">Besök butiken – Kaserntorget 9, Göteborg</h1><style>.__instant.i7H2mVXTBcpM0diIT .instant-rich-text, .__instant.i7H2mVXTBcpM0diIT .instant-rich-text p, .__instant.i7H2mVXTBcpM0diIT .instant-rich-text a, .__instant.i7H2mVXTBcpM0diIT .instant-rich-text span { font-size: 14px !important; }</style>",
+        "custom_liquid": "<h1 class=\"visually-hidden\">Besök butiken – Kaserntorget 9, Göteborg</h1>",
         "section_width": "page-width",
         "color_scheme": "scheme-1",
         "padding-block-start": 0,
         "padding-block-end": 0
+      }
+    },
+    "mug_01": {
+      "type": "mug-collage",
+      "blocks": {
+        "b1": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-besok-butiken-butiken.jpg",
+            "alt": "MUG:s butik på Kaserntorget 9 i Göteborg",
+            "lank": "",
+            "kolumn": "vanster",
+            "proportion": 59.26,
+            "proportion_mobil": 93
+          }
+        }
+      },
+      "block_order": [
+        "b1"
+      ],
+      "settings": {
+        "bakgrund": "#ffffff",
+        "textfarg": "#000000",
+        "rubrik": "",
+        "overrubrik": "",
+        "vanster_bredd": 100,
+        "hoger_bredd": 0,
+        "hoger_lage": "overst",
+        "mellanrum": 0,
+        "avstand_mobil": 8,
+        "spalter_mobil": false,
+        "luft_over": 40,
+        "luft_under": 0,
+        "marginal": 72,
+        "luft_over_mobil": 10,
+        "luft_under_mobil": 0,
+        "marginal_mobil": 20
+      }
+    },
+    "mug_02": {
+      "type": "mug-collage",
+      "blocks": {
+        "b1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Kom in och besök oss i butiken:</p><p>Kaserntorget 9<br>411 18 Göteborg<br>T: <a href=\"tel:0317110309\">031-711 03 09</a><br>E: <a href=\"mailto:order@mug.se\">order@mug.se</a></p><p>Mån–Fre: 11.00–18.00<br>Lördag: 11.00–16.00<br>Söndag: 12.00–16.00</p><p>Välkomna till MUG!</p>",
+            "bredd": 100,
+            "kolumn": "vanster",
+            "justering": "vanster",
+            "storlek": 14
+          }
+        }
+      },
+      "block_order": [
+        "b1"
+      ],
+      "settings": {
+        "bakgrund": "#ffffff",
+        "textfarg": "#000000",
+        "rubrik": "",
+        "overrubrik": "",
+        "vanster_bredd": 100,
+        "hoger_bredd": 0,
+        "hoger_lage": "overst",
+        "mellanrum": 0,
+        "avstand_mobil": 8,
+        "spalter_mobil": false,
+        "luft_over": 40,
+        "luft_under": 0,
+        "marginal": 72,
+        "luft_over_mobil": 10,
+        "luft_under_mobil": 0,
+        "marginal_mobil": 20
+      }
+    },
+    "mug_03": {
+      "type": "mug-collage",
+      "blocks": {
+        "b1": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-besok-butiken-strangar.jpg",
+            "alt": "Väggen med strängar i butiken",
+            "lank": "",
+            "kolumn": "vanster",
+            "proportion": 65.5,
+            "proportion_mobil": 146
+          }
+        },
+        "b2": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-besok-butiken-bas.jpg",
+            "alt": "Basgitarrer på väggen i butiken",
+            "lank": "",
+            "kolumn": "hoger",
+            "proportion": 65.5,
+            "proportion_mobil": 146
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2"
+      ],
+      "settings": {
+        "bakgrund": "#ffffff",
+        "textfarg": "#000000",
+        "rubrik": "",
+        "overrubrik": "",
+        "vanster_bredd": 49.46,
+        "hoger_bredd": 49.46,
+        "hoger_lage": "overst",
+        "mellanrum": 0,
+        "avstand_mobil": 8,
+        "spalter_mobil": true,
+        "luft_over": 40,
+        "luft_under": 0,
+        "marginal": 72,
+        "luft_over_mobil": 10,
+        "luft_under_mobil": 0,
+        "marginal_mobil": 20
+      }
+    },
+    "mug_04": {
+      "type": "mug-collage",
+      "blocks": {
+        "b1": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-besok-butiken-gitarrer.jpg",
+            "alt": "Elgitarrer i butiken på Kaserntorget",
+            "lank": "",
+            "kolumn": "vanster",
+            "proportion": 65.5,
+            "proportion_mobil": 146
+          }
+        },
+        "b2": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-besok-butiken-pedaler.jpg",
+            "alt": "Effektpedaler i butiken",
+            "lank": "",
+            "kolumn": "hoger",
+            "proportion": 65.5,
+            "proportion_mobil": 146
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2"
+      ],
+      "settings": {
+        "bakgrund": "#ffffff",
+        "textfarg": "#000000",
+        "rubrik": "",
+        "overrubrik": "",
+        "vanster_bredd": 49.46,
+        "hoger_bredd": 49.46,
+        "hoger_lage": "overst",
+        "mellanrum": 0,
+        "avstand_mobil": 8,
+        "spalter_mobil": true,
+        "luft_over": 15,
+        "luft_under": 60,
+        "marginal": 72,
+        "luft_over_mobil": 8,
+        "luft_under_mobil": 40,
+        "marginal_mobil": 20
       }
     }
   },
   "order": [
     "breadcrumbs",
     "seo_h1",
-    "instant-7H2mVXTBcpM0diIT",
+    "mug_01",
+    "mug_02",
+    "mug_03",
+    "mug_04",
     "section_8aKKyY",
     "section_t7Jwap"
   ]
