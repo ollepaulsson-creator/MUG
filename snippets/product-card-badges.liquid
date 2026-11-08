@@ -218,4 +218,16 @@
     font-size: 12px!important;
     letter-spacing: 1px;
   }
+
+  /* Mobil: etiketterna 2 px mindre */
+  @media screen and (max-width: 749px) {
+    .product-badges__badge,
+    .product-badges__badge.color-scheme-status,
+    .product-badges__badge.color-scheme-sale,
+    .product-badges__badge.color-scheme-nyhet,
+    .product-badges__badge.color-scheme-preorder,
+    .product-badges__badge.color-scheme-soldout {
+      font-size: 10px!important;
+    }
+  }
 {% endstylesheet %}
