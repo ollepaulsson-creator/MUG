@@ -8,11 +8,21 @@
   Parametrar: link = huvudmenyns toppnivålänk
 {%- endcomment -%}
 {%- assign mug_puff = linklists['mobilpuffar'].links | where: 'title', link.title | first -%}
+{%- comment -%} Puff som också finns i desktopmenyn (menyn megapuffar): samma bild som där (Files: megapuff-<kategori>) {%- endcomment -%}
+{%- assign mug_mega = linklists['megapuffar'].links | where: 'title', link.title | first -%}
+{%- assign mug_megapuff = mug_mega.links.first -%}
 {%- if mug_puff and mug_puff.links.size > 0 -%}
   <div class="mug-puffar" role="list">
     {%- for puff in mug_puff.links -%}
       {%- liquid
         assign bild = blank
+        if mug_megapuff and puff.url == mug_megapuff.url
+          assign megafil = 'megapuff-' | append: link.handle
+          assign megajpg = megafil | append: '.jpg'
+          assign megapng = megafil | append: '.png'
+          assign bild = images[megajpg] | default: images[megapng]
+        endif
+        if bild == blank
         case puff.type
           when 'collection_link'
             assign bild = puff.object.image | default: puff.object.products.first.featured_image
@@ -21,6 +31,7 @@
           when 'product_link'
             assign bild = puff.object.featured_image
         endcase
+        endif
       -%}
       {%- if bild != blank -%}
         <a class="mug-puff" href="{{ puff.url }}" role="listitem">
