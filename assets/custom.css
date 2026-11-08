@@ -2523,3 +2523,15 @@ dialog.facets--drawer[open] {
 .klarna-payment-box {
   text-wrap-style: pretty;
 }
+
+/* Etapp 4: produktrullarna på de omgjorda Instant-sidorna (sektioner mug_*) är lika breda som startsidans
+   (3rem glimt av nästa produkt) när det finns fler än fyra; med högst fyra produkter går de kant i kant. */
+[id*="__mug_"] .resource-list__carousel:not(:has(.resource-list__slide:nth-child(5))) {
+  --peek-next-slide-size: 0px;
+}
+
+/* …med linje över och under produkterna (samma grå som kortens mellanlinjer); linjen slutar vid sista kortet */
+[id*="__mug_"] .resource-list__carousel .resource-list__item {
+  box-sizing: border-box;
+  border-block: 1px solid rgb(229 229 229);
+}

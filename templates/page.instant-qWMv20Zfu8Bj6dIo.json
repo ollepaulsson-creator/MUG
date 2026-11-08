@@ -774,8 +774,8 @@
         "horizontal_alignment": "flex-start",
         "gap": 18,
         "color_scheme": "scheme-1",
-        "padding-block-start": 10,
-        "padding-block-end": 10
+        "padding-block-start": 30,
+        "padding-block-end": 0
       }
     },
     "mug_04": {
@@ -1009,8 +1009,8 @@
         "horizontal_alignment": "flex-start",
         "gap": 18,
         "color_scheme": "scheme-1",
-        "padding-block-start": 10,
-        "padding-block-end": 10
+        "padding-block-start": 30,
+        "padding-block-end": 0
       }
     },
     "mug_06": {
@@ -1259,8 +1259,8 @@
         "horizontal_alignment": "flex-start",
         "gap": 18,
         "color_scheme": "scheme-1",
-        "padding-block-start": 10,
-        "padding-block-end": 10
+        "padding-block-start": 30,
+        "padding-block-end": 0
       }
     },
     "mug_09": {
