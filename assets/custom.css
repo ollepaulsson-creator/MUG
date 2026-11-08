@@ -2574,3 +2574,8 @@ dialog.facets--drawer[open] {
 @media (max-width: 575px) {
   [id*="__jul_"] .section-resource-list__header p { max-width: 100%; }
 }
+
+/* MUG bildbanner: två bannersektioner direkt efter varandra får samma mellanrum som rutorna i en rad (4 px) */
+.mug-banner-sektion + .mug-banner-sektion {
+  margin-top: 4px;
+}

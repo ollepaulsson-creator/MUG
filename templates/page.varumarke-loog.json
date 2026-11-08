@@ -1271,7 +1271,8 @@
         "knapp_lank": "/collections/loog",
         "bakgrund": "#ffffff",
         "textfarg": "#000000",
-        "luft_under": 40
+        "luft_under": 60,
+        "luft_over": 20
       }
     }
   },

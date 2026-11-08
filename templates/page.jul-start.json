@@ -969,6 +969,7 @@
         "knapp_lank": "/collections/julens-storsaljare",
         "bakgrund": "#ffffff",
         "textfarg": "#000000",
+        "luft_over": 20,
         "luft_under": 60
       }
     }

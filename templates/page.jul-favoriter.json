@@ -522,7 +522,7 @@
             "bild": "shopify://shop_images/fav-0xbtnt-xmashero.jpg",
             "lank": "",
             "textstil": "rad",
-            "rubrik": "Våra bästa julklappstips!",
+            "rubrik": "",
             "uppmaning": "",
             "stortext": "JULKLAPPS–\nFAVORITER",
             "stortext_storlek": 130,
@@ -1164,7 +1164,8 @@
         "knapp_lank": "/collections/julens-storsaljare",
         "bakgrund": "#ffffff",
         "textfarg": "#000000",
-        "luft_under": 80
+        "luft_over": 20,
+        "luft_under": 60
       }
     }
   },

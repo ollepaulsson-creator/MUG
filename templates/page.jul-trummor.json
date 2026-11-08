@@ -2207,6 +2207,7 @@
         "knapp_lank": "/pages/jul-med-extra-stamning-och-spelgladje",
         "bakgrund": "#ffffff",
         "textfarg": "#000000",
+        "luft_over": 20,
         "luft_under": 60
       }
     }
