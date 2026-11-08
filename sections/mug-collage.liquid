@@ -1,0 +1,377 @@
+{%- doc -%}
+  MUG 2026-11-08 (etapp 4, ersätter Ljudhealing-sidans Instant-avsnitt).
+  Två spalter med bilder och texter på en färgad yta, plus valfri överrubrik/rubrik överst, ingress och knapp
+  underst. Bilderna står i sin egen proportion; spalternas bredd och förskjutning är inställningar.
+  Under 768 px staplas allt i en spalt (vänster spalt först).
+{%- enddoc -%}
+{%- liquid
+  assign s = section.settings
+  assign niva = s.rubrikniva | default: 'h2'
+-%}
+<div
+  class="mug-collage{% if s.hoger_lage == 'nederst' %} mug-collage--hoger-nederst{% endif %}"
+  style="
+    --mc-bg: {{ s.bakgrund }}; --mc-farg: {{ s.textfarg }};
+    --mc-over: {{ s.luft_over }}px; --mc-under: {{ s.luft_under }}px;
+    --mc-over-mobil: {{ s.luft_over_mobil }}px; --mc-under-mobil: {{ s.luft_under_mobil }}px;
+    --mc-marg: {{ s.marginal }}px; --mc-marg-mobil: {{ s.marginal_mobil }}px;
+    --mc-v: {{ s.vanster_bredd }}%; --mc-h: {{ s.hoger_bredd }}%;
+    --mc-v-ned: {{ s.vanster_forskjutning }}px; --mc-h-ned: {{ s.hoger_forskjutning }}px;
+    --mc-rubrik: {{ s.rubrik_storlek }}px; --mc-rubrik-mobil: {{ s.rubrik_storlek_mobil }}px;
+    --mc-rubrik-bredd: {{ s.rubrik_bredd }}%;
+    --mc-ingress: {{ s.ingress_storlek }}px; --mc-ingress-bredd: {{ s.ingress_bredd }}%;
+    --mc-knapp-bg: {{ s.knapp_bakgrund }}; --mc-knapp-farg: {{ s.knapp_textfarg }};
+  "
+>
+  {%- if s.overrubrik != blank or s.rubrik != blank -%}
+    <div class="mug-collage__huvud">
+      {%- if s.overrubrik != blank -%}
+        <p class="mug-collage__overrubrik">{{ s.overrubrik | escape }}</p>
+      {%- endif -%}
+      {%- if s.rubrik != blank -%}
+        <{{ niva }} class="mug-collage__rubrik">{{ s.rubrik | escape }}</{{ niva }}>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="mug-collage__spalter">
+      {%- assign kolumner = 'vanster,hoger' | split: ',' -%}
+      {%- for kolumn in kolumner -%}
+        <div class="mug-collage__spalt mug-collage__spalt--{{ kolumn }}">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.kolumn != kolumn -%}{%- continue -%}{%- endif -%}
+            {%- case block.type -%}
+              {%- when 'bild' -%}
+                {%- if block.settings.bild != blank -%}
+                  {%- assign alt = block.settings.alt | default: block.settings.bild.alt | escape -%}
+                  {%- capture luft -%}{% if block.settings.luft_over > 0 %}style="--mc-luft: {{ block.settings.luft_over }}px;"{% endif %}{%- endcapture -%}
+                  {%- if block.settings.lank != blank -%}<a class="mug-collage__bild{% if block.settings.sist_mobil %} mug-collage--sist-mobil{% endif %}" href="{{ block.settings.lank }}" {{ luft }} {{ block.shopify_attributes }}>{%- else -%}<div class="mug-collage__bild{% if block.settings.sist_mobil %} mug-collage--sist-mobil{% endif %}" {{ luft }} {{ block.shopify_attributes }}>{%- endif -%}
+                    {{- block.settings.bild | image_url: width: 1600 | image_tag: widths: '400, 600, 800, 1000, 1200, 1600', sizes: '(min-width: 768px) 50vw, 100vw', loading: 'lazy', alt: alt -}}
+                  {%- if block.settings.lank != blank -%}</a>{%- else -%}</div>{%- endif -%}
+                {%- endif -%}
+              {%- when 'text' -%}
+                <div class="mug-collage__text{% if block.settings.sist_mobil %} mug-collage--sist-mobil{% endif %}" style="--mc-text-bredd: {{ block.settings.bredd }}%;{% if block.settings.luft_over > 0 %} --mc-luft: {{ block.settings.luft_over }}px;{% endif %}" {{ block.shopify_attributes }}>
+                  {%- if block.settings.rubrik != blank -%}
+                    <h2 class="mug-collage__textrubrik">{{ block.settings.rubrik | escape }}</h2>
+                  {%- endif -%}
+                  {{ block.settings.text }}
+                </div>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  {%- if s.ingress != blank -%}
+    <div class="mug-collage__ingress">{{ s.ingress }}</div>
+  {%- endif -%}
+
+  {%- if s.knapp_text != blank and s.knapp_lank != blank -%}
+    <a class="mug-collage__knapp" href="{{ s.knapp_lank }}">{{ s.knapp_text | escape }}</a>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .mug-collage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--mc-over) var(--mc-marg) var(--mc-under);
+    background: var(--mc-bg);
+    color: var(--mc-farg);
+  }
+
+  .mug-collage__huvud {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 82px;
+    text-align: center;
+  }
+
+  .mug-collage__huvud:last-child {
+    margin-bottom: 0;
+  }
+
+  .mug-collage__overrubrik {
+    margin: 0 0 32px;
+    color: inherit;
+    font-size: 15px;
+    line-height: 1.15;
+    letter-spacing: normal;
+    text-transform: uppercase;
+  }
+
+  .mug-collage__rubrik {
+    max-width: var(--mc-rubrik-bredd);
+    margin: 0;
+    color: inherit;
+    font-size: var(--mc-rubrik);
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: normal;
+    text-transform: none;
+    text-wrap-style: pretty;
+  }
+
+  .mug-collage__spalter {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .mug-collage--hoger-nederst .mug-collage__spalter {
+    align-items: flex-end;
+  }
+
+  .mug-collage__spalt {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .mug-collage__spalt:empty {
+    display: none;
+  }
+
+  .mug-collage__spalt--vanster {
+    width: var(--mc-v);
+    margin-top: var(--mc-v-ned);
+  }
+
+  .mug-collage__spalt--hoger {
+    width: var(--mc-h);
+    margin-top: var(--mc-h-ned);
+  }
+
+  .mug-collage__bild,
+  .mug-collage__text {
+    margin-top: var(--mc-luft, 0px);
+  }
+
+  .mug-collage__bild,
+  .mug-collage__bild img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .mug-collage__text {
+    max-width: var(--mc-text-bredd, 100%);
+    font-size: 15px;
+    line-height: 1.6;
+    text-wrap-style: pretty;
+  }
+
+  .mug-collage__textrubrik {
+    margin: 0 0 16px;
+    padding-top: 40px;
+    color: inherit;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+
+  .mug-collage__text p,
+  .mug-collage__ingress p {
+    margin: 0;
+    color: inherit;
+  }
+
+  .mug-collage__text p + p {
+    margin-top: 1.6em;
+  }
+
+  .mug-collage__text a,
+  .mug-collage__ingress a {
+    color: inherit;
+  }
+
+  .mug-collage__ingress {
+    max-width: var(--mc-ingress-bredd);
+    margin-top: 92px;
+    font-size: var(--mc-ingress);
+    line-height: 1.45;
+    text-align: center;
+    text-wrap-style: pretty;
+  }
+
+  .mug-collage__ingress:first-child {
+    margin-top: 0;
+  }
+
+  .mug-collage__knapp {
+    display: inline-flex;
+    padding: 20px 24px;
+    background: var(--mc-knapp-bg);
+    color: var(--mc-knapp-farg);
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .mug-collage__knapp:hover {
+    opacity: 0.85;
+  }
+
+  * + .mug-collage__knapp {
+    margin-top: 60px;
+  }
+
+  @media (max-width: 767px) {
+    .mug-collage {
+      padding: var(--mc-over-mobil) var(--mc-marg-mobil) var(--mc-under-mobil);
+    }
+
+    .mug-collage__huvud {
+      margin-bottom: 60px;
+      padding-inline: 8px;
+    }
+
+    .mug-collage__rubrik {
+      max-width: 100%;
+      font-size: var(--mc-rubrik-mobil);
+    }
+
+    .mug-collage__spalter {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* spalterna löses upp så att block kan flyttas sist (Instant-sidornas mobilordning) */
+    .mug-collage__spalt {
+      display: contents;
+    }
+
+    .mug-collage--sist-mobil {
+      order: 1;
+    }
+
+    .mug-collage__bild,
+    .mug-collage__text {
+      margin-top: calc(var(--mc-luft, 0px) / 2);
+    }
+
+    .mug-collage__text {
+      max-width: 100%;
+    }
+
+    .mug-collage__ingress {
+      max-width: 100%;
+      margin-top: 72px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MUG bildcollage",
+  "tag": "section",
+  "class": "mug-collage-sektion",
+  "settings": [
+    { "type": "color", "id": "bakgrund", "label": "Bakgrund", "default": "#301f05" },
+    { "type": "color", "id": "textfarg", "label": "Textfärg", "default": "#ffffff" },
+    { "type": "header", "content": "Rubrik (valfri)" },
+    { "type": "text", "id": "overrubrik", "label": "Överrubrik" },
+    { "type": "text", "id": "rubrik", "label": "Rubrik" },
+    {
+      "type": "select",
+      "id": "rubrikniva",
+      "label": "Rubriknivå",
+      "options": [
+        { "value": "h1", "label": "H1 (sidans huvudrubrik)" },
+        { "value": "h2", "label": "H2" }
+      ],
+      "default": "h2"
+    },
+    { "type": "number", "id": "rubrik_storlek", "label": "Rubrikens storlek (px)", "default": 60 },
+    { "type": "number", "id": "rubrik_storlek_mobil", "label": "Rubrikens storlek, mobil (px)", "default": 42 },
+    { "type": "number", "id": "rubrik_bredd", "label": "Rubrikens bredd (%)", "default": 60 },
+    { "type": "header", "content": "Spalter" },
+    { "type": "paragraph", "content": "Lägg till bilder och texter som block och välj spalt för varje block." },
+    { "type": "number", "id": "vanster_bredd", "label": "Vänster spalts bredd (%)", "default": 58 },
+    { "type": "number", "id": "hoger_bredd", "label": "Höger spalts bredd (%)", "default": 35 },
+    { "type": "number", "id": "vanster_forskjutning", "label": "Vänster spalt nedflyttad (px)", "default": 0 },
+    { "type": "number", "id": "hoger_forskjutning", "label": "Höger spalt nedflyttad (px)", "default": 0 },
+    {
+      "type": "select",
+      "id": "hoger_lage",
+      "label": "Spalternas lodräta läge",
+      "options": [
+        { "value": "overst", "label": "Överkant mot överkant" },
+        { "value": "nederst", "label": "Nederkant mot nederkant" }
+      ],
+      "default": "overst"
+    },
+    { "type": "header", "content": "Ingress och knapp (valfria, underst)" },
+    { "type": "richtext", "id": "ingress", "label": "Ingress" },
+    { "type": "number", "id": "ingress_storlek", "label": "Ingressens storlek (px)", "default": 20 },
+    { "type": "number", "id": "ingress_bredd", "label": "Ingressens bredd (%)", "default": 74 },
+    { "type": "text", "id": "knapp_text", "label": "Knapptext" },
+    { "type": "url", "id": "knapp_lank", "label": "Knapplänk" },
+    { "type": "color", "id": "knapp_bakgrund", "label": "Knappens bakgrund", "default": "#ffffff" },
+    { "type": "color", "id": "knapp_textfarg", "label": "Knappens textfärg", "default": "#2f1b1b" },
+    { "type": "header", "content": "Luft" },
+    { "type": "number", "id": "luft_over", "label": "Över (px)", "default": 100 },
+    { "type": "number", "id": "luft_under", "label": "Under (px)", "default": 100 },
+    { "type": "number", "id": "marginal", "label": "Sidmarginal (px)", "default": 86 },
+    { "type": "number", "id": "luft_over_mobil", "label": "Över, mobil (px)", "default": 60 },
+    { "type": "number", "id": "luft_under_mobil", "label": "Under, mobil (px)", "default": 60 },
+    { "type": "number", "id": "marginal_mobil", "label": "Sidmarginal, mobil (px)", "default": 20 }
+  ],
+  "blocks": [
+    {
+      "type": "bild",
+      "name": "Bild",
+      "settings": [
+        { "type": "image_picker", "id": "bild", "label": "Bild" },
+        { "type": "text", "id": "alt", "label": "Alt-text (annars bildens egen)" },
+        { "type": "url", "id": "lank", "label": "Länk" },
+        { "type": "number", "id": "luft_over", "label": "Extra luft över (px)", "default": 0 },
+        { "type": "checkbox", "id": "sist_mobil", "label": "Sist i mobil (efter båda spalterna)", "default": false },
+        {
+          "type": "select",
+          "id": "kolumn",
+          "label": "Spalt",
+          "options": [
+            { "value": "vanster", "label": "Vänster" },
+            { "value": "hoger", "label": "Höger" }
+          ],
+          "default": "vanster"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        { "type": "text", "id": "rubrik", "label": "Rubrik (valfri)" },
+        { "type": "richtext", "id": "text", "label": "Text" },
+        { "type": "number", "id": "bredd", "label": "Bredd (% av spalten)", "default": 92 },
+        { "type": "number", "id": "luft_over", "label": "Extra luft över (px)", "default": 0 },
+        { "type": "checkbox", "id": "sist_mobil", "label": "Sist i mobil (efter båda spalterna)", "default": false },
+        {
+          "type": "select",
+          "id": "kolumn",
+          "label": "Spalt",
+          "options": [
+            { "value": "vanster", "label": "Vänster" },
+            { "value": "hoger", "label": "Höger" }
+          ],
+          "default": "vanster"
+        }
+      ]
+    }
+  ],
+  "presets": [{ "name": "MUG bildcollage" }]
+}
+{% endschema %}
