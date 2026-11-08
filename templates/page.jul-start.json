@@ -830,7 +830,7 @@
         "horizontal_alignment": "flex-start",
         "gap": 18,
         "color_scheme": "scheme-1",
-        "padding-block-start": 10,
+        "padding-block-start": 16,
         "padding-block-end": 0
       }
     },
