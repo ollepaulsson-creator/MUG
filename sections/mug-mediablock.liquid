@@ -1,0 +1,114 @@
+{%- doc -%}
+  MUG 2026-11-08 (etapp 4, ersätter Instant-sidornas bild/video-avsnitt).
+  En stor bild med en bildtextrad (play-ikon + text, snippets/mug-videorad). Med YouTube-länk öppnas
+  klippet i en ruta ovanpå sidan; annars kan raden länka vidare.
+  Lägen (Instant-sidornas mått):
+  - bild: bilden i sin egen proportion, 40 px luft över och under, bildtextraden under bilden
+  - yta: bilden fyller en yta 740 / 580 (≤768) / 420 px (≤575), bildtextraden längst ned över bilden
+{%- enddoc -%}
+{%- liquid
+  assign s = section.settings
+  assign alt = s.bildtext | default: s.bild.alt | escape
+-%}
+<div class="mug-media mug-media--{{ s.lage }}" style="--mm-bg: {{ s.bakgrund }}; --mm-farg: {{ s.textfarg }}; --mm-h: {{ s.hojd }}px; --mm-h-surf: {{ s.hojd_surfplatta }}px; --mm-h-mobil: {{ s.hojd_mobil }}px;">
+  {%- if s.lage == 'yta' -%}
+    <div class="mug-media__yta">
+      {%- if s.video != blank -%}
+        {{- s.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'mug-media__bild', image_size: '1600x' -}}
+      {%- elsif s.bild != blank -%}
+        {%- if s.mobilbild != blank -%}
+          {{- s.mobilbild | image_url: width: 1200 | image_tag: widths: '600, 900, 1200', sizes: '100vw', loading: 'lazy', alt: alt, class: 'mug-media__bild mug-media__bild--mobil' -}}
+        {%- endif -%}
+        {{- s.bild | image_url: width: 2400 | image_tag: widths: '800, 1200, 1600, 2000, 2400', sizes: '100vw', loading: 'lazy', alt: alt, class: 'mug-media__bild mug-media__bild--desktop' -}}
+      {%- endif -%}
+      {% render 'mug-videorad', text: s.bildtext, youtube: s.youtube, lank: s.lank %}
+    </div>
+  {%- else -%}
+    {%- if s.bild != blank -%}
+      <div class="mug-media__ram">
+        {{- s.bild | image_url: width: 2400 | image_tag: widths: '800, 1200, 1600, 2000, 2400', sizes: '100vw', loading: 'lazy', alt: alt, class: 'mug-media__bild' -}}
+      </div>
+    {%- endif -%}
+    {% render 'mug-videorad', text: s.bildtext, youtube: s.youtube, lank: s.lank %}
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .mug-media {
+    width: 100%;
+    background: var(--mm-bg);
+    color: var(--mm-farg);
+  }
+
+  .mug-media__ram {
+    padding: 40px 0;
+  }
+
+  .mug-media__ram .mug-media__bild {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .mug-media__yta {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: var(--mm-h, 740px);
+    overflow: hidden;
+  }
+
+  .mug-media__yta .mug-media__bild {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .mug-media__bild--mobil {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .mug-media__yta { min-height: var(--mm-h-surf, 580px); }
+  }
+
+  @media (max-width: 575px) {
+    .mug-media__yta { min-height: var(--mm-h-mobil, 420px); }
+    .mug-media__yta:has(.mug-media__bild--mobil) .mug-media__bild--desktop { display: none; }
+    .mug-media__bild--mobil { display: block; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MUG mediablock",
+  "tag": "section",
+  "class": "mug-media-sektion",
+  "settings": [
+    {
+      "type": "select",
+      "id": "lage",
+      "label": "Läge",
+      "options": [
+        { "value": "bild", "label": "Bild i egen proportion, bildtext under" },
+        { "value": "yta", "label": "Bild fyller en hög yta, bildtext över" }
+      ],
+      "default": "yta"
+    },
+    { "type": "image_picker", "id": "bild", "label": "Bild" },
+    { "type": "image_picker", "id": "mobilbild", "label": "Mobilbild (valfri, läget yta)" },
+    { "type": "video", "id": "video", "label": "Bakgrundsvideo (läget yta, ersätter bilden)" },
+    { "type": "number", "id": "hojd", "label": "Höjd, läget yta (px)", "default": 740 },
+    { "type": "number", "id": "hojd_surfplatta", "label": "Höjd surfplatta ≤768 px (px)", "default": 580 },
+    { "type": "number", "id": "hojd_mobil", "label": "Höjd mobil ≤575 px (px)", "default": 420 },
+    { "type": "text", "id": "bildtext", "label": "Bildtext" },
+    { "type": "video_url", "id": "youtube", "label": "YouTube-video (öppnas vid klick)", "accept": ["youtube"] },
+    { "type": "url", "id": "lank", "label": "Länk (om ingen video)" },
+    { "type": "color", "id": "bakgrund", "label": "Bakgrund", "default": "#000000" },
+    { "type": "color", "id": "textfarg", "label": "Textfärg", "default": "#ffffff" }
+  ],
+  "presets": [{ "name": "MUG mediablock" }]
+}
+{% endschema %}

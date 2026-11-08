@@ -2517,3 +2517,9 @@ dialog.facets--drawer[open] {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+/* MUG 2026-11-08: jämnare radbrytning i lagerstatus och Klarna-rutan på produktsidan */
+.product-inventory__text,
+.klarna-payment-box {
+  text-wrap-style: pretty;
+}

@@ -1,0 +1,231 @@
+{%- doc -%}
+  MUG 2026-11-08 (etapp 4, ersätter introt på Instants varumärkessidor).
+  Centrerad logga, H1 och ingress på mörk botten, och en bildtextrad (play-ikon, YouTube) längst ned.
+  Bild:
+  - bakgrund: bild (egen mobilbild) eller video fyller hela ytan bakom texten (PRS, Arturia, Loog)
+  - under: bilden står under texten i sin egen proportion (Adam, Teenage Engineering)
+  Alla mått är inställningar med Instant-sidornas värden som standard.
+{%- enddoc -%}
+{%- liquid
+  assign s = section.settings
+  assign alt = s.rubrik | escape
+-%}
+<div
+  class="mug-hero mug-hero--{{ s.bildlage }}"
+  style="
+    --mh-bg: {{ s.bakgrund }}; --mh-farg: {{ s.textfarg }};
+    --mh-h: {% if s.hojd > 0 %}{{ s.hojd }}px{% else %}auto{% endif %};
+    --mh-h-mobil: {% if s.hojd_mobil > 0 %}{{ s.hojd_mobil }}px{% else %}auto{% endif %};
+    --mh-logga: {{ s.logga_bredd }}px;
+    --mh-logga-over: {{ s.logga_over }}px; --mh-logga-under: {{ s.logga_under }}px;
+    --mh-logga-over-mobil: {{ s.logga_over_mobil }}px; --mh-logga-under-mobil: {{ s.logga_under_mobil }}px;
+    --mh-rubrik: {{ s.rubrik_storlek }}px; --mh-rubrik-mobil: {{ s.rubrik_storlek_mobil }}px;
+    --mh-ingress: {{ s.ingress_storlek }}px; --mh-ingress-rad: {{ s.ingress_radavstand | divided_by: 100.0 }};
+    --mh-ingress-bredd: {{ s.ingress_bredd }}%; --mh-ingress-bredd-mobil: {{ s.ingress_bredd_mobil }}%;
+  "
+>
+  {%- if s.bildlage == 'bakgrund' -%}
+    {%- if s.video != blank -%}
+      {%- comment -%} Video på desktop; finns en mobilbild visas den i mobil i stället (som Instant, och lättare) {%- endcomment -%}
+      {%- if s.mobilbild != blank -%}
+        {{- s.mobilbild | image_url: width: 1200 | image_tag: widths: '600, 900, 1200', sizes: '100vw', loading: 'eager', alt: alt, class: 'mug-hero__bakgrund mug-hero__bakgrund--mobil' -}}
+      {%- endif -%}
+      {{- s.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata', class: 'mug-hero__bakgrund mug-hero__bakgrund--desktop', image_size: '1600x' -}}
+    {%- elsif s.bild != blank -%}
+      {%- if s.mobilbild != blank -%}
+        {{- s.mobilbild | image_url: width: 1200 | image_tag: widths: '600, 900, 1200', sizes: '100vw', loading: 'eager', fetchpriority: 'high', alt: alt, class: 'mug-hero__bakgrund mug-hero__bakgrund--mobil' -}}
+      {%- endif -%}
+      {{- s.bild | image_url: width: 2400 | image_tag: widths: '800, 1200, 1600, 2000, 2400', sizes: '100vw', loading: 'eager', fetchpriority: 'high', alt: alt, class: 'mug-hero__bakgrund mug-hero__bakgrund--desktop' -}}
+    {%- endif -%}
+  {%- endif -%}
+
+  <div class="mug-hero__innehall">
+    {%- if s.logga != blank -%}
+      {{- s.logga | image_url: width: 800 | image_tag: loading: 'eager', alt: s.logga_alt, class: 'mug-hero__logga' -}}
+    {%- elsif s.logga_url != blank -%}
+      <img class="mug-hero__logga" src="{{ s.logga_url }}" alt="{{ s.logga_alt | escape }}" loading="eager">
+    {%- endif -%}
+    {%- if s.rubrik != blank -%}
+      <h1 class="mug-hero__rubrik">{{ s.rubrik | escape }}</h1>
+    {%- endif -%}
+    {%- if s.ingress != blank -%}
+      <div class="mug-hero__ingress">{{ s.ingress }}</div>
+    {%- endif -%}
+  </div>
+
+  {%- if s.bildlage == 'under' and s.bild != blank -%}
+    {{- s.bild | image_url: width: 2400 | image_tag: widths: '800, 1200, 1600, 2000, 2400', sizes: '100vw', loading: 'eager', alt: alt, class: 'mug-hero__bild' -}}
+  {%- endif -%}
+
+  {% render 'mug-videorad', text: s.bildtext, youtube: s.youtube, lank: s.lank %}
+</div>
+
+{% stylesheet %}
+  .mug-hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: var(--mh-h);
+    overflow: hidden;
+    background: var(--mh-bg);
+    color: var(--mh-farg);
+    text-align: center;
+  }
+
+  .mug-hero__bakgrund {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .mug-hero__bakgrund--mobil {
+    display: none;
+  }
+
+  .mug-hero__innehall {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .mug-hero--bakgrund .mug-hero__innehall {
+    flex: 1 1 auto;
+  }
+
+  .mug-hero__logga {
+    display: block;
+    width: var(--mh-logga);
+    max-width: 100%;
+    height: auto;
+    margin: var(--mh-logga-over) 0 var(--mh-logga-under);
+  }
+
+  .mug-hero__rubrik {
+    max-width: 50%;
+    margin: 0 0 20px;
+    color: inherit;
+    font-size: var(--mh-rubrik);
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+
+  .mug-hero__ingress {
+    max-width: var(--mh-ingress-bredd);
+    font-size: var(--mh-ingress);
+    line-height: var(--mh-ingress-rad);
+  }
+
+  .mug-hero__ingress p {
+    margin: 0;
+    color: inherit;
+  }
+
+  .mug-hero__ingress p + p {
+    margin-top: 1em;
+  }
+
+  .mug-hero__bild {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 40px;
+  }
+
+  .mug-hero .mug-videorad {
+    position: relative;
+  }
+
+  @media (max-width: 1024px) {
+    .mug-hero__ingress { max-width: max(var(--mh-ingress-bredd), 65%); }
+  }
+
+  @media (max-width: 768px) {
+    .mug-hero__ingress { max-width: max(var(--mh-ingress-bredd), 85%); }
+  }
+
+  @media (max-width: 575px) {
+    .mug-hero {
+      height: var(--mh-h-mobil);
+      padding-top: 20px;
+    }
+
+    .mug-hero__bakgrund--mobil { display: block; }
+    .mug-hero:has(.mug-hero__bakgrund--mobil) .mug-hero__bakgrund--desktop { display: none; }
+
+    .mug-hero__logga {
+      margin: var(--mh-logga-over-mobil) 0 var(--mh-logga-under-mobil);
+    }
+
+    .mug-hero__rubrik {
+      max-width: 90%;
+      font-size: var(--mh-rubrik-mobil);
+    }
+
+    .mug-hero__ingress {
+      max-width: var(--mh-ingress-bredd-mobil);
+    }
+  }
+
+  .mug-hero__rubrik,
+  .mug-hero__ingress {
+    text-wrap-style: pretty;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MUG hero",
+  "tag": "section",
+  "class": "mug-hero-sektion",
+  "settings": [
+    {
+      "type": "select",
+      "id": "bildlage",
+      "label": "Bild",
+      "options": [
+        { "value": "bakgrund", "label": "Bakgrund bakom texten" },
+        { "value": "under", "label": "Under texten" }
+      ],
+      "default": "bakgrund"
+    },
+    { "type": "image_picker", "id": "bild", "label": "Bild" },
+    { "type": "image_picker", "id": "mobilbild", "label": "Mobilbild (bakgrund, valfri)" },
+    { "type": "video", "id": "video", "label": "Bakgrundsvideo (ersätter bilden)" },
+    { "type": "number", "id": "hojd", "label": "Höjd desktop (px, 0 = efter innehållet)", "default": 1100 },
+    { "type": "number", "id": "hojd_mobil", "label": "Höjd mobil (px, 0 = efter innehållet)", "default": 1020 },
+    { "type": "header", "content": "Logga" },
+    { "type": "image_picker", "id": "logga", "label": "Logga" },
+    { "type": "url", "id": "logga_url", "label": "Logga som fil-länk (t.ex. SVG i Filer)" },
+    { "type": "text", "id": "logga_alt", "label": "Loggans alt-text" },
+    { "type": "number", "id": "logga_bredd", "label": "Bredd (px)", "default": 120 },
+    { "type": "number", "id": "logga_over", "label": "Luft över (px)", "default": 80 },
+    { "type": "number", "id": "logga_under", "label": "Luft under (px)", "default": 40 },
+    { "type": "number", "id": "logga_over_mobil", "label": "Luft över, mobil (px)", "default": 60 },
+    { "type": "number", "id": "logga_under_mobil", "label": "Luft under, mobil (px)", "default": 40 },
+    { "type": "header", "content": "Text" },
+    { "type": "text", "id": "rubrik", "label": "Rubrik (H1)" },
+    { "type": "number", "id": "rubrik_storlek", "label": "Rubrikens storlek (px)", "default": 32 },
+    { "type": "number", "id": "rubrik_storlek_mobil", "label": "Rubrikens storlek, mobil (px)", "default": 32 },
+    { "type": "richtext", "id": "ingress", "label": "Ingress" },
+    { "type": "number", "id": "ingress_storlek", "label": "Ingressens storlek (px)", "default": 20 },
+    { "type": "number", "id": "ingress_radavstand", "label": "Ingressens radavstånd (%)", "default": 145 },
+    { "type": "number", "id": "ingress_bredd", "label": "Ingressens bredd (%)", "default": 45 },
+    { "type": "number", "id": "ingress_bredd_mobil", "label": "Ingressens bredd, mobil (%)", "default": 95 },
+    { "type": "header", "content": "Bildtextrad" },
+    { "type": "text", "id": "bildtext", "label": "Bildtext" },
+    { "type": "video_url", "id": "youtube", "label": "YouTube-video (öppnas vid klick)", "accept": ["youtube"] },
+    { "type": "url", "id": "lank", "label": "Länk (om ingen video)" },
+    { "type": "color", "id": "bakgrund", "label": "Bakgrund", "default": "#000000" },
+    { "type": "color", "id": "textfarg", "label": "Textfärg", "default": "#ffffff" }
+  ],
+  "presets": [{ "name": "MUG hero" }]
+}
+{% endschema %}

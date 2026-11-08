@@ -1,0 +1,91 @@
+{%- doc -%}
+  MUG 2026-11-08: bildtextrad med play-ikon (Instant-sidornas videorad). Med YouTube-video öppnas
+  klippet i en ruta ovanpå sidan; annars länkar raden vidare (eller är bara text).
+
+  @param {string} text - Bildtexten
+  @param {object} [youtube] - video_url-inställning (typ youtube)
+  @param {string} [lank] - Länk när ingen video finns
+{%- enddoc -%}
+{%- liquid
+  assign yt = blank
+  if youtube != blank and youtube.type == 'youtube'
+    assign yt = youtube.id
+  endif
+-%}
+{%- if text != blank -%}
+  {%- if yt != blank -%}
+    <button type="button" class="mug-videorad" data-mug-yt="{{ yt }}" aria-label="Spela video: {{ text | escape }}">
+  {%- elsif lank != blank -%}
+    <a class="mug-videorad" href="{{ lank }}">
+  {%- else -%}
+    <div class="mug-videorad mug-videorad--text">
+  {%- endif -%}
+      <svg class="mug-videorad__play" viewBox="0 0 30 30" width="30" height="30" aria-hidden="true">
+        <circle cx="15" cy="15" r="14" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M12 9.5v11l9-5.5z" fill="currentColor"/>
+      </svg>
+      <span>{{ text | escape }}</span>
+  {%- if yt != blank -%}
+    </button>
+  {%- elsif lank != blank -%}
+    </a>
+  {%- else -%}
+    </div>
+  {%- endif -%}
+{%- endif -%}
+
+{%- if yt != blank -%}
+  <script>
+    (function () {
+      if (window.mugVideoDialog) return;
+      window.mugVideoDialog = true;
+      var dlg = document.createElement('dialog');
+      dlg.className = 'mug-videodialog';
+      dlg.innerHTML = '<button type="button" class="mug-videodialog__stang" aria-label="Stäng">×</button><div class="mug-videodialog__spelare"></div>';
+      document.addEventListener('DOMContentLoaded', function () { document.body.appendChild(dlg); });
+      var spelare = dlg.querySelector('.mug-videodialog__spelare');
+      function stang() { spelare.innerHTML = ''; if (dlg.open) dlg.close(); }
+      document.addEventListener('click', function (e) {
+        var knapp = e.target.closest && e.target.closest('[data-mug-yt]');
+        if (!knapp) return;
+        if (!dlg.isConnected) document.body.appendChild(dlg);
+        spelare.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + knapp.dataset.mugYt +
+          '?autoplay=1&rel=0" title="' + knapp.getAttribute('aria-label') +
+          '" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+        dlg.showModal();
+      });
+      dlg.addEventListener('click', function (e) {
+        if (e.target === dlg || e.target.classList.contains('mug-videodialog__stang')) stang();
+      });
+      dlg.addEventListener('close', function () { spelare.innerHTML = ''; });
+    })();
+  </script>
+{%- endif -%}
+
+{%- style -%}
+  .mug-videorad {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    padding: 20px;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    font-size: 16px;
+    line-height: 1.15;
+    text-align: start;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .mug-videorad--text { cursor: default; }
+  .mug-videorad__play { flex: none; width: 30px; height: 30px; }
+  .mug-videodialog { width: min(92vw, 1200px); max-width: none; padding: 0; border: 0; background: #000; overflow: visible; }
+  .mug-videodialog::backdrop { background: rgb(0 0 0 / 0.8); }
+  .mug-videodialog__spelare { aspect-ratio: 16 / 9; }
+  .mug-videodialog__spelare iframe { display: block; width: 100%; height: 100%; border: 0; }
+  .mug-videodialog__stang { position: absolute; top: -44px; right: 0; width: 40px; height: 40px; border: 0; background: none; color: #fff; font-size: 32px; line-height: 1; cursor: pointer; }
+  @media (max-width: 575px) { .mug-videorad { line-height: 1.3; } }
+{%- endstyle -%}
