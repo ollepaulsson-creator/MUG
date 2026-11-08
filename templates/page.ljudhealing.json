@@ -1,0 +1,2127 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "name": "Breadcrumbs",
+      "settings": {
+        "enable": true,
+        "nav_menu": "main-menu",
+        "home_label": "Start",
+        "aria_label": "Breadcrumbs"
+      }
+    },
+    "section_8aKKyY": {
+      "type": "section",
+      "blocks": {
+        "group_CbFznk": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://collections/syntar",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/DSC05004_b5afde67-a16d-4173-a44d-dcae3a76f81b.gif",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_D3zCpJ": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h6",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_D3zCpJ"
+          ]
+        },
+        "group_TCKgqL": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://pages/besok-butiken",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/DSC03595_v2_1080x_83b743ac-e3f4-41a0-b05f-3e34e6760869.webp",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_mgzFBp": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "<h6>Besök butiken</h6>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h6",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_mgzFBp"
+          ]
+        },
+        "group_Eqaa3L": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://collections/merch",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/VNAV_Arket_tote_16b52b5e-9d30-497b-a7a8-5148fc1036fd.webp",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_CU7EAj": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h4",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_CU7EAj"
+          ]
+        }
+      },
+      "block_order": [
+        "group_CbFznk",
+        "group_TCKgqL",
+        "group_Eqaa3L"
+      ],
+      "custom_css": [
+        ".group-block-content {position: relative;}",
+        ".group-block--width-fill h6 {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px; font-weight: 400; text-align: center; z-index: 2;}",
+        "img {display: flex; justify-content: center;}",
+        ".deferred-media__poster-button {}",
+        ".layout-panel-flex--row > .group-block--width-fill {min-height: 480px !important;}",
+        ".section-content-wrapper.section-content-wrapper {padding-bottom: 0px !important;}"
+      ],
+      "name": "t:names.multicolumn",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "flex-start",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "full-width",
+        "section_height": "medium",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "section_t7Jwap": {
+      "type": "section",
+      "blocks": {
+        "group_QaPwKz": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://pages/om-oss",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/skylt_26e37ad3-28e5-4bfe-8738-5534c1fa403e.jpg",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_m7pDx6": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "<h6>Est. 1973</h6>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h6",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_m7pDx6"
+          ]
+        },
+        "group_jQfkDk": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://collections/ernie-ball",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/ernie_stop_201f56c1-9d18-4061-b43a-a2fc208b6479.webp",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "group_HW8mfU": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://pages/serviceverkstad",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/gittarvard.webp",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_kWMnFd": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "<h6>Service och verkstad</h6>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h6",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_kWMnFd"
+          ]
+        }
+      },
+      "block_order": [
+        "group_QaPwKz",
+        "group_jQfkDk",
+        "group_HW8mfU"
+      ],
+      "custom_css": [
+        ".group-block-content {position: relative;}",
+        ".group-block--width-fill h6 {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px; font-weight: 400; text-align: center; z-index: 2;}",
+        "img {display: flex; justify-content: center;}",
+        ".deferred-media__poster-button {}",
+        ".layout-panel-flex--row > .group-block--width-fill {min-height: 480px !important;}",
+        ".section-content-wrapper.section-content-wrapper {padding-bottom: 0px !important;}"
+      ],
+      "name": "t:names.multicolumn",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "flex-start",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "full-width",
+        "section_height": "medium",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "mug_01": {
+      "type": "mug-collage",
+      "blocks": {
+        "b1": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-ljudhealing-yoga1.jpg",
+            "alt": "Kvinna spelar på en meditationschime bland gitarrerna i butiken",
+            "lank": "",
+            "kolumn": "vanster"
+          }
+        },
+        "b2": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-ljudhealing-yoga2.jpg",
+            "alt": "Kalimba från Meinl Sonic Energy spelas i knät",
+            "lank": "shopify://products/sonic-energy-kl1706h-kalimba-c-major-17-note",
+            "kolumn": "hoger"
+          }
+        },
+        "b3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Meinl Sonic Energy är en serie högkvalitativa instrument som används under bl.a. yoga, meditation, ljudhealing, massage, spa och för att skapa musik.</p>",
+            "bredd": 96,
+            "sist_mobil": false,
+            "kolumn": "hoger"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "bakgrund": "#301f05",
+        "textfarg": "#ffffff",
+        "overrubrik": "Ljudhealing & Meditation",
+        "rubrik": "Ljudhealing och meditation med Meinl Sonic Energy",
+        "rubrikniva": "h1",
+        "rubrik_storlek": 60,
+        "rubrik_storlek_mobil": 42,
+        "rubrik_bredd": 68,
+        "vanster_bredd": 58.5,
+        "hoger_bredd": 35.1,
+        "vanster_forskjutning": 0,
+        "hoger_forskjutning": 0,
+        "hoger_lage": "overst",
+        "ingress": "<p>Minska stress, öka din medvetenhet och skapa inre balans – Ljudhealing fokuserar på att stilla sinnet genom användning av ljudfrekvenser och vibrationer. Ljudhealing är en av världens äldsta terapiformer – Ljudfrekvenser och vibrationer harmoniserar kroppens energifält och får dig att slappna av och släppa på spänningar. Dessa ljud kan hjälpa till att sänka stressnivåer, lugna nervsystemet, och skapa en känsla av helhet.</p>",
+        "ingress_storlek": 20,
+        "ingress_bredd": 74,
+        "knapp_text": "",
+        "knapp_lank": "",
+        "knapp_bakgrund": "#ffffff",
+        "knapp_textfarg": "#2f1b1b",
+        "luft_over": 120,
+        "luft_under": 120,
+        "marginal": 86,
+        "luft_over_mobil": 70,
+        "luft_under_mobil": 80,
+        "marginal_mobil": 20
+      }
+    },
+    "mug_02": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "center",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 8,
+            "padding-block-end": 2,
+            "padding-inline-start": 15,
+            "padding-inline-end": 15
+          },
+          "blocks": {
+            "product_list_text_kmdAw8": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h2>Klangskålar</h2>"
+              },
+              "blocks": {}
+            },
+            "button_kyPFyt": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "SE ALLA",
+                "link": "{{ closest.collection.url }}",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 7,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 30
+              },
+              "blocks": {}
+            },
+            "swatches_8WFcrC": {
+              "type": "swatches",
+              "name": "t:names.swatches",
+              "settings": {
+                "product_swatches_alignment": "flex-start",
+                "product_swatches_alignment_mobile": "flex-start",
+                "hide_padding": false,
+                "product_swatches_padding_top": 4,
+                "product_swatches_padding_bottom": 0,
+                "product_swatches_padding_left": 0,
+                "product_swatches_padding_right": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_kmdAw8",
+            "button_kyPFyt",
+            "swatches_8WFcrC"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 2,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 15,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_tiBwKW": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_bWTfX3": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>{{ closest.product.vendor }}</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 15,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_RKXdGb": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 6,
+                "padding-block-end": 6,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_RB3K4t": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 15,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_tiBwKW",
+            "text_bWTfX3",
+            "product_title_RKXdGb",
+            "price_RB3K4t"
+          ]
+        }
+      },
+      "name": "t:names.products_carousel",
+      "settings": {
+        "collection": "singing-bowls-chalices",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "max_products": 16,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 0,
+        "rows_gap": 24,
+        "icons_style": "arrows_large",
+        "icons_shape": "circle",
+        "section_width": "full-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 18,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 10,
+        "padding-block-end": 0
+      }
+    },
+    "mug_03": {
+      "type": "mug-collage",
+      "blocks": {
+        "b1": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-ljudhealing-yoga3.jpg",
+            "alt": "Kristallklangskål med stav på en orientalisk matta",
+            "lank": "shopify://products/mcsb10d-marble-singing-bowl-10-note-d4-sacral-chakra",
+            "kolumn": "vanster"
+          }
+        },
+        "b2": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-ljudhealing-yoga4.jpg",
+            "alt": "Kristallklangskålar i olika färger slås an på en matta",
+            "lank": "shopify://products/ecsbsetebg-essence-crystal-singing-bowl-set-e4-b3-g3",
+            "kolumn": "hoger"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2"
+      ],
+      "settings": {
+        "bakgrund": "#ffffff",
+        "textfarg": "#ffffff",
+        "overrubrik": "",
+        "rubrik": "",
+        "rubrikniva": "h2",
+        "rubrik_storlek": 60,
+        "rubrik_storlek_mobil": 42,
+        "rubrik_bredd": 60,
+        "vanster_bredd": 40.6,
+        "hoger_bredd": 54.2,
+        "vanster_forskjutning": 91,
+        "hoger_forskjutning": 0,
+        "hoger_lage": "overst",
+        "ingress": "",
+        "ingress_storlek": 20,
+        "ingress_bredd": 74,
+        "knapp_text": "",
+        "knapp_lank": "",
+        "knapp_bakgrund": "#ffffff",
+        "knapp_textfarg": "#2f1b1b",
+        "luft_over": 60,
+        "luft_under": 60,
+        "marginal": 144,
+        "luft_over_mobil": 40,
+        "luft_under_mobil": 40,
+        "marginal_mobil": 0
+      }
+    },
+    "mug_04": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "center",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 8,
+            "padding-block-end": 2,
+            "padding-inline-start": 15,
+            "padding-inline-end": 15
+          },
+          "blocks": {
+            "product_list_text_kmdAw8": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h2>Steel Tongue Drums & Handpans</h2>"
+              },
+              "blocks": {}
+            },
+            "button_kyPFyt": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "SE ALLA",
+                "link": "{{ closest.collection.url }}",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 7,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 30
+              },
+              "blocks": {}
+            },
+            "swatches_8WFcrC": {
+              "type": "swatches",
+              "name": "t:names.swatches",
+              "settings": {
+                "product_swatches_alignment": "flex-start",
+                "product_swatches_alignment_mobile": "flex-start",
+                "hide_padding": false,
+                "product_swatches_padding_top": 4,
+                "product_swatches_padding_bottom": 0,
+                "product_swatches_padding_left": 0,
+                "product_swatches_padding_right": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_kmdAw8",
+            "button_kyPFyt",
+            "swatches_8WFcrC"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 2,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 15,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_tiBwKW": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_bWTfX3": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>{{ closest.product.vendor }}</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 15,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_RKXdGb": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 6,
+                "padding-block-end": 6,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_RB3K4t": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 15,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_tiBwKW",
+            "text_bWTfX3",
+            "product_title_RKXdGb",
+            "price_RB3K4t"
+          ]
+        }
+      },
+      "name": "t:names.products_carousel",
+      "settings": {
+        "collection": "steel-tongue-drums-handpans",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "max_products": 16,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 0,
+        "rows_gap": 24,
+        "icons_style": "arrows_large",
+        "icons_shape": "circle",
+        "section_width": "full-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 18,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 10,
+        "padding-block-end": 0
+      }
+    },
+    "mug_05": {
+      "type": "mug-collage",
+      "blocks": {
+        "b1": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-ljudhealing-yoga5.jpg",
+            "alt": "Yogalärare med tre klangskålar framför sig i butiken",
+            "lank": "shopify://products/sb-u-1500-universal-singing-bowl-set-3-pcs-set",
+            "kolumn": "vanster"
+          }
+        },
+        "b2": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-ljudhealing-yoga6.jpg",
+            "alt": "Steel tongue drum spelas med stav på en matta",
+            "lank": "shopify://products/ostd2nb-octave-steel-tongue-drum-d-amara-navy-blue",
+            "kolumn": "hoger"
+          }
+        },
+        "b3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Vi tar hjälp av yogalärare Sandra Pandevski för att guida dig genom vår produktserie med ljudhealing-instrument från Meinl Sonic Energy.</p>",
+            "bredd": 91,
+            "sist_mobil": true,
+            "kolumn": "vanster"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "bakgrund": "#47394c",
+        "textfarg": "#ffffff",
+        "overrubrik": "",
+        "rubrik": "",
+        "rubrikniva": "h2",
+        "rubrik_storlek": 60,
+        "rubrik_storlek_mobil": 42,
+        "rubrik_bredd": 60,
+        "vanster_bredd": 48.9,
+        "hoger_bredd": 48.9,
+        "vanster_forskjutning": 0,
+        "hoger_forskjutning": 0,
+        "hoger_lage": "overst",
+        "ingress": "",
+        "ingress_storlek": 20,
+        "ingress_bredd": 74,
+        "knapp_text": "",
+        "knapp_lank": "",
+        "knapp_bakgrund": "#ffffff",
+        "knapp_textfarg": "#2f1b1b",
+        "luft_over": 100,
+        "luft_under": 100,
+        "marginal": 30,
+        "luft_over_mobil": 60,
+        "luft_under_mobil": 40,
+        "marginal_mobil": 20
+      }
+    },
+    "mug_06": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "center",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 8,
+            "padding-block-end": 2,
+            "padding-inline-start": 15,
+            "padding-inline-end": 15
+          },
+          "blocks": {
+            "product_list_text_kmdAw8": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h2>Stämgafflar & chimes</h2>"
+              },
+              "blocks": {}
+            },
+            "button_kyPFyt": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "SE ALLA",
+                "link": "{{ closest.collection.url }}",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 7,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 30
+              },
+              "blocks": {}
+            },
+            "swatches_8WFcrC": {
+              "type": "swatches",
+              "name": "t:names.swatches",
+              "settings": {
+                "product_swatches_alignment": "flex-start",
+                "product_swatches_alignment_mobile": "flex-start",
+                "hide_padding": false,
+                "product_swatches_padding_top": 4,
+                "product_swatches_padding_bottom": 0,
+                "product_swatches_padding_left": 0,
+                "product_swatches_padding_right": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_kmdAw8",
+            "button_kyPFyt",
+            "swatches_8WFcrC"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 2,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 15,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_tiBwKW": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_bWTfX3": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>{{ closest.product.vendor }}</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 15,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_RKXdGb": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 6,
+                "padding-block-end": 6,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_RB3K4t": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 15,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_tiBwKW",
+            "text_bWTfX3",
+            "product_title_RKXdGb",
+            "price_RB3K4t"
+          ]
+        }
+      },
+      "name": "t:names.products_carousel",
+      "settings": {
+        "collection": "chimes-tuning-forks",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "max_products": 16,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 0,
+        "rows_gap": 24,
+        "icons_style": "arrows_large",
+        "icons_shape": "circle",
+        "section_width": "full-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 18,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 10,
+        "padding-block-end": 0
+      }
+    },
+    "mug_07": {
+      "type": "mug-collage",
+      "blocks": {
+        "b1": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-ljudhealing-yoga7.jpg",
+            "alt": "Kvinna lyssnar nära en månmeditationschime",
+            "lank": "shopify://products/mmc44s-moon-meditation-chime-44-silver",
+            "kolumn": "vanster"
+          }
+        },
+        "b2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Sonic Energy tar dig på en resa för att hitta mer lugn, fokus och avslappning. Upptäck energigivande ljud som är utformade för att alla ska kunna utforska, skapa och känna.</p>",
+            "bredd": 82,
+            "sist_mobil": true,
+            "kolumn": "vanster"
+          }
+        },
+        "b3": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-ljudhealing-yoga8.jpg",
+            "alt": "Meditationschime i brons sätts i rörelse",
+            "lank": "shopify://products/mmc32b-sonic-energy-moon-meditation-chime-32-bronze",
+            "kolumn": "hoger"
+          }
+        },
+        "b4": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Det handlar inte om att prestera; Istället handlar det om att låta energin flöda genom dig och förlora dig i ljudet som hjälper dig lämna stressen från omvärlden en stund.</p>",
+            "bredd": 91,
+            "sist_mobil": false,
+            "kolumn": "hoger"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ],
+      "settings": {
+        "bakgrund": "#3e160a",
+        "textfarg": "#ffffff",
+        "overrubrik": "",
+        "rubrik": "",
+        "rubrikniva": "h2",
+        "rubrik_storlek": 60,
+        "rubrik_storlek_mobil": 42,
+        "rubrik_bredd": 60,
+        "vanster_bredd": 55.3,
+        "hoger_bredd": 36.8,
+        "vanster_forskjutning": 0,
+        "hoger_forskjutning": 0,
+        "hoger_lage": "overst",
+        "ingress": "",
+        "ingress_storlek": 20,
+        "ingress_bredd": 74,
+        "knapp_text": "",
+        "knapp_lank": "",
+        "knapp_bakgrund": "#ffffff",
+        "knapp_textfarg": "#2f1b1b",
+        "luft_over": 100,
+        "luft_under": 0,
+        "marginal": 86,
+        "luft_over_mobil": 60,
+        "luft_under_mobil": 0,
+        "marginal_mobil": 20
+      }
+    },
+    "mug_08": {
+      "type": "mug-collage",
+      "blocks": {
+        "b1": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-ljudhealing-yoga9.jpg",
+            "alt": "Planetstämd chime slås an med en klubba",
+            "lank": "shopify://products/planetary-tuned-chime",
+            "kolumn": "vanster"
+          }
+        },
+        "b2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Ljudhealing upplevs ofta som ett meditativt tillstånd, där man kan känna sig mer centrerad, harmonisk och vitaliserad efteråt.</p>",
+            "bredd": 77,
+            "sist_mobil": false,
+            "kolumn": "hoger"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2"
+      ],
+      "settings": {
+        "bakgrund": "#3e160a",
+        "textfarg": "#ffffff",
+        "overrubrik": "",
+        "rubrik": "",
+        "rubrikniva": "h2",
+        "rubrik_storlek": 60,
+        "rubrik_storlek_mobil": 42,
+        "rubrik_bredd": 60,
+        "vanster_bredd": 55.3,
+        "hoger_bredd": 41.5,
+        "vanster_forskjutning": 0,
+        "hoger_forskjutning": 0,
+        "hoger_lage": "nederst",
+        "ingress": "",
+        "ingress_storlek": 20,
+        "ingress_bredd": 74,
+        "knapp_text": "",
+        "knapp_lank": "",
+        "knapp_bakgrund": "#ffffff",
+        "knapp_textfarg": "#2f1b1b",
+        "luft_over": 80,
+        "luft_under": 100,
+        "marginal": 86,
+        "luft_over_mobil": 40,
+        "luft_under_mobil": 60,
+        "marginal_mobil": 20
+      }
+    },
+    "mug_09": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "center",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 8,
+            "padding-block-end": 2,
+            "padding-inline-start": 15,
+            "padding-inline-end": 15
+          },
+          "blocks": {
+            "product_list_text_kmdAw8": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h2>Kalimba</h2>"
+              },
+              "blocks": {}
+            },
+            "button_kyPFyt": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "SE ALLA",
+                "link": "{{ closest.collection.url }}",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 7,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 30
+              },
+              "blocks": {}
+            },
+            "swatches_8WFcrC": {
+              "type": "swatches",
+              "name": "t:names.swatches",
+              "settings": {
+                "product_swatches_alignment": "flex-start",
+                "product_swatches_alignment_mobile": "flex-start",
+                "hide_padding": false,
+                "product_swatches_padding_top": 4,
+                "product_swatches_padding_bottom": 0,
+                "product_swatches_padding_left": 0,
+                "product_swatches_padding_right": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_kmdAw8",
+            "button_kyPFyt",
+            "swatches_8WFcrC"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 2,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 15,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_tiBwKW": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_bWTfX3": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>{{ closest.product.vendor }}</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 15,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_RKXdGb": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 6,
+                "padding-block-end": 6,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_RB3K4t": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 15,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_tiBwKW",
+            "text_bWTfX3",
+            "product_title_RKXdGb",
+            "price_RB3K4t"
+          ]
+        }
+      },
+      "name": "t:names.products_carousel",
+      "settings": {
+        "collection": "kalimba",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "max_products": 16,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 0,
+        "rows_gap": 24,
+        "icons_style": "arrows_large",
+        "icons_shape": "circle",
+        "section_width": "full-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 18,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 10,
+        "padding-block-end": 0
+      }
+    },
+    "mug_10": {
+      "type": "mug-collage",
+      "blocks": {
+        "b1": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-ljudhealing-yoga10.jpg",
+            "alt": "Kalimba i trä spelas på en orientalisk matta",
+            "lank": "shopify://products/sonic-energy-kl1706h-kalimba-c-major-17-note",
+            "kolumn": "vanster"
+          }
+        },
+        "b2": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-ljudhealing-yoga11.jpg",
+            "alt": "Bendo-shaker från Meinl Sonic Energy hålls upp",
+            "lank": "shopify://products/sbrl-bendo-shaker-large",
+            "kolumn": "hoger"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2"
+      ],
+      "settings": {
+        "bakgrund": "#ffffff",
+        "textfarg": "#ffffff",
+        "overrubrik": "",
+        "rubrik": "",
+        "rubrikniva": "h2",
+        "rubrik_storlek": 60,
+        "rubrik_storlek_mobil": 42,
+        "rubrik_bredd": 60,
+        "vanster_bredd": 40.6,
+        "hoger_bredd": 54.2,
+        "vanster_forskjutning": 102,
+        "hoger_forskjutning": 0,
+        "hoger_lage": "overst",
+        "ingress": "",
+        "ingress_storlek": 20,
+        "ingress_bredd": 74,
+        "knapp_text": "",
+        "knapp_lank": "",
+        "knapp_bakgrund": "#ffffff",
+        "knapp_textfarg": "#2f1b1b",
+        "luft_over": 60,
+        "luft_under": 60,
+        "marginal": 144,
+        "luft_over_mobil": 40,
+        "luft_under_mobil": 40,
+        "marginal_mobil": 0
+      }
+    },
+    "mug_11": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "center",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 8,
+            "padding-block-end": 2,
+            "padding-inline-start": 15,
+            "padding-inline-end": 15
+          },
+          "blocks": {
+            "product_list_text_kmdAw8": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h2>Ljudeffekter</h2>"
+              },
+              "blocks": {}
+            },
+            "button_kyPFyt": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "SE ALLA",
+                "link": "{{ closest.collection.url }}",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 7,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 30
+              },
+              "blocks": {}
+            },
+            "swatches_8WFcrC": {
+              "type": "swatches",
+              "name": "t:names.swatches",
+              "settings": {
+                "product_swatches_alignment": "flex-start",
+                "product_swatches_alignment_mobile": "flex-start",
+                "hide_padding": false,
+                "product_swatches_padding_top": 4,
+                "product_swatches_padding_bottom": 0,
+                "product_swatches_padding_left": 0,
+                "product_swatches_padding_right": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_kmdAw8",
+            "button_kyPFyt",
+            "swatches_8WFcrC"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 2,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 15,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_tiBwKW": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_bWTfX3": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>{{ closest.product.vendor }}</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 15,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_RKXdGb": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 6,
+                "padding-block-end": 6,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_RB3K4t": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 15,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_tiBwKW",
+            "text_bWTfX3",
+            "product_title_RKXdGb",
+            "price_RB3K4t"
+          ]
+        }
+      },
+      "name": "t:names.products_carousel",
+      "settings": {
+        "collection": "sound-effects",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "max_products": 16,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 0,
+        "rows_gap": 24,
+        "icons_style": "arrows_large",
+        "icons_shape": "circle",
+        "section_width": "full-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 18,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 10,
+        "padding-block-end": 0
+      }
+    },
+    "mug_12": {
+      "type": "mug-collage",
+      "blocks": {
+        "b1": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-ljudhealing-yoga12.jpg",
+            "alt": "Steel tongue drum i pärlgrått spelas med stav",
+            "lank": "shopify://products/std4pg-steel-tongue-drum-g-minor-pearl-grey",
+            "kolumn": "vanster"
+          }
+        },
+        "b2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Djupa, resonanta toner hjälper mot stress och främjar avkoppling. Ljudvibrationerna kan också bidra till att skapa en djupare medveten närvaro och känslomässig läkning. Utforska den kraftfulla världen av ljudhealing och möjligheten att finna inre balans och harmoni.</p>",
+            "bredd": 93,
+            "sist_mobil": false,
+            "kolumn": "vanster"
+          }
+        },
+        "b3": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-ljudhealing-yoga14.jpg",
+            "alt": "Kalimba, skallror och shakers från Meinl Sonic Energy",
+            "lank": "shopify://collections/ljudhealing-meditation",
+            "luft_over": 80,
+            "kolumn": "vanster"
+          }
+        },
+        "b4": {
+          "type": "text",
+          "settings": {
+            "rubrik": "Så fungerar ljudhealing",
+            "text": "<p>Ljud och vibrationer har en helande kraft. Genom att använda specifika frekvenser kan ljud hjälpa till att återställa balans i kroppens energisystem och främja läkning på djup nivå.</p>",
+            "bredd": 93,
+            "kolumn": "vanster"
+          }
+        },
+        "b5": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-ljudhealing-yoga13.jpg",
+            "alt": "Thunder drum från Meinl Sonic Energy hålls upp i butiken",
+            "lank": "shopify://products/td-l-thunder-drum-large",
+            "kolumn": "hoger"
+          }
+        },
+        "b6": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Låt energin flöda genom dig, förlora dig i ljudet och lämna stressen från omvärlden en stund. Ljudhealing hjälper dig uppleva en djupgående frid och helande för kropp och sinne.</p>",
+            "bredd": 94,
+            "sist_mobil": false,
+            "kolumn": "hoger"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ],
+      "settings": {
+        "bakgrund": "#4e3d32",
+        "textfarg": "#ffffff",
+        "overrubrik": "",
+        "rubrik": "",
+        "rubrikniva": "h2",
+        "rubrik_storlek": 60,
+        "rubrik_storlek_mobil": 42,
+        "rubrik_bredd": 60,
+        "vanster_bredd": 42.9,
+        "hoger_bredd": 49.2,
+        "vanster_forskjutning": 0,
+        "hoger_forskjutning": 0,
+        "hoger_lage": "overst",
+        "ingress": "",
+        "ingress_storlek": 20,
+        "ingress_bredd": 74,
+        "knapp_text": "",
+        "knapp_lank": "",
+        "knapp_bakgrund": "#ffffff",
+        "knapp_textfarg": "#2f1b1b",
+        "luft_over": 100,
+        "luft_under": 30,
+        "marginal": 86,
+        "luft_over_mobil": 60,
+        "luft_under_mobil": 0,
+        "marginal_mobil": 20
+      }
+    },
+    "mug_13": {
+      "type": "mug-collage",
+      "settings": {
+        "bakgrund": "#4e3d32",
+        "textfarg": "#ffffff",
+        "overrubrik": "",
+        "rubrik": "",
+        "rubrikniva": "h2",
+        "rubrik_storlek": 60,
+        "rubrik_storlek_mobil": 42,
+        "rubrik_bredd": 60,
+        "vanster_bredd": 58,
+        "hoger_bredd": 35,
+        "vanster_forskjutning": 0,
+        "hoger_forskjutning": 0,
+        "hoger_lage": "overst",
+        "ingress": "",
+        "ingress_storlek": 20,
+        "ingress_bredd": 74,
+        "knapp_text": "Se allt Ljudhealing & Meditation",
+        "knapp_lank": "shopify://collections/ljudhealing-meditation",
+        "knapp_bakgrund": "#ffffff",
+        "knapp_textfarg": "#2f1b1b",
+        "luft_over": 120,
+        "luft_under": 120,
+        "marginal": 86,
+        "luft_over_mobil": 70,
+        "luft_under_mobil": 60,
+        "marginal_mobil": 16
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "mug_01",
+    "mug_02",
+    "mug_03",
+    "mug_04",
+    "mug_05",
+    "mug_06",
+    "mug_07",
+    "mug_08",
+    "mug_09",
+    "mug_10",
+    "mug_11",
+    "mug_12",
+    "mug_13",
+    "section_8aKKyY",
+    "section_t7Jwap"
+  ]
+}

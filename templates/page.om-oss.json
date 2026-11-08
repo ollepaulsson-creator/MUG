@@ -1,0 +1,906 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "name": "Breadcrumbs",
+      "settings": {
+        "enable": true,
+        "nav_menu": "main-menu",
+        "home_label": "Start",
+        "aria_label": "Breadcrumbs"
+      }
+    },
+    "section_8aKKyY": {
+      "type": "section",
+      "blocks": {
+        "group_CbFznk": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://collections/syntar",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/DSC05004_b5afde67-a16d-4173-a44d-dcae3a76f81b.gif",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_D3zCpJ": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h6",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_D3zCpJ"
+          ]
+        },
+        "group_TCKgqL": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://pages/besok-butiken",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/DSC03595_v2_1080x_83b743ac-e3f4-41a0-b05f-3e34e6760869.webp",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_mgzFBp": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "<h6>Besök butiken</h6>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h6",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_mgzFBp"
+          ]
+        },
+        "group_Eqaa3L": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://collections/merch",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/VNAV_Arket_tote_16b52b5e-9d30-497b-a7a8-5148fc1036fd.webp",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_CU7EAj": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h4",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_CU7EAj"
+          ]
+        }
+      },
+      "block_order": [
+        "group_CbFznk",
+        "group_TCKgqL",
+        "group_Eqaa3L"
+      ],
+      "custom_css": [
+        ".group-block-content {position: relative;}",
+        ".group-block--width-fill h6 {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px; font-weight: 400; text-align: center; z-index: 2;}",
+        "img {display: flex; justify-content: center;}",
+        ".deferred-media__poster-button {}",
+        ".layout-panel-flex--row > .group-block--width-fill {min-height: 480px !important;}",
+        ".section-content-wrapper.section-content-wrapper {padding-bottom: 0px !important;}"
+      ],
+      "name": "t:names.multicolumn",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "flex-start",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "full-width",
+        "section_height": "medium",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "section_t7Jwap": {
+      "type": "section",
+      "blocks": {
+        "group_QaPwKz": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://pages/om-oss",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/skylt_26e37ad3-28e5-4bfe-8738-5534c1fa403e.jpg",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_m7pDx6": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "<h6>Est. 1973</h6>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h6",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_m7pDx6"
+          ]
+        },
+        "group_jQfkDk": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://collections/ernie-ball",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/ernie_stop_201f56c1-9d18-4061-b43a-a2fc208b6479.webp",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "group_HW8mfU": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://pages/serviceverkstad",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/gittarvard.webp",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_kWMnFd": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "<h6>Service och verkstad</h6>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h6",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_kWMnFd"
+          ]
+        }
+      },
+      "block_order": [
+        "group_QaPwKz",
+        "group_jQfkDk",
+        "group_HW8mfU"
+      ],
+      "custom_css": [
+        ".group-block-content {position: relative;}",
+        ".group-block--width-fill h6 {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px; font-weight: 400; text-align: center; z-index: 2;}",
+        "img {display: flex; justify-content: center;}",
+        ".deferred-media__poster-button {}",
+        ".layout-panel-flex--row > .group-block--width-fill {min-height: 480px !important;}",
+        ".section-content-wrapper.section-content-wrapper {padding-bottom: 0px !important;}"
+      ],
+      "name": "t:names.multicolumn",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "flex-start",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "full-width",
+        "section_height": "medium",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "mug_01": {
+      "type": "mug-collage",
+      "settings": {
+        "bakgrund": "#ffffff",
+        "textfarg": "#000000",
+        "overrubrik": "",
+        "rubrik": "Från London till Kaserntorget – Drömmen om en musikaffär",
+        "rubrikniva": "h1",
+        "rubrik_storlek": 60,
+        "rubrik_storlek_mobil": 42,
+        "rubrik_bredd": 74,
+        "vanster_bredd": 40,
+        "hoger_bredd": 50,
+        "vanster_forskjutning": 0,
+        "hoger_forskjutning": 0,
+        "mellanrum": 0,
+        "avstand_mobil": 50,
+        "hoger_lage": "overst",
+        "ingress": "",
+        "ingress_storlek": 20,
+        "ingress_bredd": 74,
+        "ingress_radavstand": 130,
+        "knapp_text": "",
+        "knapp_lank": "",
+        "luft_over": 80,
+        "luft_under": 0,
+        "marginal": 86,
+        "luft_over_mobil": 40,
+        "luft_under_mobil": 0,
+        "marginal_mobil": 20
+      }
+    },
+    "mug_02": {
+      "type": "mug-collage",
+      "blocks": {
+        "b1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>MUG – Musik Utan Gränser – är musikaffären för alla. Från nybörjare som vill veta vad ett strap lock är till rutinerade musiker som behöver utrustning till sin nästa turné. Vår vision är att inspirera fler till att spela musik. MUG startade 1973 som ett independent familjeföretag och har sedan dess blivit en kreativ mötesplats för artister och musikentusiaster.</p><p>Det var när MUG:s grundare Bruce Emms spelade med sitt band The Patch i Göteborg som drömmen om en musikaffär startade. The Patch, med rötter i London, hade spelat i Göteborg runt åren 1967–1969, för att efter det åka tillbaka till England.</p><p>Väl hemma i London saknade bandet Göteborg, stans musikscen och allt trevligt folk. Bruce och gitarristen Philip funderade över vad man kunde göra för att livnära sig där. De kom fram till att det behövdes en riktigt bra musikaffär, en som skulle välkomna alla och där man kunde sitta och testa instrumenten ordentligt innan man köpte dem.</p>",
+            "bredd": 100,
+            "justering": "vanster",
+            "kolumn": "vanster"
+          }
+        },
+        "b2": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-om-oss-patch.jpg",
+            "alt": "The Patch med Bruce på bas, Philip på gitarr, Roger på trummor och Tony på sång",
+            "lank": "",
+            "kolumn": "hoger"
+          }
+        },
+        "b3": {
+          "type": "text",
+          "settings": {
+            "text": "<p><em>The Patch med Bruce på bas, Philip på gitarr, Roger på trummor och Tony på sång. Delar av bandet har fortsatt att spela live även de senaste åren.</em></p>",
+            "bredd": 97,
+            "justering": "center",
+            "kolumn": "hoger"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "bakgrund": "#ffffff",
+        "textfarg": "#000000",
+        "overrubrik": "",
+        "rubrik": "",
+        "rubrikniva": "h2",
+        "rubrik_storlek": 60,
+        "rubrik_storlek_mobil": 42,
+        "rubrik_bredd": 74,
+        "vanster_bredd": 40,
+        "hoger_bredd": 47.55,
+        "vanster_forskjutning": 0,
+        "hoger_forskjutning": 0,
+        "mellanrum": 111,
+        "avstand_mobil": 50,
+        "hoger_lage": "mitten",
+        "ingress": "",
+        "ingress_storlek": 20,
+        "ingress_bredd": 74,
+        "ingress_radavstand": 130,
+        "knapp_text": "",
+        "knapp_lank": "",
+        "luft_over": 60,
+        "luft_under": 0,
+        "marginal": 108,
+        "luft_over_mobil": 50,
+        "luft_under_mobil": 0,
+        "marginal_mobil": 20
+      }
+    },
+    "mug_03": {
+      "type": "mug-collage",
+      "settings": {
+        "bakgrund": "#ffffff",
+        "textfarg": "#000000",
+        "overrubrik": "",
+        "rubrik": "",
+        "rubrikniva": "h2",
+        "rubrik_storlek": 60,
+        "rubrik_storlek_mobil": 42,
+        "rubrik_bredd": 74,
+        "vanster_bredd": 40,
+        "hoger_bredd": 50,
+        "vanster_forskjutning": 0,
+        "hoger_forskjutning": 0,
+        "mellanrum": 0,
+        "avstand_mobil": 50,
+        "hoger_lage": "overst",
+        "ingress": "<p>\"Bästa musikaffären! En av anledningarna till att jag idag jobbar med musik är det bemötande, peppande och all hjälp jag fick när jag som ung knallade in hos er.\" – Jonas Karlberg</p>",
+        "ingress_storlek": 29,
+        "ingress_bredd": 60,
+        "ingress_radavstand": 130,
+        "knapp_text": "",
+        "knapp_lank": "",
+        "luft_over": 100,
+        "luft_under": 0,
+        "marginal": 86,
+        "luft_over_mobil": 50,
+        "luft_under_mobil": 0,
+        "marginal_mobil": 20
+      }
+    },
+    "mug_04": {
+      "type": "mug-collage",
+      "blocks": {
+        "b1": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-om-oss-butiken.jpg",
+            "alt": "Musik Utan Gränser – musikaffären i Göteborg",
+            "lank": "",
+            "proportion": 96.4,
+            "kolumn": "vanster"
+          }
+        },
+        "b2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Butiken slog först upp dörrarna på Haga Nygata. Året var 1973 och Göteborgs musikscen blomstrande. Led Zeppelin skulle spela på Ullevi och bandets gitarrist Jimmy Page behövde Ernie Ball-strängar. Det var så MUG fick sin första kund.</p><p>Sedan 1977 ligger vår två våningar stora butik på Kaserntorget mitt i Göteborgs gamla stadskärna. Butiken är lika mycket en musikaffär som en institution eller fritidsgård för ungdomar i alla åldrar. Och än idag är människorna och musiken fortfarande det viktigaste för oss på MUG.</p>",
+            "bredd": 100,
+            "justering": "vanster",
+            "kolumn": "hoger"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2"
+      ],
+      "settings": {
+        "bakgrund": "#ffffff",
+        "textfarg": "#000000",
+        "overrubrik": "",
+        "rubrik": "",
+        "rubrikniva": "h2",
+        "rubrik_storlek": 60,
+        "rubrik_storlek_mobil": 42,
+        "rubrik_bredd": 74,
+        "vanster_bredd": 54.25,
+        "hoger_bredd": 40,
+        "vanster_forskjutning": 0,
+        "hoger_forskjutning": 0,
+        "mellanrum": 0,
+        "avstand_mobil": 50,
+        "hoger_lage": "mitten",
+        "ingress": "",
+        "ingress_storlek": 20,
+        "ingress_bredd": 74,
+        "ingress_radavstand": 130,
+        "knapp_text": "",
+        "knapp_lank": "",
+        "luft_over": 100,
+        "luft_under": 0,
+        "marginal": 108,
+        "luft_over_mobil": 50,
+        "luft_under_mobil": 0,
+        "marginal_mobil": 20
+      }
+    },
+    "mug_05": {
+      "type": "mug-collage",
+      "settings": {
+        "bakgrund": "#ffffff",
+        "textfarg": "#000000",
+        "overrubrik": "",
+        "rubrik": "",
+        "rubrikniva": "h2",
+        "rubrik_storlek": 60,
+        "rubrik_storlek_mobil": 42,
+        "rubrik_bredd": 74,
+        "vanster_bredd": 40,
+        "hoger_bredd": 50,
+        "vanster_forskjutning": 0,
+        "hoger_forskjutning": 0,
+        "mellanrum": 0,
+        "avstand_mobil": 50,
+        "hoger_lage": "overst",
+        "ingress": "<p>\"This is hands down the best music store I've ever been to. Every time I visit Sweden (I'm from Arizona), I always make sure I spend some time here. The staff are absolutely wonderful and the selection of gear is incredible!\" – Lela Amparo</p>",
+        "ingress_storlek": 28,
+        "ingress_bredd": 60,
+        "ingress_radavstand": 130,
+        "knapp_text": "",
+        "knapp_lank": "",
+        "luft_over": 100,
+        "luft_under": 0,
+        "marginal": 86,
+        "luft_over_mobil": 50,
+        "luft_under_mobil": 0,
+        "marginal_mobil": 20
+      }
+    },
+    "mug_06": {
+      "type": "mug-bildspel",
+      "blocks": {
+        "b1": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-om-oss-brucelasse.jpg",
+            "alt": "Bruce och Lasse i gamla butiken på Kaserntorget",
+            "bildtext": "<p><em>Bruce och Lasse poserar framför kameran i gamla butiken på Kaserntorget.</em></p>"
+          }
+        },
+        "b2": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-om-oss-80tal.jpg",
+            "alt": "Lasse bland 80-talsgitarrer i butiken",
+            "bildtext": "<p><em>Coola 80-tals-gitarrer och Lasse.</em></p>"
+          }
+        },
+        "b3": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-om-oss-dojan.jpg",
+            "alt": "Livespelning på rockpuben Dojan i Göteborg",
+            "bildtext": "<p><em>Sverige spelar kvalmatch på klassiska rockpuben Dojan – Nikke, Bernt, Lasse, Bruce, Totta och Bengt. Dojan hade livemusik varje kväll och scenen har bl.a. gästats av E Street band.</em></p>"
+          }
+        },
+        "b4": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-om-oss-errols.jpg",
+            "alt": "Bruce, Trum-Stefan, Lasse och Manko på Errols rockklubb i Göteborg",
+            "bildtext": "<p><em>Bruce, Trum-Stefan, Lasse och Manko på Errols rockklubb på Magasinsgatan i Göteborg. Denna kväll anordnade MUG, med hjälp av flertalet kända artister, en auktionsgala till förmån för utsatta barn i Rumänien.</em></p>"
+          }
+        },
+        "b5": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-om-oss-butik.jpg",
+            "alt": "MUG:s butik – mötesplats för musiker i Göteborg",
+            "bildtext": "<p><em>Butik och mötesplats – på MUG gillar vi folk och trevlig stämning.</em></p>"
+          }
+        },
+        "b6": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-om-oss-gitarrhornan.jpg",
+            "alt": "Gitarrhörnan på MUG – alla är välkomna att testspela",
+            "bildtext": "<p><em>Gitarrhörnan – alla är välkomna att sitta och testspela på MUG.</em></p>"
+          }
+        },
+        "b7": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-om-oss-bruceroger.jpg",
+            "alt": "Grundaren Bruce Emms och tidigare kompanjonen Roger Evans",
+            "bildtext": "<p><em>Bruce Emms och tidigare kompanjonen Roger Evans.</em></p>"
+          }
+        },
+        "b8": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-om-oss-skylt.jpg",
+            "alt": "MUG:s klassiska skylt monteras på fasaden",
+            "bildtext": "<p><em>Vår klassiska MUG-skylt är på väg upp.</em></p>"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8"
+      ],
+      "settings": {
+        "etikett": "Bilder från MUG:s historia",
+        "bakgrund": "#ffffff",
+        "textfarg": "#000000",
+        "proportion": 0,
+        "proportion_mobil": 0,
+        "luft_over": 100,
+        "luft_under": 0,
+        "marginal": 108,
+        "marginal_mobil": 0
+      }
+    },
+    "mug_07": {
+      "type": "mug-collage",
+      "blocks": {
+        "b1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Bland våra kunder finns privatpersoner, företag, artister, inspelningsstudios, klubbar, konsertlokaler, restauranger, skolor, teatrar, kyrkor, fritidsgårdar och studieförbund. Att vår breda och mångskiftande kundkrets skall kunna ta del av ett lika brett och spännande sortiment är viktigt för oss. Detsamma gäller för att kunna erbjuda våra kunder kunnig vägledning och hjälpsam service.</p><p>Alla som jobbar på MUG har alla själva spelat i band, och har många års erfarenhet av musikinstrument på båda sidor om disken. Oavsett om du ska uppträda på scen eller i ditt vardagsrum, bygga musiksal i din skola, en hemstudio i din källare eller installera ljudsystem på klubb eller restaurang – så ordnar vi det du behöver.</p><p>Välkomna till MUG!</p>",
+            "bredd": 100,
+            "justering": "vanster",
+            "kolumn": "vanster"
+          }
+        },
+        "b2": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-om-oss-ernieball.jpg",
+            "alt": "Roger och Bruce med Ernie och Sterling Ball på Frankfurt Musikmesse på 70-talet",
+            "lank": "",
+            "bredd": 72.2,
+            "proportion": 100,
+            "kolumn": "hoger"
+          }
+        },
+        "b3": {
+          "type": "text",
+          "settings": {
+            "text": "<p><em>Roger och Bruce med Ernie och Sterling Ball på Frankfurt Musikmesse tidigt 70-tal – där och då blev MUG agentur för Ernie Ball, starten på ett väldigt roligt samarbete.</em></p>",
+            "bredd": 100,
+            "justering": "center",
+            "kolumn": "hoger"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "bakgrund": "#ffffff",
+        "textfarg": "#000000",
+        "overrubrik": "",
+        "rubrik": "",
+        "rubrikniva": "h2",
+        "rubrik_storlek": 60,
+        "rubrik_storlek_mobil": 42,
+        "rubrik_bredd": 74,
+        "vanster_bredd": 40,
+        "hoger_bredd": 51.8,
+        "vanster_forskjutning": 0,
+        "hoger_forskjutning": 0,
+        "mellanrum": 65,
+        "avstand_mobil": 50,
+        "hoger_lage": "mitten",
+        "ingress": "",
+        "ingress_storlek": 20,
+        "ingress_bredd": 74,
+        "ingress_radavstand": 130,
+        "knapp_text": "",
+        "knapp_lank": "",
+        "luft_over": 100,
+        "luft_under": 100,
+        "marginal": 108,
+        "luft_over_mobil": 50,
+        "luft_under_mobil": 60,
+        "marginal_mobil": 20
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "mug_01",
+    "mug_02",
+    "mug_03",
+    "mug_04",
+    "mug_05",
+    "mug_06",
+    "mug_07",
+    "section_8aKKyY",
+    "section_t7Jwap"
+  ]
+}
