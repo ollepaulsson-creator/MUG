@@ -565,9 +565,9 @@
         "textfarg": "#000000",
         "linjefarg": "#e2e2e2",
         "luft_over": 40,
-        "luft_under": 60,
+        "luft_under": 48,
         "luft_over_mobil": 30,
-        "luft_under_mobil": 40
+        "luft_under_mobil": 32
       }
     },
     "mug_03": {
@@ -937,9 +937,9 @@
         "bakgrund": "#ffffff",
         "textfarg": "#000000",
         "linjefarg": "#e2e2e2",
-        "luft_over": 60,
+        "luft_over": 48,
         "luft_under": 0,
-        "luft_over_mobil": 40,
+        "luft_over_mobil": 32,
         "luft_under_mobil": 0
       }
     },
@@ -1122,9 +1122,9 @@
         "bakgrund": "#ffffff",
         "textfarg": "#000000",
         "linjefarg": "#e2e2e2",
-        "luft_over": 64,
+        "luft_over": 48,
         "luft_under": 0,
-        "luft_over_mobil": 48,
+        "luft_over_mobil": 40,
         "luft_under_mobil": 0
       }
     },
@@ -1275,9 +1275,9 @@
         "bakgrund": "#ffffff",
         "textfarg": "#000000",
         "linjefarg": "#e2e2e2",
-        "luft_over": 64,
+        "luft_over": 48,
         "luft_under": 100,
-        "luft_over_mobil": 48,
+        "luft_over_mobil": 40,
         "luft_under_mobil": 60
       }
     }

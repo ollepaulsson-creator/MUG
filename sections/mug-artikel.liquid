@@ -63,13 +63,13 @@
   }
 
   .mug-artikel__rubrik--h2 {
-    margin: 64px 0 20px;
+    margin: 48px 0 16px;
     font-size: 26px;
     line-height: 1.28;
   }
 
   .mug-artikel__rubrik--h3 {
-    margin: 40px 0 12px;
+    margin: 32px 0 10px;
     font-size: 22px;
     line-height: 1.15;
   }
@@ -131,6 +131,17 @@
 
   .mug-artikel__prisrad span {
     padding: 10px;
+    text-wrap-style: pretty;
+  }
+
+  .mug-artikel__fraga summary span,
+  .mug-artikel__text li {
+    text-wrap-style: pretty;
+  }
+
+  /* luft mellan frågorna och texten efter dem */
+  .mug-artikel__fraga + .mug-artikel__text {
+    margin-top: 40px;
   }
 
   .mug-artikel__prisrad span + span {
@@ -146,7 +157,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    padding: 18px 0;
+    padding: 18px 12px 18px 0;
     font-size: 16px;
     line-height: 1.15;
     list-style: none;
@@ -188,7 +199,7 @@
     }
 
     .mug-artikel__rubrik--h2 {
-      margin-top: 48px;
+      margin-top: 40px;
     }
 
     .mug-artikel__text--ingress {
