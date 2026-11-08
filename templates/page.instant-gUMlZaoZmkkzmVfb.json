@@ -9,10 +9,6 @@
  */
 {
   "sections": {
-    "instant-gUMlZaoZmkkzmVfb": {
-      "type": "instant-gUMlZaoZmkkzmVfb",
-      "settings": {}
-    },
     "breadcrumbs": {
       "type": "breadcrumbs",
       "name": "Breadcrumbs",
@@ -517,22 +513,189 @@
         "padding-block-end": 0
       }
     },
-    "seo_h1": {
-      "type": "custom-liquid",
-      "custom_css": [],
+    "mug_01": {
+      "type": "mug-collage",
       "settings": {
-        "custom_liquid": "<h1 class=\"visually-hidden\">Sälj eller byt in dina instrument</h1>",
-        "section_width": "page-width",
-        "color_scheme": "scheme-1",
-        "padding-block-start": 0,
-        "padding-block-end": 0
+        "bakgrund": "#ffffff",
+        "textfarg": "#000000",
+        "overrubrik": "",
+        "rubrik": "Sälj eller byt in",
+        "rubrikniva": "h1",
+        "rubrik_storlek": 52,
+        "rubrik_storlek_mobil": 48,
+        "rubrik_bredd": 74,
+        "vanster_bredd": 100,
+        "hoger_bredd": 0,
+        "mellanrum": 0,
+        "avstand_mobil": 25,
+        "hoger_lage": "overst",
+        "ingress": "",
+        "ingress_storlek": 20,
+        "ingress_bredd": 71,
+        "ingress_radavstand": 160,
+        "luft_over": 60,
+        "luft_under": 0,
+        "marginal": 86,
+        "luft_over_mobil": 30,
+        "luft_under_mobil": 0,
+        "marginal_mobil": 20
+      }
+    },
+    "mug_02": {
+      "type": "mug-collage",
+      "settings": {
+        "bakgrund": "#ffffff",
+        "textfarg": "#000000",
+        "overrubrik": "",
+        "rubrik": "",
+        "rubrikniva": "h2",
+        "rubrik_storlek": 52,
+        "rubrik_storlek_mobil": 48,
+        "rubrik_bredd": 74,
+        "vanster_bredd": 100,
+        "hoger_bredd": 0,
+        "mellanrum": 0,
+        "avstand_mobil": 25,
+        "hoger_lage": "overst",
+        "ingress": "<p>Har du en gitarr, bas, förstärkare, synth eller annan utrustning du vill sälja eller byta in? Vi köper och förmedlar begagnade instrument och gör hela processen enkel och trygg. Med många års erfarenhet och bred kunskap om instrument kan du känna dig trygg hos oss – vi gör alltid vårt bästa för att värdera instrumenten rättvist!</p>",
+        "ingress_storlek": 20,
+        "ingress_bredd": 71,
+        "ingress_radavstand": 160,
+        "luft_over": 30,
+        "luft_under": 0,
+        "marginal": 86,
+        "luft_over_mobil": 20,
+        "luft_under_mobil": 0,
+        "marginal_mobil": 20
+      }
+    },
+    "mug_03": {
+      "type": "mug-collage",
+      "blocks": {
+        "b1": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Så här går det till:</strong></p>",
+            "bredd": 100,
+            "justering": "vanster",
+            "sist_mobil": true,
+            "kolumn": "vanster"
+          }
+        },
+        "b2": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>1. Ladda upp bilder:</strong> För att vi ska kunna ge dig en korrekt värdering behöver vi bilder och information om ditt instrument. Ladda upp bilder på instrumentets framsida, baksida, etikett, serienummer och eventuella defekter, originalcase/-fodral samt originaltillbehör.</p>",
+            "bredd": 100,
+            "justering": "vanster",
+            "sist_mobil": true,
+            "kolumn": "vanster"
+          }
+        },
+        "b3": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>2. Bifoga information:</strong> Vi behöver även information om instrumentet: när du köpte det, hur länge du haft det, har du kvitton och dokument bevarade; har instrumentet använts vid inspelningar, på världsturnéer eller tillhört någon känd person? Sådan information hjälper oss att snabbt göra en rättvis och korrekt värdering.</p>",
+            "bredd": 100,
+            "justering": "vanster",
+            "sist_mobil": true,
+            "kolumn": "vanster"
+          }
+        },
+        "b4": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>3. Vi återkopplar snabbt:</strong> Vi återkopplar med ett prisförslag. Vi värderar alla instrument rättvist och professionellt, och säkerställer att både köpare och säljare får en bra upplevelse.</p>",
+            "bredd": 100,
+            "justering": "vanster",
+            "sist_mobil": true,
+            "kolumn": "vanster"
+          }
+        },
+        "b5": {
+          "type": "knapp",
+          "settings": {
+            "text": "Ladda upp dina bilder här",
+            "lank": "shopify://pages/ladda-upp-bilder",
+            "bakgrund": "#000000",
+            "textfarg": "#ffffff",
+            "luft_over": 0,
+            "sist_mobil": true,
+            "kolumn": "vanster"
+          }
+        },
+        "b6": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Har du frågor om hur det går till? Chatta med oss, ring på <a href=\"tel:0317110309\">031-711 03 09</a>, maila till <a href=\"mailto:order@mug.se\">order@mug.se</a> eller kom helt enkelt in till oss i butiken.</p>",
+            "bredd": 100,
+            "justering": "vanster",
+            "sist_mobil": true,
+            "kolumn": "vanster"
+          }
+        },
+        "b7": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/sida-salj-byt-fredrik.jpg",
+            "alt": "Fredrik i butiken med en begagnad halvakustisk bas och gitarr",
+            "lank": "",
+            "kolumn": "hoger"
+          }
+        },
+        "b8": {
+          "type": "text",
+          "settings": {
+            "text": "<p><em>Fredrik och gänget hjälper till att göra en rättvis och professionell värdering av dina instrument.</em></p>",
+            "bredd": 100,
+            "justering": "center",
+            "sist_mobil": false,
+            "kolumn": "hoger"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8"
+      ],
+      "settings": {
+        "bakgrund": "#ffffff",
+        "textfarg": "#000000",
+        "overrubrik": "",
+        "rubrik": "",
+        "rubrikniva": "h2",
+        "rubrik_storlek": 52,
+        "rubrik_storlek_mobil": 48,
+        "rubrik_bredd": 74,
+        "vanster_bredd": 52.2,
+        "hoger_bredd": 41.8,
+        "mellanrum": 0,
+        "avstand_mobil": 25,
+        "hoger_lage": "overst",
+        "ingress": "",
+        "ingress_storlek": 20,
+        "ingress_bredd": 71,
+        "ingress_radavstand": 160,
+        "luft_over": 60,
+        "luft_under": 100,
+        "marginal": 220,
+        "luft_over_mobil": 40,
+        "luft_under_mobil": 60,
+        "marginal_mobil": 20
       }
     }
   },
   "order": [
     "breadcrumbs",
-    "seo_h1",
-    "instant-gUMlZaoZmkkzmVfb",
+    "mug_01",
+    "mug_02",
+    "mug_03",
     "section_8aKKyY",
     "section_t7Jwap"
   ]

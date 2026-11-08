@@ -556,7 +556,7 @@
         "luft_over": 40,
         "luft_under": 0,
         "marginal": 72,
-        "luft_over_mobil": 10,
+        "luft_over_mobil": 20,
         "luft_under_mobil": 0,
         "marginal_mobil": 20,
         "maxbredd": 1400
@@ -698,7 +698,7 @@
         "luft_under": 60,
         "marginal": 72,
         "luft_over_mobil": 8,
-        "luft_under_mobil": 40,
+        "luft_under_mobil": 20,
         "marginal_mobil": 20,
         "maxbredd": 1400
       }

@@ -81,6 +81,10 @@
                     {{- block.settings.bild | image_url: width: 1800 | image_tag: widths: '360, 480, 640, 800, 960, 1100, 1300, 1500, 1800', sizes: storlekar, loading: laddning, fetchpriority: prio, alt: alt -}}
                   {%- if block.settings.lank != blank -%}</a>{%- else -%}</div>{%- endif -%}
                 {%- endif -%}
+              {%- when 'knapp' -%}
+                {%- if block.settings.text != blank and block.settings.lank != blank -%}
+                  <a class="mug-collage__blockknapp{% if block.settings.sist_mobil %} mug-collage--sist-mobil{% endif %}" href="{{ block.settings.lank }}" style="--mc-luft: {{ block.settings.luft_over }}px; background: {{ block.settings.bakgrund }}; color: {{ block.settings.textfarg }};" {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</a>
+                {%- endif -%}
               {%- when 'text' -%}
                 <div class="mug-collage__text{% if block.settings.sist_mobil %} mug-collage--sist-mobil{% endif %}{% if block.settings.justering == 'center' %} mug-collage__text--center{% endif %}" style="{% if block.settings.storlek > 0 %}font-size: {{ block.settings.storlek }}px; {% endif %}--mc-text-bredd: {{ block.settings.bredd }}%;{% if block.settings.luft_over > 0 %} --mc-luft: {{ block.settings.luft_over }}px;{% endif %}" {{ block.shopify_attributes }}>
                   {%- if block.settings.rubrik != blank -%}
@@ -340,6 +344,20 @@
     white-space: nowrap;
   }
 
+  .mug-collage__blockknapp {
+    align-self: flex-start;
+    margin-top: var(--mc-luft, 0px);
+    padding: 14px 18px;
+    border-radius: 2px;
+    font-size: 15px;
+    line-height: 17px;
+    text-decoration: none;
+  }
+
+  .mug-collage__blockknapp:hover {
+    opacity: 0.85;
+  }
+
   .mug-collage__knapp:hover {
     opacity: 0.85;
   }
@@ -499,6 +517,28 @@
         { "type": "number", "id": "proportion", "label": "Höjd i % av bredden (0 = bildens egen, annars beskärs den)", "default": 0 },
         { "type": "number", "id": "proportion_mobil", "label": "Höjd i % av bredden, mobil (0 = som ovan)", "default": 0 },
         { "type": "number", "id": "proportion_stor", "label": "Höjd i % av bredden, skärmar ≥1600 px (0 = som ovan)", "default": 0 },
+        { "type": "checkbox", "id": "sist_mobil", "label": "Sist i mobil (efter båda spalterna)", "default": false },
+        {
+          "type": "select",
+          "id": "kolumn",
+          "label": "Spalt",
+          "options": [
+            { "value": "vanster", "label": "Vänster" },
+            { "value": "hoger", "label": "Höger" }
+          ],
+          "default": "vanster"
+        }
+      ]
+    },
+    {
+      "type": "knapp",
+      "name": "Knapp",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Knapptext" },
+        { "type": "url", "id": "lank", "label": "Länk" },
+        { "type": "color", "id": "bakgrund", "label": "Bakgrund", "default": "#000000" },
+        { "type": "color", "id": "textfarg", "label": "Textfärg", "default": "#ffffff" },
+        { "type": "number", "id": "luft_over", "label": "Extra luft över (px)", "default": 0 },
         { "type": "checkbox", "id": "sist_mobil", "label": "Sist i mobil (efter båda spalterna)", "default": false },
         {
           "type": "select",
