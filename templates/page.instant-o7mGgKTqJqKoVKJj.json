@@ -520,7 +520,7 @@
           "type": "bild",
           "settings": {
             "bild": "shopify://shop_images/sida-ljudhealing-yoga1.jpg",
-            "alt": "",
+            "alt": "Kvinna spelar på en meditationschime bland gitarrerna i butiken",
             "lank": "",
             "kolumn": "vanster"
           }
@@ -529,7 +529,7 @@
           "type": "bild",
           "settings": {
             "bild": "shopify://shop_images/sida-ljudhealing-yoga2.jpg",
-            "alt": "",
+            "alt": "Kalimba från Meinl Sonic Energy spelas i knät",
             "lank": "shopify://products/sonic-energy-kl1706h-kalimba-c-major-17-note",
             "kolumn": "hoger"
           }
@@ -794,7 +794,7 @@
         "gap": 18,
         "color_scheme": "scheme-1",
         "padding-block-start": 30,
-        "padding-block-end": 30
+        "padding-block-end": 0
       }
     },
     "mug_03": {
@@ -804,7 +804,7 @@
           "type": "bild",
           "settings": {
             "bild": "shopify://shop_images/sida-ljudhealing-yoga3.jpg",
-            "alt": "",
+            "alt": "Kristallklangskål med stav på en orientalisk matta",
             "lank": "shopify://products/mcsb10d-marble-singing-bowl-10-note-d4-sacral-chakra",
             "kolumn": "vanster"
           }
@@ -813,7 +813,7 @@
           "type": "bild",
           "settings": {
             "bild": "shopify://shop_images/sida-ljudhealing-yoga4.jpg",
-            "alt": "",
+            "alt": "Kristallklangskålar i olika färger slås an på en matta",
             "lank": "shopify://products/ecsbsetebg-essence-crystal-singing-bowl-set-e4-b3-g3",
             "kolumn": "hoger"
           }
@@ -1068,7 +1068,7 @@
         "gap": 18,
         "color_scheme": "scheme-1",
         "padding-block-start": 30,
-        "padding-block-end": 30
+        "padding-block-end": 0
       }
     },
     "mug_05": {
@@ -1078,7 +1078,7 @@
           "type": "bild",
           "settings": {
             "bild": "shopify://shop_images/sida-ljudhealing-yoga5.jpg",
-            "alt": "",
+            "alt": "Yogalärare med tre klangskålar framför sig i butiken",
             "lank": "shopify://products/sb-u-1500-universal-singing-bowl-set-3-pcs-set",
             "kolumn": "vanster"
           }
@@ -1087,7 +1087,7 @@
           "type": "bild",
           "settings": {
             "bild": "shopify://shop_images/sida-ljudhealing-yoga6.jpg",
-            "alt": "",
+            "alt": "Steel tongue drum spelas med stav på en matta",
             "lank": "shopify://products/ostd2nb-octave-steel-tongue-drum-d-amara-navy-blue",
             "kolumn": "hoger"
           }
@@ -1352,7 +1352,7 @@
         "gap": 18,
         "color_scheme": "scheme-1",
         "padding-block-start": 30,
-        "padding-block-end": 30
+        "padding-block-end": 0
       }
     },
     "mug_07": {
@@ -1362,7 +1362,7 @@
           "type": "bild",
           "settings": {
             "bild": "shopify://shop_images/sida-ljudhealing-yoga7.jpg",
-            "alt": "",
+            "alt": "Kvinna lyssnar nära en månmeditationschime",
             "lank": "shopify://products/mmc44s-moon-meditation-chime-44-silver",
             "kolumn": "vanster"
           }
@@ -1380,7 +1380,7 @@
           "type": "bild",
           "settings": {
             "bild": "shopify://shop_images/sida-ljudhealing-yoga8.jpg",
-            "alt": "",
+            "alt": "Meditationschime i brons sätts i rörelse",
             "lank": "shopify://products/mmc32b-sonic-energy-moon-meditation-chime-32-bronze",
             "kolumn": "hoger"
           }
@@ -1437,7 +1437,7 @@
           "type": "bild",
           "settings": {
             "bild": "shopify://shop_images/sida-ljudhealing-yoga9.jpg",
-            "alt": "",
+            "alt": "Planetstämd chime slås an med en klubba",
             "lank": "shopify://products/planetary-tuned-chime",
             "kolumn": "vanster"
           }
@@ -1701,7 +1701,7 @@
         "gap": 18,
         "color_scheme": "scheme-1",
         "padding-block-start": 30,
-        "padding-block-end": 30
+        "padding-block-end": 0
       }
     },
     "mug_10": {
@@ -1711,7 +1711,7 @@
           "type": "bild",
           "settings": {
             "bild": "shopify://shop_images/sida-ljudhealing-yoga10.jpg",
-            "alt": "",
+            "alt": "Kalimba i trä spelas på en orientalisk matta",
             "lank": "shopify://products/sonic-energy-kl1706h-kalimba-c-major-17-note",
             "kolumn": "vanster"
           }
@@ -1720,7 +1720,7 @@
           "type": "bild",
           "settings": {
             "bild": "shopify://shop_images/sida-ljudhealing-yoga11.jpg",
-            "alt": "",
+            "alt": "Bendo-shaker från Meinl Sonic Energy hålls upp",
             "lank": "shopify://products/sbrl-bendo-shaker-large",
             "kolumn": "hoger"
           }
@@ -1975,7 +1975,7 @@
         "gap": 18,
         "color_scheme": "scheme-1",
         "padding-block-start": 30,
-        "padding-block-end": 30
+        "padding-block-end": 0
       }
     },
     "mug_12": {
@@ -1985,7 +1985,7 @@
           "type": "bild",
           "settings": {
             "bild": "shopify://shop_images/sida-ljudhealing-yoga12.jpg",
-            "alt": "",
+            "alt": "Steel tongue drum i pärlgrått spelas med stav",
             "lank": "shopify://products/std4pg-steel-tongue-drum-g-minor-pearl-grey",
             "kolumn": "vanster"
           }
@@ -2003,7 +2003,7 @@
           "type": "bild",
           "settings": {
             "bild": "shopify://shop_images/sida-ljudhealing-yoga14.jpg",
-            "alt": "",
+            "alt": "Kalimba, skallror och shakers från Meinl Sonic Energy",
             "lank": "shopify://collections/ljudhealing-meditation",
             "luft_over": 80,
             "kolumn": "vanster"
@@ -2022,7 +2022,7 @@
           "type": "bild",
           "settings": {
             "bild": "shopify://shop_images/sida-ljudhealing-yoga13.jpg",
-            "alt": "",
+            "alt": "Thunder drum från Meinl Sonic Energy hålls upp i butiken",
             "lank": "shopify://products/td-l-thunder-drum-large",
             "kolumn": "hoger"
           }

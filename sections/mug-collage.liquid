@@ -47,7 +47,24 @@
                   {%- assign alt = block.settings.alt | default: block.settings.bild.alt | escape -%}
                   {%- capture luft -%}{% if block.settings.luft_over > 0 %}style="--mc-luft: {{ block.settings.luft_over }}px;"{% endif %}{%- endcapture -%}
                   {%- if block.settings.lank != blank -%}<a class="mug-collage__bild{% if block.settings.sist_mobil %} mug-collage--sist-mobil{% endif %}" href="{{ block.settings.lank }}" {{ luft }} {{ block.shopify_attributes }}>{%- else -%}<div class="mug-collage__bild{% if block.settings.sist_mobil %} mug-collage--sist-mobil{% endif %}" {{ luft }} {{ block.shopify_attributes }}>{%- endif -%}
-                    {{- block.settings.bild | image_url: width: 1600 | image_tag: widths: '400, 600, 800, 1000, 1200, 1600', sizes: '(min-width: 768px) 50vw, 100vw', loading: 'lazy', alt: alt -}}
+                    {%- liquid
+                      if kolumn == 'vanster'
+                        assign andel = s.vanster_bredd | divided_by: 100.0
+                      else
+                        assign andel = s.hoger_bredd | divided_by: 100.0
+                      endif
+                      assign marg = s.marginal | times: 2
+                      assign marg_mobil = s.marginal_mobil | times: 2
+                      capture storlekar
+                        echo '(min-width: 768px) calc((100vw - ' | append: marg | append: 'px) * ' | append: andel | append: '), calc(100vw - ' | append: marg_mobil | append: 'px)'
+                      endcapture
+                      if section.index <= 2
+                        assign laddning = 'eager'
+                      else
+                        assign laddning = 'lazy'
+                      endif
+                    -%}
+                    {{- block.settings.bild | image_url: width: 1800 | image_tag: widths: '360, 480, 640, 800, 960, 1100, 1300, 1500, 1800', sizes: storlekar, loading: laddning, alt: alt -}}
                   {%- if block.settings.lank != blank -%}</a>{%- else -%}</div>{%- endif -%}
                 {%- endif -%}
               {%- when 'text' -%}
