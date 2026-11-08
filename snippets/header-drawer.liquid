@@ -344,8 +344,30 @@
                             assign mug_ovriga = mug_genvagar | reject: 'title', 'Nyheter'
                             assign mug_grupper = link.links | where: 'levels', 1
                             assign mug_rader = mug_nyheter | concat: mug_grupper | concat: mug_ovriga
+
+                            # MUG 2026-11-08: genvägar som leder till samma sida som en grupp, en länk i en grupp
+                            # eller en bildpuff i samma kategori visas inte i mobilen (dubbletter). Desktop har kvar dem.
+                            assign mug_upptagna = '|'
+                            for g in mug_grupper
+                              assign u = g.url | remove: 'https://www.mug.se' | split: '?' | first
+                              assign mug_upptagna = mug_upptagna | append: u | append: '|'
+                              for l in g.links
+                                assign u = l.url | remove: 'https://www.mug.se' | split: '?' | first
+                                assign mug_upptagna = mug_upptagna | append: u | append: '|'
+                              endfor
+                            endfor
+                            assign mug_pkat = linklists['mobilpuffar'].links | where: 'title', link.title | first
+                            for l in mug_pkat.links
+                              assign u = l.url | remove: 'https://www.mug.se' | split: '?' | first
+                              assign mug_upptagna = mug_upptagna | append: u | append: '|'
+                            endfor
                           -%}
                           {%- for childlink in mug_rader -%}
+                            {%- if childlink.links == blank and childlink.title != 'Nyheter' -%}
+                              {%- assign u = childlink.url | remove: 'https://www.mug.se' | split: '?' | first -%}
+                              {%- assign nyckel = '|' | append: u | append: '|' -%}
+                              {%- if mug_upptagna contains nyckel -%}{%- continue -%}{%- endif -%}
+                            {%- endif -%}
                             <li
                               class="
                                 menu-drawer__list-item
