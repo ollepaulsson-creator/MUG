@@ -800,8 +800,32 @@
       }
     },
     "featured_slagverk_1": {
-      "type": "instant-m2nFbDXTeAwVGGCk",
-      "settings": {}
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-mcdj4q-section-arturia.jpg",
+            "logga": "shopify://shop_images/banner-vckrah-arturia.png",
+            "lank": "/pages/arturia-digital-precision-analog-sjal",
+            "textstil": "kort",
+            "rubrik": "Digital precision möter analog själ",
+            "brodtext": "Franska Arturia har blivit en nyckelspelare inom modern musikproduktion genom att kombinera analog värme med digital precision. Med sina prisbelönta synthar, mjukvaruinstrument och controllers erbjuder företaget verktyg som förenar klassiska ljud med framtidens teknik.",
+            "logga_bredd": 110,
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1"
+      ],
+      "settings": {
+        "hojd_lage": "fyll",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      }
     }
   },
   "order": [

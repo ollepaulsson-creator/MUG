@@ -800,8 +800,32 @@
       }
     },
     "featured_elgitarr_1": {
-      "type": "instant-pAIjqVrDW5Me8tFH",
-      "settings": {}
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-qjwehp-prs.jpg",
+            "logga": "shopify://shop_images/banner-yyjsz1-prs.png",
+            "lank": "/pages/prs-hantverk-signerat-paul-reed-smith",
+            "textstil": "kort",
+            "rubrik": "Hantverk signerat Paul Reed Smith",
+            "brodtext": "Amerikanska PRS Guitars har sedan mitten av 1980-talet byggt upp ett rykte som en av världens mest respekterade gitarrtillverkare. Paul Reed Smith var inte nöjd med att bara spela – han ville förstå, förfina och konstant förbättra. Med balans mellan hantverk, innovation och estetik jagar PRS perfektion.",
+            "logga_bredd": 110,
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1"
+      ],
+      "settings": {
+        "hojd_lage": "fyll",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      }
     }
   },
   "order": [

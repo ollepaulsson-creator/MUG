@@ -800,8 +800,31 @@
       }
     },
     "featured_bas_1": {
-      "type": "instant-3Gzh5NpGBNGISxW3",
-      "settings": {}
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/banner-i3r3sc-arturia.gif",
+            "lank": "/pages/arturia-digital-precision-moter-analog-sjal",
+            "textstil": "rad",
+            "rubrik": "Bas 1",
+            "uppmaning": "UPPTÄCK",
+            "dolj_uppmaning_mobil": true,
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1"
+      ],
+      "settings": {
+        "hojd_lage": "fyll",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true
+      }
     }
   },
   "order": [
