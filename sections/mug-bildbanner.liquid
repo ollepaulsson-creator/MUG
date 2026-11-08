@@ -13,7 +13,19 @@
 {%- enddoc -%}
 {%- liquid
   assign rutor = section.blocks.size
+  # Kategorisidans kort (fyll, nyckel featured_<kategori>_<n>) finns i kollektionsmallen för alla
+  # kategorisidor, men ska bara skrivas ut där kollektionens metafält custom.featured_grid pekar på det
+  # (annars hämtar varje kategorisida alla korts bilder i onödan).
+  assign visa = true
+  if section.settings.hojd_lage == 'fyll' and collection
+    assign nyckel = section.id | split: '__' | last | remove_first: 'featured_' | replace: '_', '-'
+    assign valda = collection.metafields.custom.featured_grid.value | downcase | replace: ' ', '-'
+    unless valda contains nyckel
+      assign visa = false
+    endunless
+  endif
 -%}
+{%- if visa -%}
 <div
   class="mug-banner mug-banner--{{ section.settings.hojd_lage }}{% if section.settings.mobil_omvand %} mug-banner--omvand{% endif %}"
   style="--mb-h: {{ section.settings.hojd_desktop }}px; --mb-h-laptop: {{ section.settings.hojd_laptop }}px; --mb-h-mobil: {{ section.settings.hojd_mobil }}px;"
@@ -29,7 +41,9 @@
       assign mediaklass = 'mug-banner__media mug-banner__media--' | append: b.bildlage
       assign mediaklass_mobil = mediaklass | append: ' mug-banner__media--mobil'
       assign mediaklass_desktop = mediaklass | append: ' mug-banner__media--desktop'
-      if forloop.first
+      # Kategorisidans kort (fyll) renderas dolda på alla kategorisidor och visas bara där de hör hemma –
+      # ladda dem lat så att dolda kort inte hämtar bilder i onödan.
+      if forloop.first and section.settings.hojd_lage == 'fast'
         assign laddning = 'eager'
       else
         assign laddning = 'lazy'
@@ -83,6 +97,31 @@
     </{{ tagg }}>
   {%- endfor -%}
 </div>
+<script>
+  (function () {
+    /* Textraden i en ruta: rubrik + uppmaning på en rad. Ryms de inte döljs uppmaningen;
+       ryms inte rubriken ens ensam får den brytas. Körs om när rutans bredd ändras. */
+    var sek = document.currentScript.previousElementSibling;
+    if (!sek) return;
+    function justera(rad) {
+      rad.classList.remove('mug-banner__rad--utan-uppmaning', 'mug-banner__rad--bryt');
+      var rub = rad.querySelector('.mug-banner__rubrik');
+      if (!rub) return;
+      if (rub.scrollWidth > rub.clientWidth + 1 || rad.scrollWidth > rad.clientWidth + 1) {
+        rad.classList.add('mug-banner__rad--utan-uppmaning');
+        if (rub.scrollWidth > rub.clientWidth + 1) rad.classList.add('mug-banner__rad--bryt');
+      }
+    }
+    var rader = sek.querySelectorAll('.mug-banner__rad');
+    if (!rader.length) return;
+    var ro = window.ResizeObserver ? new ResizeObserver(function (poster) {
+      poster.forEach(function (p) { justera(p.target); });
+    }) : null;
+    rader.forEach(function (r) { justera(r); if (ro) ro.observe(r); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { rader.forEach(justera); });
+  })();
+</script>
+{%- endif -%}
 
 {% stylesheet %}
   .mug-banner {
@@ -103,6 +142,7 @@
   }
 
   .mug-banner__ruta {
+    container-type: inline-size;
     position: relative;
     display: block;
     flex: 1 1 0;
@@ -153,7 +193,7 @@
     right: 0;
     bottom: 0;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: flex-end;
     justify-content: space-between;
     gap: 0 16px;
@@ -163,6 +203,26 @@
     font-weight: 400;
     letter-spacing: 0.06em;
     text-transform: uppercase;
+  }
+
+  /* En rad: rubriken får inte brytas så länge den ryms ensam. Skriptet nedan döljer
+     uppmaningen när båda inte ryms, och tillåter radbrytning först när rubriken inte ryms ensam. */
+  .mug-banner__rubrik {
+    min-width: 0;
+    white-space: nowrap;
+  }
+
+  .mug-banner__uppmaning {
+    flex: none;
+    white-space: nowrap;
+  }
+
+  .mug-banner__rad--utan-uppmaning .mug-banner__uppmaning {
+    display: none;
+  }
+
+  .mug-banner__rad--bryt .mug-banner__rubrik {
+    white-space: normal;
   }
 
   .mug-banner__kort {
@@ -195,6 +255,21 @@
     font-weight: 400;
   }
 
+  /* Riktigt stora skärmar: höjden växer med bredden (55vw, rutorna blir ungefär kvadratiska)
+     men aldrig över 92 % av skärmhöjden och aldrig under den inställda höjden. */
+  @media (min-width: 1700px) {
+    .mug-banner:not(.mug-banner--fyll) {
+      height: clamp(var(--mb-h), 55vw, 92vh);
+    }
+  }
+
+  /* Smal ruta: bara rubriken, så att rubrik och uppmaning aldrig hamnar på varandra */
+  @container (max-width: 599px) {
+    .mug-banner__uppmaning {
+      display: none;
+    }
+  }
+
   @media (max-width: 1024px) {
     .mug-banner:not(.mug-banner--fyll) {
       height: var(--mb-h-laptop);
@@ -220,7 +295,9 @@
 
   }
 
-  @media (max-width: 575px) {
+  /* Staplade rutor redan under 900 px (Instant: 575) – annars blir rutorna så smala att
+     rubriken bryts på två rader och krockar med uppmaningen (surfplatta, liten laptop). */
+  @media (max-width: 900px) {
     .mug-banner:not(.mug-banner--fyll) {
       flex-direction: column;
       height: auto;
@@ -234,7 +311,9 @@
       flex: none;
       height: var(--mb-h-mobil);
     }
+  }
 
+  @media (max-width: 575px) {
     .mug-banner__stortext {
       font-size: var(--mb-stor-mobil);
     }
