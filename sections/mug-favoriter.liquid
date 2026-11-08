@@ -1,0 +1,204 @@
+{%- doc -%}
+  MUG 2026-11-08 (etapp 4, ersätter Instants Julklappsfavoriter).
+  Produktkort i rader om tre: egen bild (t.ex. frilagd) och egen text, medan namn, märke, pris och
+  länk hämtas från den kopplade produkten så att de alltid stämmer. Utan kopplad produkt används
+  reservfälten (namn, märke, pris) och kortet blir olänkat.
+{%- enddoc -%}
+{%- liquid
+  assign s = section.settings
+-%}
+<div class="mug-fav" style="--mf-over: {{ s.luft_over }}px; --mf-under: {{ s.luft_under }}px; --mf-max: {{ s.maxbredd }}px;">
+  <ul class="mug-fav__lista" role="list">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign b = block.settings
+        assign p = b.produkt
+        assign titel = b.namn
+        assign marke = b.marke
+        assign url = blank
+        if p != blank
+          assign titel = p.title
+          assign marke = p.vendor
+          assign url = p.url
+        endif
+      -%}
+      <li class="mug-fav__kort" {{ block.shopify_attributes }}>
+        {%- if url != blank -%}<a class="mug-fav__bild mug-prog" href="{{ url }}" style="background-image: url({{ b.bild | default: p.featured_image | image_url: width: 40 }});">{%- else -%}<div class="mug-fav__bild mug-prog" style="background-image: url({{ b.bild | default: p.featured_image | image_url: width: 40 }});">{%- endif -%}
+          {%- assign bild = b.bild | default: p.featured_image -%}
+          {%- if bild != blank -%}
+            {{- bild | image_url: width: 800 | image_tag: widths: '330, 500, 660, 800', sizes: '(min-width: 768px) 330px, 100vw', loading: 'lazy', alt: titel -}}
+          {%- endif -%}
+        {%- if url != blank -%}</a>{%- else -%}</div>{%- endif -%}
+        <h3 class="mug-fav__titel">
+          {%- if url != blank -%}<a href="{{ url }}">{{ titel | escape }}</a>{%- else -%}{{ titel | escape }}{%- endif -%}
+        </h3>
+        {%- if marke != blank -%}<p class="mug-fav__marke">{{ marke | escape }}</p>{%- endif -%}
+        {%- if b.text != blank -%}<div class="mug-fav__text">{{ b.text }}</div>{%- endif -%}
+        <p class="mug-fav__pris">
+          {%- if p != blank -%}
+            {%- if p.available == false -%}
+              <span class="mug-fav__slut">Tillfälligt slut</span> ·
+            {%- endif -%}
+            {%- if p.price_varies -%}Från {% endif -%}
+            {{ p.price | money_without_trailing_zeros }}
+            {%- if p.compare_at_price > p.price -%}
+              <s>{{ p.compare_at_price | money_without_trailing_zeros }}</s>
+            {%- endif -%}
+          {%- else -%}
+            {{ b.pris | escape }}
+          {%- endif -%}
+        </p>
+      </li>
+    {%- endfor -%}
+  </ul>
+</div>
+
+<script>
+  (function () {
+    if (window.mugProgressiv) return;
+    window.mugProgressiv = true;
+    function klar(img) { img.classList.add('mug-prog--klar'); }
+    document.addEventListener('load', function (e) {
+      if (e.target.tagName === 'IMG' && e.target.closest('.mug-prog')) klar(e.target);
+    }, true);
+    function kolla() {
+      document.querySelectorAll('.mug-prog img').forEach(function (img) { if (img.complete && img.naturalWidth) klar(img); });
+    }
+    kolla();
+    document.addEventListener('DOMContentLoaded', kolla);
+  })();
+</script>
+
+{% stylesheet %}
+  .mug-prog {
+    background-color: rgb(127 127 127 / 0.15);
+    background-position: center;
+    background-size: cover;
+  }
+
+  .mug-prog img {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .mug-prog img.mug-prog--klar {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mug-prog img { transition: none; }
+  }
+
+  .mug-fav {
+    padding: var(--mf-over) 20px var(--mf-under);
+  }
+
+  .mug-fav__lista {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 15px;
+    row-gap: 60px;
+    max-width: var(--mf-max, 1000px);
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+  }
+
+  .mug-fav__bild {
+    display: block;
+    aspect-ratio: 323 / 314;
+    overflow: hidden;
+    background-color: transparent;
+  }
+
+  .mug-fav__bild img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .mug-fav__titel {
+    margin: 25px 0 15px;
+    color: inherit;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: normal;
+    text-transform: none;
+    text-wrap-style: pretty;
+  }
+
+  .mug-fav__titel a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .mug-fav__marke {
+    margin: 0 0 15px;
+    font-size: 18px;
+    line-height: 1.6;
+    text-transform: uppercase;
+  }
+
+  .mug-fav__text,
+  .mug-fav__text p {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.6;
+    text-wrap-style: pretty;
+  }
+
+  .mug-fav__pris {
+    margin: 15px 0 0;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  .mug-fav__pris s {
+    margin-left: 6px;
+    opacity: 0.55;
+  }
+
+  .mug-fav__slut {
+    color: #b00020;
+  }
+
+  @media (max-width: 767px) {
+    .mug-fav__lista {
+      grid-template-columns: 1fr;
+      row-gap: 48px;
+    }
+
+    .mug-fav__titel { font-size: 22px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MUG favoriter",
+  "tag": "section",
+  "class": "mug-fav-sektion",
+  "settings": [
+    { "type": "number", "id": "maxbredd", "label": "Maxbredd (px)", "default": 1000 },
+    { "type": "number", "id": "luft_over", "label": "Luft över (px)", "default": 60 },
+    { "type": "number", "id": "luft_under", "label": "Luft under (px)", "default": 60 }
+  ],
+  "blocks": [
+    {
+      "type": "produkt",
+      "name": "Produkt",
+      "settings": [
+        { "type": "product", "id": "produkt", "label": "Produkt (namn, märke, pris och länk hämtas härifrån)" },
+        { "type": "image_picker", "id": "bild", "label": "Egen bild (annars produktens)" },
+        { "type": "richtext", "id": "text", "label": "Text" },
+        { "type": "header", "content": "Reserv om ingen produkt är kopplad" },
+        { "type": "text", "id": "namn", "label": "Namn" },
+        { "type": "text", "id": "marke", "label": "Märke" },
+        { "type": "text", "id": "pris", "label": "Pris" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "MUG favoriter" }]
+}
+{% endschema %}

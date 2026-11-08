@@ -50,9 +50,9 @@
       endif
     -%}
     <{{ tagg }}
-      class="mug-banner__ruta mug-banner__ruta--{{ b.textstil }}"
+      class="mug-banner__ruta mug-banner__ruta--{{ b.textstil }}{% if laddning == 'lazy' and b.video == blank and b.bild != blank %} mug-prog{% endif %}"
       {% if b.lank != blank %}href="{{ b.lank }}"{% endif %}
-      style="--mb-text: {{ b.textfarg }}; --mb-bg: {{ b.bakgrundsfarg }}; --mb-stor: {{ b.stortext_storlek }}px; --mb-stor-laptop: {{ b.stortext_laptop }}px; --mb-stor-surf: {{ b.stortext_surfplatta }}px; --mb-stor-mobil: {{ b.stortext_mobil }}px;"
+      style="{% if laddning == 'lazy' and b.video == blank and b.bild != blank %}background-image: url({{ b.bild | image_url: width: 40 }});{% endif %} --mb-text: {{ b.textfarg }}; --mb-bg: {{ b.bakgrundsfarg }}; --mb-stor: {{ b.stortext_storlek }}px; --mb-stor-laptop: {{ b.stortext_laptop }}px; --mb-stor-surf: {{ b.stortext_surfplatta }}px; --mb-stor-mobil: {{ b.stortext_mobil }}px;"
       {{ block.shopify_attributes }}
     >
       {%- if b.video != blank -%}
@@ -123,7 +123,44 @@
 </script>
 {%- endif -%}
 
+
+<script>
+  (function () {
+    if (window.mugProgressiv) return;
+    window.mugProgressiv = true;
+    function klar(img) { img.classList.add('mug-prog--klar'); }
+    document.addEventListener('load', function (e) {
+      if (e.target.tagName === 'IMG' && e.target.closest('.mug-prog')) klar(e.target);
+    }, true);
+    function kolla() {
+      document.querySelectorAll('.mug-prog img').forEach(function (img) { if (img.complete && img.naturalWidth) klar(img); });
+    }
+    kolla();
+    document.addEventListener('DOMContentLoaded', kolla);
+    document.addEventListener('shopify:section:load', kolla);
+  })();
+</script>
+
 {% stylesheet %}
+  .mug-prog {
+    background-color: rgb(127 127 127 / 0.15);
+    background-position: center;
+    background-size: cover;
+  }
+
+  .mug-prog img {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .mug-prog img.mug-prog--klar {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mug-prog img { transition: none; }
+  }
+
   .mug-banner {
     display: flex;
     gap: 4px;

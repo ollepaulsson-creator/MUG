@@ -21,13 +21,33 @@
         {%- endif -%}
         {{- s.bild | image_url: width: 2400 | image_tag: widths: '800, 1200, 1600, 2000, 2400', sizes: '100vw', loading: 'lazy', alt: alt, class: 'mug-media__bild mug-media__bild--desktop' -}}
       {%- endif -%}
-      {% render 'mug-videorad', text: s.bildtext, youtube: s.youtube, lank: s.lank %}
+      {%- if s.bildtext_stil == 'text' -%}
+        {%- if s.bildtext != blank -%}<p class="mug-bildtext-ren">{{ s.bildtext | escape }}</p>{%- endif -%}
+      {%- else -%}
+        {% render 'mug-videorad', text: s.bildtext, youtube: s.youtube, lank: s.lank %}
+      {%- endif -%}
     </div>
   {%- else -%}
     {%- if s.bild != blank -%}
-      <div class="mug-media__ram"><div class="mug-prog" style="background-image: url({{ s.bild | image_url: width: 40 }});">
-        {{- s.bild | image_url: width: 2400 | image_tag: widths: '800, 1200, 1600, 2000, 2400', sizes: '100vw', loading: 'lazy', alt: alt, class: 'mug-media__bild' -}}
-      </div></div>
+      {%- liquid
+        if section.index <= 3
+          assign laddning = 'eager'
+          assign prio = 'high'
+        else
+          assign laddning = 'lazy'
+          assign prio = 'auto'
+        endif
+      -%}
+      <div class="mug-media__ram{% if s.utan_luft %} mug-media__ram--utan-luft{% endif %}">
+        <div class="mug-prog{% if s.mobilbild != blank %} mug-media__bild--desktop{% endif %}" style="background-image: url({{ s.bild | image_url: width: 40 }});">
+          {{- s.bild | image_url: width: 2400 | image_tag: widths: '800, 1200, 1600, 2000, 2400', sizes: '100vw', loading: laddning, fetchpriority: prio, alt: alt, class: 'mug-media__bild' -}}
+        </div>
+        {%- if s.mobilbild != blank -%}
+          <div class="mug-prog mug-media__bild--mobil" style="background-image: url({{ s.mobilbild | image_url: width: 40 }});">
+            {{- s.mobilbild | image_url: width: 1200 | image_tag: widths: '400, 600, 800, 1000, 1200', sizes: '100vw', loading: laddning, alt: alt, class: 'mug-media__bild' -}}
+          </div>
+        {%- endif -%}
+      </div>
     {%- endif -%}
     {% render 'mug-videorad', text: s.bildtext, youtube: s.youtube, lank: s.lank %}
   {%- endif -%}
@@ -52,6 +72,21 @@
 <noscript><style>.mug-prog img { opacity: 1 !important; }</style></noscript>
 
 {% stylesheet %}
+  .mug-bildtext-ren {
+    position: relative;
+    max-width: 380px;
+    margin: 0;
+    padding: 30px;
+    color: inherit;
+    font-size: 15px;
+    line-height: 1.45;
+    text-wrap-style: pretty;
+  }
+
+  @media (max-width: 575px) {
+    .mug-bildtext-ren { padding: 20px; }
+  }
+
   /* progressiv laddning: suddig miniatyr som bakgrund, skarp bild tonar in när den laddats */
   .mug-prog {
     background-color: rgb(127 127 127 / 0.15);
@@ -80,6 +115,15 @@
 
   .mug-media__ram {
     padding: 40px 0;
+  }
+
+  .mug-media__ram--utan-luft {
+    padding: 0;
+  }
+
+  @media (max-width: 575px) {
+    .mug-media__ram .mug-media__bild--desktop:has(+ .mug-media__bild--mobil) { display: none; }
+    .mug-media__ram .mug-media__bild--mobil { display: block; }
   }
 
   .mug-media__ram .mug-media__bild {
@@ -136,12 +180,23 @@
       "default": "yta"
     },
     { "type": "image_picker", "id": "bild", "label": "Bild" },
-    { "type": "image_picker", "id": "mobilbild", "label": "Mobilbild (valfri, läget yta)" },
+    { "type": "image_picker", "id": "mobilbild", "label": "Mobilbild (valfri, visas ≤575 px)" },
+    { "type": "checkbox", "id": "utan_luft", "label": "Ingen luft över och under bilden (läget bild)", "default": false },
     { "type": "video", "id": "video", "label": "Bakgrundsvideo (läget yta, ersätter bilden)" },
     { "type": "number", "id": "hojd", "label": "Höjd, läget yta (px)", "default": 740 },
     { "type": "number", "id": "hojd_surfplatta", "label": "Höjd surfplatta ≤768 px (px)", "default": 580 },
     { "type": "number", "id": "hojd_mobil", "label": "Höjd mobil ≤575 px (px)", "default": 420 },
-    { "type": "text", "id": "bildtext", "label": "Bildtext" },
+    { "type": "textarea", "id": "bildtext", "label": "Bildtext" },
+    {
+      "type": "select",
+      "id": "bildtext_stil",
+      "label": "Bildtextens stil",
+      "options": [
+        { "value": "rad", "label": "Rad med play-ikon (video/länk)" },
+        { "value": "text", "label": "Text nere till vänster" }
+      ],
+      "default": "rad"
+    },
     { "type": "video_url", "id": "youtube", "label": "YouTube-video (öppnas vid klick)", "accept": ["youtube"] },
     { "type": "url", "id": "lank", "label": "Länk (om ingen video)" },
     { "type": "color", "id": "bakgrund", "label": "Bakgrund", "default": "#000000" },

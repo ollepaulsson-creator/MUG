@@ -1,0 +1,2246 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "name": "Breadcrumbs",
+      "settings": {
+        "enable": true,
+        "nav_menu": "main-menu",
+        "home_label": "Start",
+        "aria_label": "Breadcrumbs"
+      }
+    },
+    "section_8aKKyY": {
+      "type": "section",
+      "blocks": {
+        "group_CbFznk": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://collections/syntar",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/DSC05004_b5afde67-a16d-4173-a44d-dcae3a76f81b.gif",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_D3zCpJ": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h6",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_D3zCpJ"
+          ]
+        },
+        "group_TCKgqL": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://pages/besok-butiken",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/DSC03595_v2_1080x_83b743ac-e3f4-41a0-b05f-3e34e6760869.webp",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_mgzFBp": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "<h6>Besök butiken</h6>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h6",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_mgzFBp"
+          ]
+        },
+        "group_Eqaa3L": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://collections/merch",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/VNAV_Arket_tote_16b52b5e-9d30-497b-a7a8-5148fc1036fd.webp",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_CU7EAj": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h4",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_CU7EAj"
+          ]
+        }
+      },
+      "block_order": [
+        "group_CbFznk",
+        "group_TCKgqL",
+        "group_Eqaa3L"
+      ],
+      "custom_css": [
+        ".group-block-content {position: relative;}",
+        ".group-block--width-fill h6 {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px; font-weight: 400; text-align: center; z-index: 2;}",
+        "img {display: flex; justify-content: center;}",
+        ".deferred-media__poster-button {}",
+        ".layout-panel-flex--row > .group-block--width-fill {min-height: 480px !important;}",
+        ".section-content-wrapper.section-content-wrapper {padding-bottom: 0px !important;}"
+      ],
+      "name": "t:names.multicolumn",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "flex-start",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "full-width",
+        "section_height": "medium",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "section_t7Jwap": {
+      "type": "section",
+      "blocks": {
+        "group_QaPwKz": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://pages/om-oss",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/skylt_26e37ad3-28e5-4bfe-8738-5534c1fa403e.jpg",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_m7pDx6": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "<h6>Est. 1973</h6>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h6",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_m7pDx6"
+          ]
+        },
+        "group_jQfkDk": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://collections/ernie-ball",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/ernie_stop_201f56c1-9d18-4061-b43a-a2fc208b6479.webp",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "group_HW8mfU": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://pages/serviceverkstad",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/gittarvard.webp",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_kWMnFd": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "<h6>Service och verkstad</h6>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h6",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_kWMnFd"
+          ]
+        }
+      },
+      "block_order": [
+        "group_QaPwKz",
+        "group_jQfkDk",
+        "group_HW8mfU"
+      ],
+      "custom_css": [
+        ".group-block-content {position: relative;}",
+        ".group-block--width-fill h6 {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px; font-weight: 400; text-align: center; z-index: 2;}",
+        "img {display: flex; justify-content: center;}",
+        ".deferred-media__poster-button {}",
+        ".layout-panel-flex--row > .group-block--width-fill {min-height: 480px !important;}",
+        ".section-content-wrapper.section-content-wrapper {padding-bottom: 0px !important;}"
+      ],
+      "name": "t:names.multicolumn",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "flex-start",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "full-width",
+        "section_height": "medium",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "jul_01": {
+      "type": "mug-hero",
+      "settings": {
+        "bildlage": "bakgrund",
+        "bild": "shopify://shop_images/jul-j5faw7-uavolt176.jpg",
+        "mobilbild": "shopify://shop_images/jul-friosn-inspelningmobil.jpg",
+        "bildfokus": "49% 61%",
+        "bildfokus_mobil": "50% 86%",
+        "hojd": 1100,
+        "hojd_mobil": 800,
+        "logga_alt": "",
+        "logga_bredd": 120,
+        "logga_over": 80,
+        "logga_under": 40,
+        "logga_over_mobil": 60,
+        "logga_under_mobil": 40,
+        "rubrik": "Julklappsguiden – årets bästa tips för hemmastudion",
+        "rubrik_storlek": 32,
+        "rubrik_storlek_mobil": 32,
+        "rubrik_over": 80,
+        "rubrik_over_mobil": 60,
+        "rubrik_bredd": 90,
+        "ingress": "<p>’This the season to make music! Oavsett om du letar efter den perfekta julklappen till producenten i ditt liv eller om du själv är sugen på en välförtjänt uppgradering, så har vi tipsen för hemmastudion. Oavsett budget eller nivå finns här gåvor som garanterat träffar rätt ton i jul.</p>",
+        "ingress_storlek": 18,
+        "ingress_radavstand": 150,
+        "ingress_bredd": 45,
+        "ingress_bredd_mobil": 95,
+        "bildtext": "Volt 176 är den perfekta julklappen till den som vill spela in sin musik med riktigt bra ljudkvalitet. Du får varm vintage-karaktär, en inbyggd 76-kompressor, till ett grymt pris!",
+        "bildtext_stil": "text",
+        "lank": "",
+        "bakgrund": "#000000",
+        "textfarg": "#ffffff"
+      }
+    },
+    "jul_02": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "center",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 17,
+            "padding-block-end": 10,
+            "padding-inline-start": 15,
+            "padding-inline-end": 15
+          },
+          "blocks": {
+            "product_list_text_kmdAw8": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h2>Begagnat och vintage</h2>"
+              },
+              "blocks": {},
+              "disabled": true
+            },
+            "button_kyPFyt": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "SE ALLA",
+                "link": "{{ closest.collection.url }}",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 7,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 30
+              },
+              "blocks": {},
+              "disabled": true
+            },
+            "swatches_8WFcrC": {
+              "type": "swatches",
+              "name": "t:names.swatches",
+              "settings": {
+                "product_swatches_alignment": "flex-start",
+                "product_swatches_alignment_mobile": "flex-start",
+                "hide_padding": false,
+                "product_swatches_padding_top": 4,
+                "product_swatches_padding_bottom": 0,
+                "product_swatches_padding_left": 0,
+                "product_swatches_padding_right": 0
+              },
+              "blocks": {},
+              "disabled": true
+            },
+            "jul_text": {
+              "type": "text",
+              "name": "Avsnittstext",
+              "settings": {
+                "text": "<h2>Personalens favoriter i jul</h2><p>Här tipsar vi i personalen om de bästa prylarna för hemma-studion. Från kristallklara studiolurar och kraftfulla studio monitorer till mångsidiga MIDI-keyboards och ljudkort i proffsklass – här har vi samlat den bästa utrustningen.</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "jul_text",
+            "product_list_text_kmdAw8",
+            "button_kyPFyt",
+            "swatches_8WFcrC"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 2,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 15,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_tiBwKW": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_bWTfX3": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>{{ closest.product.vendor }}</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 15,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_RKXdGb": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 6,
+                "padding-block-end": 6,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_RB3K4t": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 15,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_tiBwKW",
+            "text_bWTfX3",
+            "product_title_RKXdGb",
+            "price_RB3K4t"
+          ]
+        }
+      },
+      "name": "t:names.products_carousel",
+      "settings": {
+        "collection": "jul-personalens-favoriter-i-jul-inspelninghidden",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "max_products": 16,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 0,
+        "rows_gap": 24,
+        "icons_style": "arrows_large",
+        "icons_shape": "circle",
+        "section_width": "full-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 18,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 10,
+        "padding-block-end": 0
+      }
+    },
+    "jul_03": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "center",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 17,
+            "padding-block-end": 10,
+            "padding-inline-start": 15,
+            "padding-inline-end": 15
+          },
+          "blocks": {
+            "product_list_text_kmdAw8": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h2>Begagnat och vintage</h2>"
+              },
+              "blocks": {},
+              "disabled": true
+            },
+            "button_kyPFyt": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "SE ALLA",
+                "link": "{{ closest.collection.url }}",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 7,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 30
+              },
+              "blocks": {},
+              "disabled": true
+            },
+            "swatches_8WFcrC": {
+              "type": "swatches",
+              "name": "t:names.swatches",
+              "settings": {
+                "product_swatches_alignment": "flex-start",
+                "product_swatches_alignment_mobile": "flex-start",
+                "hide_padding": false,
+                "product_swatches_padding_top": 4,
+                "product_swatches_padding_bottom": 0,
+                "product_swatches_padding_left": 0,
+                "product_swatches_padding_right": 0
+              },
+              "blocks": {},
+              "disabled": true
+            },
+            "jul_text": {
+              "type": "text",
+              "name": "Avsnittstext",
+              "settings": {
+                "text": "<h2>Hörlurar</h2><p>Varje musiker som producerar digitalt behöver ett par riktigt bra par bra hörlurar – inte bara för mixning, utan också för de där sena kvällssessionerna när man inte kan höja volymen på monitorerna. Ge bort precision och komfort i jul. Oavsett om de spelar in sång, instrument, redigerar beats eller bara lyssnar på din senaste mix är bra hörlurar en gåva som kommer att användas varje dag.</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "jul_text",
+            "product_list_text_kmdAw8",
+            "button_kyPFyt",
+            "swatches_8WFcrC"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 2,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 15,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_tiBwKW": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_bWTfX3": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>{{ closest.product.vendor }}</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 15,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_RKXdGb": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 6,
+                "padding-block-end": 6,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_RB3K4t": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 15,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_tiBwKW",
+            "text_bWTfX3",
+            "product_title_RKXdGb",
+            "price_RB3K4t"
+          ]
+        }
+      },
+      "name": "t:names.products_carousel",
+      "settings": {
+        "collection": "jul-horlurarhidden",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "max_products": 16,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 0,
+        "rows_gap": 24,
+        "icons_style": "arrows_large",
+        "icons_shape": "circle",
+        "section_width": "full-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 18,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 10,
+        "padding-block-end": 0
+      }
+    },
+    "jul_04": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "center",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 17,
+            "padding-block-end": 10,
+            "padding-inline-start": 15,
+            "padding-inline-end": 15
+          },
+          "blocks": {
+            "product_list_text_kmdAw8": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h2>Begagnat och vintage</h2>"
+              },
+              "blocks": {},
+              "disabled": true
+            },
+            "button_kyPFyt": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "SE ALLA",
+                "link": "{{ closest.collection.url }}",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 7,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 30
+              },
+              "blocks": {},
+              "disabled": true
+            },
+            "swatches_8WFcrC": {
+              "type": "swatches",
+              "name": "t:names.swatches",
+              "settings": {
+                "product_swatches_alignment": "flex-start",
+                "product_swatches_alignment_mobile": "flex-start",
+                "hide_padding": false,
+                "product_swatches_padding_top": 4,
+                "product_swatches_padding_bottom": 0,
+                "product_swatches_padding_left": 0,
+                "product_swatches_padding_right": 0
+              },
+              "blocks": {},
+              "disabled": true
+            },
+            "jul_text": {
+              "type": "text",
+              "name": "Avsnittstext",
+              "settings": {
+                "text": "<h2>USB-MIDI klaviatur</h2><p>En USB-MIDI-klaviatur är en riktigt grym julklapp för den som vill skapa musik digitalt. Arturias modeller – från det portabla MiniLab 3 till det kreativa KeyStep och BeatStep och det mer omfattande KeyLab Essential – erbjuder hög spelkänsla, genomtänkta kontroller och integrerad mjukvara som gör starten både inspirerande och enkel.</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "jul_text",
+            "product_list_text_kmdAw8",
+            "button_kyPFyt",
+            "swatches_8WFcrC"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 2,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 15,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_tiBwKW": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_bWTfX3": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>{{ closest.product.vendor }}</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 15,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_RKXdGb": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 6,
+                "padding-block-end": 6,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_RB3K4t": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 15,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_tiBwKW",
+            "text_bWTfX3",
+            "product_title_RKXdGb",
+            "price_RB3K4t"
+          ]
+        }
+      },
+      "name": "t:names.products_carousel",
+      "settings": {
+        "collection": "jul-usb-midi-klaviaturhidden-1",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "max_products": 16,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 0,
+        "rows_gap": 24,
+        "icons_style": "arrows_large",
+        "icons_shape": "circle",
+        "section_width": "full-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 18,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 10,
+        "padding-block-end": 0
+      }
+    },
+    "jul_05": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "center",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 17,
+            "padding-block-end": 10,
+            "padding-inline-start": 15,
+            "padding-inline-end": 15
+          },
+          "blocks": {
+            "product_list_text_kmdAw8": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h2>Begagnat och vintage</h2>"
+              },
+              "blocks": {},
+              "disabled": true
+            },
+            "button_kyPFyt": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "SE ALLA",
+                "link": "{{ closest.collection.url }}",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 7,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 30
+              },
+              "blocks": {},
+              "disabled": true
+            },
+            "swatches_8WFcrC": {
+              "type": "swatches",
+              "name": "t:names.swatches",
+              "settings": {
+                "product_swatches_alignment": "flex-start",
+                "product_swatches_alignment_mobile": "flex-start",
+                "hide_padding": false,
+                "product_swatches_padding_top": 4,
+                "product_swatches_padding_bottom": 0,
+                "product_swatches_padding_left": 0,
+                "product_swatches_padding_right": 0
+              },
+              "blocks": {},
+              "disabled": true
+            },
+            "jul_text": {
+              "type": "text",
+              "name": "Avsnittstext",
+              "settings": {
+                "text": "<h2>Ljudinterface</h2><p>En pålitlig ljudinterface är hjärtat i varje producents setup och kopplar samman mikrofoner, instrument och monitorer med kristallklar ljudkvalitet. Den här julen kan du hitta några av de bästa erbjudandena på interfaces och ljudkort som kombinerar professionell prestanda med oslagbart värde. Från kompakta och budgetvänliga alternativ perfekta för hemmastudior till avancerade enheter för fullskaliga produktioner – ett kvalitetsinterface är en gåva som får varje spår att låta som bäst utan att spräcka budgeten.</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "jul_text",
+            "product_list_text_kmdAw8",
+            "button_kyPFyt",
+            "swatches_8WFcrC"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 2,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 15,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_tiBwKW": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_bWTfX3": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>{{ closest.product.vendor }}</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 15,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_RKXdGb": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 6,
+                "padding-block-end": 6,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_RB3K4t": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 15,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_tiBwKW",
+            "text_bWTfX3",
+            "product_title_RKXdGb",
+            "price_RB3K4t"
+          ]
+        }
+      },
+      "name": "t:names.products_carousel",
+      "settings": {
+        "collection": "jul-ljudinterfacehidden",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "max_products": 16,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 0,
+        "rows_gap": 24,
+        "icons_style": "arrows_large",
+        "icons_shape": "circle",
+        "section_width": "full-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 18,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 10,
+        "padding-block-end": 0
+      }
+    },
+    "jul_06": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "center",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 17,
+            "padding-block-end": 10,
+            "padding-inline-start": 15,
+            "padding-inline-end": 15
+          },
+          "blocks": {
+            "product_list_text_kmdAw8": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h2>Begagnat och vintage</h2>"
+              },
+              "blocks": {},
+              "disabled": true
+            },
+            "button_kyPFyt": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "SE ALLA",
+                "link": "{{ closest.collection.url }}",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 7,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 30
+              },
+              "blocks": {},
+              "disabled": true
+            },
+            "swatches_8WFcrC": {
+              "type": "swatches",
+              "name": "t:names.swatches",
+              "settings": {
+                "product_swatches_alignment": "flex-start",
+                "product_swatches_alignment_mobile": "flex-start",
+                "hide_padding": false,
+                "product_swatches_padding_top": 4,
+                "product_swatches_padding_bottom": 0,
+                "product_swatches_padding_left": 0,
+                "product_swatches_padding_right": 0
+              },
+              "blocks": {},
+              "disabled": true
+            },
+            "jul_text": {
+              "type": "text",
+              "name": "Avsnittstext",
+              "settings": {
+                "text": "<h2>Studiomonitorer</h2><p>Bra hörlurar är viktiga, men inget slår klarheten och djupet hos ett par riktigt bra studiomonitorer. Dessa högtalare ger producenter en noggrann och detaljerad bild av mixen och hjälper varje kick, virvel och hi-hat att sitta perfekt. Från kompakta monitorer för sovrumsstudion till fullstora system för professionella miljöer – ett par kvalitets­högtalare kan förvandla arbetsytan och lyfta varje produktion. Hör din musik så som den var tänkt att låta.</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "jul_text",
+            "product_list_text_kmdAw8",
+            "button_kyPFyt",
+            "swatches_8WFcrC"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 2,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 15,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_tiBwKW": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_bWTfX3": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>{{ closest.product.vendor }}</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 15,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_RKXdGb": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 6,
+                "padding-block-end": 6,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_RB3K4t": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 15,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_tiBwKW",
+            "text_bWTfX3",
+            "product_title_RKXdGb",
+            "price_RB3K4t"
+          ]
+        }
+      },
+      "name": "t:names.products_carousel",
+      "settings": {
+        "collection": "jul-studiomonitorerhidden",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "max_products": 16,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 0,
+        "rows_gap": 24,
+        "icons_style": "arrows_large",
+        "icons_shape": "circle",
+        "section_width": "full-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 18,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 10,
+        "padding-block-end": 0
+      }
+    },
+    "jul_07": {
+      "type": "mug-mediablock",
+      "settings": {
+        "lage": "yta",
+        "bild": "shopify://shop_images/jul-h78em8-rodent1.jpg",
+        "mobilbild": "",
+        "hojd": 750,
+        "hojd_surfplatta": 580,
+        "hojd_mobil": 420,
+        "bildtext": "Røde NT1 är en fantastisk julklapp till alla som vill ta sina inspelningar till en professionell nivå. Med kristallklar detaljrikedom, låg brusnivå och en varm, naturlig klang.",
+        "bildtext_stil": "text",
+        "youtube": "",
+        "lank": "",
+        "bakgrund": "#000000",
+        "textfarg": "#ffffff"
+      }
+    },
+    "jul_08": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "center",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 17,
+            "padding-block-end": 10,
+            "padding-inline-start": 15,
+            "padding-inline-end": 15
+          },
+          "blocks": {
+            "product_list_text_kmdAw8": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h2>Begagnat och vintage</h2>"
+              },
+              "blocks": {},
+              "disabled": true
+            },
+            "button_kyPFyt": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "SE ALLA",
+                "link": "{{ closest.collection.url }}",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 7,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 30
+              },
+              "blocks": {},
+              "disabled": true
+            },
+            "swatches_8WFcrC": {
+              "type": "swatches",
+              "name": "t:names.swatches",
+              "settings": {
+                "product_swatches_alignment": "flex-start",
+                "product_swatches_alignment_mobile": "flex-start",
+                "hide_padding": false,
+                "product_swatches_padding_top": 4,
+                "product_swatches_padding_bottom": 0,
+                "product_swatches_padding_left": 0,
+                "product_swatches_padding_right": 0
+              },
+              "blocks": {},
+              "disabled": true
+            },
+            "jul_text": {
+              "type": "text",
+              "name": "Avsnittstext",
+              "settings": {
+                "text": "<h2>Inspelningsmikrofoner</h2><p>Oavsett om det handlar om att spela in sång, instrument eller omgivningsljud är en högkvalitativ studiomikrofon ett måste för varje producent. Från mångsidiga kondensatormikrofoner som briljerar på sång till dynamiska mikrofoner byggda för kraftfulla inspelningar – rätt mikrofon kan få varje spår att låta professionellt och välpolerat. Ge bort klarhet och karaktär. En studiomikrofon är mer än bara utrustning; den är nyckeln till att förverkliga musikaliska idéer.</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "jul_text",
+            "product_list_text_kmdAw8",
+            "button_kyPFyt",
+            "swatches_8WFcrC"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 2,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 15,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_tiBwKW": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_bWTfX3": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>{{ closest.product.vendor }}</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 15,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_RKXdGb": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 6,
+                "padding-block-end": 6,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_RB3K4t": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 15,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_tiBwKW",
+            "text_bWTfX3",
+            "product_title_RKXdGb",
+            "price_RB3K4t"
+          ]
+        }
+      },
+      "name": "t:names.products_carousel",
+      "settings": {
+        "collection": "jul-inspelningsmikrofonerhidden",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "max_products": 16,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 0,
+        "rows_gap": 24,
+        "icons_style": "arrows_large",
+        "icons_shape": "circle",
+        "section_width": "full-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 18,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 10,
+        "padding-block-end": 0
+      }
+    },
+    "jul_09": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "center",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 17,
+            "padding-block-end": 10,
+            "padding-inline-start": 15,
+            "padding-inline-end": 15
+          },
+          "blocks": {
+            "product_list_text_kmdAw8": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h2>Begagnat och vintage</h2>"
+              },
+              "blocks": {},
+              "disabled": true
+            },
+            "button_kyPFyt": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "SE ALLA",
+                "link": "{{ closest.collection.url }}",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 7,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 30
+              },
+              "blocks": {},
+              "disabled": true
+            },
+            "swatches_8WFcrC": {
+              "type": "swatches",
+              "name": "t:names.swatches",
+              "settings": {
+                "product_swatches_alignment": "flex-start",
+                "product_swatches_alignment_mobile": "flex-start",
+                "hide_padding": false,
+                "product_swatches_padding_top": 4,
+                "product_swatches_padding_bottom": 0,
+                "product_swatches_padding_left": 0,
+                "product_swatches_padding_right": 0
+              },
+              "blocks": {},
+              "disabled": true
+            },
+            "jul_text": {
+              "type": "text",
+              "name": "Avsnittstext",
+              "settings": {
+                "text": "<h2>Produkter från MUG</h2><p>Osäker på vad du ska välja? Gör någon riktigt glad i Jul med ett presentkort, en halsduk eller en T-shirt från MUG. Våra presentkort är både snygga och användbara – och låter mottagaren välja fritt ur hela vårt sortiment. Samtidigt stöttar du din lokala musikaffär, vilket gör även oss extra glada i jul. God jul! :)</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "jul_text",
+            "product_list_text_kmdAw8",
+            "button_kyPFyt",
+            "swatches_8WFcrC"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 2,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 15,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_tiBwKW": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_bWTfX3": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>{{ closest.product.vendor }}</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 15,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_RKXdGb": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 6,
+                "padding-block-end": 6,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_RB3K4t": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 15,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_tiBwKW",
+            "text_bWTfX3",
+            "product_title_RKXdGb",
+            "price_RB3K4t"
+          ]
+        }
+      },
+      "name": "t:names.products_carousel",
+      "settings": {
+        "collection": "produkter-fran-mughidden",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "max_products": 16,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 0,
+        "rows_gap": 24,
+        "icons_style": "arrows_large",
+        "icons_shape": "circle",
+        "section_width": "full-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 18,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 10,
+        "padding-block-end": 0
+      }
+    },
+    "jul_10": {
+      "type": "mug-textblock",
+      "settings": {
+        "stil": "intro",
+        "knapp_text": "Visa allt i Julsortimentet",
+        "knapp_lank": "/pages/jul-med-extra-stamning-och-spelgladje",
+        "bakgrund": "#ffffff",
+        "textfarg": "#000000",
+        "luft_under": 60
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "jul_01",
+    "jul_02",
+    "jul_03",
+    "jul_04",
+    "jul_05",
+    "jul_06",
+    "jul_07",
+    "jul_08",
+    "jul_09",
+    "jul_10",
+    "section_8aKKyY",
+    "section_t7Jwap"
+  ]
+}

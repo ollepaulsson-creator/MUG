@@ -2535,3 +2535,42 @@ dialog.facets--drawer[open] {
   box-sizing: border-box;
   border-block: 1px solid rgb(229 229 229);
 }
+
+/* Etapp 4: julguidernas sektioner (jul_*) – produktrullarna som på varumärkessidorna, och rubrikraden
+   (rubrik + text i produktlistans rubrikblock) i samma stil som MUG textblock "avsnitt". */
+[id*="__jul_"] .resource-list__carousel:not(:has(.resource-list__slide:nth-child(5))) {
+  --peek-next-slide-size: 0px;
+}
+
+[id*="__jul_"] .resource-list__carousel .resource-list__item {
+  box-sizing: border-box;
+  border-block: 1px solid rgb(229 229 229);
+}
+
+[id*="__jul_"] .section-resource-list__header:has(p) h2 {
+  margin: 0 0 10px;
+  font-size: 24px !important;
+  font-weight: 400 !important;
+  line-height: 1.15 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  text-wrap-style: pretty;
+}
+
+[id*="__jul_"] .section-resource-list__header p {
+  max-width: 65%;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  text-transform: none;
+  letter-spacing: normal;
+  text-wrap-style: pretty;
+}
+
+@media (max-width: 768px) {
+  [id*="__jul_"] .section-resource-list__header p { max-width: 90%; }
+}
+
+@media (max-width: 575px) {
+  [id*="__jul_"] .section-resource-list__header p { max-width: 100%; }
+}

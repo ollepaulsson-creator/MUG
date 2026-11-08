@@ -16,10 +16,10 @@
     --mh-bg: {{ s.bakgrund }}; --mh-farg: {{ s.textfarg }};
     --mh-h: {% if s.hojd > 0 %}{{ s.hojd }}px{% else %}auto{% endif %};
     --mh-h-mobil: {% if s.hojd_mobil > 0 %}{{ s.hojd_mobil }}px{% else %}auto{% endif %};
-    --mh-logga: {{ s.logga_bredd }}px;
+    --mh-logga: {{ s.logga_bredd }}px; --mh-rubrik-over: {{ s.rubrik_over | default: 0 }}px; --mh-rubrik-over-mobil: {{ s.rubrik_over_mobil | default: 0 }}px; --mh-fokus: {{ s.bildfokus | default: '50% 50%' }}; --mh-fokus-mobil: {{ s.bildfokus_mobil | default: '50% 50%' }};
     --mh-logga-over: {{ s.logga_over }}px; --mh-logga-under: {{ s.logga_under }}px;
     --mh-logga-over-mobil: {{ s.logga_over_mobil }}px; --mh-logga-under-mobil: {{ s.logga_under_mobil }}px;
-    --mh-rubrik: {{ s.rubrik_storlek }}px; --mh-rubrik-mobil: {{ s.rubrik_storlek_mobil }}px;
+    --mh-rubrik: {{ s.rubrik_storlek }}px; --mh-rubrik-bredd: {{ s.rubrik_bredd | default: 50 }}%; --mh-rubrik-mobil: {{ s.rubrik_storlek_mobil }}px;
     --mh-ingress: {{ s.ingress_storlek }}px; --mh-ingress-rad: {{ s.ingress_radavstand | divided_by: 100.0 }};
     --mh-ingress-bredd: {{ s.ingress_bredd }}%; --mh-ingress-bredd-mobil: {{ s.ingress_bredd_mobil }}%;
   "
@@ -57,10 +57,37 @@
     {{- s.bild | image_url: width: 2400 | image_tag: widths: '800, 1200, 1600, 2000, 2400', sizes: '100vw', loading: 'eager', alt: alt, class: 'mug-hero__bild' -}}
   {%- endif -%}
 
-  {% render 'mug-videorad', text: s.bildtext, youtube: s.youtube, lank: s.lank %}
+  {%- if s.bildtext_stil == 'text' -%}
+    {%- if s.bildtext != blank -%}<p class="mug-bildtext-ren mug-hero__bildtext">{{ s.bildtext | escape }}</p>{%- endif -%}
+  {%- else -%}
+    {% render 'mug-videorad', text: s.bildtext, youtube: s.youtube, lank: s.lank %}
+  {%- endif -%}
 </div>
 
 {% stylesheet %}
+  .mug-bildtext-ren {
+    position: relative;
+    max-width: 380px;
+    margin: 0;
+    padding: 30px;
+    color: inherit;
+    font-size: 15px;
+    line-height: 1.45;
+    text-wrap-style: pretty;
+  }
+
+  @media (max-width: 575px) {
+    .mug-bildtext-ren { padding: 20px; }
+  }
+
+  .mug-hero__bildtext {
+    align-self: flex-start;
+  }
+
+  @media (max-width: 575px) {
+    .mug-hero__bildtext { display: none; }
+  }
+
   .mug-hero {
     position: relative;
     display: flex;
@@ -80,14 +107,17 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: var(--mh-fokus, center);
   }
 
   .mug-hero__bakgrund--mobil {
     display: none;
+    object-position: var(--mh-fokus-mobil, center);
   }
 
   .mug-hero__innehall {
     position: relative;
+    padding-top: var(--mh-rubrik-over, 0px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -107,7 +137,7 @@
   }
 
   .mug-hero__rubrik {
-    max-width: 50%;
+    max-width: var(--mh-rubrik-bredd, 50%);
     margin: 0 0 20px;
     color: inherit;
     font-size: var(--mh-rubrik);
@@ -158,6 +188,7 @@
     }
 
     .mug-hero__bakgrund--mobil { display: block; }
+    .mug-hero__innehall { padding-top: var(--mh-rubrik-over-mobil, 0px); }
     .mug-hero:has(.mug-hero__bakgrund--mobil) .mug-hero__bakgrund--desktop { display: none; }
 
     .mug-hero__logga {
@@ -199,6 +230,8 @@
     { "type": "image_picker", "id": "bild", "label": "Bild" },
     { "type": "image_picker", "id": "mobilbild", "label": "Mobilbild (bakgrund, valfri)" },
     { "type": "video", "id": "video", "label": "Bakgrundsvideo (ersätter bilden)" },
+    { "type": "text", "id": "bildfokus", "label": "Bildens fokus (t.ex. 50% 100%)", "default": "50% 50%" },
+    { "type": "text", "id": "bildfokus_mobil", "label": "Bildens fokus, mobil", "default": "50% 50%" },
     { "type": "number", "id": "hojd", "label": "Höjd desktop (px, 0 = efter innehållet)", "default": 1100 },
     { "type": "number", "id": "hojd_mobil", "label": "Höjd mobil (px, 0 = efter innehållet)", "default": 1020 },
     { "type": "header", "content": "Logga" },
@@ -213,6 +246,9 @@
     { "type": "header", "content": "Text" },
     { "type": "text", "id": "rubrik", "label": "Rubrik (H1)" },
     { "type": "number", "id": "rubrik_storlek", "label": "Rubrikens storlek (px)", "default": 32 },
+    { "type": "number", "id": "rubrik_over", "label": "Luft över rubriken (px, utan logga)", "default": 0 },
+    { "type": "number", "id": "rubrik_bredd", "label": "Rubrikens maxbredd (%)", "default": 50 },
+    { "type": "number", "id": "rubrik_over_mobil", "label": "Luft över rubriken, mobil (px)", "default": 0 },
     { "type": "number", "id": "rubrik_storlek_mobil", "label": "Rubrikens storlek, mobil (px)", "default": 32 },
     { "type": "richtext", "id": "ingress", "label": "Ingress" },
     { "type": "number", "id": "ingress_storlek", "label": "Ingressens storlek (px)", "default": 20 },
@@ -220,7 +256,17 @@
     { "type": "number", "id": "ingress_bredd", "label": "Ingressens bredd (%)", "default": 45 },
     { "type": "number", "id": "ingress_bredd_mobil", "label": "Ingressens bredd, mobil (%)", "default": 95 },
     { "type": "header", "content": "Bildtextrad" },
-    { "type": "text", "id": "bildtext", "label": "Bildtext" },
+    { "type": "textarea", "id": "bildtext", "label": "Bildtext" },
+    {
+      "type": "select",
+      "id": "bildtext_stil",
+      "label": "Bildtextens stil",
+      "options": [
+        { "value": "rad", "label": "Rad med play-ikon (video/länk)" },
+        { "value": "text", "label": "Text nere till vänster" }
+      ],
+      "default": "rad"
+    },
     { "type": "video_url", "id": "youtube", "label": "YouTube-video (öppnas vid klick)", "accept": ["youtube"] },
     { "type": "url", "id": "lank", "label": "Länk (om ingen video)" },
     { "type": "color", "id": "bakgrund", "label": "Bakgrund", "default": "#000000" },

@@ -10,7 +10,7 @@
 -%}
 <div
   class="mug-text mug-text--{{ s.stil }}"
-  style="--mt-bg: {{ s.bakgrund }}; --mt-farg: {{ s.textfarg }}; --mt-luft-under: {{ s.luft_under }}px; --mt-rubrik-rad: {{ s.rubrik_radavstand | divided_by: 100.0 }};"
+  style="--mt-bg: {{ s.bakgrund }}; --mt-farg: {{ s.textfarg }}; --mt-luft-under: {{ s.luft_under }}px; --mt-luft-over: {{ s.luft_over | default: 0 }}px; --mt-rubrik-rad: {{ s.rubrik_radavstand | divided_by: 100.0 }};"
 >
   {%- if s.logga != blank -%}
     {%- assign loggastil = 'width: ' | append: s.logga_bredd | append: 'px' -%}
@@ -35,6 +35,7 @@
     background: var(--mt-bg);
     color: var(--mt-farg);
     padding-bottom: var(--mt-luft-under);
+    padding-top: var(--mt-luft-over, 0px);
   }
 
   .mug-text__rubrik,
@@ -133,7 +134,7 @@
   }
 
   @media (max-width: 575px) {
-    .mug-text--intro { padding-top: 20px; }
+    .mug-text--intro { padding-top: max(20px, calc(var(--mt-luft-over, 0px) * 0.67)); }
     .mug-text--intro .mug-text__logga { margin: 60px 0 40px; }
     .mug-text--intro .mug-text__rubrik,
     .mug-text--intro .mug-text__text { max-width: 90%; }
@@ -183,6 +184,7 @@
     { "type": "url", "id": "knapp_lank", "label": "Knapplänk" },
     { "type": "color", "id": "bakgrund", "label": "Bakgrund", "default": "#ffffff" },
     { "type": "color", "id": "textfarg", "label": "Textfärg", "default": "#000000" },
+    { "type": "range", "id": "luft_over", "label": "Luft över", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 0 },
     { "type": "range", "id": "luft_under", "label": "Luft under", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 0 }
   ],
   "presets": [{ "name": "MUG textblock" }]

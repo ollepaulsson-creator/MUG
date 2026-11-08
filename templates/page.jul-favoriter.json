@@ -1,0 +1,1187 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "name": "Breadcrumbs",
+      "settings": {
+        "enable": true,
+        "nav_menu": "main-menu",
+        "home_label": "Start",
+        "aria_label": "Breadcrumbs"
+      }
+    },
+    "section_8aKKyY": {
+      "type": "section",
+      "blocks": {
+        "group_CbFznk": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://collections/syntar",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/DSC05004_b5afde67-a16d-4173-a44d-dcae3a76f81b.gif",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_D3zCpJ": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h6",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_D3zCpJ"
+          ]
+        },
+        "group_TCKgqL": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://pages/besok-butiken",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/DSC03595_v2_1080x_83b743ac-e3f4-41a0-b05f-3e34e6760869.webp",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_mgzFBp": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "<h6>Besök butiken</h6>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h6",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_mgzFBp"
+          ]
+        },
+        "group_Eqaa3L": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://collections/merch",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/VNAV_Arket_tote_16b52b5e-9d30-497b-a7a8-5148fc1036fd.webp",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_CU7EAj": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h4",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_CU7EAj"
+          ]
+        }
+      },
+      "block_order": [
+        "group_CbFznk",
+        "group_TCKgqL",
+        "group_Eqaa3L"
+      ],
+      "custom_css": [
+        ".group-block-content {position: relative;}",
+        ".group-block--width-fill h6 {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px; font-weight: 400; text-align: center; z-index: 2;}",
+        "img {display: flex; justify-content: center;}",
+        ".deferred-media__poster-button {}",
+        ".layout-panel-flex--row > .group-block--width-fill {min-height: 480px !important;}",
+        ".section-content-wrapper.section-content-wrapper {padding-bottom: 0px !important;}"
+      ],
+      "name": "t:names.multicolumn",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "flex-start",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "full-width",
+        "section_height": "medium",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "section_t7Jwap": {
+      "type": "section",
+      "blocks": {
+        "group_QaPwKz": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://pages/om-oss",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/skylt_26e37ad3-28e5-4bfe-8738-5534c1fa403e.jpg",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_m7pDx6": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "<h6>Est. 1973</h6>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h6",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_m7pDx6"
+          ]
+        },
+        "group_jQfkDk": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://collections/ernie-ball",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/ernie_stop_201f56c1-9d18-4061-b43a-a2fc208b6479.webp",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "group_HW8mfU": {
+          "type": "group",
+          "name": "Column",
+          "settings": {
+            "link": "shopify://pages/serviceverkstad",
+            "open_in_new_tab": false,
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/gittarvard.webp",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_kWMnFd": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "<h6>Service och verkstad</h6>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h6",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_kWMnFd"
+          ]
+        }
+      },
+      "block_order": [
+        "group_QaPwKz",
+        "group_jQfkDk",
+        "group_HW8mfU"
+      ],
+      "custom_css": [
+        ".group-block-content {position: relative;}",
+        ".group-block--width-fill h6 {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px; font-weight: 400; text-align: center; z-index: 2;}",
+        "img {display: flex; justify-content: center;}",
+        ".deferred-media__poster-button {}",
+        ".layout-panel-flex--row > .group-block--width-fill {min-height: 480px !important;}",
+        ".section-content-wrapper.section-content-wrapper {padding-bottom: 0px !important;}"
+      ],
+      "name": "t:names.multicolumn",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "flex-start",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "full-width",
+        "section_height": "medium",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "jul_01": {
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/fav-0xbtnt-xmashero.jpg",
+            "lank": "",
+            "textstil": "rad",
+            "rubrik": "Våra bästa julklappstips!",
+            "uppmaning": "",
+            "stortext": "JULKLAPPS–\nFAVORITER",
+            "stortext_storlek": 130,
+            "stortext_laptop": 110,
+            "stortext_surfplatta": 80,
+            "stortext_mobil": 52,
+            "textfarg": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1"
+      ],
+      "settings": {
+        "hojd_lage": "fast",
+        "hojd_desktop": 1100,
+        "hojd_laptop": 900,
+        "hojd_mobil": 600,
+        "mobil_omvand": false
+      }
+    },
+    "jul_02": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<h1 class=\"visually-hidden\">Julklappsfavoriter – julklappstips till dina nära och kära</h1>",
+        "color_scheme": "scheme-1",
+        "section_width": "page-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "jul_03": {
+      "type": "mug-collage",
+      "settings": {
+        "bakgrund": "#ffffff",
+        "textfarg": "#000000",
+        "overrubrik": "",
+        "rubrik": "",
+        "vanster_bredd": 100,
+        "hoger_bredd": 0,
+        "mellanrum": 0,
+        "avstand_mobil": 10,
+        "hoger_lage": "overst",
+        "ingress": "<p>Här har vi samlat utvalda julklappstips för både stor och liten, för nybörjaren eller den som spelat länge. Från percussion och klaviatur till de yngsta, gitarrpaket till nybörjaren, en synth till hemmastudion eller en ny elgitarr åt den som drömmer om att bli rockstjärna. God Jul!</p>",
+        "ingress_storlek": 22,
+        "ingress_bredd": 57,
+        "ingress_radavstand": 160,
+        "luft_over": 100,
+        "luft_under": 40,
+        "marginal": 86,
+        "luft_over_mobil": 50,
+        "luft_under_mobil": 20,
+        "marginal_mobil": 20
+      }
+    },
+    "jul_04": {
+      "type": "mug-favoriter",
+      "blocks": {
+        "k01": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "mini-jazzmaster-hh-maple-fingerboard-daphne-blue",
+            "bild": "shopify://shop_images/fav-e1aycj-1.png",
+            "text": "<p>Äntligen utökas Squier's Mini serie med en fantastisk Jazzmaster! Mindre kropp, lättare vikt och kortare och smalare hals. Perfekt för den blivande rockstjärnan, eller kanske som resegitarr?</p>",
+            "namn": "Mini Jazzmaster HH Maple Fingerboard Daphne Blue",
+            "marke": "SQUIER BY FENDER",
+            "pris": "2 195 kr"
+          }
+        },
+        "k02": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "dato-duo",
+            "bild": "shopify://shop_images/fav-9xsg47-2.png",
+            "text": "<p>Vår favorit Dato DUO är svår att slita sig ifrån. Användarvänlig, färgglatt blinkande, två-player synth som är utformad för att skapa elektronisk musik tillsammans. Ingen erfarenhet behövs, det låter ändå fantastiskt. Synthen har inbyggda högtalare och massor av effekter. Framtagen för alla barn mellan 3 och 99 år – Prova, vi lovar den är grym!</p>",
+            "namn": "DATO DUO",
+            "marke": "DATO",
+            "pris": "3 895 kr"
+          }
+        },
+        "k03": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "hh-2059-melodica-red",
+            "bild": "shopify://shop_images/fav-jcgzir-melodica.png",
+            "text": "<p>Alla bli glada av att spela melodica! Melodican får sin ton genom att du blåser luft in i instrumentet och spelar på tangenterna. Tonen påminner om ett dragspel och är lika roligt för barn som vuxen.</p>",
+            "namn": "HH 2059 Melodica Red",
+            "marke": "CASCHA",
+            "pris": "350 kr"
+          }
+        },
+        "k04": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "minilab-3",
+            "bild": "shopify://shop_images/fav-4vlpum-minilab.png",
+            "text": "<p>MiniLab 3 är en nästa generations plug-and-play MIDI-kontroller som kombinerar ett fantastiskt miniklaviatur, flexibla pads, faders och rattar med ett premium-programpaket med sömlös DAW-integration som låter dig bli kreativ direkt.</p>",
+            "namn": "MiniLab 3",
+            "marke": "ARTURIA",
+            "pris": "1 095 kr"
+          }
+        },
+        "k05": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "eureka",
+            "bild": "shopify://shop_images/fav-dbx40u-eureka.png",
+            "text": "<p>Jam Pedals åtog sig att skapa en pedal som kombinerade det sjungande, dynamiska mellanregistret i germaniumfuzzar med den grovkorninga, fylliga och avrundade Muff-typen av fuzz/dist. Och .... Eureka!</p>",
+            "namn": "Eureka!",
+            "marke": "JAM PEDALS",
+            "pris": "2 450 kr"
+          }
+        },
+        "k06": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "mug-presentkort",
+            "bild": "shopify://shop_images/fav-rgq06z-3.png",
+            "text": "<p>Gör någon glad med ett presentkort från MUG. Våra presentkort är både snygga och användbara och låter mottagaren välja från hela vårt sortiment. Inget utgångsdatum att stressa över heller. Fungerar att handla för både online och i butik.</p>",
+            "namn": "Presentkort",
+            "marke": "MUSIK UTAN GRÄNSER",
+            "pris": "Från 350 kr"
+          }
+        }
+      },
+      "block_order": [
+        "k01",
+        "k02",
+        "k03",
+        "k04",
+        "k05",
+        "k06"
+      ],
+      "settings": {
+        "maxbredd": 999,
+        "luft_over": 40,
+        "luft_under": 60
+      }
+    },
+    "jul_05": {
+      "type": "mug-collage",
+      "blocks": {
+        "b1": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/fav-bz1bzz-lykke.jpg",
+            "alt": "Julklappar under granen",
+            "lank": "",
+            "kolumn": "vanster"
+          }
+        },
+        "b2": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/fav-8kfdrf-piano.jpg",
+            "alt": "Piano i juletid",
+            "lank": "",
+            "kolumn": "hoger"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2"
+      ],
+      "settings": {
+        "bakgrund": "#ffffff",
+        "textfarg": "#000000",
+        "overrubrik": "",
+        "rubrik": "",
+        "vanster_bredd": 46.6,
+        "hoger_bredd": 46.6,
+        "mellanrum": 62,
+        "avstand_mobil": 10,
+        "hoger_lage": "mitten",
+        "ingress": "",
+        "ingress_storlek": 22,
+        "ingress_bredd": 57,
+        "ingress_radavstand": 160,
+        "luft_over": 40,
+        "luft_under": 40,
+        "marginal": 110,
+        "luft_over_mobil": 30,
+        "luft_under_mobil": 30,
+        "marginal_mobil": 0
+      }
+    },
+    "jul_06": {
+      "type": "mug-favoriter",
+      "blocks": {
+        "k07": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "po-32-tonic",
+            "bild": "shopify://shop_images/fav-ynaizi-pocketoperator.png",
+            "text": "<p>Pocket Operators är små och ultraportabla musikenheter. Varje enhet kan användas individuellt, eller tillsammans med annan kompatibel utrustning. Denna heter PO-32 Tonic och har Trum- och percussion-syntesizer samt en sequencer. Parameter locks, punch-in-effekter och obegränsade ljud med Microtonic VST. En perfekt gåva till den som redan har allt!</p>",
+            "namn": "PO-32 Tonic",
+            "marke": "TEENAGE ENGINEERING",
+            "pris": "995 kr"
+          }
+        },
+        "k08": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "dp-2000-digital-drum-and-percussion-pad-8-dynamic-pads",
+            "bild": "shopify://shop_images/fav-5rccvc-pad.png",
+            "text": "<p>NUX DP-2000 är en integrerad percussionpad designad för trummisar som kräver mångsidighet. Med åtta anslagskänsliga pads som integrerar akustiska trumljud från NUX flaggskepp DM-8 kit, tillsammans med utvalda akustiska och elektroniska ljud. Lyser i mörkret när du spelar gör den också!</p>",
+            "namn": "DP-2000 Digital Drum and Percussion Pad",
+            "marke": "NUX",
+            "pris": "3 599 kr"
+          }
+        },
+        "k09": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "mini-stratocaster-black",
+            "bild": "shopify://shop_images/fav-5kltdw-stratocaster.png",
+            "text": "<p>En 3/4 version av Squier Stratocaster, perfekt från ca. 6 år och uppåt eller kanske de som trivs med en mindre gitarrkropp och smalare hals. Utrustad med tre single-coil mikrofoner och 5-läges mikrofonswitch för att ge möjlighet till flertal olika sound.</p>",
+            "namn": "Mini Stratocaster svart",
+            "marke": "SQUIER BY FENDER",
+            "pris": "2 195 kr"
+          }
+        },
+        "k10": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "volt-2-usb-c-audio-interface",
+            "bild": "shopify://shop_images/fav-xh9vue-volt.png",
+            "text": "<p>En favorit och flerfaldig testvinnare, och ett otroligt bra val för dig som vill komma igång prisvärt och snabbt. Volt 2 är ett externt USB-ljudkort från Universal Audio utrustat med två ingångar för mikrofon-, instrument- eller linjesignaler, två utgångar för högtalare, en hörlursutgång samt ett inbyggt MIDI-interface. Mikrofon-preamparna har även ett vintage-läge som ger mer karaktär när du behöver det.</p>",
+            "namn": "Volt 2 USB-C ljudkort",
+            "marke": "UNIVERSAL AUDIO",
+            "pris": "2 690 kr"
+          }
+        },
+        "k11": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "medeli-mk1-nebula-series-green",
+            "bild": "shopify://shop_images/fav-amufl6-medeli.png",
+            "text": "<p>Medeli MK1 passar både för yngre nybörjare eller den som vill ha ett enklare keyboard, eller som ett MIDI-keyboard. Detta mini-keyboard har 37 tangenter, USB-C-kabel för laddning och MIDI, 1x2 watt högtalare.</p>",
+            "namn": "MK1 Nebula Series Green",
+            "marke": "MEDELI",
+            "pris": "699 kr"
+          }
+        },
+        "k12": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "mustang-micro",
+            "bild": "shopify://shop_images/fav-ctdz8s-micro.png",
+            "text": "<p>Förstärkaren som du kan ta med överallt. Koppla in Mustang Micro i din gitarr, anslut enheten till dina hörlurar via Bluetooth och börja spela. Mustang Micro har väldigt låg latency så att man inte störs av fördröjning. Lika perfekt och enkel för nybörjare så som erfarna gitarrister.</p>",
+            "namn": "Mustang Micro",
+            "marke": "FENDER",
+            "pris": "1 595 kr"
+          }
+        },
+        "k13": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "mighty-lite-mkii-bt",
+            "bild": "shopify://shop_images/fav-qj1nue-mighty.png",
+            "text": "<p>Mighty Lite MKII BT är en helt grym bärbar förstärkare för både elgitarr och elbas som är fullpackad med funktioner. Den erbjuder förstärkarmodellering, Impulse Responses (IRs) för högtalarkabinett och till och med akustisk förstärkarmodellering med akustiska IRs för att simulera ljudet av akustiska gitarrer. Dessutom är den superliten, låter grymt och är enkel att använda!</p>",
+            "namn": "Mighty Lite MKII BT",
+            "marke": "NUX",
+            "pris": "1 049 kr"
+          }
+        },
+        "k14": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "tx-6",
+            "bild": "shopify://shop_images/fav-yoya6m-tx6.png",
+            "text": "<p>Med TX-6 får du en fullpackad portabel mixer med det mesta du kan tänkas behöva för att mixa och skapa musik. Då den lätt ryms i din hand förtjänar verkligen TX-6 att kallas en komplett pocket mixer då den kan fungera som både ljudkort, mixer med inbyggda effekter och ljud. Packa ner den i väskan, ta med den upp på scen eller in i studion och låt den bli navet i din portabla studio.</p>",
+            "namn": "TX-6",
+            "marke": "TEENAGE ENGINEERING",
+            "pris": "11 990 kr"
+          }
+        },
+        "k15": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "affinity-series™-stratocaster®-hss-pack-lake-placid-blue",
+            "bild": "shopify://shop_images/fav-2vn2jx-lakeplacid.png",
+            "text": "<p>Det perfekta nybörjarpaketet för de som vill börja lära sig spela elgitarr. Du får en stratocaster-elgitarr, här i Lake Placid Blue, en Squier Frontman-komboförstärkare, axelband, kabel, plektrum, samt en 3-månaders prenumeration på Fender Play. En perfekt julklapp!</p>",
+            "namn": "Affinity Series Stratocaster HSS Pack Lake Placid Blue",
+            "marke": "FENDER",
+            "pris": "4 495 kr"
+          }
+        }
+      },
+      "block_order": [
+        "k07",
+        "k08",
+        "k09",
+        "k10",
+        "k11",
+        "k12",
+        "k13",
+        "k14",
+        "k15"
+      ],
+      "settings": {
+        "maxbredd": 999,
+        "luft_over": 60,
+        "luft_under": 60
+      }
+    },
+    "jul_07": {
+      "type": "mug-collage",
+      "blocks": {
+        "b1": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/fav-si9vsl-lykke.jpg",
+            "alt": "Julstämning med musik",
+            "lank": "",
+            "kolumn": "vanster"
+          }
+        }
+      },
+      "block_order": [
+        "b1"
+      ],
+      "settings": {
+        "bakgrund": "#ffffff",
+        "textfarg": "#000000",
+        "overrubrik": "",
+        "rubrik": "",
+        "vanster_bredd": 100,
+        "hoger_bredd": 0,
+        "mellanrum": 0,
+        "avstand_mobil": 10,
+        "hoger_lage": "overst",
+        "ingress": "",
+        "ingress_storlek": 22,
+        "ingress_bredd": 57,
+        "ingress_radavstand": 160,
+        "luft_over": 40,
+        "luft_under": 40,
+        "marginal": 450,
+        "luft_over_mobil": 30,
+        "luft_under_mobil": 30,
+        "marginal_mobil": 0
+      }
+    },
+    "jul_08": {
+      "type": "mug-favoriter",
+      "blocks": {
+        "k16": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "lk-s450-keyboardpaket",
+            "bild": "shopify://shop_images/fav-vubwjo-keyboardpaket.png",
+            "text": "<p>Keyboard och sångpaket i ett med LK-S450. Casio LK-S450 är din egen personliga lärare med dess Key Lightning System som guidar dig genom varje del genom att belysa tangenterna i sekvenser.</p>",
+            "namn": "LK-S450 keyboard och sångpaket",
+            "marke": "CASIO",
+            "pris": "3 595 kr"
+          }
+        },
+        "k17": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "ac70-op-3-4",
+            "bild": "shopify://shop_images/fav-7lrbou-ac70.png",
+            "text": "<p>En utmärkt nybörjargitarr i 3/4 storlek som passar bra för personer med små händer eller någon som helt enkelt vill ha en smidig resegitarr. Kombinationen av det kvalitativa tonträet mahogny för gitarrens sidor och baksida samt en gran till toppen/översidan ger gitarren en stabil grund och ett fint klassiskt ljud.</p>",
+            "namn": "AC70 OP 3/4 med väska",
+            "marke": "CORT",
+            "pris": "1 795 kr"
+          }
+        },
+        "k18": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "dm210-all-mesh-head-digital-drum-kit",
+            "bild": "shopify://shop_images/fav-ve1mfn-drums.png",
+            "text": "<p>Stör du dina grannar? Eller har du inte tillräckligt med plats för ett akustiskt trumset? DM-210 är ett nytt digitalt instegsnivåtrumset, men det är utrustat med trumskinn i mesh. Du kan enkelt anpassa känslan efter din stil genom att justera spänningen på mesh-huvudena.</p>",
+            "namn": "DM210 All Mesh Head Digital Drum Kit",
+            "marke": "NUX",
+            "pris": "5 795 kr"
+          }
+        },
+        "k19": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "ninoset4-percussion-set",
+            "bild": "shopify://shop_images/fav-owhtkm-ninokit.png",
+            "text": "<p>Ett färgglatt set med olika rytminstrument för en bra och kul variation i ljud och lockelse. Kul för hela familjen, perfekt vid musiklek eller musikundervisning. Rekommenderas från 3 år.</p>",
+            "namn": "NINOSET 4 Percussion",
+            "marke": "NINO",
+            "pris": "935 kr"
+          }
+        },
+        "k20": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "dt-770-pro-80-ohm",
+            "bild": "shopify://shop_images/fav-wbehvg-beyer.png",
+            "text": "<p>Favorit i butiken, bland kritiker samt i tester. DT 770 PRO är en sluten dynamisk hörlur designad för monitorlyssning av musik och ljud. Vadderade öronkuddar gör hörluren bekväm för många timmars användande. Finns egentligen inte mycket att säga mer än vad alla andra redan sagt; och det är att dessa studiolurar är riktigt bra.</p>",
+            "namn": "DT 770 PRO 80 ohm",
+            "marke": "BEYERDYNAMIC",
+            "pris": "1 795 kr"
+          }
+        },
+        "k21": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "gold-coated-metal-kazoo",
+            "bild": "shopify://shop_images/fav-0mzwic-kazoo.png",
+            "text": "<p>Kazoo tillverkad i bleck med förgylld finish. Membranet hålls på plats av ett gängat lock och ger ett stort ljud! Världens enklaste (och kanske roligaste?) instrument!</p>",
+            "namn": "Gold Kazoo",
+            "marke": "CLARKE",
+            "pris": "79 kr"
+          }
+        },
+        "k22": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "ep-133-k-o-ii-128mb",
+            "bild": "shopify://shop_images/fav-iilhy7-ko2.png",
+            "text": "<p>Den andra ronden med EP–133 K.O. II, den efterlängtade uppföljaren till världens mest framgångsrika sampler, som bygger på den nu närmast legendariska PO-33 K.O!. EP–133 K.O. II tar upplevelsen till en ny nivå genom att erbjuda mer kraft, utökade samplingsmöjligheter, en ny och förbättrad sequencer samt helt nya Punch-In 2.0-effekter som kommer att lyfta dina produktioner.</p>",
+            "namn": "EP–133 K.O. II",
+            "marke": "TEENAGE ENGINEERING",
+            "pris": "3 990 kr"
+          }
+        },
+        "k23": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "mini-electric-red",
+            "bild": "shopify://shop_images/fav-fbc1g8-loogred.png",
+            "text": "<p>Loog gör lättspelade och roliga gitarrer för barn. Grym kvalitet och spelbarhet gör Loog till en storfavorit. Kommer med inbyggd förstärkare och högtalare, samt en inlärningsapp. Vilket gör att du är redo att köra igång direkt. Gitarrer i barnstorlek har funnits tidigare, men Loog har gått ett steg längre och halverat antalet strängar från sex till tre.</p>",
+            "namn": "Mini Electric Red",
+            "marke": "LOOG",
+            "pris": "1 995 kr"
+          }
+        },
+        "k24": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "k52",
+            "bild": "shopify://shop_images/fav-emuz1x-k52.png",
+            "text": "<p>Ljud av proffskvalitet möter elegans och prisvärdhet i AKG K52. AKG K52 är en sluten hörlur av typen over-ear, som tack vare sitt klara ljud och sköna passform fungerar både i hemstudion samt för keyboard- och digitalpianospel.</p>",
+            "namn": "K52",
+            "marke": "AKG",
+            "pris": "495 kr"
+          }
+        }
+      },
+      "block_order": [
+        "k16",
+        "k17",
+        "k18",
+        "k19",
+        "k20",
+        "k21",
+        "k22",
+        "k23",
+        "k24"
+      ],
+      "settings": {
+        "maxbredd": 999,
+        "luft_over": 60,
+        "luft_under": 60
+      }
+    },
+    "jul_09": {
+      "type": "mug-collage",
+      "blocks": {
+        "b1": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/fav-uyyll3-jul.jpg",
+            "alt": "God jul från MUG",
+            "lank": "",
+            "kolumn": "vanster"
+          }
+        },
+        "b2": {
+          "type": "bild",
+          "settings": {
+            "bild": "shopify://shop_images/fav-reespp-stickerslogo.jpg",
+            "alt": "MUG-stickers",
+            "lank": "",
+            "kolumn": "hoger"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2"
+      ],
+      "settings": {
+        "bakgrund": "#ffffff",
+        "textfarg": "#000000",
+        "overrubrik": "",
+        "rubrik": "",
+        "vanster_bredd": 46.6,
+        "hoger_bredd": 46.6,
+        "mellanrum": 62,
+        "avstand_mobil": 10,
+        "hoger_lage": "mitten",
+        "ingress": "",
+        "ingress_storlek": 22,
+        "ingress_bredd": 57,
+        "ingress_radavstand": 160,
+        "luft_over": 40,
+        "luft_under": 40,
+        "marginal": 110,
+        "luft_over_mobil": 30,
+        "luft_under_mobil": 30,
+        "marginal_mobil": 0
+      }
+    },
+    "jul_10": {
+      "type": "mug-favoriter",
+      "blocks": {
+        "k25": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "key-stickers",
+            "bild": "shopify://shop_images/fav-81giro-stickers.png",
+            "text": "<p>Till alla nybörjare på piano! Piano och keyboard-klistermärken gör det lättare att lära sig spela piano, det perfekta tillbehöret för alla nybörjare! En sticker för varje not hjälper dig att hålla koll på vilka noter du spelar och var de finns på ditt klaviatur. Ett trevligt hjälpmedel för att hjälpa lära dig nya pianostycken snabbt.</p>",
+            "namn": "Piano och keyboard stickers",
+            "marke": "MUSIK UTAN GRÄNSER",
+            "pris": "99 kr"
+          }
+        },
+        "k26": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "mstd3g-mini-steel-tongue-drum-b-major-gold",
+            "bild": "shopify://shop_images/fav-4af3hi-steel.png",
+            "text": "<p>Förstämda toner gör så att alla kan låta bra på en steel tongue drum – från yoga och ljudterapi till klassrum, kontor eller soffbordet. Detta något mindre format av Sonic Energy’s vanliga Steel Tongue Drums är en rolig storlek för oändliga möjligheter för var du kan spela.</p>",
+            "namn": "MSTD3G Mini Steel Tongue Drum B Major Gold",
+            "marke": "SONIC ENERGY",
+            "pris": "475 kr"
+          }
+        },
+        "k27": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "ac100-op-4-4-med-vaska",
+            "bild": "shopify://shop_images/fav-c2scaw-ac100.png",
+            "text": "<p>En utmärkt nybörjargitarr i 4/4 storlek. Kombinationen av det kvalitativa tonträet mahogny för gitarrens sidor och baksida samt en gran till toppen/översidan ger gitarren en stabil grund och ett fint klassiskt ljud.</p>",
+            "namn": "AC100 OP 4/4",
+            "marke": "CORT",
+            "pris": "1 795 kr"
+          }
+        },
+        "k28": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "metallophone-12-color",
+            "bild": "shopify://shop_images/fav-ei1rw0-goldon.png",
+            "text": "<p>Ett perfekt instrument till musikentusiaster i alla åldrar! Ha roligt när du skapar musik med Goldon Metallofon. 12 toner, färgade ljudplattor, bottenplatta i plywood samt en ram i solitt trä.</p>",
+            "namn": "Metallophone 12 Color",
+            "marke": "GOLDON",
+            "pris": "385 kr"
+          }
+        },
+        "k29": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "ukcb",
+            "bild": "shopify://shop_images/fav-gl62pm-ukcbukulele.png",
+            "text": "<p>Vår storsäljare! Ukulele av konsertmodell. Kropp i utvalt sapele ädelträ med vit binding. Hals av Nato. Gjutna stämskruvar gör det mycket enkelt att stämma ukulelen. En prisvärd ukulele av bra kvalitet.</p>",
+            "namn": "UKCB ukulele",
+            "marke": "EVERDEEN",
+            "pris": "750 kr"
+          }
+        },
+        "k30": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "affinity-series-p-bass-paket-svart",
+            "bild": "shopify://shop_images/fav-flob1v-squirebas.png",
+            "text": "<p>Prisvärt baspaket från Squier med en Affinity Precision Bass PJ elbas, en Fender Rumble 15 förstärkare, instrumentkabel, axelband och plektrum. Kort och gott allt du behöver för att börja spela elbas!</p>",
+            "namn": "Affinity Series P-Baspaket Svart",
+            "marke": "SQUIER BY FENDER",
+            "pris": "4 995 kr"
+          }
+        },
+        "k31": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "sharkfin-silver",
+            "bild": "shopify://shop_images/fav-lyzwyf-sharkfin.jpg",
+            "text": "<p>Handgjort silversmycke i form av ett klassiskt Sharkfin plektrum. Äkta silver och tillverkat av silversmed i Göteborg. En riktigt fin julklapp till någon du tycker om.</p>",
+            "namn": "Sharkfin",
+            "marke": "MUSIK UTAN GRÄNSER",
+            "pris": "1 195 kr"
+          }
+        },
+        "k32": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "eb-2221-regular-slinky",
+            "bild": "shopify://shop_images/fav-n4muqm-ernieball.png",
+            "text": "<p>Den perfekta julklappen till alla som spelar elektriskt. 1973 startade MUG på Haga Nygata, första frågan från vår första kund var om vi sålde Ernie Ball strängar. Vid den tiden visste vi inte vad Ernie Ball var för något. Kunden hette Jimmy Page och skulle spela med sitt Led Zeppelin på Scandinavium senare samma dag. Nu vet vi bättre. :)</p>",
+            "namn": "EB-2221 Regular Slinky",
+            "marke": "ERNIE BALL",
+            "pris": "100 kr"
+          }
+        },
+        "k33": {
+          "type": "produkt",
+          "settings": {
+            "produkt": "major-diatonic",
+            "bild": "shopify://shop_images/fav-elb19m-leeoscar.png",
+            "text": "<p>Lee Oskar Major Diatonic är vårt absolut populäraste munspel. Jämför material, konstruktion, design, funktionalitet och ljud mellan Lee Oskar och andra fabrikat, inget annat munspel har så många fördelar och låter så bra. En favorit!</p>",
+            "namn": "Major Diatonic",
+            "marke": "LEE OSKAR",
+            "pris": "429 kr"
+          }
+        }
+      },
+      "block_order": [
+        "k25",
+        "k26",
+        "k27",
+        "k28",
+        "k29",
+        "k30",
+        "k31",
+        "k32",
+        "k33"
+      ],
+      "settings": {
+        "maxbredd": 999,
+        "luft_over": 60,
+        "luft_under": 60
+      }
+    },
+    "jul_11": {
+      "type": "mug-textblock",
+      "settings": {
+        "stil": "intro",
+        "knapp_text": "Visa allt i Julsortimentet",
+        "knapp_lank": "/collections/julens-storsaljare",
+        "bakgrund": "#ffffff",
+        "textfarg": "#000000",
+        "luft_under": 80
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "jul_01",
+    "jul_02",
+    "jul_03",
+    "jul_04",
+    "jul_05",
+    "jul_06",
+    "jul_07",
+    "jul_08",
+    "jul_09",
+    "jul_10",
+    "jul_11",
+    "section_8aKKyY",
+    "section_t7Jwap"
+  ]
+}
