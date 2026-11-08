@@ -2558,7 +2558,7 @@ dialog.facets--drawer[open] {
 }
 
 [id*="__jul_"] .section-resource-list__header p {
-  max-width: 65%;
+  max-width: 55%;
   margin: 0;
   font-size: 16px;
   line-height: 1.6;
