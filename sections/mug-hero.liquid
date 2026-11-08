@@ -1,10 +1,10 @@
 {%- doc -%}
-  MUG 2026-11-08 (etapp 4, ersätter introt på Instants varumärkessidor).
+  MUG 2026-11-08 (etapp 4, intro/toppbild på landningssidorna).
   Centrerad logga, H1 och ingress på mörk botten, och en bildtextrad (play-ikon, YouTube) längst ned.
   Bild:
   - bakgrund: bild (egen mobilbild) eller video fyller hela ytan bakom texten (PRS, Arturia, Loog)
   - under: bilden står under texten i sin egen proportion (Adam, Teenage Engineering)
-  Alla mått är inställningar med Instant-sidornas värden som standard.
+  Alla mått är inställningar.
 {%- enddoc -%}
 {%- liquid
   assign s = section.settings
@@ -26,7 +26,7 @@
 >
   {%- if s.bildlage == 'bakgrund' -%}
     {%- if s.video != blank -%}
-      {%- comment -%} Video på desktop; finns en mobilbild visas den i mobil i stället (som Instant, och lättare) {%- endcomment -%}
+      {%- comment -%} Video på desktop; finns en mobilbild visas den i mobil i stället (lättare) {%- endcomment -%}
       {%- if s.mobilbild != blank -%}
         {{- s.mobilbild | image_url: width: 1200 | image_tag: widths: '600, 900, 1200', sizes: '100vw', loading: 'eager', alt: alt, class: 'mug-hero__bakgrund mug-hero__bakgrund--mobil' -}}
       {%- endif -%}

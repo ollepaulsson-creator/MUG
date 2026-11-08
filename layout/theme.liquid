@@ -576,8 +576,8 @@ document.addEventListener("DOMContentLoaded", function() {
       via the --mug-chat-ink custom property (inherits into the shadow).
       Backdrop is found with elementsFromPoint under the pill; images are
       region-sampled through cover-mapping (Shopify's CDN sends CORS headers;
-      Instant's cdn.instant.so does not → unsampleable large images are treated
-      as photography → white text). {%- endcomment -%}
+      images from hosts without CORS are unsampleable and treated as
+      photography → white text). {%- endcomment -%}
     <style>
       /* Hide the activator until our shadow styling has been applied —
          prevents the flash of Shopify's default icon + "Chatt" pill. */

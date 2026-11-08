@@ -1,5 +1,5 @@
 {%- doc -%}
-  MUG 2026-11-08 (etapp 4, ersätter Instants bildbanners): en till fyra bildrutor
+  MUG 2026-11-08 (etapp 4, bildbanners): en till fyra bildrutor
   sida vid sida, var och en en länk med bild (egen mobilbild) eller video och text.
 
   Textstilar per ruta:
@@ -7,8 +7,8 @@
   - kort: logga, rubrik 26 px och brödtext längst ned – kategorisidornas 2×2-kort
   Stor text (valfri) ligger centrerad över bilden, t.ex. SOMMAR / PRISER.
 
-  Mått som Instant-sektionerna: rutor 4 px isär, höjd 880 / 800 (≤1024) / 561 (≤768),
-  under 576 px staplas rutorna (sista rutan först, som i Instant). "Fyll"-läget används
+  Mått: rutor 4 px isär, höjd 880 / 800 (≤1024) / 561 (≤768),
+  under 576 px staplas rutorna (sista rutan först). "Fyll"-läget används
   i kategorisidornas kortplats, där höjden kommer från rutnätet.
 {%- enddoc -%}
 {%- liquid
@@ -340,7 +340,7 @@
 
   }
 
-  /* Staplade rutor redan under 900 px (Instant: 575) – annars blir rutorna så smala att
+  /* Staplade rutor redan under 900 px (förr 575) – annars blir rutorna så smala att
      rubriken bryts på två rader och krockar med uppmaningen (surfplatta, liten laptop). */
   @media (max-width: 900px) {
     .mug-banner:not(.mug-banner--fyll) {

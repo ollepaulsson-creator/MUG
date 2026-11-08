@@ -675,8 +675,8 @@ a.cart-items__media-container {
     display: none;
 }
 /* Scoped to the cart drawer heading only. Previously this selector also
-   listed a bare `h3`, which forced every h3 on the site (incl. Instant page
-   headings) to 14px uppercase !important, overriding their own styles. */
+   listed a bare `h3`, which forced every h3 on the site to 14px uppercase
+   !important, overriding their own styles. */
 .cart-drawer__heading {
     font-size: 14px!important;
     text-transform: uppercase!important;
@@ -1365,10 +1365,7 @@ slideshow-component.predictive-search-results__list {
     grid-row: 1 / span 2;
   }
 
-  .product-grid__item--featured .shopify-section,
-  .product-grid__item--featured .__instant,
-  .product-grid__item--featured [data-instant-type='root'],
-  .product-grid__item--featured [data-instant-type='root'] > [data-instant-type='container'] {
+  .product-grid__item--featured .shopify-section {
     height: 100%;
   }
 }
@@ -1923,7 +1920,7 @@ media-gallery slideshow-slides {
   line-height: calc(1.3em + 1px) !important;
 }
 
-/* ── Page-builder pages (Shogun/Instant content in page.content) ──
+/* ── Page-builder pages (Shogun content in page.content) ──
    These render on the default page template, which also prints the page-title
    H1 block over the builder design. Hide that title block. The width cap is
    dropped in sections/main-page.liquid (omits .page-width-content), so the
@@ -1939,14 +1936,11 @@ media-gallery slideshow-slides {
 }
 
 /* Static pages: hide the builder-added trailing divider at the end of the page
-   content (Shogun <hr> or an empty bordered <div> in Instant content), so it
-   doesn't double up with the image grid now appended above the footer. */
+   content (Shogun <hr>), so it doesn't double up with the image grid now
+   appended above the footer. */
 .template-page [id$="__main"] .rte hr,
 .template-page rte-formatter hr {
   display: none !important;
-}
-.template-page .shopify-section[id*="instant"] div:empty:last-child {
-  border: 0 !important;
 }
 
 /* Collection title on mobile: smaller title, tighter line-height, and more
@@ -2144,32 +2138,6 @@ select.sorting-filter__select {
 html,
 body {
   font-synthesis: style;
-}
-
-/* ── Besök butiken (Instant-sidans hashade klasser; uppdatera om sidan
-   byggs om i Instant och klasserna byter namn) ── */
-/* +20px luft mellan brödsmulorna och fasadbilden */
-.ilKzw84cJcW0Fkg1a {
-  margin-top: 20px;
-}
-/* Fasadbilden 20 % högre: bilden är en Instant-fill som fyller containern,
-   så det är containerns min-height som höjs (Instants trappa 640/600/460/260
-   × 1,2). Instant-CSS:en laddas efter custom.css → !important krävs. */
-.__instant .ilKzw84cJcW0Fkg1a {
-  min-height: 768px !important;
-}
-@media (max-width: 1024px) {
-  .__instant .ilKzw84cJcW0Fkg1a { min-height: 720px !important; }
-}
-@media (max-width: 768px) {
-  .__instant .ilKzw84cJcW0Fkg1a { min-height: 552px !important; }
-}
-@media (max-width: 575px) {
-  .__instant .ilKzw84cJcW0Fkg1a { min-height: 312px !important; }
-}
-/* Kontaktuppgifter & öppettider */
-.iHAtlEutza6RWGEOr p {
-  font-size: 15px;
 }
 
 /* Varukorgsdrawern på mobil: 20px smalare (95vw-regeln i styles.css gav ~20px
@@ -2524,7 +2492,7 @@ dialog.facets--drawer[open] {
   text-wrap-style: pretty;
 }
 
-/* Etapp 4: produktrullarna på de omgjorda Instant-sidorna (sektioner mug_*) är lika breda som startsidans
+/* Etapp 4: produktrullarna på landningssidorna (sektioner mug_*) är lika breda som startsidans
    (3rem glimt av nästa produkt) när det finns fler än fyra; med högst fyra produkter går de kant i kant. */
 [id*="__mug_"] .resource-list__carousel:not(:has(.resource-list__slide:nth-child(5))) {
   --peek-next-slide-size: 0px;
