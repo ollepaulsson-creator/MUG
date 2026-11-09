@@ -1,3 +1,26 @@
+{%- comment -%} MUG 2026-11-09: custom.css sätter "Inter Variable" på nästan all text, men typsnittet
+  fanns bara på datorer där det var installerat — alla andra fick systemtypsnittet. Här självhostas
+  Inter 4.1 (rsms/Inter, SIL OFL 1.1) som variabel font, latin-delmängd med alla OpenType-funktioner
+  (bl.a. ss07), wght 100–900 och opsz 14–32. Shopifys statiska Inter (temainställningarna) används
+  knappt och förladdas därför inte längre. {%- endcomment -%}
+<link
+  rel="preload"
+  as="font"
+  href="{{ 'InterVariable-latin.woff2' | asset_url }}"
+  type="font/woff2"
+  crossorigin
+>
+<style>
+  @font-face {
+    font-family: "Inter Variable";
+    src: url("{{ 'InterVariable-latin.woff2' | asset_url }}") format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+0000-00FF, U+0100-017F, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2070-209F, U+20AC, U+2122, U+2190-21FF, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+</style>
+
 {%- unless settings.type_body_font.system?
   and settings.type_subheading_font.system?
   and settings.type_heading_font.system?
@@ -10,33 +33,6 @@
 {%- endunless -%}
 
 {% # theme-check-disable %}
-{%- unless settings.type_body_font.system? -%}
-  <link
-    rel="preload"
-    as="font"
-    href="{{ settings.type_body_font | font_url }}"
-    type="font/woff2"
-    crossorigin
-  >
-{%- endunless -%}
-{%- unless settings.type_subheading_font.system? -%}
-  <link
-    rel="preload"
-    as="font"
-    href="{{ settings.type_subheading_font | font_url }}"
-    type="font/woff2"
-    crossorigin
-  >
-{%- endunless -%}
-{%- unless settings.type_heading_font.system? -%}
-  <link
-    rel="preload"
-    as="font"
-    href="{{ settings.type_heading_font | font_url }}"
-    type="font/woff2"
-    crossorigin
-  >
-{%- endunless -%}
 {%- unless settings.type_accent_font.system? or settings.type_accent_font or settings.type_accent_font or settings.type_accent_font -%}
   <link
     rel="preload"
