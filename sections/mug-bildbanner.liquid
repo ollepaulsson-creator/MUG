@@ -74,7 +74,18 @@
       {%- endif -%}
 
       {%- if b.stortext != blank -%}
-        <span class="mug-banner__stortext">{{ b.stortext | escape | newline_to_br }}</span>
+        {%- liquid
+          # längsta raden i tecken: stortexten skalas ner så att den raden ryms i rutan (med luft på sidorna)
+          assign tecken = 1
+          assign rader = b.stortext | newline_to_br | split: '<br />'
+          for rad in rader
+            assign n = rad | strip | size
+            if n > tecken
+              assign tecken = n
+            endif
+          endfor
+        -%}
+        <span class="mug-banner__stortext" style="--mb-stor-tecken: {{ tecken }};">{{ b.stortext | escape | newline_to_br }}</span>
       {%- endif -%}
 
       {%- if b.textstil == 'kort' -%}
@@ -215,9 +226,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
+    /* Luft mot kanterna och ett tak: längsta raden (≈0,62 em per versal i Inter) får ta högst
+       84 % av rutans bredd. Taket slår bara till när den inställda storleken inte ryms. */
+    --mb-stor-tak: calc(84cqi / (var(--mb-stor-tecken, 1) * 0.62));
+    padding: 0 8cqi;
     text-align: center;
-    font-size: var(--mb-stor);
+    font-size: min(var(--mb-stor), var(--mb-stor-tak));
     line-height: 1.15;
     font-weight: 400;
     text-transform: uppercase;
@@ -321,7 +335,7 @@
     }
 
     .mug-banner__stortext {
-      font-size: var(--mb-stor-laptop);
+      font-size: min(var(--mb-stor-laptop), var(--mb-stor-tak));
     }
   }
 
@@ -335,7 +349,7 @@
     }
 
     .mug-banner__stortext {
-      font-size: var(--mb-stor-surf);
+      font-size: min(var(--mb-stor-surf), var(--mb-stor-tak));
     }
 
   }
@@ -360,7 +374,7 @@
 
   @media (max-width: 575px) {
     .mug-banner__stortext {
-      font-size: var(--mb-stor-mobil);
+      font-size: min(var(--mb-stor-mobil), var(--mb-stor-tak));
     }
 
     .mug-banner__media--mobil {

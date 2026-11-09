@@ -19,7 +19,7 @@
     --mh-logga: {{ s.logga_bredd }}px; --mh-rubrik-over: {{ s.rubrik_over | default: 0 }}px; --mh-rubrik-over-mobil: {{ s.rubrik_over_mobil | default: 0 }}px; --mh-fokus: {{ s.bildfokus | default: '50% 50%' }}; --mh-fokus-mobil: {{ s.bildfokus_mobil | default: '50% 50%' }};
     --mh-logga-over: {{ s.logga_over }}px; --mh-logga-under: {{ s.logga_under }}px;
     --mh-logga-over-mobil: {{ s.logga_over_mobil }}px; --mh-logga-under-mobil: {{ s.logga_under_mobil }}px;
-    --mh-rubrik: {{ s.rubrik_storlek }}px; --mh-rubrik-bredd: {{ s.rubrik_bredd | default: 50 }}%; --mh-rubrik-mobil: {{ s.rubrik_storlek_mobil }}px;
+    --mh-rubrik: {{ s.rubrik_storlek }}px; --mh-rubrik-bredd: {{ s.rubrik_bredd | default: 50 }}%;{% if s.rubrik_maxbredd > 0 %} --mh-rubrik-max: {{ s.rubrik_maxbredd }}px;{% endif %} --mh-rubrik-mobil: {{ s.rubrik_storlek_mobil }}px;
     --mh-ingress: {{ s.ingress_storlek }}px; --mh-ingress-rad: {{ s.ingress_radavstand | divided_by: 100.0 }};
     --mh-ingress-bredd: {{ s.ingress_bredd }}%; --mh-ingress-bredd-mobil: {{ s.ingress_bredd_mobil }}%;
   "
@@ -138,7 +138,7 @@
   }
 
   .mug-hero__rubrik {
-    max-width: var(--mh-rubrik-bredd, 50%);
+    max-width: min(var(--mh-rubrik-bredd, 50%), var(--mh-rubrik-max, 100%));
     margin: 0 0 20px;
     color: inherit;
     font-size: var(--mh-rubrik);
@@ -249,6 +249,7 @@
     { "type": "number", "id": "rubrik_storlek", "label": "Rubrikens storlek (px)", "default": 32 },
     { "type": "number", "id": "rubrik_over", "label": "Luft över rubriken (px, utan logga)", "default": 0 },
     { "type": "number", "id": "rubrik_bredd", "label": "Rubrikens maxbredd (%)", "default": 50 },
+    { "type": "number", "id": "rubrik_maxbredd", "label": "Rubrikens maxbredd i px (tom = ingen gräns)" },
     { "type": "number", "id": "rubrik_over_mobil", "label": "Luft över rubriken, mobil (px)", "default": 0 },
     { "type": "number", "id": "rubrik_storlek_mobil", "label": "Rubrikens storlek, mobil (px)", "default": 32 },
     { "type": "richtext", "id": "ingress", "label": "Ingress" },

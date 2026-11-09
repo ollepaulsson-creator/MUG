@@ -516,6 +516,7 @@
     "jul_01": {
       "type": "mug-hero",
       "settings": {
+        "rubrik_maxbredd": 640,
         "bildlage": "bakgrund",
         "bild": "shopify://shop_images/jul-lkfzpw-jul.jpg",
         "mobilbild": "shopify://shop_images/jul-oueig9-jul2mobil.jpg",

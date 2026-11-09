@@ -516,6 +516,7 @@
     "jul_01": {
       "type": "mug-hero",
       "settings": {
+        "rubrik_maxbredd": 640,
         "bildlage": "bakgrund",
         "bild": "shopify://shop_images/jul-j5faw7-uavolt176.jpg",
         "mobilbild": "shopify://shop_images/jul-friosn-inspelningmobil.jpg",

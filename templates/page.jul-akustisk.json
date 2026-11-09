@@ -516,6 +516,7 @@
     "jul_01": {
       "type": "mug-hero",
       "settings": {
+        "rubrik_maxbredd": 640,
         "bildlage": "bakgrund",
         "bild": "shopify://shop_images/jul-ye6lq0-akustiskgitarr.jpg",
         "mobilbild": "shopify://shop_images/jul-up5w44-akustiskgitarrmobil.jpg",
