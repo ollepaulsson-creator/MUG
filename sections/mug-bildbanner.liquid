@@ -6,6 +6,8 @@
   - rad: rubrik till vänster och uppmaning till höger längst ned (15 px versaler) – startsidan
   - kort: logga, rubrik 26 px och brödtext längst ned – kategorisidornas 2×2-kort
   Stor text (valfri) ligger centrerad över bilden, t.ex. SOMMAR / PRISER.
+  Animerade produktbilder (valfria, upp till 8 friställda bilder): en i taget
+  centrerad över bakgrunden, byts med ett rakt klipp med intervallet – Lagerfynd 2026-11-10.
 
   Mått: rutor 4 px isär, höjd 880 / 800 (≤1024) / 561 (≤768),
   under 576 px staplas rutorna (sista rutan först). "Fyll"-läget används
@@ -48,11 +50,16 @@
       else
         assign laddning = 'lazy'
       endif
+      # Intoning (40 px-miniatyr som tonas över till bilden) kan stängas av per sektion (Olle 2026-11-10, Lagerfynd).
+      assign tona = false
+      if laddning == 'lazy' and b.video == blank and b.bild != blank and section.settings.tona_in != false
+        assign tona = true
+      endif
     -%}
     <{{ tagg }}
-      class="mug-banner__ruta mug-banner__ruta--{{ b.textstil }}{% if laddning == 'lazy' and b.video == blank and b.bild != blank %} mug-prog{% endif %}"
+      class="mug-banner__ruta mug-banner__ruta--{{ b.textstil }}{% if tona %} mug-prog{% endif %}"
       {% if b.lank != blank %}href="{{ b.lank }}"{% endif %}
-      style="{% if laddning == 'lazy' and b.video == blank and b.bild != blank %}background-image: url({{ b.bild | image_url: width: 40 }});{% endif %} --mb-text: {{ b.textfarg }}; --mb-bg: {{ b.bakgrundsfarg }}; --mb-stor: {{ b.stortext_storlek }}px; --mb-stor-laptop: {{ b.stortext_laptop }}px; --mb-stor-surf: {{ b.stortext_surfplatta }}px; --mb-stor-mobil: {{ b.stortext_mobil }}px;"
+      style="{% if tona %}background-image: url({{ b.bild | image_url: width: 40 }});{% endif %} --mb-text: {{ b.textfarg }}; --mb-bg: {{ b.bakgrundsfarg }}; --mb-stor: {{ b.stortext_storlek }}px; --mb-stor-laptop: {{ b.stortext_laptop }}px; --mb-stor-surf: {{ b.stortext_surfplatta }}px; --mb-stor-mobil: {{ b.stortext_mobil }}px;"
       {{ block.shopify_attributes }}
     >
       {%- if b.video != blank -%}
@@ -69,8 +76,49 @@
               assign storlek = '(min-width: 1024px) 50vw, 100vw'
             endif
           -%}
-          {{- b.bild | image_url: width: 2400 | image_tag: widths: '600, 900, 1200, 1600, 2000, 2400', sizes: storlek, loading: laddning, alt: alt, class: mediaklass -}}
+          {%- if section.settings.originalstorlek -%}
+            {{- b.bild | image_url: width: b.bild.width | image_tag: srcset: nil, loading: laddning, alt: alt, class: mediaklass -}}
+          {%- else -%}
+            {{- b.bild | image_url: width: 2400 | image_tag: widths: '600, 900, 1200, 1600, 2000, 2400', sizes: storlek, loading: laddning, alt: alt, class: mediaklass -}}
+          {%- endif -%}
         {%- endif -%}
+      {%- endif -%}
+
+      {%- liquid
+        assign flytbilder = ''
+        for i in (1..8)
+          assign nyckel_flyt = 'flyt_' | append: i
+          if b[nyckel_flyt] != blank
+            assign flytbilder = flytbilder | append: nyckel_flyt | append: ','
+          endif
+        endfor
+        assign flytbilder = flytbilder | split: ','
+      -%}
+      {%- if flytbilder.size > 0 -%}
+        <span
+          class="mug-banner__flyt"
+          style="--mb-flyt-h: {{ b.flyt_storlek }}%; --mb-flyt-h-mobil: {{ b.flyt_storlek_mobil }}%;"
+          data-intervall="{{ b.flyt_intervall | times: 1000 }}"
+        >
+          {%- for nyckel_flyt in flytbilder -%}
+            {%- liquid
+              assign fb = b[nyckel_flyt]
+              if forloop.first
+                assign flyt_laddning = laddning
+              else
+                assign flyt_laddning = 'lazy'
+              endif
+            -%}
+            {%- assign nyckel_skala = nyckel_flyt | replace: 'flyt_', 'flyt_skala_' -%}
+            <span class="mug-banner__flytpost{% if forloop.first %} mug-banner__flytpost--aktiv{% endif %}"{% unless forloop.first %} aria-hidden="true"{% endunless %} style="--mb-flyt-skala: {{ b[nyckel_skala] | default: 100 | divided_by: 100.0 }};">
+              {%- if section.settings.originalstorlek -%}
+                {{- fb | image_url: width: fb.width | image_tag: srcset: nil, loading: flyt_laddning, alt: fb.alt, class: 'mug-banner__flytbild' -}}
+              {%- else -%}
+                {{- fb | image_url: width: 1200 | image_tag: widths: '400, 600, 800, 1000, 1200', sizes: '(min-width: 901px) 30vw, 70vw', loading: flyt_laddning, alt: fb.alt, class: 'mug-banner__flytbild' -}}
+              {%- endif -%}
+            </span>
+          {%- endfor -%}
+        </span>
       {%- endif -%}
 
       {%- if b.stortext != blank -%}
@@ -130,6 +178,44 @@
     }) : null;
     rader.forEach(function (r) { justera(r); if (ro) ro.observe(r); });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { rader.forEach(justera); });
+  })();
+  (function () {
+    /* Animerade produktbilder: en i taget, rakt klipp till nästa med intervallet.
+       Står still när rutan inte syns eller fliken är dold. */
+    var sek = document.currentScript.previousElementSibling;
+    if (!sek) return;
+    sek.querySelectorAll('.mug-banner__flyt').forEach(function (flyt) {
+      var poster = flyt.querySelectorAll('.mug-banner__flytpost');
+      if (poster.length < 2) return;
+      var intervall = parseInt(flyt.dataset.intervall, 10) || 3000;
+      var aktiv = 0, timer = null, synlig = false;
+      function visa(n) {
+        var forra = poster[aktiv];
+        forra.classList.remove('mug-banner__flytpost--aktiv');
+        forra.setAttribute('aria-hidden', 'true');
+        aktiv = n;
+        var img = poster[aktiv].querySelector('img');
+        if (img) img.loading = 'eager';
+        poster[aktiv].classList.add('mug-banner__flytpost--aktiv');
+        poster[aktiv].removeAttribute('aria-hidden');
+        /* förladda nästa */
+        var nasta = poster[(aktiv + 1) % poster.length].querySelector('img');
+        if (nasta) nasta.loading = 'eager';
+      }
+      function start() { if (!timer && synlig && !document.hidden) timer = setInterval(function () { visa((aktiv + 1) % poster.length); }, intervall); }
+      function stopp() { clearInterval(timer); timer = null; }
+      if (window.IntersectionObserver) {
+        new IntersectionObserver(function (e) {
+          synlig = e[0].isIntersecting;
+          if (synlig) {
+            var nasta = poster[1].querySelector('img');
+            if (nasta) nasta.loading = 'eager';
+            start();
+          } else stopp();
+        }).observe(flyt);
+      } else { synlig = true; start(); }
+      document.addEventListener('visibilitychange', function () { document.hidden ? stopp() : start(); });
+    });
   })();
 </script>
 {%- endif -%}
@@ -218,6 +304,34 @@
 
   .mug-banner__media--mobil {
     display: none;
+  }
+
+  .mug-banner__flyt {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .mug-banner__flytpost {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+  }
+
+  .mug-banner__flytpost--aktiv {
+    visibility: visible;
+  }
+
+  .mug-banner__flytbild {
+    display: block;
+    width: auto;
+    height: calc(var(--mb-flyt-h, 52%) * var(--mb-flyt-skala, 1));
+    max-width: calc(68% * var(--mb-flyt-skala, 1));
+    object-fit: contain;
+    filter: drop-shadow(0 24px 30px rgb(0 0 0 / 0.55));
   }
 
   .mug-banner__stortext {
@@ -370,6 +484,10 @@
       flex: none;
       height: var(--mb-h-mobil);
     }
+
+    .mug-banner__flytbild {
+      height: calc(var(--mb-flyt-h-mobil, 60%) * var(--mb-flyt-skala, 1));
+    }
   }
 
   @media (max-width: 575px) {
@@ -406,7 +524,9 @@
     { "type": "number", "id": "hojd_desktop", "label": "Höjd desktop (px)", "default": 880 },
     { "type": "number", "id": "hojd_laptop", "label": "Höjd laptop, ≤1024 px (px)", "default": 800 },
     { "type": "number", "id": "hojd_mobil", "label": "Höjd per ruta, surfplatta och mobil, ≤768 px (px)", "default": 561 },
-    { "type": "checkbox", "id": "mobil_omvand", "label": "Mobil: visa sista rutan först", "default": true }
+    { "type": "checkbox", "id": "mobil_omvand", "label": "Mobil: visa sista rutan först", "default": true },
+    { "type": "checkbox", "id": "tona_in", "label": "Tona in bilderna när de laddas", "default": true },
+    { "type": "checkbox", "id": "originalstorlek", "label": "Leverera bilderna i originalstorlek", "info": "För bilder som redan är komprimerade i rätt storlek (t.ex. korniga bakgrunder, där Shopifys nedskalning ger större filer).", "default": false }
   ],
   "blocks": [
     {
@@ -449,7 +569,28 @@
             { "value": "hela", "label": "Hela bilden, centrerad" }
           ],
           "default": "fyll"
-        }
+        },
+        { "type": "header", "content": "Animerade produktbilder" },
+        { "type": "paragraph", "content": "Friställda bilder (PNG/WebP med genomskinlig bakgrund) som visas en i taget över bilden ovan och byts med ett rakt klipp." },
+        { "type": "image_picker", "id": "flyt_1", "label": "Produktbild 1" },
+        { "type": "range", "id": "flyt_skala_1", "label": "… storlek", "min": 50, "max": 150, "step": 5, "unit": "%", "default": 100 },
+        { "type": "image_picker", "id": "flyt_2", "label": "Produktbild 2" },
+        { "type": "range", "id": "flyt_skala_2", "label": "… storlek", "min": 50, "max": 150, "step": 5, "unit": "%", "default": 100 },
+        { "type": "image_picker", "id": "flyt_3", "label": "Produktbild 3" },
+        { "type": "range", "id": "flyt_skala_3", "label": "… storlek", "min": 50, "max": 150, "step": 5, "unit": "%", "default": 100 },
+        { "type": "image_picker", "id": "flyt_4", "label": "Produktbild 4" },
+        { "type": "range", "id": "flyt_skala_4", "label": "… storlek", "min": 50, "max": 150, "step": 5, "unit": "%", "default": 100 },
+        { "type": "image_picker", "id": "flyt_5", "label": "Produktbild 5" },
+        { "type": "range", "id": "flyt_skala_5", "label": "… storlek", "min": 50, "max": 150, "step": 5, "unit": "%", "default": 100 },
+        { "type": "image_picker", "id": "flyt_6", "label": "Produktbild 6" },
+        { "type": "range", "id": "flyt_skala_6", "label": "… storlek", "min": 50, "max": 150, "step": 5, "unit": "%", "default": 100 },
+        { "type": "image_picker", "id": "flyt_7", "label": "Produktbild 7" },
+        { "type": "range", "id": "flyt_skala_7", "label": "… storlek", "min": 50, "max": 150, "step": 5, "unit": "%", "default": 100 },
+        { "type": "image_picker", "id": "flyt_8", "label": "Produktbild 8" },
+        { "type": "range", "id": "flyt_skala_8", "label": "… storlek", "min": 50, "max": 150, "step": 5, "unit": "%", "default": 100 },
+        { "type": "range", "id": "flyt_storlek", "label": "Bildernas höjd", "min": 30, "max": 90, "step": 2, "unit": "%", "default": 52 },
+        { "type": "range", "id": "flyt_storlek_mobil", "label": "… surfplatta och mobil (≤900 px)", "min": 30, "max": 90, "step": 2, "unit": "%", "default": 60 },
+        { "type": "range", "id": "flyt_intervall", "label": "Byt bild var", "min": 2, "max": 8, "step": 0.5, "unit": "s", "default": 3 }
       ]
     }
   ],

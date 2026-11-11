@@ -9,6 +9,282 @@
  */
 {
   "sections": {
+    "mug_lagerfynd": {
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_lagerfynd_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/lagerfynd-rubrik-opt.webp",
+            "lank": "shopify://collections/lagerfynd-till-megapriser",
+            "textstil": "rad",
+            "rubrik": "Lagerfynd",
+            "uppmaning": "Megapriser!",
+            "dolj_uppmaning_mobil": true,
+            "stortext_storlek": 68,
+            "stortext_laptop": 68,
+            "stortext_surfplatta": 48,
+            "stortext_mobil": 48,
+            "textfarg": "#ffffff"
+          }
+        },
+        "ruta_lagerfynd_2": {
+          "type": "ruta",
+          "settings": {
+            "flyt_1": "shopify://shop_images/lagerfynd-kfs-1-footswitch-opt.webp",
+            "flyt_skala_1": 80,
+            "flyt_2": "shopify://shop_images/lagerfynd-more-you-hub-opt.webp",
+            "flyt_3": "shopify://shop_images/lagerfynd-xvive-p3-v2-opt.webp",
+            "flyt_4": "shopify://shop_images/lagerfynd-jhms1-hendrix-shrine-fuzz-face-mini-opt.webp",
+            "flyt_5": "shopify://shop_images/lagerfynd-vh-micro-opt.webp",
+            "flyt_7": "shopify://shop_images/lagerfynd-zoom-m2-opt.webp",
+            "flyt_skala_7": 120,
+            "bild": "shopify://shop_images/lagerfynd-produktbakgrund-2-opt.webp",
+            "lank": "shopify://collections/lagerfynd-till-megapriser",
+            "textstil": "rad",
+            "rubrik": "Lagerfynd",
+            "uppmaning": "Megapriser!",
+            "dolj_uppmaning_mobil": true,
+            "textfarg": "#ffffff",
+            "flyt_storlek": 52,
+            "flyt_storlek_mobil": 60,
+            "flyt_intervall": 3
+          }
+        }
+      },
+      "block_order": [
+        "ruta_lagerfynd_1",
+        "ruta_lagerfynd_2"
+      ],
+      "settings": {
+        "hojd_lage": "fast",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": false,
+        "tona_in": false,
+        "originalstorlek": true
+      }
+    },
+    "product_list_lagerfynd": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "center",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 8,
+            "padding-block-end": 2,
+            "padding-inline-start": 15,
+            "padding-inline-end": 15
+          },
+          "blocks": {
+            "product_list_text_kmdAw8": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h2>Lagerfynd till megapriser</h2>"
+              },
+              "blocks": {}
+            },
+            "button_kyPFyt": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "SE ALLA",
+                "link": "{{ closest.collection.url }}",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 7,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 30
+              },
+              "blocks": {}
+            },
+            "swatches_8WFcrC": {
+              "type": "swatches",
+              "name": "t:names.swatches",
+              "settings": {
+                "product_swatches_alignment": "flex-start",
+                "product_swatches_alignment_mobile": "flex-start",
+                "hide_padding": false,
+                "product_swatches_padding_top": 4,
+                "product_swatches_padding_bottom": 0,
+                "product_swatches_padding_left": 0,
+                "product_swatches_padding_right": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_kmdAw8",
+            "button_kyPFyt",
+            "swatches_8WFcrC"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 2,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 15,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_tiBwKW": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_bWTfX3": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>{{ closest.product.vendor }}</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 15,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_RKXdGb": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 6,
+                "padding-block-end": 6,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_RB3K4t": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 15,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_tiBwKW",
+            "text_bWTfX3",
+            "product_title_RKXdGb",
+            "price_RB3K4t"
+          ]
+        }
+      },
+      "name": "t:names.products_carousel",
+      "settings": {
+        "collection": "lagerfynd-till-megapriser",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "max_products": 8,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 0,
+        "rows_gap": 24,
+        "icons_style": "arrows_large",
+        "icons_shape": "circle",
+        "section_width": "full-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 18,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 10,
+        "padding-block-end": 0
+      }
+    },
     "instant_0nh459rct_mq_luf_ug_TFTECX": {
       "type": "mug-bildbanner",
       "blocks": {
@@ -2004,6 +2280,8 @@
     }
   },
   "order": [
+    "mug_lagerfynd",
+    "product_list_lagerfynd",
     "instant_0nh459rct_mq_luf_ug_TFTECX",
     "product_list_PmjHpA",
     "instant_t1_wt_xo_ymjr_hm_xylw_t4wpNk",
