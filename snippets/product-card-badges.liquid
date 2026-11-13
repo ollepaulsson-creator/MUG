@@ -64,14 +64,32 @@
 {%- assign is_campaign = false -%}
 {%- assign campaign_badge_label = 'Kampanj' -%}
 
-{%- assign mug_shop_campaign = shop.metafields.mug.campaign.value -%}
-{%- if mug_shop_campaign and mug_shop_campaign.active -%}
-  {%- if product.metafields.mug.campaign.value == mug_shop_campaign.id -%}
-    {%- assign mf_start = mug_shop_campaign.starts_at | date: '%s' | plus: 0 -%}
-    {%- assign mf_end = mug_shop_campaign.ends_at | date: '%s' | plus: 0 -%}
-    {%- if now_seconds >= mf_start and now_seconds <= mf_end -%}
-      {%- assign is_campaign = true -%}
-      {%- assign campaign_badge_label = mug_shop_campaign.badge_text -%}
+{%- comment %} Flera kampanjer samtidigt (2026-11-13): shop.metafields.mug.campaigns
+  = { kampanj-id: { badge_text, notice_text, starts_at, ends_at } } för alla aktiva.
+  Saknas posten faller vi tillbaka på den gamla enkampanjslogiken (mug.campaign). {%- endcomment -%}
+{%- assign mug_product_campaign_id = product.metafields.mug.campaign.value -%}
+{%- assign mug_campaign_entry = nil -%}
+{%- if mug_product_campaign_id != blank -%}
+  {%- assign mug_campaign_entry = shop.metafields.mug.campaigns.value[mug_product_campaign_id] -%}
+{%- endif -%}
+
+{%- if mug_campaign_entry -%}
+  {%- assign mf_start = mug_campaign_entry.starts_at | date: '%s' | plus: 0 -%}
+  {%- assign mf_end = mug_campaign_entry.ends_at | date: '%s' | plus: 0 -%}
+  {%- if now_seconds >= mf_start and now_seconds <= mf_end -%}
+    {%- assign is_campaign = true -%}
+    {%- assign campaign_badge_label = mug_campaign_entry.badge_text -%}
+  {%- endif -%}
+{%- else -%}
+  {%- assign mug_shop_campaign = shop.metafields.mug.campaign.value -%}
+  {%- if mug_shop_campaign and mug_shop_campaign.active -%}
+    {%- if mug_product_campaign_id == mug_shop_campaign.id -%}
+      {%- assign mf_start = mug_shop_campaign.starts_at | date: '%s' | plus: 0 -%}
+      {%- assign mf_end = mug_shop_campaign.ends_at | date: '%s' | plus: 0 -%}
+      {%- if now_seconds >= mf_start and now_seconds <= mf_end -%}
+        {%- assign is_campaign = true -%}
+        {%- assign campaign_badge_label = mug_shop_campaign.badge_text -%}
+      {%- endif -%}
     {%- endif -%}
   {%- endif -%}
 {%- endif -%}
