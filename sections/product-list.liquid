@@ -22,6 +22,10 @@
     {% render 'gap-style', value: section.settings.gap %}
   "
 >
+  {%- comment -%} "Se alla"-länken i rubrikraden får aldrig radbrytas (Olle 2026-11-14). Inline så att den slår igenom direkt. {%- endcomment -%}
+  <style>
+    .section-resource-list__header a.link { white-space: nowrap; flex-shrink: 0; }
+  </style>
   <div class="section-resource-list__header">
     {%- content_for 'block', type: '_product-list-content', id: 'static-header' -%}
   </div>
