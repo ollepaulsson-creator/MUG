@@ -32,8 +32,15 @@
 
   {% capture list_items %}
     {% if section.settings.collection != blank and shop.products_count != 0 %}
-      {% paginate section.settings.collection.products by max_items %}
-        {% for product in section.settings.collection.products limit: max_items %}
+      {%- comment -%}
+        hoppa_over > 0: listan börjar efter de första N produkterna i kollektionen, så två
+        listor kan visa samma kollektion med olika produkter (Black Week, Olle 2026-11-17).
+        Läser utan paginate (Shopify ger då de första 50), och ?page från karusellens
+        "ladda fler" flyttar fönstret ett max_items-steg i taget.
+      {%- endcomment -%}
+      {% if section.settings.hoppa_over > 0 %}
+        {% assign lista_start = current_page | minus: 1 | times: max_items | plus: section.settings.hoppa_over %}
+        {% for product in section.settings.collection.products offset: lista_start limit: max_items %}
           {% unless product.available %}{% continue %}{% endunless %}
           <div
             class="resource-list__item"
@@ -47,7 +54,24 @@
             <!--@list/split-->
           {% endunless %}
         {% endfor %}
-      {% endpaginate %}
+      {% else %}
+        {% paginate section.settings.collection.products by max_items %}
+          {% for product in section.settings.collection.products limit: max_items %}
+            {% unless product.available %}{% continue %}{% endunless %}
+            <div
+              class="resource-list__item"
+            >
+              {% # theme-check-disable UniqueStaticBlockId %}
+                {% content_for 'block', type: '_product-card', id: 'static-product-card', closest.product: product %}
+              {% # theme-check-enable UniqueStaticBlockId %}
+            </div>
+
+            {% unless forloop.last %}
+              <!--@list/split-->
+            {% endunless %}
+          {% endfor %}
+        {% endpaginate %}
+      {% endif %}
     {% else %}
       {% for i in (1..max_items) %}
         <div
@@ -150,6 +174,16 @@
       "max": 16,
       "step": 1,
       "default": 4
+    },
+    {
+      "type": "range",
+      "id": "hoppa_over",
+      "label": "Hoppa över första produkterna",
+      "info": "Visa samma kollektion som en annan lista men börja efter så här många produkter. 0 = från början.",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "default": 0
     },
     {
       "type": "range",
