@@ -9,6 +9,714 @@
  */
 {
   "sections": {
+    "mug_blackweek_1": {
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/blackweek-1-rubrik-vit.webp",
+            "lank": "shopify://collections/black-week",
+            "textstil": "rad",
+            "rubrik": "Black Week",
+            "uppmaning": "Megapriser!",
+            "dolj_uppmaning_mobil": true,
+            "brodtext": "",
+            "logga_bredd": 110,
+            "stortext": "",
+            "stortext_storlek": 110,
+            "stortext_laptop": 90,
+            "stortext_surfplatta": 68,
+            "stortext_mobil": 68,
+            "textfarg": "#ffffff",
+            "bakgrundsfarg": "#f2f2f2",
+            "bildlage": "fyll",
+            "flyt_skala_1": 100,
+            "flyt_skala_2": 100,
+            "flyt_skala_3": 100,
+            "flyt_skala_4": 100,
+            "flyt_skala_5": 100,
+            "flyt_skala_6": 100,
+            "flyt_skala_7": 100,
+            "flyt_skala_8": 100,
+            "flyt_storlek": 52,
+            "flyt_storlek_mobil": 60,
+            "flyt_intervall": 3
+          }
+        },
+        "ruta_2": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/blackweek-1-produktbakgrund.webp",
+            "lank": "shopify://collections/black-week",
+            "textstil": "rad",
+            "rubrik": "Black Week",
+            "uppmaning": "Megapriser!",
+            "dolj_uppmaning_mobil": true,
+            "brodtext": "",
+            "logga_bredd": 110,
+            "stortext": "",
+            "stortext_storlek": 110,
+            "stortext_laptop": 90,
+            "stortext_surfplatta": 68,
+            "stortext_mobil": 68,
+            "textfarg": "#ffffff",
+            "bakgrundsfarg": "#f2f2f2",
+            "bildlage": "fyll",
+            "flyt_1": "shopify://shop_images/blackweek-flyt-duesenberg-vit.webp",
+            "flyt_skala_1": 145,
+            "flyt_2": "shopify://shop_images/blackweek-flyt-madprofessor-evolution-orange.webp",
+            "flyt_skala_2": 85,
+            "flyt_3": "shopify://shop_images/blackweek-flyt-waldorf-iridium-core.webp",
+            "flyt_skala_3": 125,
+            "flyt_4": "shopify://shop_images/blackweek-flyt-meinl-byzance-hihat.webp",
+            "flyt_skala_4": 90,
+            "flyt_5": "shopify://shop_images/blackweek-flyt-kala-ubass.webp",
+            "flyt_skala_5": 145,
+            "flyt_6": "shopify://shop_images/blackweek-flyt-dod-odpre-250.webp",
+            "flyt_skala_6": 85,
+            "flyt_7": "shopify://shop_images/blackweek-flyt-beyerdynamic-dt770.webp",
+            "flyt_skala_7": 100,
+            "flyt_8": "shopify://shop_images/blackweek-flyt-dreadbox-utopia.webp",
+            "flyt_skala_8": 100,
+            "flyt_storlek": 52,
+            "flyt_storlek_mobil": 60,
+            "flyt_intervall": 2
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1",
+        "ruta_2"
+      ],
+      "settings": {
+        "hojd_lage": "fast",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": false,
+        "tona_in": false,
+        "originalstorlek": true
+      }
+    },
+    "product_list_blackweek": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "center",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 8,
+            "padding-block-end": 2,
+            "padding-inline-start": 15,
+            "padding-inline-end": 15
+          },
+          "blocks": {
+            "product_list_text_kmdAw8": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "Black Week – Upp till 60% rabatt"
+              },
+              "blocks": {}
+            },
+            "button_kyPFyt": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "SE ALLA",
+                "link": "{{ closest.collection.url }}",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 7,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 30
+              },
+              "blocks": {}
+            },
+            "swatches_8WFcrC": {
+              "type": "swatches",
+              "name": "t:names.swatches",
+              "settings": {
+                "product_swatches_alignment": "flex-start",
+                "product_swatches_alignment_mobile": "flex-start",
+                "hide_padding": false,
+                "product_swatches_padding_top": 4,
+                "product_swatches_padding_bottom": 0,
+                "product_swatches_padding_left": 0,
+                "product_swatches_padding_right": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_kmdAw8",
+            "button_kyPFyt",
+            "swatches_8WFcrC"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 2,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 15,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_tiBwKW": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_bWTfX3": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>{{ closest.product.vendor }}</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 15,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_RKXdGb": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 6,
+                "padding-block-end": 6,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_RB3K4t": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 15,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_tiBwKW",
+            "text_bWTfX3",
+            "product_title_RKXdGb",
+            "price_RB3K4t"
+          ]
+        }
+      },
+      "name": "t:names.products_carousel",
+      "settings": {
+        "collection": "black-week",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "max_products": 8,
+        "hoppa_over": 0,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 0,
+        "rows_gap": 24,
+        "icons_style": "arrows_large",
+        "icons_shape": "circle",
+        "section_width": "full-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 18,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 10,
+        "padding-block-end": 0
+      }
+    },
+    "mug_blackweek_2": {
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/blackweek-2-produktbakgrund-ljus.webp",
+            "lank": "shopify://collections/black-week",
+            "textstil": "rad",
+            "rubrik": "Black Week",
+            "uppmaning": "Megapriser!",
+            "dolj_uppmaning_mobil": true,
+            "brodtext": "",
+            "logga_bredd": 110,
+            "stortext": "",
+            "stortext_storlek": 110,
+            "stortext_laptop": 90,
+            "stortext_surfplatta": 68,
+            "stortext_mobil": 68,
+            "textfarg": "#ffffff",
+            "bakgrundsfarg": "#f2f2f2",
+            "bildlage": "fyll",
+            "flyt_1": "shopify://shop_images/blackweek-flyt-orange-crush.webp",
+            "flyt_skala_1": 85,
+            "flyt_2": "shopify://shop_images/blackweek-flyt-ibanez-akustisk.webp",
+            "flyt_skala_2": 140,
+            "flyt_3": "shopify://shop_images/blackweek-flyt-ua-max.webp",
+            "flyt_skala_3": 85,
+            "flyt_4": "shopify://shop_images/blackweek-flyt-korg-wavestate-module.webp",
+            "flyt_skala_4": 120,
+            "flyt_5": "shopify://shop_images/blackweek-flyt-ua-woodrow.webp",
+            "flyt_skala_5": 85,
+            "flyt_6": "shopify://shop_images/blackweek-flyt-ua-volt.webp",
+            "flyt_skala_6": 100,
+            "flyt_7": "shopify://shop_images/blackweek-flyt-prs-archon.webp",
+            "flyt_skala_7": 85,
+            "flyt_8": "shopify://shop_images/blackweek-flyt-warm-wa2a.webp",
+            "flyt_skala_8": 135,
+            "flyt_storlek": 52,
+            "flyt_storlek_mobil": 60,
+            "flyt_intervall": 2
+          }
+        },
+        "ruta_2": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/blackweek-2-rubrik-vit.webp",
+            "lank": "shopify://collections/black-week",
+            "textstil": "rad",
+            "rubrik": "Black Week",
+            "uppmaning": "Megapriser!",
+            "dolj_uppmaning_mobil": true,
+            "brodtext": "",
+            "logga_bredd": 110,
+            "stortext": "",
+            "stortext_storlek": 110,
+            "stortext_laptop": 90,
+            "stortext_surfplatta": 68,
+            "stortext_mobil": 68,
+            "textfarg": "#ffffff",
+            "bakgrundsfarg": "#f2f2f2",
+            "bildlage": "fyll",
+            "flyt_skala_1": 100,
+            "flyt_skala_2": 100,
+            "flyt_skala_3": 100,
+            "flyt_skala_4": 100,
+            "flyt_skala_5": 100,
+            "flyt_skala_6": 100,
+            "flyt_skala_7": 100,
+            "flyt_skala_8": 100,
+            "flyt_storlek": 52,
+            "flyt_storlek_mobil": 60,
+            "flyt_intervall": 3
+          }
+        }
+      },
+      "block_order": [
+        "ruta_1",
+        "ruta_2"
+      ],
+      "settings": {
+        "hojd_lage": "fast",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": true,
+        "tona_in": false,
+        "originalstorlek": true
+      }
+    },
+    "product_list_blackweek_2": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "center",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 8,
+            "padding-block-end": 2,
+            "padding-inline-start": 15,
+            "padding-inline-end": 15
+          },
+          "blocks": {
+            "product_list_text_kmdAw8": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h2>Black Week</h2>"
+              },
+              "blocks": {}
+            },
+            "button_kyPFyt": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "SE ALLA",
+                "link": "{{ closest.collection.url }}",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 7,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 30
+              },
+              "blocks": {}
+            },
+            "swatches_8WFcrC": {
+              "type": "swatches",
+              "name": "t:names.swatches",
+              "settings": {
+                "product_swatches_alignment": "flex-start",
+                "product_swatches_alignment_mobile": "flex-start",
+                "hide_padding": false,
+                "product_swatches_padding_top": 4,
+                "product_swatches_padding_bottom": 0,
+                "product_swatches_padding_left": 0,
+                "product_swatches_padding_right": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_kmdAw8",
+            "button_kyPFyt",
+            "swatches_8WFcrC"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 2,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 15,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_tiBwKW": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_bWTfX3": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>{{ closest.product.vendor }}</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 15,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_RKXdGb": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 6,
+                "padding-block-end": 6,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_RB3K4t": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 15,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_tiBwKW",
+            "text_bWTfX3",
+            "product_title_RKXdGb",
+            "price_RB3K4t"
+          ]
+        }
+      },
+      "name": "t:names.products_carousel",
+      "settings": {
+        "collection": "black-week",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "max_products": 8,
+        "hoppa_over": 8,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 0,
+        "rows_gap": 24,
+        "icons_style": "arrows_large",
+        "icons_shape": "circle",
+        "section_width": "full-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 18,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 10,
+        "padding-block-end": 0
+      }
+    },
+    "mug_lagerfynd_2": {
+      "type": "mug-bildbanner",
+      "blocks": {
+        "ruta_lagerfynd_1": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/lagerfynd-2-rubrik-vit.webp",
+            "lank": "shopify://collections/lagerfynd-till-megapriser",
+            "textstil": "rad",
+            "rubrik": "Lagerfynd",
+            "uppmaning": "Megapriser!",
+            "dolj_uppmaning_mobil": true,
+            "brodtext": "",
+            "logga_bredd": 110,
+            "stortext": "",
+            "stortext_storlek": 68,
+            "stortext_laptop": 68,
+            "stortext_surfplatta": 48,
+            "stortext_mobil": 48,
+            "textfarg": "#ffffff",
+            "bakgrundsfarg": "#f2f2f2",
+            "bildlage": "fyll",
+            "flyt_skala_1": 100,
+            "flyt_skala_2": 100,
+            "flyt_skala_3": 100,
+            "flyt_skala_4": 100,
+            "flyt_skala_5": 100,
+            "flyt_skala_6": 100,
+            "flyt_skala_7": 100,
+            "flyt_skala_8": 100,
+            "flyt_storlek": 52,
+            "flyt_storlek_mobil": 60,
+            "flyt_intervall": 3
+          }
+        },
+        "ruta_lagerfynd_2": {
+          "type": "ruta",
+          "settings": {
+            "bild": "shopify://shop_images/lagerfynd-2-produktbakgrund-original.webp",
+            "lank": "shopify://collections/lagerfynd-till-megapriser",
+            "textstil": "rad",
+            "rubrik": "Lagerfynd",
+            "uppmaning": "Megapriser!",
+            "dolj_uppmaning_mobil": true,
+            "brodtext": "",
+            "logga_bredd": 110,
+            "stortext": "",
+            "stortext_storlek": 110,
+            "stortext_laptop": 90,
+            "stortext_surfplatta": 68,
+            "stortext_mobil": 68,
+            "textfarg": "#ffffff",
+            "bakgrundsfarg": "#f2f2f2",
+            "bildlage": "fyll",
+            "flyt_1": "shopify://shop_images/lagerfynd-kfs-1-footswitch-opt.webp",
+            "flyt_skala_1": 80,
+            "flyt_2": "shopify://shop_images/lagerfynd-more-you-hub-opt.webp",
+            "flyt_skala_2": 100,
+            "flyt_3": "shopify://shop_images/lagerfynd-xvive-p3-v2-opt.webp",
+            "flyt_skala_3": 100,
+            "flyt_4": "shopify://shop_images/lagerfynd-jhms1-hendrix-shrine-fuzz-face-mini-opt.webp",
+            "flyt_skala_4": 100,
+            "flyt_5": "shopify://shop_images/lagerfynd-vh-micro-opt.webp",
+            "flyt_skala_5": 100,
+            "flyt_skala_6": 100,
+            "flyt_7": "shopify://shop_images/lagerfynd-zoom-m2-opt.webp",
+            "flyt_skala_7": 120,
+            "flyt_skala_8": 100,
+            "flyt_storlek": 52,
+            "flyt_storlek_mobil": 60,
+            "flyt_intervall": 3
+          }
+        }
+      },
+      "block_order": [
+        "ruta_lagerfynd_1",
+        "ruta_lagerfynd_2"
+      ],
+      "settings": {
+        "hojd_lage": "fast",
+        "hojd_desktop": 880,
+        "hojd_laptop": 800,
+        "hojd_mobil": 561,
+        "mobil_omvand": false,
+        "tona_in": false,
+        "originalstorlek": true
+      }
+    },
     "product_list_lagerfynd": {
       "type": "product-list",
       "blocks": {
@@ -213,6 +921,7 @@
         "layout_type": "carousel",
         "carousel_on_mobile": false,
         "max_products": 8,
+        "hoppa_over": 0,
         "columns": 4,
         "mobile_columns": "2",
         "mobile_card_size": "44cqw",
@@ -240,7 +949,27 @@
             "rubrik": "EP–35 K.O.AMP",
             "uppmaning": "multi–input/FX/speaker/amp",
             "dolj_uppmaning_mobil": true,
-            "textfarg": "#ffffff"
+            "brodtext": "",
+            "logga_bredd": 110,
+            "stortext": "",
+            "stortext_storlek": 110,
+            "stortext_laptop": 90,
+            "stortext_surfplatta": 68,
+            "stortext_mobil": 68,
+            "textfarg": "#ffffff",
+            "bakgrundsfarg": "#f2f2f2",
+            "bildlage": "fyll",
+            "flyt_skala_1": 100,
+            "flyt_skala_2": 100,
+            "flyt_skala_3": 100,
+            "flyt_skala_4": 100,
+            "flyt_skala_5": 100,
+            "flyt_skala_6": 100,
+            "flyt_skala_7": 100,
+            "flyt_skala_8": 100,
+            "flyt_storlek": 52,
+            "flyt_storlek_mobil": 60,
+            "flyt_intervall": 3
           }
         },
         "ruta_2": {
@@ -252,7 +981,27 @@
             "rubrik": "EP–35 K.O.AMP",
             "uppmaning": "Med tillbehör!",
             "dolj_uppmaning_mobil": true,
-            "textfarg": "#000000"
+            "brodtext": "",
+            "logga_bredd": 110,
+            "stortext": "",
+            "stortext_storlek": 110,
+            "stortext_laptop": 90,
+            "stortext_surfplatta": 68,
+            "stortext_mobil": 68,
+            "textfarg": "#000000",
+            "bakgrundsfarg": "#f2f2f2",
+            "bildlage": "fyll",
+            "flyt_skala_1": 100,
+            "flyt_skala_2": 100,
+            "flyt_skala_3": 100,
+            "flyt_skala_4": 100,
+            "flyt_skala_5": 100,
+            "flyt_skala_6": 100,
+            "flyt_skala_7": 100,
+            "flyt_skala_8": 100,
+            "flyt_storlek": 52,
+            "flyt_storlek_mobil": 60,
+            "flyt_intervall": 3
           }
         }
       },
@@ -265,7 +1014,9 @@
         "hojd_desktop": 880,
         "hojd_laptop": 800,
         "hojd_mobil": 561,
-        "mobil_omvand": true
+        "mobil_omvand": true,
+        "tona_in": true,
+        "originalstorlek": false
       }
     },
     "product_list_PmjHpA": {
@@ -472,6 +1223,7 @@
         "layout_type": "carousel",
         "carousel_on_mobile": false,
         "max_products": 8,
+        "hoppa_over": 0,
         "columns": 4,
         "mobile_columns": "2",
         "mobile_card_size": "44cqw",
@@ -499,7 +1251,27 @@
             "rubrik": "Andra Generationen VOLT och Volt MAX",
             "uppmaning": "Beställ nu!",
             "dolj_uppmaning_mobil": true,
-            "textfarg": "#ffffff"
+            "brodtext": "",
+            "logga_bredd": 110,
+            "stortext": "",
+            "stortext_storlek": 110,
+            "stortext_laptop": 90,
+            "stortext_surfplatta": 68,
+            "stortext_mobil": 68,
+            "textfarg": "#ffffff",
+            "bakgrundsfarg": "#f2f2f2",
+            "bildlage": "fyll",
+            "flyt_skala_1": 100,
+            "flyt_skala_2": 100,
+            "flyt_skala_3": 100,
+            "flyt_skala_4": 100,
+            "flyt_skala_5": 100,
+            "flyt_skala_6": 100,
+            "flyt_skala_7": 100,
+            "flyt_skala_8": 100,
+            "flyt_storlek": 52,
+            "flyt_storlek_mobil": 60,
+            "flyt_intervall": 3
           }
         },
         "ruta_2": {
@@ -511,7 +1283,27 @@
             "rubrik": "Andra Generationen VOLT och Volt MAX",
             "uppmaning": "Beställ nu!",
             "dolj_uppmaning_mobil": true,
-            "textfarg": "#ffffff"
+            "brodtext": "",
+            "logga_bredd": 110,
+            "stortext": "",
+            "stortext_storlek": 110,
+            "stortext_laptop": 90,
+            "stortext_surfplatta": 68,
+            "stortext_mobil": 68,
+            "textfarg": "#ffffff",
+            "bakgrundsfarg": "#f2f2f2",
+            "bildlage": "fyll",
+            "flyt_skala_1": 100,
+            "flyt_skala_2": 100,
+            "flyt_skala_3": 100,
+            "flyt_skala_4": 100,
+            "flyt_skala_5": 100,
+            "flyt_skala_6": 100,
+            "flyt_skala_7": 100,
+            "flyt_skala_8": 100,
+            "flyt_storlek": 52,
+            "flyt_storlek_mobil": 60,
+            "flyt_intervall": 3
           }
         }
       },
@@ -524,7 +1316,9 @@
         "hojd_desktop": 880,
         "hojd_laptop": 800,
         "hojd_mobil": 561,
-        "mobil_omvand": true
+        "mobil_omvand": true,
+        "tona_in": true,
+        "originalstorlek": false
       }
     },
     "product_list_g6D6TP": {
@@ -731,6 +1525,7 @@
         "layout_type": "carousel",
         "carousel_on_mobile": false,
         "max_products": 8,
+        "hoppa_over": 0,
         "columns": 4,
         "mobile_columns": "2",
         "mobile_card_size": "44cqw",
@@ -758,12 +1553,27 @@
             "rubrik": "Begagnat och Vintage",
             "uppmaning": "UPPTÄCK",
             "dolj_uppmaning_mobil": true,
+            "brodtext": "",
+            "logga_bredd": 110,
             "stortext": "BEGAGNAT\nOCH VINTAGE",
             "stortext_storlek": 68,
             "stortext_laptop": 68,
             "stortext_surfplatta": 48,
             "stortext_mobil": 48,
-            "textfarg": "#ffffff"
+            "textfarg": "#ffffff",
+            "bakgrundsfarg": "#f2f2f2",
+            "bildlage": "fyll",
+            "flyt_skala_1": 100,
+            "flyt_skala_2": 100,
+            "flyt_skala_3": 100,
+            "flyt_skala_4": 100,
+            "flyt_skala_5": 100,
+            "flyt_skala_6": 100,
+            "flyt_skala_7": 100,
+            "flyt_skala_8": 100,
+            "flyt_storlek": 52,
+            "flyt_storlek_mobil": 60,
+            "flyt_intervall": 3
           }
         },
         "ruta_2": {
@@ -775,7 +1585,27 @@
             "rubrik": "Begagnat och Vintage",
             "uppmaning": "UPPTÄCK",
             "dolj_uppmaning_mobil": true,
-            "textfarg": "#ffffff"
+            "brodtext": "",
+            "logga_bredd": 110,
+            "stortext": "",
+            "stortext_storlek": 110,
+            "stortext_laptop": 90,
+            "stortext_surfplatta": 68,
+            "stortext_mobil": 68,
+            "textfarg": "#ffffff",
+            "bakgrundsfarg": "#f2f2f2",
+            "bildlage": "fyll",
+            "flyt_skala_1": 100,
+            "flyt_skala_2": 100,
+            "flyt_skala_3": 100,
+            "flyt_skala_4": 100,
+            "flyt_skala_5": 100,
+            "flyt_skala_6": 100,
+            "flyt_skala_7": 100,
+            "flyt_skala_8": 100,
+            "flyt_storlek": 52,
+            "flyt_storlek_mobil": 60,
+            "flyt_intervall": 3
           }
         }
       },
@@ -788,7 +1618,9 @@
         "hojd_desktop": 880,
         "hojd_laptop": 800,
         "hojd_mobil": 561,
-        "mobil_omvand": true
+        "mobil_omvand": true,
+        "tona_in": true,
+        "originalstorlek": false
       }
     },
     "product_list_HAC7P3": {
@@ -995,6 +1827,7 @@
         "layout_type": "carousel",
         "carousel_on_mobile": false,
         "max_products": 8,
+        "hoppa_over": 0,
         "columns": 4,
         "mobile_columns": "2",
         "mobile_card_size": "44cqw",
@@ -1022,7 +1855,27 @@
             "rubrik": "LJUDHEALING & MEDITATION",
             "uppmaning": "UPPTÄCK",
             "dolj_uppmaning_mobil": true,
-            "textfarg": "#ffffff"
+            "brodtext": "",
+            "logga_bredd": 110,
+            "stortext": "",
+            "stortext_storlek": 110,
+            "stortext_laptop": 90,
+            "stortext_surfplatta": 68,
+            "stortext_mobil": 68,
+            "textfarg": "#ffffff",
+            "bakgrundsfarg": "#f2f2f2",
+            "bildlage": "fyll",
+            "flyt_skala_1": 100,
+            "flyt_skala_2": 100,
+            "flyt_skala_3": 100,
+            "flyt_skala_4": 100,
+            "flyt_skala_5": 100,
+            "flyt_skala_6": 100,
+            "flyt_skala_7": 100,
+            "flyt_skala_8": 100,
+            "flyt_storlek": 52,
+            "flyt_storlek_mobil": 60,
+            "flyt_intervall": 3
           }
         },
         "ruta_2": {
@@ -1034,7 +1887,27 @@
             "rubrik": "LJUDHEALING & MEDITATION",
             "uppmaning": "UPPTÄCK",
             "dolj_uppmaning_mobil": true,
-            "textfarg": "#ffffff"
+            "brodtext": "",
+            "logga_bredd": 110,
+            "stortext": "",
+            "stortext_storlek": 110,
+            "stortext_laptop": 90,
+            "stortext_surfplatta": 68,
+            "stortext_mobil": 68,
+            "textfarg": "#ffffff",
+            "bakgrundsfarg": "#f2f2f2",
+            "bildlage": "fyll",
+            "flyt_skala_1": 100,
+            "flyt_skala_2": 100,
+            "flyt_skala_3": 100,
+            "flyt_skala_4": 100,
+            "flyt_skala_5": 100,
+            "flyt_skala_6": 100,
+            "flyt_skala_7": 100,
+            "flyt_skala_8": 100,
+            "flyt_storlek": 52,
+            "flyt_storlek_mobil": 60,
+            "flyt_intervall": 3
           }
         }
       },
@@ -1047,7 +1920,9 @@
         "hojd_desktop": 880,
         "hojd_laptop": 800,
         "hojd_mobil": 561,
-        "mobil_omvand": true
+        "mobil_omvand": true,
+        "tona_in": true,
+        "originalstorlek": false
       }
     },
     "product_list_NawcEz": {
@@ -1254,6 +2129,7 @@
         "layout_type": "carousel",
         "carousel_on_mobile": false,
         "max_products": 8,
+        "hoppa_over": 0,
         "columns": 4,
         "mobile_columns": "2",
         "mobile_card_size": "44cqw",
@@ -1701,624 +2577,6 @@
         "gradient_direction": "to top",
         "padding-block-start": 0,
         "padding-block-end": 0
-      }
-    },
-    "mug_blackweek_1": {
-      "type": "mug-bildbanner",
-      "blocks": {
-        "ruta_1": {
-          "type": "ruta",
-          "settings": {
-            "bild": "shopify://shop_images/blackweek-1-rubrik-vit.webp",
-            "lank": "shopify://collections/black-week",
-            "textstil": "rad",
-            "rubrik": "Black Week",
-            "uppmaning": "Megapriser!",
-            "dolj_uppmaning_mobil": true,
-            "textfarg": "#ffffff"
-          }
-        },
-        "ruta_2": {
-          "type": "ruta",
-          "settings": {
-            "bild": "shopify://shop_images/blackweek-1-produktbakgrund.webp",
-            "lank": "shopify://collections/black-week",
-            "textstil": "rad",
-            "rubrik": "Black Week",
-            "uppmaning": "Megapriser!",
-            "dolj_uppmaning_mobil": true,
-            "textfarg": "#ffffff",
-            "flyt_storlek": 52,
-            "flyt_storlek_mobil": 60,
-            "flyt_intervall": 2,
-            "flyt_1": "shopify://shop_images/blackweek-flyt-duesenberg-vit.webp",
-            "flyt_skala_1": 145,
-            "flyt_2": "shopify://shop_images/blackweek-flyt-madprofessor-evolution-orange.webp",
-            "flyt_skala_2": 85,
-            "flyt_3": "shopify://shop_images/blackweek-flyt-waldorf-iridium-core.webp",
-            "flyt_skala_3": 125,
-            "flyt_4": "shopify://shop_images/blackweek-flyt-meinl-byzance-hihat.webp",
-            "flyt_skala_4": 90,
-            "flyt_5": "shopify://shop_images/blackweek-flyt-kala-ubass.webp",
-            "flyt_skala_5": 145,
-            "flyt_6": "shopify://shop_images/blackweek-flyt-dod-odpre-250.webp",
-            "flyt_skala_6": 85,
-            "flyt_7": "shopify://shop_images/blackweek-flyt-beyerdynamic-dt770.webp",
-            "flyt_skala_7": 100,
-            "flyt_8": "shopify://shop_images/blackweek-flyt-dreadbox-utopia.webp",
-            "flyt_skala_8": 100
-          }
-        }
-      },
-      "block_order": [
-        "ruta_1",
-        "ruta_2"
-      ],
-      "settings": {
-        "hojd_lage": "fast",
-        "hojd_desktop": 880,
-        "hojd_laptop": 800,
-        "hojd_mobil": 561,
-        "mobil_omvand": false,
-        "tona_in": false,
-        "originalstorlek": true
-      }
-    },
-    "product_list_blackweek": {
-      "type": "product-list",
-      "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
-          "name": "t:names.header",
-          "static": true,
-          "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
-            "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 8,
-            "padding-block-end": 2,
-            "padding-inline-start": 15,
-            "padding-inline-end": 15
-          },
-          "blocks": {
-            "product_list_text_kmdAw8": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h2>Black Week</h2>"
-              },
-              "blocks": {}
-            },
-            "button_kyPFyt": {
-              "type": "button",
-              "name": "t:names.button",
-              "settings": {
-                "label": "SE ALLA",
-                "link": "{{ closest.collection.url }}",
-                "open_in_new_tab": false,
-                "style_class": "link",
-                "width": "fit-content",
-                "custom_width": 7,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 30
-              },
-              "blocks": {}
-            },
-            "swatches_8WFcrC": {
-              "type": "swatches",
-              "name": "t:names.swatches",
-              "settings": {
-                "product_swatches_alignment": "flex-start",
-                "product_swatches_alignment_mobile": "flex-start",
-                "hide_padding": false,
-                "product_swatches_padding_top": 4,
-                "product_swatches_padding_bottom": 0,
-                "product_swatches_padding_left": 0,
-                "product_swatches_padding_right": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_kmdAw8",
-            "button_kyPFyt",
-            "swatches_8WFcrC"
-          ]
-        },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
-          "settings": {
-            "product_card_gap": 2,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 15,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_tiBwKW": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "square",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "text_bWTfX3": {
-              "type": "text",
-              "name": "t:names.text",
-              "settings": {
-                "text": "<p>{{ closest.product.vendor }}</p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h5",
-                "font": "var(--font-body--family)",
-                "font_size": "0.9375rem",
-                "line_height": "normal",
-                "letter_spacing": "loose",
-                "case": "uppercase",
-                "wrap": "pretty",
-                "color": "var(--color-foreground-heading)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 15,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_RKXdGb": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "0.9375rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 6,
-                "padding-block-end": 6,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_RB3K4t": {
-              "type": "price",
-              "name": "t:names.product_price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "custom",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "0.9375rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "color": "var(--color-foreground)",
-                "padding-block-start": 0,
-                "padding-block-end": 15,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_tiBwKW",
-            "text_bWTfX3",
-            "product_title_RKXdGb",
-            "price_RB3K4t"
-          ]
-        }
-      },
-      "name": "t:names.products_carousel",
-      "settings": {
-        "collection": "black-week",
-        "layout_type": "carousel",
-        "carousel_on_mobile": false,
-        "max_products": 8,
-        "columns": 4,
-        "mobile_columns": "2",
-        "mobile_card_size": "44cqw",
-        "columns_gap": 0,
-        "rows_gap": 24,
-        "icons_style": "arrows_large",
-        "icons_shape": "circle",
-        "section_width": "full-width",
-        "horizontal_alignment": "flex-start",
-        "gap": 18,
-        "color_scheme": "scheme-1",
-        "padding-block-start": 10,
-        "padding-block-end": 0
-      }
-    },
-    "mug_blackweek_2": {
-      "type": "mug-bildbanner",
-      "blocks": {
-        "ruta_1": {
-          "type": "ruta",
-          "settings": {
-            "bild": "shopify://shop_images/blackweek-2-produktbakgrund-ljus.webp",
-            "lank": "shopify://collections/black-week",
-            "textstil": "rad",
-            "rubrik": "Black Week",
-            "uppmaning": "Megapriser!",
-            "dolj_uppmaning_mobil": true,
-            "textfarg": "#ffffff",
-            "flyt_storlek": 52,
-            "flyt_storlek_mobil": 60,
-            "flyt_intervall": 2,
-            "flyt_1": "shopify://shop_images/blackweek-flyt-orange-crush.webp",
-            "flyt_skala_1": 85,
-            "flyt_2": "shopify://shop_images/blackweek-flyt-ibanez-akustisk.webp",
-            "flyt_skala_2": 140,
-            "flyt_3": "shopify://shop_images/blackweek-flyt-ua-max.webp",
-            "flyt_skala_3": 85,
-            "flyt_4": "shopify://shop_images/blackweek-flyt-korg-wavestate-module.webp",
-            "flyt_skala_4": 120,
-            "flyt_5": "shopify://shop_images/blackweek-flyt-ua-woodrow.webp",
-            "flyt_skala_5": 85,
-            "flyt_6": "shopify://shop_images/blackweek-flyt-ua-volt.webp",
-            "flyt_skala_6": 100,
-            "flyt_7": "shopify://shop_images/blackweek-flyt-prs-archon.webp",
-            "flyt_skala_7": 85,
-            "flyt_8": "shopify://shop_images/blackweek-flyt-warm-wa2a.webp",
-            "flyt_skala_8": 135
-          }
-        },
-        "ruta_2": {
-          "type": "ruta",
-          "settings": {
-            "bild": "shopify://shop_images/blackweek-2-rubrik-vit.webp",
-            "lank": "shopify://collections/black-week",
-            "textstil": "rad",
-            "rubrik": "Black Week",
-            "uppmaning": "Megapriser!",
-            "dolj_uppmaning_mobil": true,
-            "textfarg": "#ffffff"
-          }
-        }
-      },
-      "block_order": [
-        "ruta_1",
-        "ruta_2"
-      ],
-      "settings": {
-        "hojd_lage": "fast",
-        "hojd_desktop": 880,
-        "hojd_laptop": 800,
-        "hojd_mobil": 561,
-        "mobil_omvand": true,
-        "tona_in": false,
-        "originalstorlek": true
-      }
-    },
-    "product_list_blackweek_2": {
-      "type": "product-list",
-      "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
-          "name": "t:names.header",
-          "static": true,
-          "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
-            "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 8,
-            "padding-block-end": 2,
-            "padding-inline-start": 15,
-            "padding-inline-end": 15
-          },
-          "blocks": {
-            "product_list_text_kmdAw8": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h2>Black Week</h2>"
-              },
-              "blocks": {}
-            },
-            "button_kyPFyt": {
-              "type": "button",
-              "name": "t:names.button",
-              "settings": {
-                "label": "SE ALLA",
-                "link": "{{ closest.collection.url }}",
-                "open_in_new_tab": false,
-                "style_class": "link",
-                "width": "fit-content",
-                "custom_width": 7,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 30
-              },
-              "blocks": {}
-            },
-            "swatches_8WFcrC": {
-              "type": "swatches",
-              "name": "t:names.swatches",
-              "settings": {
-                "product_swatches_alignment": "flex-start",
-                "product_swatches_alignment_mobile": "flex-start",
-                "hide_padding": false,
-                "product_swatches_padding_top": 4,
-                "product_swatches_padding_bottom": 0,
-                "product_swatches_padding_left": 0,
-                "product_swatches_padding_right": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_kmdAw8",
-            "button_kyPFyt",
-            "swatches_8WFcrC"
-          ]
-        },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
-          "settings": {
-            "product_card_gap": 2,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 15,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_tiBwKW": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "square",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "text_bWTfX3": {
-              "type": "text",
-              "name": "t:names.text",
-              "settings": {
-                "text": "<p>{{ closest.product.vendor }}</p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h5",
-                "font": "var(--font-body--family)",
-                "font_size": "0.9375rem",
-                "line_height": "normal",
-                "letter_spacing": "loose",
-                "case": "uppercase",
-                "wrap": "pretty",
-                "color": "var(--color-foreground-heading)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 15,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_RKXdGb": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "0.9375rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 6,
-                "padding-block-end": 6,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_RB3K4t": {
-              "type": "price",
-              "name": "t:names.product_price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "custom",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "0.9375rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "color": "var(--color-foreground)",
-                "padding-block-start": 0,
-                "padding-block-end": 15,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_tiBwKW",
-            "text_bWTfX3",
-            "product_title_RKXdGb",
-            "price_RB3K4t"
-          ]
-        }
-      },
-      "name": "t:names.products_carousel",
-      "settings": {
-        "collection": "black-week",
-        "layout_type": "carousel",
-        "carousel_on_mobile": false,
-        "max_products": 8,
-        "columns": 4,
-        "mobile_columns": "2",
-        "mobile_card_size": "44cqw",
-        "columns_gap": 0,
-        "rows_gap": 24,
-        "icons_style": "arrows_large",
-        "icons_shape": "circle",
-        "section_width": "full-width",
-        "horizontal_alignment": "flex-start",
-        "gap": 18,
-        "color_scheme": "scheme-1",
-        "padding-block-start": 10,
-        "padding-block-end": 0,
-        "hoppa_over": 8
-      }
-    },
-    "mug_lagerfynd_2": {
-      "type": "mug-bildbanner",
-      "blocks": {
-        "ruta_lagerfynd_1": {
-          "type": "ruta",
-          "settings": {
-            "bild": "shopify://shop_images/lagerfynd-2-rubrik-vit.webp",
-            "lank": "shopify://collections/lagerfynd-till-megapriser",
-            "textstil": "rad",
-            "rubrik": "Lagerfynd",
-            "uppmaning": "Megapriser!",
-            "dolj_uppmaning_mobil": true,
-            "stortext_storlek": 68,
-            "stortext_laptop": 68,
-            "stortext_surfplatta": 48,
-            "stortext_mobil": 48,
-            "textfarg": "#ffffff"
-          }
-        },
-        "ruta_lagerfynd_2": {
-          "type": "ruta",
-          "settings": {
-            "flyt_1": "shopify://shop_images/lagerfynd-kfs-1-footswitch-opt.webp",
-            "flyt_skala_1": 80,
-            "flyt_2": "shopify://shop_images/lagerfynd-more-you-hub-opt.webp",
-            "flyt_3": "shopify://shop_images/lagerfynd-xvive-p3-v2-opt.webp",
-            "flyt_4": "shopify://shop_images/lagerfynd-jhms1-hendrix-shrine-fuzz-face-mini-opt.webp",
-            "flyt_5": "shopify://shop_images/lagerfynd-vh-micro-opt.webp",
-            "flyt_7": "shopify://shop_images/lagerfynd-zoom-m2-opt.webp",
-            "flyt_skala_7": 120,
-            "bild": "shopify://shop_images/lagerfynd-2-produktbakgrund-original.webp",
-            "lank": "shopify://collections/lagerfynd-till-megapriser",
-            "textstil": "rad",
-            "rubrik": "Lagerfynd",
-            "uppmaning": "Megapriser!",
-            "dolj_uppmaning_mobil": true,
-            "textfarg": "#ffffff",
-            "flyt_storlek": 52,
-            "flyt_storlek_mobil": 60,
-            "flyt_intervall": 3
-          }
-        }
-      },
-      "block_order": [
-        "ruta_lagerfynd_1",
-        "ruta_lagerfynd_2"
-      ],
-      "settings": {
-        "hojd_lage": "fast",
-        "hojd_desktop": 880,
-        "hojd_laptop": 800,
-        "hojd_mobil": 561,
-        "mobil_omvand": false,
-        "tona_in": false,
-        "originalstorlek": true
       }
     }
   },
