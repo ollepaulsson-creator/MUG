@@ -2505,6 +2505,10 @@ dialog.facets--drawer[open] {
 .product-inventory__text {
   max-width: 85%;
 }
+/* …av hela kolumnens bredd: blocket krymper annars till textens bredd, så att 85 % bryter även korta rader */
+product-inventory.product-inventory {
+  width: 100%;
+}
 
 /* Etapp 4: produktrullarna på landningssidorna (sektioner mug_*) är lika breda som startsidans
    (3rem glimt av nästa produkt) när det finns fler än fyra; med högst fyra produkter går de kant i kant. */
