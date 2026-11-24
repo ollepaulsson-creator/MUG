@@ -516,7 +516,6 @@
     "jul_01": {
       "type": "mug-hero",
       "settings": {
-        "rubrik_maxbredd": 640,
         "bildlage": "bakgrund",
         "bild": "shopify://shop_images/jul-shlvji-trummor.jpg",
         "mobilbild": "shopify://shop_images/jul-bs82kr-trummormobil.jpg",
@@ -532,10 +531,11 @@
         "logga_under_mobil": 40,
         "rubrik": "Julklappsguiden – årets bästa tips för trummor och tillbehör",
         "rubrik_storlek": 32,
-        "rubrik_storlek_mobil": 32,
         "rubrik_over": 80,
-        "rubrik_over_mobil": 60,
         "rubrik_bredd": 90,
+        "rubrik_maxbredd": 640,
+        "rubrik_over_mobil": 60,
+        "rubrik_storlek_mobil": 32,
         "ingress": "<p>Från smarta verktyg som lyfter trummisens övningsrutin till snygga accessoarer som sätter personlig prägel eller drömmen om ett digitaltrumset – här hittar du genomtänkta gåvor för alla typer av trummisar. Oavsett om du vill ge något praktiskt, inspirerande eller personligt, finns här julklappar som garanterat uppskattas.</p>",
         "ingress_storlek": 18,
         "ingress_radavstand": 150,
@@ -556,10 +556,10 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": false,
+            "content_direction": "row",
+            "vertical_on_mobile": true,
             "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
@@ -588,18 +588,18 @@
             "product_list_text_kmdAw8": {
               "type": "_product-list-text",
               "name": "t:names.collection_title",
+              "disabled": true,
               "settings": {
                 "text": "<h2>Begagnat och vintage</h2>"
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
               "settings": {
                 "label": "SE ALLA",
-                "link": "{{ closest.collection.url }}",
+                "link": "shopify://collections/slagverk",
                 "open_in_new_tab": false,
                 "style_class": "link",
                 "width": "fit-content",
@@ -607,12 +607,12 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
               "name": "t:names.swatches",
+              "disabled": true,
               "settings": {
                 "product_swatches_alignment": "flex-start",
                 "product_swatches_alignment_mobile": "flex-start",
@@ -622,8 +622,7 @@
                 "product_swatches_padding_left": 0,
                 "product_swatches_padding_right": 0
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "jul_text": {
               "type": "text",
@@ -792,10 +791,10 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": false,
+            "content_direction": "row",
+            "vertical_on_mobile": true,
             "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
@@ -824,18 +823,18 @@
             "product_list_text_kmdAw8": {
               "type": "_product-list-text",
               "name": "t:names.collection_title",
+              "disabled": true,
               "settings": {
                 "text": "<h2>Begagnat och vintage</h2>"
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
               "settings": {
                 "label": "SE ALLA",
-                "link": "{{ closest.collection.url }}",
+                "link": "shopify://collections/digitala-trummor",
                 "open_in_new_tab": false,
                 "style_class": "link",
                 "width": "fit-content",
@@ -843,12 +842,12 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
               "name": "t:names.swatches",
+              "disabled": true,
               "settings": {
                 "product_swatches_alignment": "flex-start",
                 "product_swatches_alignment_mobile": "flex-start",
@@ -858,8 +857,7 @@
                 "product_swatches_padding_left": 0,
                 "product_swatches_padding_right": 0
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "jul_text": {
               "type": "text",
@@ -1028,10 +1026,10 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": false,
+            "content_direction": "row",
+            "vertical_on_mobile": true,
             "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
@@ -1060,18 +1058,18 @@
             "product_list_text_kmdAw8": {
               "type": "_product-list-text",
               "name": "t:names.collection_title",
+              "disabled": true,
               "settings": {
                 "text": "<h2>Begagnat och vintage</h2>"
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
               "settings": {
                 "label": "SE ALLA",
-                "link": "{{ closest.collection.url }}",
+                "link": "shopify://collections/ovningsplattor",
                 "open_in_new_tab": false,
                 "style_class": "link",
                 "width": "fit-content",
@@ -1079,12 +1077,12 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
               "name": "t:names.swatches",
+              "disabled": true,
               "settings": {
                 "product_swatches_alignment": "flex-start",
                 "product_swatches_alignment_mobile": "flex-start",
@@ -1094,8 +1092,7 @@
                 "product_swatches_padding_left": 0,
                 "product_swatches_padding_right": 0
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "jul_text": {
               "type": "text",
@@ -1264,10 +1261,10 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": false,
+            "content_direction": "row",
+            "vertical_on_mobile": true,
             "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
@@ -1296,18 +1293,18 @@
             "product_list_text_kmdAw8": {
               "type": "_product-list-text",
               "name": "t:names.collection_title",
+              "disabled": true,
               "settings": {
                 "text": "<h2>Begagnat och vintage</h2>"
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
               "settings": {
                 "label": "SE ALLA",
-                "link": "{{ closest.collection.url }}",
+                "link": "shopify://collections/cajon",
                 "open_in_new_tab": false,
                 "style_class": "link",
                 "width": "fit-content",
@@ -1315,12 +1312,12 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
               "name": "t:names.swatches",
+              "disabled": true,
               "settings": {
                 "product_swatches_alignment": "flex-start",
                 "product_swatches_alignment_mobile": "flex-start",
@@ -1330,8 +1327,7 @@
                 "product_swatches_padding_left": 0,
                 "product_swatches_padding_right": 0
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "jul_text": {
               "type": "text",
@@ -1500,10 +1496,10 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": false,
+            "content_direction": "row",
+            "vertical_on_mobile": true,
             "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
@@ -1532,18 +1528,18 @@
             "product_list_text_kmdAw8": {
               "type": "_product-list-text",
               "name": "t:names.collection_title",
+              "disabled": true,
               "settings": {
                 "text": "<h2>Begagnat och vintage</h2>"
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
               "settings": {
                 "label": "SE ALLA",
-                "link": "{{ closest.collection.url }}",
+                "link": "shopify://collections/tillbehor-for-trummor",
                 "open_in_new_tab": false,
                 "style_class": "link",
                 "width": "fit-content",
@@ -1551,12 +1547,12 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
               "name": "t:names.swatches",
+              "disabled": true,
               "settings": {
                 "product_swatches_alignment": "flex-start",
                 "product_swatches_alignment_mobile": "flex-start",
@@ -1566,8 +1562,7 @@
                 "product_swatches_padding_left": 0,
                 "product_swatches_padding_right": 0
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "jul_text": {
               "type": "text",
@@ -1736,10 +1731,10 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": false,
+            "content_direction": "row",
+            "vertical_on_mobile": true,
             "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
@@ -1768,18 +1763,18 @@
             "product_list_text_kmdAw8": {
               "type": "_product-list-text",
               "name": "t:names.collection_title",
+              "disabled": true,
               "settings": {
                 "text": "<h2>Begagnat och vintage</h2>"
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
               "settings": {
                 "label": "SE ALLA",
-                "link": "{{ closest.collection.url }}",
+                "link": "shopify://collections/trumstockar",
                 "open_in_new_tab": false,
                 "style_class": "link",
                 "width": "fit-content",
@@ -1787,12 +1782,12 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
               "name": "t:names.swatches",
+              "disabled": true,
               "settings": {
                 "product_swatches_alignment": "flex-start",
                 "product_swatches_alignment_mobile": "flex-start",
@@ -1802,8 +1797,7 @@
                 "product_swatches_padding_left": 0,
                 "product_swatches_padding_right": 0
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "jul_text": {
               "type": "text",
@@ -2004,15 +1998,16 @@
             "product_list_text_kmdAw8": {
               "type": "_product-list-text",
               "name": "t:names.collection_title",
+              "disabled": true,
               "settings": {
                 "text": "<h2>Begagnat och vintage</h2>"
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
+              "disabled": true,
               "settings": {
                 "label": "SE ALLA",
                 "link": "{{ closest.collection.url }}",
@@ -2023,12 +2018,12 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
               "name": "t:names.swatches",
+              "disabled": true,
               "settings": {
                 "product_swatches_alignment": "flex-start",
                 "product_swatches_alignment_mobile": "flex-start",
@@ -2038,8 +2033,7 @@
                 "product_swatches_padding_left": 0,
                 "product_swatches_padding_right": 0
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "jul_text": {
               "type": "text",
@@ -2205,7 +2199,7 @@
       "settings": {
         "stil": "intro",
         "knapp_text": "Visa allt i Julsortimentet",
-        "knapp_lank": "/pages/jul-med-extra-stamning-och-spelgladje",
+        "knapp_lank": "/pages/julklappstips",
         "bakgrund": "#ffffff",
         "textfarg": "#000000",
         "luft_over": 20,

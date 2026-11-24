@@ -516,7 +516,6 @@
     "jul_01": {
       "type": "mug-hero",
       "settings": {
-        "rubrik_maxbredd": 640,
         "bildlage": "bakgrund",
         "bild": "shopify://shop_images/jul-ye6lq0-akustiskgitarr.jpg",
         "mobilbild": "shopify://shop_images/jul-up5w44-akustiskgitarrmobil.jpg",
@@ -532,10 +531,11 @@
         "logga_under_mobil": 40,
         "rubrik": "Julklappsguiden – årets bästa tips bland akustiska gitarrer och tillbehör",
         "rubrik_storlek": 32,
-        "rubrik_storlek_mobil": 32,
         "rubrik_over": 80,
-        "rubrik_over_mobil": 60,
         "rubrik_bredd": 90,
+        "rubrik_maxbredd": 640,
+        "rubrik_over_mobil": 60,
+        "rubrik_storlek_mobil": 32,
         "ingress": "<p>En akustisk gitarr under granen? Här har vi samlat våra bästa julklappstips inom akustiska gitarrer och tillbehör. Oavsett om du letar efter en större present att lägga under granen eller ett mindre tillbehör som gör spelandet roligare, hittar du här noga utvalda favoriter som passar alla som gillar att spela gitarr eller vill börja.</p>",
         "ingress_storlek": 18,
         "ingress_radavstand": 150,
@@ -556,10 +556,10 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": false,
+            "content_direction": "row",
+            "vertical_on_mobile": true,
             "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
@@ -588,18 +588,18 @@
             "product_list_text_kmdAw8": {
               "type": "_product-list-text",
               "name": "t:names.collection_title",
+              "disabled": true,
               "settings": {
                 "text": "<h2>Begagnat och vintage</h2>"
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
               "settings": {
                 "label": "SE ALLA",
-                "link": "{{ closest.collection.url }}",
+                "link": "shopify://collections/akustiska-gitarrer",
                 "open_in_new_tab": false,
                 "style_class": "link",
                 "width": "fit-content",
@@ -607,12 +607,12 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
               "name": "t:names.swatches",
+              "disabled": true,
               "settings": {
                 "product_swatches_alignment": "flex-start",
                 "product_swatches_alignment_mobile": "flex-start",
@@ -622,8 +622,7 @@
                 "product_swatches_padding_left": 0,
                 "product_swatches_padding_right": 0
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "jul_text": {
               "type": "text",
@@ -792,10 +791,10 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": false,
+            "content_direction": "row",
+            "vertical_on_mobile": true,
             "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
@@ -824,18 +823,18 @@
             "product_list_text_kmdAw8": {
               "type": "_product-list-text",
               "name": "t:names.collection_title",
+              "disabled": true,
               "settings": {
                 "text": "<h2>Begagnat och vintage</h2>"
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
               "settings": {
                 "label": "SE ALLA",
-                "link": "{{ closest.collection.url }}",
+                "link": "shopify://collections/nyborjare-akustisk-gitarr",
                 "open_in_new_tab": false,
                 "style_class": "link",
                 "width": "fit-content",
@@ -843,12 +842,12 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
               "name": "t:names.swatches",
+              "disabled": true,
               "settings": {
                 "product_swatches_alignment": "flex-start",
                 "product_swatches_alignment_mobile": "flex-start",
@@ -858,8 +857,7 @@
                 "product_swatches_padding_left": 0,
                 "product_swatches_padding_right": 0
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "jul_text": {
               "type": "text",
@@ -1028,10 +1026,10 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": false,
+            "content_direction": "row",
+            "vertical_on_mobile": true,
             "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
@@ -1060,18 +1058,18 @@
             "product_list_text_kmdAw8": {
               "type": "_product-list-text",
               "name": "t:names.collection_title",
+              "disabled": true,
               "settings": {
                 "text": "<h2>Begagnat och vintage</h2>"
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
               "settings": {
                 "label": "SE ALLA",
-                "link": "{{ closest.collection.url }}",
+                "link": "shopify://collections/akustiska-gitarrer",
                 "open_in_new_tab": false,
                 "style_class": "link",
                 "width": "fit-content",
@@ -1079,12 +1077,12 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
               "name": "t:names.swatches",
+              "disabled": true,
               "settings": {
                 "product_swatches_alignment": "flex-start",
                 "product_swatches_alignment_mobile": "flex-start",
@@ -1094,8 +1092,7 @@
                 "product_swatches_padding_left": 0,
                 "product_swatches_padding_right": 0
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "jul_text": {
               "type": "text",
@@ -1264,10 +1261,10 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": false,
+            "content_direction": "row",
+            "vertical_on_mobile": true,
             "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
@@ -1296,18 +1293,18 @@
             "product_list_text_kmdAw8": {
               "type": "_product-list-text",
               "name": "t:names.collection_title",
+              "disabled": true,
               "settings": {
                 "text": "<h2>Begagnat och vintage</h2>"
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
               "settings": {
                 "label": "SE ALLA",
-                "link": "{{ closest.collection.url }}",
+                "link": "shopify://collections/ukuleler",
                 "open_in_new_tab": false,
                 "style_class": "link",
                 "width": "fit-content",
@@ -1315,12 +1312,12 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
               "name": "t:names.swatches",
+              "disabled": true,
               "settings": {
                 "product_swatches_alignment": "flex-start",
                 "product_swatches_alignment_mobile": "flex-start",
@@ -1330,8 +1327,7 @@
                 "product_swatches_padding_left": 0,
                 "product_swatches_padding_right": 0
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "jul_text": {
               "type": "text",
@@ -1500,10 +1496,10 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": false,
+            "content_direction": "row",
+            "vertical_on_mobile": true,
             "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
@@ -1532,18 +1528,18 @@
             "product_list_text_kmdAw8": {
               "type": "_product-list-text",
               "name": "t:names.collection_title",
+              "disabled": true,
               "settings": {
                 "text": "<h2>Begagnat och vintage</h2>"
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
               "settings": {
                 "label": "SE ALLA",
-                "link": "{{ closest.collection.url }}",
+                "link": "shopify://collections/akustiskforstarkare",
                 "open_in_new_tab": false,
                 "style_class": "link",
                 "width": "fit-content",
@@ -1551,12 +1547,12 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
               "name": "t:names.swatches",
+              "disabled": true,
               "settings": {
                 "product_swatches_alignment": "flex-start",
                 "product_swatches_alignment_mobile": "flex-start",
@@ -1566,8 +1562,7 @@
                 "product_swatches_padding_left": 0,
                 "product_swatches_padding_right": 0
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "jul_text": {
               "type": "text",
@@ -1736,10 +1731,10 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": false,
+            "content_direction": "row",
+            "vertical_on_mobile": true,
             "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
@@ -1768,18 +1763,18 @@
             "product_list_text_kmdAw8": {
               "type": "_product-list-text",
               "name": "t:names.collection_title",
+              "disabled": true,
               "settings": {
                 "text": "<h2>Begagnat och vintage</h2>"
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
               "settings": {
                 "label": "SE ALLA",
-                "link": "{{ closest.collection.url }}",
+                "link": "shopify://collections/alla-akustiska-strangar",
                 "open_in_new_tab": false,
                 "style_class": "link",
                 "width": "fit-content",
@@ -1787,12 +1782,12 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
               "name": "t:names.swatches",
+              "disabled": true,
               "settings": {
                 "product_swatches_alignment": "flex-start",
                 "product_swatches_alignment_mobile": "flex-start",
@@ -1802,8 +1797,7 @@
                 "product_swatches_padding_left": 0,
                 "product_swatches_padding_right": 0
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "jul_text": {
               "type": "text",
@@ -1989,10 +1983,10 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": false,
+            "content_direction": "row",
+            "vertical_on_mobile": true,
             "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
@@ -2021,18 +2015,18 @@
             "product_list_text_kmdAw8": {
               "type": "_product-list-text",
               "name": "t:names.collection_title",
+              "disabled": true,
               "settings": {
                 "text": "<h2>Begagnat och vintage</h2>"
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
               "settings": {
                 "label": "SE ALLA",
-                "link": "{{ closest.collection.url }}",
+                "link": "shopify://collections/capo",
                 "open_in_new_tab": false,
                 "style_class": "link",
                 "width": "fit-content",
@@ -2040,12 +2034,12 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
               "name": "t:names.swatches",
+              "disabled": true,
               "settings": {
                 "product_swatches_alignment": "flex-start",
                 "product_swatches_alignment_mobile": "flex-start",
@@ -2055,8 +2049,7 @@
                 "product_swatches_padding_left": 0,
                 "product_swatches_padding_right": 0
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "jul_text": {
               "type": "text",
@@ -2225,10 +2218,10 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": false,
+            "content_direction": "row",
+            "vertical_on_mobile": true,
             "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
@@ -2257,18 +2250,18 @@
             "product_list_text_kmdAw8": {
               "type": "_product-list-text",
               "name": "t:names.collection_title",
+              "disabled": true,
               "settings": {
                 "text": "<h2>Begagnat och vintage</h2>"
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
               "settings": {
                 "label": "SE ALLA",
-                "link": "{{ closest.collection.url }}",
+                "link": "shopify://collections/gitarrvard",
                 "open_in_new_tab": false,
                 "style_class": "link",
                 "width": "fit-content",
@@ -2276,12 +2269,12 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
               "name": "t:names.swatches",
+              "disabled": true,
               "settings": {
                 "product_swatches_alignment": "flex-start",
                 "product_swatches_alignment_mobile": "flex-start",
@@ -2291,8 +2284,7 @@
                 "product_swatches_padding_left": 0,
                 "product_swatches_padding_right": 0
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "jul_text": {
               "type": "text",
@@ -2461,10 +2453,10 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": false,
+            "content_direction": "row",
+            "vertical_on_mobile": true,
             "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
@@ -2493,18 +2485,18 @@
             "product_list_text_kmdAw8": {
               "type": "_product-list-text",
               "name": "t:names.collection_title",
+              "disabled": true,
               "settings": {
                 "text": "<h2>Begagnat och vintage</h2>"
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
               "settings": {
                 "label": "SE ALLA",
-                "link": "{{ closest.collection.url }}",
+                "link": "shopify://collections/munspel",
                 "open_in_new_tab": false,
                 "style_class": "link",
                 "width": "fit-content",
@@ -2512,12 +2504,12 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
               "name": "t:names.swatches",
+              "disabled": true,
               "settings": {
                 "product_swatches_alignment": "flex-start",
                 "product_swatches_alignment_mobile": "flex-start",
@@ -2527,8 +2519,7 @@
                 "product_swatches_padding_left": 0,
                 "product_swatches_padding_right": 0
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "jul_text": {
               "type": "text",
@@ -2697,10 +2688,10 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": false,
+            "content_direction": "row",
+            "vertical_on_mobile": true,
             "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
@@ -2729,18 +2720,18 @@
             "product_list_text_kmdAw8": {
               "type": "_product-list-text",
               "name": "t:names.collection_title",
+              "disabled": true,
               "settings": {
                 "text": "<h2>Begagnat och vintage</h2>"
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
               "settings": {
                 "label": "SE ALLA",
-                "link": "{{ closest.collection.url }}",
+                "link": "shopify://collections/tillbehor-for-akustisk-gitarr",
                 "open_in_new_tab": false,
                 "style_class": "link",
                 "width": "fit-content",
@@ -2748,12 +2739,12 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
               "name": "t:names.swatches",
+              "disabled": true,
               "settings": {
                 "product_swatches_alignment": "flex-start",
                 "product_swatches_alignment_mobile": "flex-start",
@@ -2763,8 +2754,7 @@
                 "product_swatches_padding_left": 0,
                 "product_swatches_padding_right": 0
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "jul_text": {
               "type": "text",
@@ -2933,10 +2923,10 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": false,
+            "content_direction": "row",
+            "vertical_on_mobile": true,
             "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
@@ -2965,18 +2955,18 @@
             "product_list_text_kmdAw8": {
               "type": "_product-list-text",
               "name": "t:names.collection_title",
+              "disabled": true,
               "settings": {
                 "text": "<h2>Begagnat och vintage</h2>"
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
               "settings": {
                 "label": "SE ALLA",
-                "link": "{{ closest.collection.url }}",
+                "link": "shopify://collections/inspelning-hemma",
                 "open_in_new_tab": false,
                 "style_class": "link",
                 "width": "fit-content",
@@ -2984,12 +2974,12 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
               "name": "t:names.swatches",
+              "disabled": true,
               "settings": {
                 "product_swatches_alignment": "flex-start",
                 "product_swatches_alignment_mobile": "flex-start",
@@ -2999,8 +2989,7 @@
                 "product_swatches_padding_left": 0,
                 "product_swatches_padding_right": 0
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "jul_text": {
               "type": "text",
@@ -3201,15 +3190,16 @@
             "product_list_text_kmdAw8": {
               "type": "_product-list-text",
               "name": "t:names.collection_title",
+              "disabled": true,
               "settings": {
                 "text": "<h2>Begagnat och vintage</h2>"
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
+              "disabled": true,
               "settings": {
                 "label": "SE ALLA",
                 "link": "{{ closest.collection.url }}",
@@ -3220,12 +3210,12 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
               "name": "t:names.swatches",
+              "disabled": true,
               "settings": {
                 "product_swatches_alignment": "flex-start",
                 "product_swatches_alignment_mobile": "flex-start",
@@ -3235,8 +3225,7 @@
                 "product_swatches_padding_left": 0,
                 "product_swatches_padding_right": 0
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "jul_text": {
               "type": "text",
@@ -3402,7 +3391,7 @@
       "settings": {
         "stil": "intro",
         "knapp_text": "Visa allt i Julsortimentet",
-        "knapp_lank": "/pages/jul-med-extra-stamning-och-spelgladje",
+        "knapp_lank": "/pages/julklappstips",
         "bakgrund": "#ffffff",
         "textfarg": "#000000",
         "luft_over": 20,
