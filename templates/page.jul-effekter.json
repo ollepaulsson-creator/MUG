@@ -892,7 +892,7 @@
               "type": "text",
               "name": "Avsnittsrubrik",
               "settings": {
-                "text": "<h2><a href=\"/collections/horlursforstarkare-for-gitarr\" title=\"Hörlursförstärkare\">Hörlursförstärkare</a></h2>",
+                "text": "<h2><a href=\"/collections/horlursforstarkare-for-gitarr\" title=\"Hörlursförstärkare för gitarr\">Hörlursförstärkare för gitarr</a></h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1029,7 +1029,7 @@
       },
       "name": "t:names.products_carousel",
       "settings": {
-        "collection": "horlursforstarkare-1",
+        "collection": "horlursforstarkare-for-gitarr",
         "layout_type": "carousel",
         "carousel_on_mobile": false,
         "max_products": 16,
