@@ -865,7 +865,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Elgitarrpaket</h2><p>Letar du efter ett komplett paket med allt en nybörjare behöver för att börja spela gitarr? Vi har flera prisvärda gitarrpaket med våra populäraste modeller – både för stora och små. Gitarrpaket från Squire by Fender eller Ibanez-paket med utvalda tillbehör, som vi på MUG har sätt ihop – allt du behöver för att börja komma igång och spela direkt.</p>",
+                "text": "<h2>Elgitarrpaket</h2><p>Letar du efter ett komplett paket med allt en nybörjare behöver för att börja spela gitarr? Vi har flera prisvärda gitarrpaket med våra populäraste modeller – både för stora och små. Gitarrpaket från Squier by Fender eller Ibanez-paket med utvalda tillbehör, som vi på MUG har sätt ihop – allt du behöver för att börja komma igång och spela direkt.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1101,7 +1101,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Squire by Fender</h2><p>Letar du efter den klassiska Fender-viben men med ett tillgängligt pris? Squier by Fender är Fenders instegsmärke som hjälper dig med just det. Från iögonfallande Telecasters, Jaguarer till Stratocasters.</p>",
+                "text": "<h2>Squier by Fender</h2><p>Letar du efter den klassiska Fender-viben men med ett tillgängligt pris? Squier by Fender är Fenders instegsmärke som hjälper dig med just det. Från iögonfallande Telecasters, Jaguarer till Stratocasters.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -2062,7 +2062,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Förstärkare för hörlurar</h2><p>Plugga in en hörlursförstärkare i gitarren, koppla in ett par hörlurar och spela helt tyst. Dessutom får du massor av förstärkarljud och effekter. Dessa smidiga små enheter erbjuder populära ljud baserade på verklig utrustning, från klassiska rockförstärkare till moderna, experimentella effekter som du kan anpassa efter smak.</p>",
+                "text": "<h2>Hörlursförstärkare för gitarr</h2><p>Plugga in en hörlursförstärkare i gitarren, koppla in ett par hörlurar och spela helt tyst. Dessutom får du massor av förstärkarljud och effekter. Dessa smidiga små enheter erbjuder populära ljud baserade på verklig utrustning, från klassiska rockförstärkare till moderna, experimentella effekter som du kan anpassa efter smak.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -2198,7 +2198,7 @@
       },
       "name": "t:names.products_carousel",
       "settings": {
-        "collection": "horlursforstarkare-1",
+        "collection": "horlursforstarkare-for-gitarr",
         "layout_type": "carousel",
         "carousel_on_mobile": false,
         "max_products": 16,
