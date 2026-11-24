@@ -155,8 +155,12 @@ export default {
       return json({ ok: false, error: 'send-failed', detail: detail.slice(0, 300) }, 502, cors);
     }
 
-    // 2) Copy to the submitter — without attachments (they have the photos)
-    await sendEmail(env, {
+    // 2) Copy to the submitter — without attachments (they have the photos).
+    // The submission already reached the store, so a failed copy must not turn
+    // into an error for the customer (they would resend and create duplicates).
+    // Instead: retry once on transient errors, and if it still fails, alert the
+    // store so someone can contact the customer by phone.
+    const copy = await sendWithRetry(env, {
       from: env.FROM_EMAIL,
       to: [email],
       subject: 'Kopia på din intresseanmälan – Musik Utan Gränser',
@@ -167,8 +171,25 @@ export default {
         table +
         `<p style="font:14px/1.6 sans-serif">Vänliga hälsningar<br>Musik Utan Gränser<br>031-711 03 09 · order@mug.se</p>`,
     });
+    console.log('resend copy response: ' + copy.status + ' ' + copy.detail.slice(0, 300));
 
-    return json({ ok: true }, 200, cors);
+    if (!copy.ok) {
+      const alert = await sendWithRetry(env, {
+        from: env.FROM_EMAIL,
+        to: [env.TO_EMAIL],
+        reply_to: email,
+        subject: `OBS: kopian till kunden skickades inte – ${model} — ${name}`,
+        html:
+          `<p style="font:14px/1.6 sans-serif">Intresseanmälan ovan (Sälj/byt in: ${esc(model)} — ${esc(name)}) kom fram, ` +
+          `men kopian till <b>${esc(email)}</b> kunde inte skickas. Kontrollera adressen och kontakta gärna kunden` +
+          `${phone ? ` på <b>${esc(phone)}</b>` : ''}.</p>` +
+          `<p style="font:12px/1.5 sans-serif;color:#666">Fel från Resend (${copy.status}): ${esc(copy.detail.slice(0, 300))}</p>` +
+          table,
+      });
+      console.log('copy failed, store alerted: ' + alert.status);
+    }
+
+    return json({ ok: true, copySent: copy.ok }, 200, cors);
   },
 
   // Cron (see wrangler.toml): regenerate the local inventory feed and warm
@@ -311,6 +332,24 @@ async function buildLocalInventoryFeed(env) {
   }
   if (lines.length < 2) throw new Error('feed came out empty — refusing to publish');
   return lines.join('\n') + '\n';
+}
+
+// Sends via Resend and reads the response. Retries once after a short pause on
+// rate limits (429), server errors (5xx) and network failures; 4xx errors such
+// as an invalid recipient address are final.
+async function sendWithRetry(env, payload) {
+  let last = { ok: false, status: 0, detail: '' };
+  for (let attempt = 0; attempt < 2; attempt++) {
+    if (attempt) await new Promise((r) => setTimeout(r, 1500));
+    try {
+      const res = await sendEmail(env, payload);
+      last = { ok: res.ok, status: res.status, detail: await res.text().catch(() => '') };
+    } catch (e) {
+      last = { ok: false, status: 0, detail: 'network: ' + (e && e.message) };
+    }
+    if (last.ok || (last.status >= 400 && last.status < 500 && last.status !== 429)) break;
+  }
+  return last;
 }
 
 async function sendEmail(env, payload) {
