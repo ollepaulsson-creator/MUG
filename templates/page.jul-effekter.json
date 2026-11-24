@@ -557,13 +557,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -628,8 +628,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Personalens favoriter i jul</h2><p>Här tipsar vi i personalen om våra favorit tillbehör till gitarristen. Här listar vi allt från små tillbehör perfekta som julstrumpor till större överraskningar att lägga under granen. Det finns ingen tid att förlora — ta en titt på våra bästa julklappstips.</p>",
+                "text": "<p>Här tipsar vi i personalen om våra favorit tillbehör till gitarristen. Här listar vi allt från små tillbehör perfekta som julstrumpor till större överraskningar att lägga under granen. Det finns ingen tid att förlora — ta en titt på våra bästa julklappstips.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/gitarreffekter\" title=\"Personalens favoriter i jul\">Personalens favoriter i jul</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -639,9 +652,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -792,13 +806,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -863,8 +877,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Hörlursförstärkare</h2><p>Plugga in en hörlursförstärkare i din gitarr, koppla in ett par hörlurar och spela helt tyst. Dessutom får du massor av förstärkarljud och effekter. Dessa smidiga små enheter erbjuder populära ljud baserade på verklig utrustning, från klassiska rockförstärkare till moderna, experimentella effekter som du kan anpassa efter smak.</p>",
+                "text": "<p>Plugga in en hörlursförstärkare i din gitarr, koppla in ett par hörlurar och spela helt tyst. Dessutom får du massor av förstärkarljud och effekter. Dessa smidiga små enheter erbjuder populära ljud baserade på verklig utrustning, från klassiska rockförstärkare till moderna, experimentella effekter som du kan anpassa efter smak.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/horlursforstarkare-for-gitarr\" title=\"Hörlursförstärkare\">Hörlursförstärkare</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -874,9 +901,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -1027,13 +1055,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1098,8 +1126,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Förstärkare</h2><p>En bra elgitarrförstärkare är lika viktig som själva gitarren. Det är här din ton väcks till liv. I vårt sortiment hittar du allt från kompakta övningsförstärkare till kraftfulla rör- och digitalförstärkare både nya och begagnade för scen och studio.</p>",
+                "text": "<p>En bra elgitarrförstärkare är lika viktig som själva gitarren. Det är här din ton väcks till liv. I vårt sortiment hittar du allt från kompakta övningsförstärkare till kraftfulla rör- och digitalförstärkare både nya och begagnade för scen och studio.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/gitarrforstarkare\" title=\"Förstärkare\">Förstärkare</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -1109,9 +1150,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },

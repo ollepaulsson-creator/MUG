@@ -557,13 +557,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -628,8 +628,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Personalens favoriter i jul</h2><p>Här tipsar vi i personalen om våra favoritprylar för alla som spelar akustisk gitarr. Vi listar allt från smarta små tillbehör perfekta som julstrumpor till större överraskningar att lägga under granen. Det finns ingen tid att förlora — ta en titt på våra bästa julklappstips för akustisk gitarr.</p>",
+                "text": "<p>Här tipsar vi i personalen om våra favoritprylar för alla som spelar akustisk gitarr. Vi listar allt från smarta små tillbehör perfekta som julstrumpor till större överraskningar att lägga under granen. Det finns ingen tid att förlora — ta en titt på våra bästa julklappstips för akustisk gitarr.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/akustiska-gitarrer\" title=\"Personalens favoriter i jul\">Personalens favoriter i jul</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -639,9 +652,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -792,13 +806,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -863,8 +877,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Akustiska gitarrer i 3/4 och 1/2-storlekar</h2><p>Vi har prisvärda akustiska gitarrer som passar alla åldrar. För barn från ca. 8–11 år rekommenderar vi gitarrer i 3/4-storlek (beroende på barnets längd). För yngre barn från ca. 6–8 år rekommenderar vi 1/2-storlek (beroende på barnets längd). Främst nylonsträngat då det är mjukare och enklare att spela på. En akustik gitarr är fantastisk julklapp till den som vill börja spela!</p>",
+                "text": "<p>Vi har prisvärda akustiska gitarrer som passar alla åldrar. För barn från ca. 8–11 år rekommenderar vi gitarrer i 3/4-storlek (beroende på barnets längd). För yngre barn från ca. 6–8 år rekommenderar vi 1/2-storlek (beroende på barnets längd). Främst nylonsträngat då det är mjukare och enklare att spela på. En akustik gitarr är fantastisk julklapp till den som vill börja spela!</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/nyborjare-akustisk-gitarr\" title=\"Akustiska gitarrer i 3/4 och 1/2-storlekar\">Akustiska gitarrer i 3/4 och 1/2-storlekar</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -874,9 +901,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -1027,13 +1055,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1098,8 +1126,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Fullstora akustiska gitarrer</h2><p>Letar du efter en prisvärd akustisk gitarr att lägga under granen? Här hittar du ett noga utvalt urval av prisvärda nylon- och stålsträngade modeller som passar allt från nybörjare till den mer erfarne spelaren. En akustisk gitarr är en gåva som inspirerar, håller länge och sprider musikglädje långt efter att julen är över.</p>",
+                "text": "<p>Letar du efter en prisvärd akustisk gitarr att lägga under granen? Här hittar du ett noga utvalt urval av prisvärda nylon- och stålsträngade modeller som passar allt från nybörjare till den mer erfarne spelaren. En akustisk gitarr är en gåva som inspirerar, håller länge och sprider musikglädje långt efter att julen är över.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/akustiska-gitarrer\" title=\"Fullstora akustiska gitarrer\">Fullstora akustiska gitarrer</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -1109,9 +1150,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -1262,13 +1304,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1333,8 +1375,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Ukulele</h2><p>Med sin kompakta storlek, varma ton och lättspelade natur är ukulelen perfekt för spelare på alla nivåer – och den idealiska följeslagaren. Från gårdagens ukulelespelare, som George Formby och George Harrison, till dagens innovatörer som The Shins och Alex G har den enkla ukulelen verkligen gjort ett imponerande avtryck i populärmusiken.</p>",
+                "text": "<p>Med sin kompakta storlek, varma ton och lättspelade natur är ukulelen perfekt för spelare på alla nivåer – och den idealiska följeslagaren. Från gårdagens ukulelespelare, som George Formby och George Harrison, till dagens innovatörer som The Shins och Alex G har den enkla ukulelen verkligen gjort ett imponerande avtryck i populärmusiken.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/ukuleler\" title=\"Ukulele\">Ukulele</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -1344,9 +1399,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -1497,13 +1553,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1568,8 +1624,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Akustiska förstärkare</h2><p>Om din kära redan har en gitarr med mik kan en akustisk gitarrförstärkare vara precis vad de behöver för att ta sitt sound till nästa nivå. Vi har modeller som passar bra hemma i vardagsrummet eller om man skall spelar live. Akustiska gitarrförstärkare kan vara riktigt roliga och inspirerande.</p>",
+                "text": "<p>Om din kära redan har en gitarr med mik kan en akustisk gitarrförstärkare vara precis vad de behöver för att ta sitt sound till nästa nivå. Vi har modeller som passar bra hemma i vardagsrummet eller om man skall spelar live. Akustiska gitarrförstärkare kan vara riktigt roliga och inspirerande.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/akustiskforstarkare\" title=\"Akustiska förstärkare\">Akustiska förstärkare</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -1579,9 +1648,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -1732,13 +1802,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1803,8 +1873,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Strängar</h2><p>Gitarrister kan aldrig ha för många gitarrsträngar. Vissa tror att man bara behöver byta dem när en går av, men i själva verket byter proffsmusiker strängar varannan vecka (eller till och med inför varje spelning). Fräscha strängar låter bättre, känns skönare att spela på, håller stämningen bättre och får helt enkelt en gitarr att vakna till liv.</p>",
+                "text": "<p>Gitarrister kan aldrig ha för många gitarrsträngar. Vissa tror att man bara behöver byta dem när en går av, men i själva verket byter proffsmusiker strängar varannan vecka (eller till och med inför varje spelning). Fräscha strängar låter bättre, känns skönare att spela på, håller stämningen bättre och får helt enkelt en gitarr att vakna till liv.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/alla-akustiska-strangar\" title=\"Strängar\">Strängar</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -1814,9 +1897,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -1984,13 +2068,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -2055,8 +2139,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Capon</h2><p>Gitarrcapon gör att spelare kan byta tonart utan att behöva lära sig nya ackordformer eller stämma om sitt instrument. Kläm bara fast ett över ett band, så spelar du direkt i en ny tonart. De kan vara en räddare i nöden när man kompar sångare. Ingen singer-songwriter borde vara utan en!</p>",
+                "text": "<p>Gitarrcapon gör att spelare kan byta tonart utan att behöva lära sig nya ackordformer eller stämma om sitt instrument. Kläm bara fast ett över ett band, så spelar du direkt i en ny tonart. De kan vara en räddare i nöden när man kompar sångare. Ingen singer-songwriter borde vara utan en!</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/capo\" title=\"Capon\">Capon</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -2066,9 +2163,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -2219,13 +2317,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -2290,8 +2388,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Gitarrvård</h2><p>Vad ger man en gitarrist som redan har allt? Jo, ett professionellt rengöringskit som får hens instrument hålla och låta i toppskick! Vi erbjuder rengörings- och vårdkit för gitarrer från toppmärken som Dunlop, D'Addario och MusicNomad med fler. Dessa rekomenderar vi varmt:</p>",
+                "text": "<p>Vad ger man en gitarrist som redan har allt? Jo, ett professionellt rengöringskit som får hens instrument hålla och låta i toppskick! Vi erbjuder rengörings- och vårdkit för gitarrer från toppmärken som Dunlop, D'Addario och MusicNomad med fler. Dessa rekomenderar vi varmt:</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/gitarrvard\" title=\"Gitarrvård\">Gitarrvård</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -2301,9 +2412,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -2454,13 +2566,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -2525,8 +2637,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Munspel</h2><p>Ett munspel är en perfekt present till vem som helst – kompakta, lättspelade och fulla av karaktär. Oavsett om mottagaren är nybörjare eller erfaren musiker ger ett munspel möjlighet att skapa värme, känsla och julmagi var man än befinner sig. Här hittar du våra bästa tips för att lägga musikalisk glädje under granen.</p>",
+                "text": "<p>Ett munspel är en perfekt present till vem som helst – kompakta, lättspelade och fulla av karaktär. Oavsett om mottagaren är nybörjare eller erfaren musiker ger ett munspel möjlighet att skapa värme, känsla och julmagi var man än befinner sig. Här hittar du våra bästa tips för att lägga musikalisk glädje under granen.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/munspel\" title=\"Munspel\">Munspel</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -2536,9 +2661,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -2689,13 +2815,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -2760,8 +2886,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Tips på bästa tillbehören</h2><p>Här har vi samlat tips på fler tillbehör till akustiska gitarrer. Vad sägs om en looper-pedal för att skapa loopar med lager på lager, en stämapparat, plektrum eller ett snyggt axelband – gåvor som garanterat uppskattas under julgranen.</p>",
+                "text": "<p>Här har vi samlat tips på fler tillbehör till akustiska gitarrer. Vad sägs om en looper-pedal för att skapa loopar med lager på lager, en stämapparat, plektrum eller ett snyggt axelband – gåvor som garanterat uppskattas under julgranen.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/tillbehor-for-akustisk-gitarr\" title=\"Tips på bästa tillbehören\">Tips på bästa tillbehören</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -2771,9 +2910,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -2924,13 +3064,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -2995,8 +3135,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Inspelning</h2><p>Julen är den bästa årstiden för att skapa musik! Här listar vi allt från kristallklara studiolurar och kraftfulla studio monitorer till mångsidiga MIDI-keyboards och professionella ljudkort – helt enkelt den perfekta utrustningen för att skapa din egen hemma studio. Oavsett budget eller erfarenhetsnivå kommer de här gåvorna att träffa helt rätt ton i jul.</p>",
+                "text": "<p>Julen är den bästa årstiden för att skapa musik! Här listar vi allt från kristallklara studiolurar och kraftfulla studio monitorer till mångsidiga MIDI-keyboards och professionella ljudkort – helt enkelt den perfekta utrustningen för att skapa din egen hemma studio. Oavsett budget eller erfarenhetsnivå kommer de här gåvorna att träffa helt rätt ton i jul.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/inspelning-hemma\" title=\"Inspelning\">Inspelning</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -3006,9 +3159,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },

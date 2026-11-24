@@ -557,13 +557,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -628,8 +628,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Digitalpianon</h2><p>Digitalpianon förenar det klassiska pianots känsla med modern teknik. Du får autentisk spelkänsla, realistiskt ljud och möjlighet att spela med hörlurar – perfekt för hem, studio eller scen. Här hittar du allt från kompakta modeller för nybörjare till fullstora pianon med vägda tangenter och inbyggda högtalare i flera prisklasser.</p>",
+                "text": "<p>Digitalpianon förenar det klassiska pianots känsla med modern teknik. Du får autentisk spelkänsla, realistiskt ljud och möjlighet att spela med hörlurar – perfekt för hem, studio eller scen. Här hittar du allt från kompakta modeller för nybörjare till fullstora pianon med vägda tangenter och inbyggda högtalare i flera prisklasser.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/digital-pianon\" title=\"Digitalpianon\">Digitalpianon</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -639,9 +652,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -792,13 +806,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -863,8 +877,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Keyboard</h2><p>Här fokuserar vi på portabla keyboards med lättspelade tangenter, inbyggda högtalare och smarta funktioner. De är perfekta för dig som vill lära dig spela, öva eller bara jamma hemma. Många modeller inkluderar ackordfunktioner, rytmer, ljudbanker och möjlighet att koppla till dator eller mobil. Lättspelat, inspirerande och prisvärt – keyboards för både nybörjare och vardagsmusiker.</p>",
+                "text": "<p>Här fokuserar vi på portabla keyboards med lättspelade tangenter, inbyggda högtalare och smarta funktioner. De är perfekta för dig som vill lära dig spela, öva eller bara jamma hemma. Många modeller inkluderar ackordfunktioner, rytmer, ljudbanker och möjlighet att koppla till dator eller mobil. Lättspelat, inspirerande och prisvärt – keyboards för både nybörjare och vardagsmusiker.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/keyboard\" title=\"Keyboard\">Keyboard</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -874,9 +901,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -1027,13 +1055,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1098,8 +1126,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>USB-MIDI klaviatur</h2><p>En USB-MIDI-klaviatur är en riktigt grym julklapp för den som vill skapa musik digitalt. Arturias modeller – från det portabla MiniLab 3 till det kreativa KeyStep och BeatStep och det mer omfattande KeyLab Essential – erbjuder hög spelkänsla, genomtänkta kontroller och integrerad mjukvara som gör starten både inspirerande och enkel.</p>",
+                "text": "<p>En USB-MIDI-klaviatur är en riktigt grym julklapp för den som vill skapa musik digitalt. Arturias modeller – från det portabla MiniLab 3 till det kreativa KeyStep och BeatStep och det mer omfattande KeyLab Essential – erbjuder hög spelkänsla, genomtänkta kontroller och integrerad mjukvara som gör starten både inspirerande och enkel.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/usb-midi-klaviatur\" title=\"USB-MIDI klaviatur\">USB-MIDI klaviatur</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -1109,9 +1150,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -1262,13 +1304,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1333,8 +1375,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Synthar</h2><p>En synth är en fantastisk julklapp för nybörjaren som vill börja skapa musik med moderna verktyg. Instrument som Teenage Engineerings intuitiva OP-XY eller Pocket Operator serie, Korgs Microkorg, eller Arturias användarvänliga MiniBrute och MicroFreak. Instument som gör det enkelt att utforska ljuddesign, melodier och produktion utan omfattande förkunskaper.</p>",
+                "text": "<p>En synth är en fantastisk julklapp för nybörjaren som vill börja skapa musik med moderna verktyg. Instrument som Teenage Engineerings intuitiva OP-XY eller Pocket Operator serie, Korgs Microkorg, eller Arturias användarvänliga MiniBrute och MicroFreak. Instument som gör det enkelt att utforska ljuddesign, melodier och produktion utan omfattande förkunskaper.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/syntar\" title=\"Synthar\">Synthar</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -1344,9 +1399,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -1497,13 +1553,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1568,8 +1624,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Personalens favoriter i jul</h2><p>Här tipsar vi i personalen om våra egna favoriter. Vi har valt ut prylarna vi själva använder mest – eller sådana vi tror hade passat perfekt att ge bort i jul.</p>",
+                "text": "<p>Här tipsar vi i personalen om våra egna favoriter. Vi har valt ut prylarna vi själva använder mest – eller sådana vi tror hade passat perfekt att ge bort i jul.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/piano-keyboard\" title=\"Personalens favoriter i jul\">Personalens favoriter i jul</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -1579,9 +1648,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -1732,13 +1802,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1803,8 +1873,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Tillbehör till klaviatur</h2><p>Här listar vi tips på tillbehör till klaviaturinstrument. Vad sägs om en justerbar pianopall som ger rätt spelhöjd, belysning som gör kvällssessionerna enklare, en sustainpedal för naturlig klangförlängning, eller ett X-stativ som håller keyboarden eller pianot stabilt på plats och gör din ställning ergonomisk.</p>",
+                "text": "<p>Här listar vi tips på tillbehör till klaviaturinstrument. Vad sägs om en justerbar pianopall som ger rätt spelhöjd, belysning som gör kvällssessionerna enklare, en sustainpedal för naturlig klangförlängning, eller ett X-stativ som håller keyboarden eller pianot stabilt på plats och gör din ställning ergonomisk.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/tillbehor-for-syntar\" title=\"Tillbehör till klaviatur\">Tillbehör till klaviatur</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -1814,9 +1897,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -1984,13 +2068,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -2055,8 +2139,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Inspelning</h2><p>Julen är den bästa årstiden för att skapa musik! Här listar vi allt från kristallklara studiolurar och kraftfulla studio monitorer till mångsidiga MIDI-keyboards och professionella ljudkort – helt enkelt den perfekta utrustningen för att skapa din egen hemma studio. Oavsett budget eller erfarenhetsnivå kommer de här gåvorna att träffa helt rätt ton i jul.</p>",
+                "text": "<p>Julen är den bästa årstiden för att skapa musik! Här listar vi allt från kristallklara studiolurar och kraftfulla studio monitorer till mångsidiga MIDI-keyboards och professionella ljudkort – helt enkelt den perfekta utrustningen för att skapa din egen hemma studio. Oavsett budget eller erfarenhetsnivå kommer de här gåvorna att träffa helt rätt ton i jul.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/inspelning-hemma\" title=\"Inspelning\">Inspelning</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -2066,9 +2163,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },

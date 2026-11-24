@@ -2565,3 +2565,28 @@ product-inventory.product-inventory {
 .mug-banner-sektion + .mug-banner-sektion {
   margin-top: 4px;
 }
+
+/* Julguiderna (Olle 2026-11-25): rubriken länkar till kategorin, SE ALLA står direkt
+   efter rubriken och beskrivningen bryter till egen rad under – även i mobilen. */
+[id*="__jul_"] .section-resource-list__header .group-block-content {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: flex-start;
+  column-gap: 16px;
+}
+[id*="__jul_"] .section-resource-list__header .group-block-content > .text-block:has(p) {
+  flex-basis: 100%;
+}
+[id*="__jul_"] .section-resource-list__header .group-block-content > .text-block:not(:has(p)) {
+  width: auto;
+  flex: 0 0 auto;
+}
+[id*="__jul_"] .section-resource-list__header h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+[id*="__jul_"] .section-resource-list__header h2 a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}

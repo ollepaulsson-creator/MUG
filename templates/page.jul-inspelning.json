@@ -557,13 +557,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -628,8 +628,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Personalens favoriter i jul</h2><p>Här tipsar vi i personalen om de bästa prylarna för hemma-studion. Från kristallklara studiolurar och kraftfulla studio monitorer till mångsidiga MIDI-keyboards och ljudkort i proffsklass – här har vi samlat den bästa utrustningen.</p>",
+                "text": "<p>Här tipsar vi i personalen om de bästa prylarna för hemma-studion. Från kristallklara studiolurar och kraftfulla studio monitorer till mångsidiga MIDI-keyboards och ljudkort i proffsklass – här har vi samlat den bästa utrustningen.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/studio-inspelning\" title=\"Personalens favoriter i jul\">Personalens favoriter i jul</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -639,9 +652,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -792,13 +806,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -863,8 +877,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Hörlurar</h2><p>Varje musiker som producerar digitalt behöver ett par riktigt bra par bra hörlurar – inte bara för mixning, utan också för de där sena kvällssessionerna när man inte kan höja volymen på monitorerna. Ge bort precision och komfort i jul. Oavsett om de spelar in sång, instrument, redigerar beats eller bara lyssnar på din senaste mix är bra hörlurar en gåva som kommer att användas varje dag.</p>",
+                "text": "<p>Varje musiker som producerar digitalt behöver ett par riktigt bra par bra hörlurar – inte bara för mixning, utan också för de där sena kvällssessionerna när man inte kan höja volymen på monitorerna. Ge bort precision och komfort i jul. Oavsett om de spelar in sång, instrument, redigerar beats eller bara lyssnar på din senaste mix är bra hörlurar en gåva som kommer att användas varje dag.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/horlurar\" title=\"Hörlurar\">Hörlurar</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -874,9 +901,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -1027,13 +1055,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1098,8 +1126,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>USB-MIDI klaviatur</h2><p>En USB-MIDI-klaviatur är en riktigt grym julklapp för den som vill skapa musik digitalt. Arturias modeller – från det portabla MiniLab 3 till det kreativa KeyStep och BeatStep och det mer omfattande KeyLab Essential – erbjuder hög spelkänsla, genomtänkta kontroller och integrerad mjukvara som gör starten både inspirerande och enkel.</p>",
+                "text": "<p>En USB-MIDI-klaviatur är en riktigt grym julklapp för den som vill skapa musik digitalt. Arturias modeller – från det portabla MiniLab 3 till det kreativa KeyStep och BeatStep och det mer omfattande KeyLab Essential – erbjuder hög spelkänsla, genomtänkta kontroller och integrerad mjukvara som gör starten både inspirerande och enkel.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/usb-midi-klaviatur\" title=\"USB-MIDI klaviatur\">USB-MIDI klaviatur</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -1109,9 +1150,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -1262,13 +1304,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1333,8 +1375,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Ljudinterface</h2><p>En pålitlig ljudinterface är hjärtat i varje producents setup och kopplar samman mikrofoner, instrument och monitorer med kristallklar ljudkvalitet. Den här julen kan du hitta några av de bästa erbjudandena på interfaces och ljudkort som kombinerar professionell prestanda med oslagbart värde. Från kompakta och budgetvänliga alternativ perfekta för hemmastudior till avancerade enheter för fullskaliga produktioner – ett kvalitetsinterface är en gåva som får varje spår att låta som bäst utan att spräcka budgeten.</p>",
+                "text": "<p>En pålitlig ljudinterface är hjärtat i varje producents setup och kopplar samman mikrofoner, instrument och monitorer med kristallklar ljudkvalitet. Den här julen kan du hitta några av de bästa erbjudandena på interfaces och ljudkort som kombinerar professionell prestanda med oslagbart värde. Från kompakta och budgetvänliga alternativ perfekta för hemmastudior till avancerade enheter för fullskaliga produktioner – ett kvalitetsinterface är en gåva som får varje spår att låta som bäst utan att spräcka budgeten.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/ljudkort\" title=\"Ljudinterface\">Ljudinterface</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -1344,9 +1399,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -1497,13 +1553,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1568,8 +1624,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Studiomonitorer</h2><p>Bra hörlurar är viktiga, men inget slår klarheten och djupet hos ett par riktigt bra studiomonitorer. Dessa högtalare ger producenter en noggrann och detaljerad bild av mixen och hjälper varje kick, virvel och hi-hat att sitta perfekt. Från kompakta monitorer för sovrumsstudion till fullstora system för professionella miljöer – ett par kvalitets­högtalare kan förvandla arbetsytan och lyfta varje produktion. Hör din musik så som den var tänkt att låta.</p>",
+                "text": "<p>Bra hörlurar är viktiga, men inget slår klarheten och djupet hos ett par riktigt bra studiomonitorer. Dessa högtalare ger producenter en noggrann och detaljerad bild av mixen och hjälper varje kick, virvel och hi-hat att sitta perfekt. Från kompakta monitorer för sovrumsstudion till fullstora system för professionella miljöer – ett par kvalitets­högtalare kan förvandla arbetsytan och lyfta varje produktion. Hör din musik så som den var tänkt att låta.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/studiomonitorer\" title=\"Studiomonitorer\">Studiomonitorer</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -1579,9 +1648,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -1749,13 +1819,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1820,8 +1890,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Inspelningsmikrofoner</h2><p>Oavsett om det handlar om att spela in sång, instrument eller omgivningsljud är en högkvalitativ studiomikrofon ett måste för varje producent. Från mångsidiga kondensatormikrofoner som briljerar på sång till dynamiska mikrofoner byggda för kraftfulla inspelningar – rätt mikrofon kan få varje spår att låta professionellt och välpolerat. Ge bort klarhet och karaktär. En studiomikrofon är mer än bara utrustning; den är nyckeln till att förverkliga musikaliska idéer.</p>",
+                "text": "<p>Oavsett om det handlar om att spela in sång, instrument eller omgivningsljud är en högkvalitativ studiomikrofon ett måste för varje producent. Från mångsidiga kondensatormikrofoner som briljerar på sång till dynamiska mikrofoner byggda för kraftfulla inspelningar – rätt mikrofon kan få varje spår att låta professionellt och välpolerat. Ge bort klarhet och karaktär. En studiomikrofon är mer än bara utrustning; den är nyckeln till att förverkliga musikaliska idéer.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/mikrofoner-studio\" title=\"Inspelningsmikrofoner\">Inspelningsmikrofoner</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -1831,9 +1914,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },

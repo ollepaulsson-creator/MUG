@@ -557,13 +557,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -628,8 +628,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Personalens favoriter i jul</h2><p>Här tipsar vi i personalen om våra favorittillbehör till alla trummisar. Allt från små tillbehör perfekta som julstrumpor till större överraskningar som ett digitalt trumset att lägga under granen. Det finns ingen tid att förlora — ta en titt på våra bästa julklappstips.</p>",
+                "text": "<p>Här tipsar vi i personalen om våra favorittillbehör till alla trummisar. Allt från små tillbehör perfekta som julstrumpor till större överraskningar som ett digitalt trumset att lägga under granen. Det finns ingen tid att förlora — ta en titt på våra bästa julklappstips.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/slagverk\" title=\"Personalens favoriter i jul\">Personalens favoriter i jul</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -639,9 +652,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -792,13 +806,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -863,8 +877,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Digitala trummor</h2><p>Ett digitalt trumset är drömjulklappen för alla trummisar. Spela hemma och hur högt du vill! En imponerande mångsidighet låter spelaren utforska ett brett spektrum av ljud och stilar i ett kompakt format. För nybörjare är elektroniska trumset lättanvända och innehåller ofta inbyggda övningsfunktioner som hjälper till att utveckla färdigheter. Mer rutinerade trummisar uppskattar möjligheten att finjustera sitt sound och öva tyst med hörlurar – perfekt för hemmabruk.</p>",
+                "text": "<p>Ett digitalt trumset är drömjulklappen för alla trummisar. Spela hemma och hur högt du vill! En imponerande mångsidighet låter spelaren utforska ett brett spektrum av ljud och stilar i ett kompakt format. För nybörjare är elektroniska trumset lättanvända och innehåller ofta inbyggda övningsfunktioner som hjälper till att utveckla färdigheter. Mer rutinerade trummisar uppskattar möjligheten att finjustera sitt sound och öva tyst med hörlurar – perfekt för hemmabruk.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/digitala-trummor\" title=\"Digitala trummor\">Digitala trummor</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -874,9 +901,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -1027,13 +1055,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1098,8 +1126,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Övningsplattor</h2><p>Övningsplattor är trumslagarnas hemliga vapen! Perfekta för tyst och fokuserad träning låter de trummisar finslipa sina färdigheter utan att driva grannarna till vansinne. Oavsett om man just har börjat eller jobbar på sina paradiddlar är övningsplattor superportabla, hållbara och ett utmärkt sätt att hålla groovet vid liv – var som helst, när som helst.</p>",
+                "text": "<p>Övningsplattor är trumslagarnas hemliga vapen! Perfekta för tyst och fokuserad träning låter de trummisar finslipa sina färdigheter utan att driva grannarna till vansinne. Oavsett om man just har börjat eller jobbar på sina paradiddlar är övningsplattor superportabla, hållbara och ett utmärkt sätt att hålla groovet vid liv – var som helst, när som helst.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/ovningsplattor\" title=\"Övningsplattor\">Övningsplattor</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -1109,9 +1150,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -1262,13 +1304,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1333,8 +1375,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Cajons</h2><p>En cajón är en fin julklapp till trummisen som vill kunna spela överallt. Det är ett enkelt, portabelt instrument som ändå rymmer mycket ljud – från djup bas till tydliga snärtiga toner. Perfekt för spontana jam, akustiska spelningar eller bara för att hålla igång rytmen hemma. Ett instrument som bjuder in till kreativitet utan att ta mycket plats.</p>",
+                "text": "<p>En cajón är en fin julklapp till trummisen som vill kunna spela överallt. Det är ett enkelt, portabelt instrument som ändå rymmer mycket ljud – från djup bas till tydliga snärtiga toner. Perfekt för spontana jam, akustiska spelningar eller bara för att hålla igång rytmen hemma. Ett instrument som bjuder in till kreativitet utan att ta mycket plats.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/cajon\" title=\"Cajons\">Cajons</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -1344,9 +1399,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -1497,13 +1553,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1568,8 +1624,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Tillbehör för trummor</h2><p>Trumtillbehör är de perfekta små presenterna som gör stor skillnad! Från moongel och trumstockar till en snygg stockväska som håller ordning på allt – dessa vardagshjältar är trummisens bästa vän. Enkla, praktiska och alltid uppskattade hjälper de trummisar att både låta och känna sig som bäst.</p>",
+                "text": "<p>Trumtillbehör är de perfekta små presenterna som gör stor skillnad! Från moongel och trumstockar till en snygg stockväska som håller ordning på allt – dessa vardagshjältar är trummisens bästa vän. Enkla, praktiska och alltid uppskattade hjälper de trummisar att både låta och känna sig som bäst.</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/tillbehor-for-trummor\" title=\"Tillbehör för trummor\">Tillbehör för trummor</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -1579,9 +1648,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
@@ -1732,13 +1802,13 @@
           "static": true,
           "settings": {
             "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1803,8 +1873,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Trumstockar</h2><p>Trumstockar är den självklara presenten som alltid träffar rätt! Färska stockar ett måste för rätt känsla, balans och spelglädje. Finns i olika storlekar, material och spetsformer – perfekta för att hitta sin personliga touch. En enkel, prisvärd och alltid uppskattad gåva!</p>",
+                "text": "<p>Trumstockar är den självklara presenten som alltid träffar rätt! Färska stockar ett måste för rätt känsla, balans och spelglädje. Finns i olika storlekar, material och spetsformer – perfekta för att hitta sin personliga touch. En enkel, prisvärd och alltid uppskattad gåva!</p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/trumstockar\" title=\"Trumstockar\">Trumstockar</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -1814,9 +1897,10 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
+            "button_kyPFyt",
             "jul_text",
             "product_list_text_kmdAw8",
-            "button_kyPFyt",
             "swatches_8WFcrC"
           ]
         },
