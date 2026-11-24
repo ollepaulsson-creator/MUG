@@ -2544,7 +2544,7 @@ product-inventory.product-inventory {
 }
 
 [id*="__jul_"] .section-resource-list__header p {
-  max-width: 55%;
+  max-width: min(75%, 980px);
   margin: 0;
   font-size: 16px;
   line-height: 1.6;
