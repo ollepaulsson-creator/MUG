@@ -1306,14 +1306,14 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
+            "content_direction": "row",
             "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1379,8 +1379,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Multieffekts-pedaler</h2><p>Multi-effektpedaler är den moderna gitarristens schweiziska armékniv. I ett enda kompakt paket får du hundratals effekter, förstärkar­modeller och kreativa verktyg som tidigare krävde ett helt pedalbord. Oavsett om du vill experimentera med nya ljud, ha en smidig allt-i-ett-lösning för scen och studio eller bara slippa släpa runt på massa prylar, erbjuder multieffekter mycket flexibilitet.</p>",
+                "text": "<p>Multi-effektpedaler är den moderna gitarristens schweiziska armékniv. I ett enda kompakt paket får du hundratals effekter, förstärkar­modeller och kreativa verktyg som tidigare krävde ett helt pedalbord. Oavsett om du vill experimentera med nya ljud, ha en smidig allt-i-ett-lösning för scen och studio eller bara slippa släpa runt på massa prylar, erbjuder multieffekter mycket flexibilitet. <a href=\"/collections/gitarreffekter?filter.p.m.custom.filters_typ=Multieffekt\" title=\"Se alla – Multieffekts-pedaler\">Se alla</a></p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/gitarreffekter?filter.p.m.custom.filters_typ=Multieffekt\" title=\"Multieffekts-pedaler\">Multieffekts-pedaler</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -1390,6 +1403,7 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
             "jul_text",
             "product_list_text_kmdAw8",
             "button_kyPFyt",
@@ -1542,14 +1556,14 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
+            "content_direction": "row",
             "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1615,8 +1629,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Distortion/overdrive-pedaler</h2><p>Distortionpedaler och overdrive pedaler är hjärtat i många ikoniska gitarrsound – från klassisk rock till modern metal. De ger ditt spel extra kraft, bett och sustain, och kan förvandla även den renaste signal till ett massivt, aggressivt wall-of-sound. Oavsett om du vill ha lätt overtone eller ett totalt high-gain kaos, är en bra distortionpedal ett av de mest grundläggande verktygen på varje gitarrists pedalbord.</p>",
+                "text": "<p>Distortionpedaler och overdrive pedaler är hjärtat i många ikoniska gitarrsound – från klassisk rock till modern metal. De ger ditt spel extra kraft, bett och sustain, och kan förvandla även den renaste signal till ett massivt, aggressivt wall-of-sound. Oavsett om du vill ha lätt overtone eller ett totalt high-gain kaos, är en bra distortionpedal ett av de mest grundläggande verktygen på varje gitarrists pedalbord. <a href=\"/collections/gitarreffekter?filter.p.m.custom.filters_typ=Distortion&amp;filter.p.m.custom.filters_typ=Overdrive\" title=\"Se alla – Distortion/overdrive-pedaler\">Se alla</a></p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/gitarreffekter?filter.p.m.custom.filters_typ=Distortion&amp;filter.p.m.custom.filters_typ=Overdrive\" title=\"Distortion/overdrive-pedaler\">Distortion/overdrive-pedaler</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -1626,6 +1653,7 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
             "jul_text",
             "product_list_text_kmdAw8",
             "button_kyPFyt",
@@ -1778,14 +1806,14 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
+            "content_direction": "row",
             "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1851,8 +1879,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Fuzzpedaler</h2><p>Fuzzpedaler är för dig som vill spränga gränserna och kliva in i det råa, vilda och oförutsägbara. Med sin tjocka, trasiga och nästan synthliknande distorsion gav fuzz liv åt 60-talets rockrevolution och fortsätter att inspirera dagens experimentella gitarrister. De förvandlar tonen till något helt eget — perfekt för dig som vill sticka ut och skapa riktigt karaktärsfulla ljud.</p>",
+                "text": "<p>Fuzzpedaler är för dig som vill spränga gränserna och kliva in i det råa, vilda och oförutsägbara. Med sin tjocka, trasiga och nästan synthliknande distorsion gav fuzz liv åt 60-talets rockrevolution och fortsätter att inspirera dagens experimentella gitarrister. De förvandlar tonen till något helt eget — perfekt för dig som vill sticka ut och skapa riktigt karaktärsfulla ljud. <a href=\"/collections/gitarreffekter?filter.p.m.custom.filters_typ=Fuzz\" title=\"Se alla – Fuzzpedaler\">Se alla</a></p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/gitarreffekter?filter.p.m.custom.filters_typ=Fuzz\" title=\"Fuzzpedaler\">Fuzzpedaler</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -1862,6 +1903,7 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
             "jul_text",
             "product_list_text_kmdAw8",
             "button_kyPFyt",
@@ -2014,14 +2056,14 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
+            "content_direction": "row",
             "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -2087,8 +2129,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Delaypedaler</h2><p>Delaypedaler är hemligheten bakom många atmosfäriska klanger, stora soundscapes och rytmiska ekon som fyller ett helt rum. Från subtila slapbacks till långa, svävande svansar låter de dig forma rymd och djup i ditt sound på ett sätt som få andra effekter kan matcha. Oavsett genre är delay en av de mest mångsidiga och kreativa pedalerna du kan lägga till på ditt pedalbord.</p>",
+                "text": "<p>Delaypedaler är hemligheten bakom många atmosfäriska klanger, stora soundscapes och rytmiska ekon som fyller ett helt rum. Från subtila slapbacks till långa, svävande svansar låter de dig forma rymd och djup i ditt sound på ett sätt som få andra effekter kan matcha. Oavsett genre är delay en av de mest mångsidiga och kreativa pedalerna du kan lägga till på ditt pedalbord. <a href=\"/collections/gitarreffekter?filter.p.m.custom.filters_typ=Delay\" title=\"Se alla – Delaypedaler\">Se alla</a></p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/gitarreffekter?filter.p.m.custom.filters_typ=Delay\" title=\"Delaypedaler\">Delaypedaler</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -2098,6 +2153,7 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
             "jul_text",
             "product_list_text_kmdAw8",
             "button_kyPFyt",
@@ -2250,14 +2306,14 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
+            "content_direction": "row",
             "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -2323,8 +2379,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Wah Wah-pedaler</h2><p>Wah-Wah-pedaler ger ditt spel en expressiv röstliknande karaktär som gjort dem legendariska inom rock, funk och soul. Med en enkel fotrörelse kan du forma tonen i realtid – från mjuka, vokala svep till agressiva quacks. En wah är inte bara en effekt, utan ett instrument i sig som tillför dynamik, personlighet och attityd till ditt spel.</p>",
+                "text": "<p>Wah-Wah-pedaler ger ditt spel en expressiv röstliknande karaktär som gjort dem legendariska inom rock, funk och soul. Med en enkel fotrörelse kan du forma tonen i realtid – från mjuka, vokala svep till agressiva quacks. En wah är inte bara en effekt, utan ett instrument i sig som tillför dynamik, personlighet och attityd till ditt spel. <a href=\"/collections/gitarreffekter?filter.p.m.custom.filters_typ=Wah\" title=\"Se alla – Wah Wah-pedaler\">Se alla</a></p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/gitarreffekter?filter.p.m.custom.filters_typ=Wah\" title=\"Wah Wah-pedaler\">Wah Wah-pedaler</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -2334,6 +2403,7 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
             "jul_text",
             "product_list_text_kmdAw8",
             "button_kyPFyt",
@@ -2486,14 +2556,14 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
+            "content_direction": "row",
             "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -2559,8 +2629,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Produkter från MUG</h2><p>Osäker på vad du ska välja? Gör någon riktigt glad i Jul med ett presentkort, en halsduk eller en T-shirt från MUG. Våra presentkort är både snygga och användbara – och låter mottagaren välja fritt ur hela vårt sortiment. Samtidigt stöttar du din lokala musikaffär, vilket gör även oss extra glada i jul. God jul! :)</p>",
+                "text": "<p>Osäker på vad du ska välja? Gör någon riktigt glad i Jul med ett presentkort, en halsduk eller en T-shirt från MUG. Våra presentkort är både snygga och användbara – och låter mottagaren välja fritt ur hela vårt sortiment. Samtidigt stöttar du din lokala musikaffär, vilket gör även oss extra glada i jul. God jul! :) <a href=\"/collections/musik-utan-granser\" title=\"Se alla – Produkter från MUG\">Se alla</a></p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/musik-utan-granser\" title=\"Produkter från MUG\">Produkter från MUG</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -2570,6 +2653,7 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
             "jul_text",
             "product_list_text_kmdAw8",
             "button_kyPFyt",

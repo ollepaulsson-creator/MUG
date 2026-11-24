@@ -3309,14 +3309,14 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
+            "content_direction": "row",
             "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -3382,8 +3382,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Musikböcker</h2><p>Inspiration i bokform! En variation av musik- och sångböcker som kan göra det lättare att lära och utvecklas i musiken. Perfekt som komplement till lektioner – eller som ett roligt sätt att utforska musik hemma under jullovet.</p>",
+                "text": "<p>Inspiration i bokform! En variation av musik- och sångböcker som kan göra det lättare att lära och utvecklas i musiken. Perfekt som komplement till lektioner – eller som ett roligt sätt att utforska musik hemma under jullovet. <a href=\"/collections/bocker-och-noter\" title=\"Se alla – böcker och noter\">Se alla</a></p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/bocker-och-noter\" title=\"Musikböcker\">Musikböcker</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -3393,6 +3406,7 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
             "jul_text",
             "product_list_text_kmdAw8",
             "button_kyPFyt",
@@ -4045,14 +4059,14 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
+            "content_direction": "row",
             "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 0,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -4118,8 +4132,21 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<h2>Produkter från MUG</h2><p>Osäker på vad du ska välja? Gör någon riktigt glad i Jul med ett presentkort, en halsduk eller en T-shirt från MUG. Våra presentkort är både snygga och användbara – och låter mottagaren välja fritt ur hela vårt sortiment. Samtidigt stöttar du din lokala musikaffär, vilket gör även oss extra glada i jul. God jul! :)</p>",
+                "text": "<p>Osäker på vad du ska välja? Gör någon riktigt glad i Jul med ett presentkort, en halsduk eller en T-shirt från MUG. Våra presentkort är både snygga och användbara – och låter mottagaren välja fritt ur hela vårt sortiment. Samtidigt stöttar du din lokala musikaffär, vilket gör även oss extra glada i jul. God jul! :) <a href=\"/collections/musik-utan-granser\" title=\"Se alla – Produkter från MUG\">Se alla</a></p>",
                 "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "wrap": "pretty"
+              },
+              "blocks": {}
+            },
+            "jul_rubrik": {
+              "type": "text",
+              "name": "Avsnittsrubrik",
+              "settings": {
+                "text": "<h2><a href=\"/collections/musik-utan-granser\" title=\"Produkter från MUG\">Produkter från MUG</a></h2>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -4129,6 +4156,7 @@
             }
           },
           "block_order": [
+            "jul_rubrik",
             "jul_text",
             "product_list_text_kmdAw8",
             "button_kyPFyt",
