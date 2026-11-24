@@ -607,7 +607,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -628,7 +629,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Här tipsar vi i personalen om våra favoritprylar för alla som spelar akustisk gitarr. Vi listar allt från smarta små tillbehör perfekta som julstrumpor till större överraskningar att lägga under granen. Det finns ingen tid att förlora — ta en titt på våra bästa julklappstips för akustisk gitarr.</p>",
+                "text": "<p>Här tipsar vi i personalen om våra favoritprylar för alla som spelar akustisk gitarr. Vi listar allt från smarta små tillbehör perfekta som julstrumpor till större överraskningar att lägga under granen. Det finns ingen tid att förlora — ta en titt på våra bästa julklappstips för akustisk gitarr. <a href=\"/collections/akustiska-gitarrer\" title=\"Se alla – Personalens favoriter i jul\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -856,7 +857,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -877,7 +879,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Vi har prisvärda akustiska gitarrer som passar alla åldrar. För barn från ca. 8–11 år rekommenderar vi gitarrer i 3/4-storlek (beroende på barnets längd). För yngre barn från ca. 6–8 år rekommenderar vi 1/2-storlek (beroende på barnets längd). Främst nylonsträngat då det är mjukare och enklare att spela på. En akustik gitarr är fantastisk julklapp till den som vill börja spela!</p>",
+                "text": "<p>Vi har prisvärda akustiska gitarrer som passar alla åldrar. För barn från ca. 8–11 år rekommenderar vi gitarrer i 3/4-storlek (beroende på barnets längd). För yngre barn från ca. 6–8 år rekommenderar vi 1/2-storlek (beroende på barnets längd). Främst nylonsträngat då det är mjukare och enklare att spela på. En akustik gitarr är fantastisk julklapp till den som vill börja spela! <a href=\"/collections/nyborjare-akustisk-gitarr\" title=\"Se alla – Akustiska gitarrer i 3/4 och 1/2-storlekar\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1105,7 +1107,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -1126,7 +1129,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Letar du efter en prisvärd akustisk gitarr att lägga under granen? Här hittar du ett noga utvalt urval av prisvärda nylon- och stålsträngade modeller som passar allt från nybörjare till den mer erfarne spelaren. En akustisk gitarr är en gåva som inspirerar, håller länge och sprider musikglädje långt efter att julen är över.</p>",
+                "text": "<p>Letar du efter en prisvärd akustisk gitarr att lägga under granen? Här hittar du ett noga utvalt urval av prisvärda nylon- och stålsträngade modeller som passar allt från nybörjare till den mer erfarne spelaren. En akustisk gitarr är en gåva som inspirerar, håller länge och sprider musikglädje långt efter att julen är över. <a href=\"/collections/akustiska-gitarrer\" title=\"Se alla – Fullstora akustiska gitarrer\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1354,7 +1357,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -1375,7 +1379,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Med sin kompakta storlek, varma ton och lättspelade natur är ukulelen perfekt för spelare på alla nivåer – och den idealiska följeslagaren. Från gårdagens ukulelespelare, som George Formby och George Harrison, till dagens innovatörer som The Shins och Alex G har den enkla ukulelen verkligen gjort ett imponerande avtryck i populärmusiken.</p>",
+                "text": "<p>Med sin kompakta storlek, varma ton och lättspelade natur är ukulelen perfekt för spelare på alla nivåer – och den idealiska följeslagaren. Från gårdagens ukulelespelare, som George Formby och George Harrison, till dagens innovatörer som The Shins och Alex G har den enkla ukulelen verkligen gjort ett imponerande avtryck i populärmusiken. <a href=\"/collections/ukuleler\" title=\"Se alla – Ukulele\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1603,7 +1607,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -1624,7 +1629,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Om din kära redan har en gitarr med mik kan en akustisk gitarrförstärkare vara precis vad de behöver för att ta sitt sound till nästa nivå. Vi har modeller som passar bra hemma i vardagsrummet eller om man skall spelar live. Akustiska gitarrförstärkare kan vara riktigt roliga och inspirerande.</p>",
+                "text": "<p>Om din kära redan har en gitarr med mik kan en akustisk gitarrförstärkare vara precis vad de behöver för att ta sitt sound till nästa nivå. Vi har modeller som passar bra hemma i vardagsrummet eller om man skall spelar live. Akustiska gitarrförstärkare kan vara riktigt roliga och inspirerande. <a href=\"/collections/akustiskforstarkare\" title=\"Se alla – Akustiska förstärkare\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1852,7 +1857,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -1873,7 +1879,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Gitarrister kan aldrig ha för många gitarrsträngar. Vissa tror att man bara behöver byta dem när en går av, men i själva verket byter proffsmusiker strängar varannan vecka (eller till och med inför varje spelning). Fräscha strängar låter bättre, känns skönare att spela på, håller stämningen bättre och får helt enkelt en gitarr att vakna till liv.</p>",
+                "text": "<p>Gitarrister kan aldrig ha för många gitarrsträngar. Vissa tror att man bara behöver byta dem när en går av, men i själva verket byter proffsmusiker strängar varannan vecka (eller till och med inför varje spelning). Fräscha strängar låter bättre, känns skönare att spela på, håller stämningen bättre och får helt enkelt en gitarr att vakna till liv. <a href=\"/collections/alla-akustiska-strangar\" title=\"Se alla – Strängar\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -2118,7 +2124,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -2139,7 +2146,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Gitarrcapon gör att spelare kan byta tonart utan att behöva lära sig nya ackordformer eller stämma om sitt instrument. Kläm bara fast ett över ett band, så spelar du direkt i en ny tonart. De kan vara en räddare i nöden när man kompar sångare. Ingen singer-songwriter borde vara utan en!</p>",
+                "text": "<p>Gitarrcapon gör att spelare kan byta tonart utan att behöva lära sig nya ackordformer eller stämma om sitt instrument. Kläm bara fast ett över ett band, så spelar du direkt i en ny tonart. De kan vara en räddare i nöden när man kompar sångare. Ingen singer-songwriter borde vara utan en! <a href=\"/collections/capo\" title=\"Se alla – Capon\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -2367,7 +2374,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -2388,7 +2396,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Vad ger man en gitarrist som redan har allt? Jo, ett professionellt rengöringskit som får hens instrument hålla och låta i toppskick! Vi erbjuder rengörings- och vårdkit för gitarrer från toppmärken som Dunlop, D'Addario och MusicNomad med fler. Dessa rekomenderar vi varmt:</p>",
+                "text": "<p>Vad ger man en gitarrist som redan har allt? Jo, ett professionellt rengöringskit som får hens instrument hålla och låta i toppskick! Vi erbjuder rengörings- och vårdkit för gitarrer från toppmärken som Dunlop, D'Addario och MusicNomad med fler. Dessa rekomenderar vi varmt: <a href=\"/collections/gitarrvard\" title=\"Se alla – Gitarrvård\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -2616,7 +2624,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -2637,7 +2646,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Ett munspel är en perfekt present till vem som helst – kompakta, lättspelade och fulla av karaktär. Oavsett om mottagaren är nybörjare eller erfaren musiker ger ett munspel möjlighet att skapa värme, känsla och julmagi var man än befinner sig. Här hittar du våra bästa tips för att lägga musikalisk glädje under granen.</p>",
+                "text": "<p>Ett munspel är en perfekt present till vem som helst – kompakta, lättspelade och fulla av karaktär. Oavsett om mottagaren är nybörjare eller erfaren musiker ger ett munspel möjlighet att skapa värme, känsla och julmagi var man än befinner sig. Här hittar du våra bästa tips för att lägga musikalisk glädje under granen. <a href=\"/collections/munspel\" title=\"Se alla – Munspel\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -2865,7 +2874,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -2886,7 +2896,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Här har vi samlat tips på fler tillbehör till akustiska gitarrer. Vad sägs om en looper-pedal för att skapa loopar med lager på lager, en stämapparat, plektrum eller ett snyggt axelband – gåvor som garanterat uppskattas under julgranen.</p>",
+                "text": "<p>Här har vi samlat tips på fler tillbehör till akustiska gitarrer. Vad sägs om en looper-pedal för att skapa loopar med lager på lager, en stämapparat, plektrum eller ett snyggt axelband – gåvor som garanterat uppskattas under julgranen. <a href=\"/collections/tillbehor-for-akustisk-gitarr\" title=\"Se alla – Tips på bästa tillbehören\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -3114,7 +3124,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -3135,7 +3146,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Julen är den bästa årstiden för att skapa musik! Här listar vi allt från kristallklara studiolurar och kraftfulla studio monitorer till mångsidiga MIDI-keyboards och professionella ljudkort – helt enkelt den perfekta utrustningen för att skapa din egen hemma studio. Oavsett budget eller erfarenhetsnivå kommer de här gåvorna att träffa helt rätt ton i jul.</p>",
+                "text": "<p>Julen är den bästa årstiden för att skapa musik! Här listar vi allt från kristallklara studiolurar och kraftfulla studio monitorer till mångsidiga MIDI-keyboards och professionella ljudkort – helt enkelt den perfekta utrustningen för att skapa din egen hemma studio. Oavsett budget eller erfarenhetsnivå kommer de här gåvorna att träffa helt rätt ton i jul. <a href=\"/collections/inspelning-hemma\" title=\"Se alla – Inspelning\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",

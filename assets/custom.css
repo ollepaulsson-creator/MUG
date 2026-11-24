@@ -2574,6 +2574,7 @@ product-inventory.product-inventory {
   align-items: baseline;
   justify-content: flex-start;
   column-gap: 16px;
+  row-gap: 0;
 }
 [id*="__jul_"] .section-resource-list__header .group-block-content > .text-block:has(p) {
   flex-basis: 100%;

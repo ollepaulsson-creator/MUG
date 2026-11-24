@@ -607,7 +607,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -628,7 +629,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Här tipsar vi i personalen om våra bästa tillbehör för gitarristen. Allt från små perfekta julstrumpeklappor till större överraskningar att lägga under granen. Ingen tid att förlora – upptäck våra mest rekommenderade julklappstips!</p>",
+                "text": "<p>Här tipsar vi i personalen om våra bästa tillbehör för gitarristen. Allt från små perfekta julstrumpeklappor till större överraskningar att lägga under granen. Ingen tid att förlora – upptäck våra mest rekommenderade julklappstips! <a href=\"/collections/elgitarrer\" title=\"Se alla – Personalens favoriter i jul\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -856,7 +857,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -877,7 +879,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Letar du efter ett komplett paket med allt en nybörjare behöver för att börja spela gitarr? Vi har flera prisvärda gitarrpaket med våra populäraste modeller – både för stora och små. Gitarrpaket från Squier by Fender eller Ibanez-paket med utvalda tillbehör, som vi på MUG har sätt ihop – allt du behöver för att börja komma igång och spela direkt.</p>",
+                "text": "<p>Letar du efter ett komplett paket med allt en nybörjare behöver för att börja spela gitarr? Vi har flera prisvärda gitarrpaket med våra populäraste modeller – både för stora och små. Gitarrpaket från Squier by Fender eller Ibanez-paket med utvalda tillbehör, som vi på MUG har sätt ihop – allt du behöver för att börja komma igång och spela direkt. <a href=\"/collections/nyborjare-elgitarr\" title=\"Se alla – Elgitarrpaket\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1105,7 +1107,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -1126,7 +1129,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Letar du efter den klassiska Fender-viben men med ett tillgängligt pris? Squier by Fender är Fenders instegsmärke som hjälper dig med just det. Från iögonfallande Telecasters, Jaguarer till Stratocasters.</p>",
+                "text": "<p>Letar du efter den klassiska Fender-viben men med ett tillgängligt pris? Squier by Fender är Fenders instegsmärke som hjälper dig med just det. Från iögonfallande Telecasters, Jaguarer till Stratocasters. <a href=\"/collections/squier-by-fender\" title=\"Se alla – Squier by Fender\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1354,7 +1357,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -1375,7 +1379,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Ibanez är kända för deras fokus på exceptionell spelbarhet (särskilt de snabba halsarna), mångsidiga toner och deras starka position inom rock- och metalgenrer. Trots sitt starka rykte inom rock och metal, erbjuder Ibanez ett brett utbud av modeller (som Artcore-serien) som passar utmärkt för andra stilar, inklusive jazz och blues, tack vare mångsidiga mickkonfigurationer och olika träslag. Allt med ett högkvalitativt hantverk till extremt bra priser.</p>",
+                "text": "<p>Ibanez är kända för deras fokus på exceptionell spelbarhet (särskilt de snabba halsarna), mångsidiga toner och deras starka position inom rock- och metalgenrer. Trots sitt starka rykte inom rock och metal, erbjuder Ibanez ett brett utbud av modeller (som Artcore-serien) som passar utmärkt för andra stilar, inklusive jazz och blues, tack vare mångsidiga mickkonfigurationer och olika träslag. Allt med ett högkvalitativt hantverk till extremt bra priser. <a href=\"/collections/ibanez-electric-guitars\" title=\"Se alla – Ibanez\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1603,7 +1607,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -1624,7 +1629,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Med Cort får du välbyggda gitarrer till ett extremt lågt pris. Cort erbjuder instrument som presterar på en nivå som ofta kan jämföras med gitarrer som kostar betydligt mer. Dessutom är många av modellerna prisvinnare i olika kvalitetstester. Flera av Corts gitarrer har även funktioner och material som vanligtvis inte återfinns i deras prisklass, såsom halsar i rostad lönn (roasted maple), rostfria bandstavar (stainless steel frets) och låsbara stämskruvar (locking tuners).</p>",
+                "text": "<p>Med Cort får du välbyggda gitarrer till ett extremt lågt pris. Cort erbjuder instrument som presterar på en nivå som ofta kan jämföras med gitarrer som kostar betydligt mer. Dessutom är många av modellerna prisvinnare i olika kvalitetstester. Flera av Corts gitarrer har även funktioner och material som vanligtvis inte återfinns i deras prisklass, såsom halsar i rostad lönn (roasted maple), rostfria bandstavar (stainless steel frets) och låsbara stämskruvar (locking tuners). <a href=\"/collections/cort\" title=\"Se alla – Cort\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1852,7 +1857,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -1873,7 +1879,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Loog gör instrument som gör det roligt och enkelt för barn att börja spela musik på riktigt. Med smart design, färgstarka modeller – gitarrer med tre strängar eller pianon utan distraherande funktioner – sänks tröskeln, samtidigt som barnen lär sig äkta spelteknik som fungerar på vilket instrument som helst.</p>",
+                "text": "<p>Loog gör instrument som gör det roligt och enkelt för barn att börja spela musik på riktigt. Med smart design, färgstarka modeller – gitarrer med tre strängar eller pianon utan distraherande funktioner – sänks tröskeln, samtidigt som barnen lär sig äkta spelteknik som fungerar på vilket instrument som helst. <a href=\"/collections/loog\" title=\"Se alla – Loog Electric Guitars\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -2118,7 +2124,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -2139,7 +2146,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Plugga in en hörlursförstärkare i gitarren, koppla in ett par hörlurar och spela helt tyst. Dessutom får du massor av förstärkarljud och effekter. Dessa smidiga små enheter erbjuder populära ljud baserade på verklig utrustning, från klassiska rockförstärkare till moderna, experimentella effekter som du kan anpassa efter smak.</p>",
+                "text": "<p>Plugga in en hörlursförstärkare i gitarren, koppla in ett par hörlurar och spela helt tyst. Dessutom får du massor av förstärkarljud och effekter. Dessa smidiga små enheter erbjuder populära ljud baserade på verklig utrustning, från klassiska rockförstärkare till moderna, experimentella effekter som du kan anpassa efter smak. <a href=\"/collections/horlursforstarkare-for-gitarr\" title=\"Se alla – Hörlursförstärkare för gitarr\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -2367,7 +2374,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -2388,7 +2396,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>En bra elgitarrförstärkare är lika viktig som själva gitarren. Det är här din ton verkligen väcks till liv. I vårt sortiment hittar du allt från kompakta övningsförstärkare till kraftfulla rör- och digitalförstärkare både nya och begagnade för scen och studio.</p>",
+                "text": "<p>En bra elgitarrförstärkare är lika viktig som själva gitarren. Det är här din ton verkligen väcks till liv. I vårt sortiment hittar du allt från kompakta övningsförstärkare till kraftfulla rör- och digitalförstärkare både nya och begagnade för scen och studio. <a href=\"/collections/gitarrforstarkare\" title=\"Se alla – Förstärkare\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -2616,7 +2624,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -2637,7 +2646,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Effektpedaler är nyckeln till att forma ditt personliga sound. Från subtilt reverb till massiva fuzz-väggar. Vårt sortiment täcker alla typer av pedaler: overdrive, distortion, delay, reverb, modulation, wah, EQ och multi-effekter från tillverkare som Jampedals, Earthquaker Devices, T-Rex, MXR, Wampler, Electro Harmonix, Mad Professor och många fler.</p>",
+                "text": "<p>Effektpedaler är nyckeln till att forma ditt personliga sound. Från subtilt reverb till massiva fuzz-väggar. Vårt sortiment täcker alla typer av pedaler: overdrive, distortion, delay, reverb, modulation, wah, EQ och multi-effekter från tillverkare som Jampedals, Earthquaker Devices, T-Rex, MXR, Wampler, Electro Harmonix, Mad Professor och många fler. <a href=\"/collections/gitarreffekter\" title=\"Se alla – Effektpedaler\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -2865,7 +2874,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -2886,7 +2896,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Regelbunden vård förlänger livslängden på din gitarr och håller den i toppform. Här hittar du allt du behöver för att rengöra, återfukta och skydda ditt instrument, från rengöringskit, polermedel och lemon oil till verktyg för setup och strängbyte. En perfekt julklapp för gitaristen som tar sina instrument på allvar!</p>",
+                "text": "<p>Regelbunden vård förlänger livslängden på din gitarr och håller den i toppform. Här hittar du allt du behöver för att rengöra, återfukta och skydda ditt instrument, från rengöringskit, polermedel och lemon oil till verktyg för setup och strängbyte. En perfekt julklapp för gitaristen som tar sina instrument på allvar! <a href=\"/collections/gitarrvard-elgitarr\" title=\"Se alla – Gitarrvård\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -3114,7 +3124,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -3135,7 +3146,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Gitarrister kan aldrig få för många gitarrsträngar. Det enda du egentligen behöver ha koll på är strängtjockleken, alltså string gauge. Varje gitarr är nämligen inställd för en viss tjocklek, och fel set kan påverka hur instrumentet känns att spela på. Men oroa dig inte — de flesta elgitarrer levereras med 9–42 eller 10–46 som standard, så dessa är nästan alltid ett säkert kort.</p>",
+                "text": "<p>Gitarrister kan aldrig få för många gitarrsträngar. Det enda du egentligen behöver ha koll på är strängtjockleken, alltså string gauge. Varje gitarr är nämligen inställd för en viss tjocklek, och fel set kan påverka hur instrumentet känns att spela på. Men oroa dig inte — de flesta elgitarrer levereras med 9–42 eller 10–46 som standard, så dessa är nästan alltid ett säkert kort. <a href=\"/collections/elgitarrstrangar\" title=\"Se alla – Elgitarrsträngar\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -3363,7 +3374,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -3384,7 +3396,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Ett bra axelband handlar inte bara om komfort – det är också en del av din stil. Vi har axelband i läder, nylon, bomull och vävda material i olika bredder, längder och designer. Vi erbjuder axelband från Ernie Ball, Fender, Planet Waves och flera andra tillverkare. Oavsett om du föredrar klassisk elegans, retrolook eller moderna mönster hittar du ett band som passar både din gitarr och din personlighet.</p>",
+                "text": "<p>Ett bra axelband handlar inte bara om komfort – det är också en del av din stil. Vi har axelband i läder, nylon, bomull och vävda material i olika bredder, längder och designer. Vi erbjuder axelband från Ernie Ball, Fender, Planet Waves och flera andra tillverkare. Oavsett om du föredrar klassisk elegans, retrolook eller moderna mönster hittar du ett band som passar både din gitarr och din personlighet. <a href=\"/collections/axelband\" title=\"Se alla – Axelband\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -3612,7 +3624,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -3633,7 +3646,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>En riktigt bra kabel ska hålla en livstid – inte bara fram till nästa gig. Som tur är tillverkar många av våra toppmärken robusta och pålitliga gitarrkablar som är byggda för att hålla, med ett rent och kristallklart ljud. Precis som med strängar kan en gitarrist aldrig ha för många kablar, och extrakablar är alltid uppskattade! Och om de är pedalfantaster är korta patchkablar perfekta för att koppla ihop deras effektpedaler.</p>",
+                "text": "<p>En riktigt bra kabel ska hålla en livstid – inte bara fram till nästa gig. Som tur är tillverkar många av våra toppmärken robusta och pålitliga gitarrkablar som är byggda för att hålla, med ett rent och kristallklart ljud. Precis som med strängar kan en gitarrist aldrig ha för många kablar, och extrakablar är alltid uppskattade! Och om de är pedalfantaster är korta patchkablar perfekta för att koppla ihop deras effektpedaler. <a href=\"/collections/kablar-for-stranginstrument\" title=\"Se alla – Gitarrkablar\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -3861,7 +3874,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -3882,7 +3896,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Plektrum bör finnas under varje gran – byt ut de gamla slitna mot ett nytt gäng favoritplektrum. Ett nytt set håller spelglädjen vid liv långt in på det nya året. Är du osäker på vilket märke eller vilken form de gillar? Då är Dunlop Variety Player Pack ett säkert val. Med 12 olika stilar och tjocklekar hittar de garanterat nya favoriter i mixen. Eller något av våra andra rekommendationer.</p>",
+                "text": "<p>Plektrum bör finnas under varje gran – byt ut de gamla slitna mot ett nytt gäng favoritplektrum. Ett nytt set håller spelglädjen vid liv långt in på det nya året. Är du osäker på vilket märke eller vilken form de gillar? Då är Dunlop Variety Player Pack ett säkert val. Med 12 olika stilar och tjocklekar hittar de garanterat nya favoriter i mixen. Eller något av våra andra rekommendationer. <a href=\"/collections/plektrum\" title=\"Se alla – Plektrum\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -4110,7 +4124,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -4131,7 +4146,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Julen är den bästa årstiden för att skapa musik! Här listar vi allt från kristallklara studiolurar och kraftfulla studio monitorer till mångsidiga MIDI-keyboards och professionella ljudkort – helt enkelt den perfekta utrustningen för att skapa din egen hemma studio. Oavsett budget eller erfarenhetsnivå kommer de här gåvorna att träffa helt rätt ton i jul.</p>",
+                "text": "<p>Julen är den bästa årstiden för att skapa musik! Här listar vi allt från kristallklara studiolurar och kraftfulla studio monitorer till mångsidiga MIDI-keyboards och professionella ljudkort – helt enkelt den perfekta utrustningen för att skapa din egen hemma studio. Oavsett budget eller erfarenhetsnivå kommer de här gåvorna att träffa helt rätt ton i jul. <a href=\"/collections/inspelning-hemma\" title=\"Se alla – Inspelning\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",

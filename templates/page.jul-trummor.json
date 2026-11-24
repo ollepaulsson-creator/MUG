@@ -607,7 +607,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -628,7 +629,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Här tipsar vi i personalen om våra favorittillbehör till alla trummisar. Allt från små tillbehör perfekta som julstrumpor till större överraskningar som ett digitalt trumset att lägga under granen. Det finns ingen tid att förlora — ta en titt på våra bästa julklappstips.</p>",
+                "text": "<p>Här tipsar vi i personalen om våra favorittillbehör till alla trummisar. Allt från små tillbehör perfekta som julstrumpor till större överraskningar som ett digitalt trumset att lägga under granen. Det finns ingen tid att förlora — ta en titt på våra bästa julklappstips. <a href=\"/collections/slagverk\" title=\"Se alla – Personalens favoriter i jul\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -856,7 +857,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -877,7 +879,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Ett digitalt trumset är drömjulklappen för alla trummisar. Spela hemma och hur högt du vill! En imponerande mångsidighet låter spelaren utforska ett brett spektrum av ljud och stilar i ett kompakt format. För nybörjare är elektroniska trumset lättanvända och innehåller ofta inbyggda övningsfunktioner som hjälper till att utveckla färdigheter. Mer rutinerade trummisar uppskattar möjligheten att finjustera sitt sound och öva tyst med hörlurar – perfekt för hemmabruk.</p>",
+                "text": "<p>Ett digitalt trumset är drömjulklappen för alla trummisar. Spela hemma och hur högt du vill! En imponerande mångsidighet låter spelaren utforska ett brett spektrum av ljud och stilar i ett kompakt format. För nybörjare är elektroniska trumset lättanvända och innehåller ofta inbyggda övningsfunktioner som hjälper till att utveckla färdigheter. Mer rutinerade trummisar uppskattar möjligheten att finjustera sitt sound och öva tyst med hörlurar – perfekt för hemmabruk. <a href=\"/collections/digitala-trummor\" title=\"Se alla – Digitala trummor\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1105,7 +1107,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -1126,7 +1129,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Övningsplattor är trumslagarnas hemliga vapen! Perfekta för tyst och fokuserad träning låter de trummisar finslipa sina färdigheter utan att driva grannarna till vansinne. Oavsett om man just har börjat eller jobbar på sina paradiddlar är övningsplattor superportabla, hållbara och ett utmärkt sätt att hålla groovet vid liv – var som helst, när som helst.</p>",
+                "text": "<p>Övningsplattor är trumslagarnas hemliga vapen! Perfekta för tyst och fokuserad träning låter de trummisar finslipa sina färdigheter utan att driva grannarna till vansinne. Oavsett om man just har börjat eller jobbar på sina paradiddlar är övningsplattor superportabla, hållbara och ett utmärkt sätt att hålla groovet vid liv – var som helst, när som helst. <a href=\"/collections/ovningsplattor\" title=\"Se alla – Övningsplattor\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1354,7 +1357,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -1375,7 +1379,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>En cajón är en fin julklapp till trummisen som vill kunna spela överallt. Det är ett enkelt, portabelt instrument som ändå rymmer mycket ljud – från djup bas till tydliga snärtiga toner. Perfekt för spontana jam, akustiska spelningar eller bara för att hålla igång rytmen hemma. Ett instrument som bjuder in till kreativitet utan att ta mycket plats.</p>",
+                "text": "<p>En cajón är en fin julklapp till trummisen som vill kunna spela överallt. Det är ett enkelt, portabelt instrument som ändå rymmer mycket ljud – från djup bas till tydliga snärtiga toner. Perfekt för spontana jam, akustiska spelningar eller bara för att hålla igång rytmen hemma. Ett instrument som bjuder in till kreativitet utan att ta mycket plats. <a href=\"/collections/cajon\" title=\"Se alla – Cajons\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1603,7 +1607,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -1624,7 +1629,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Trumtillbehör är de perfekta små presenterna som gör stor skillnad! Från moongel och trumstockar till en snygg stockväska som håller ordning på allt – dessa vardagshjältar är trummisens bästa vän. Enkla, praktiska och alltid uppskattade hjälper de trummisar att både låta och känna sig som bäst.</p>",
+                "text": "<p>Trumtillbehör är de perfekta små presenterna som gör stor skillnad! Från moongel och trumstockar till en snygg stockväska som håller ordning på allt – dessa vardagshjältar är trummisens bästa vän. Enkla, praktiska och alltid uppskattade hjälper de trummisar att både låta och känna sig som bäst. <a href=\"/collections/tillbehor-for-trummor\" title=\"Se alla – Tillbehör för trummor\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1852,7 +1857,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -1873,7 +1879,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Trumstockar är den självklara presenten som alltid träffar rätt! Färska stockar ett måste för rätt känsla, balans och spelglädje. Finns i olika storlekar, material och spetsformer – perfekta för att hitta sin personliga touch. En enkel, prisvärd och alltid uppskattad gåva!</p>",
+                "text": "<p>Trumstockar är den självklara presenten som alltid träffar rätt! Färska stockar ett måste för rätt känsla, balans och spelglädje. Finns i olika storlekar, material och spetsformer – perfekta för att hitta sin personliga touch. En enkel, prisvärd och alltid uppskattad gåva! <a href=\"/collections/trumstockar\" title=\"Se alla – Trumstockar\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",

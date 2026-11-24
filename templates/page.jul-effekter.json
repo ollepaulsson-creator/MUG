@@ -607,7 +607,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -628,7 +629,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Här tipsar vi i personalen om våra favorit tillbehör till gitarristen. Här listar vi allt från små tillbehör perfekta som julstrumpor till större överraskningar att lägga under granen. Det finns ingen tid att förlora — ta en titt på våra bästa julklappstips.</p>",
+                "text": "<p>Här tipsar vi i personalen om våra favorit tillbehör till gitarristen. Här listar vi allt från små tillbehör perfekta som julstrumpor till större överraskningar att lägga under granen. Det finns ingen tid att förlora — ta en titt på våra bästa julklappstips. <a href=\"/collections/gitarreffekter\" title=\"Se alla – Personalens favoriter i jul\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -856,7 +857,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -877,7 +879,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>Plugga in en hörlursförstärkare i din gitarr, koppla in ett par hörlurar och spela helt tyst. Dessutom får du massor av förstärkarljud och effekter. Dessa smidiga små enheter erbjuder populära ljud baserade på verklig utrustning, från klassiska rockförstärkare till moderna, experimentella effekter som du kan anpassa efter smak.</p>",
+                "text": "<p>Plugga in en hörlursförstärkare i din gitarr, koppla in ett par hörlurar och spela helt tyst. Dessutom får du massor av förstärkarljud och effekter. Dessa smidiga små enheter erbjuder populära ljud baserade på verklig utrustning, från klassiska rockförstärkare till moderna, experimentella effekter som du kan anpassa efter smak. <a href=\"/collections/horlursforstarkare-for-gitarr\" title=\"Se alla – Hörlursförstärkare\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1105,7 +1107,8 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -1126,7 +1129,7 @@
               "type": "text",
               "name": "Avsnittstext",
               "settings": {
-                "text": "<p>En bra elgitarrförstärkare är lika viktig som själva gitarren. Det är här din ton väcks till liv. I vårt sortiment hittar du allt från kompakta övningsförstärkare till kraftfulla rör- och digitalförstärkare både nya och begagnade för scen och studio.</p>",
+                "text": "<p>En bra elgitarrförstärkare är lika viktig som själva gitarren. Det är här din ton väcks till liv. I vårt sortiment hittar du allt från kompakta övningsförstärkare till kraftfulla rör- och digitalförstärkare både nya och begagnade för scen och studio. <a href=\"/collections/gitarrforstarkare\" title=\"Se alla – Förstärkare\">Se alla</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
