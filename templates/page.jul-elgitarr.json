@@ -597,6 +597,7 @@
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
+              "disabled": true,
               "settings": {
                 "label": "SE ALLA",
                 "link": "shopify://collections/elgitarrer",
@@ -607,8 +608,7 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -847,9 +847,10 @@
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
+              "disabled": true,
               "settings": {
                 "label": "SE ALLA",
-                "link": "shopify://collections/nyborjare-elgitarr",
+                "link": "shopify://collections/nyborjare-elgitarr-ersatt",
                 "open_in_new_tab": false,
                 "style_class": "link",
                 "width": "fit-content",
@@ -857,8 +858,7 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -1097,6 +1097,7 @@
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
+              "disabled": true,
               "settings": {
                 "label": "SE ALLA",
                 "link": "shopify://collections/squier-by-fender",
@@ -1107,8 +1108,7 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -1347,6 +1347,7 @@
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
+              "disabled": true,
               "settings": {
                 "label": "SE ALLA",
                 "link": "shopify://collections/ibanez-electric-guitars",
@@ -1357,8 +1358,7 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -1597,6 +1597,7 @@
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
+              "disabled": true,
               "settings": {
                 "label": "SE ALLA",
                 "link": "shopify://collections/cort",
@@ -1607,8 +1608,7 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -1847,6 +1847,7 @@
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
+              "disabled": true,
               "settings": {
                 "label": "SE ALLA",
                 "link": "shopify://collections/loog",
@@ -1857,8 +1858,7 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -2114,6 +2114,7 @@
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
+              "disabled": true,
               "settings": {
                 "label": "SE ALLA",
                 "link": "shopify://collections/horlursforstarkare-for-gitarr",
@@ -2124,8 +2125,7 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -2364,6 +2364,7 @@
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
+              "disabled": true,
               "settings": {
                 "label": "SE ALLA",
                 "link": "shopify://collections/gitarrforstarkare",
@@ -2374,8 +2375,7 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -2614,6 +2614,7 @@
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
+              "disabled": true,
               "settings": {
                 "label": "SE ALLA",
                 "link": "shopify://collections/gitarreffekter",
@@ -2624,8 +2625,7 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -2864,6 +2864,7 @@
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
+              "disabled": true,
               "settings": {
                 "label": "SE ALLA",
                 "link": "shopify://collections/gitarrvard-elgitarr",
@@ -2874,8 +2875,7 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -3114,6 +3114,7 @@
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
+              "disabled": true,
               "settings": {
                 "label": "SE ALLA",
                 "link": "shopify://collections/elgitarrstrangar",
@@ -3124,8 +3125,7 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -3364,6 +3364,7 @@
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
+              "disabled": true,
               "settings": {
                 "label": "SE ALLA",
                 "link": "shopify://collections/axelband",
@@ -3374,8 +3375,7 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -3614,6 +3614,7 @@
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
+              "disabled": true,
               "settings": {
                 "label": "SE ALLA",
                 "link": "shopify://collections/kablar-for-stranginstrument",
@@ -3624,8 +3625,7 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -3864,6 +3864,7 @@
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
+              "disabled": true,
               "settings": {
                 "label": "SE ALLA",
                 "link": "shopify://collections/plektrum",
@@ -3874,8 +3875,7 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
@@ -4114,6 +4114,7 @@
             "button_kyPFyt": {
               "type": "button",
               "name": "t:names.button",
+              "disabled": true,
               "settings": {
                 "label": "SE ALLA",
                 "link": "shopify://collections/inspelning-hemma",
@@ -4124,8 +4125,7 @@
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 30
               },
-              "blocks": {},
-              "disabled": true
+              "blocks": {}
             },
             "swatches_8WFcrC": {
               "type": "swatches",
