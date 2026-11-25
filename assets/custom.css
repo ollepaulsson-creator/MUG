@@ -520,6 +520,10 @@ ul.pagination__list {
     top: -1px;
     position: relative;
 }
+.pagination__arrow--prev {
+    display: inline-block;
+    transform: scaleX(-1);
+}
 .pagination__item--prev a, .pagination__item--next a {
   outline: none;
 }
