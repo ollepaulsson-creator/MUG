@@ -2595,3 +2595,35 @@ product-inventory.product-inventory {
   text-decoration: underline;
   text-underline-offset: 4px;
 }
+
+/* hCaptcha: Shopifys hörnikon döljs; texten "Skyddas av hCaptcha" står i formulären i stället (Olle 2026-11-25) */
+#shop-hcaptcha-badge-container { display: none !important; }
+.hcaptcha-note {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.4;
+  color: rgba(0, 0, 0, 0.55);
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease, opacity 0.2s ease, margin 0.2s ease;
+}
+/* Visas först när besökaren börjar fylla i (fokus i formuläret eller ifyllt fält) */
+form:focus-within .hcaptcha-note,
+form:has(input[placeholder]:not(:placeholder-shown)) .hcaptcha-note,
+form:has(textarea[placeholder]:not(:placeholder-shown)) .hcaptcha-note {
+  max-height: 4em;
+  opacity: 1;
+  margin-top: 8px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hcaptcha-note { transition: none; }
+}
+.hcaptcha-note a { color: inherit; text-decoration: underline; }
+
+/* Sidfotens menylänkar ("Mer om oss"): understrykning vid hover/fokus, som telefon- och e-postlänkarna (Olle 2026-11-25) */
+.shopify-section-group-footer-group .menu__item a:hover,
+.shopify-section-group-footer-group .menu__item a:focus-visible {
+  text-decoration-line: underline;
+  text-decoration-color: currentColor;
+}
