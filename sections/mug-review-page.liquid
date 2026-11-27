@@ -133,8 +133,8 @@
       if (typeof v === 'string' && /kr/.test(v)) return v;
       var n = Number(v);
       if (isNaN(n)) return String(v);
-      // Butikens money-format: "3,995 kr" (komma som tusentalsavgränsare, inga ören)
-      return n.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' kr';
+      // Butikens money-format sedan 2026-11-27: "3 995 kr" (mellanslag som tusentalsavgränsare, inga ören)
+      return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' kr';
     }
 
     function lankOn(a, url) {
